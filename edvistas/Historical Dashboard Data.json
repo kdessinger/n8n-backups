@@ -1,0 +1,224 @@
+{
+  "active": false,
+  "connections": {
+    "Spreadsheet File": {
+      "main": [
+        [
+          {
+            "node": "Write Binary File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Microsoft SQL": {
+      "main": [
+        [
+          {
+            "node": "Set",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "SplitInBatches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "Microsoft SQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cron": {
+      "main": [
+        [
+          {
+            "node": "Microsoft SQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set": {
+      "main": [
+        [
+          {
+            "node": "Spreadsheet File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SplitInBatches": {
+      "main": [
+        [
+          {
+            "node": "Date & Time",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2022-02-10T21:57:15.216Z",
+  "id": 2,
+  "name": "Historical Dashboard Data",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "position": [
+        40,
+        180
+      ],
+      "id": "4dcc4bf7-5352-433b-afae-033628db9ea6"
+    },
+    {
+      "parameters": {
+        "operation": "toFile",
+        "options": {
+          "fileName": "dashboard_historical.xls",
+          "sheetName": "Sheet1"
+        }
+      },
+      "name": "Spreadsheet File",
+      "type": "n8n-nodes-base.spreadsheetFile",
+      "position": [
+        700,
+        320
+      ],
+      "typeVersion": 1,
+      "id": "0d8a75a8-1302-46aa-ba28-35238cff4d86"
+    },
+    {
+      "parameters": {
+        "fileName": "/mnt/share/_tmp/kjd_dashboards_historical.xls"
+      },
+      "name": "Write Binary File",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "position": [
+        860,
+        380
+      ],
+      "typeVersion": 1,
+      "id": "3a71c752-bacd-408a-a349-7ccbd679d677"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "DECLARE @NoDist table (ID SmallInt) Insert into @NoDist values (-1), (21), (804), (805), (806), (815)\nDECLARE @tdate datetime set @tdate = GetDate()\n\nSelect * from (\nSelect 'AIMS' as Name, Count(*) as Count, @tdate Date FROM aims..districts a Where a.enabled=1 and a.id not in(Select ID from @NoDist)\nunion select 'Courses' Name, Count(*) Count, @tdate Date FROM rbemcd..courses r Where r.districtid >0 and r.districtid not in(Select ID from @NoDist)\nunion select 'Datamate Elite' Name, Count(*) Count, @tdate Date from evitesting..districts e WHERE e.enabled=1 and e.id not in(Select ID from @NoDist) and e.datamateElite = 1\nunion select 'Datamate Live' Name, Count(*) Count, @tdate Date FROM evitesting..districts e WHERE e.enabled=1 and e.id not in(Select ID from @NoDist) and e.dmversion = 'Live'\nunion select 'Datamate Basic' Name, Count(*) Count, @tdate Date FROM evitesting..districts e WHERE e.enabled=1 and e.id not in(Select ID from @NoDist) and e.dmversion = 'Basic'\nunion select 'Districts' as Name, Count(*) Count, @tdate Date from eviForms..ecDistricts d Where d.id not in(Select ID from @NoDist)\nunion select 'Forms' as Name, Count(*) Count, @tdate Date  from eviForms..forms Where complete=0\nunion select 'Guardians' as Name, Count(*) Count, @tdate Date from eviForms..ecGuardians\nunion select 'SafeSchools' as Name, Count(*) Count, @tdate Date from safeschools..district ss Where ss.enabled=1 and (ss.trial = 0 or ss.trial is null) and ss.id not in(Select ID from @NoDist)\nunion select 'Schools' as Name, Count(*) Count, @tdate Date  from eviForms..ecschools \nunion select 'SMS' as Name, Sum(segments) Count, @tdate Date From eviForms..smsLog \nunion select 'Staff' as Name, Count(*) Count, @tdate Date  from eviForms..ecStaff sf where disabled=0 and sf.districtId not in (Select ID from @NoDist)\nunion select 'StaffTrac' as Name, Count(*) Count, @tdate Date FROM stafftrac..districts st Where st.enabled=1 and st.id not in (Select ID from @NoDist)\nunion select 'Students' as Name, Count(*) Count, @tdate Date  from eviForms..ecStudents s where active=1 and s.districtid not in (Select ID from @NoDist)\nunion select 'Surveys' as Name, Count(*) Count, @tdate Date FROM eviSurvate..surveys sv Where sv.disable=0 and sv.districtid not in (Select ID from @NoDist)\nunion select 'Users' as Name, Count(*) Count, @tdate Date  from eviForms..ecUsers u where u.active=1 and u.districtid not in (Select ID from @NoDist)\nunion select 'Item Bank' as Name, Count(*) Count, @tdate Date FROM evitesting..questionBank q\n ) l\n Pivot (\n\tSum(l.count) For l.name\n\tIn ([AIMS],[Courses],[Datamate Elite],[Datamate Live],[Datamate Basic],[Districts],[Forms],[Guardians],[SafeSchools],[Schools],[SMS],[Staff],[StaffTrac],[Students],[Surveys],[Users],[Item Bank])\n ) as pivotTable"
+      },
+      "name": "Microsoft SQL",
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1,
+      "position": [
+        340,
+        320
+      ],
+      "credentials": {
+        "microsoftSql": {
+          "id": "1",
+          "name": "DB1.DS1.GOWLS.COM (EVI)"
+        }
+      },
+      "id": "fd9ffe0c-2cc9-4250-9208-ddda7aefc8a6"
+    },
+    {
+      "parameters": {
+        "triggerTimes": {
+          "item": [
+            {
+              "mode": "everyHour"
+            }
+          ]
+        }
+      },
+      "name": "Cron",
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1,
+      "position": [
+        40,
+        400
+      ],
+      "disabled": true,
+      "id": "0ac9047a-1f1d-4702-b977-7f04ee92aa87"
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "=Data",
+              "value": "=YYYY"
+            },
+            {}
+          ],
+          "number": []
+        },
+        "options": {
+          "dotNotation": false
+        }
+      },
+      "name": "Set",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        500,
+        380
+      ],
+      "id": "1257099e-589a-4c09-bd25-1c4b2278b9e4"
+    },
+    {
+      "parameters": {
+        "action": "calculate",
+        "value": "=Date",
+        "dataPropertyName": "=NewDate",
+        "options": {
+          "fromFormat": "YYYY-MM-DD HH:mm:ss"
+        }
+      },
+      "name": "Date & Time",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 1,
+      "position": [
+        960,
+        60
+      ],
+      "id": "89fd8851-c874-4b27-9196-73156f21d9c7"
+    },
+    {
+      "parameters": {
+        "batchSize": 3,
+        "options": {}
+      },
+      "name": "SplitInBatches",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 1,
+      "position": [
+        520,
+        100
+      ],
+      "id": "2a3e6025-70ca-49a1-80d2-61ba9359e3cd"
+    }
+  ],
+  "pinData": null,
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "updatedAt": "2022-02-21T20:00:01.750Z"
+}
