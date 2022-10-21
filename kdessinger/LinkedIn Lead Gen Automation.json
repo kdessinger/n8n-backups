@@ -1,0 +1,595 @@
+{
+  "active": false,
+  "connections": {
+    "Cron": {
+      "main": [
+        [
+          {
+            "node": "LinkedIn Post Commenters",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "LinkedIn Post Liker",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lemlist": {
+      "main": [
+        [
+          {
+            "node": "Phantombuster",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Exists ?": {
+      "main": [
+        [
+          {
+            "node": "Set - Update",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Set - New",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set - New": {
+      "main": [
+        [
+          {
+            "node": "Airtable - Create",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Likers": {
+      "main": [
+        [
+          {
+            "node": "Dropcontact",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Dropcontact": {
+      "main": [
+        [
+          {
+            "node": "Airtable - List",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Comments": {
+      "main": [
+        [
+          {
+            "node": "Dropcontact",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set - Update": {
+      "main": [
+        [
+          {
+            "node": "Airtable - Update",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Phantombuster": {
+      "main": [
+        [
+          {
+            "node": "Hubspot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable - List": {
+      "main": [
+        [
+          {
+            "node": "Exists ?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable - Create": {
+      "main": [
+        [
+          {
+            "node": "Lemlist",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable - Update": {
+      "main": [
+        [
+          {
+            "node": "Lemlist",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LinkedIn Post Commenters": {
+      "main": [
+        [
+          {
+            "node": "Wait 30s1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait 30s1": {
+      "main": [
+        [
+          {
+            "node": "Get Comments",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2022-02-03T16:56:46.475Z",
+  "id": 3,
+  "name": "LinkedIn Lead Gen Automation",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "position": [
+        240,
+        300
+      ],
+      "id": "dbcca63d-54c8-44a9-88bd-5d339402bb82"
+    },
+    {
+      "parameters": {
+        "triggerTimes": {
+          "item": [
+            {
+              "mode": "everyHour"
+            }
+          ]
+        }
+      },
+      "name": "Cron",
+      "type": "n8n-nodes-base.cron",
+      "position": [
+        480,
+        320
+      ],
+      "typeVersion": 1,
+      "id": "e4d9bb54-7839-4b4a-81ed-4e8fb2ad678d"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$node[\"Airtable - List\"].json[\"fields\"][\"Email\"]}}",
+              "value2": "={{$node[\"Dropcontact - GET\"].json[\"data\"][0][\"email\"][0][\"email\"]}}"
+            }
+          ]
+        }
+      },
+      "name": "Exists ?",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        1680,
+        300
+      ],
+      "typeVersion": 1,
+      "id": "58546e12-6e2e-4fec-ac23-09b63011fb32"
+    },
+    {
+      "parameters": {
+        "operation": "list",
+        "table": "Contacts",
+        "additionalOptions": {
+          "fields": []
+        }
+      },
+      "name": "Airtable - List",
+      "type": "n8n-nodes-base.airtable",
+      "position": [
+        1480,
+        300
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "airtableApi": {
+          "id": "",
+          "name": ""
+        }
+      },
+      "id": "293e024d-430f-44a8-87f5-467133e335b4"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "table": "Contacts",
+        "id": "={{$node[\"Airtable - List\"].json[\"id\"]}}",
+        "updateAllFields": false,
+        "options": {
+          "typecast": true
+        }
+      },
+      "name": "Airtable - Update",
+      "type": "n8n-nodes-base.airtable",
+      "position": [
+        2080,
+        220
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "airtableApi": {
+          "id": "",
+          "name": ""
+        }
+      },
+      "id": "0efc19c9-1e8e-459b-89a0-a6788ef83b7a"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "table": "Contacts",
+        "options": {
+          "typecast": true
+        }
+      },
+      "name": "Airtable - Create",
+      "type": "n8n-nodes-base.airtable",
+      "position": [
+        2080,
+        410
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "airtableApi": {
+          "id": "",
+          "name": ""
+        }
+      },
+      "id": "88795e83-485c-4117-bc81-44f288343b31"
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "=ID",
+              "value": "={{$node[\"Airtable - List\"].json[\"id\"]}}"
+            },
+            {
+              "name": "Email",
+              "value": "={{$node[\"Dropcontact - GET\"].json[\"data\"][0][\"email\"][0][\"email\"]}}"
+            },
+            {
+              "name": "Phone",
+              "value": "={{$node[\"Dropcontact - GET\"].json[\"data\"][0][\"phone\"]}}"
+            },
+            {
+              "name": "LinkedIn",
+              "value": "={{$node[\"Dropcontact - GET\"].json[\"data\"][0][\"linkedin\"]}}"
+            },
+            {
+              "name": "Account",
+              "value": "={{$node[\"Dropcontact - GET\"].json[\"data\"][0][\"company\"]}}"
+            },
+            {
+              "name": "Company website",
+              "value": "={{$node[\"Dropcontact - GET\"].json[\"data\"][0][\"website\"]}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Set - Update",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1880,
+        220
+      ],
+      "typeVersion": 1,
+      "id": "2d1ae68c-5a5c-4c96-a7f1-0f7c4933f085"
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "Name",
+              "value": "={{$node[\"Dropcontact - GET\"].json[\"data\"][0][\"full_name\"]}}"
+            },
+            {
+              "name": "Account",
+              "value": "={{$node[\"Dropcontact - GET\"].json[\"data\"][0][\"company\"]}}"
+            },
+            {
+              "name": "Company website",
+              "value": "={{$node[\"Dropcontact - GET\"].json[\"data\"][0][\"website\"]}}"
+            },
+            {
+              "name": "Email",
+              "value": "={{$node[\"Dropcontact - GET\"].json[\"data\"][0][\"email\"][0][\"email\"]}}"
+            },
+            {
+              "name": "Phone",
+              "value": "={{$node[\"Dropcontact - GET\"].json[\"data\"][0][\"phone\"]}}"
+            },
+            {
+              "name": "LinkedIn",
+              "value": "={{$node[\"Dropcontact - GET\"].json[\"data\"][0][\"linkedin\"]}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Set - New",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1880,
+        410
+      ],
+      "typeVersion": 1,
+      "id": "e57ca998-e517-473d-ae98-68cabb3e2423"
+    },
+    {
+      "parameters": {
+        "resource": "lead",
+        "campaignId": "",
+        "email": "={{$node[\"Dropcontact - GET\"].json[\"data\"][0][\"email\"][0][\"email\"]}}",
+        "additionalFields": {
+          "companyName": "={{$node[\"Dropcontact - GET\"].json[\"data\"][0][\"company\"]}}",
+          "firstName": "={{$node[\"Dropcontact - GET\"].json[\"data\"][0][\"first_name\"]}}",
+          "lastName": "={{$node[\"Dropcontact - GET\"].json[\"data\"][0][\"last_name\"]}}"
+        }
+      },
+      "name": "Lemlist",
+      "type": "n8n-nodes-base.lemlist",
+      "position": [
+        2280,
+        310
+      ],
+      "retryOnFail": false,
+      "typeVersion": 1,
+      "credentials": {
+        "lemlistApi": {
+          "id": "",
+          "name": ""
+        }
+      },
+      "continueOnFail": true,
+      "id": "e8a09d41-ae91-48e3-a542-1e27e4301410"
+    },
+    {
+      "parameters": {
+        "resource": "contact",
+        "email": "={{$node[\"Dropcontact - GET\"].json[\"data\"][0][\"email\"][0][\"email\"]}}",
+        "additionalFields": {
+          "city": "={{$node[\"Dropcontact - GET\"].json[\"data\"][0][\"siret_city\"]}}",
+          "companyName": "={{$node[\"Dropcontact - GET\"].json[\"data\"][0][\"company\"]}}",
+          "firstName": "={{$node[\"Dropcontact - GET\"].json[\"data\"][0][\"first_name\"]}}",
+          "gender": "={{$node[\"Dropcontact - GET\"].json[\"data\"][0][\"civility\"]}}",
+          "lastName": "={{$node[\"Dropcontact - GET\"].json[\"data\"][0][\"last_name\"]}}",
+          "originalSource": "SOCIAL_MEDIA",
+          "phoneNumber": "={{$node[\"Dropcontact - GET\"].json[\"data\"][0][\"phone\"]}}",
+          "websiteUrl": "={{$node[\"Dropcontact - GET\"].json[\"data\"][0][\"website\"]}}"
+        }
+      },
+      "name": "Hubspot",
+      "type": "n8n-nodes-base.hubspot",
+      "position": [
+        2680,
+        310
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "hubspotApi": {
+          "id": "",
+          "name": ""
+        }
+      },
+      "id": "2d974dc2-f065-4e8f-9199-bc3b67fb3ab7"
+    },
+    {
+      "parameters": {
+        "jsonParameters": true,
+        "additionalFields": {
+          "manualLaunch": true
+        }
+      },
+      "name": "LinkedIn Post Commenters",
+      "type": "n8n-nodes-base.phantombuster",
+      "position": [
+        680,
+        220
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "phantombusterApi": {
+          "id": "",
+          "name": ""
+        }
+      },
+      "id": "fef87282-9e25-416d-b8c4-f0aea5c4c0dd"
+    },
+    {
+      "parameters": {
+        "operation": "getOutput",
+        "additionalFields": {}
+      },
+      "name": "Get Comments",
+      "type": "n8n-nodes-base.phantombuster",
+      "position": [
+        1080,
+        220
+      ],
+      "executeOnce": true,
+      "typeVersion": 1,
+      "credentials": {
+        "phantombusterApi": {
+          "id": "",
+          "name": ""
+        }
+      },
+      "id": "64e79153-f4b2-43b9-b2d5-8362e104c942"
+    },
+    {
+      "parameters": {
+        "additionalFields": {
+          "company": "=",
+          "first_name": "=",
+          "last_name": "",
+          "linkedin": "",
+          "website": ""
+        },
+        "options": {}
+      },
+      "name": "Dropcontact",
+      "type": "n8n-nodes-base.dropcontact",
+      "position": [
+        1280,
+        300
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "dropcontactApi": {
+          "id": "",
+          "name": ""
+        }
+      },
+      "id": "695e5e52-8af5-4aaf-9823-441ca97c434c"
+    },
+    {
+      "parameters": {
+        "additionalFields": {}
+      },
+      "name": "Phantombuster",
+      "type": "n8n-nodes-base.phantombuster",
+      "position": [
+        2480,
+        310
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "phantombusterApi": {
+          "id": "",
+          "name": ""
+        }
+      },
+      "id": "aba1dfc9-1bd4-4915-aa31-4d0945fb5e2f"
+    },
+    {
+      "parameters": {
+        "jsonParameters": true,
+        "additionalFields": {
+          "manualLaunch": true
+        }
+      },
+      "name": "LinkedIn Post Liker",
+      "type": "n8n-nodes-base.phantombuster",
+      "position": [
+        680,
+        420
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "phantombusterApi": {
+          "id": "",
+          "name": ""
+        }
+      },
+      "id": "80c18c3a-f0aa-4bef-afda-d20de5ad4c5d"
+    },
+    {
+      "parameters": {
+        "operation": "getOutput",
+        "additionalFields": {}
+      },
+      "name": "Get Likers",
+      "type": "n8n-nodes-base.phantombuster",
+      "position": [
+        1080,
+        420
+      ],
+      "executeOnce": true,
+      "typeVersion": 1,
+      "credentials": {
+        "phantombusterApi": {
+          "id": "",
+          "name": ""
+        }
+      },
+      "id": "18dbe1ad-4a47-4727-882b-e4e2fde54665"
+    },
+    {
+      "parameters": {
+        "functionCode": "function sleep(milliseconds) {\n  return new Promise(\n    resolve => setTimeout(resolve, milliseconds)\n  );\n}\n\nawait sleep(30000);\n\n// Output data\nreturn items;\n"
+      },
+      "name": "Wait 30s1",
+      "type": "n8n-nodes-base.function",
+      "position": [
+        880,
+        420
+      ],
+      "typeVersion": 1,
+      "notes": "Wait 30 secondes",
+      "id": "71cf149b-0736-492c-8a5a-9ef4a8ff1465"
+    }
+  ],
+  "pinData": null,
+  "settings": {},
+  "staticData": null,
+  "tags": [
+    {
+      "id": "2",
+      "name": "LinkedIn",
+      "createdAt": "2022-02-03T16:57:00.821Z",
+      "updatedAt": "2022-02-03T16:57:00.821Z"
+    }
+  ],
+  "updatedAt": "2022-02-03T16:57:18.606Z"
+}
