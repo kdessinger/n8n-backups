@@ -1,0 +1,134 @@
+{
+  "active": false,
+  "connections": {
+    "Odoo": {
+      "main": [
+        [
+          {
+            "node": "Sort",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sort": {
+      "main": [
+        [
+          {
+            "node": "Set",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set": {
+      "main": [
+        []
+      ]
+    },
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "Odoo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2022-10-18T06:08:14.304Z",
+  "id": 10,
+  "name": "My workflow 4",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "4f6ef26b-f5ae-4ef5-ad19-307ff3a3b185",
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "position": [
+        160,
+        60
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "note",
+        "operation": "getAll",
+        "options": {
+          "fieldsList": [
+            "display_name",
+            "memo",
+            "stage_id",
+            "user_id"
+          ]
+        }
+      },
+      "id": "963b96bf-e36a-4fff-9d4b-90a6d540d304",
+      "name": "Odoo",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        400,
+        60
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "15",
+          "name": "Odoo-Stage (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "Stage",
+              "value": "={{$json[\"stage_id\"][1]}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "7b5c4684-1065-42f1-a37b-0f39ea3fe0f0",
+      "name": "Set",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        780,
+        60
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "sort",
+        "sortFieldsUi": {
+          "sortField": [
+            {
+              "fieldName": "display_name"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "36056426-be9a-4e1a-b7aa-b2613b24fb29",
+      "name": "Sort",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 1,
+      "position": [
+        600,
+        60
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "updatedAt": "2022-10-18T06:08:14.304Z"
+}
