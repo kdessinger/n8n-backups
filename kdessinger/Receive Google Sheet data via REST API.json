@@ -1,0 +1,76 @@
+{
+  "active": false,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2022-06-16T06:29:03.137Z",
+  "id": 7,
+  "name": "Receive Google Sheet data via REST API",
+  "nodes": [
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "sheetId": "1jT6tjYqItrIxbicK33-zVABLDeQSnyP5Wwfmkfq-kB4",
+        "range": "A:B",
+        "rawData": true,
+        "options": {}
+      },
+      "name": "Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        640,
+        300
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "8",
+          "name": "Google Sheets account"
+        }
+      },
+      "id": "356f1909-1558-41a9-bbec-20d61186bca0"
+    },
+    {
+      "parameters": {
+        "path": "webhook",
+        "responseMode": "lastNode",
+        "responseData": "allEntries",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "position": [
+        440,
+        300
+      ],
+      "typeVersion": 1,
+      "id": "8415488d-0f12-434e-ad5c-b3b7b1e3ff87"
+    },
+    {
+      "parameters": {},
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "position": [
+        240,
+        300
+      ],
+      "id": "43eb764a-14ce-4d01-a680-7d1a01307ca0"
+    }
+  ],
+  "pinData": null,
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "updatedAt": "2022-06-16T06:29:03.137Z"
+}
