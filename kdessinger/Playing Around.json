@@ -1,0 +1,174 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2022-02-02T07:12:06.135Z",
+  "id": 1,
+  "name": "Playing Around",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "position": [
+        -860,
+        -240
+      ],
+      "id": "7df73765-9653-4c6d-ace7-dfaaca6a3edc"
+    },
+    {
+      "parameters": {
+        "path": "53caf8ec-e327-4454-89f0-c50cb0b9a95a",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -860,
+        -80
+      ],
+      "webhookId": "53caf8ec-e327-4454-89f0-c50cb0b9a95a",
+      "id": "a0c48e7d-4041-4c53-9d42-6a84dba13a5a"
+    },
+    {
+      "parameters": {
+        "form": "203155680254149"
+      },
+      "name": "JotForm Trigger",
+      "type": "n8n-nodes-base.jotFormTrigger",
+      "typeVersion": 1,
+      "position": [
+        -860,
+        260
+      ],
+      "webhookId": "4e33bd1e-f511-4838-b7ee-1ddf3fe50355",
+      "credentials": {
+        "jotFormApi": {
+          "id": "1",
+          "name": "JotForm account"
+        }
+      },
+      "id": "73704010-4774-47fe-8543-1c7523719255"
+    },
+    {
+      "parameters": {
+        "resource": "template",
+        "operation": "getAll"
+      },
+      "name": "Home Assistant",
+      "type": "n8n-nodes-base.homeAssistant",
+      "typeVersion": 1,
+      "position": [
+        -620,
+        120
+      ],
+      "credentials": {
+        "homeAssistantApi": {
+          "id": "2",
+          "name": "Home Assistant account"
+        }
+      },
+      "id": "d0d3c257-c3ab-4636-b284-2670d114189f"
+    },
+    {
+      "parameters": {
+        "resource": "user",
+        "operation": "get",
+        "userId": "325CBD5D-BD5C-408D-A87C-5A3FD82DC19F"
+      },
+      "name": "Nextcloud",
+      "type": "n8n-nodes-base.nextCloud",
+      "typeVersion": 1,
+      "position": [
+        -620,
+        300
+      ],
+      "alwaysOutputData": false,
+      "credentials": {
+        "nextCloudApi": {
+          "id": "3",
+          "name": "NextCloud (EdVistas)"
+        }
+      },
+      "notes": "Gets Kenn Dessinger's Account info",
+      "id": "e943bc79-5844-4892-9cdb-dbed616d6639"
+    },
+    {
+      "parameters": {
+        "additionalFields": {},
+        "options": {}
+      },
+      "name": "Microsoft Dynamics CRM",
+      "type": "n8n-nodes-base.microsoftDynamicsCrm",
+      "typeVersion": 1,
+      "position": [
+        -620,
+        -240
+      ],
+      "id": "38981042-43c7-497a-8c56-030e5791442f"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery"
+      },
+      "name": "Microsoft SQL",
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1,
+      "position": [
+        -620,
+        -60
+      ],
+      "id": "e8d57a81-4967-4d1a-8d0d-d7a254e4e0ac"
+    },
+    {
+      "parameters": {},
+      "name": "Discord",
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 1,
+      "position": [
+        -400,
+        -60
+      ],
+      "id": "4580d93a-4193-42c9-992d-9cacee59abb7"
+    },
+    {
+      "parameters": {},
+      "name": "Error Trigger",
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        -860,
+        80
+      ],
+      "id": "e13ab54a-d330-4ef0-b7ee-5abdd5d0542b"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "typeName": "Group",
+        "returnAll": true,
+        "options": {}
+      },
+      "name": "Bubble",
+      "type": "n8n-nodes-base.bubble",
+      "typeVersion": 1,
+      "position": [
+        -400,
+        -240
+      ],
+      "credentials": {
+        "bubbleApi": {
+          "id": "5",
+          "name": "Dashboards"
+        }
+      },
+      "id": "d0f443da-d46b-4b64-b143-99bf2301a05d"
+    }
+  ],
+  "pinData": null,
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "updatedAt": "2022-03-07T04:48:34.463Z"
+}
