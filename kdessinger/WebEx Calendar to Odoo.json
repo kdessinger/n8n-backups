@@ -1,0 +1,429 @@
+{
+  "active": false,
+  "connections": {
+    "Webex": {
+      "main": [
+        [
+          {
+            "node": "MeetingStart",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MeetingStart": {
+      "main": [
+        [
+          {
+            "node": "MeetingEnd",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MeetingEnd": {
+      "main": [
+        [
+          {
+            "node": "Odoo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2022-08-10T03:58:51.871Z",
+  "id": 8,
+  "name": "WebEx Calendar to Odoo",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "eb6cd315-fad9-4b4a-bd51-438c5f99093d",
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "position": [
+        -400,
+        140
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "calendar.event",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "description",
+              "fieldValue": "={{$json[\"agenda\"]}}"
+            },
+            {
+              "fieldName": "location",
+              "fieldValue": "=WebEx"
+            },
+            {
+              "fieldName": "start",
+              "fieldValue": "={{ $json[\"MeetingStart\"] }}"
+            },
+            {
+              "fieldName": "display_name",
+              "fieldValue": "={{ $json[\"title\"] }}"
+            },
+            {
+              "fieldName": "stop",
+              "fieldValue": "={{ $json[\"MeetingEnd\"] }}"
+            },
+            {
+              "fieldName": "name",
+              "fieldValue": "={{ $json[\"title\"] }}"
+            },
+            {
+              "fieldName": "privacy",
+              "fieldValue": "public"
+            },
+            {
+              "fieldName": "show_as",
+              "fieldValue": "busy"
+            },
+            {
+              "fieldName": "videocall_location",
+              "fieldValue": "={{ $json[\"webLink\"] }}"
+            }
+          ]
+        }
+      },
+      "id": "7ec79f12-e714-45a5-922c-66425f13c75d",
+      "name": "Odoo",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        700,
+        120
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "14",
+          "name": "odoo-stage (Admin)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "event": "all",
+        "filters": {
+          "ownedBy": ""
+        }
+      },
+      "id": "0f6f0d65-89d4-4ae9-93e6-b1cbfceebdd1",
+      "name": "Webex Trigger",
+      "type": "n8n-nodes-base.ciscoWebexTrigger",
+      "typeVersion": 1,
+      "position": [
+        100,
+        300
+      ],
+      "webhookId": "310b2baf-54b5-4ee3-9298-5a04cb64ff42",
+      "credentials": {
+        "ciscoWebexOAuth2Api": {
+          "id": "13",
+          "name": "Webex (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "10639508-95b0-4a45-82dd-099f5786aa68",
+      "name": "Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -460,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "meeting",
+        "operation": "getAll",
+        "returnAll": true,
+        "filters": {}
+      },
+      "id": "2e61417b-12ba-4e2c-978e-633f3b5be224",
+      "name": "Webex",
+      "type": "n8n-nodes-base.ciscoWebex",
+      "typeVersion": 1,
+      "position": [
+        100,
+        120
+      ],
+      "credentials": {
+        "ciscoWebexOAuth2Api": {
+          "id": "13",
+          "name": "Webex (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "value": "={{ $json[\"start\"] }}",
+        "dataPropertyName": "MeetingStart",
+        "custom": true,
+        "toFormat": "YYYY-MM-DD HH:mm:ss",
+        "options": {
+          "fromTimezone": "={{ $json[\"timezone\"] }}",
+          "toTimezone": "US/Eastern"
+        }
+      },
+      "id": "56b84c45-7f24-469b-b9b3-5d2a075adfa9",
+      "name": "MeetingStart",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 1,
+      "position": [
+        300,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "value": "={{ $json[\"end\"] }}",
+        "dataPropertyName": "MeetingEnd",
+        "custom": true,
+        "toFormat": "YYYY-MM-DD HH:mm:ss",
+        "options": {
+          "fromTimezone": "={{ $json[\"timezone\"] }}",
+          "toTimezone": "US/Eastern"
+        }
+      },
+      "id": "d2aea0d9-9f00-4104-ac58-e4bf29483416",
+      "name": "MeetingEnd",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 1,
+      "position": [
+        500,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "hr.department",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {
+          "fieldsList": []
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "active",
+              "value": "true"
+            }
+          ]
+        }
+      },
+      "id": "7a394f6d-fb61-49ff-88df-3b2fb9bb76c5",
+      "name": "Departments",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        300,
+        580
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "15",
+          "name": "Odoo-Stage (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "helpdesk.ticket",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {
+          "fieldsList": []
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "active",
+              "value": "true"
+            }
+          ]
+        }
+      },
+      "id": "cc85aa95-d705-481b-9bed-ae0ff0309520",
+      "name": "Helpdesk",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        180,
+        500
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "15",
+          "name": "Odoo-Stage (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "project.project",
+        "operation": "getAll",
+        "options": {},
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "name",
+              "value": "Kenn's Tasks"
+            }
+          ]
+        }
+      },
+      "id": "210741c0-4203-4e03-85e9-3f9de7bec963",
+      "name": "Projects",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        420,
+        460
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "15",
+          "name": "Odoo-Stage (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "report.project.task.user",
+        "operation": "getAll",
+        "limit": 10,
+        "options": {}
+      },
+      "id": "b8c41444-33d8-4528-804e-d5b6458e2e26",
+      "name": "Tasks",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        540,
+        560
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "15",
+          "name": "Odoo-Stage (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "note",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {}
+      },
+      "id": "a8e42866-e79b-4d2e-b72c-ccebf08bb59d",
+      "name": "Notes",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        700,
+        460
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "15",
+          "name": "Odoo-Stage (kdessinger)"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Webex": [
+      {
+        "json": {
+          "id": "759bfc6183db4cc4b852f4b4119bf59f",
+          "meetingNumber": "1328249173",
+          "title": "Membership system Weekly Call",
+          "agenda": "Review where we are in testing, get reports into the new system, and see what needs to be done to move this to production.",
+          "password": "DSker379xHV",
+          "phoneAndVideoSystemPassword": "37537379",
+          "meetingType": "meetingSeries",
+          "state": "active",
+          "timezone": "UTC",
+          "start": "2022-08-30T17:00:00Z",
+          "end": "2022-08-30T18:00:00Z",
+          "recurrence": "FREQ=WEEKLY;WKST=SU;INTERVAL=1;BYDAY=TU",
+          "hostUserId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9jNjBmY2Y4NC01MDYxLTQyZTgtYmRlYi01NDgxOGRhM2RiMjg",
+          "hostDisplayName": "Edvistas",
+          "hostEmail": "bbouchard@edvistas.com",
+          "siteUrl": "educationalvistasinc.my.webex.com",
+          "webLink": "https://educationalvistasinc.my.webex.com/educationalvistasinc.my/j.php?MTID=m0b22596dec27f73f172aaabb242f359c",
+          "sipAddress": "1328249173@webex.com",
+          "dialInIpAddress": "173.243.2.68",
+          "enabledAutoRecordMeeting": false,
+          "allowAnyUserToBeCoHost": false,
+          "allowFirstUserToBeCoHost": false,
+          "allowAuthenticatedDevices": true,
+          "enabledJoinBeforeHost": true,
+          "joinBeforeHostMinutes": 5,
+          "enableConnectAudioBeforeHost": true,
+          "excludePassword": false,
+          "publicMeeting": false,
+          "reminderTime": 15,
+          "enableAutomaticLock": false,
+          "unlockedMeetingJoinSecurity": "allowJoin",
+          "telephony": {
+            "accessCode": "1328249173",
+            "callInNumbers": [
+              {
+                "label": "US Toll",
+                "callInNumber": "+1-415-655-0003",
+                "tollType": "toll"
+              }
+            ],
+            "links": [
+              {
+                "rel": "globalCallinNumbers",
+                "href": "/v1/meetings/759bfc6183db4cc4b852f4b4119bf59f/globalCallinNumbers",
+                "method": "GET"
+              }
+            ]
+          },
+          "meetingOptions": {
+            "enabledChat": true,
+            "enabledVideo": true,
+            "enabledPolling": false,
+            "enabledNote": true,
+            "noteType": "allowAll",
+            "enabledClosedCaptions": false,
+            "enabledFileTransfer": true,
+            "enabledUCFRichMedia": false
+          },
+          "sessionTypeId": 3,
+          "scheduledType": "meeting",
+          "enabledBreakoutSessions": false
+        }
+      }
+    ]
+  },
+  "settings": {},
+  "staticData": {
+    "node:Webex Trigger": {
+      "secret": "f4251d83d151563f29d56de745462a5a"
+    }
+  },
+  "tags": [],
+  "updatedAt": "2022-10-07T06:31:17.965Z"
+}
