@@ -1,0 +1,114 @@
+{
+  "active": false,
+  "connections": {
+    "Function": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IMAP Email": {
+      "main": [
+        [
+          {
+            "node": "Function",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2022-02-03T16:59:04.983Z",
+  "id": 4,
+  "name": "Create Nextcloud Deck Card from IMAP email",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "position": [
+        640,
+        100
+      ],
+      "id": "66858baa-53ca-403a-abbd-c2ccd63d3331"
+    },
+    {
+      "parameters": {
+        "postProcessAction": "nothing",
+        "format": "raw",
+        "options": {}
+      },
+      "name": "IMAP Email",
+      "type": "n8n-nodes-base.emailReadImap",
+      "position": [
+        920,
+        100
+      ],
+      "notesInFlow": true,
+      "typeVersion": 1,
+      "alwaysOutputData": true,
+      "credentials": {
+        "imap": {
+          "id": "11",
+          "name": "IMAP account"
+        }
+      },
+      "notes": "Check email",
+      "id": "b75863f3-2d8d-4020-afdc-5cd9f54fb1a5"
+    },
+    {
+      "parameters": {
+        "functionCode": "// Code here will run only once, no matter how many input items there are.\n// More info and help: https://docs.n8n.io/nodes/n8n-nodes-base.function\n\n// Loop over inputs and add a new field called 'myNewField' to the JSON of each one\nfor (item of items) {\n  if (item.json.textHtml) {\n    // Remove HTML, double quotations, line breaks, carriage returns\n    item.json.body = item.json.textHtml.replace(/<br(\\s*?\\/?)>/g, \"\\\\n\").replace(/(<([^>]+)>)/g, \"\").replace(/\\\"/g, \"\");\n    //item.json.body = item.json.textHtml.eplace(/(<([^>]+)>)/g, \"\").replace(/\\\"/g, \"\").replace(/\\n/g, \"\").replace(/\\r/g, \"\");\n  } else {\n    // Remove double quotations, line breaks, carriage returns\n    item.json.body = item.json.textPlain.replace(/\\\"/g, \"\").replace(/\\n/g, \"\\\\n\").replace(/\\r/g, \"\");\n  }\n}\n\n// You can write logs to the browser console\nconsole.log('Done!');\n\nreturn items;"
+      },
+      "name": "Function",
+      "type": "n8n-nodes-base.function",
+      "position": [
+        1170,
+        100
+      ],
+      "notesInFlow": true,
+      "typeVersion": 1,
+      "notes": "Strip HTML code",
+      "id": "8015ee40-6364-43ba-88ea-1e8244ebf351"
+    },
+    {
+      "parameters": {
+        "authentication": "basicAuth",
+        "requestMethod": "POST",
+        "url": "https://your.nextcloud.com/index.php/apps/deck/api/v1.0/boards/YOUR-BOARD-ID/stacks/YOUR-STACK-ID/cards",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "={\n\"title\": \"{{$json[\"subject\"]}}\",\n\"type\": \"plain\",\n\"order\": -1,\n\"description\": \"{{$json[\"body\"]}}\"\n}",
+        "headerParametersJson": "{\n\"OCS-APIRequest\": \"true\",\n\"Content-Type\": \"application/json\"\n}"
+      },
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        1400,
+        100
+      ],
+      "notesInFlow": true,
+      "typeVersion": 1,
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "3",
+          "name": "Nextcloud credential"
+        }
+      },
+      "notes": "Add card to Nextcloud Deck App. Configure board / stack id to your environment.",
+      "id": "845151eb-f2fe-41ad-9c4f-7c3e4884a9c4"
+    }
+  ],
+  "pinData": null,
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "updatedAt": "2022-06-22T03:39:38.179Z"
+}
