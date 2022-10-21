@@ -1,0 +1,156 @@
+{
+  "active": false,
+  "connections": {
+    "IF": {
+      "main": [
+        [
+          {
+            "node": "Twilio",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "NoOp",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cron": {
+      "main": [
+        [
+          {
+            "node": "OpenWeatherMap",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenWeatherMap": {
+      "main": [
+        [
+          {
+            "node": "IF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2022-02-21T20:00:11.594Z",
+  "id": 4,
+  "name": "Weather",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "position": [
+        300,
+        -20
+      ],
+      "id": "263c4c6a-f965-4762-afad-88ea7673470d"
+    },
+    {
+      "parameters": {
+        "triggerTimes": {
+          "item": [
+            {}
+          ]
+        }
+      },
+      "name": "Cron",
+      "type": "n8n-nodes-base.cron",
+      "position": [
+        300,
+        140
+      ],
+      "typeVersion": 1,
+      "id": "2a888b28-ca6b-4a9e-85da-25f5d6ab62c2"
+    },
+    {
+      "parameters": {
+        "format": "imperial",
+        "locationSelection": "zipCode",
+        "zipCode": "12308"
+      },
+      "name": "OpenWeatherMap",
+      "type": "n8n-nodes-base.openWeatherMap",
+      "position": [
+        500,
+        140
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "openWeatherMapApi": {
+          "id": "6",
+          "name": "OpenWeatherMap (kdessinger)"
+        }
+      },
+      "id": "bf8a9f79-f349-4e7d-b474-eb6dc2e271ce"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{$node[\"OpenWeatherMap\"].json[\"main\"][\"feels_like\"]}}",
+              "value2": 32
+            }
+          ]
+        }
+      },
+      "name": "IF",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        680,
+        140
+      ],
+      "typeVersion": 1,
+      "id": "866abd66-be05-46c7-af66-cb0ac4e634ed"
+    },
+    {
+      "parameters": {
+        "from": "+18442026677",
+        "to": "+15125144925",
+        "message": "=Wear a sweater today, it is {{$node[\"OpenWeatherMap\"].json[\"main\"][\"feels_like\"]}}°F outside right now."
+      },
+      "name": "Twilio",
+      "type": "n8n-nodes-base.twilio",
+      "position": [
+        920,
+        20
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "twilioApi": {
+          "id": "3",
+          "name": "Twilio (kdessinger)"
+        }
+      },
+      "id": "88f39e1f-ef56-4c66-8afc-2496c91b81f0"
+    },
+    {
+      "parameters": {},
+      "name": "NoOp",
+      "type": "n8n-nodes-base.noOp",
+      "position": [
+        920,
+        240
+      ],
+      "typeVersion": 1,
+      "id": "c1bede6d-a08d-4208-b6c4-037d5648a0c3"
+    }
+  ],
+  "pinData": null,
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "updatedAt": "2022-02-22T20:11:53.084Z"
+}
