@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "n8n": {
       "main": [
@@ -484,5 +484,5 @@
   "settings": {},
   "staticData": null,
   "tags": [],
-  "updatedAt": "2022-10-21T17:00:56.981Z"
+  "updatedAt": "2022-10-21T17:05:39.819Z"
 }
