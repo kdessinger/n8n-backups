@@ -1,0 +1,142 @@
+{
+  "active": false,
+  "connections": {
+    "Move Binary Data": {
+      "main": [
+        [
+          {
+            "node": "Write Binary File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Binary File": {
+      "main": [
+        [
+          {
+            "node": "Spreadsheet File1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Spreadsheet File1": {
+      "main": [
+        [
+          {
+            "node": "Move Binary Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "Read Binary File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2022-11-01T19:25:33.787Z",
+  "id": 7,
+  "name": "CSV_2_JSON",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "d40d7872-a364-4b5b-ab2b-dee0302a0a3d",
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "position": [
+        420,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "filePath": "/mnt/share/_convert/CSV_2_JSON/n8n_spreadsheet.csv"
+      },
+      "name": "Read Binary File",
+      "type": "n8n-nodes-base.readBinaryFile",
+      "position": [
+        620,
+        440
+      ],
+      "typeVersion": 1,
+      "id": "5a30d331-e15e-4061-b1ed-6b6962d91622"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "name": "Spreadsheet File1",
+      "type": "n8n-nodes-base.spreadsheetFile",
+      "position": [
+        800,
+        440
+      ],
+      "typeVersion": 1,
+      "id": "fb1bcd7b-5b4f-4711-b348-4b64dcf0e679"
+    },
+    {
+      "parameters": {
+        "mode": "jsonToBinary",
+        "options": {}
+      },
+      "name": "Move Binary Data",
+      "type": "n8n-nodes-base.moveBinaryData",
+      "position": [
+        980,
+        440
+      ],
+      "typeVersion": 1,
+      "id": "b91c5085-43f6-4345-bc13-7e2dfd6bab0a"
+    },
+    {
+      "parameters": {
+        "fileName": "/mnt/share/_convert/CSV_2_JSON/n8n_spreadsheet.json"
+      },
+      "name": "Write Binary File",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "position": [
+        1160,
+        440
+      ],
+      "typeVersion": 1,
+      "id": "e2716d22-de12-42bf-b0ff-4c5485386e5a"
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2022-11-01T19:25:43.994Z",
+      "updatedAt": "2022-11-01T19:25:43.994Z",
+      "id": "4",
+      "name": "Convert"
+    },
+    {
+      "createdAt": "2022-11-01T19:25:52.377Z",
+      "updatedAt": "2022-11-01T19:25:52.377Z",
+      "id": "5",
+      "name": "csv"
+    },
+    {
+      "createdAt": "2022-11-01T19:26:05.550Z",
+      "updatedAt": "2022-11-01T19:26:05.550Z",
+      "id": "7",
+      "name": "json"
+    }
+  ],
+  "updatedAt": "2022-11-01T19:33:18.936Z"
+}
