@@ -1,0 +1,77 @@
+{
+  "active": false,
+  "connections": {
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Write Binary File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2022-11-02T20:09:15.948Z",
+  "id": 8,
+  "name": "Write Binary Files",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "position": [
+        460,
+        460
+      ],
+      "typeVersion": 1,
+      "id": "d1429daf-5224-4732-accb-61add22b1eed"
+    },
+    {
+      "parameters": {
+        "url": "https://www.edvistas.com/wp-content/uploads/2022/03/Educational-Vistas-Logo-RGB-150px.png",
+        "responseFormat": "file",
+        "options": {}
+      },
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        660,
+        460
+      ],
+      "typeVersion": 1,
+      "id": "f30919c4-470b-4aae-8233-0a7ac2771a2d"
+    },
+    {
+      "parameters": {
+        "fileName": "/home/n8n-logo.png",
+        "options": {}
+      },
+      "name": "Write Binary File",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "position": [
+        860,
+        460
+      ],
+      "typeVersion": 1,
+      "id": "fe7f4f8a-9eee-4134-b0bd-8855f7dd6bd6"
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "updatedAt": "2022-11-02T21:29:48.267Z"
+}
