@@ -1,0 +1,437 @@
+{
+  "active": false,
+  "connections": {
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "Download XML File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Write header row": {
+      "main": [
+        [
+          {
+            "node": "Wait for spreadsheet creation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Define header row": {
+      "main": [
+        [
+          {
+            "node": "Write header row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download XML File": {
+      "main": [
+        [
+          {
+            "node": "Parse XML content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse XML content": {
+      "main": [
+        [
+          {
+            "node": "Split out food items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split out food items": {
+      "main": [
+        [
+          {
+            "node": "Create new spreadsheet file",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Wait for spreadsheet creation",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Create new spreadsheet file": {
+      "main": [
+        [
+          {
+            "node": "Define header row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait for spreadsheet creation": {
+      "main": [
+        [
+          {
+            "node": "Write data to sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Nextcloud": {
+      "main": [
+        [
+          {
+            "node": "Move Binary Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split out food items1": {
+      "main": [
+        []
+      ]
+    },
+    "Nextcloud1": {
+      "main": [
+        [
+          {
+            "node": "Set",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set": {
+      "main": [
+        [
+          {
+            "node": "Nextcloud",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2022-11-02T21:58:30.534Z",
+  "id": 9,
+  "name": "Read XML file and store content",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "d0c92688-14fc-4393-a1d6-926eb867b81e",
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "position": [
+        180,
+        449
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## n8n version\n\nThis workflow was created using n8n version 0.197.1 and uses a new [expression syntax](https://docs.n8n.io/code-examples/methods-variables-reference/) as well as a new version of the Merge node. Make sure you're also using n8n version 0.197.1 or newer when running this workflow.",
+        "height": 169,
+        "width": 436
+      },
+      "id": "0edbad78-249b-441c-877d-bac57fb44a91",
+      "name": "Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        40,
+        20
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "url": "https://www.w3schools.com/xml/simple.xml",
+        "options": {}
+      },
+      "id": "251d893c-11cb-4702-a289-44f198581722",
+      "name": "Download XML File",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        400,
+        449
+      ],
+      "typeVersion": 3
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "0973b302-1ba9-4faf-9d6c-2caca1b301f5",
+      "name": "Parse XML content",
+      "type": "n8n-nodes-base.xml",
+      "position": [
+        620,
+        449
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "resource": "spreadsheet",
+        "title": "My XML Data",
+        "options": {}
+      },
+      "id": "01854111-27cb-40c1-b95e-14f91f89e9f1",
+      "name": "Create new spreadsheet file",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        1060,
+        349
+      ],
+      "executeOnce": true,
+      "typeVersion": 2,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "19",
+          "name": "Tom's Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "columns",
+              "value": "={{ [ Object.keys($(\"Split out food items\").first().json) ] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "affbcb81-5873-406e-a51d-cd6fee682992",
+      "name": "Define header row",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1280,
+        349
+      ],
+      "executeOnce": true,
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "breakfast_menu.food",
+        "options": {}
+      },
+      "id": "537aff03-ae08-4712-bfae-15f0e3a5e69a",
+      "name": "Split out food items",
+      "type": "n8n-nodes-base.itemLists",
+      "position": [
+        840,
+        449
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "sheetId": "={{ $(\"Create new spreadsheet file\").first().json[\"spreadsheetId\"] }}",
+        "rawData": true,
+        "dataProperty": "columns",
+        "options": {}
+      },
+      "id": "b247f984-6ed2-4de0-8877-a61571863ff8",
+      "name": "Write header row",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        1500,
+        349
+      ],
+      "typeVersion": 2,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "19",
+          "name": "Tom's Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "chooseBranch",
+        "output": "input2"
+      },
+      "id": "fc9e2c32-30b1-4162-a686-2d049e52e111",
+      "name": "Wait for spreadsheet creation",
+      "type": "n8n-nodes-base.merge",
+      "position": [
+        1720,
+        449
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "sheetId": "={{ $(\"Create new spreadsheet file\").first().json[\"spreadsheetId\"] }}",
+        "options": {}
+      },
+      "id": "fdc6d5d9-e08d-4086-a233-0edb3c11bc86",
+      "name": "Write data to sheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        1940,
+        449
+      ],
+      "typeVersion": 2,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "19",
+          "name": "Tom's Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "path": "/!Clients/Educational Vistas/Uploads/schoolinfo.xml"
+      },
+      "id": "e22b0b05-e6b8-4c12-aeee-d0926adaea42",
+      "name": "Nextcloud",
+      "type": "n8n-nodes-base.nextCloud",
+      "typeVersion": 1,
+      "position": [
+        880,
+        60
+      ],
+      "credentials": {
+        "nextCloudApi": {
+          "id": "18",
+          "name": "NextCloud (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "breakfast_menu.food",
+        "include": "allOtherFields",
+        "options": {}
+      },
+      "id": "91484d04-ec6c-4714-a9b4-2ed92da6fae2",
+      "name": "Split out food items1",
+      "type": "n8n-nodes-base.itemLists",
+      "position": [
+        1400,
+        60
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "options": {
+          "encoding": "utf8",
+          "stripBOM": true,
+          "keepSource": false
+        }
+      },
+      "id": "0b0cd4ad-7e84-47b5-929e-94604a4d6db6",
+      "name": "Move Binary Data",
+      "type": "n8n-nodes-base.moveBinaryData",
+      "typeVersion": 1,
+      "position": [
+        1120,
+        60
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "folder",
+        "operation": "list",
+        "path": "/!Clients/Educational Vistas/Uploads"
+      },
+      "id": "1159b5ed-cbab-44be-8fa6-42d6e3ff65e9",
+      "name": "Nextcloud1",
+      "type": "n8n-nodes-base.nextCloud",
+      "typeVersion": 1,
+      "position": [
+        580,
+        60
+      ],
+      "credentials": {
+        "nextCloudApi": {
+          "id": "18",
+          "name": "NextCloud (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "={{ $json[\"type\"] }}",
+              "value": "file"
+            }
+          ]
+        },
+        "options": {
+          "dotNotation": true
+        }
+      },
+      "id": "56150b6b-0874-4b8a-bdd0-024bb26912b8",
+      "name": "Set",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        740,
+        60
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2022-11-01T19:25:43.994Z",
+      "updatedAt": "2022-11-01T19:25:43.994Z",
+      "id": "4",
+      "name": "Convert"
+    },
+    {
+      "createdAt": "2022-11-02T21:58:34.707Z",
+      "updatedAt": "2022-11-02T21:58:34.707Z",
+      "id": "8",
+      "name": "XML"
+    },
+    {
+      "createdAt": "2022-11-02T21:58:39.465Z",
+      "updatedAt": "2022-11-02T21:58:39.465Z",
+      "id": "9",
+      "name": "NextCloud"
+    },
+    {
+      "createdAt": "2022-11-02T21:58:55.434Z",
+      "updatedAt": "2022-11-02T21:58:55.434Z",
+      "id": "10",
+      "name": "XLS"
+    }
+  ],
+  "updatedAt": "2022-11-02T22:11:23.043Z"
+}
