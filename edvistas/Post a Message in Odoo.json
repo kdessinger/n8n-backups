@@ -1,0 +1,88 @@
+{
+  "active": false,
+  "connections": {
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "Get Affirmations",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Affirmations": {
+      "main": [
+        [
+          {
+            "node": "Odoo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2022-11-10T21:20:44.103Z",
+  "hash": "facd196c8f2aa3b8d5be8ef3ca808f1b",
+  "id": 10,
+  "name": "Post a Message in Odoo",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "position": [
+        20,
+        500
+      ],
+      "typeVersion": 1,
+      "id": "e19e00b6-2eb3-46ec-98bc-3523c13fd9cb"
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "mail.message",
+        "operation": "getAll",
+        "options": {}
+      },
+      "id": "8aeffec7-e881-4eb2-a30a-596c592eb580",
+      "name": "Odoo",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        440,
+        500
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "odooApi": {
+          "id": "13",
+          "name": "Odoo-Stage (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://www.affirmations.dev/",
+        "options": {
+          "allowUnauthorizedCerts": true
+        }
+      },
+      "id": "cc8f8530-599d-4336-b028-209af643ca93",
+      "name": "Get Affirmations",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        220,
+        500
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "updatedAt": "2022-11-10T21:23:08.620Z"
+}
