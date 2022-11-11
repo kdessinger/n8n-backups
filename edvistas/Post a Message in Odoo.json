@@ -16,7 +16,7 @@
       "main": [
         [
           {
-            "node": "Odoo",
+            "node": "Write Post",
             "type": "main",
             "index": 0
           }
@@ -25,7 +25,7 @@
     }
   },
   "createdAt": "2022-11-10T21:20:44.103Z",
-  "hash": "facd196c8f2aa3b8d5be8ef3ca808f1b",
+  "hash": "a0119235749e5635ecd3c2d6667ff607",
   "id": 10,
   "name": "Post a Message in Odoo",
   "nodes": [
@@ -34,7 +34,7 @@
       "name": "Start",
       "type": "n8n-nodes-base.start",
       "position": [
-        20,
+        -200,
         500
       ],
       "typeVersion": 1,
@@ -45,15 +45,27 @@
         "resource": "custom",
         "customResource": "mail.message",
         "operation": "getAll",
-        "options": {}
+        "options": {},
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "record_name",
+              "value": "Filestore Uploads"
+            },
+            {
+              "fieldName": "res_id",
+              "value": "110"
+            }
+          ]
+        }
       },
       "id": "8aeffec7-e881-4eb2-a30a-596c592eb580",
       "name": "Odoo",
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        440,
-        500
+        220,
+        320
       ],
       "alwaysOutputData": true,
       "credentials": {
@@ -75,8 +87,75 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
+        0,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "mail.message",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "subject",
+              "fieldValue": "=Affirmation"
+            },
+            {
+              "fieldName": "email_from",
+              "fieldValue": "datamate@edvistas.com"
+            },
+            {
+              "fieldName": "message_type",
+              "fieldValue": "Email"
+            },
+            {
+              "fieldName": "res_id",
+              "fieldValue": "110"
+            },
+            {
+              "fieldName": "model",
+              "fieldValue": "mail.channel"
+            },
+            {
+              "fieldName": "record_name",
+              "fieldValue": "Filestore Uploads"
+            },
+            {
+              "fieldName": "body",
+              "fieldValue": "={{ $json[\"affirmation\"] }}"
+            }
+          ]
+        }
+      },
+      "id": "f066d6df-3bf6-4147-8d6a-11037aba9e09",
+      "name": "Write Post",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
         220,
         500
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "odooApi": {
+          "id": "13",
+          "name": "Odoo-Stage (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "return items[0].json.map(item => {\n  return {\n    json: {\n      id:item.id,\n      memo:item.memo,\n      username:item.user_id[1],\n      display_name:item.display_name,\n      name:item.name\n      \n    },\n  }\n});\n"
+      },
+      "id": "969b1b16-f54e-40de-83d1-47ee31e37353",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        0,
+        320
       ]
     }
   ],
@@ -84,5 +163,5 @@
   "settings": {},
   "staticData": null,
   "tags": [],
-  "updatedAt": "2022-11-10T21:23:08.620Z"
+  "updatedAt": "2022-11-11T15:16:23.146Z"
 }
