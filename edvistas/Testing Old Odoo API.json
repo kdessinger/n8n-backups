@@ -1,0 +1,135 @@
+{
+  "active": false,
+  "connections": {
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "FunctionItem",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "FunctionItem": {
+      "main": [
+        [
+          {
+            "node": "Function",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Function": {
+      "main": [
+        [
+          {
+            "node": "Item Lists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2022-11-15T15:43:41.293Z",
+  "hash": "9cff4f141eae764820e3cff6bab59aeb",
+  "id": 11,
+  "name": "Testing Old Odoo API",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "position": [
+        660,
+        200
+      ],
+      "id": "ea1b3d30-d4ed-4640-af13-b96279740ed6"
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "http://localhost:8069/jsonrpc",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "{\n    \"jsonrpc\": \"2.0\",\n    \"method\": \"call\",\n    \"params\": {\n        \"service\": \"object\",\n        \"method\": \"execute\",\n        \"args\": [\"controlc\",\n        2,\n        \"nqp4-b9v6-9ier\",\n        \"note.note\",\n        \"search_read\",\n        []]\n    },\n    \"id\": 154\n}"
+      },
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        940,
+        200
+      ],
+      "id": "c64b995a-67ee-4c32-8188-2e4c81414436"
+    },
+    {
+      "parameters": {
+        "functionCode": "return item.result\n"
+      },
+      "name": "FunctionItem",
+      "type": "n8n-nodes-base.functionItem",
+      "typeVersion": 1,
+      "position": [
+        1180,
+        200
+      ],
+      "id": "a06c2950-fd9d-423c-ab52-11df8c855b2d"
+    },
+    {
+      "parameters": {
+        "functionCode": "return items[0].json.map(item => {\n  return {\n    json: {\n      id:item.id,\n      memo:item.memo,\n      username:item.user_id[1],\n      display_name:item.display_name,\n      name:item.name\n      \n    },\n  }\n});\n"
+      },
+      "name": "Function",
+      "type": "n8n-nodes-base.function",
+      "position": [
+        1450,
+        200
+      ],
+      "typeVersion": 1,
+      "id": "d5abc532-1cc6-455b-b833-fc4a8cc42cb2"
+    },
+    {
+      "parameters": {
+        "operation": "sort",
+        "sortFieldsUi": {
+          "sortField": [
+            {
+              "fieldName": "id"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Item Lists",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 1,
+      "position": [
+        1650,
+        200
+      ],
+      "id": "5e47d507-1a82-4831-b79f-9dc62bfca658"
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "updatedAt": "2022-11-15T15:43:41.293Z"
+}
