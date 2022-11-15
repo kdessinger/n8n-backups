@@ -25,7 +25,7 @@
     }
   },
   "createdAt": "2022-11-10T21:20:44.103Z",
-  "hash": "a0119235749e5635ecd3c2d6667ff607",
+  "hash": "514b6b670eac843a729c20334357c2ea",
   "id": 10,
   "name": "Post a Message in Odoo",
   "nodes": [
@@ -157,11 +157,75 @@
         0,
         320
       ]
+    },
+    {
+      "parameters": {
+        "functionCode": "return items[0].json.map(item => {\n  return {\n    json: {\n      id:item.id,\n      memo:item.memo,\n      username:item.user_id[1],\n      display_name:item.display_name,\n      name:item.name\n      \n    },\n  }\n});\n"
+      },
+      "name": "Function",
+      "type": "n8n-nodes-base.function",
+      "position": [
+        -220,
+        320
+      ],
+      "typeVersion": 1,
+      "id": "f63b9f68-46da-466a-b511-e5fff7d4d6bf"
+    },
+    {
+      "parameters": {
+        "operation": "sort",
+        "sortFieldsUi": {
+          "sortField": [
+            {
+              "fieldName": "id"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Item Lists",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 1,
+      "position": [
+        -440,
+        320
+      ],
+      "id": "29b772fd-f9bd-4258-a2ae-428c7145dc38"
+    },
+    {
+      "parameters": {
+        "functionCode": "return item.result\n"
+      },
+      "name": "FunctionItem",
+      "type": "n8n-nodes-base.functionItem",
+      "typeVersion": 1,
+      "position": [
+        0,
+        160
+      ],
+      "id": "888c9d76-87ee-44c8-9bd4-5915b4fa8822"
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "http://localhost:8069/jsonrpc",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "{\n    \"jsonrpc\": \"2.0\",\n    \"method\": \"call\",\n    \"params\": {\n        \"service\": \"object\",\n        \"method\": \"execute\",\n        \"args\": [\"controlc\",\n        2,\n        \"nqp4-b9v6-9ier\",\n        \"note.note\",\n        \"search_read\",\n        []]\n    },\n    \"id\": 154\n}"
+      },
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        -440,
+        140
+      ],
+      "id": "c5e9431d-506a-45e6-a42e-8ebc2857b45f"
     }
   ],
   "pinData": {},
   "settings": {},
   "staticData": null,
   "tags": [],
-  "updatedAt": "2022-11-11T15:16:23.146Z"
+  "updatedAt": "2022-11-15T16:47:39.835Z"
 }
