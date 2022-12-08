@@ -58,7 +58,7 @@
     }
   },
   "createdAt": "2022-11-01T19:25:33.787Z",
-  "hash": "eb19ee76be6850b8708abe9744a3e74e",
+  "dataLoaded": false,
   "id": 7,
   "name": "CSV_2_JSON",
   "nodes": [
@@ -194,5 +194,6 @@
       "name": "json"
     }
   ],
-  "updatedAt": "2022-11-03T00:18:11.804Z"
+  "updatedAt": "2022-11-03T00:18:11.804Z",
+  "versionId": "14d7c201-2476-4c9d-84b5-01ef7c6c39d2"
 }
