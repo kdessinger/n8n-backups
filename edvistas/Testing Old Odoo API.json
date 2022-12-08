@@ -47,7 +47,7 @@
     }
   },
   "createdAt": "2022-11-15T15:43:41.293Z",
-  "hash": "9cff4f141eae764820e3cff6bab59aeb",
+  "dataLoaded": false,
   "id": 11,
   "name": "Testing Old Odoo API",
   "nodes": [
@@ -131,5 +131,6 @@
   "settings": {},
   "staticData": null,
   "tags": [],
-  "updatedAt": "2022-11-15T15:43:41.293Z"
+  "updatedAt": "2022-11-15T15:43:41.293Z",
+  "versionId": "e39cf449-8456-4107-918c-d8a7a5edeb6a"
 }
