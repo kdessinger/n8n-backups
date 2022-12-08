@@ -43,7 +43,7 @@
     }
   },
   "createdAt": "2022-02-21T20:00:11.594Z",
-  "dataLoaded": false,
+  "dataLoaded": true,
   "id": 4,
   "name": "Weather",
   "nodes": [
@@ -153,6 +153,6 @@
   "settings": {},
   "staticData": null,
   "tags": [],
-  "updatedAt": "2022-02-22T20:11:53.084Z",
+  "updatedAt": "2022-12-08T16:20:53.000Z",
   "versionId": "b0795ed9-c724-425d-ab4c-6c28f12e5a40"
 }
