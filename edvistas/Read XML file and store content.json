@@ -134,7 +134,7 @@
     }
   },
   "createdAt": "2022-11-02T21:58:30.534Z",
-  "dataLoaded": false,
+  "dataLoaded": true,
   "id": 9,
   "name": "Read XML file and store content",
   "nodes": [
@@ -434,6 +434,6 @@
       "name": "XLS"
     }
   ],
-  "updatedAt": "2022-11-02T22:11:23.043Z",
+  "updatedAt": "2022-12-08T16:50:37.000Z",
   "versionId": "fa7d2baf-be6f-4cb7-88cf-cab7104f2d17"
 }
