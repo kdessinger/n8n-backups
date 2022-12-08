@@ -25,7 +25,7 @@
     }
   },
   "createdAt": "2022-11-10T21:20:44.103Z",
-  "hash": "514b6b670eac843a729c20334357c2ea",
+  "dataLoaded": true,
   "id": 10,
   "name": "Post a Message in Odoo",
   "nodes": [
@@ -227,5 +227,6 @@
   "settings": {},
   "staticData": null,
   "tags": [],
-  "updatedAt": "2022-11-15T16:47:39.835Z"
+  "updatedAt": "2022-12-07T22:01:34.000Z",
+  "versionId": "7f6f1b06-d752-4047-9dca-62aefc23da11"
 }
