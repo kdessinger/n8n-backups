@@ -25,7 +25,7 @@
     }
   },
   "createdAt": "2022-11-02T20:09:15.948Z",
-  "hash": "7ca415db9ccd8713d38084f40aa14d21",
+  "dataLoaded": false,
   "id": 8,
   "name": "Write Binary Files",
   "nodes": [
@@ -74,5 +74,6 @@
   "settings": {},
   "staticData": null,
   "tags": [],
-  "updatedAt": "2022-11-02T21:29:48.267Z"
+  "updatedAt": "2022-11-02T21:29:48.267Z",
+  "versionId": "8ab86401-3be9-41b8-8092-34dffa50847f"
 }
