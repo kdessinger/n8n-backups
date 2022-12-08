@@ -74,7 +74,7 @@
     }
   },
   "createdAt": "2022-02-10T21:57:15.216Z",
-  "hash": "d4f7a5f462bc21e72d23e215e25115cf",
+  "dataLoaded": false,
   "id": 2,
   "name": "Historical Dashboard Data",
   "nodes": [
@@ -221,5 +221,6 @@
   "settings": {},
   "staticData": null,
   "tags": [],
-  "updatedAt": "2022-02-21T20:00:01.750Z"
+  "updatedAt": "2022-02-21T20:00:01.750Z",
+  "versionId": "e42c934f-38c7-480c-bc91-918cd997626b"
 }
