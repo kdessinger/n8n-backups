@@ -176,7 +176,7 @@
     }
   },
   "createdAt": "2022-10-19T03:02:28.609Z",
-  "hash": "5591adecceb0b063ba3409219cd23f78",
+  "dataLoaded": false,
   "id": 6,
   "name": "Backup n8n To Github",
   "nodes": [
@@ -485,5 +485,6 @@
   "settings": {},
   "staticData": null,
   "tags": [],
-  "updatedAt": "2022-11-16T21:51:25.021Z"
+  "updatedAt": "2022-11-16T21:51:25.021Z",
+  "versionId": "c98bc132-3ab3-4cd1-9b57-9136067e4a15"
 }
