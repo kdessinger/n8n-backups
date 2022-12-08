@@ -8,7 +8,7 @@
     }
   },
   "createdAt": "2022-02-10T21:57:15.216Z",
-  "hash": "1ee30e14da24c5c7fefe6412f117dcdf",
+  "dataLoaded": false,
   "id": 3,
   "name": "Test Accounts",
   "nodes": [
@@ -129,5 +129,6 @@
   "settings": {},
   "staticData": null,
   "tags": [],
-  "updatedAt": "2022-02-22T20:14:51.162Z"
+  "updatedAt": "2022-02-22T20:14:51.162Z",
+  "versionId": "50e38bfa-13f0-4eea-b129-0b638ce7c64d"
 }
