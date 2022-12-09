@@ -1,0 +1,185 @@
+{
+  "active": false,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Odoo1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create URL string": {
+      "main": [
+        []
+      ]
+    },
+    "Odoo1": {
+      "main": [
+        [
+          {
+            "node": "Create URL string",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2022-12-09T05:18:20.176Z",
+  "dataLoaded": true,
+  "id": 13,
+  "name": "8x8 to Odoo API endpoint",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "6f7b288e-1efe-4504-a6fd-660931327269",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "f80aceed-b676-42aa-bf25-f7a44408b1bc",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "position": [
+        580,
+        120
+      ],
+      "webhookId": "6f7b288e-1efe-4504-a6fd-660931327269",
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Create a simple API endpoint\n\nIn this workflow we show how to create a simple API endpoint with `Webhook` and `Respond to Webhook` nodes\n\n",
+        "height": 280,
+        "width": 600
+      },
+      "id": "3b9ec913-0bbe-4906-bf8e-da352b556655",
+      "name": "Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        560,
+        -20
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "product",
+              "value": "=https://www.google.com/search?q={{$json[\"query\"][\"phone\"]}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "5a228fcb-78b9-4a28-95d2-d7c9fdf1d4ea",
+      "name": "Create URL string",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        980,
+        120
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "### How to use it\n1. Execute the workflow so that the webhook starts listening\n2. Make a test request by pasting, **in a new browser tab**, the test URL from the `Webhook` node and appending the following test at the end `?first_name=bob&last_name=dylan`\n\nYou will receive the following output in the new tab `The URL of the Google search query for the term \"bob dylan\" is: https://www.google.com/search?q=bob+dylan`\n\n",
+        "height": 220,
+        "width": 600
+      },
+      "id": "e7971820-45a8-4dc8-ba4c-b3220d65307a",
+      "name": "Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        560,
+        280
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "contactId": "12",
+        "options": {
+          "fieldsList": [
+            "name",
+            "commercial_company_name",
+            "mobile",
+            "phone",
+            "email"
+          ]
+        }
+      },
+      "id": "ca5a7acc-717e-4a84-b75d-5abb6fa8a0e4",
+      "name": "Odoo",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        1260,
+        120
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "12",
+          "name": "Odoo-Prod (Administrator)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "res.partner",
+        "operation": "get",
+        "customResourceId": "={{ $json[\"query\"] }}",
+        "options": {
+          "fieldsList": []
+        }
+      },
+      "id": "1cd6f54c-c3a6-4011-a1a8-57e7670fd6e3",
+      "name": "Odoo1",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        780,
+        120
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "12",
+          "name": "Odoo-Prod (Administrator)"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2022-12-09T05:43:33.523Z",
+      "updatedAt": "2022-12-09T05:43:33.523Z",
+      "id": "11",
+      "name": "8x8"
+    },
+    {
+      "createdAt": "2022-12-09T05:43:36.104Z",
+      "updatedAt": "2022-12-09T05:43:36.104Z",
+      "id": "12",
+      "name": "odoo"
+    },
+    {
+      "createdAt": "2022-12-09T05:43:38.988Z",
+      "updatedAt": "2022-12-09T05:43:38.988Z",
+      "id": "13",
+      "name": "voip"
+    }
+  ],
+  "updatedAt": "2022-12-09T05:43:41.000Z",
+  "versionId": "8c07ac54-d3cd-4052-98ca-5814f5165bdf"
+}
