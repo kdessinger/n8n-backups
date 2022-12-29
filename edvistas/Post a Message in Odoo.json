@@ -22,6 +22,11 @@
           }
         ]
       ]
+    },
+    "Write Post": {
+      "main": [
+        []
+      ]
     }
   },
   "createdAt": "2022-11-10T21:20:44.103Z",
@@ -34,7 +39,7 @@
       "name": "Start",
       "type": "n8n-nodes-base.start",
       "position": [
-        -200,
+        -700,
         500
       ],
       "typeVersion": 1,
@@ -45,6 +50,7 @@
         "resource": "custom",
         "customResource": "mail.message",
         "operation": "getAll",
+        "limit": 10,
         "options": {},
         "filterRequest": {
           "filter": [
@@ -64,8 +70,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        220,
-        320
+        100,
+        280
       ],
       "alwaysOutputData": true,
       "credentials": {
@@ -87,7 +93,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        0,
+        -480,
         500
       ]
     },
@@ -98,16 +104,12 @@
         "fieldsToCreateOrUpdate": {
           "fields": [
             {
-              "fieldName": "subject",
-              "fieldValue": "=Affirmation"
-            },
-            {
               "fieldName": "email_from",
               "fieldValue": "datamate@edvistas.com"
             },
             {
               "fieldName": "message_type",
-              "fieldValue": "Email"
+              "fieldValue": "email"
             },
             {
               "fieldName": "res_id",
@@ -133,7 +135,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        220,
+        -240,
         500
       ],
       "alwaysOutputData": true,
@@ -154,8 +156,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        0,
-        320
+        -300,
+        280
       ]
     },
     {
@@ -165,8 +167,8 @@
       "name": "Function",
       "type": "n8n-nodes-base.function",
       "position": [
-        -220,
-        320
+        -500,
+        280
       ],
       "typeVersion": 1,
       "id": "f63b9f68-46da-466a-b511-e5fff7d4d6bf"
@@ -187,8 +189,8 @@
       "type": "n8n-nodes-base.itemLists",
       "typeVersion": 1,
       "position": [
-        -440,
-        320
+        -700,
+        280
       ],
       "id": "29b772fd-f9bd-4258-a2ae-428c7145dc38"
     },
@@ -200,27 +202,10 @@
       "type": "n8n-nodes-base.functionItem",
       "typeVersion": 1,
       "position": [
-        0,
-        160
+        -100,
+        280
       ],
       "id": "888c9d76-87ee-44c8-9bd4-5915b4fa8822"
-    },
-    {
-      "parameters": {
-        "requestMethod": "POST",
-        "url": "http://localhost:8069/jsonrpc",
-        "jsonParameters": true,
-        "options": {},
-        "bodyParametersJson": "{\n    \"jsonrpc\": \"2.0\",\n    \"method\": \"call\",\n    \"params\": {\n        \"service\": \"object\",\n        \"method\": \"execute\",\n        \"args\": [\"controlc\",\n        2,\n        \"nqp4-b9v6-9ier\",\n        \"note.note\",\n        \"search_read\",\n        []]\n    },\n    \"id\": 154\n}"
-      },
-      "name": "HTTP Request",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 1,
-      "position": [
-        -440,
-        140
-      ],
-      "id": "c5e9431d-506a-45e6-a42e-8ebc2857b45f"
     }
   ],
   "pinData": {},
@@ -228,6 +213,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2022-12-07T22:01:34.000Z",
-  "versionId": "7f6f1b06-d752-4047-9dca-62aefc23da11"
+  "updatedAt": "2022-12-29T16:02:37.000Z",
+  "versionId": "5be8185a-4aaf-4ead-b96a-8b4ac95a7af3"
 }
