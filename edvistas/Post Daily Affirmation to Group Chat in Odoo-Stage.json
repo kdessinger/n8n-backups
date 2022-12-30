@@ -1,0 +1,232 @@
+{
+  "active": true,
+  "connections": {
+    "Get Affirmations": {
+      "main": [
+        [
+          {
+            "node": "Set Channel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Channel": {
+      "main": [
+        [
+          {
+            "node": "Get Channel ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Channel ID": {
+      "main": [
+        [
+          {
+            "node": "Post Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get Affirmations",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2022-12-29T20:41:07.488Z",
+  "dataLoaded": true,
+  "id": 14,
+  "name": "Post Daily Affirmation to Group Chat in Odoo-Stage",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "https://www.affirmations.dev/",
+        "options": {
+          "allowUnauthorizedCerts": true
+        }
+      },
+      "id": "37cc172d-0915-4b57-910c-22868f8ade8b",
+      "name": "Get Affirmations",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        -820,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "Channel",
+              "value": "general"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "263bc6bc-2626-4a49-9dcc-3edbe203f148",
+      "name": "Set Channel",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        -600,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "mail.channel",
+        "operation": "getAll",
+        "limit": 1,
+        "options": {
+          "fieldsList": [
+            "id",
+            "name",
+            "description",
+            "public",
+            "active"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "name",
+              "value": "={{ $json[\"Channel\"] }}"
+            }
+          ]
+        }
+      },
+      "id": "b85dc687-e9a1-486e-81bf-b344e093bf9a",
+      "name": "Get Channel ID",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        -400,
+        500
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "20",
+          "name": "Odoo-Stage (odoo-bot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "=mail.message",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "email_from",
+              "fieldValue": "datamate@edvistas.com"
+            },
+            {
+              "fieldName": "message_type",
+              "fieldValue": "email"
+            },
+            {
+              "fieldName": "model",
+              "fieldValue": "mail.channel"
+            },
+            {
+              "fieldName": "record_name",
+              "fieldValue": "={{ $json[\"Group\"] }}"
+            },
+            {
+              "fieldName": "body",
+              "fieldValue": "={{ $node[\"Get Affirmations\"].json[\"affirmation\"] }}"
+            },
+            {
+              "fieldName": "res_id",
+              "fieldValue": "={{ $json[\"id\"] }}"
+            }
+          ]
+        }
+      },
+      "id": "4f06c305-f262-4ece-8397-e909cb1b5ace",
+      "name": "Post Message",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        -200,
+        500
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "odooApi": {
+          "id": "20",
+          "name": "Odoo-Stage (odoo-bot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 8
+            }
+          ]
+        }
+      },
+      "id": "f824b2ef-4ef4-4e4e-b30b-697cd4f87adf",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1060,
+        500
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "saveManualExecutions": false,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrencyRules": []
+    }
+  },
+  "tags": [
+    {
+      "createdAt": "2022-12-09T05:43:36.104Z",
+      "updatedAt": "2022-12-09T05:43:36.104Z",
+      "id": "12",
+      "name": "odoo"
+    },
+    {
+      "createdAt": "2022-12-29T17:51:17.794Z",
+      "updatedAt": "2022-12-29T17:51:17.794Z",
+      "id": "14",
+      "name": "post"
+    },
+    {
+      "createdAt": "2022-12-29T17:51:21.720Z",
+      "updatedAt": "2022-12-29T17:51:21.720Z",
+      "id": "15",
+      "name": "message"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2022-12-29T21:03:28.000Z",
+  "versionId": "79ec3d64-c47f-420f-bc9c-c1d563450d21"
+}
