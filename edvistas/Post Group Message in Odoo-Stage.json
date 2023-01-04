@@ -16,18 +16,7 @@
       "main": [
         [
           {
-            "node": "Set Channel",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Set Channel": {
-      "main": [
-        [
-          {
-            "node": "Get Channel ID",
+            "node": "Set Channel (general)",
             "type": "main",
             "index": 0
           }
@@ -39,6 +28,17 @@
         [
           {
             "node": "Post Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Channel (general)": {
+      "main": [
+        [
+          {
+            "node": "Get Channel ID",
             "type": "main",
             "index": 0
           }
@@ -75,27 +75,6 @@
       "typeVersion": 3,
       "position": [
         -820,
-        500
-      ]
-    },
-    {
-      "parameters": {
-        "values": {
-          "string": [
-            {
-              "name": "Channel",
-              "value": "general"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "aaa20796-3033-4a30-b991-a7677a92c9e2",
-      "name": "Set Channel",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 1,
-      "position": [
-        -600,
         500
       ]
     },
@@ -234,6 +213,27 @@
           "name": "Odoo-Stage (odoo-bot)"
         }
       }
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "Channel",
+              "value": "general"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "aaa20796-3033-4a30-b991-a7677a92c9e2",
+      "name": "Set Channel (general)",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        -600,
+        500
+      ]
     }
   ],
   "pinData": {},
@@ -267,6 +267,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2022-12-29T20:55:18.000Z",
-  "versionId": "052c27ee-b962-47d7-9c27-000a02888125"
+  "updatedAt": "2023-01-03T17:41:05.000Z",
+  "versionId": "b927e4d2-3c82-4d54-b692-c967e58aeb34"
 }
