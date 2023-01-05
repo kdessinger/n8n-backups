@@ -1,0 +1,324 @@
+{
+  "active": true,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Odoo Lookup",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Odoo Lookup": {
+      "main": [
+        [
+          {
+            "node": "IF Found",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "URL IF Found": {
+      "main": [
+        [
+          {
+            "node": "Open Existing Contact",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "URL IF Not Found": {
+      "main": [
+        [
+          {
+            "node": "Open New Contact",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF Found": {
+      "main": [
+        [
+          {
+            "node": "URL IF Found",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "URL IF Not Found",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-01-05T07:10:27.933Z",
+  "dataLoaded": false,
+  "id": 17,
+  "name": "8x8 to Odoo Contact Search",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "odoo/search",
+        "responseMode": "responseNode",
+        "options": {
+          "ignoreBots": true
+        }
+      },
+      "id": "35f99421-1244-44fd-bd11-6ffd238424f2",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "position": [
+        600,
+        180
+      ],
+      "webhookId": "6f7b288e-1efe-4504-a6fd-660931327269",
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Simple API contact search in odoo\n\nIn this workflow we will accept a phone number and search odoo for the corresponding record and open to that client.\n\n",
+        "height": 140.6222044621179,
+        "width": 554.7042175838476
+      },
+      "id": "96cb81df-bbd0-4e8c-a29f-168a73669493",
+      "name": "Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        601.3292513517301,
+        0
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "### How to use it\n1. Execute the workflow so that the webhook starts listening\n2. Make a test request by pasting, **in a new browser tab**, the test URL from the `Webhook` node and appending the following test at the end `?q=8005551212`\n\nYou will receive a redirect from to the first name found in the contacts of production Odoo.\n\n",
+        "height": 188.5538132729734,
+        "width": 562.8363247771495
+      },
+      "id": "48affeee-a577-4113-bb42-21e12205c013",
+      "name": "Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        600,
+        340
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "res.partner",
+        "operation": "getAll",
+        "limit": 1,
+        "options": {
+          "fieldsList": [
+            "name",
+            "commercial_company_name",
+            "mobile",
+            "phone",
+            "email",
+            "phone_sanitized"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "phone_sanitized",
+              "operator": "like",
+              "value": "={{ $json[\"query\"][\"q\"] }}"
+            }
+          ]
+        }
+      },
+      "id": "93165a83-4811-4121-8405-e5f44793eecf",
+      "name": "Odoo Lookup",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        800,
+        180
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "odooApi": {
+          "id": "12",
+          "name": "Odoo-Prod (Administrator)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "=<html>\n  <head>\n    <title>Incomming Call!</title>\n    <meta http-equiv=\"refresh\" content=\"0; URL={{ $json[\"url\"] }}\">\n  </head>\n  <body>\n    <h1>{{ $json[\"Name\"] }}</h1>\n    <h3>{{ $json[\"company\"] }}</h3>\n    <h3>{{ $json[\"email\"] }}</h3>\n    <h3>{{ $json[\"phone\"] }}</h3>\n    <h3>{{ $json[\"mobile\"] }}</h3>\n    You are being redirected to Odoo.\n  </body>\n</html>\n",
+        "options": {}
+      },
+      "id": "8d9a7767-d13a-4632-b9ab-689c89f38aaa",
+      "name": "Open Existing Contact",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        1460,
+        80
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "=<html>\n  <head>\n    <title>Incomming Call!</title>\n    <meta http-equiv=\"refresh\" content=\"0; URL={{ $json[\"url\"] }}\">\n  </head>\n</html>\n",
+        "options": {}
+      },
+      "id": "5bcf6513-9fc7-4f54-9b74-29995ae9d549",
+      "name": "Open New Contact",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        1460,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "Name",
+              "value": "={{ $json[\"name\"] }}"
+            },
+            {
+              "name": "email",
+              "value": "={{ $json[\"email\"] }}"
+            },
+            {
+              "name": "company",
+              "value": "={{ $json[\"commercial_company_name\"] }}"
+            },
+            {
+              "name": "mobile",
+              "value": "={{ $json[\"mobile\"] }}"
+            },
+            {
+              "name": "phone",
+              "value": "={{ $json[\"phone\"] }}"
+            },
+            {
+              "name": "url",
+              "value": "=https://odoo.edvistas.com/web#id={{ $json[\"id\"] }}&menu_id=111&action=139&model=res.partner&view_type=form"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "71605e01-2ba1-4a6c-aa81-c8e740a4dc5b",
+      "name": "URL IF Found",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1260,
+        80
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "Name",
+              "value": "={{ $json[\"name\"] }}"
+            },
+            {
+              "name": "email",
+              "value": "={{ $json[\"email\"] }}"
+            },
+            {
+              "name": "company",
+              "value": "={{ $json[\"commercial_company_name\"] }}"
+            },
+            {
+              "name": "mobile",
+              "value": "={{ $json[\"mobile\"] }}"
+            },
+            {
+              "name": "phone",
+              "value": "={{ $json[\"phone\"] }}"
+            },
+            {
+              "name": "url",
+              "value": "=https://odoo.edvistas.com/web#cids=1&menu_id=111&action=139&model=res.partner&view_type=form"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "fa4f06b3-3a46-4ff1-8f75-9262ee8949d2",
+      "name": "URL IF Not Found",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1260,
+        260
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json[\"id\"] }}",
+              "operation": "larger"
+            }
+          ]
+        }
+      },
+      "id": "e269183a-79c0-4bf6-b437-a590844fefda",
+      "name": "IF Found",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        1020,
+        180
+      ],
+      "alwaysOutputData": false
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2022-12-09T05:43:33.523Z",
+      "updatedAt": "2022-12-09T05:43:33.523Z",
+      "id": "11",
+      "name": "8x8"
+    },
+    {
+      "createdAt": "2022-12-09T05:43:36.104Z",
+      "updatedAt": "2022-12-09T05:43:36.104Z",
+      "id": "12",
+      "name": "odoo"
+    },
+    {
+      "createdAt": "2022-12-09T05:43:38.988Z",
+      "updatedAt": "2022-12-09T05:43:38.988Z",
+      "id": "13",
+      "name": "voip"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2023-01-05T08:03:50.000Z",
+  "versionId": "befa326a-b34d-4868-a1a1-c8c9123bacc6"
+}
