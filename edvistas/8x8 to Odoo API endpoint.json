@@ -1,11 +1,11 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "Webhook": {
       "main": [
         [
           {
-            "node": "Odoo1",
+            "node": "Odoo Lookup",
             "type": "main",
             "index": 0
           }
@@ -14,10 +14,16 @@
     },
     "Create URL string": {
       "main": [
-        []
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
-    "Odoo1": {
+    "Odoo Lookup": {
       "main": [
         [
           {
@@ -36,9 +42,11 @@
   "nodes": [
     {
       "parameters": {
-        "path": "6f7b288e-1efe-4504-a6fd-660931327269",
+        "path": "search",
         "responseMode": "responseNode",
-        "options": {}
+        "options": {
+          "ignoreBots": true
+        }
       },
       "id": "f80aceed-b676-42aa-bf25-f7a44408b1bc",
       "name": "Webhook",
@@ -52,9 +60,9 @@
     },
     {
       "parameters": {
-        "content": "## Create a simple API endpoint\n\nIn this workflow we show how to create a simple API endpoint with `Webhook` and `Respond to Webhook` nodes\n\n",
-        "height": 280,
-        "width": 600
+        "content": "## Simple API contact search for odoo\n\nIn this workflow we will accept a phone number and search odoo for the corresponding record and open to that client.\n\n",
+        "height": 299.75896759585885,
+        "width": 850.112094787866
       },
       "id": "3b9ec913-0bbe-4906-bf8e-da352b556655",
       "name": "Note1",
@@ -71,8 +79,28 @@
         "values": {
           "string": [
             {
-              "name": "product",
-              "value": "=https://www.google.com/search?q={{$json[\"query\"][\"phone\"]}}"
+              "name": "Name",
+              "value": "={{ $json[\"name\"] }}"
+            },
+            {
+              "name": "email",
+              "value": "={{ $json[\"email\"] }}"
+            },
+            {
+              "name": "company",
+              "value": "={{ $json[\"commercial_company_name\"] }}"
+            },
+            {
+              "name": "mobile",
+              "value": "={{ $json[\"mobile\"] }}"
+            },
+            {
+              "name": "phone",
+              "value": "={{ $json[\"phone\"] }}"
+            },
+            {
+              "name": "url",
+              "value": "=https://odoo-stage.edvistas.com/web#id={{ $json[\"id\"] }}&menu_id=111&action=139&model=res.partner&view_type=form"
             }
           ]
         },
@@ -89,7 +117,7 @@
     },
     {
       "parameters": {
-        "content": "### How to use it\n1. Execute the workflow so that the webhook starts listening\n2. Make a test request by pasting, **in a new browser tab**, the test URL from the `Webhook` node and appending the following test at the end `?first_name=bob&last_name=dylan`\n\nYou will receive the following output in the new tab `The URL of the Google search query for the term \"bob dylan\" is: https://www.google.com/search?q=bob+dylan`\n\n",
+        "content": "### How to use it\n1. Execute the workflow so that the webhook starts listening\n2. Make a test request by pasting, **in a new browser tab**, the test URL from the `Webhook` node and appending the following test at the end `?q=8005551212`\n\nYou will receive the following output in the new tab `The URL of the Odoo search query for the term \"bob dylan\" is:\n\n",
         "height": 220,
         "width": 600
       },
@@ -97,52 +125,54 @@
       "name": "Note3",
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        560,
-        280
+        680,
+        300
       ],
       "typeVersion": 1
     },
     {
       "parameters": {
-        "operation": "get",
-        "contactId": "12",
+        "respondWith": "text",
+        "responseBody": "=<html>\n  <head>\n    <title>Incomming Call!</title>\n    <meta http-equiv=\"refresh\" content=\"0; URL={{ $json[\"url\"] }}\">\n  </head>\n  <body>\n    <h1>{{ $json[\"Name\"] }}</h1>\n    <h1>{{ $json[\"company\"] }}</h2>\n    <h1>{{ $json[\"email\"] }}</h3>\n    <h1>{{ $json[\"phone\"] }}</h3>\n    <h1>{{ $json[\"mobile\"] }}</h3>\n    You are being redirected to Odoo.\n  </body>\n</html>\n",
+        "options": {}
+      },
+      "id": "f45271e6-6183-4e43-8c18-2d276fb9193d",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        1180,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "res.partner",
+        "operation": "getAll",
+        "limit": 2,
         "options": {
           "fieldsList": [
             "name",
             "commercial_company_name",
             "mobile",
             "phone",
-            "email"
+            "email",
+            "phone_sanitized"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "phone_sanitized",
+              "operator": "like",
+              "value": "={{ $json[\"query\"][\"q\"] }}"
+            }
           ]
         }
       },
-      "id": "ca5a7acc-717e-4a84-b75d-5abb6fa8a0e4",
-      "name": "Odoo",
-      "type": "n8n-nodes-base.odoo",
-      "typeVersion": 1,
-      "position": [
-        1260,
-        120
-      ],
-      "credentials": {
-        "odooApi": {
-          "id": "12",
-          "name": "Odoo-Prod (Administrator)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "resource": "custom",
-        "customResource": "res.partner",
-        "operation": "get",
-        "customResourceId": "={{ $json[\"query\"] }}",
-        "options": {
-          "fieldsList": []
-        }
-      },
       "id": "1cd6f54c-c3a6-4011-a1a8-57e7670fd6e3",
-      "name": "Odoo1",
+      "name": "Odoo Lookup",
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
@@ -180,7 +210,7 @@
       "name": "voip"
     }
   ],
-  "triggerCount": 0,
-  "updatedAt": "2022-12-09T05:43:41.000Z",
-  "versionId": "8c07ac54-d3cd-4052-98ca-5814f5165bdf"
+  "triggerCount": 1,
+  "updatedAt": "2023-01-05T04:27:05.000Z",
+  "versionId": "25a9e61c-d236-4ac8-8c09-92f128d407ef"
 }
