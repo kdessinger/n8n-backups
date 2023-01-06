@@ -58,8 +58,7 @@
     }
   },
   "createdAt": "2022-11-01T19:25:33.787Z",
-  "dataLoaded": false,
-  "id": 7,
+  "id": "7",
   "name": "CSV_2_JSON",
   "nodes": [
     {
