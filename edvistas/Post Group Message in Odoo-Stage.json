@@ -47,8 +47,7 @@
     }
   },
   "createdAt": "2022-11-10T21:20:44.103Z",
-  "dataLoaded": true,
-  "id": 10,
+  "id": "10",
   "name": "Post Group Message in Odoo-Stage",
   "nodes": [
     {
