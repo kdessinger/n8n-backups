@@ -14,8 +14,7 @@
     }
   },
   "createdAt": "2022-12-08T16:15:16.454Z",
-  "dataLoaded": true,
-  "id": 12,
+  "id": "12",
   "name": "Serve a static HTML page when a link is accessed",
   "nodes": [
     {
