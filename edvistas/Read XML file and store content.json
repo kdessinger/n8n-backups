@@ -134,8 +134,7 @@
     }
   },
   "createdAt": "2022-11-02T21:58:30.534Z",
-  "dataLoaded": true,
-  "id": 9,
+  "id": "9",
   "name": "Read XML file and store content",
   "nodes": [
     {
