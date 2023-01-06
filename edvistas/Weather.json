@@ -48,8 +48,7 @@
     }
   },
   "createdAt": "2022-02-21T20:00:11.594Z",
-  "dataLoaded": true,
-  "id": 4,
+  "id": "4",
   "name": "Weather",
   "nodes": [
     {
