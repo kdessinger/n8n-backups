@@ -5,18 +5,7 @@
       "main": [
         [
           {
-            "node": "Set Channel",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Set Channel": {
-      "main": [
-        [
-          {
-            "node": "Get Channel ID",
+            "node": "Set Channel (general)",
             "type": "main",
             "index": 0
           }
@@ -44,6 +33,17 @@
           }
         ]
       ]
+    },
+    "Set Channel (general)": {
+      "main": [
+        [
+          {
+            "node": "Get Channel ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2022-12-29T20:41:07.488Z",
@@ -63,27 +63,6 @@
       "typeVersion": 3,
       "position": [
         -820,
-        500
-      ]
-    },
-    {
-      "parameters": {
-        "values": {
-          "string": [
-            {
-              "name": "Channel",
-              "value": "general"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "263bc6bc-2626-4a49-9dcc-3edbe203f148",
-      "name": "Set Channel",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 1,
-      "position": [
-        -600,
         500
       ]
     },
@@ -122,7 +101,7 @@
       "credentials": {
         "odooApi": {
           "id": "20",
-          "name": "Odoo-Stage (odoo-bot)"
+          "name": "Odoo-Stage (OdooBot)"
         }
       }
     },
@@ -171,7 +150,7 @@
       "credentials": {
         "odooApi": {
           "id": "20",
-          "name": "Odoo-Stage (odoo-bot)"
+          "name": "Odoo-Stage (OdooBot)"
         }
       }
     },
@@ -191,6 +170,27 @@
       "typeVersion": 1,
       "position": [
         -1060,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "Channel",
+              "value": "general"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "263bc6bc-2626-4a49-9dcc-3edbe203f148",
+      "name": "Set Channel (general)",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        -600,
         500
       ]
     }
@@ -226,6 +226,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-01-09T21:04:30.000Z",
-  "versionId": "79ec3d64-c47f-420f-bc9c-c1d563450d21"
+  "updatedAt": "2023-01-11T00:12:47.000Z",
+  "versionId": "8d73387c-25d8-475c-b7e6-79ea9c435cc6"
 }
