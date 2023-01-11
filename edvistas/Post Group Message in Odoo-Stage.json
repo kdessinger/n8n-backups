@@ -5,7 +5,7 @@
       "main": [
         [
           {
-            "node": "Get Affirmations",
+            "node": "ChatGPT Request",
             "type": "main",
             "index": 0
           }
@@ -14,13 +14,7 @@
     },
     "Get Affirmations": {
       "main": [
-        [
-          {
-            "node": "Set Channel (general)",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Get Channel ID": {
@@ -39,6 +33,17 @@
         [
           {
             "node": "Get Channel ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ChatGPT Request": {
+      "main": [
+        [
+          {
+            "node": "Set Channel (general)",
             "type": "main",
             "index": 0
           }
@@ -73,8 +78,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        -820,
-        500
+        -940,
+        280
       ]
     },
     {
@@ -115,13 +120,13 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -640,
+        -500,
         280
       ],
       "credentials": {
         "odooApi": {
           "id": "20",
-          "name": "Odoo-Stage (odoo-bot)"
+          "name": "Odoo-Stage (OdooBot)"
         }
       }
     },
@@ -160,7 +165,7 @@
       "credentials": {
         "odooApi": {
           "id": "20",
-          "name": "Odoo-Stage (odoo-bot)"
+          "name": "Odoo-Stage (OdooBot)"
         }
       }
     },
@@ -188,7 +193,7 @@
             },
             {
               "fieldName": "body",
-              "fieldValue": "={{ $node[\"Get Affirmations\"].json[\"affirmation\"] }}"
+              "fieldValue": "={{ $node[\"ChatGPT Request\"].json[\"choices\"][0][\"text\"] }}"
             },
             {
               "fieldName": "res_id",
@@ -209,7 +214,7 @@
       "credentials": {
         "odooApi": {
           "id": "20",
-          "name": "Odoo-Stage (odoo-bot)"
+          "name": "Odoo-Stage (OdooBot)"
         }
       }
     },
@@ -233,6 +238,53 @@
         -600,
         500
       ]
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "requestMethod": "POST",
+        "url": "https://api.openai.com/v1/engines/text-davinci-001/completions",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "={\n  \"prompt\": \"Give me a highly inspirational quote\", \n  \"temperature\": 0.7,\n  \"max_tokens\": 64,\n  \"top_p\": 1,\n  \"frequency_penalty\": 0,\n  \"presence_penalty\": 0\n}"
+      },
+      "name": "ChatGPT Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        -820,
+        500
+      ],
+      "typeVersion": 1,
+      "id": "66db6fda-d13b-4f9d-8a3e-24208629a6d7",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "23",
+          "name": "openAI (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "requestMethod": "POST",
+        "url": "https://api.openai.com/v1/models/text-davinci-003",
+        "jsonParameters": true,
+        "options": {}
+      },
+      "name": "ChatGPT Request1",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        -720,
+        280
+      ],
+      "typeVersion": 1,
+      "id": "3c12c263-4fc5-4037-8b5a-748e12c9b422",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "23",
+          "name": "openAI (kdessinger)"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -266,6 +318,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-01-04T18:04:15.000Z",
-  "versionId": "b72819c9-36a3-47c8-9485-3151259678b6"
+  "updatedAt": "2023-01-11T01:45:07.000Z",
+  "versionId": "7d860b3c-5431-442d-9ca5-f4f0ecd2f149"
 }
