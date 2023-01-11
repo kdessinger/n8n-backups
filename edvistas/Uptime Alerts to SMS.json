@@ -1,0 +1,66 @@
+{
+  "active": false,
+  "connections": {
+    "Uptime Kuma Input": {
+      "main": [
+        [
+          {
+            "node": "Twilio SMS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-01-11T16:49:15.438Z",
+  "id": "19",
+  "name": "Uptime Alerts to SMS",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "uptimekuma/alert",
+        "options": {}
+      },
+      "name": "Uptime Kuma Input",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        160,
+        520
+      ],
+      "webhookId": "d201c9fa-57bf-417f-a911-7a168c6cd0ad",
+      "id": "3f676677-7087-4ee6-837d-c68af9d1835a"
+    },
+    {
+      "parameters": {
+        "from": "+15188968042",
+        "to": "+15125144925",
+        "message": "={{ $json[\"body\"][\"msg\"] }}",
+        "options": {}
+      },
+      "name": "Twilio SMS",
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [
+        400,
+        520
+      ],
+      "id": "9da6537c-6419-49a8-b018-bab8ee8aabbd",
+      "credentials": {
+        "twilioApi": {
+          "id": "3",
+          "name": "Twilio (kdessinger)"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2023-01-11T16:58:15.000Z",
+  "versionId": "38f302fb-4545-4308-9e75-a888335948ee"
+}
