@@ -1,0 +1,161 @@
+{
+  "active": true,
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "ChatGPT (Inspire Quote)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ChatGPT (Inspire Quote)": {
+      "main": [
+        [
+          {
+            "node": "Post Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2022-12-29T20:41:07.488Z",
+  "id": "14",
+  "name": "Post Daily Motivational to Chat Group in Odoo",
+  "nodes": [
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "=mail.message",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "email_from",
+              "fieldValue": "datamate@edvistas.com"
+            },
+            {
+              "fieldName": "message_type",
+              "fieldValue": "email"
+            },
+            {
+              "fieldName": "model",
+              "fieldValue": "mail.channel"
+            },
+            {
+              "fieldName": "record_name",
+              "fieldValue": "=ChatGPT:{{ $node[\"ChatGPT (Inspire Quote)\"].json[\"created\"] }}"
+            },
+            {
+              "fieldName": "body",
+              "fieldValue": "={{ $json[\"choices\"][0][\"text\"] }}"
+            },
+            {
+              "fieldName": "res_id",
+              "fieldValue": "={{ 1 }}"
+            },
+            {
+              "fieldName": "subtype_id",
+              "fieldValue": "=1"
+            }
+          ]
+        }
+      },
+      "id": "4f06c305-f262-4ece-8397-e909cb1b5ace",
+      "name": "Post Message",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        -600,
+        500
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 8
+            }
+          ]
+        }
+      },
+      "id": "f824b2ef-4ef4-4e4e-b30b-697cd4f87adf",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1060,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "requestMethod": "POST",
+        "url": "https://api.openai.com/v1/engines/text-davinci-001/completions",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "={\n  \"prompt\": \"Give me a highly inspirational quote\", \n  \"temperature\": 0.7,\n  \"max_tokens\": 64,\n  \"top_p\": 1,\n  \"frequency_penalty\": 0,\n  \"presence_penalty\": 0\n}"
+      },
+      "name": "ChatGPT (Inspire Quote)",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        -820,
+        500
+      ],
+      "typeVersion": 1,
+      "id": "b2cdd5e9-01e6-4e57-ab29-5ca31b3ea36b",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "23",
+          "name": "openAI (kdessinger)"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "saveManualExecutions": false,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrencyRules": []
+    }
+  },
+  "tags": [
+    {
+      "createdAt": "2022-12-09T05:43:36.104Z",
+      "updatedAt": "2022-12-09T05:43:36.104Z",
+      "id": "12",
+      "name": "odoo"
+    },
+    {
+      "createdAt": "2022-12-29T17:51:17.794Z",
+      "updatedAt": "2022-12-29T17:51:17.794Z",
+      "id": "14",
+      "name": "post"
+    },
+    {
+      "createdAt": "2022-12-29T17:51:21.720Z",
+      "updatedAt": "2022-12-29T17:51:21.720Z",
+      "id": "15",
+      "name": "message"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2023-01-12T07:09:23.000Z",
+  "versionId": "55be6250-088f-44f3-98b5-058cfbf657f8"
+}
