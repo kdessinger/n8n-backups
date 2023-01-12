@@ -18,20 +18,9 @@
   "name": "Serve a static HTML page when a link is accessed",
   "nodes": [
     {
-      "parameters": {},
-      "name": "Start",
-      "type": "n8n-nodes-base.start",
-      "position": [
-        380,
-        390
-      ],
-      "typeVersion": 1,
-      "id": "7947f94f-b739-42b8-92ae-15c87d7edc68"
-    },
-    {
       "parameters": {
         "respondWith": "text",
-        "responseBody": "<!doctype html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n\n    <link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3\" crossorigin=\"anonymous\">\n\n    <title>Hello, world!</title>\n  </head>\n  <body>\n    <h1>Hello, world!</h1>\n\n    <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js\" integrity=\"sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p\" crossorigin=\"anonymous\"></script>\n  </body>\n</html>\n",
+        "responseBody": "<html><body>\n\nAll data are projected in Alaska Albers Equal Area with (unit feet) \nunless otherwise specified (EPSG Code 2964). The dataset contains a\ncollection of geodata from several sources with different licenses. \nThese licenses have to be respected by the user.\n\n<h3>1) GTOPO30 - Alaska elevation model (GRASS)</h3>\n\nInformation on GTOPO30 data (global digital elevation model (DEM) with a \nhorizontal grid spacing of 30 arc seconds (1 kilometer)\nare available at:\n<br />\nhttp://edc.usgs.gov/products/elevation/gtopo30/gtopo30.html\n\n<h3>3) AVHRR Global Land Cover Classification (ERDAS IMG)</h3>\n\nInformation on AVHRR data (Global Land Cover Classification) are available at:\n<br />\nhttp://glcf.umiacs.umd.edu/data/landcover/description.shtml\n<br />\nThe data are classified and colored according to information from glcf. Both\ncolor and reclass tables are provided with the data. \n\n<h3>4) VMAP0 - Vector Map Level 0 from 09/2000 (Shape)</h3>\n\nThe VMAP0 dataset has been converted from VPF format to SHP format\nand kindly provided by Andras Fabian. Then the data were adapted for alaska\ndataset. For further information about the original dataset, please refer to\n<br />\nhttp://gis-lab.info/qa/vmap0-eng.html\n<br />\nLayers included in the alaska dataset are:\n<ul>\n<li>alaska -> Political Boundary (GRASS Polygone)</li>\n<li>trees -> Forest > 10 km2 (Polygone)</li>\n<li>swamp -> Swamp/Marsh > 10 km2 (Polygone)</li>\n<li>tundra -> Tundra > 10 km2 (Polygone)</li>\n<li>landice -> Land ice > 10 km2 (Polygone)</li>\n<li>grassland -> Grassland > 10 km2 (Polygone)</li>\n<li>builtups -> Built-Up Areas (Polygone)</li>\n<li>railroads -> Railroads (Line)</li>\n<li>trails -> Trails and Tracks (Line)</li>\n<li>pipelines -> Pipelines (Line)</li>\n<li>rivers -> Rivers and intermittend rivers (GRASS Line)</li>\n<li>majrivers -> Major rivers (Line)</li>\n<li>airports -> Airports (GRASS Point)</li>\n<li>popp -> Population Points (Buildings/Settlements) (Point)</li>\n<li>storagep -> Storage Point Features (Point)</li>\n</ul>\n\n<h3>5) GADM Shape - Regions of Alaska </h3>\n \nThis layer was extracted and reprojected based on the GADM dataset \nhttp://www.gadm.org/ of the United States of America. This dataset is \nfreely available for academic and other non-commercial use.\n\n<h3>6) CVS table - 150 random elevation points for Alaska </h3>\n\nThis layer was generated from the gtopo30 dataset in GRASS and can \nbe used with the delimited text and the interpolation plugin in QGIS.\n\n<h3>7) GPS - waypoints in GPX format</h3>\n\nThis layer was created for the QGIS demo dataset using the\ndigitizing feature of the QGIS GPS plugin. The waypoints show 4 national \nmonuments in Alaska. The CRS of the gpx file is latlon, WGS84.\n\n<h3>8) GRASS mapset</h3>\n\nA collection of vector and raster layers was created for the QGIS demo dataset.\nThe vector layers were derived from VMAP0 data. The raster layer is the gtopo30\nlayer described in item 1). \n\n<h3>9) GML layer</h3>\n\nA polygon type GML layer of the alaska lakes. The vector layer was derived from \nVMAP0 data.\n\n<h3>10) Shape layer with Climate Data</h3>\n\nA point shape layer with some climate data for the diagram overlay feature\ncollected from http://climate.gi.alaska.edu/Climate/Temperature/mean_temp.html. \n\n<ul>\n<li>T_F_JAN  (Average temperature (°F), 1971- 2000 in January)\n<li>T_F_JUL  (Average temperature (°F), 1971- 2000 in July)\n<li>T_F_MEAN (Average temperature (°F), 1971- 2000 in Year)\n</ul>\n\n<h3>11) Hillshade GeoTiff </h3>\n\nAn exctract of the Natural Earth global shaded relief from \nhttp://www.naturalearthdata.com/downloads/50m-raster-data/50m-shaded-relief/.\n\n</body></html>\n\n",
         "options": {
           "responseHeaders": {
             "entries": [
@@ -74,6 +63,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2022-12-08T16:15:24.000Z",
-  "versionId": "342e2e0a-3ba5-40cc-bd32-70dc004fe174"
+  "updatedAt": "2023-01-12T07:06:03.000Z",
+  "versionId": "622f8796-f03c-4dae-a5e5-c149e15e1da7"
 }
