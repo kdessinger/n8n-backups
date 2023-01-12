@@ -45,17 +45,6 @@
         ]
       ]
     },
-    "Start": {
-      "main": [
-        [
-          {
-            "node": "Globals",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "GitHub": {
       "main": [
         [
@@ -179,17 +168,6 @@
   "id": "6",
   "name": "Backup n8n To Github",
   "nodes": [
-    {
-      "parameters": {},
-      "id": "af28f832-7867-4959-82d8-45e9790cfe10",
-      "name": "Start",
-      "type": "n8n-nodes-base.start",
-      "position": [
-        620,
-        320
-      ],
-      "typeVersion": 1
-    },
     {
       "parameters": {
         "resource": "file",
@@ -386,8 +364,8 @@
       "name": "Every 12 hours",
       "type": "n8n-nodes-base.cron",
       "position": [
-        620,
-        600
+        600,
+        460
       ],
       "typeVersion": 1
     },
@@ -485,6 +463,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2023-01-11T20:58:44.000Z",
-  "versionId": "c98bc132-3ab3-4cd1-9b57-9136067e4a15"
+  "updatedAt": "2023-01-12T07:43:00.000Z",
+  "versionId": "4911e870-b9fc-4b76-8c5e-3ed322203fcd"
 }
