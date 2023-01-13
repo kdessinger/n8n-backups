@@ -1,0 +1,215 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking \"Execute Workflow\"": {
+      "main": [
+        []
+      ]
+    },
+    "Read Binary Files": {
+      "main": [
+        []
+      ]
+    },
+    "Set": {
+      "main": [
+        []
+      ]
+    },
+    "Spreadsheet File": {
+      "main": [
+        []
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "XML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "XML": {
+      "main": [
+        [
+          {
+            "node": "Item Lists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-01-12T19:17:35.106Z",
+  "id": "21",
+  "name": "Mastery Item Bank",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "77ec208a-0a17-4b76-ad61-e73b652aa17e",
+      "name": "When clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        240,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "fileSelector": "/mnt/share/_tmp/items/*.xml"
+      },
+      "id": "7122d9a4-a63d-4bba-817b-c0e9637474f9",
+      "name": "Read Binary Files",
+      "type": "n8n-nodes-base.readBinaryFiles",
+      "typeVersion": 1,
+      "position": [
+        680,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "boolean": [
+            {
+              "name": "process",
+              "value": true
+            }
+          ]
+        },
+        "options": {
+          "dotNotation": true
+        }
+      },
+      "id": "4d524e8f-79e6-4e20-a06f-b79ebdc31f73",
+      "name": "Set",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        880,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "toFile",
+        "binaryPropertyName": "={{ $json[\"assessmentItem\"][\"title\"] }}",
+        "options": {
+          "headerRow": false
+        }
+      },
+      "id": "3e657ef7-acf1-45ed-ad41-b8bbc44d3c31",
+      "name": "Spreadsheet File",
+      "type": "n8n-nodes-base.spreadsheetFile",
+      "typeVersion": 1,
+      "position": [
+        1100,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "url": "http://192.168.148.140:8088/_tmp/items/ITEM-LOGIC--573302.xml",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {}
+      },
+      "id": "7e260ca2-b54a-4dae-b6c3-53136f222dbf",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        460,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "b94fa285-bf0a-4c95-8131-86b6f7736f15",
+      "name": "XML",
+      "type": "n8n-nodes-base.xml",
+      "typeVersion": 1,
+      "position": [
+        660,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "aggregateItems",
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "={{ $json[\"assessmentItem\"][\"identifier\"] }}",
+              "renameField": true,
+              "outputFieldName": "File"
+            },
+            {
+              "fieldToAggregate": "={{ $json[\"assessmentItem\"][\"title\"] }}",
+              "renameField": true,
+              "outputFieldName": "Title"
+            },
+            {
+              "fieldToAggregate": "={{ $json[\"assessmentItem\"][\"itemBody\"][\"div\"][\"div\"][0][\"p\"][0] }}\n\n{{ $json[\"assessmentItem\"][\"itemBody\"][\"div\"][\"div\"][0][\"p\"][1] }}",
+              "renameField": true,
+              "outputFieldName": "Question"
+            },
+            {}
+          ]
+        },
+        "options": {}
+      },
+      "id": "e6514aad-6d3e-4f52-82b5-b6477f44da64",
+      "name": "Item Lists",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 1,
+      "position": [
+        880,
+        420
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2023-01-12T19:17:50.336Z",
+      "updatedAt": "2023-01-12T19:17:50.336Z",
+      "id": "17",
+      "name": "QTI"
+    },
+    {
+      "createdAt": "2023-01-12T19:17:57.211Z",
+      "updatedAt": "2023-01-12T19:17:57.211Z",
+      "id": "18",
+      "name": "distractor"
+    },
+    {
+      "createdAt": "2023-01-12T19:18:23.073Z",
+      "updatedAt": "2023-01-12T19:18:23.073Z",
+      "id": "19",
+      "name": "rationale"
+    },
+    {
+      "createdAt": "2023-01-12T19:19:08.778Z",
+      "updatedAt": "2023-01-12T19:19:08.778Z",
+      "id": "20",
+      "name": "Instructure"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2023-01-12T21:30:11.000Z",
+  "versionId": "d371e6b9-3195-4f62-99db-fd155b37a8ed"
+}
