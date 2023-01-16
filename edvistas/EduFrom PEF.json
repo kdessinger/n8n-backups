@@ -3,13 +3,7 @@
   "connections": {
     "Move Binary Data": {
       "main": [
-        [
-          {
-            "node": "Write Binary File",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Webhook": {
@@ -34,6 +28,16 @@
             "node": "Item Lists",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Set1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Set2",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -46,6 +50,17 @@
     "Item Lists": {
       "main": [
         []
+      ]
+    },
+    "Set1": {
+      "main": [
+        [
+          {
+            "node": "Item Lists1",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
@@ -75,8 +90,8 @@
       "name": "Write Binary File",
       "type": "n8n-nodes-base.writeBinaryFile",
       "position": [
-        740,
-        340
+        1320,
+        320
       ],
       "typeVersion": 1,
       "id": "4fb7a7d1-6423-4a42-bf76-1635dd0d31af"
@@ -148,8 +163,8 @@
       "type": "n8n-nodes-base.itemLists",
       "typeVersion": 1,
       "position": [
-        380,
-        420
+        200,
+        560
       ]
     },
     {
@@ -162,8 +177,245 @@
       "type": "n8n-nodes-base.itemLists",
       "typeVersion": 1,
       "position": [
-        380,
-        600
+        440,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "Formid",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"formid\"] }}"
+            },
+            {
+              "name": "=referid",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"referid\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][1][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][1][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][2][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][2][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][3][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][3][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][4][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][4][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][5][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][5][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][6][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][6][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][7][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][7][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][8][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][8][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][9][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][9][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][10][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][10][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][11][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][11][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][\"17\"][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][\"17\"][\"value\"] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "ef52da9d-c849-4ea0-a7c3-67c7e82ab5b1",
+      "name": "Set1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        500,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "=body",
+        "include": "allOtherFields",
+        "options": {}
+      },
+      "id": "a942d0b9-0c54-4053-a5d6-e32e6738c051",
+      "name": "Item Lists1",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 1,
+      "position": [
+        860,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "Formid",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"formid\"] }}"
+            },
+            {
+              "name": "=referid",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"referid\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][0][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][0][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][1][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][1][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][2][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][2][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][3][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][3][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][4][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][4][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][5][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][5][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][6][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][6][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][7][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][7][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][8][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][8][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][9][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][9][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][10][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][10][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][11][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][11][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][12][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][12][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][13][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][13][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][14][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][14][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][15][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][15][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][16][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][16][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][17][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][17][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][18][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][18][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][19][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][19][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][20][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][20][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][21][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][21][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][22][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][22][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][23][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][23][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][24][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][24][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][25][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][25][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][26][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][26][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][27][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][27][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][28][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][28][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][\"17\"][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][\"17\"][\"value\"] }}"
+            },
+            {
+              "name": "={{ $node[\"Webhook\"].json[\"body\"][\"queryresult\"][\"field\"][17][\"name\"] }}",
+              "value": "={{ $node[\"Webhook\"].json[\"body\"][\"queryresult\"][\"field\"][17][\"value\"] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c4565a62-e1da-4cee-9be5-3d9b5aee5b15",
+      "name": "Set2",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        620,
+        400
       ]
     }
   ],
@@ -3507,6 +3759,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-01-15T01:11:27.000Z",
-  "versionId": "99ef06ab-c9cc-4206-91c1-c7c845dde703"
+  "updatedAt": "2023-01-16T00:56:46.000Z",
+  "versionId": "8521b01f-6fe7-47d4-84c9-d14aefb57bb1"
 }
