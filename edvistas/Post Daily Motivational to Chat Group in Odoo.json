@@ -86,7 +86,11 @@
         "rule": {
           "interval": [
             {
-              "triggerAtHour": 8
+              "field": "weeks",
+              "triggerAtDay": [
+                1
+              ],
+              "triggerAtHour": 7
             }
           ]
         }
@@ -107,7 +111,7 @@
         "url": "https://api.openai.com/v1/engines/text-davinci-001/completions",
         "jsonParameters": true,
         "options": {},
-        "bodyParametersJson": "={\n  \"prompt\": \"Give me a highly inspirational quote\", \n  \"temperature\": 0.7,\n  \"max_tokens\": 64,\n  \"top_p\": 1,\n  \"frequency_penalty\": 0,\n  \"presence_penalty\": 0\n}"
+        "bodyParametersJson": "={\n  \"prompt\": \"Create an upbeat monday welcome message to the eployees of Educational Vistas.  Here is a description of the company: Educational Vistas, Inc. was founded as a New York State S corporation on May 27th, 1993. Our original mission statement “Quality Education is the Salvation of our Nation” still drives everything that we do. We are wholly-family founded and owned. Our 28 years of proven success have been accomplished by combining the best of educational pedagogy and practice with cutting-edge technology and software. Currently, we provide products and/or services to almost 500 school districts, Boards of Cooperative Services (BOCES), Regional Information Centers (RIC’s), Charter Schools, Parochial Schools, and NYS Youth Detention Centers all across NY state. We are also the largest and oldest New York State assessment scoring company. Each year, our 700-800 certified  New York State teachers score hundreds-of-thousands of State assessments in English Language Arts (ELA), Mathematics, Science, and all NYS Regents Assessments that are required for high school graduation. Our own assessments have been approved by the New York State Department (NYSED) for use with Student Learning Objectives (SLO’s) for any district in the State. Our SurVate™ secure survey system is also the number one solution that schools use to gather school climate data in their efforts to reduce bullying and disruptive incidents. In New York City, EVI is the only approved assessment scoring alternative for character schools who do not want to use their scoring consortium. The NYC Department of Education allows us to not only score but also scan, verify, and upload this critical data directly to the NYC Department of Assessment. We also provide the most comprehensive reading literacy assessment – Degrees of Reading Power (DRP) under contract to any NYC school that requests it. Our DataMate™ product serves as both the on-line assessment platform and the report management portal. Our Curriculum Developer (CD) is the web-based software management system where all unit development and distribution will occur for the State-wide curriculum project under the direction of the Capital Region BOCES called “The Partnership.” Over 200 school districts and 19 BOCES have already signed up to participate. As a New York State company based in Schenectady, we strive every day to provide the best products, services, and employment opportunities to our growing list of clients and employees. We had a 24% increase in revenue in 2019 and are projecting even more growth in the coming years.\", \n  \"temperature\": 0.7,\n  \"max_tokens\": 128,\n  \"top_p\": 1,\n  \"frequency_penalty\": 0,\n  \"presence_penalty\": 0\n}"
       },
       "name": "ChatGPT (Inspire Quote)",
       "type": "n8n-nodes-base.httpRequest",
@@ -156,6 +160,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-01-12T07:09:23.000Z",
-  "versionId": "55be6250-088f-44f3-98b5-058cfbf657f8"
+  "updatedAt": "2023-01-16T04:43:18.000Z",
+  "versionId": "2a0b2e82-18de-4eaf-b447-81d51fa712f4"
 }
