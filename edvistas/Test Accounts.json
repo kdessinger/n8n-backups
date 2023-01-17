@@ -1,7 +1,23 @@
 {
   "active": false,
   "connections": {
-    "Start": {
+    "ChatGPT": {
+      "main": [
+        []
+      ]
+    },
+    "Nextcloud": {
+      "main": [
+        [
+          {
+            "node": "Item Lists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Item Lists": {
       "main": [
         []
       ]
@@ -17,8 +33,8 @@
       "type": "n8n-nodes-base.start",
       "typeVersion": 1,
       "position": [
-        -460,
-        -20
+        -740,
+        140
       ],
       "id": "b135b656-2380-4925-adf6-9fb2b7455985"
     },
@@ -36,15 +52,15 @@
       "typeVersion": 1,
       "position": [
         -460,
-        160
+        140
       ],
+      "id": "28195cc0-43df-49aa-be3d-f460638b6073",
       "credentials": {
         "microsoftTeamsOAuth2Api": {
           "id": "5",
           "name": "Microsoft Teams (kdessinger)"
         }
-      },
-      "id": "28195cc0-43df-49aa-be3d-f460638b6073"
+      }
     },
     {
       "parameters": {
@@ -56,36 +72,37 @@
       "typeVersion": 1,
       "position": [
         -280,
-        160
+        140
       ],
+      "id": "5dd0d930-4679-41de-9ed3-e03232e1679f",
       "credentials": {
         "imap": {
           "id": "7",
           "name": "Email (kdessinger@edvistas.com)"
         }
-      },
-      "id": "5dd0d930-4679-41de-9ed3-e03232e1679f"
+      }
     },
     {
       "parameters": {
         "from": "+18442026677",
         "to": "+15125144925",
-        "message": "This is a test"
+        "message": "This is a test",
+        "options": {}
       },
       "name": "Twilio",
       "type": "n8n-nodes-base.twilio",
       "typeVersion": 1,
       "position": [
         -100,
-        160
+        140
       ],
+      "id": "45e4cf60-6c5d-4bc1-b6d0-f13d0dce92f9",
       "credentials": {
         "twilioApi": {
           "id": "3",
           "name": "Twilio (kdessinger)"
         }
-      },
-      "id": "45e4cf60-6c5d-4bc1-b6d0-f13d0dce92f9"
+      }
     },
     {
       "parameters": {
@@ -98,15 +115,15 @@
       "typeVersion": 1,
       "position": [
         -460,
-        360
+        320
       ],
+      "id": "995adae0-6f13-4bba-9207-1f5d49373b5d",
       "credentials": {
         "microsoftTeamsOAuth2Api": {
           "id": "5",
           "name": "Microsoft Teams (kdessinger)"
         }
-      },
-      "id": "995adae0-6f13-4bba-9207-1f5d49373b5d"
+      }
     },
     {
       "parameters": {
@@ -117,18 +134,2762 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
-        -240,
-        360
+        -280,
+        320
       ],
       "webhookId": "d201c9fa-57bf-417f-a911-7a168c6cd0ad",
       "id": "c81d265f-78a7-4b9a-830c-04fb757902ed"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "requestMethod": "POST",
+        "url": "https://api.openai.com/v1/engines/text-davinci-003/completions",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "={\n  \"prompt\": \"Create an upbeat monday welcome message to the eployees of Educational Vistas.  Here is a description of the company: Educational Vistas, Inc. was founded as a New York State S corporation on May 27th, 1993. Our original mission statement “Quality Education is the Salvation of our Nation” still drives everything that we do. We are wholly-family founded and owned. Our 28 years of proven success have been accomplished by combining the best of educational pedagogy and practice with cutting-edge technology and software. Currently, we provide products and/or services to almost 500 school districts, Boards of Cooperative Services (BOCES), Regional Information Centers (RIC’s), Charter Schools, Parochial Schools, and NYS Youth Detention Centers all across NY state. We are also the largest and oldest New York State assessment scoring company. Each year, our 700-800 certified  New York State teachers score hundreds-of-thousands of State assessments in English Language Arts (ELA), Mathematics, Science, and all NYS Regents Assessments that are required for high school graduation. Our own assessments have been approved by the New York State Department (NYSED) for use with Student Learning Objectives (SLO’s) for any district in the State. Our SurVate™ secure survey system is also the number one solution that schools use to gather school climate data in their efforts to reduce bullying and disruptive incidents. In New York City, EVI is the only approved assessment scoring alternative for character schools who do not want to use their scoring consortium. The NYC Department of Education allows us to not only score but also scan, verify, and upload this critical data directly to the NYC Department of Assessment. We also provide the most comprehensive reading literacy assessment – Degrees of Reading Power (DRP) under contract to any NYC school that requests it. Our DataMate™ product serves as both the on-line assessment platform and the report management portal. Our Curriculum Developer (CD) is the web-based software management system where all unit development and distribution will occur for the State-wide curriculum project under the direction of the Capital Region BOCES called “The Partnership.” Over 200 school districts and 19 BOCES have already signed up to participate. As a New York State company based in Schenectady, we strive every day to provide the best products, services, and employment opportunities to our growing list of clients and employees. We had a 24% increase in revenue in 2019 and are projecting even more growth in the coming years.\", \n  \"temperature\": 0.7,\n  \"max_tokens\": 128,\n  \"top_p\": 1,\n  \"frequency_penalty\": 0,\n  \"presence_penalty\": 0\n}"
+      },
+      "name": "ChatGPT",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        -100,
+        320
+      ],
+      "typeVersion": 1,
+      "id": "1968a20f-aa78-4df3-a819-654247b7906b",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "23",
+          "name": "openAI (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "folder",
+        "operation": "list",
+        "path": "/!Clients/"
+      },
+      "id": "eaee191e-f42d-4999-84a5-871ce0fa1fe7",
+      "name": "Nextcloud",
+      "type": "n8n-nodes-base.nextCloud",
+      "typeVersion": 1,
+      "position": [
+        -280,
+        -20
+      ],
+      "credentials": {
+        "nextCloudApi": {
+          "id": "18",
+          "name": "NextCloud (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "removeDuplicates",
+        "compare": "selectedFields",
+        "fieldsToCompare": {
+          "fields": [
+            {
+              "fieldName": "path"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "7ea18f4b-6b20-46f3-927e-98e2f75b5b7d",
+      "name": "Item Lists",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 1,
+      "position": [
+        -100,
+        -20
+      ]
     }
   ],
-  "pinData": null,
+  "pinData": {
+    "Nextcloud": [
+      {
+        "json": {
+          "path": "%21Clients/.stfolder/",
+          "lastModified": "Fri, 17 Sep 2021 02:19:49 GMT",
+          "type": "folder",
+          "eTag": "614897188db38"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Academy%20Charter%20School/",
+          "lastModified": "Tue, 23 Nov 2021 21:47:41 GMT",
+          "type": "folder",
+          "eTag": "619d622077d0e"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Afton/",
+          "lastModified": "Tue, 04 Jan 2022 18:06:09 GMT",
+          "type": "folder",
+          "eTag": "61d48c91b6608"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Albany%20City%20VADIRS/",
+          "lastModified": "Thu, 23 Dec 2021 17:23:48 GMT",
+          "type": "folder",
+          "eTag": "61c4b954aaec6"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Albany%20Public%20Schools/",
+          "lastModified": "Thu, 18 Nov 2021 15:49:09 GMT",
+          "type": "folder",
+          "eTag": "61967ba737ad6"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Alex%20Dell/",
+          "lastModified": "Thu, 19 Aug 2021 19:22:02 GMT",
+          "type": "folder",
+          "eTag": "612c18e59f54f"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Amber%20Charter%20School/",
+          "lastModified": "Wed, 10 Nov 2021 15:27:56 GMT",
+          "type": "folder",
+          "eTag": "618c053e3f571"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Amherst/",
+          "lastModified": "Fri, 26 Aug 2022 18:18:12 GMT",
+          "type": "folder",
+          "eTag": "630910ebb9089"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Amityville%20UFSD/",
+          "lastModified": "Wed, 10 Nov 2021 15:32:20 GMT",
+          "type": "folder",
+          "eTag": "618c053e3fcba"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Amsterdam%20City%20Schools/",
+          "lastModified": "Thu, 17 Nov 2022 20:27:00 GMT",
+          "type": "folder",
+          "eTag": "637699141f5c2"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Appleville%20CSD/",
+          "lastModified": "Thu, 17 Nov 2022 20:26:59 GMT",
+          "type": "folder",
+          "eTag": "6376991390d57"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Archidioces%20of%20New%20York/",
+          "lastModified": "Thu, 17 Nov 2022 20:27:00 GMT",
+          "type": "folder",
+          "eTag": "637699148e98e"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Ark%20Community%20Charter%20School/",
+          "lastModified": "Wed, 10 Nov 2021 16:20:22 GMT",
+          "type": "folder",
+          "eTag": "618c053e3ff0d"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Arlington%20CSD/",
+          "lastModified": "Wed, 10 Nov 2021 16:21:40 GMT",
+          "type": "folder",
+          "eTag": "618c053e3fc56"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Averill%20Park/",
+          "lastModified": "Mon, 05 Dec 2022 19:25:50 GMT",
+          "type": "folder",
+          "eTag": "638e45be91412"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Babylon%20School%20District/",
+          "lastModified": "Wed, 10 Nov 2021 17:27:23 GMT",
+          "type": "folder",
+          "eTag": "618c053e3f473"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Baldwin%20UFSD/",
+          "lastModified": "Wed, 10 Nov 2021 17:30:10 GMT",
+          "type": "folder",
+          "eTag": "618c053e4042a"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Ballston%20Spa/",
+          "lastModified": "Wed, 21 Dec 2022 15:45:41 GMT",
+          "type": "folder",
+          "eTag": "63a32a2588288"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Barton%20Elemantary%20School/",
+          "lastModified": "Tue, 28 Dec 2021 15:07:21 GMT",
+          "type": "folder",
+          "eTag": "61cb2ad25bded"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Beacon%20City/",
+          "lastModified": "Tue, 28 Sep 2021 12:55:11 GMT",
+          "type": "folder",
+          "eTag": "6154dc4a52005"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Bedford%20Stuyvesant/",
+          "lastModified": "Thu, 09 Dec 2021 05:30:31 GMT",
+          "type": "folder",
+          "eTag": "61b19477b232d"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Bellmore/",
+          "lastModified": "Wed, 17 Nov 2021 14:23:19 GMT",
+          "type": "folder",
+          "eTag": "61954e817406a"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Berlin/",
+          "lastModified": "Thu, 19 Aug 2021 19:22:28 GMT",
+          "type": "folder",
+          "eTag": "612c18e59ef7f"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Berne-Knox%20Westerlo/",
+          "lastModified": "Thu, 23 Dec 2021 14:36:33 GMT",
+          "type": "folder",
+          "eTag": "61c49df8c1ab1"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Bethlehem/",
+          "lastModified": "Mon, 11 Jul 2022 18:00:27 GMT",
+          "type": "folder",
+          "eTag": "62cc653b541d2"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Blind%20Brook-Rye/",
+          "lastModified": "Mon, 11 Jul 2022 18:00:30 GMT",
+          "type": "folder",
+          "eTag": "62cc653e0991c"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Bloomfield/",
+          "lastModified": "Wed, 20 Oct 2021 14:54:19 GMT",
+          "type": "folder",
+          "eTag": "6171648e33ae6"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Boliver-Richburg/",
+          "lastModified": "Thu, 23 Dec 2021 15:35:56 GMT",
+          "type": "folder",
+          "eTag": "61c49df8c3be9"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Bolton%20CSD/",
+          "lastModified": "Wed, 17 Nov 2021 15:33:33 GMT",
+          "type": "folder",
+          "eTag": "61954e817266c"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Book%20Buddies/",
+          "lastModified": "Tue, 22 Jun 2021 20:37:39 GMT",
+          "type": "folder",
+          "eTag": "6111876329313"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Brentwood%20UFSD/",
+          "lastModified": "Mon, 21 Nov 2022 17:13:48 GMT",
+          "type": "folder",
+          "eTag": "637bb1ccc9a11"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Briarcliff%20Manor/",
+          "lastModified": "Wed, 17 Nov 2021 16:09:46 GMT",
+          "type": "folder",
+          "eTag": "61954e8172d45"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Bridgeport/",
+          "lastModified": "Wed, 24 Nov 2021 19:08:43 GMT",
+          "type": "folder",
+          "eTag": "619e993d61f07"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Brighter%20Choice%20Boys%20Middle%20School/",
+          "lastModified": "Wed, 17 Nov 2021 16:53:38 GMT",
+          "type": "folder",
+          "eTag": "61954e8172592"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Brighter%20Choice%20Girls%20Middle%20school/",
+          "lastModified": "Wed, 17 Nov 2021 16:58:20 GMT",
+          "type": "folder",
+          "eTag": "61954e8174760"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Brighter%20Choice%20for%20Boys/",
+          "lastModified": "Wed, 17 Nov 2021 16:42:22 GMT",
+          "type": "folder",
+          "eTag": "61954e8171f04"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Brighter%20choice%20for%20Girls/",
+          "lastModified": "Wed, 17 Nov 2021 16:46:41 GMT",
+          "type": "folder",
+          "eTag": "61954e81741c9"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/BroadalbinPerth/",
+          "lastModified": "Thu, 23 Dec 2021 15:38:41 GMT",
+          "type": "folder",
+          "eTag": "61c49df8c1bca"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Bronx%20Charter%20for%20better%20learning/",
+          "lastModified": "Wed, 24 Nov 2021 17:51:25 GMT",
+          "type": "folder",
+          "eTag": "619e7ca38f8e9"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Brunswick%20CSD/",
+          "lastModified": "Wed, 17 Nov 2021 16:31:07 GMT",
+          "type": "folder",
+          "eTag": "61954e8173f47"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Buffalo%20City/",
+          "lastModified": "Thu, 23 Dec 2021 17:24:13 GMT",
+          "type": "folder",
+          "eTag": "61c4b954ab325"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Burnt%20Hills%20Ballston%20Lake%20CSD/",
+          "lastModified": "Wed, 17 Nov 2021 16:33:05 GMT",
+          "type": "folder",
+          "eTag": "61954e8174811"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Byram%20Hills/",
+          "lastModified": "Thu, 23 Dec 2021 15:40:25 GMT",
+          "type": "folder",
+          "eTag": "61c49df842ff7"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Cairo%20Durham/",
+          "lastModified": "Tue, 08 Nov 2022 14:54:06 GMT",
+          "type": "folder",
+          "eTag": "636a6d9387c36"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Calgary%20BOE/",
+          "lastModified": "Wed, 23 Mar 2022 14:23:05 GMT",
+          "type": "folder",
+          "eTag": "623ccfe6cee7f"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Cambridge/",
+          "lastModified": "Tue, 28 Dec 2021 15:26:20 GMT",
+          "type": "folder",
+          "eTag": "61cb484ba52ca"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Canajoharie/",
+          "lastModified": "Mon, 11 Jul 2022 18:01:40 GMT",
+          "type": "folder",
+          "eTag": "62cc6584b2fe5"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Canandaigua/",
+          "lastModified": "Thu, 15 Sep 2022 12:45:45 GMT",
+          "type": "folder",
+          "eTag": "6323395d015d4"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Cap%20Region%20Boces/",
+          "lastModified": "Mon, 11 Jul 2022 18:01:44 GMT",
+          "type": "folder",
+          "eTag": "62cc65887d202"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Carmel/",
+          "lastModified": "Mon, 29 Aug 2022 20:56:58 GMT",
+          "type": "folder",
+          "eTag": "630d281ab668e"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Catskill%20UFSD/",
+          "lastModified": "Thu, 18 Nov 2021 14:44:05 GMT",
+          "type": "folder",
+          "eTag": "61966ebf0a964"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Center%20Moriches%20UFSD/",
+          "lastModified": "Thu, 18 Nov 2021 14:46:49 GMT",
+          "type": "folder",
+          "eTag": "61966ebf0c458"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Chappaqua%20CSD/",
+          "lastModified": "Wed, 02 Mar 2022 21:10:03 GMT",
+          "type": "folder",
+          "eTag": "621fdd2ca9613"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Charlotte%20Valley/",
+          "lastModified": "Thu, 18 Nov 2021 15:12:34 GMT",
+          "type": "folder",
+          "eTag": "61966ebf0bce9"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Chateaugay/",
+          "lastModified": "Thu, 16 Dec 2021 15:58:53 GMT",
+          "type": "folder",
+          "eTag": "61bb8baac027b"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Chatham/",
+          "lastModified": "Thu, 23 Dec 2021 15:42:38 GMT",
+          "type": "folder",
+          "eTag": "61c49df8c52f6"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Cheektowaga%20Maryvale/",
+          "lastModified": "Thu, 20 Oct 2022 18:12:26 GMT",
+          "type": "folder",
+          "eTag": "635194cb4d410"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Chenango%20Valley%20CSD/",
+          "lastModified": "Thu, 18 Nov 2021 15:26:48 GMT",
+          "type": "folder",
+          "eTag": "61967ba739ef9"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Childrens%20Home%20of%20Kingston/",
+          "lastModified": "Thu, 23 Dec 2021 17:17:09 GMT",
+          "type": "folder",
+          "eTag": "61c4b954abc69"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/China%20Tutoring/",
+          "lastModified": "Wed, 24 Nov 2021 17:55:42 GMT",
+          "type": "folder",
+          "eTag": "619e7ca38f897"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Clarence%20CSD/",
+          "lastModified": "Wed, 02 Nov 2022 18:17:09 GMT",
+          "type": "folder",
+          "eTag": "6362b49ac851c"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Cobleskill%20Richmondville/",
+          "lastModified": "Thu, 23 Dec 2021 15:44:21 GMT",
+          "type": "folder",
+          "eTag": "61c49df8c0ab2"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Colonial%20Motor%20Cars/",
+          "lastModified": "Thu, 23 Sep 2021 18:09:41 GMT",
+          "type": "folder",
+          "eTag": "614d3be37ee1c"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Commack%20UFSD/",
+          "lastModified": "Thu, 18 Nov 2021 16:01:47 GMT",
+          "type": "folder",
+          "eTag": "61967ba73a21c"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Community%20Education%20Center/",
+          "lastModified": "Thu, 17 Nov 2022 20:27:33 GMT",
+          "type": "folder",
+          "eTag": "63769935d9bd7"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Community%20Outreach%20Center/",
+          "lastModified": "Thu, 19 Aug 2021 19:24:41 GMT",
+          "type": "folder",
+          "eTag": "612c18e59f277"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Compass%20Charter/",
+          "lastModified": "Fri, 11 Feb 2022 12:33:42 GMT",
+          "type": "folder",
+          "eTag": "620665cbb62c2"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Cooperstown/",
+          "lastModified": "Wed, 19 Oct 2022 19:23:33 GMT",
+          "type": "folder",
+          "eTag": "63504f4ba1006"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Corinth%20CS/",
+          "lastModified": "Thu, 18 Nov 2021 16:10:27 GMT",
+          "type": "folder",
+          "eTag": "619e993d6217b"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Coxsackie-Athens/",
+          "lastModified": "Thu, 06 Oct 2022 15:47:36 GMT",
+          "type": "folder",
+          "eTag": "633f3db31deb2"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Creative%20Advantage/",
+          "lastModified": "Tue, 22 Jun 2021 20:41:32 GMT",
+          "type": "folder",
+          "eTag": "611187632a63a"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Darien/",
+          "lastModified": "Wed, 23 Mar 2022 15:06:24 GMT",
+          "type": "folder",
+          "eTag": "623ccfe6cd023"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Deer%20Park/",
+          "lastModified": "Thu, 23 Dec 2021 15:47:20 GMT",
+          "type": "folder",
+          "eTag": "61c49df8c0a04"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Deposit/",
+          "lastModified": "Wed, 24 Nov 2021 17:56:58 GMT",
+          "type": "folder",
+          "eTag": "619e7cec840e2"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Dobbs%20Ferry/",
+          "lastModified": "Thu, 24 Jun 2021 13:50:38 GMT",
+          "type": "folder",
+          "eTag": "611187632aa49"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Dover/",
+          "lastModified": "Thu, 18 Nov 2021 17:33:14 GMT",
+          "type": "folder",
+          "eTag": "6197429a18077"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Dr.%20Mac/",
+          "lastModified": "Tue, 13 Dec 2022 14:51:19 GMT",
+          "type": "folder",
+          "eTag": "63989167f2b3a"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Duane%20Lake/",
+          "lastModified": "Thu, 18 Nov 2021 17:38:28 GMT",
+          "type": "folder",
+          "eTag": "61995552c06cc"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Duanesburg/",
+          "lastModified": "Thu, 23 Dec 2021 15:47:52 GMT",
+          "type": "folder",
+          "eTag": "61c49df8c1b06"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/EDGE%20Document%20Solutions/",
+          "lastModified": "Wed, 21 Dec 2022 22:34:58 GMT",
+          "type": "folder",
+          "eTag": "63a38a12561fd"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/East%20Greenbush/",
+          "lastModified": "Tue, 28 Dec 2021 14:32:05 GMT",
+          "type": "folder",
+          "eTag": "61cb2ad2578e5"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/East%20Hampton%20UFSD/",
+          "lastModified": "Fri, 19 Nov 2021 15:22:54 GMT",
+          "type": "folder",
+          "eTag": "61995552bf467"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/East%20Harlem%20Scholars/",
+          "lastModified": "Wed, 24 Nov 2021 17:59:03 GMT",
+          "type": "folder",
+          "eTag": "619e993d63a16"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/East%20Harlem%20Scholars%20School%202/",
+          "lastModified": "Wed, 24 Nov 2021 17:59:03 GMT",
+          "type": "folder",
+          "eTag": "619e993d63176"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/East%20Ramapo%20CSD/",
+          "lastModified": "Thu, 23 Dec 2021 15:49:24 GMT",
+          "type": "folder",
+          "eTag": "61c49df8c23b2"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/East%20Side%20Union%20HS%20District/",
+          "lastModified": "Mon, 08 Nov 2021 18:40:46 GMT",
+          "type": "folder",
+          "eTag": "61897b8fdfc84"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/East%20Williston%20UFSD/",
+          "lastModified": "Thu, 23 Dec 2021 15:49:52 GMT",
+          "type": "folder",
+          "eTag": "61c49df8c277b"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Eastern%20Suffolk%20BOCES/",
+          "lastModified": "Thu, 06 Jan 2022 21:10:39 GMT",
+          "type": "folder",
+          "eTag": "61d75b3da92c6"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Eastport-South%20Manor%20CSD/",
+          "lastModified": "Fri, 19 Nov 2021 16:42:17 GMT",
+          "type": "folder",
+          "eTag": "61995552c0d56"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Edinburg%20Common%20School/",
+          "lastModified": "Thu, 23 Dec 2021 15:50:31 GMT",
+          "type": "folder",
+          "eTag": "61c49df8c1eca"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Edmeston/",
+          "lastModified": "Fri, 19 Nov 2021 17:11:34 GMT",
+          "type": "folder",
+          "eTag": "61995552bf2c0"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Educational%20Vistas/",
+          "lastModified": "Tue, 15 Nov 2022 15:01:35 GMT",
+          "type": "folder",
+          "eTag": "6373b6cdb47f9"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Ellenville/",
+          "lastModified": "Thu, 17 Nov 2022 20:28:07 GMT",
+          "type": "folder",
+          "eTag": "63769957a0e0e"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Elmsford/",
+          "lastModified": "Thu, 23 Dec 2021 15:50:59 GMT",
+          "type": "folder",
+          "eTag": "61c49df8c1890"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Endicott/",
+          "lastModified": "Wed, 08 Dec 2021 16:24:25 GMT",
+          "type": "folder",
+          "eTag": "61b18c55ca796"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Enlarged%20City%20School%20District%20of%20Troy/",
+          "lastModified": "Mon, 29 Nov 2021 14:42:33 GMT",
+          "type": "folder",
+          "eTag": "61a4f338ceed3"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Erie%201%20BOCES/",
+          "lastModified": "Wed, 23 Mar 2022 13:25:47 GMT",
+          "type": "folder",
+          "eTag": "623ccfe6cad9a"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Erie%202%20BOCES/",
+          "lastModified": "Thu, 23 Dec 2021 16:05:14 GMT",
+          "type": "folder",
+          "eTag": "61c49e42effd5"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Everyone%20Reads%20PA/",
+          "lastModified": "Wed, 23 Mar 2022 14:17:59 GMT",
+          "type": "folder",
+          "eTag": "623ccfe6cbec3"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Fahari%20Academey/",
+          "lastModified": "Mon, 29 Nov 2021 14:47:27 GMT",
+          "type": "folder",
+          "eTag": "61a4f338cddaa"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Fairport/",
+          "lastModified": "Thu, 14 Jul 2022 19:59:52 GMT",
+          "type": "folder",
+          "eTag": "62d1d0e9a490a"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Farmingdale%20UFSD/",
+          "lastModified": "Mon, 29 Nov 2021 14:51:03 GMT",
+          "type": "folder",
+          "eTag": "61a4f338cf722"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Farmington/",
+          "lastModified": "Wed, 20 Oct 2021 14:53:33 GMT",
+          "type": "folder",
+          "eTag": "6171648e32e65"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Finn%20Academy/",
+          "lastModified": "Mon, 19 Dec 2022 13:23:07 GMT",
+          "type": "folder",
+          "eTag": "63a206fdaa28c"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/First%20Baptist%20Academy/",
+          "lastModified": "Tue, 28 Jun 2022 17:45:23 GMT",
+          "type": "folder",
+          "eTag": "62c1bcf5d7740"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Florida%20UFSD/",
+          "lastModified": "Mon, 29 Nov 2021 14:57:33 GMT",
+          "type": "folder",
+          "eTag": "61a4f338cdbd2"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Followers%20of%20Jesus%20School/",
+          "lastModified": "Mon, 29 Nov 2021 14:59:49 GMT",
+          "type": "folder",
+          "eTag": "61a4f338ceff7"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Fonda-Fultonville%20CSD/",
+          "lastModified": "Tue, 27 Sep 2022 12:11:44 GMT",
+          "type": "folder",
+          "eTag": "6332e88041701"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Fort%20Ann%20CSD/",
+          "lastModified": "Mon, 29 Nov 2021 15:15:03 GMT",
+          "type": "folder",
+          "eTag": "61a4f338cfcb4"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Fort%20Edwaard%20UFSD/",
+          "lastModified": "Mon, 29 Nov 2021 15:23:23 GMT",
+          "type": "folder",
+          "eTag": "61a4f338cfee5"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Fort%20Plain/",
+          "lastModified": "Thu, 23 Dec 2021 16:05:15 GMT",
+          "type": "folder",
+          "eTag": "61c49e42effd5"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Franklin%20CSD/",
+          "lastModified": "Mon, 29 Nov 2021 15:31:26 GMT",
+          "type": "folder",
+          "eTag": "61a4f338ce799"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Gallaudet%20University/",
+          "lastModified": "Mon, 28 Feb 2022 14:35:55 GMT",
+          "type": "folder",
+          "eTag": "621fdbf4b7529"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Galway/",
+          "lastModified": "Thu, 15 Dec 2022 20:54:21 GMT",
+          "type": "folder",
+          "eTag": "639b897d638bd"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Germantown/",
+          "lastModified": "Thu, 28 Jul 2022 19:43:37 GMT",
+          "type": "folder",
+          "eTag": "62e2e6e9e3d41"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Glastonbury/",
+          "lastModified": "Mon, 12 Sep 2022 13:26:45 GMT",
+          "type": "folder",
+          "eTag": "63222ed32e572"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Glen%20Cove/",
+          "lastModified": "Mon, 29 Nov 2021 16:37:19 GMT",
+          "type": "folder",
+          "eTag": "61a50f88e0380"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Glens%20Falls%20city%20school/",
+          "lastModified": "Mon, 29 Nov 2021 16:39:01 GMT",
+          "type": "folder",
+          "eTag": "61a50f88df8bd"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Gloversville/",
+          "lastModified": "Mon, 29 Nov 2021 16:55:25 GMT",
+          "type": "folder",
+          "eTag": "61a50f88e1dad"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Goshen/",
+          "lastModified": "Thu, 17 Nov 2022 20:28:40 GMT",
+          "type": "folder",
+          "eTag": "63769978c1f5a"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Graduation%20Alliance/",
+          "lastModified": "Fri, 18 Feb 2022 19:22:09 GMT",
+          "type": "folder",
+          "eTag": "62118234945a7"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Great%20Neck/",
+          "lastModified": "Mon, 29 Nov 2021 17:17:39 GMT",
+          "type": "folder",
+          "eTag": "61a50f88de6bf"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Greater%20Johnston/",
+          "lastModified": "Mon, 29 Nov 2021 17:28:54 GMT",
+          "type": "folder",
+          "eTag": "61a50f88df377"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Green%20Island%20UFSD/",
+          "lastModified": "Mon, 29 Nov 2021 17:31:35 GMT",
+          "type": "folder",
+          "eTag": "61a50f88dddb0"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Greenville/",
+          "lastModified": "Mon, 29 Nov 2021 17:33:11 GMT",
+          "type": "folder",
+          "eTag": "61a50f88ddd57"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Greenwich/",
+          "lastModified": "Tue, 06 Dec 2022 19:27:27 GMT",
+          "type": "folder",
+          "eTag": "638f979fedce4"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Greenwood%20Lake%20UFSD/",
+          "lastModified": "Wed, 01 Dec 2021 14:55:06 GMT",
+          "type": "folder",
+          "eTag": "61a79b467595e"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Guilderland/",
+          "lastModified": "Wed, 23 Nov 2022 13:13:34 GMT",
+          "type": "folder",
+          "eTag": "637e1c8402572"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/HFM%20BOCES/",
+          "lastModified": "Thu, 23 Dec 2021 17:25:39 GMT",
+          "type": "folder",
+          "eTag": "61c4b954afc66"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Hadley%20Luzerne/",
+          "lastModified": "Wed, 01 Dec 2021 16:16:18 GMT",
+          "type": "folder",
+          "eTag": "61a7b78658f48"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Half%20Hollow%20Hills/",
+          "lastModified": "Wed, 01 Dec 2021 16:29:54 GMT",
+          "type": "folder",
+          "eTag": "61a7b7865595e"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Hampton%20Bays/",
+          "lastModified": "Tue, 15 Nov 2022 14:59:50 GMT",
+          "type": "folder",
+          "eTag": "6373a9666bf52"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Harborfields/",
+          "lastModified": "Wed, 01 Dec 2021 16:35:22 GMT",
+          "type": "folder",
+          "eTag": "61a7b786598ad"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Harlem%20Link/",
+          "lastModified": "Wed, 01 Dec 2021 16:42:32 GMT",
+          "type": "folder",
+          "eTag": "61a7b7865836b"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Harrison/",
+          "lastModified": "Wed, 01 Dec 2021 16:56:57 GMT",
+          "type": "folder",
+          "eTag": "61a7b78659254"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Hartford/",
+          "lastModified": "Wed, 01 Dec 2021 17:08:58 GMT",
+          "type": "folder",
+          "eTag": "61a7b786591fd"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Hastings%20on%20Hudson%20UFSD/",
+          "lastModified": "Wed, 01 Dec 2021 17:15:34 GMT",
+          "type": "folder",
+          "eTag": "61a7b78658313"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Hauppauge%20UFSD/",
+          "lastModified": "Wed, 01 Dec 2021 17:13:15 GMT",
+          "type": "folder",
+          "eTag": "61a7b78656b2e"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Haven%20Academy/",
+          "lastModified": "Thu, 24 Jun 2021 13:46:46 GMT",
+          "type": "folder",
+          "eTag": "611187632a3d4"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Hendrick%20Hudson/",
+          "lastModified": "Mon, 01 Aug 2022 19:12:50 GMT",
+          "type": "folder",
+          "eTag": "62ea83c3688cc"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Herricks%20UFSD/",
+          "lastModified": "Wed, 01 Dec 2021 17:33:34 GMT",
+          "type": "folder",
+          "eTag": "61a7b786595ce"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Highland%20Falls/",
+          "lastModified": "Wed, 01 Dec 2021 17:36:36 GMT",
+          "type": "folder",
+          "eTag": "61a7b78657218"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Hoosick%20Falls/",
+          "lastModified": "Mon, 27 Dec 2021 21:00:27 GMT",
+          "type": "folder",
+          "eTag": "61ca29b3a55cb"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Hudson%20CSD/",
+          "lastModified": "Thu, 23 Dec 2021 17:26:09 GMT",
+          "type": "folder",
+          "eTag": "61c4b954aa3f7"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Hudson%20Falls/",
+          "lastModified": "Thu, 02 Dec 2021 15:54:19 GMT",
+          "type": "folder",
+          "eTag": "61ae41662b6b5"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Huntington%20UFSD/",
+          "lastModified": "Thu, 23 Dec 2021 17:26:37 GMT",
+          "type": "folder",
+          "eTag": "61c4b954a9f79"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Ichabod%20Crane/",
+          "lastModified": "Mon, 29 Aug 2022 15:49:19 GMT",
+          "type": "folder",
+          "eTag": "630d2ac1e35c2"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Indian%20Lake/",
+          "lastModified": "Thu, 02 Dec 2021 16:21:18 GMT",
+          "type": "folder",
+          "eTag": "61ae41662c786"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Iroquois/",
+          "lastModified": "Thu, 02 Dec 2021 16:38:45 GMT",
+          "type": "folder",
+          "eTag": "61ae41662e427"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Island%20Park/",
+          "lastModified": "Wed, 24 Nov 2021 17:37:19 GMT",
+          "type": "folder",
+          "eTag": "619e7ca38df28"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Jefferson/",
+          "lastModified": "Thu, 23 Dec 2021 16:05:15 GMT",
+          "type": "folder",
+          "eTag": "61c49e42effd5"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Johnsburg%20CSD/",
+          "lastModified": "Thu, 02 Dec 2021 16:54:51 GMT",
+          "type": "folder",
+          "eTag": "61ae41662fb50"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/JohnstonXD/",
+          "lastModified": "Mon, 26 Jul 2021 20:13:03 GMT",
+          "type": "folder",
+          "eTag": "611187632aa9d"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Johnstown/",
+          "lastModified": "Thu, 28 Jul 2022 19:46:27 GMT",
+          "type": "folder",
+          "eTag": "62e2e7934872d"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Katonah-Lewisboro/",
+          "lastModified": "Thu, 02 Dec 2021 16:56:50 GMT",
+          "type": "folder",
+          "eTag": "61ae41662e3c4"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Kenmore-Town%20of%20Tonawanda/",
+          "lastModified": "Thu, 02 Dec 2021 17:21:32 GMT",
+          "type": "folder",
+          "eTag": "61ae41662deac"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/King%20Center/",
+          "lastModified": "Thu, 02 Dec 2021 17:46:27 GMT",
+          "type": "folder",
+          "eTag": "61ae41662c261"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Kings%20Park/",
+          "lastModified": "Tue, 07 Dec 2021 15:32:25 GMT",
+          "type": "folder",
+          "eTag": "61af8a2f8120a"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Kingston%20CSD/",
+          "lastModified": "Wed, 21 Dec 2022 20:34:18 GMT",
+          "type": "folder",
+          "eTag": "63a36dcacb33d"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Kipp%20Tech%20Valley/",
+          "lastModified": "Tue, 07 Dec 2021 16:46:03 GMT",
+          "type": "folder",
+          "eTag": "61afa22e9e44b"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Kiryas%20Joel%20Village%20SD/",
+          "lastModified": "Tue, 01 Nov 2022 18:15:33 GMT",
+          "type": "folder",
+          "eTag": "63616245c1ffa"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Kristie%20Kiernan%20Bouryal/",
+          "lastModified": "Tue, 04 Aug 2020 18:21:57 GMT",
+          "type": "folder",
+          "eTag": "6111876329da1"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/LHRIC/",
+          "lastModified": "Thu, 01 Dec 2022 15:18:55 GMT",
+          "type": "folder",
+          "eTag": "6388c5ff85b9a"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Lackawanna%20CSD/",
+          "lastModified": "Tue, 28 Dec 2021 15:28:20 GMT",
+          "type": "folder",
+          "eTag": "61cb484ba7d47"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Lake%20George/",
+          "lastModified": "Fri, 23 Sep 2022 17:55:58 GMT",
+          "type": "folder",
+          "eTag": "632df32e6f72f"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Lake%20Pleasant/",
+          "lastModified": "Thu, 23 Dec 2021 16:05:22 GMT",
+          "type": "folder",
+          "eTag": "61c49e42effd5"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Lake%20Shore%20Central/",
+          "lastModified": "Tue, 07 Dec 2021 17:41:11 GMT",
+          "type": "folder",
+          "eTag": "61afa22e9f55c"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Lakeland%20CSD/",
+          "lastModified": "Tue, 07 Dec 2021 17:39:56 GMT",
+          "type": "folder",
+          "eTag": "61afa22ea2712"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Lansing%20CSD/",
+          "lastModified": "Thu, 23 Dec 2021 16:05:15 GMT",
+          "type": "folder",
+          "eTag": "61c49e42effd5"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Lansingburgh/",
+          "lastModified": "Thu, 06 Oct 2022 13:27:57 GMT",
+          "type": "folder",
+          "eTag": "633f3db31cc02"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Lawrence/",
+          "lastModified": "Thu, 22 Dec 2022 17:17:02 GMT",
+          "type": "folder",
+          "eTag": "63a4910e11ac3"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Levittown/",
+          "lastModified": "Thu, 10 Nov 2022 14:36:31 GMT",
+          "type": "folder",
+          "eTag": "636d164141aff"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Lewiston-Porter%20CSD/",
+          "lastModified": "Sat, 05 Nov 2022 23:53:23 GMT",
+          "type": "folder",
+          "eTag": "6366f773a132d"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Lindenhurst/",
+          "lastModified": "Mon, 12 Dec 2022 18:41:13 GMT",
+          "type": "folder",
+          "eTag": "639775c98e401"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Lockport/",
+          "lastModified": "Wed, 30 Nov 2022 16:29:55 GMT",
+          "type": "folder",
+          "eTag": "63878503336b0"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Locust%20Valley%20CSD/",
+          "lastModified": "Wed, 11 Jan 2023 15:45:54 GMT",
+          "type": "folder",
+          "eTag": "63bed9b22d687"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Lower%20Merion/",
+          "lastModified": "Thu, 15 Sep 2022 19:23:01 GMT",
+          "type": "folder",
+          "eTag": "6323dfd1caee6"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Lynbrook/",
+          "lastModified": "Thu, 23 Dec 2021 17:28:06 GMT",
+          "type": "folder",
+          "eTag": "61c4b954ab81d"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/MAA/",
+          "lastModified": "Fri, 16 Dec 2022 20:02:00 GMT",
+          "type": "folder",
+          "eTag": "639cceb861ac5"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Maine-Endwell%20CSD/",
+          "lastModified": "Wed, 08 Dec 2021 16:52:21 GMT",
+          "type": "folder",
+          "eTag": "61b18c55cdcca"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Manhasset/",
+          "lastModified": "Wed, 08 Dec 2021 16:57:53 GMT",
+          "type": "folder",
+          "eTag": "61b18c55cfb57"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Marlboro/",
+          "lastModified": "Wed, 08 Dec 2021 17:08:21 GMT",
+          "type": "folder",
+          "eTag": "61b18c55ce09e"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Mayfield/",
+          "lastModified": "Tue, 05 Jul 2022 18:21:56 GMT",
+          "type": "folder",
+          "eTag": "62cc619eb5db8"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Mechanicville/",
+          "lastModified": "Tue, 28 Dec 2021 14:42:25 GMT",
+          "type": "folder",
+          "eTag": "61cb2ad2591f0"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Menands/",
+          "lastModified": "Thu, 23 Dec 2021 17:28:35 GMT",
+          "type": "folder",
+          "eTag": "61c4b954adde6"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Merrick/",
+          "lastModified": "Mon, 14 Nov 2022 15:20:46 GMT",
+          "type": "folder",
+          "eTag": "637278e64be2b"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Mexico/",
+          "lastModified": "Wed, 08 Dec 2021 17:28:16 GMT",
+          "type": "folder",
+          "eTag": "61b18c55d09d5"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Middle%20Country/",
+          "lastModified": "Mon, 12 Dec 2022 20:41:54 GMT",
+          "type": "folder",
+          "eTag": "6398e62458962"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Middletown/",
+          "lastModified": "Wed, 08 Dec 2021 17:43:22 GMT",
+          "type": "folder",
+          "eTag": "61b18c55cec0e"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Millbrook/",
+          "lastModified": "Wed, 26 Oct 2022 12:30:58 GMT",
+          "type": "folder",
+          "eTag": "63593a43b622e"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Miller%20Place/",
+          "lastModified": "Sat, 17 Sep 2022 21:09:43 GMT",
+          "type": "folder",
+          "eTag": "63263797956ec"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Mineola/",
+          "lastModified": "Thu, 12 Jan 2023 07:02:37 GMT",
+          "type": "folder",
+          "eTag": "63bfb08d6885e"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Minerva/",
+          "lastModified": "Thu, 09 Dec 2021 16:38:26 GMT",
+          "type": "folder",
+          "eTag": "61b2440579dbd"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Minisink%20Valley/",
+          "lastModified": "Thu, 23 Dec 2021 16:49:32 GMT",
+          "type": "folder",
+          "eTag": "61c4b954af8f8"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Mohonasen/",
+          "lastModified": "Thu, 23 Dec 2021 17:28:58 GMT",
+          "type": "folder",
+          "eTag": "61c4b954aa859"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Monroe%20Woodbury/",
+          "lastModified": "Tue, 14 Dec 2021 15:50:46 GMT",
+          "type": "folder",
+          "eTag": "61ba0e80dcccd"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Montauk/",
+          "lastModified": "Thu, 05 Jan 2023 14:53:23 GMT",
+          "type": "folder",
+          "eTag": "63b6e4632aa24"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Monticello/",
+          "lastModified": "Thu, 23 Dec 2021 16:50:15 GMT",
+          "type": "folder",
+          "eTag": "61c4b954aaab8"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Mott%20Haven%20Academy/",
+          "lastModified": "Thu, 17 Nov 2022 20:33:45 GMT",
+          "type": "folder",
+          "eTag": "63769aa981ae3"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Mt%20Vernon/",
+          "lastModified": "Tue, 16 Aug 2022 20:59:21 GMT",
+          "type": "folder",
+          "eTag": "62fc052963040"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Mt.%20Pleasant%20CSD/",
+          "lastModified": "Thu, 23 Dec 2021 16:50:48 GMT",
+          "type": "folder",
+          "eTag": "61c4b954ae60b"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/NYSED/",
+          "lastModified": "Thu, 22 Sep 2022 14:20:59 GMT",
+          "type": "folder",
+          "eTag": "632c803dba0e0"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/National%20Technical%20Institute%20for%20the%20Deaf/",
+          "lastModified": "Wed, 15 Jun 2022 14:19:14 GMT",
+          "type": "folder",
+          "eTag": "62b0c94915f41"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Neighborhood%20Charter/",
+          "lastModified": "Wed, 15 Dec 2021 15:04:39 GMT",
+          "type": "folder",
+          "eTag": "61ba0e80ddb9f"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/New%20Lebanon/",
+          "lastModified": "Thu, 28 Jul 2022 19:50:44 GMT",
+          "type": "folder",
+          "eTag": "62e2e894de1a3"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/New%20Rochelle/",
+          "lastModified": "Thu, 12 Jan 2023 07:02:33 GMT",
+          "type": "folder",
+          "eTag": "63bfb089ca3e3"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/New%20York%20City%20Department%20of%20Education/",
+          "lastModified": "Thu, 17 Nov 2022 20:33:53 GMT",
+          "type": "folder",
+          "eTag": "63769ab1da9dc"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Newburgh/",
+          "lastModified": "Fri, 16 Sep 2022 17:07:47 GMT",
+          "type": "folder",
+          "eTag": "6324ad63d4966"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Newcomb/",
+          "lastModified": "Wed, 15 Dec 2021 15:12:51 GMT",
+          "type": "folder",
+          "eTag": "61ba0e80e07f9"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Niskayuna/",
+          "lastModified": "Thu, 23 Dec 2021 16:59:15 GMT",
+          "type": "folder",
+          "eTag": "61c4b954af59f"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Nora%20Cronin/",
+          "lastModified": "Wed, 15 Dec 2021 15:25:36 GMT",
+          "type": "folder",
+          "eTag": "61ba0e80dd844"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/North%20Babylon/",
+          "lastModified": "Wed, 15 Dec 2021 17:05:45 GMT",
+          "type": "folder",
+          "eTag": "61ba327589947"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/North%20Colonie/",
+          "lastModified": "Wed, 15 Dec 2021 17:15:59 GMT",
+          "type": "folder",
+          "eTag": "61ba3275874f7"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/North%20Merrick/",
+          "lastModified": "Wed, 15 Dec 2021 17:16:32 GMT",
+          "type": "folder",
+          "eTag": "61ba32758a66e"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/North%20Rockland/",
+          "lastModified": "Mon, 03 Jan 2022 21:25:42 GMT",
+          "type": "folder",
+          "eTag": "61d369d617e73"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/North%20Warren/",
+          "lastModified": "Wed, 15 Dec 2021 17:26:08 GMT",
+          "type": "folder",
+          "eTag": "61ba32758b4d8"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Northbrook-Glenview%20SD%2030/",
+          "lastModified": "Wed, 20 Oct 2021 15:01:44 GMT",
+          "type": "folder",
+          "eTag": "6171648e33d6d"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Northport%20East%20North%20Port/",
+          "lastModified": "Wed, 12 Jan 2022 19:51:39 GMT",
+          "type": "folder",
+          "eTag": "61dfab6d48e8b"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Northville/",
+          "lastModified": "Wed, 07 Dec 2022 14:22:18 GMT",
+          "type": "folder",
+          "eTag": "6392391ca9a64"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Oneida/",
+          "lastModified": "Thu, 23 Dec 2021 17:30:40 GMT",
+          "type": "folder",
+          "eTag": "61c4b954ab0c5"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Oppeheim%20Ephratah/",
+          "lastModified": "Thu, 23 Dec 2021 17:00:15 GMT",
+          "type": "folder",
+          "eTag": "61c4b954aa75b"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Ossining/",
+          "lastModified": "Thu, 16 Dec 2021 15:09:39 GMT",
+          "type": "folder",
+          "eTag": "61bb8baabfdbe"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Oyster%20Bay-East%20Norwich%20CSD/",
+          "lastModified": "Thu, 23 Dec 2021 17:00:41 GMT",
+          "type": "folder",
+          "eTag": "61c4b954ae517"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/PEF%20Public%20Employees%20Federation/",
+          "lastModified": "Fri, 13 Jan 2023 19:13:08 GMT",
+          "type": "folder",
+          "eTag": "63c1ad4432232"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Pawling/",
+          "lastModified": "Thu, 16 Dec 2021 15:42:56 GMT",
+          "type": "folder",
+          "eTag": "61bb8baabf2b0"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Pearl%20River/",
+          "lastModified": "Thu, 16 Dec 2021 15:55:32 GMT",
+          "type": "folder",
+          "eTag": "61bb8baac14ab"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Pearson%20School%20Systems/",
+          "lastModified": "Wed, 24 Nov 2021 18:59:18 GMT",
+          "type": "folder",
+          "eTag": "619e993d655cc"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Peekskill/",
+          "lastModified": "Wed, 05 Jan 2022 15:48:41 GMT",
+          "type": "folder",
+          "eTag": "61d5c6264ba49"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Pine%20Bush/",
+          "lastModified": "Thu, 23 Dec 2021 17:01:15 GMT",
+          "type": "folder",
+          "eTag": "61c4b954ad6df"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Plainedge%20UFSD/",
+          "lastModified": "Tue, 28 Dec 2021 14:43:36 GMT",
+          "type": "folder",
+          "eTag": "61cb2ad25684f"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Plainview-Old%20Bethpage%20CSD/",
+          "lastModified": "Thu, 16 Dec 2021 16:55:50 GMT",
+          "type": "folder",
+          "eTag": "61bb8baac0906"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Port%20Jefferson%20UFSD/",
+          "lastModified": "Thu, 16 Dec 2021 17:06:49 GMT",
+          "type": "folder",
+          "eTag": "61bb8baac10eb"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Port%20Jervis/",
+          "lastModified": "Thu, 23 Dec 2021 17:03:34 GMT",
+          "type": "folder",
+          "eTag": "61c4b954ab9c4"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Port%20Washington%20UFSD/",
+          "lastModified": "Mon, 18 Jul 2022 14:11:10 GMT",
+          "type": "folder",
+          "eTag": "62d569fe9648a"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Questar/",
+          "lastModified": "Thu, 28 Jul 2022 19:57:14 GMT",
+          "type": "folder",
+          "eTag": "62e2ea1a79cf3"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/RIT/",
+          "lastModified": "Tue, 21 Dec 2021 14:32:55 GMT",
+          "type": "folder",
+          "eTag": "61c1e5ad91462"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Ramapo/",
+          "lastModified": "Thu, 23 Dec 2021 17:05:23 GMT",
+          "type": "folder",
+          "eTag": "61c4b954aca6b"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Ravena/",
+          "lastModified": "Tue, 28 Dec 2021 14:44:57 GMT",
+          "type": "folder",
+          "eTag": "61cb2ad25763c"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Readme.md",
+          "lastModified": "Thu, 11 Aug 2022 15:58:59 GMT",
+          "contentLength": "1",
+          "contentType": "text/markdown",
+          "type": "file",
+          "eTag": "8768b0c02821d30567d368f840f50aa1"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Red%20Hook/",
+          "lastModified": "Sat, 25 Dec 2021 21:28:37 GMT",
+          "type": "folder",
+          "eTag": "61c78d054a15f"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Red%20River%20College/",
+          "lastModified": "Wed, 23 Mar 2022 14:19:33 GMT",
+          "type": "folder",
+          "eTag": "623ccfe6ce651"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Regional%20SD%2019/",
+          "lastModified": "Wed, 23 Mar 2022 15:08:27 GMT",
+          "type": "folder",
+          "eTag": "623ccfe6cdc7f"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Remsen/",
+          "lastModified": "Thu, 23 Dec 2021 17:06:40 GMT",
+          "type": "folder",
+          "eTag": "61c4b954aad65"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Remsenburg-Speonk%20UFSD/",
+          "lastModified": "Thu, 10 Mar 2022 21:45:07 GMT",
+          "type": "folder",
+          "eTag": "622bf371ee49a"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Rhinebeck/",
+          "lastModified": "Thu, 23 Dec 2021 17:07:10 GMT",
+          "type": "folder",
+          "eTag": "61c4b954aad14"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Riverhead%20Charter/",
+          "lastModified": "Thu, 23 Dec 2021 17:31:14 GMT",
+          "type": "folder",
+          "eTag": "61c4b954ad281"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Riverhead%20UFSD/",
+          "lastModified": "Mon, 09 Jan 2023 11:56:31 GMT",
+          "type": "folder",
+          "eTag": "63bc00efd03c7"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Rochester/",
+          "lastModified": "Tue, 04 Aug 2020 18:21:56 GMT",
+          "type": "folder",
+          "eTag": "6111876329dfa"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Rochester%20Prep%20Brooks%20Campus/",
+          "lastModified": "Tue, 21 Dec 2021 16:43:40 GMT",
+          "type": "folder",
+          "eTag": "61c20fa811334"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Rochester%20Prep%20Elementary/",
+          "lastModified": "Tue, 21 Dec 2021 16:48:51 GMT",
+          "type": "folder",
+          "eTag": "61c20fa811665"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Rochester%20Prep%20West%20Campus/",
+          "lastModified": "Tue, 21 Dec 2021 16:51:15 GMT",
+          "type": "folder",
+          "eTag": "61c20fa811810"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Rockville%20Centre%20UFSD/",
+          "lastModified": "Tue, 21 Dec 2021 16:55:49 GMT",
+          "type": "folder",
+          "eTag": "61c20fa80f946"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Roman%20Catholic%20Diocese%20of%20Albany/",
+          "lastModified": "Thu, 19 Aug 2021 19:17:56 GMT",
+          "type": "folder",
+          "eTag": "612c18e59f1e1"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Rome/",
+          "lastModified": "Tue, 21 Dec 2021 16:58:23 GMT",
+          "type": "folder",
+          "eTag": "61c20fa80f495"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Rondout%20Valley/",
+          "lastModified": "Thu, 23 Dec 2021 17:07:47 GMT",
+          "type": "folder",
+          "eTag": "61c4b954ada45"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Roosevalt%20Childrens%20Academy%20Charter%20School/",
+          "lastModified": "Tue, 21 Dec 2021 17:11:52 GMT",
+          "type": "folder",
+          "eTag": "61c20fa8118d6"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Roosevelt%20UFSD/",
+          "lastModified": "Tue, 21 Dec 2021 17:08:30 GMT",
+          "type": "folder",
+          "eTag": "61c20fa80d762"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Roslyn/",
+          "lastModified": "Fri, 13 Jan 2023 18:19:14 GMT",
+          "type": "folder",
+          "eTag": "63c1a0a258d7a"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Rotterdam%20Mohonasen/",
+          "lastModified": "Wed, 22 Dec 2021 17:29:37 GMT",
+          "type": "folder",
+          "eTag": "61c364fcac5ec"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Roxbury%20CSD/",
+          "lastModified": "Thu, 23 Dec 2021 17:31:38 GMT",
+          "type": "folder",
+          "eTag": "61c4b954afe73"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/SIRS%20(Mid%20Hudson%20RIC)/",
+          "lastModified": "Thu, 28 Jul 2022 19:58:23 GMT",
+          "type": "folder",
+          "eTag": "62e2ea5f577e7"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Saanys/",
+          "lastModified": "Fri, 02 Dec 2022 21:53:33 GMT",
+          "type": "folder",
+          "eTag": "638a73dd6fdc2"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Sachem/",
+          "lastModified": "Mon, 22 Aug 2022 15:05:17 GMT",
+          "type": "folder",
+          "eTag": "6303ab8a6a166"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Sag%20Harbor/",
+          "lastModified": "Wed, 22 Dec 2021 17:32:32 GMT",
+          "type": "folder",
+          "eTag": "61c364fcabfe4"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Salem/",
+          "lastModified": "Wed, 22 Dec 2021 17:38:47 GMT",
+          "type": "folder",
+          "eTag": "61c364fca9f4f"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Saratoga%20Springs/",
+          "lastModified": "Tue, 04 Jan 2022 17:46:26 GMT",
+          "type": "folder",
+          "eTag": "61d48c88a342c"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Saugerties%20CSD/",
+          "lastModified": "Thu, 17 Nov 2022 21:20:35 GMT",
+          "type": "folder",
+          "eTag": "6376a5a36b65e"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Schenectady%20City/",
+          "lastModified": "Thu, 06 Jan 2022 17:35:27 GMT",
+          "type": "folder",
+          "eTag": "61d75b3da8bd8"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Schodack/",
+          "lastModified": "Tue, 13 Oct 2020 16:15:58 GMT",
+          "type": "folder",
+          "eTag": "611187632a093"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Schoharie/",
+          "lastModified": "Tue, 11 Jan 2022 15:45:13 GMT",
+          "type": "folder",
+          "eTag": "61dda80239bec"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Schuylerville/",
+          "lastModified": "Thu, 13 Jan 2022 04:32:56 GMT",
+          "type": "folder",
+          "eTag": "61dfab78cae57"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Scotia%20Glenville/",
+          "lastModified": "Wed, 12 Jan 2022 15:39:31 GMT",
+          "type": "folder",
+          "eTag": "61defe5cca29a"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Seaford/",
+          "lastModified": "Wed, 12 Jan 2022 15:50:29 GMT",
+          "type": "folder",
+          "eTag": "61defe5cc98fa"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Sewanhaka/",
+          "lastModified": "Wed, 12 Jan 2022 15:55:30 GMT",
+          "type": "folder",
+          "eTag": "61defe5ccb14c"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Sharon%20Springs/",
+          "lastModified": "Wed, 12 Jan 2022 16:04:58 GMT",
+          "type": "folder",
+          "eTag": "61defe5cc7e5c"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Shenendehowa/",
+          "lastModified": "Mon, 26 Sep 2022 18:11:31 GMT",
+          "type": "folder",
+          "eTag": "6331eb5351957"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Silver%20Creek/",
+          "lastModified": "Wed, 12 Jan 2022 18:50:22 GMT",
+          "type": "folder",
+          "eTag": "61df22ef91275"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/South%20Buffalo%20Charter/",
+          "lastModified": "Fri, 16 Dec 2022 20:02:37 GMT",
+          "type": "folder",
+          "eTag": "639ccedd3161a"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/South%20Colonie/",
+          "lastModified": "Wed, 12 Jan 2022 18:50:22 GMT",
+          "type": "folder",
+          "eTag": "61df22ef91275"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/South%20Glens%20Falls/",
+          "lastModified": "Wed, 12 Jan 2022 18:50:22 GMT",
+          "type": "folder",
+          "eTag": "61df22ef91275"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/South%20Orangetown/",
+          "lastModified": "Thu, 13 Jan 2022 16:02:55 GMT",
+          "type": "folder",
+          "eTag": "61e058b78dc1c"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Southside%20Academy%20Charter%20School/",
+          "lastModified": "Wed, 12 Jan 2022 18:50:21 GMT",
+          "type": "folder",
+          "eTag": "61df22ef91275"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Spackenkill/",
+          "lastModified": "Thu, 28 Jul 2022 19:59:39 GMT",
+          "type": "folder",
+          "eTag": "62e2eaab1d0f1"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Spencerport%20CSD/",
+          "lastModified": "Thu, 13 Jan 2022 16:13:20 GMT",
+          "type": "folder",
+          "eTag": "61e058b78b5b1"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/St%20Anne%20Institute/",
+          "lastModified": "Thu, 13 Jan 2022 16:24:34 GMT",
+          "type": "folder",
+          "eTag": "61e058b78e232"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/St.%20Hope/",
+          "lastModified": "Tue, 18 Jan 2022 17:31:14 GMT",
+          "type": "folder",
+          "eTag": "61e6fd73b15b3"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/St.%20Thomason/",
+          "lastModified": "Tue, 15 Nov 2022 20:14:00 GMT",
+          "type": "folder",
+          "eTag": "637405a977d54"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Stamford/",
+          "lastModified": "Thu, 13 Jan 2022 17:00:06 GMT",
+          "type": "folder",
+          "eTag": "61e075e573dac"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Stillwater/",
+          "lastModified": "Thu, 22 Sep 2022 17:48:44 GMT",
+          "type": "folder",
+          "eTag": "632c9ffcac4d8"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Suffern%20CSD/",
+          "lastModified": "Tue, 18 Jan 2022 14:27:58 GMT",
+          "type": "folder",
+          "eTag": "61e6d04a4f980"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Susquehanna%20Valley%20CSD/",
+          "lastModified": "Tue, 18 Jan 2022 14:26:01 GMT",
+          "type": "folder",
+          "eTag": "61e6d04a50cbe"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Syosset/",
+          "lastModified": "Tue, 18 Jan 2022 15:38:50 GMT",
+          "type": "folder",
+          "eTag": "61e6ed0d81f32"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Syracuse/",
+          "lastModified": "Thu, 17 Nov 2022 20:35:17 GMT",
+          "type": "folder",
+          "eTag": "63769b050a22a"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Tarrytown/",
+          "lastModified": "Tue, 18 Jan 2022 15:18:38 GMT",
+          "type": "folder",
+          "eTag": "61e6ed0d84a26"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/The%20Academy%20Charter%20School/",
+          "lastModified": "Tue, 18 Jan 2022 15:35:56 GMT",
+          "type": "folder",
+          "eTag": "61e6ed0d8520a"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/The%20Dance%20Experience/",
+          "lastModified": "Thu, 09 Dec 2021 05:30:52 GMT",
+          "type": "folder",
+          "eTag": "61b1948c7aeb7"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Thomaston%20Public%20Schools/",
+          "lastModified": "Tue, 15 Nov 2022 15:54:07 GMT",
+          "type": "folder",
+          "eTag": "6373b6cdb1f0a"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Three%20Village%20CSD/",
+          "lastModified": "Tue, 18 Jan 2022 15:49:07 GMT",
+          "type": "folder",
+          "eTag": "61e6ed0d82b1f"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Troy/",
+          "lastModified": "Thu, 30 Jun 2022 15:38:29 GMT",
+          "type": "folder",
+          "eTag": "62c1bcf5df119"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Trumbull/",
+          "lastModified": "Wed, 20 Oct 2021 14:54:13 GMT",
+          "type": "folder",
+          "eTag": "6171648e32b78"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Tuckahoe/",
+          "lastModified": "Mon, 19 Sep 2022 18:17:08 GMT",
+          "type": "folder",
+          "eTag": "6328da0eb37b4"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Tupper%20Lake/",
+          "lastModified": "Tue, 18 Jan 2022 15:57:46 GMT",
+          "type": "folder",
+          "eTag": "61e6ed0d8213a"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Tuxedo/",
+          "lastModified": "Thu, 28 Jul 2022 20:00:22 GMT",
+          "type": "folder",
+          "eTag": "62e2ead6498c1"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/UC%20Blue%20Ash%20College/",
+          "lastModified": "Wed, 20 Oct 2021 15:40:19 GMT",
+          "type": "folder",
+          "eTag": "6171648e34294"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/USDAN/",
+          "lastModified": "Tue, 12 Oct 2021 17:55:05 GMT",
+          "type": "folder",
+          "eTag": "616602a7981a7"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Union%20Endicott/",
+          "lastModified": "Tue, 18 Jan 2022 17:14:30 GMT",
+          "type": "folder",
+          "eTag": "61e6fd73b1607"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Uniondale%20UFSD/",
+          "lastModified": "Wed, 14 Dec 2022 16:33:28 GMT",
+          "type": "folder",
+          "eTag": "6399fb3a4907a"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Urban%20Assembly/",
+          "lastModified": "Mon, 19 Jul 2021 19:47:00 GMT",
+          "type": "folder",
+          "eTag": "6171648e34519"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Utica/",
+          "lastModified": "Tue, 18 Jan 2022 17:36:15 GMT",
+          "type": "folder",
+          "eTag": "61e6fd73b36a0"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Valley%20Central/",
+          "lastModified": "Tue, 28 Dec 2021 15:34:51 GMT",
+          "type": "folder",
+          "eTag": "61cb484ba7620"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Voorheesville%20CSD/",
+          "lastModified": "Thu, 23 Dec 2021 17:36:38 GMT",
+          "type": "folder",
+          "eTag": "61c4b954aa2ec"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/WLS/",
+          "lastModified": "Wed, 30 Mar 2022 01:57:54 GMT",
+          "type": "folder",
+          "eTag": "6246ff345b20d"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/WNYRIC/",
+          "lastModified": "Tue, 28 Dec 2021 15:18:00 GMT",
+          "type": "folder",
+          "eTag": "61cb2ad2569f5"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Wallkill/",
+          "lastModified": "Thu, 23 Dec 2021 17:18:24 GMT",
+          "type": "folder",
+          "eTag": "61c4b954adb3d"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Warwick%20Valley/",
+          "lastModified": "Thu, 23 Dec 2021 18:10:00 GMT",
+          "type": "folder",
+          "eTag": "61c4bb79a04c4"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Washington%20Learning%20Source/",
+          "lastModified": "Thu, 09 Dec 2021 05:30:52 GMT",
+          "type": "folder",
+          "eTag": "61b1948cee1a2"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Waterford%20-%20Halfmoon/",
+          "lastModified": "Thu, 23 Dec 2021 17:37:35 GMT",
+          "type": "folder",
+          "eTag": "61c4b954ad4eb"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Watervliet/",
+          "lastModified": "Thu, 28 Jul 2022 20:01:10 GMT",
+          "type": "folder",
+          "eTag": "62e2eb0653bc6"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/West%20Babylon/",
+          "lastModified": "Tue, 15 Nov 2022 14:08:55 GMT",
+          "type": "folder",
+          "eTag": "63739ec855078"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/West%20Buffalo%20Charter/",
+          "lastModified": "Fri, 13 Jan 2023 18:19:38 GMT",
+          "type": "folder",
+          "eTag": "63c1a0baf289a"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/West%20Genessee/",
+          "lastModified": "Thu, 28 Jul 2022 20:01:15 GMT",
+          "type": "folder",
+          "eTag": "62e2eb0ba6e5b"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Western%20Suffolk%20BOCES/",
+          "lastModified": "Tue, 04 Aug 2020 18:21:56 GMT",
+          "type": "folder",
+          "eTag": "611187632a7c8"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Westhill/",
+          "lastModified": "Mon, 19 Sep 2022 15:14:34 GMT",
+          "type": "folder",
+          "eTag": "6328da0eb111d"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Whitehall/",
+          "lastModified": "Thu, 23 Dec 2021 17:43:20 GMT",
+          "type": "folder",
+          "eTag": "61c4b954ae7ca"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/William%20Floyd/",
+          "lastModified": "Thu, 23 Dec 2021 17:38:42 GMT",
+          "type": "folder",
+          "eTag": "61c4b954ac45a"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Wisdom%20Thinkers/",
+          "lastModified": "Fri, 13 Aug 2021 19:55:38 GMT",
+          "type": "folder",
+          "eTag": "611716fb72cc4"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Wyandanch/",
+          "lastModified": "Thu, 23 Dec 2021 17:39:24 GMT",
+          "type": "folder",
+          "eTag": "61c4b954adb95"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/Yonkers/",
+          "lastModified": "Sun, 21 Aug 2022 22:17:11 GMT",
+          "type": "folder",
+          "eTag": "6302aee71f799"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/cold%20spring%20harbor%20CSD/",
+          "lastModified": "Sat, 05 Nov 2022 15:57:09 GMT",
+          "type": "folder",
+          "eTag": "6366cfababa18"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/long%20lake/",
+          "lastModified": "Wed, 08 Dec 2021 16:40:16 GMT",
+          "type": "folder",
+          "eTag": "61b18c55cec62"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/northport/",
+          "lastModified": "Wed, 15 Dec 2021 17:45:12 GMT",
+          "type": "folder",
+          "eTag": "61ba327587708"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/oceanside%20UFSD/",
+          "lastModified": "Thu, 30 Jun 2022 15:39:11 GMT",
+          "type": "folder",
+          "eTag": "62c1bcf5def22"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/poughkeepsie%20city%20school%20district/",
+          "lastModified": "Thu, 23 Dec 2021 17:04:02 GMT",
+          "type": "folder",
+          "eTag": "61c4b954ad7f0"
+        }
+      },
+      {
+        "json": {
+          "path": "%21Clients/queensbury/",
+          "lastModified": "Mon, 20 Dec 2021 17:18:11 GMT",
+          "type": "folder",
+          "eTag": "61c0bccccfef2"
+        }
+      }
+    ]
+  },
   "settings": {},
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2022-02-22T20:14:51.162Z",
-  "versionId": "50e38bfa-13f0-4eea-b129-0b638ce7c64d"
+  "updatedAt": "2023-01-17T01:28:11.000Z",
+  "versionId": "66ae81a9-3e9d-4185-a36b-a3ad23d93da4"
 }
