@@ -24,9 +24,8 @@
       ]
     }
   },
-  "createdAt": "2023-01-05T01:30:17.094Z",
-  "dataLoaded": false,
-  "id": 15,
+  "createdAt": "2023-02-01T15:14:32.992Z",
+  "id": "24",
   "name": "Creating an API endpoint",
   "nodes": [
     {
@@ -118,6 +117,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-01-05T01:30:17.094Z",
-  "versionId": "1721a645-9548-40f9-88ed-b37df6d8c5a9"
+  "updatedAt": "2023-02-01T15:14:32.992Z",
+  "versionId": "3c64c3f6-80ec-4a38-a1fb-c406f0d9ff3d"
 }
