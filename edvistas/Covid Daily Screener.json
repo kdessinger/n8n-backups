@@ -1,0 +1,730 @@
+{
+  "active": true,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Manual Pivot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "dbo.fields": {
+      "main": [
+        []
+      ]
+    },
+    "IF": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Manual Pivot": {
+      "main": [
+        [
+          {
+            "node": "IF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-02-09T05:41:27.726Z",
+  "id": "25",
+  "name": "Covid Daily Screener",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "evi/screener",
+        "options": {}
+      },
+      "id": "46a8a079-87e4-4a69-959d-30de39c65ce5",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        0,
+        340
+      ],
+      "webhookId": "9f93b254-ec79-4389-9a6a-6bc767e254b7"
+    },
+    {
+      "parameters": {
+        "content": "## Covid Daily Screener\n**Saved Data** from district: Educational Vistas.\nClick to open [EduForm](http://pefelection.org)",
+        "height": 116.05381391445826,
+        "width": 322.3990989103916
+      },
+      "id": "a6574388-9dc9-4701-824d-f1bfc7986251",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -100,
+        140
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "body.queryresult.field",
+        "options": {}
+      },
+      "id": "da83859c-5e1e-4e67-b2da-598659449fa7",
+      "name": "dbo.fields",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 1,
+      "position": [
+        280,
+        140
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.Q1_No }}",
+              "value2": "={{ $json.Q1_Yes }}"
+            },
+            {
+              "value1": "={{ $json.Q2_No }}",
+              "value2": "={{ $json.Q2_Yes }}"
+            },
+            {
+              "value1": "={{ $json.Q3_No }}",
+              "value2": "={{ $json.Q3_Yes }}"
+            },
+            {
+              "value1": "={{ $json.Q4_No }}",
+              "value2": "={{ $json.Q4_Yes }}"
+            }
+          ]
+        }
+      },
+      "id": "94bb5138-b42e-4144-b2b1-9c23d547e5f2",
+      "name": "IF",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        400,
+        340
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "6ee35826-5fce-47aa-9851-5e0af19b8d67",
+      "name": "No Operation, do nothing",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        620,
+        200
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "31e4c9e8-7664-47b9-959b-931437f5b74b",
+      "name": "No Operation, do nothing1",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        620,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "Formid",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"formid\"] }}"
+            },
+            {
+              "name": "referid",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"referid\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][0][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][0][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][1][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][1][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][2][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][2][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][3][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][3][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][4][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][4][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][5][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][5][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][6][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][6][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][7][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][7][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][8][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][8][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][9][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][9][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][10][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][10][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][11][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][11][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][12][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][12][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][13][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][13][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][14][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][14][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][15][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][15][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][16][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][16][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][17][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][17][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][18][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][18][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][19][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][19][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][20][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][20][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][21][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][21][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][22][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][22][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][23][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][23][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][24][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][24][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][25][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][25][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][26][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][26][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][27][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][27][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][28][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][28][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][29][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][29][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][30][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][30][\"value\"] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "6ded0d48-8515-4491-8108-f0bcf7a7df0d",
+      "name": "Manual Pivot",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        220,
+        340
+      ],
+      "alwaysOutputData": false
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "connection": "Keep-Alive",
+            "host": "n8n.edvistas.com",
+            "x-forwarded-scheme": "https",
+            "x-forwarded-proto": "https",
+            "x-forwarded-for": "199.223.255.8",
+            "x-real-ip": "199.223.255.8",
+            "content-length": "2694",
+            "content-type": "application/xml;charset=\"utf-8\""
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "queryresult": {
+              "username": "",
+              "password": "",
+              "formid": "5264",
+              "othersystemid": "",
+              "referid": "32b70e05-b91a-4626-9d49-d03a2c8ac08c",
+              "field": [
+                {
+                  "id": "219738",
+                  "name": "txt_Name",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "219739",
+                  "name": "Staff_Name",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "Dessinger Kenn"
+                },
+                {
+                  "id": "219740",
+                  "name": "txt_title",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "219742",
+                  "name": "Q1_No",
+                  "type": "2",
+                  "txttype": "7",
+                  "value": "qid219742"
+                },
+                {
+                  "id": "219743",
+                  "name": "Q1_Yes",
+                  "type": "2",
+                  "txttype": "7",
+                  "value": "qid219742"
+                },
+                {
+                  "id": "219747",
+                  "name": "Q2_Yes",
+                  "type": "2",
+                  "txttype": "7",
+                  "value": "qid219748"
+                },
+                {
+                  "id": "219748",
+                  "name": "Q2_No",
+                  "type": "2",
+                  "txttype": "7",
+                  "value": "qid219748"
+                },
+                {
+                  "id": "219749",
+                  "name": "Q3_Yes",
+                  "type": "2",
+                  "txttype": "7",
+                  "value": "qid219750"
+                },
+                {
+                  "id": "219750",
+                  "name": "Q3_No",
+                  "type": "2",
+                  "txttype": "7",
+                  "value": "qid219750"
+                },
+                {
+                  "id": "219751",
+                  "name": "Q4_Yes",
+                  "type": "2",
+                  "txttype": "7",
+                  "value": "qid219752"
+                },
+                {
+                  "id": "219752",
+                  "name": "Q4_No",
+                  "type": "2",
+                  "txttype": "7",
+                  "value": "qid219752"
+                },
+                {
+                  "id": "219753",
+                  "name": "Email",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "kdessinger@edvistas.com"
+                },
+                {
+                  "id": "219754",
+                  "name": "Search",
+                  "type": "9",
+                  "txttype": "7",
+                  "display": "",
+                  "value": ""
+                },
+                {
+                  "id": "219756",
+                  "name": "Good",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "219757",
+                  "name": "Certification",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": "1"
+                },
+                {
+                  "id": "219758",
+                  "name": "Bad",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "219759",
+                  "name": "Time",
+                  "type": "1",
+                  "txttype": "4",
+                  "value": "1/1/1901 1:05:00 AM"
+                },
+                {
+                  "id": "219760",
+                  "name": "txt_Date",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "219761",
+                  "name": "Date",
+                  "type": "1",
+                  "txttype": "3",
+                  "value": "2/9/2023"
+                },
+                {
+                  "id": "237099",
+                  "name": "CampusAccess",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "237100",
+                  "name": "txt_Q1",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "237101",
+                  "name": "txt_Q2",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "237102",
+                  "name": "txt_Q3",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "237103",
+                  "name": "txt_Q4",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "dbo.fields": [
+      {
+        "json": {
+          "id": "219738",
+          "name": "txt_Name",
+          "type": "6",
+          "txttype": "7",
+          "value": ""
+        }
+      },
+      {
+        "json": {
+          "id": "219739",
+          "name": "Staff_Name",
+          "type": "1",
+          "txttype": "7",
+          "value": "Dessinger Kenn"
+        }
+      },
+      {
+        "json": {
+          "id": "219740",
+          "name": "txt_title",
+          "type": "6",
+          "txttype": "7",
+          "value": ""
+        }
+      },
+      {
+        "json": {
+          "id": "219742",
+          "name": "Q1_No",
+          "type": "2",
+          "txttype": "7",
+          "value": "qid219742"
+        }
+      },
+      {
+        "json": {
+          "id": "219743",
+          "name": "Q1_Yes",
+          "type": "2",
+          "txttype": "7",
+          "value": "qid219742"
+        }
+      },
+      {
+        "json": {
+          "id": "219747",
+          "name": "Q2_Yes",
+          "type": "2",
+          "txttype": "7",
+          "value": "qid219748"
+        }
+      },
+      {
+        "json": {
+          "id": "219748",
+          "name": "Q2_No",
+          "type": "2",
+          "txttype": "7",
+          "value": "qid219748"
+        }
+      },
+      {
+        "json": {
+          "id": "219749",
+          "name": "Q3_Yes",
+          "type": "2",
+          "txttype": "7",
+          "value": "qid219750"
+        }
+      },
+      {
+        "json": {
+          "id": "219750",
+          "name": "Q3_No",
+          "type": "2",
+          "txttype": "7",
+          "value": "qid219750"
+        }
+      },
+      {
+        "json": {
+          "id": "219751",
+          "name": "Q4_Yes",
+          "type": "2",
+          "txttype": "7",
+          "value": "qid219752"
+        }
+      },
+      {
+        "json": {
+          "id": "219752",
+          "name": "Q4_No",
+          "type": "2",
+          "txttype": "7",
+          "value": "qid219752"
+        }
+      },
+      {
+        "json": {
+          "id": "219753",
+          "name": "Email",
+          "type": "1",
+          "txttype": "7",
+          "value": "kdessinger@edvistas.com"
+        }
+      },
+      {
+        "json": {
+          "id": "219754",
+          "name": "Search",
+          "type": "9",
+          "txttype": "7",
+          "display": "",
+          "value": ""
+        }
+      },
+      {
+        "json": {
+          "id": "219756",
+          "name": "Good",
+          "type": "6",
+          "txttype": "7",
+          "value": ""
+        }
+      },
+      {
+        "json": {
+          "id": "219757",
+          "name": "Certification",
+          "type": "3",
+          "txttype": "7",
+          "value": "1"
+        }
+      },
+      {
+        "json": {
+          "id": "219758",
+          "name": "Bad",
+          "type": "6",
+          "txttype": "7",
+          "value": ""
+        }
+      },
+      {
+        "json": {
+          "id": "219759",
+          "name": "Time",
+          "type": "1",
+          "txttype": "4",
+          "value": "1/1/1901 1:05:00 AM"
+        }
+      },
+      {
+        "json": {
+          "id": "219760",
+          "name": "txt_Date",
+          "type": "6",
+          "txttype": "7",
+          "value": ""
+        }
+      },
+      {
+        "json": {
+          "id": "219761",
+          "name": "Date",
+          "type": "1",
+          "txttype": "3",
+          "value": "2/9/2023"
+        }
+      },
+      {
+        "json": {
+          "id": "237099",
+          "name": "CampusAccess",
+          "type": "6",
+          "txttype": "7",
+          "value": ""
+        }
+      },
+      {
+        "json": {
+          "id": "237100",
+          "name": "txt_Q1",
+          "type": "6",
+          "txttype": "7",
+          "value": ""
+        }
+      },
+      {
+        "json": {
+          "id": "237101",
+          "name": "txt_Q2",
+          "type": "6",
+          "txttype": "7",
+          "value": ""
+        }
+      },
+      {
+        "json": {
+          "id": "237102",
+          "name": "txt_Q3",
+          "type": "6",
+          "txttype": "7",
+          "value": ""
+        }
+      },
+      {
+        "json": {
+          "id": "237103",
+          "name": "txt_Q4",
+          "type": "6",
+          "txttype": "7",
+          "value": ""
+        }
+      }
+    ]
+  },
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2023-02-09T07:16:30.000Z",
+  "versionId": "1a5b1fbf-1d1b-47c9-9819-ac5fb38cf041"
+}
