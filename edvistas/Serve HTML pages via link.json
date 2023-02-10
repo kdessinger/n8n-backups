@@ -1,12 +1,6 @@
 {
   "active": false,
-  "connections": {
-    "Webhook": {
-      "main": [
-        []
-      ]
-    }
-  },
+  "connections": {},
   "createdAt": "2023-01-16T19:56:46.379Z",
   "id": "23",
   "name": "Serve HTML pages via link",
