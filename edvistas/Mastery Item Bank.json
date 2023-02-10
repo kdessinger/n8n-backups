@@ -1,26 +1,6 @@
 {
   "active": false,
   "connections": {
-    "When clicking \"Execute Workflow\"": {
-      "main": [
-        []
-      ]
-    },
-    "Read Binary Files": {
-      "main": [
-        []
-      ]
-    },
-    "Set": {
-      "main": [
-        []
-      ]
-    },
-    "Spreadsheet File": {
-      "main": [
-        []
-      ]
-    },
     "HTTP Request": {
       "main": [
         [
