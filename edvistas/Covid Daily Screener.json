@@ -16,14 +16,14 @@
       "main": [
         [
           {
-            "node": "No Operation, do nothing",
+            "node": "All Good Do Nothing",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "No Operation, do nothing1",
+            "node": "Covid Alert - Notify",
             "type": "main",
             "index": 0
           }
@@ -121,28 +121,6 @@
       "position": [
         400,
         340
-      ]
-    },
-    {
-      "parameters": {},
-      "id": "6ee35826-5fce-47aa-9851-5e0af19b8d67",
-      "name": "No Operation, do nothing",
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [
-        620,
-        200
-      ]
-    },
-    {
-      "parameters": {},
-      "id": "31e4c9e8-7664-47b9-959b-931437f5b74b",
-      "name": "No Operation, do nothing1",
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [
-        620,
-        440
       ]
     },
     {
@@ -295,6 +273,28 @@
         340
       ],
       "alwaysOutputData": false
+    },
+    {
+      "parameters": {},
+      "id": "6ee35826-5fce-47aa-9851-5e0af19b8d67",
+      "name": "All Good Do Nothing",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        620,
+        200
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "31e4c9e8-7664-47b9-959b-931437f5b74b",
+      "name": "Covid Alert - Notify",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        620,
+        440
+      ]
     }
   ],
   "pinData": {
@@ -720,6 +720,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2023-02-09T07:16:30.000Z",
-  "versionId": "1a5b1fbf-1d1b-47c9-9819-ac5fb38cf041"
+  "updatedAt": "2023-02-10T21:31:40.000Z",
+  "versionId": "823cec75-cceb-457b-a5bc-a5cd47f4e52d"
 }
