@@ -5,36 +5,36 @@
       "main": [
         [
           {
-            "node": "Manual Pivot",
+            "node": "EduForm Pivot",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "IF": {
+    "IF Screener Answers All No's": {
       "main": [
         [
           {
-            "node": "All Good Do Nothing",
+            "node": "All Good, Do Nothing",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Covid Alert - Notify",
+            "node": "Covid Alert! - Notify",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Manual Pivot": {
+    "EduForm Pivot": {
       "main": [
         [
           {
-            "node": "IF",
+            "node": "IF Screener Answers All No's",
             "type": "main",
             "index": 0
           }
@@ -92,30 +92,52 @@
       ]
     },
     {
+      "parameters": {},
+      "id": "6ee35826-5fce-47aa-9851-5e0af19b8d67",
+      "name": "All Good, Do Nothing",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        620,
+        200
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "31e4c9e8-7664-47b9-959b-931437f5b74b",
+      "name": "Covid Alert! - Notify",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        620,
+        440
+      ]
+    },
+    {
       "parameters": {
         "conditions": {
           "string": [
             {
               "value1": "={{ $json.Q1_No }}",
-              "value2": "={{ $json.Q1_Yes }}"
+              "value2": "qid219742"
             },
             {
               "value1": "={{ $json.Q2_No }}",
-              "value2": "={{ $json.Q2_Yes }}"
+              "value2": "qid219748"
             },
             {
               "value1": "={{ $json.Q3_No }}",
-              "value2": "={{ $json.Q3_Yes }}"
+              "value2": "qid219750"
             },
             {
               "value1": "={{ $json.Q4_No }}",
-              "value2": "={{ $json.Q4_Yes }}"
+              "value2": "qid219752"
             }
           ]
         }
       },
       "id": "94bb5138-b42e-4144-b2b1-9c23d547e5f2",
-      "name": "IF",
+      "name": "IF Screener Answers All No's",
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
@@ -265,36 +287,14 @@
         "options": {}
       },
       "id": "6ded0d48-8515-4491-8108-f0bcf7a7df0d",
-      "name": "Manual Pivot",
+      "name": "EduForm Pivot",
       "type": "n8n-nodes-base.set",
       "typeVersion": 1,
       "position": [
-        220,
+        200,
         340
       ],
       "alwaysOutputData": false
-    },
-    {
-      "parameters": {},
-      "id": "6ee35826-5fce-47aa-9851-5e0af19b8d67",
-      "name": "All Good Do Nothing",
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [
-        620,
-        200
-      ]
-    },
-    {
-      "parameters": {},
-      "id": "31e4c9e8-7664-47b9-959b-931437f5b74b",
-      "name": "Covid Alert - Notify",
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [
-        620,
-        440
-      ]
     }
   ],
   "pinData": {
@@ -714,12 +714,44 @@
           "value": ""
         }
       }
+    ],
+    "EduForm Pivot": [
+      {
+        "json": {
+          "Formid": "5264",
+          "referid": "32b70e05-b91a-4626-9d49-d03a2c8ac08c",
+          "txt_Name": "",
+          "Staff_Name": "Dessinger Kenn",
+          "txt_title": "",
+          "Q1_No": "qid219742",
+          "Q1_Yes": "qid219742",
+          "Q2_Yes": "qid219748",
+          "Q2_No": "qid219748",
+          "Q3_Yes": "qid219750",
+          "Q3_No": "qid219750",
+          "Q4_Yes": "qid219752",
+          "Q4_No": "qid219752",
+          "Email": "kdessinger@edvistas.com",
+          "Search": "",
+          "Good": "",
+          "Certification": "1",
+          "Bad": "",
+          "Time": "1/1/1901 1:05:00 AM",
+          "txt_Date": "",
+          "Date": "2/9/2023",
+          "CampusAccess": "",
+          "txt_Q1": "",
+          "txt_Q2": "",
+          "txt_Q3": "",
+          "txt_Q4": ""
+        }
+      }
     ]
   },
   "settings": {},
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2023-02-10T21:31:40.000Z",
-  "versionId": "823cec75-cceb-457b-a5bc-a5cd47f4e52d"
+  "updatedAt": "2023-02-13T16:49:53.000Z",
+  "versionId": "7c0c5cf7-7c4d-455e-a449-30199f6e0972"
 }
