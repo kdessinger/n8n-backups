@@ -64,9 +64,9 @@
     },
     {
       "parameters": {
-        "content": "## Covid Daily Screener\n**Saved Data** from district: Educational Vistas.\nClick to open [EduForm](http://pefelection.org)",
-        "height": 116.05381391445826,
-        "width": 322.3990989103916
+        "content": "## Covid Daily Screener\nEduForm Submissions from district: **Educational Vistas**\nClick to open form: [5264](https://apps.edvistas.com/forms/formEntry.aspx?formid=5264)",
+        "height": 145.40279860657162,
+        "width": 295.718203735743
       },
       "id": "a6574388-9dc9-4701-824d-f1bfc7986251",
       "name": "Sticky Note1",
@@ -750,8 +750,15 @@
   },
   "settings": {},
   "staticData": null,
-  "tags": [],
+  "tags": [
+    {
+      "createdAt": "2023-02-13T23:28:21.763Z",
+      "updatedAt": "2023-02-13T23:28:21.763Z",
+      "id": "21",
+      "name": "EduForm"
+    }
+  ],
   "triggerCount": 1,
-  "updatedAt": "2023-02-13T16:49:53.000Z",
-  "versionId": "7c0c5cf7-7c4d-455e-a449-30199f6e0972"
+  "updatedAt": "2023-02-13T23:28:24.000Z",
+  "versionId": "e8a4d384-15f8-46cc-bec8-9b2fee60080c"
 }
