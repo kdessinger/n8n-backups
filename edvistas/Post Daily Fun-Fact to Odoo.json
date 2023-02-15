@@ -1,0 +1,160 @@
+{
+  "active": true,
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "ChatGPT (Fun-Fact)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ChatGPT (Fun-Fact)": {
+      "main": [
+        [
+          {
+            "node": "Post Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-02-14T20:17:12.973Z",
+  "id": "26",
+  "name": "Post Daily Fun-Fact to Odoo",
+  "nodes": [
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "=mail.message",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "email_from",
+              "fieldValue": "odoobot@edvistas.com"
+            },
+            {
+              "fieldName": "message_type",
+              "fieldValue": "comment"
+            },
+            {
+              "fieldName": "model",
+              "fieldValue": "mail.channel"
+            },
+            {
+              "fieldName": "record_name",
+              "fieldValue": "=ChatGPT:{{ $node[\"ChatGPT (Fun-Fact)\"].json[\"created\"] }}"
+            },
+            {
+              "fieldName": "body",
+              "fieldValue": "={{ $json[\"choices\"][0][\"text\"] }}"
+            },
+            {
+              "fieldName": "res_id",
+              "fieldValue": "={{ 18 }}"
+            },
+            {
+              "fieldName": "subtype_id",
+              "fieldValue": "=1"
+            }
+          ]
+        }
+      },
+      "id": "9120906e-640a-4e49-8026-115bc2038cc4",
+      "name": "Post Message",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        1660,
+        600
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "triggerAtDay": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "triggerAtHour": 9
+            }
+          ]
+        }
+      },
+      "id": "edab0d33-2962-4764-ad46-fdcceb8879fc",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        600
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "requestMethod": "POST",
+        "url": "https://api.openai.com/v1/engines/text-davinci-002/completions",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "{\n  \"prompt\": \"Please write a fun-fact about the education industry. Try not to repeat an answer\", \n  \"temperature\": 0.7,\n  \"max_tokens\": 180,\n  \"top_p\": 1,\n  \"frequency_penalty\": 0,\n  \"presence_penalty\": 0\n}"
+      },
+      "name": "ChatGPT (Fun-Fact)",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        1440,
+        600
+      ],
+      "typeVersion": 1,
+      "id": "4463e152-55f7-443b-b176-81f1b34269a8",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "23",
+          "name": "openAI (kdessinger)"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrencyRules": []
+    }
+  },
+  "tags": [
+    {
+      "createdAt": "2022-12-09T05:43:36.104Z",
+      "updatedAt": "2022-12-09T05:43:36.104Z",
+      "id": "12",
+      "name": "odoo"
+    },
+    {
+      "createdAt": "2023-02-14T20:17:22.566Z",
+      "updatedAt": "2023-02-14T20:17:22.566Z",
+      "id": "22",
+      "name": "ChatGPT"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2023-02-14T20:19:35.000Z",
+  "versionId": "eb0ddc97-ee34-4f73-99a4-76e66ec5d9be"
+}
