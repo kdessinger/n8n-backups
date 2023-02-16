@@ -112,7 +112,7 @@
       "parameters": {
         "authentication": "headerAuth",
         "requestMethod": "POST",
-        "url": "https://api.openai.com/v1/engines/text-davinci-002/completions",
+        "url": "https://api.openai.com/v1/engines/text-davinci-003/completions",
         "jsonParameters": true,
         "options": {},
         "bodyParametersJson": "{\n  \"prompt\": \"Please write a fun-fact about the education industry.\", \n  \"temperature\": 0.7,\n  \"max_tokens\": 180,\n  \"top_p\": 1,\n  \"frequency_penalty\": 0,\n  \"presence_penalty\": 0\n}"
@@ -155,6 +155,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-02-15T15:36:16.000Z",
-  "versionId": "7adfcf24-73a3-4568-ab92-1cfbfd8c0be7"
+  "updatedAt": "2023-02-16T15:59:18.000Z",
+  "versionId": "a7e8fd42-1129-4223-a541-15f20641d888"
 }
