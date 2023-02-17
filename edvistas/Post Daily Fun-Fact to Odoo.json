@@ -52,7 +52,7 @@
             },
             {
               "fieldName": "body",
-              "fieldValue": "={{ $json[\"choices\"][0][\"text\"] }}"
+              "fieldValue": "=Fun-Fact of the day: {{ $json[\"choices\"][0][\"text\"] }}"
             },
             {
               "fieldName": "res_id",
@@ -70,7 +70,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        1660,
+        1640,
         600
       ],
       "alwaysOutputData": true,
@@ -104,7 +104,7 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1,
       "position": [
-        1200,
+        1220,
         600
       ]
     },
@@ -155,6 +155,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-02-16T15:59:18.000Z",
-  "versionId": "a7e8fd42-1129-4223-a541-15f20641d888"
+  "updatedAt": "2023-02-16T20:47:10.000Z",
+  "versionId": "e3819eeb-dc5c-44dc-8834-f65c32629dd6"
 }
