@@ -23,7 +23,7 @@
         ],
         [
           {
-            "node": "Covid Alert! - Notify",
+            "node": "Covid Alert! - Do Nothing",
             "type": "main",
             "index": 0
           }
@@ -64,31 +64,17 @@
     },
     {
       "parameters": {
-        "content": "## Covid Daily Screener\nEduForm Submissions from district: **Educational Vistas**\nClick to open form: [5264](https://apps.edvistas.com/forms/formEntry.aspx?formid=5264)",
-        "height": 145.40279860657162,
-        "width": 295.718203735743
+        "content": "## Covid Daily Screener\nEduForm Submissions and workflow processees.\nClick to open EVI's form: [5264](https://apps.edvistas.com/forms/formEntry.aspx?formid=5264)\n\n* Fields Catalog shows all Fields used in this EduForm Submission.\n* Webhook - The URL Eduform sumbitted to.\n* EduForm Pivot - Pivots the data into human readable.\n* IF - Logical Test\n* Alert - Various Alert outputs (Email).",
+        "height": 239.67711630610643,
+        "width": 737.8050865341586
       },
       "id": "a6574388-9dc9-4701-824d-f1bfc7986251",
       "name": "Sticky Note1",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -100,
-        140
-      ]
-    },
-    {
-      "parameters": {
-        "fieldToSplitOut": "body.queryresult.field",
-        "options": {}
-      },
-      "id": "da83859c-5e1e-4e67-b2da-598659449fa7",
-      "name": "dbo.fields",
-      "type": "n8n-nodes-base.itemLists",
-      "typeVersion": 1,
-      "position": [
-        280,
-        140
+        -20,
+        -83
       ]
     },
     {
@@ -100,17 +86,6 @@
       "position": [
         620,
         200
-      ]
-    },
-    {
-      "parameters": {},
-      "id": "31e4c9e8-7664-47b9-959b-931437f5b74b",
-      "name": "Covid Alert! - Notify",
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [
-        620,
-        440
       ]
     },
     {
@@ -295,6 +270,31 @@
         340
       ],
       "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "body.queryresult.field",
+        "options": {}
+      },
+      "id": "da83859c-5e1e-4e67-b2da-598659449fa7",
+      "name": "Fields Catalogue",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 1,
+      "position": [
+        500,
+        -40
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "31e4c9e8-7664-47b9-959b-931437f5b74b",
+      "name": "Covid Alert! - Do Nothing",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        620,
+        440
+      ]
     }
   ],
   "pinData": {
@@ -496,7 +496,39 @@
         }
       }
     ],
-    "dbo.fields": [
+    "EduForm Pivot": [
+      {
+        "json": {
+          "Formid": "5264",
+          "referid": "32b70e05-b91a-4626-9d49-d03a2c8ac08c",
+          "txt_Name": "",
+          "Staff_Name": "Dessinger Kenn",
+          "txt_title": "",
+          "Q1_No": "qid219742",
+          "Q1_Yes": "qid219742",
+          "Q2_Yes": "qid219748",
+          "Q2_No": "qid219748",
+          "Q3_Yes": "qid219750",
+          "Q3_No": "qid219750",
+          "Q4_Yes": "qid219752",
+          "Q4_No": "qid219752",
+          "Email": "kdessinger@edvistas.com",
+          "Search": "",
+          "Good": "",
+          "Certification": "1",
+          "Bad": "",
+          "Time": "1/1/1901 1:05:00 AM",
+          "txt_Date": "",
+          "Date": "2/9/2023",
+          "CampusAccess": "",
+          "txt_Q1": "",
+          "txt_Q2": "",
+          "txt_Q3": "",
+          "txt_Q4": ""
+        }
+      }
+    ],
+    "Fields Catalogue": [
       {
         "json": {
           "id": "219738",
@@ -714,38 +746,6 @@
           "value": ""
         }
       }
-    ],
-    "EduForm Pivot": [
-      {
-        "json": {
-          "Formid": "5264",
-          "referid": "32b70e05-b91a-4626-9d49-d03a2c8ac08c",
-          "txt_Name": "",
-          "Staff_Name": "Dessinger Kenn",
-          "txt_title": "",
-          "Q1_No": "qid219742",
-          "Q1_Yes": "qid219742",
-          "Q2_Yes": "qid219748",
-          "Q2_No": "qid219748",
-          "Q3_Yes": "qid219750",
-          "Q3_No": "qid219750",
-          "Q4_Yes": "qid219752",
-          "Q4_No": "qid219752",
-          "Email": "kdessinger@edvistas.com",
-          "Search": "",
-          "Good": "",
-          "Certification": "1",
-          "Bad": "",
-          "Time": "1/1/1901 1:05:00 AM",
-          "txt_Date": "",
-          "Date": "2/9/2023",
-          "CampusAccess": "",
-          "txt_Q1": "",
-          "txt_Q2": "",
-          "txt_Q3": "",
-          "txt_Q4": ""
-        }
-      }
     ]
   },
   "settings": {},
@@ -759,6 +759,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-02-13T23:28:24.000Z",
-  "versionId": "e8a4d384-15f8-46cc-bec8-9b2fee60080c"
+  "updatedAt": "2023-02-17T16:59:09.000Z",
+  "versionId": "182ef6c0-762e-4fe6-8f00-fcf835a6bcdc"
 }
