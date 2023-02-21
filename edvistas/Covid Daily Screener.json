@@ -1,17 +1,6 @@
 {
   "active": true,
   "connections": {
-    "Webhook": {
-      "main": [
-        [
-          {
-            "node": "EduForm Pivot",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "IF Screener Answers All No's": {
       "main": [
         [
@@ -23,7 +12,7 @@
         ],
         [
           {
-            "node": "Covid Alert! - Do Nothing",
+            "node": "Covid Alert! Send Email",
             "type": "main",
             "index": 0
           }
@@ -40,28 +29,28 @@
           }
         ]
       ]
+    },
+    "Submit Form": {
+      "main": [
+        [
+          {
+            "node": "EduForm Pivot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Covid Alert! Send Email": {
+      "main": [
+        []
+      ]
     }
   },
   "createdAt": "2023-02-09T05:41:27.726Z",
   "id": "25",
   "name": "Covid Daily Screener",
   "nodes": [
-    {
-      "parameters": {
-        "httpMethod": "POST",
-        "path": "evi/screener",
-        "options": {}
-      },
-      "id": "46a8a079-87e4-4a69-959d-30de39c65ce5",
-      "name": "Webhook",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 1,
-      "position": [
-        0,
-        340
-      ],
-      "webhookId": "9f93b254-ec79-4389-9a6a-6bc767e254b7"
-    },
     {
       "parameters": {
         "content": "## Covid Daily Screener\nEduForm Submissions and workflow processees.\nClick to open EVI's form: [5264](https://apps.edvistas.com/forms/formEntry.aspx?formid=5264)\n\n* Fields Catalog shows all Fields used in this EduForm Submission.\n* Webhook - The URL Eduform sumbitted to.\n* EduForm Pivot - Pivots the data into human readable.\n* IF - Logical Test\n* Alert - Various Alert outputs (Email).",
@@ -286,216 +275,48 @@
       ]
     },
     {
-      "parameters": {},
-      "id": "31e4c9e8-7664-47b9-959b-931437f5b74b",
-      "name": "Covid Alert! - Do Nothing",
-      "type": "n8n-nodes-base.noOp",
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "evi/screener",
+        "options": {}
+      },
+      "id": "46a8a079-87e4-4a69-959d-30de39c65ce5",
+      "name": "Submit Form",
+      "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
+        0,
+        340
+      ],
+      "webhookId": "9f93b254-ec79-4389-9a6a-6bc767e254b7"
+    },
+    {
+      "parameters": {
+        "fromEmail": "noreply@edvistas.com",
+        "toEmail": "kdessinger@edvistas.com",
+        "subject": "COVID Trace - Potential Exposure Alert",
+        "text": "=Public Saftey Alert Detected!\nDate: {{ $json.Date }}\nName: {{ $json[\"Staff_Name\"] }}\nEmail: {{ $json[\"Email\"] }}\n\nPlease note that a during a screening test a Guest or Staff member has reported a potential exposure risk to the Covid-19 Virus. Please check the submitted records in EduFrom: https://apps.edvistas.com/forms/formView.aspx?formId={{ $json[\"Formid\"] }}&referId={{ $json[\"referid\"] }}\n\n",
+        "options": {
+          "allowUnauthorizedCerts": true
+        }
+      },
+      "id": "0448e1e1-ea1c-48e8-8d05-c1b6852f6565",
+      "name": "Covid Alert! Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [
         620,
-        440
-      ]
+        420
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "27",
+          "name": "SMTP (mx.gowls.com)"
+        }
+      }
     }
   ],
   "pinData": {
-    "Webhook": [
-      {
-        "json": {
-          "headers": {
-            "connection": "Keep-Alive",
-            "host": "n8n.edvistas.com",
-            "x-forwarded-scheme": "https",
-            "x-forwarded-proto": "https",
-            "x-forwarded-for": "199.223.255.8",
-            "x-real-ip": "199.223.255.8",
-            "content-length": "2694",
-            "content-type": "application/xml;charset=\"utf-8\""
-          },
-          "params": {},
-          "query": {},
-          "body": {
-            "queryresult": {
-              "username": "",
-              "password": "",
-              "formid": "5264",
-              "othersystemid": "",
-              "referid": "32b70e05-b91a-4626-9d49-d03a2c8ac08c",
-              "field": [
-                {
-                  "id": "219738",
-                  "name": "txt_Name",
-                  "type": "6",
-                  "txttype": "7",
-                  "value": ""
-                },
-                {
-                  "id": "219739",
-                  "name": "Staff_Name",
-                  "type": "1",
-                  "txttype": "7",
-                  "value": "Dessinger Kenn"
-                },
-                {
-                  "id": "219740",
-                  "name": "txt_title",
-                  "type": "6",
-                  "txttype": "7",
-                  "value": ""
-                },
-                {
-                  "id": "219742",
-                  "name": "Q1_No",
-                  "type": "2",
-                  "txttype": "7",
-                  "value": "qid219742"
-                },
-                {
-                  "id": "219743",
-                  "name": "Q1_Yes",
-                  "type": "2",
-                  "txttype": "7",
-                  "value": "qid219742"
-                },
-                {
-                  "id": "219747",
-                  "name": "Q2_Yes",
-                  "type": "2",
-                  "txttype": "7",
-                  "value": "qid219748"
-                },
-                {
-                  "id": "219748",
-                  "name": "Q2_No",
-                  "type": "2",
-                  "txttype": "7",
-                  "value": "qid219748"
-                },
-                {
-                  "id": "219749",
-                  "name": "Q3_Yes",
-                  "type": "2",
-                  "txttype": "7",
-                  "value": "qid219750"
-                },
-                {
-                  "id": "219750",
-                  "name": "Q3_No",
-                  "type": "2",
-                  "txttype": "7",
-                  "value": "qid219750"
-                },
-                {
-                  "id": "219751",
-                  "name": "Q4_Yes",
-                  "type": "2",
-                  "txttype": "7",
-                  "value": "qid219752"
-                },
-                {
-                  "id": "219752",
-                  "name": "Q4_No",
-                  "type": "2",
-                  "txttype": "7",
-                  "value": "qid219752"
-                },
-                {
-                  "id": "219753",
-                  "name": "Email",
-                  "type": "1",
-                  "txttype": "7",
-                  "value": "kdessinger@edvistas.com"
-                },
-                {
-                  "id": "219754",
-                  "name": "Search",
-                  "type": "9",
-                  "txttype": "7",
-                  "display": "",
-                  "value": ""
-                },
-                {
-                  "id": "219756",
-                  "name": "Good",
-                  "type": "6",
-                  "txttype": "7",
-                  "value": ""
-                },
-                {
-                  "id": "219757",
-                  "name": "Certification",
-                  "type": "3",
-                  "txttype": "7",
-                  "value": "1"
-                },
-                {
-                  "id": "219758",
-                  "name": "Bad",
-                  "type": "6",
-                  "txttype": "7",
-                  "value": ""
-                },
-                {
-                  "id": "219759",
-                  "name": "Time",
-                  "type": "1",
-                  "txttype": "4",
-                  "value": "1/1/1901 1:05:00 AM"
-                },
-                {
-                  "id": "219760",
-                  "name": "txt_Date",
-                  "type": "6",
-                  "txttype": "7",
-                  "value": ""
-                },
-                {
-                  "id": "219761",
-                  "name": "Date",
-                  "type": "1",
-                  "txttype": "3",
-                  "value": "2/9/2023"
-                },
-                {
-                  "id": "237099",
-                  "name": "CampusAccess",
-                  "type": "6",
-                  "txttype": "7",
-                  "value": ""
-                },
-                {
-                  "id": "237100",
-                  "name": "txt_Q1",
-                  "type": "6",
-                  "txttype": "7",
-                  "value": ""
-                },
-                {
-                  "id": "237101",
-                  "name": "txt_Q2",
-                  "type": "6",
-                  "txttype": "7",
-                  "value": ""
-                },
-                {
-                  "id": "237102",
-                  "name": "txt_Q3",
-                  "type": "6",
-                  "txttype": "7",
-                  "value": ""
-                },
-                {
-                  "id": "237103",
-                  "name": "txt_Q4",
-                  "type": "6",
-                  "txttype": "7",
-                  "value": ""
-                }
-              ]
-            }
-          }
-        }
-      }
-    ],
     "EduForm Pivot": [
       {
         "json": {
@@ -746,6 +567,204 @@
           "value": ""
         }
       }
+    ],
+    "Submit Form": [
+      {
+        "json": {
+          "headers": {
+            "connection": "Keep-Alive",
+            "host": "n8n.edvistas.com",
+            "x-forwarded-scheme": "https",
+            "x-forwarded-proto": "https",
+            "x-forwarded-for": "199.223.255.8",
+            "x-real-ip": "199.223.255.8",
+            "content-length": "2694",
+            "content-type": "application/xml;charset=\"utf-8\""
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "queryresult": {
+              "username": "",
+              "password": "",
+              "formid": "5264",
+              "othersystemid": "",
+              "referid": "32b70e05-b91a-4626-9d49-d03a2c8ac08c",
+              "field": [
+                {
+                  "id": "219738",
+                  "name": "txt_Name",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "219739",
+                  "name": "Staff_Name",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "Dessinger Kenn"
+                },
+                {
+                  "id": "219740",
+                  "name": "txt_title",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "219742",
+                  "name": "Q1_No",
+                  "type": "2",
+                  "txttype": "7",
+                  "value": "qid219742"
+                },
+                {
+                  "id": "219743",
+                  "name": "Q1_Yes",
+                  "type": "2",
+                  "txttype": "7",
+                  "value": "qid219742"
+                },
+                {
+                  "id": "219747",
+                  "name": "Q2_Yes",
+                  "type": "2",
+                  "txttype": "7",
+                  "value": "qid219748"
+                },
+                {
+                  "id": "219748",
+                  "name": "Q2_No",
+                  "type": "2",
+                  "txttype": "7",
+                  "value": "qid219748"
+                },
+                {
+                  "id": "219749",
+                  "name": "Q3_Yes",
+                  "type": "2",
+                  "txttype": "7",
+                  "value": "qid219750"
+                },
+                {
+                  "id": "219750",
+                  "name": "Q3_No",
+                  "type": "2",
+                  "txttype": "7",
+                  "value": "qid219750"
+                },
+                {
+                  "id": "219751",
+                  "name": "Q4_Yes",
+                  "type": "2",
+                  "txttype": "7",
+                  "value": "qid219752"
+                },
+                {
+                  "id": "219752",
+                  "name": "Q4_No",
+                  "type": "2",
+                  "txttype": "7",
+                  "value": "qid219752"
+                },
+                {
+                  "id": "219753",
+                  "name": "Email",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "kdessinger@edvistas.com"
+                },
+                {
+                  "id": "219754",
+                  "name": "Search",
+                  "type": "9",
+                  "txttype": "7",
+                  "display": "",
+                  "value": ""
+                },
+                {
+                  "id": "219756",
+                  "name": "Good",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "219757",
+                  "name": "Certification",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": "1"
+                },
+                {
+                  "id": "219758",
+                  "name": "Bad",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "219759",
+                  "name": "Time",
+                  "type": "1",
+                  "txttype": "4",
+                  "value": "1/1/1901 1:05:00 AM"
+                },
+                {
+                  "id": "219760",
+                  "name": "txt_Date",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "219761",
+                  "name": "Date",
+                  "type": "1",
+                  "txttype": "3",
+                  "value": "2/9/2023"
+                },
+                {
+                  "id": "237099",
+                  "name": "CampusAccess",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "237100",
+                  "name": "txt_Q1",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "237101",
+                  "name": "txt_Q2",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "237102",
+                  "name": "txt_Q3",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "237103",
+                  "name": "txt_Q4",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        }
+      }
     ]
   },
   "settings": {},
@@ -759,6 +778,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-02-17T16:59:09.000Z",
-  "versionId": "182ef6c0-762e-4fe6-8f00-fcf835a6bcdc"
+  "updatedAt": "2023-02-20T20:52:21.000Z",
+  "versionId": "4ca546c6-3525-488e-a19b-538cea230fac"
 }
