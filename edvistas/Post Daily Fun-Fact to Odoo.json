@@ -16,7 +16,7 @@
       "main": [
         [
           {
-            "node": "Post Message",
+            "node": "Post to Production",
             "type": "main",
             "index": 0
           }
@@ -28,59 +28,6 @@
   "id": "26",
   "name": "Post Daily Fun-Fact to Odoo",
   "nodes": [
-    {
-      "parameters": {
-        "resource": "custom",
-        "customResource": "=mail.message",
-        "fieldsToCreateOrUpdate": {
-          "fields": [
-            {
-              "fieldName": "email_from",
-              "fieldValue": "odoobot@edvistas.com"
-            },
-            {
-              "fieldName": "message_type",
-              "fieldValue": "comment"
-            },
-            {
-              "fieldName": "model",
-              "fieldValue": "mail.channel"
-            },
-            {
-              "fieldName": "record_name",
-              "fieldValue": "=ChatGPT:{{ $node[\"ChatGPT (Fun-Fact)\"].json[\"created\"] }}"
-            },
-            {
-              "fieldName": "body",
-              "fieldValue": "=Fun-Fact of the day: {{ $json[\"choices\"][0][\"text\"] }}"
-            },
-            {
-              "fieldName": "res_id",
-              "fieldValue": "={{ 18 }}"
-            },
-            {
-              "fieldName": "subtype_id",
-              "fieldValue": "=1"
-            }
-          ]
-        }
-      },
-      "id": "9120906e-640a-4e49-8026-115bc2038cc4",
-      "name": "Post Message",
-      "type": "n8n-nodes-base.odoo",
-      "typeVersion": 1,
-      "position": [
-        1640,
-        600
-      ],
-      "alwaysOutputData": true,
-      "credentials": {
-        "odooApi": {
-          "id": "22",
-          "name": "Odoo (OdooBot)"
-        }
-      }
-    },
     {
       "parameters": {
         "rule": {
@@ -125,10 +72,65 @@
       ],
       "typeVersion": 1,
       "id": "4463e152-55f7-443b-b176-81f1b34269a8",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
       "credentials": {
         "httpHeaderAuth": {
           "id": "23",
           "name": "openAI (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "=mail.message",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "email_from",
+              "fieldValue": "odoobot@edvistas.com"
+            },
+            {
+              "fieldName": "message_type",
+              "fieldValue": "comment"
+            },
+            {
+              "fieldName": "model",
+              "fieldValue": "mail.channel"
+            },
+            {
+              "fieldName": "record_name",
+              "fieldValue": "=ChatGPT:{{ $node[\"ChatGPT (Fun-Fact)\"].json[\"created\"] }}"
+            },
+            {
+              "fieldName": "body",
+              "fieldValue": "=Fun-Fact of the day: {{ $json[\"choices\"][0][\"text\"] }}"
+            },
+            {
+              "fieldName": "res_id",
+              "fieldValue": "={{ 18 }}"
+            },
+            {
+              "fieldName": "subtype_id",
+              "fieldValue": "=1"
+            }
+          ]
+        }
+      },
+      "id": "9120906e-640a-4e49-8026-115bc2038cc4",
+      "name": "Post to Production",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        1640,
+        600
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
         }
       }
     }
@@ -155,6 +157,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-02-16T20:47:10.000Z",
-  "versionId": "e3819eeb-dc5c-44dc-8834-f65c32629dd6"
+  "updatedAt": "2023-02-21T20:19:52.000Z",
+  "versionId": "d1803814-1acf-4e25-b9c5-7ae1a3c5fcf6"
 }
