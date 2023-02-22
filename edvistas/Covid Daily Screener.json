@@ -314,6 +314,21 @@
           "name": "SMTP (mx.gowls.com)"
         }
       }
+    },
+    {
+      "parameters": {
+        "content": "### Why does EduForm submit multiple times?\n\nAsk Greg Thums",
+        "height": 113.16835874469837,
+        "width": 235.9858593209741
+      },
+      "id": "40f8549f-4867-4461-b80e-40995a4bf66a",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -360,
+        200
+      ]
     }
   ],
   "pinData": {
@@ -778,6 +793,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-02-20T20:52:21.000Z",
-  "versionId": "4ca546c6-3525-488e-a19b-538cea230fac"
+  "updatedAt": "2023-02-21T20:12:29.000Z",
+  "versionId": "91ae8363-fbe8-444f-b908-eee6c864fcc0"
 }
