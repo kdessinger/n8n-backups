@@ -1,0 +1,224 @@
+{
+  "active": false,
+  "connections": {
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "Choose a random item",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Choose a random item": {
+      "main": [
+        [
+          {
+            "node": "ChatGPT Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ChatGPT Request": {
+      "main": [
+        [
+          {
+            "node": "Format Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Results": {
+      "main": [
+        [
+          {
+            "node": "Odoo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2022-12-20T04:54:04.180Z",
+  "id": "13",
+  "name": "OpenAI-powered tweet generator",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "position": [
+        380,
+        240
+      ],
+      "typeVersion": 1,
+      "id": "8dd96c84-2838-4ea3-a29c-c6e1a908b269"
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "=mail.message",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "email_from",
+              "fieldValue": "datamate@edvistas.com"
+            },
+            {
+              "fieldName": "message_type",
+              "fieldValue": "email"
+            },
+            {
+              "fieldName": "model",
+              "fieldValue": "mail.channel"
+            },
+            {
+              "fieldName": "record_name",
+              "fieldValue": "={{ $json[\"Group\"] }}"
+            },
+            {
+              "fieldName": "body",
+              "fieldValue": "={{ $node[\"Get Affirmations\"].json[\"affirmation\"] }}"
+            },
+            {
+              "fieldName": "res_id",
+              "fieldValue": "={{ $json[\"id\"] }}"
+            }
+          ]
+        }
+      },
+      "id": "1b297f2c-b4c6-4b4d-af22-75b0e83cc499",
+      "name": "Post Message",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        820,
+        60
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "odooApi": {
+          "id": "14",
+          "name": "odoo-stage (Admin)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "note",
+        "memo": "={{ $json[\"Content\"] }}"
+      },
+      "id": "b11930c6-898a-42f5-8bd2-c00d2b60c826",
+      "name": "Odoo",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        1180,
+        240
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "15",
+          "name": "Odoo-Stage (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://www.affirmations.dev/",
+        "options": {
+          "allowUnauthorizedCerts": true
+        }
+      },
+      "id": "af06471b-d51e-4f48-9582-81457dc4d3ba",
+      "name": "Get Affirmations",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        580,
+        60
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "// hashtag list\nconst Hashtags = [\n  \"#techtwitter\",\n  \"#technology\",\n  \"#investing\",\n  \"#AI\",\n  \"#education\",\n  \"#hak5\",\n  \"#n8n\"\n];\n\n// random output function\nconst randomHashtag = Hashtags[Math.floor(Math.random() * Hashtags.length)];\nitem.hashtag = randomHashtag;\nreturn item;"
+      },
+      "name": "Choose a random item",
+      "type": "n8n-nodes-base.functionItem",
+      "position": [
+        580,
+        240
+      ],
+      "typeVersion": 1,
+      "id": "cd73ad4a-847e-4806-b3e0-d9c90bcc6606"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "requestMethod": "POST",
+        "url": "https://api.openai.com/v1/engines/text-davinci-002/completions",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "={\n  \"prompt\": \"Generate a tweet, with under 100 characters, about and including the hashtag {{$node[\"Choose a random item\"].json[\"hashtag\"]}}:\",\n  \"temperature\": 0.7,\n  \"max_tokens\": 64,\n  \"top_p\": 1,\n  \"frequency_penalty\": 0,\n  \"presence_penalty\": 0\n}"
+      },
+      "name": "ChatGPT Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        780,
+        240
+      ],
+      "typeVersion": 1,
+      "id": "ee684180-1c56-4f7a-85ea-8d8574dd21b0",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "20",
+          "name": "openai API (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "Hashtag",
+              "value": "={{$node[\"Choose a random item\"].json[\"hashtag\"]}}"
+            },
+            {
+              "name": "Content",
+              "value": "={{$node[\"ChatGPT Request\"].json[\"choices\"][0][\"text\"]}}"
+            },
+            {
+              "name": "Engine",
+              "value": "={{ $json.model }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Format Results",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        980,
+        240
+      ],
+      "typeVersion": 1,
+      "id": "038c90e9-9ee6-46e7-afb3-c59b2351bd54"
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2023-02-14T06:28:27.000Z",
+  "versionId": "48e1a416-9dac-467b-adac-fb8dd28c68ed"
+}
