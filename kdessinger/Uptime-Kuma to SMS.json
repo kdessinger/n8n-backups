@@ -1,0 +1,66 @@
+{
+  "active": true,
+  "connections": {
+    "Alerts": {
+      "main": [
+        [
+          {
+            "node": "Twilio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-01-11T01:52:21.524Z",
+  "id": "14",
+  "name": "Uptime-Kuma to SMS",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "uptime/alerts",
+        "options": {}
+      },
+      "id": "62e14fe1-ea22-4d1b-9f4f-d220b9842ffc",
+      "name": "Alerts",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        560,
+        380
+      ],
+      "webhookId": "064c37ad-2c10-4840-bdba-fc3774b078aa"
+    },
+    {
+      "parameters": {
+        "from": "+18442026677",
+        "to": "+15125144925",
+        "message": "={{ $json[\"body\"][\"msg\"] }}",
+        "options": {}
+      },
+      "id": "dffd3776-20b5-4c31-b138-d946e4be30ed",
+      "name": "Twilio",
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [
+        800,
+        380
+      ],
+      "credentials": {
+        "twilioApi": {
+          "id": "23",
+          "name": "522eeWYlV0Bijojb5CT7X57jsmbXsCuh"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2023-01-28T01:31:39.000Z",
+  "versionId": "fe409aff-b063-475e-9ef0-77b703b9dfd8"
+}
