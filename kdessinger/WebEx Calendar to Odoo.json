@@ -36,7 +36,7 @@
     }
   },
   "createdAt": "2022-08-10T03:58:51.871Z",
-  "id": 8,
+  "id": "8",
   "name": "WebEx Calendar to Odoo",
   "nodes": [
     {
@@ -425,5 +425,7 @@
     }
   },
   "tags": [],
-  "updatedAt": "2022-10-07T06:31:17.965Z"
+  "triggerCount": 0,
+  "updatedAt": "2022-10-07T06:31:17.965Z",
+  "versionId": "6ae85eb3-701a-45a9-bf73-606f5dd2a1b3"
 }
