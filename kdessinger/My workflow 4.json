@@ -23,11 +23,6 @@
         ]
       ]
     },
-    "Set": {
-      "main": [
-        []
-      ]
-    },
     "Start": {
       "main": [
         [
@@ -41,7 +36,7 @@
     }
   },
   "createdAt": "2022-10-18T06:08:14.304Z",
-  "id": 10,
+  "id": "10",
   "name": "My workflow 4",
   "nodes": [
     {
@@ -130,5 +125,7 @@
   "settings": {},
   "staticData": null,
   "tags": [],
-  "updatedAt": "2022-10-18T06:08:14.304Z"
+  "triggerCount": 0,
+  "updatedAt": "2022-10-18T06:08:14.304Z",
+  "versionId": "4fd32482-78e4-45b2-b8fc-5459f9bf4ec1"
 }
