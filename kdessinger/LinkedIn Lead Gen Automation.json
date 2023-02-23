@@ -169,7 +169,7 @@
     }
   },
   "createdAt": "2022-02-03T16:56:46.475Z",
-  "id": 3,
+  "id": "3",
   "name": "LinkedIn Lead Gen Automation",
   "nodes": [
     {
@@ -585,11 +585,13 @@
   "staticData": null,
   "tags": [
     {
-      "id": "2",
-      "name": "LinkedIn",
       "createdAt": "2022-02-03T16:57:00.821Z",
-      "updatedAt": "2022-02-03T16:57:00.821Z"
+      "updatedAt": "2022-02-03T16:57:00.821Z",
+      "id": "2",
+      "name": "LinkedIn"
     }
   ],
-  "updatedAt": "2022-02-03T16:57:18.606Z"
+  "triggerCount": 0,
+  "updatedAt": "2022-02-03T16:57:18.606Z",
+  "versionId": "d30af404-faf2-48fe-93af-8001472b326d"
 }
