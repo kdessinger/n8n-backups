@@ -71,6 +71,34 @@
           }
         ]
       ]
+    },
+    "Northwinds Products": {
+      "main": [
+        [
+          {
+            "node": "Add Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add Data": {
+      "main": [
+        [
+          {
+            "node": "Backordered?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Backordered?": {
+      "main": [
+        [],
+        []
+      ]
     }
   },
   "createdAt": "2022-02-10T21:57:15.216Z",
@@ -177,8 +205,8 @@
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 1,
       "position": [
-        820,
-        120
+        840,
+        160
       ],
       "id": "89fd8851-c874-4b27-9196-73156f21d9c7"
     },
@@ -241,7 +269,7 @@
         "operation": "executeQuery",
         "query": "SELECT TOP (10) * FROM Northwind..Products"
       },
-      "name": "Microsoft SQL (EVICore)1",
+      "name": "Northwinds Products",
       "type": "n8n-nodes-base.microsoftSql",
       "typeVersion": 1,
       "position": [
@@ -255,6 +283,82 @@
           "name": "SQL01.edvistas.local (kdessinger)"
         }
       }
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "Source",
+              "value": "n8n"
+            }
+          ],
+          "number": [
+            {
+              "name": "SKU",
+              "value": "={{ $json[\"SupplierID\"] }}{{ $json[\"ProductID\"] }}{{ $json[\"CategoryID\"] }}-{{ $json[\"ReorderLevel\"] }}-{{ $json[\"UnitPrice\"] }}{{ $json[\"UnitsInStock\"] }}{{ $json[\"UnitsOnOrder\"] }}"
+            }
+          ],
+          "boolean": [
+            {
+              "name": "InStock",
+              "value": "={{ $json[\"UnitsInStock\"] > 0}}"
+            },
+            {
+              "name": "Reorder",
+              "value": "={{ $json[\"ReorderLevel\"] >= $json[\"UnitsInStock\"] }}"
+            }
+          ]
+        },
+        "options": {
+          "dotNotation": true
+        }
+      },
+      "id": "1d8e03ee-12ce-4642-8408-532d9207043b",
+      "name": "Add Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        560,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.Discontinued }}",
+              "value2": true
+            },
+            {
+              "value1": "={{ $json.Reorder }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "86b313f2-3216-41de-8216-fa308750a117",
+      "name": "Backordered?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        780,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "8eeb6285-1f67-42be-9966-2e269cb0968e",
+      "name": "OpenAI",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        1300,
+        260
+      ]
     }
   ],
   "pinData": {},
@@ -262,6 +366,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-02-24T04:57:18.000Z",
-  "versionId": "8d484e59-faa5-4d6e-9729-7a183e2671a7"
+  "updatedAt": "2023-02-24T05:35:30.000Z",
+  "versionId": "79c68125-21e5-4378-9e39-f4d88181beff"
 }
