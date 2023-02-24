@@ -1,0 +1,106 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2023-02-24T06:02:40.431Z",
+  "id": "27",
+  "name": "ChatGPT Prompts",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "edit",
+        "input": "={{ $json[\"choices\"][0][\"text\"] }}",
+        "instruction": "convert to spanish",
+        "options": {}
+      },
+      "id": "6ff753cf-4530-4378-88c8-369dc573ba86",
+      "name": "Convert to Spanish",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        940,
+        280
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "edit",
+        "input": "={{ $json[\"choices\"][0][\"text\"] }}",
+        "instruction": "Convert to German",
+        "options": {}
+      },
+      "id": "a6f9a063-006a-4223-93c3-7e16bc0e072a",
+      "name": "Convert to German",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        940,
+        440
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "prompt": "Give me a highly motivational quote by someone famous",
+        "options": {
+          "maxTokens": 100
+        }
+      },
+      "id": "bb35ee21-97af-4b51-a5ee-dbaf07bd2bf1",
+      "name": "Motivational Quote",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        1140,
+        380
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "fbfdcd90-3c8d-4f72-9904-597c05ff19b6",
+      "name": "When clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        580,
+        360
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2023-02-14T20:17:22.566Z",
+      "updatedAt": "2023-02-14T20:17:22.566Z",
+      "id": "22",
+      "name": "ChatGPT"
+    },
+    {
+      "createdAt": "2023-02-24T06:02:51.704Z",
+      "updatedAt": "2023-02-24T06:02:51.704Z",
+      "id": "23",
+      "name": "Prompts"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2023-02-24T14:59:59.000Z",
+  "versionId": "f4388760-38e5-4670-a63d-d75c3f41f10b"
+}
