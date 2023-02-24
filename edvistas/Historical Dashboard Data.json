@@ -219,16 +219,36 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "SELECT TOP (100) [Date],[CC_Code],[Seq],[Line],[SignerID],[Signer Name],[Status],[NomineeID],[Nominee_Name],[Nominee_Affiliation],[sigTotal],[ScanURL],[DataURL]FROM [PEF].[dbo].[Signers]ORDER BY Abs(SEQ), Line "
+        "query": "SELECT TOP (10) [Date],[CC_Code],[Seq],[Line],[SignerID],[Signer Name],[Status],[NomineeID],[Nominee_Name],[Nominee_Affiliation],[sigTotal],[ScanURL],[DataURL]FROM [PEF].[dbo].[Signers] ORDER BY Abs(SEQ), Line "
       },
       "name": "Microsoft SQL (PEF)",
       "type": "n8n-nodes-base.microsoftSql",
       "typeVersion": 1,
       "position": [
-        280,
-        20
+        100,
+        0
       ],
       "id": "594d19e2-4cf6-46e2-893a-4ff8ae865f37",
+      "credentials": {
+        "microsoftSql": {
+          "id": "9",
+          "name": "SQL01.edvistas.local (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT TOP (10) * FROM Northwind..Products"
+      },
+      "name": "Microsoft SQL (EVICore)1",
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1,
+      "position": [
+        340,
+        0
+      ],
+      "id": "e4e05343-a633-4785-99ea-0edc27349afa",
       "credentials": {
         "microsoftSql": {
           "id": "9",
@@ -242,6 +262,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-01-11T16:37:28.000Z",
-  "versionId": "189d3061-ef60-4dad-bccd-ddedbf2f3674"
+  "updatedAt": "2023-02-24T04:57:18.000Z",
+  "versionId": "8d484e59-faa5-4d6e-9729-7a183e2671a7"
 }
