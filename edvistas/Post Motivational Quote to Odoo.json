@@ -19,6 +19,11 @@
             "node": "Post Message",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Convert to Spanish",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -127,9 +132,55 @@
           "name": "openAI (kdessinger)"
         }
       }
+    },
+    {
+      "parameters": {
+        "operation": "edit",
+        "input": "={{ $json[\"choices\"][0][\"text\"] }}",
+        "instruction": "convert to spanish",
+        "options": {}
+      },
+      "id": "a9995a1e-b75f-42d7-a368-a48b5fd68154",
+      "name": "Convert to Spanish",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        -600,
+        320
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "ChatGPT (Inspire Quote)": [
+      {
+        "json": {
+          "id": "cmpl-6nLKL62N783p9slZTP0A0znWjnk3s",
+          "object": "text_completion",
+          "created": 1677218073,
+          "model": "text-davinci-001",
+          "choices": [
+            {
+              "text": "\n\nWelcome to another fabulous week at Educational Vistas! We are proud to provide quality education products and services to schools all across New York State. Our team of dedicated employees is committed to helping our clients succeed, and we are looking forward to another year of growth and success. Have a great week!",
+              "index": 0,
+              "logprobs": null,
+              "finish_reason": "stop"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 517,
+            "completion_tokens": 61,
+            "total_tokens": 578
+          }
+        }
+      }
+    ]
+  },
   "settings": {
     "saveManualExecutions": false,
     "callerPolicy": "workflowsFromSameOwner"
@@ -160,6 +211,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-02-14T20:28:18.000Z",
-  "versionId": "1a0514fc-2bf1-4796-be2f-123579e4f54e"
+  "updatedAt": "2023-02-24T06:00:39.000Z",
+  "versionId": "e9d81e0c-5cfc-4e81-8319-902fc6a1963c"
 }
