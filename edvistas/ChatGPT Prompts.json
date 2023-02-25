@@ -17,8 +17,8 @@
       "type": "n8n-nodes-base.openAi",
       "typeVersion": 1,
       "position": [
-        940,
-        280
+        1160,
+        240
       ],
       "credentials": {
         "openAiApi": {
@@ -39,8 +39,8 @@
       "type": "n8n-nodes-base.openAi",
       "typeVersion": 1,
       "position": [
-        940,
-        440
+        1340,
+        240
       ],
       "credentials": {
         "openAiApi": {
@@ -61,8 +61,8 @@
       "type": "n8n-nodes-base.openAi",
       "typeVersion": 1,
       "position": [
-        1140,
-        380
+        980,
+        240
       ],
       "credentials": {
         "openAiApi": {
@@ -78,9 +78,32 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        580,
-        360
+        620,
+        240
       ]
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "prompt": "cat in outter space",
+        "options": {
+          "n": 2
+        }
+      },
+      "id": "d42b5776-6395-4dd4-bf3d-dde985316b5f",
+      "name": "Image Generator",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        800,
+        240
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -101,6 +124,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-02-24T14:59:59.000Z",
-  "versionId": "f4388760-38e5-4670-a63d-d75c3f41f10b"
+  "updatedAt": "2023-02-25T00:41:27.000Z",
+  "versionId": "b43933ed-d80e-4be5-ba78-41a1da1dab5a"
 }
