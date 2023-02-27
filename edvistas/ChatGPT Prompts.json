@@ -17,8 +17,8 @@
       "type": "n8n-nodes-base.openAi",
       "typeVersion": 1,
       "position": [
-        1160,
-        240
+        760,
+        140
       ],
       "credentials": {
         "openAiApi": {
@@ -39,8 +39,8 @@
       "type": "n8n-nodes-base.openAi",
       "typeVersion": 1,
       "position": [
-        1340,
-        240
+        940,
+        140
       ],
       "credentials": {
         "openAiApi": {
@@ -61,8 +61,8 @@
       "type": "n8n-nodes-base.openAi",
       "typeVersion": 1,
       "position": [
-        980,
-        240
+        580,
+        140
       ],
       "credentials": {
         "openAiApi": {
@@ -78,14 +78,14 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        620,
-        240
+        220,
+        140
       ]
     },
     {
       "parameters": {
         "resource": "image",
-        "prompt": "cat in outter space",
+        "prompt": "={{ $json.text }}",
         "options": {
           "n": 2
         }
@@ -95,8 +95,152 @@
       "type": "n8n-nodes-base.openAi",
       "typeVersion": 1,
       "position": [
-        800,
-        240
+        940,
+        320
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "moderate",
+        "input": "i want to kill them"
+      },
+      "id": "e1b90ecc-a95d-42b8-b5e3-3a78abdf7b44",
+      "name": "Heat Checker",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        1120,
+        140
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "prompt": "=Create a prompt for DALL-E that will generate a photo realisitc high-res image from this motivatial quote: {{ $json[\"text\"] }}",
+        "options": {
+          "maxTokens": 100
+        }
+      },
+      "id": "f8d45ba3-3f71-4b93-9bf5-421334d9577a",
+      "name": "Quote to Image Words",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        760,
+        320
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "prompt": "I want you to act as a password generator. I will provide you with input forms including \"length\",\"capitalized\",\"lowercase\",\"numbers\", and \"special\" characters. Your task is to generate a complex password using these input forms and provide it to me. Do not include any explanations or additional information in your response, don't say Result: just simply provide the generated password. length = 16, capitalized = 1, numbers = 2, special = 1, lowercase = 12.",
+        "options": {
+          "maxTokens": 16
+        }
+      },
+      "id": "cb2fc375-b883-4016-bac1-743da87895bc",
+      "name": "Password Generator",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        1300,
+        140
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Define the function\nfunction generatePassword() {\n  // Set local variables\n  const passwordLength = 16;\n  const includeCapitalLetters = 2;\n  const includeSpecialCharacters = 1;\n\n  // Define possible characters for each category\n  const lowercaseLetters = \"abcdefghijklmnopqrstuvwxyz\";\n  const uppercaseLetters = \"ABCDEFGHIJKLMNOPQRSTUVWXYZ\";\n  const specialCharacters = \"!@#$%^&*()_+-=[]{}|;:,.<>?\";\n  const numbers = \"0123456789\";\n\n  // Initialize the possible characters to use in the password\n  let possibleCharacters = lowercaseLetters;\n\n  // Add uppercase letters to possible characters if requested\n  if (includeCapitalLetters > 0) {\n    possibleCharacters += uppercaseLetters;\n  }\n\n  // Add special characters to possible characters if requested\n  if (includeSpecialCharacters > 0) {\n    possibleCharacters += specialCharacters;\n  }\n\n  // Generate the password\n  let password = \"\";\n  for (let i = 0; i < passwordLength; i++) {\n    // Choose a random character from the possible characters\n    const randomIndex = Math.floor(Math.random() * possibleCharacters.length);\n    const randomCharacter = possibleCharacters[randomIndex];\n\n    // Add the random character to the password\n    password += randomCharacter;\n  }\n\n  // Return the generated password\n  return password;\n}\n\n// Call the function and output the result to the console\nconsole.log(generatePassword());\n"
+      },
+      "id": "e641aa8a-f537-4ae1-8528-bab17ba61cff",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        1520,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "prompt": "I want you to act as a prompt generator. Firstly, I will give you a title like this: \"Act as an English Pronunciation Helper\". Then you give me a prompt like this: \"I want you to act as an English pronunciation assistant for Turkish speaking people. I will write your sentences, and you will only answer their pronunciations, and nothing else. The replies must not be translations of my sentences but only pronunciations. Pronunciations should use Turkish Latin letters for phonetics. Do not write explanations on replies. My first sentence is \"how the weather is in Istanbul?\".\" (You should adapt the sample prompt according to the title I gave. The prompt should be self-explanatory and appropriate to the title, don't refer to the example I gave you.). My first title is \"Act as a Code Review Helper\" (Give me prompt only)",
+        "options": {
+          "maxTokens": 200
+        }
+      },
+      "id": "94b9fb1f-d3c3-4876-a6ee-eb13c1c58172",
+      "name": "prompt generator",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        580,
+        320
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "prompt": "=I want you to act as a dream interpreter. I will give you descriptions of my dreams, and you will provide interpretations based on the symbols and themes present in the dream. Do not provide personal opinions or assumptions about the dreamer. Provide only factual interpretations based on the information given. My first dream is about losing all your teeth and being happy about it.  ",
+        "options": {
+          "maxTokens": 200
+        }
+      },
+      "id": "d03f1248-349f-4a91-afaf-b2ae5469f54c",
+      "name": "Dream Interpreter",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        1120,
+        320
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "prompt": "=I want you to act as an educational content creator. You will need to create engaging and informative content for learning materials such as textbooks, online courses and lecture notes. My first suggestion request is \"I need help developing a lesson plan on renewable energy sources for high school students.\"",
+        "options": {
+          "maxTokens": 200
+        }
+      },
+      "id": "b19ea764-313c-4cb4-9b69-2411f984bdfd",
+      "name": "Educational Content Creator",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        1300,
+        320
       ],
       "credentials": {
         "openAiApi": {
@@ -106,7 +250,28 @@
       }
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Educational Content Creator": [
+      {
+        "json": {
+          "text": "Lesson Plan on Renewable Energy Sources for High School Students\n\nObjective: \nAt the end of the lesson, students will have gained an understanding of renewable energy sources, their importance and implications for the environment and their lives, as well as ideas on how to reduce their own personal energy consumption. \n\nMaterials: \n- Teacher laptop for presenting information\n- Handouts summarizing renewable sources and their benefits\n- Examples of different renewable energy sources (visuals)\n- Notebooks for students to make notes\n\nProcedure: \n1. Introduction (5-10 min): \n    - Introduce the topic of renewable energy sources \n    - Explain the importance of this topic and its impact on the environment\n2. Explanation of Renewable Sources (15-20 min): \n    - Update the visual aid to highlight different energy sources, such as solar, wind, biomass, and geothermal \n    - Expand on",
+          "index": 0,
+          "logprobs": null,
+          "finish_reason": "length"
+        }
+      }
+    ],
+    "Dream Interpreter": [
+      {
+        "json": {
+          "text": "In this dream, the symbols of the loss of teeth and being happy likely points to the dreamer feeling a sense of relief or freedom. It is likely the dreamer is going through a difficult period of their life, which they feel they are relieved or liberated from. It could also refer to a desire to reinvent oneself, or to address personal issues that may have been a source of pain or unhappiness.",
+          "index": 0,
+          "logprobs": null,
+          "finish_reason": "stop"
+        }
+      }
+    ]
+  },
   "settings": {},
   "staticData": null,
   "tags": [
@@ -124,6 +289,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-02-25T00:41:27.000Z",
-  "versionId": "b43933ed-d80e-4be5-ba78-41a1da1dab5a"
+  "updatedAt": "2023-02-27T02:16:10.000Z",
+  "versionId": "3f5312c0-049b-49c0-a697-2392478be28c"
 }
