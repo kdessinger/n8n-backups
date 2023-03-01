@@ -93,12 +93,6 @@
           }
         ]
       ]
-    },
-    "Backordered?": {
-      "main": [
-        [],
-        []
-      ]
     }
   },
   "createdAt": "2022-02-10T21:57:15.216Z",
@@ -346,19 +340,6 @@
         780,
         0
       ]
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
-      "id": "8eeb6285-1f67-42be-9966-2e269cb0968e",
-      "name": "OpenAI",
-      "type": "n8n-nodes-base.openAi",
-      "typeVersion": 1,
-      "position": [
-        1300,
-        260
-      ]
     }
   ],
   "pinData": {},
@@ -366,6 +347,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-02-24T05:35:30.000Z",
-  "versionId": "79c68125-21e5-4378-9e39-f4d88181beff"
+  "updatedAt": "2023-03-01T01:59:14.000Z",
+  "versionId": "9a480215-41b4-4166-b173-537a26153883"
 }
