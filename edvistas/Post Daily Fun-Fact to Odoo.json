@@ -5,14 +5,14 @@
       "main": [
         [
           {
-            "node": "ChatGPT (Fun-Fact)",
+            "node": "OpenAI",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "ChatGPT (Fun-Fact)": {
+    "OpenAI": {
       "main": [
         [
           {
@@ -57,32 +57,6 @@
     },
     {
       "parameters": {
-        "authentication": "headerAuth",
-        "requestMethod": "POST",
-        "url": "https://api.openai.com/v1/engines/text-davinci-003/completions",
-        "jsonParameters": true,
-        "options": {},
-        "bodyParametersJson": "{\n  \"prompt\": \"Please write a fun-fact about the education industry.\", \n  \"temperature\": 0.7,\n  \"max_tokens\": 180,\n  \"top_p\": 1,\n  \"frequency_penalty\": 0,\n  \"presence_penalty\": 0\n}"
-      },
-      "name": "ChatGPT (Fun-Fact)",
-      "type": "n8n-nodes-base.httpRequest",
-      "position": [
-        1440,
-        600
-      ],
-      "typeVersion": 1,
-      "id": "4463e152-55f7-443b-b176-81f1b34269a8",
-      "retryOnFail": true,
-      "waitBetweenTries": 5000,
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "23",
-          "name": "OpenAI (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {
         "resource": "custom",
         "customResource": "=mail.message",
         "fieldsToCreateOrUpdate": {
@@ -101,7 +75,7 @@
             },
             {
               "fieldName": "record_name",
-              "fieldValue": "=ChatGPT:{{ $node[\"ChatGPT (Fun-Fact)\"].json[\"created\"] }}"
+              "fieldValue": "=OpenAI:{{ $json[\"created\"] }}"
             },
             {
               "fieldName": "body",
@@ -137,6 +111,7 @@
     {
       "parameters": {
         "prompt": "Please write a fun-fact about the education industry.",
+        "simplifyOutput": false,
         "options": {
           "maxTokens": 180,
           "temperature": 0.7,
@@ -149,12 +124,12 @@
       "typeVersion": 1,
       "position": [
         1440,
-        440
+        600
       ],
       "credentials": {
         "openAiApi": {
-          "id": "29",
-          "name": "OpenAi (infoedvistas)"
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
         }
       }
     }
@@ -181,6 +156,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-03-01T01:57:06.000Z",
-  "versionId": "fa4be7ab-ee28-4993-ab9c-1ea19231ed20"
+  "updatedAt": "2023-03-01T16:58:47.000Z",
+  "versionId": "6e971f82-9693-4008-ae09-5849d1190253"
 }
