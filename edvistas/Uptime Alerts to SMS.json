@@ -8,6 +8,11 @@
             "node": "Twilio SMS",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Post to Odoo",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -45,7 +50,7 @@
       "typeVersion": 1,
       "position": [
         400,
-        520
+        420
       ],
       "id": "9da6537c-6419-49a8-b018-bab8ee8aabbd",
       "credentials": {
@@ -54,13 +59,92 @@
           "name": "Twilio (kdessinger)"
         }
       }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "=mail.message",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "email_from",
+              "fieldValue": "odoobot@edvistas.com"
+            },
+            {
+              "fieldName": "message_type",
+              "fieldValue": "comment"
+            },
+            {
+              "fieldName": "model",
+              "fieldValue": "mail.channel"
+            },
+            {
+              "fieldName": "record_name",
+              "fieldValue": "Uptime Kuma Alert"
+            },
+            {
+              "fieldName": "body",
+              "fieldValue": "={{ $json[\"body\"][\"msg\"] }}"
+            },
+            {
+              "fieldName": "res_id",
+              "fieldValue": "={{ 16 }}"
+            },
+            {
+              "fieldName": "subtype_id",
+              "fieldValue": "=1"
+            }
+          ]
+        }
+      },
+      "id": "8c2802a0-8abe-444a-bd48-ad74b913162d",
+      "name": "Post to Odoo",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        400,
+        600
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
+        }
+      }
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Uptime Kuma Input": [
+      {
+        "json": {
+          "headers": {
+            "connection": "close",
+            "host": "n8n.edvistas.com",
+            "x-forwarded-scheme": "https",
+            "x-forwarded-proto": "https",
+            "x-forwarded-for": "192.168.148.1",
+            "x-real-ip": "192.168.148.1",
+            "content-length": "53",
+            "accept": "application/json, text/plain, */*",
+            "content-type": "application/json",
+            "user-agent": "axios/0.27.2"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "heartbeat": null,
+            "monitor": null,
+            "msg": "n8n Testing"
+          }
+        }
+      }
+    ]
+  },
   "settings": {},
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2023-01-27T21:57:46.000Z",
-  "versionId": "586e85d7-7bb4-4cc0-a990-5bd5e4cc99e7"
+  "updatedAt": "2023-03-01T21:05:21.000Z",
+  "versionId": "d6210e12-a51e-4a97-9c39-1b545a8c20c8"
 }
