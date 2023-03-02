@@ -5,7 +5,7 @@
       "main": [
         [
           {
-            "node": "ChatGPT (Inspire Quote)",
+            "node": "Motivational Quote",
             "type": "main",
             "index": 0
           }
@@ -13,6 +13,11 @@
       ]
     },
     "ChatGPT (Inspire Quote)": {
+      "main": [
+        []
+      ]
+    },
+    "Motivational Quote": {
       "main": [
         [
           {
@@ -48,7 +53,7 @@
             },
             {
               "fieldName": "record_name",
-              "fieldValue": "=ChatGPT:{{ $node[\"ChatGPT (Inspire Quote)\"].json[\"created\"] }}"
+              "fieldValue": "=ChatGPT:{{ $json[\"created\"] }}"
             },
             {
               "fieldName": "body",
@@ -117,22 +122,23 @@
       "type": "n8n-nodes-base.httpRequest",
       "position": [
         -820,
-        500
+        320
       ],
       "typeVersion": 1,
       "id": "b2cdd5e9-01e6-4e57-ab29-5ca31b3ea36b",
       "credentials": {
         "httpHeaderAuth": {
-          "id": "30",
-          "name": "OpenAI (infoedvistas)"
+          "id": "23",
+          "name": "OpenAI (kdessinger)"
         }
       }
     },
     {
       "parameters": {
         "prompt": "Create an upbeat Monday welcome message to the employees of Educational Vistas.  Here is a description of the company: Educational Vistas, Inc. was founded as a New York State S corporation on May 27th, 1993. Our original mission statement “Quality Education is the Salvation of our Nation” still drives everything that we do. We are wholly-family founded and owned. Our 30 years of proven success have been accomplished by combining the best of educational pedagogy and practice with cutting-edge technology and software. Currently, we provide products and/or services to almost 500 school districts, Boards of Cooperative Services (BOCES), Regional Information Centers (RIC’s), Charter Schools, Parochial Schools, and NYS Youth Detention Centers all across NY state. We are also the largest and oldest New York State assessment scoring company. Each year, our 700-800 certified  New York State teachers score hundreds of thousands of State assessments in English Language Arts (ELA), Mathematics, Science, and all NYS Regents Assessments that are required for high school graduation. Our own assessments have been approved by the New York State Department (NYSED) for use with Student Learning Objectives (SLOs) for any district in the State. Our SurVate™ secure survey system is also the number one solution that schools use to gather school climate data in their efforts to reduce bullying and disruptive incidents. In New York City, EVI is the only approved assessment scoring alternative for character schools that do not want to use their scoring consortium. The NYC Department of Education allows us to not only score but also scan, verify, and upload this critical data directly to the NYC Department of Assessment. We also provide the most comprehensive reading literacy assessment – Degrees of Reading Power (DRP) under contract to any NYC school that requests it. Our DataMate™ product serves as both the on-line assessment platform and the report management portal. Our Curriculum Developer (CD) is the web-based software management system where all unit development and distribution will occur for the State-wide curriculum project under the direction of the Capital Region BOCES called “The Partnership.” Over 200 school districts and 19 BOCES have already signed up to participate. As a New York State company based in Schenectady, we strive every day to provide the best products, services, and employment opportunities to our growing list of clients and employees. We had a 24% increase in revenue in 2022 and are projecting even more growth in the coming years.",
+        "simplifyOutput": false,
         "options": {
-          "maxTokens": 100
+          "maxTokens": 180
         }
       },
       "id": "0ab00ac4-95fc-410f-bf45-7801113c1fed",
@@ -141,41 +147,17 @@
       "typeVersion": 1,
       "position": [
         -820,
-        320
+        500
       ],
       "credentials": {
         "openAiApi": {
-          "id": "29",
-          "name": "OpenAi (infoedvistas)"
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
         }
       }
     }
   ],
-  "pinData": {
-    "ChatGPT (Inspire Quote)": [
-      {
-        "json": {
-          "id": "cmpl-6nLKL62N783p9slZTP0A0znWjnk3s",
-          "object": "text_completion",
-          "created": 1677218073,
-          "model": "text-davinci-001",
-          "choices": [
-            {
-              "text": "\n\nWelcome to another fabulous week at Educational Vistas! We are proud to provide quality education products and services to schools all across New York State. Our team of dedicated employees is committed to helping our clients succeed, and we are looking forward to another year of growth and success. Have a great week!",
-              "index": 0,
-              "logprobs": null,
-              "finish_reason": "stop"
-            }
-          ],
-          "usage": {
-            "prompt_tokens": 517,
-            "completion_tokens": 61,
-            "total_tokens": 578
-          }
-        }
-      }
-    ]
-  },
+  "pinData": {},
   "settings": {
     "saveManualExecutions": false,
     "callerPolicy": "workflowsFromSameOwner"
@@ -206,6 +188,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-03-01T01:58:27.000Z",
-  "versionId": "9b34455b-9990-4db4-8d89-0bf8e833993a"
+  "updatedAt": "2023-03-01T17:09:53.000Z",
+  "versionId": "7aa8fa97-484f-4a58-8f89-d469d898163e"
 }
