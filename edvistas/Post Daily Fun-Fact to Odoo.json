@@ -51,7 +51,7 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1,
       "position": [
-        1220,
+        1240,
         600
       ]
     },
@@ -156,6 +156,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-03-01T16:58:47.000Z",
-  "versionId": "6e971f82-9693-4008-ae09-5849d1190253"
+  "updatedAt": "2023-03-01T17:12:41.000Z",
+  "versionId": "de74ce57-b6ef-4114-9058-210d3330a76a"
 }
