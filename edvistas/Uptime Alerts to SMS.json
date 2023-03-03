@@ -143,8 +143,21 @@
   },
   "settings": {},
   "staticData": null,
-  "tags": [],
+  "tags": [
+    {
+      "createdAt": "2022-12-09T05:43:36.104Z",
+      "updatedAt": "2022-12-09T05:43:36.104Z",
+      "id": "12",
+      "name": "odoo"
+    },
+    {
+      "createdAt": "2023-03-03T15:41:27.787Z",
+      "updatedAt": "2023-03-03T15:41:27.787Z",
+      "id": "24",
+      "name": "SMS"
+    }
+  ],
   "triggerCount": 1,
-  "updatedAt": "2023-03-01T21:05:21.000Z",
-  "versionId": "d6210e12-a51e-4a97-9c39-1b545a8c20c8"
+  "updatedAt": "2023-03-03T15:41:35.000Z",
+  "versionId": "9aa48858-6e46-4aeb-9fe6-e2924a1a84de"
 }
