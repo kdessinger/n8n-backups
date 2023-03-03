@@ -11,6 +11,17 @@
           }
         ]
       ]
+    },
+    "Podcast": {
+      "main": [
+        [
+          {
+            "node": "Post to Production",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2023-02-24T06:02:40.431Z",
@@ -343,6 +354,59 @@
         580,
         -40
       ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "=mail.message",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "email_from",
+              "fieldValue": "odoobot@edvistas.com"
+            },
+            {
+              "fieldName": "message_type",
+              "fieldValue": "comment"
+            },
+            {
+              "fieldName": "model",
+              "fieldValue": "mail.channel"
+            },
+            {
+              "fieldName": "record_name",
+              "fieldValue": "=OpenAI:{{ $json[\"created\"] }}"
+            },
+            {
+              "fieldName": "body",
+              "fieldValue": "<p><strong>Introduction:</strong><br /><em>[Music Plays]</em><br /><br /><strong>Host:</strong> Welcome to The Educational Vistas Podcast, where we explore the broad world of education and schooling. Today, we&rsquo;ll be taking a deep dive from traditional schooling your child to the ever-expanding world of home schooling and beyond. <br /><br />We&rsquo;ll start off by exploring the different options available to parents when it comes to schooling thier children. We&rsquo;ll talk about the pros and cons of each option and discuss the importance of finding an educational model that fits each family&rsquo;s individual needs. <br /><br />Next, we&rsquo;ll dive into the world of home schooling and discuss the advantages and disadvantages that come with this educational option. We&rsquo;ll also share stories from parents who&rsquo;ve made the transition to home schooling and discuss the challenges and successes they&rsquo;ve experienced. <br /><br />Finally, we&rsquo;ll explore the different resources available to parents when it comes to educating their children. We&rsquo;ll discuss the key elements of a curriculum and the importance of finding the right materials for each student. We&rsquo;ll also share tips on how to create an engaging learning environment and discuss the benefits of learning through play.<br /><br />We invite you to join us as we explore the world of education and home schooling. We&rsquo;ll be sharing stories, resources, and tips throughout the episode and we encourage you to share your thoughts and experiences with us in the comments. <br /><br />Now, let&rsquo;s dive right in. <br /><br /><strong>Segment 1:</strong> Exploring Different Educational Models <br /><br />In this segment, we&rsquo;ll be exploring the different educational models available to parents. We&rsquo;ll discuss the pros and cons of each option and the importance of finding an educational model that fits each family&rsquo;s individual needs. <br /><br />We&rsquo;ll start off by talking about traditional schooling. We&rsquo;ll explore the different models available, such as public, private, and charter schools, and discuss the benefits and drawbacks of each. We&rsquo;ll also talk about the importance of finding a school that fits each child&rsquo;s individual needs and explore the resources available to parents who are considering this option. <br /><br />Next, we&rsquo;ll discuss virtual schooling. We&rsquo;ll explore the different online educational programs available and discuss the advantages and disadvantages of taking classes online. We&rsquo;ll also discuss the importance of staying connected to a school community and the need for structure and discipline when it comes to online learning. <br /><br />Finally, we&rsquo;ll talk about homeschooling. We&rsquo;ll discuss the advantages and disadvantages of this educational model, as well as the different resources available to parents who are interested in this option. <br /><br /><strong>Segment 2:</strong> Stories from Home Schooling Families <br /><br />In this segment, we&rsquo;ll be exploring the world of home schooling through the stories of parents who&rsquo;ve made the transition to this educational model. <br /><br />We&rsquo;ll start off by talking to a family who&rsquo;s been homeschooling for several years. We&rsquo;ll discuss the challenges they&rsquo;ve faced and the successes they&rsquo;ve experienced. We&rsquo;ll also explore the different home schooling models they&rsquo;ve tried and the resources they&rsquo;ve found most helpful. <br /><br />Next, we&rsquo;ll talk to a family who&rsquo;s just starting to homeschool. We&rsquo;ll discuss the challenges they&rsquo;re facing, the resources they&rsquo;ve found helpful, and the tips they&rsquo;d like to share with other families who are considering this educational model. <br /><br />Finally, we&rsquo;ll talk to a family who&rsquo;s been homeschooling for a few years, but is now transitioning back to a traditional school. We&rsquo;ll discuss the challenges they&rsquo;ve faced during the transition and the things they&rsquo;ve learned from their experience. <br /><br /><strong>Segment 3:</strong> Creating an Engaging Learning Environment <br /><br />In this segment, we&rsquo;ll be exploring the different resources available to parents when it comes to educating their children. We&rsquo;ll discuss the key elements of a curriculum and the importance of finding the right materials for each student. We&rsquo;ll also share tips on how to create an engaging learning environment and discuss the benefits of learning through play. <br /><br />We&rsquo;ll start off by talking about the importance of finding the right materials for each student. We&rsquo;ll discuss the different resources available and the need for parents to find materials that are both engaging and age-appropriate. <br /><br />Next, we&rsquo;ll discuss the importance of creating a learning environment that is both comfortable and stimulating. We&rsquo;ll share tips on how to create a space that encourages learning and explore the benefits of learning through play. <br /><br />Finally, we&rsquo;ll talk about the importance of teaching students to be independent learners. We&rsquo;ll discuss the need for structure and discipline, as well as the importance of allowing students the freedom to explore and discover their own interests. <br /><br /><strong>Conclusion:</strong> <br />That&rsquo;s it for today&rsquo;s episode of The Educational Vistas Podcast. We hope you enjoyed learning about different educational models, hearing stories from home schooling families, and exploring the different resources available to parents when it comes to educating their children. <br /><br />We encourage you to share your thoughts and experiences with us in the comments and invite you to join us again next time as we continue to explore the world of education. <br /><br />Thanks for listening!</p>"
+            },
+            {
+              "fieldName": "res_id",
+              "fieldValue": "={{ 197 }}"
+            },
+            {
+              "fieldName": "subtype_id",
+              "fieldValue": "=1"
+            }
+          ]
+        }
+      },
+      "id": "ea96eeed-a8bc-4b9a-bbc8-b223cb51b1f9",
+      "name": "Post to Production",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        940,
+        -40
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
+        }
+      }
     }
   ],
   "pinData": {
@@ -394,6 +458,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-03-02T21:41:26.000Z",
-  "versionId": "54f0314e-1af6-4bb6-b6ce-e009337db9f3"
+  "updatedAt": "2023-03-03T15:21:32.000Z",
+  "versionId": "e84bdc00-7b45-4dda-884f-bd8e7500d2b0"
 }
