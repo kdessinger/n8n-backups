@@ -8,6 +8,11 @@
             "node": "Podcast",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Image Generator1",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -17,6 +22,28 @@
         [
           {
             "node": "Post to Production",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Image Generator1": {
+      "main": [
+        [
+          {
+            "node": "Post to Production",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Password Generator": {
+      "main": [
+        [
+          {
+            "node": "Crypto",
             "type": "main",
             "index": 0
           }
@@ -101,8 +128,8 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        320,
-        160
+        380,
+        -40
       ]
     },
     {
@@ -187,8 +214,8 @@
       ],
       "credentials": {
         "openAiApi": {
-          "id": "29",
-          "name": "OpenAi (infoedvistas)"
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
         }
       }
     },
@@ -202,8 +229,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        320,
-        340
+        380,
+        320
       ]
     },
     {
@@ -284,8 +311,8 @@
       "name": "ChatGPT (Manual Auth)",
       "type": "n8n-nodes-base.httpRequest",
       "position": [
-        320,
-        -40
+        380,
+        140
       ],
       "typeVersion": 1,
       "id": "f3b1ff90-f03d-4d9b-8072-ee5aa0987413",
@@ -312,8 +339,8 @@
       "type": "n8n-nodes-base.openAi",
       "typeVersion": 1,
       "position": [
-        760,
-        -40
+        860,
+        20
       ],
       "credentials": {
         "openAiApi": {
@@ -352,7 +379,7 @@
       "typeVersion": 1,
       "position": [
         580,
-        -40
+        -60
       ]
     },
     {
@@ -388,6 +415,10 @@
             {
               "fieldName": "subtype_id",
               "fieldValue": "=1"
+            },
+            {
+              "fieldName": "attachment_ids",
+              "fieldValue": "={{ $binary.data }}"
             }
           ]
         }
@@ -397,8 +428,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        940,
-        -40
+        1120,
+        -60
       ],
       "alwaysOutputData": true,
       "credentials": {
@@ -407,6 +438,45 @@
           "name": "Odoo (OdooBot)"
         }
       }
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "prompt": "=Podcast, microphone, studio, talking, {{ $json[\"topic\"] }}, {{ $json[\"subtopics\"] }}",
+        "options": {
+          "n": 4,
+          "size": "512x512"
+        }
+      },
+      "id": "2a787726-3de0-466b-a927-859c925efdbc",
+      "name": "Image Generator1",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        860,
+        -140
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "value": "={{ $json.text }}",
+        "dataPropertyName": "key",
+        "encoding": "base64"
+      },
+      "id": "2af8788c-32d9-4ba5-82be-a8935bf29d94",
+      "name": "Crypto",
+      "type": "n8n-nodes-base.crypto",
+      "typeVersion": 1,
+      "position": [
+        1500,
+        140
+      ]
     }
   ],
   "pinData": {
@@ -458,6 +528,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-03-06T19:31:09.000Z",
-  "versionId": "7583de5c-f515-473f-a5cd-eb6f4860a489"
+  "updatedAt": "2023-03-07T07:23:21.000Z",
+  "versionId": "fd0d9aa1-80d1-45d8-b330-053ad00e7879"
 }
