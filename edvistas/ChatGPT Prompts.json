@@ -108,7 +108,7 @@
     {
       "parameters": {
         "resource": "image",
-        "prompt": "={{ $json.text }}",
+        "prompt": "exotic bird, painting, highly detailed, ornate, intricate, black, orange, yellow, gold, green, violet, blue, cyan, ultra real, long, swirling feather, gorgeous, fairytale, starry background, dreamlike style, fantasy, surreal environment.",
         "options": {
           "n": 2
         }
@@ -123,8 +123,8 @@
       ],
       "credentials": {
         "openAiApi": {
-          "id": "29",
-          "name": "OpenAi (infoedvistas)"
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
         }
       }
     },
@@ -458,6 +458,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-03-03T15:21:32.000Z",
-  "versionId": "e84bdc00-7b45-4dda-884f-bd8e7500d2b0"
+  "updatedAt": "2023-03-06T19:31:09.000Z",
+  "versionId": "7583de5c-f515-473f-a5cd-eb6f4860a489"
 }
