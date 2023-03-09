@@ -1,0 +1,318 @@
+{
+  "active": false,
+  "connections": {
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "ChatGPT Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Channel ID": {
+      "main": [
+        [
+          {
+            "node": "Post Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ChatGPT Request": {
+      "main": [
+        [
+          {
+            "node": "Set Channel (Podcast)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Channel (Podcast)": {
+      "main": [
+        [
+          {
+            "node": "Get Channel ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2022-11-10T21:20:44.103Z",
+  "id": "10",
+  "name": "Post Group Message in Odoo",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "position": [
+        -1060,
+        500
+      ],
+      "typeVersion": 1,
+      "id": "e19e00b6-2eb3-46ec-98bc-3523c13fd9cb"
+    },
+    {
+      "parameters": {
+        "url": "https://www.affirmations.dev/",
+        "options": {
+          "allowUnauthorizedCerts": true
+        }
+      },
+      "id": "cc8f8530-599d-4336-b028-209af643ca93",
+      "name": "Get Affirmations",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        -920,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "mail.channel",
+        "operation": "getAll",
+        "limit": 1,
+        "options": {
+          "fieldsList": [
+            "id",
+            "name",
+            "description",
+            "public",
+            "active"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "name",
+              "value": "={{ $json[\"Channel\"] }}"
+            }
+          ]
+        }
+      },
+      "id": "6be9923c-5bfd-40c5-b674-667cc19e9ca9",
+      "name": "Get Channel ID",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        -400,
+        500
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "=mail.message",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "email_from",
+              "fieldValue": "odoobot@edvistas.com"
+            },
+            {
+              "fieldName": "message_type",
+              "fieldValue": "comment"
+            },
+            {
+              "fieldName": "model",
+              "fieldValue": "mail.channel"
+            },
+            {
+              "fieldName": "record_name",
+              "fieldValue": "={{ $json[\"Group\"] }}"
+            },
+            {
+              "fieldName": "body",
+              "fieldValue": "=Did you know that Dr Jordan B Peterson has recently published an amazing podcast on Education called \"How to Educate Your Children wtih Jeff Sandefer\"?  I thought you might be interested in this podcast seeing it is relevant to our internal EVI podcast.  If you want to give it a listen go here:  https://podcasts.google.com/feed/aHR0cHM6Ly9mZWVkcy5zaW1wbGVjYXN0LmNvbS92c3kxbTVMVg/episode/NTRkMWYzZmUtYTcxOC00NmIzLWJlYjItOTNlYjc2NmI2NWRl?sa=X&ved=0CAIQx8UHahgKEwjIk-6u18z9AhUAAAAAHQAAAAAQtwM"
+            },
+            {
+              "fieldName": "res_id",
+              "fieldValue": "={{ $json[\"id\"] }}"
+            }
+          ]
+        }
+      },
+      "id": "f066d6df-3bf6-4147-8d6a-11037aba9e09",
+      "name": "Post Message",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        -200,
+        500
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "requestMethod": "POST",
+        "url": "https://api.openai.com/v1/engines/text-davinci-001/completions",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "={\n  \"prompt\": \"Give me a highly inspirational quote\", \n  \"temperature\": 0.7,\n  \"max_tokens\": 64,\n  \"top_p\": 1,\n  \"frequency_penalty\": 0,\n  \"presence_penalty\": 0\n}"
+      },
+      "name": "ChatGPT Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        -820,
+        500
+      ],
+      "typeVersion": 1,
+      "id": "66db6fda-d13b-4f9d-8a3e-24208629a6d7",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "23",
+          "name": "OpenAI (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "requestMethod": "POST",
+        "url": "https://api.openai.com/v1/models/text-davinci-003",
+        "jsonParameters": true,
+        "options": {}
+      },
+      "name": "ChatGPT Request1",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        -720,
+        340
+      ],
+      "typeVersion": 1,
+      "id": "3c12c263-4fc5-4037-8b5a-748e12c9b422",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "23",
+          "name": "OpenAI (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "Channel",
+              "value": "Podcast"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "aaa20796-3033-4a30-b991-a7677a92c9e2",
+      "name": "Set Channel (Podcast)",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        -600,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "mail.channel",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {
+          "fieldsList": [
+            "id",
+            "name",
+            "description",
+            "public",
+            "alias_name",
+            "active",
+            "is_chat",
+            "is_member",
+            "member_count"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "public",
+              "operator": "notEqual",
+              "value": "private"
+            },
+            {
+              "fieldName": "active",
+              "value": "true"
+            }
+          ]
+        }
+      },
+      "id": "74ee7050-ba11-490c-8498-5a9c50b59d47",
+      "name": "Get Channel List",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        -500,
+        340
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "saveManualExecutions": false,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrencyRules": []
+    }
+  },
+  "tags": [
+    {
+      "createdAt": "2022-12-09T05:43:36.104Z",
+      "updatedAt": "2022-12-09T05:43:36.104Z",
+      "id": "12",
+      "name": "odoo"
+    },
+    {
+      "createdAt": "2022-12-29T17:51:17.794Z",
+      "updatedAt": "2022-12-29T17:51:17.794Z",
+      "id": "14",
+      "name": "post"
+    },
+    {
+      "createdAt": "2022-12-29T17:51:21.720Z",
+      "updatedAt": "2022-12-29T17:51:21.720Z",
+      "id": "15",
+      "name": "message"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2023-03-08T17:14:09.000Z",
+  "versionId": "68f4a6da-609b-49be-84ff-246fff29f9f9"
+}
