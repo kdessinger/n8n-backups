@@ -118,7 +118,7 @@
       "name": "Parse potentially affected workflows",
       "type": "n8n-nodes-base.code",
       "position": [
-        1720,
+        1700,
         560
       ],
       "typeVersion": 1,
@@ -162,7 +162,7 @@
       "name": "Generate Report",
       "type": "n8n-nodes-base.html",
       "position": [
-        2020,
+        1960,
         560
       ],
       "typeVersion": 1
@@ -186,7 +186,7 @@
       "name": "Serve HTML Report",
       "type": "n8n-nodes-base.respondToWebhook",
       "position": [
-        2200,
+        2180,
         560
       ],
       "typeVersion": 1
@@ -219,6 +219,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-03-03T15:41:15.000Z",
-  "versionId": "5d4237e8-60f8-49c3-a8db-544cd92d0986"
+  "updatedAt": "2023-03-09T02:34:14.000Z",
+  "versionId": "02d5a2d7-6250-4194-b6d0-89e1c0eb0617"
 }
