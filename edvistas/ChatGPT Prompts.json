@@ -49,6 +49,39 @@
           }
         ]
       ]
+    },
+    "Image Generator": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking \"Execute Workflow\"": {
+      "main": [
+        [
+          {
+            "node": "Image Generator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "Write Binary File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2023-02-24T06:02:40.431Z",
@@ -145,7 +178,7 @@
       "type": "n8n-nodes-base.openAi",
       "typeVersion": 1,
       "position": [
-        940,
+        1340,
         320
       ],
       "credentials": {
@@ -222,7 +255,7 @@
     {
       "parameters": {
         "mode": "runOnceForEachItem",
-        "jsCode": "// Define the function\nfunction generatePassword() {\n  // Set local variables\n  const passwordLength = 16;\n  const includeCapitalLetters = 2;\n  const includeSpecialCharacters = 1;\n\n  // Define possible characters for each category\n  const lowercaseLetters = \"abcdefghijklmnopqrstuvwxyz\";\n  const uppercaseLetters = \"ABCDEFGHIJKLMNOPQRSTUVWXYZ\";\n  const specialCharacters = \"!@#$%^&*()_+-=[]{}|;:,.<>?\";\n  const numbers = \"0123456789\";\n\n  // Initialize the possible characters to use in the password\n  let possibleCharacters = lowercaseLetters;\n\n  // Add uppercase letters to possible characters if requested\n  if (includeCapitalLetters > 0) {\n    possibleCharacters += uppercaseLetters;\n  }\n\n  // Add special characters to possible characters if requested\n  if (includeSpecialCharacters > 0) {\n    possibleCharacters += specialCharacters;\n  }\n\n  // Generate the password\n  let password = \"\";\n  for (let i = 0; i < passwordLength; i++) {\n    // Choose a random character from the possible characters\n    const randomIndex = Math.floor(Math.random() * possibleCharacters.length);\n    const randomCharacter = possibleCharacters[randomIndex];\n\n    // Add the random character to the password\n    password += randomCharacter;\n  }\n\n  // Return the generated password\n  return password;\n}\n\n// Call the function and output the result to the console\nconsole.log(generatePassword());\n"
+        "jsCode": "function generateRandomFileName() {\n  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';\n  let fileName = '';\n  const fileExtension = '.txt'; // Change this to your desired file extension\n\n  for (let i = 0; i < 10; i++) { // Change 10 to the desired length of the file name\n    fileName += characters.charAt(Math.floor(Math.random() * characters.length));\n  }\n\n  return fileName + fileExtension;\n}\n\nconsole.log(generateRandomFileName()); // Example output: \"l7K3qoGvzB.txt\"\n"
       },
       "id": "e641aa8a-f537-4ae1-8528-bab17ba61cff",
       "name": "Code",
@@ -267,7 +300,7 @@
       "type": "n8n-nodes-base.openAi",
       "typeVersion": 1,
       "position": [
-        1120,
+        940,
         320
       ],
       "credentials": {
@@ -289,7 +322,7 @@
       "type": "n8n-nodes-base.openAi",
       "typeVersion": 1,
       "position": [
-        1300,
+        1120,
         320
       ],
       "credentials": {
@@ -477,6 +510,33 @@
         1500,
         140
       ]
+    },
+    {
+      "parameters": {
+        "fileName": "=/mnt/share/_tmp/{{ $binary.data.fileName }}{{ $node[\"Image Generator\"].parameter[\"options\"][\"n\"] }}.{{ $binary.data.fileExtension }}",
+        "options": {}
+      },
+      "name": "Write Binary File",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "position": [
+        1700,
+        320
+      ],
+      "typeVersion": 1,
+      "id": "d1c66294-6aca-4a7f-937f-2a5e4d0569e3"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field\n// called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $input.all();"
+      },
+      "id": "ebfce7b7-efba-45dd-9216-e5fe2af04552",
+      "name": "Code1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        1520,
+        320
+      ]
     }
   ],
   "pinData": {
@@ -528,6 +588,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-03-07T07:23:21.000Z",
-  "versionId": "fd0d9aa1-80d1-45d8-b330-053ad00e7879"
+  "updatedAt": "2023-03-10T06:45:12.000Z",
+  "versionId": "4532cbd5-efe3-4835-8b7c-fc231777db32"
 }
