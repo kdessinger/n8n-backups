@@ -1,0 +1,176 @@
+{
+  "active": false,
+  "connections": {
+    "Webex by Cisco Trigger": {
+      "main": [
+        [
+          {
+            "node": "Webex by Cisco",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webex by Cisco": {
+      "main": [
+        [
+          {
+            "node": "Odoo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-03-11T05:03:52.098Z",
+  "id": "29",
+  "name": "Webex to Odoo",
+  "nodes": [
+    {
+      "parameters": {
+        "event": "created",
+        "filters": {}
+      },
+      "id": "37148117-5894-4007-8925-9ae4218061fa",
+      "name": "Webex by Cisco Trigger",
+      "type": "n8n-nodes-base.ciscoWebexTrigger",
+      "typeVersion": 1,
+      "position": [
+        160,
+        240
+      ],
+      "webhookId": "fff83038-660f-4b39-ace6-9808a1868a96",
+      "credentials": {
+        "ciscoWebexOAuth2Api": {
+          "id": "4",
+          "name": "Cisco Webex (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "meeting",
+        "operation": "get",
+        "meetingId": "={{ $json.data.id }}",
+        "options": {}
+      },
+      "id": "89412315-69fd-435e-b9d4-4c5f1f0e7d50",
+      "name": "Webex by Cisco",
+      "type": "n8n-nodes-base.ciscoWebex",
+      "typeVersion": 1,
+      "position": [
+        380,
+        240
+      ],
+      "credentials": {
+        "ciscoWebexOAuth2Api": {
+          "id": "4",
+          "name": "Cisco Webex (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "calendar.event",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "display_name",
+              "fieldValue": "={{ $json.title }}"
+            },
+            {
+              "fieldName": "description",
+              "fieldValue": "={{ $json.agenda }}"
+            },
+            {
+              "fieldName": "start",
+              "fieldValue": "={{ $json.start }}"
+            },
+            {
+              "fieldName": "stop",
+              "fieldValue": "={{ $json.end }}"
+            },
+            {
+              "fieldName": "duration"
+            },
+            {}
+          ]
+        }
+      },
+      "id": "75b265f5-6562-421e-b5e2-2b50bd58e99d",
+      "name": "Odoo",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        600,
+        240
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "14",
+          "name": "Odoo-Stage (Administrator)"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Webex by Cisco Trigger": [
+      {
+        "json": {
+          "id": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svZDM0MDdlYTMtYWRhNS00NjBkLTkxZWYtMDEwY2E5NjA4ZTQy",
+          "name": "n8n-webhook:https://n8n.edvistas.com/webhook-test/fff83038-660f-4b39-ace6-9808a1868a96/webhook",
+          "targetUrl": "https://n8n.edvistas.com/webhook-test/fff83038-660f-4b39-ace6-9808a1868a96/webhook",
+          "resource": "meetings",
+          "event": "created",
+          "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9hYjQ1NTg3Ni1jMWUxLTQ2MjUtOTAzNS0wNGRmMmNhNzA3YjU",
+          "createdBy": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hYTFlZTYyNC00MmM2LTQxMzQtYjcwNy1mZmI4YmRmMDJhZWQ",
+          "appId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0M4NmRmODMzOTM1YjYzYTg0ZTE0YWQ2NmU4OTJjNWNmNDQyNzZiNGM3NjU5ZWQwYjZmM2QzNmI2ZTUzZDRhNThm",
+          "ownedBy": "creator",
+          "status": "active",
+          "created": "2023-03-11T08:27:09.713Z",
+          "data": {
+            "id": "e4cd62ba5b974c36b51b8ba7b0d7c1c1",
+            "meetingNumber": "26312043813",
+            "meetingType": "meetingSeries",
+            "timezone": "UTC",
+            "start": "2023-03-12T19:35:00Z",
+            "end": "2023-03-12T20:35:00Z",
+            "hostUserId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hYTFlZTYyNC00MmM2LTQxMzQtYjcwNy1mZmI4YmRmMDJhZWQ",
+            "state": "active",
+            "hostEmail": "kdessinger@edvistas.com",
+            "siteUrl": "educationalvistasinc.my.webex.com",
+            "orgId": "ab455876-c1e1-4625-9035-04df2ca707b5",
+            "hostType": "1001001"
+          }
+        }
+      }
+    ]
+  },
+  "settings": {},
+  "staticData": {
+    "node:Webex by Cisco Trigger": {
+      "webhookId": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svZDM0MDdlYTMtYWRhNS00NjBkLTkxZWYtMDEwY2E5NjA4ZTQy",
+      "secret": "107c687ee654e759c75eb828439aabab"
+    }
+  },
+  "tags": [
+    {
+      "createdAt": "2022-12-09T05:43:36.104Z",
+      "updatedAt": "2022-12-09T05:43:36.104Z",
+      "id": "12",
+      "name": "odoo"
+    },
+    {
+      "createdAt": "2023-03-11T08:29:05.672Z",
+      "updatedAt": "2023-03-11T08:29:05.672Z",
+      "id": "25",
+      "name": "WebEx"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2023-03-11T08:38:08.000Z",
+  "versionId": "c85fdfde-7f3f-43ce-a041-1320613bc15b"
+}
