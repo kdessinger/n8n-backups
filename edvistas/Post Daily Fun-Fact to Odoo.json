@@ -16,7 +16,7 @@
       "main": [
         [
           {
-            "node": "Post to Production",
+            "node": "Post to Odoo",
             "type": "main",
             "index": 0
           }
@@ -57,6 +57,31 @@
     },
     {
       "parameters": {
+        "prompt": "Please write a fun-fact about the education industry.",
+        "simplifyOutput": false,
+        "options": {
+          "maxTokens": 180,
+          "temperature": 0.7,
+          "topP": 1
+        }
+      },
+      "id": "0cb5244b-43ee-4e1f-beff-b875cf4bb8af",
+      "name": "OpenAI",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        1440,
+        600
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
         "resource": "custom",
         "customResource": "=mail.message",
         "fieldsToCreateOrUpdate": {
@@ -93,7 +118,7 @@
         }
       },
       "id": "9120906e-640a-4e49-8026-115bc2038cc4",
-      "name": "Post to Production",
+      "name": "Post to Odoo",
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
@@ -105,31 +130,6 @@
         "odooApi": {
           "id": "22",
           "name": "Odoo (OdooBot)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "prompt": "Please write a fun-fact about the education industry.",
-        "simplifyOutput": false,
-        "options": {
-          "maxTokens": 180,
-          "temperature": 0.7,
-          "topP": 1
-        }
-      },
-      "id": "0cb5244b-43ee-4e1f-beff-b875cf4bb8af",
-      "name": "OpenAI",
-      "type": "n8n-nodes-base.openAi",
-      "typeVersion": 1,
-      "position": [
-        1440,
-        600
-      ],
-      "credentials": {
-        "openAiApi": {
-          "id": "28",
-          "name": "OpenAi (kdessinger)"
         }
       }
     }
@@ -156,6 +156,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-03-01T17:12:41.000Z",
-  "versionId": "de74ce57-b6ef-4114-9058-210d3330a76a"
+  "updatedAt": "2023-03-13T03:44:24.000Z",
+  "versionId": "dba91144-8131-4b62-9670-d0794fe6efd4"
 }
