@@ -3,13 +3,17 @@
   "connections": {
     "Nextcloud": {
       "main": [
-        [
-          {
-            "node": "Item Lists",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
+      ]
+    },
+    "NocoDB": {
+      "main": [
+        []
+      ]
+    },
+    "Microsoft SQL": {
+      "main": [
+        []
       ]
     }
   },
@@ -17,17 +21,6 @@
   "id": "3",
   "name": "Test Accounts",
   "nodes": [
-    {
-      "parameters": {},
-      "name": "Start",
-      "type": "n8n-nodes-base.start",
-      "typeVersion": 1,
-      "position": [
-        -740,
-        140
-      ],
-      "id": "b135b656-2380-4925-adf6-9fb2b7455985"
-    },
     {
       "parameters": {
         "resource": "channelMessage",
@@ -41,8 +34,8 @@
       "type": "n8n-nodes-base.microsoftTeams",
       "typeVersion": 1,
       "position": [
-        -460,
-        140
+        -940,
+        -40
       ],
       "id": "28195cc0-43df-49aa-be3d-f460638b6073",
       "credentials": {
@@ -61,8 +54,8 @@
       "type": "n8n-nodes-base.emailReadImap",
       "typeVersion": 1,
       "position": [
-        -280,
-        140
+        -740,
+        -40
       ],
       "id": "5dd0d930-4679-41de-9ed3-e03232e1679f",
       "credentials": {
@@ -83,35 +76,14 @@
       "type": "n8n-nodes-base.twilio",
       "typeVersion": 1,
       "position": [
-        -100,
-        140
+        -580,
+        -40
       ],
       "id": "45e4cf60-6c5d-4bc1-b6d0-f13d0dce92f9",
       "credentials": {
         "twilioApi": {
           "id": "3",
           "name": "Twilio (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "getAll",
-        "teamId": "17a77370-9004-44fc-a2bc-127787bbc72c",
-        "returnAll": true
-      },
-      "name": "Microsoft Teams1",
-      "type": "n8n-nodes-base.microsoftTeams",
-      "typeVersion": 1,
-      "position": [
-        -460,
-        320
-      ],
-      "id": "995adae0-6f13-4bba-9207-1f5d49373b5d",
-      "credentials": {
-        "microsoftTeamsOAuth2Api": {
-          "id": "5",
-          "name": "Microsoft Teams (kdessinger)"
         }
       }
     },
@@ -124,8 +96,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
-        -280,
-        320
+        -760,
+        140
       ],
       "webhookId": "d201c9fa-57bf-417f-a911-7a168c6cd0ad",
       "id": "c81d265f-78a7-4b9a-830c-04fb757902ed"
@@ -142,15 +114,15 @@
       "name": "ChatGPT",
       "type": "n8n-nodes-base.httpRequest",
       "position": [
-        -100,
-        320
+        -580,
+        140
       ],
       "typeVersion": 1,
       "id": "1968a20f-aa78-4df3-a819-654247b7906b",
       "credentials": {
         "httpHeaderAuth": {
           "id": "23",
-          "name": "openAI (kdessinger)"
+          "name": "OpenAI (kdessinger)"
         }
       }
     },
@@ -165,8 +137,8 @@
       "type": "n8n-nodes-base.nextCloud",
       "typeVersion": 1,
       "position": [
-        -280,
-        -20
+        -760,
+        -200
       ],
       "credentials": {
         "nextCloudApi": {
@@ -176,25 +148,434 @@
       }
     },
     {
+      "parameters": {},
+      "id": "ee4a8a73-e44a-4347-8638-decfb86584c2",
+      "name": "Bitwarden",
+      "type": "n8n-nodes-base.bitwarden",
+      "typeVersion": 1,
+      "position": [
+        -940,
+        -200
+      ],
+      "credentials": {
+        "bitwardenApi": {
+          "id": "31",
+          "name": "Bitwarden account"
+        }
+      }
+    },
+    {
       "parameters": {
-        "operation": "removeDuplicates",
-        "compare": "selectedFields",
-        "fieldsToCompare": {
-          "fields": [
+        "pollTimes": {
+          "item": [
             {
-              "fieldName": "path"
+              "mode": "everyMinute"
             }
           ]
         },
-        "options": {}
+        "baseId": {
+          "__rl": true,
+          "mode": "url",
+          "value": "",
+          "__regex": "https://airtable.com/([a-zA-Z0-9]{2,})"
+        },
+        "tableId": {
+          "__rl": true,
+          "mode": "url",
+          "value": "",
+          "__regex": "https://airtable.com/[a-zA-Z0-9]{2,}/([a-zA-Z0-9]{2,})"
+        },
+        "additionalFields": {}
       },
-      "id": "7ea18f4b-6b20-46f3-927e-98e2f75b5b7d",
-      "name": "Item Lists",
-      "type": "n8n-nodes-base.itemLists",
+      "id": "5a8704ea-3427-41d8-8743-e47756537f4a",
+      "name": "Airtable Trigger",
+      "type": "n8n-nodes-base.airtableTrigger",
       "typeVersion": 1,
       "position": [
-        -100,
-        -20
+        -580,
+        -200
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "ced0629e-010c-478b-8dac-8995ffd83b7f",
+      "name": "OpenAI",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        -400,
+        -200
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "operation": "get",
+        "options": {}
+      },
+      "id": "e43c4bde-690b-4eb6-867f-e0847ef089c0",
+      "name": "Odoo",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        -400,
+        -40
+      ]
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "filters": {}
+      },
+      "id": "5d4f62f1-d7fd-42f7-80c3-2626fff461ed",
+      "name": "Gmail Trigger",
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1,
+      "position": [
+        -400,
+        140
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "get"
+      },
+      "id": "70123373-2082-4466-86b0-a47796784e54",
+      "name": "Baserow",
+      "type": "n8n-nodes-base.baserow",
+      "typeVersion": 1,
+      "position": [
+        -220,
+        -200
+      ],
+      "credentials": {
+        "baserowApi": {
+          "id": "26",
+          "name": "Baserow (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "84387bb4-15ba-4946-ad61-52f3a15de560",
+      "name": "Facebook Trigger",
+      "type": "n8n-nodes-base.facebookTrigger",
+      "typeVersion": 1,
+      "position": [
+        -560,
+        320
+      ],
+      "webhookId": "9e652740-9141-4bd1-916c-1da761c87efd"
+    },
+    {
+      "parameters": {
+        "propertyId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "metricsGA4": {
+          "metricValues": [
+            {}
+          ]
+        },
+        "dimensionsGA4": {
+          "dimensionValues": [
+            {}
+          ]
+        },
+        "additionalFields": {}
+      },
+      "id": "8dbfde16-6fe1-400c-a565-71dcd7f53b4b",
+      "name": "Google Analytics",
+      "type": "n8n-nodes-base.googleAnalytics",
+      "typeVersion": 2,
+      "position": [
+        -220,
+        140
+      ]
+    },
+    {
+      "parameters": {
+        "additionalFields": {}
+      },
+      "id": "2ca5c019-8c93-4a9e-84c3-c4ea5a34111e",
+      "name": "LinkedIn",
+      "type": "n8n-nodes-base.linkedIn",
+      "typeVersion": 1,
+      "position": [
+        -940,
+        140
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "release",
+        "operation": "get",
+        "owner": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "repository": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        }
+      },
+      "id": "806d93b3-bb70-424f-8c59-453f4e47d4e1",
+      "name": "GitHub",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1,
+      "position": [
+        -940,
+        320
+      ],
+      "credentials": {
+        "githubApi": {
+          "id": "17",
+          "name": "GitHub (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "bc7345e2-fff7-468f-a2c3-59f30fad9138",
+      "name": "JotForm Trigger",
+      "type": "n8n-nodes-base.jotFormTrigger",
+      "typeVersion": 1,
+      "position": [
+        -760,
+        320
+      ],
+      "webhookId": "505ffc91-900e-49cd-9fac-8ed5933e4314"
+    },
+    {
+      "parameters": {},
+      "id": "f55ec76d-a01b-4a05-b683-ced69a3da599",
+      "name": "NocoDB",
+      "type": "n8n-nodes-base.nocoDb",
+      "typeVersion": 2,
+      "position": [
+        -40,
+        -200
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "purchase"
+      },
+      "id": "1095882f-5bae-4af7-bd14-3e8f02713016",
+      "name": "QuickBooks Online",
+      "type": "n8n-nodes-base.quickbooks",
+      "typeVersion": 1,
+      "position": [
+        -400,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "events": [
+          "BOOKING_CREATED"
+        ],
+        "options": {}
+      },
+      "id": "b2e38256-9007-4b74-8f96-e1718e30b2ff",
+      "name": "Cal Trigger",
+      "type": "n8n-nodes-base.calTrigger",
+      "typeVersion": 2,
+      "position": [
+        -220,
+        -40
+      ],
+      "webhookId": "e17de371-e3b1-4ec2-9e65-0b2dcfd091ee"
+    },
+    {
+      "parameters": {
+        "resource": "alerts",
+        "operation": "get"
+      },
+      "id": "b610fe39-1c70-40b3-a068-8b024018641e",
+      "name": "Metabase",
+      "type": "n8n-nodes-base.metabase",
+      "typeVersion": 1,
+      "position": [
+        -220,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery"
+      },
+      "id": "d8ebcef9-b992-41d7-9f6a-a79519cae7b2",
+      "name": "Microsoft SQL",
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        -40
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "additionalFields": {}
+      },
+      "id": "b4b9dc44-9145-4221-98cd-3125f8361bf3",
+      "name": "Microsoft Outlook",
+      "type": "n8n-nodes-base.microsoftOutlook",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        140
+      ]
+    },
+    {
+      "parameters": {
+        "additionalFields": {}
+      },
+      "id": "aa08a86d-c65e-4f7f-bafa-bfa29f710e0b",
+      "name": "Twitter",
+      "type": "n8n-nodes-base.twitter",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "format": "imperial",
+        "locationSelection": "zipCode",
+        "zipCode": "12138"
+      },
+      "id": "c13a4678-ba2d-4605-be9a-2245c08cee41",
+      "name": "OpenWeatherMap",
+      "type": "n8n-nodes-base.openWeatherMap",
+      "typeVersion": 1,
+      "position": [
+        140,
+        -200
+      ],
+      "credentials": {
+        "openWeatherMapApi": {
+          "id": "6",
+          "name": "OpenWeatherMap (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "additionalFields": {}
+      },
+      "id": "f85e98e6-4838-4826-b5a6-5602b202b4e7",
+      "name": "Wordpress",
+      "type": "n8n-nodes-base.wordpress",
+      "typeVersion": 1,
+      "position": [
+        140,
+        -40
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "additionalFields": {}
+      },
+      "id": "4215827b-d588-48e8-960f-a44de80380a8",
+      "name": "Zoom",
+      "type": "n8n-nodes-base.zoom",
+      "typeVersion": 1,
+      "position": [
+        140,
+        140
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "chat"
+      },
+      "id": "03ef7ad1-5271-4167-b1ee-e4a14275e354",
+      "name": "Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        140,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "attachmentAction",
+        "event": "all",
+        "filters": {}
+      },
+      "id": "f4c3370c-150c-47b7-84c1-570baf994af1",
+      "name": "Webex by Cisco Trigger",
+      "type": "n8n-nodes-base.ciscoWebexTrigger",
+      "typeVersion": 1,
+      "position": [
+        300,
+        -200
+      ],
+      "webhookId": "efa0c3f7-969e-4771-84a6-1dfdc580a7ea",
+      "credentials": {
+        "ciscoWebexOAuth2Api": {
+          "id": "4",
+          "name": "Cisco Webex (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "additionalFields": {}
+      },
+      "id": "941a1465-e13c-407a-a8b6-fa582271f28c",
+      "name": "iCalendar",
+      "type": "n8n-nodes-base.iCal",
+      "typeVersion": 1,
+      "position": [
+        300,
+        -40
+      ]
+    },
+    {
+      "parameters": {
+        "customerId": "kdessinger",
+        "message": "This is a message"
+      },
+      "id": "594bc1b9-c936-45f4-8b74-8d84829fbfde",
+      "name": "Customer Messenger (n8n training)",
+      "type": "n8n-nodes-base.n8nTrainingCustomerMessenger",
+      "typeVersion": 1,
+      "position": [
+        300,
+        140
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "get"
+      },
+      "id": "036ebe6e-5715-4f2f-84da-176d7088d00e",
+      "name": "Google Contacts",
+      "type": "n8n-nodes-base.googleContacts",
+      "typeVersion": 1,
+      "position": [
+        300,
+        320
       ]
     }
   ],
@@ -2880,6 +3261,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-01-17T01:28:11.000Z",
-  "versionId": "66ae81a9-3e9d-4185-a36b-a3ad23d93da4"
+  "updatedAt": "2023-03-13T05:07:38.000Z",
+  "versionId": "525ddd9a-d91c-45ce-8188-8e391e1ebc98"
 }
