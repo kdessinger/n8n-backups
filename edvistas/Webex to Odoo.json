@@ -23,21 +23,14 @@
         ],
         [
           {
-            "node": "Get Meeting Info",
+            "node": "Get Meeting Info1",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Get Meeting Info",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Get Meeting Info",
+            "node": "Get Meeting Info2",
             "type": "main",
             "index": 0
           }
@@ -70,16 +63,71 @@
       "main": [
         [
           {
-            "node": "Odoo Calendar",
+            "node": "Code",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Odoo Calendar": {
+    "Get Meeting Info1": {
+      "main": [
+        [
+          {
+            "node": "MeetingStart1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MeetingStart1": {
+      "main": [
+        [
+          {
+            "node": "MeetingEnd1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MeetingEnd1": {
+      "main": [
+        [
+          {
+            "node": "Odoo Update Calendar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Meeting Info2": {
+      "main": [
+        [
+          {
+            "node": "Odoo Delete Calendar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Odoo Add Calendar": {
       "main": [
         []
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Odoo Add Calendar",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
@@ -97,8 +145,8 @@
       "type": "n8n-nodes-base.ciscoWebexTrigger",
       "typeVersion": 1,
       "position": [
-        900,
-        300
+        680,
+        320
       ],
       "webhookId": "309ef9eb-0e9c-4c06-85a6-5ca205f93f91",
       "credentials": {
@@ -119,8 +167,8 @@
       "type": "n8n-nodes-base.ciscoWebexTrigger",
       "typeVersion": 1,
       "position": [
-        180,
-        300
+        -40,
+        320
       ],
       "webhookId": "fff83038-660f-4b39-ace6-9808a1868a96",
       "credentials": {
@@ -141,8 +189,8 @@
       "type": "n8n-nodes-base.ciscoWebexTrigger",
       "typeVersion": 1,
       "position": [
-        360,
-        300
+        140,
+        320
       ],
       "webhookId": "f14dc782-49f4-467d-9a14-e7fec75521a9",
       "credentials": {
@@ -163,8 +211,8 @@
       "type": "n8n-nodes-base.ciscoWebexTrigger",
       "typeVersion": 1,
       "position": [
-        540,
-        300
+        320,
+        320
       ],
       "webhookId": "e9bbf4c6-bd27-4643-b38e-16c25fb1c940",
       "credentials": {
@@ -185,8 +233,8 @@
       "type": "n8n-nodes-base.ciscoWebexTrigger",
       "typeVersion": 1,
       "position": [
-        720,
-        300
+        500,
+        320
       ],
       "webhookId": "e2cf07cd-0938-4de7-a588-6572081b0932",
       "credentials": {
@@ -215,16 +263,15 @@
               "output": 2
             }
           ]
-        },
-        "fallbackOutput": 3
+        }
       },
       "id": "15a33e0f-c4e8-4c69-b7c2-4b9ea9b03d60",
       "name": "Switch",
       "type": "n8n-nodes-base.switch",
       "typeVersion": 1,
       "position": [
-        140,
-        520
+        60,
+        700
       ]
     },
     {
@@ -239,7 +286,7 @@
       "type": "n8n-nodes-base.ciscoWebex",
       "typeVersion": 1,
       "position": [
-        340,
+        360,
         520
       ],
       "credentials": {
@@ -259,10 +306,277 @@
       "type": "n8n-nodes-base.ciscoWebexTrigger",
       "typeVersion": 1,
       "position": [
-        -40,
-        520
+        -80,
+        700
       ],
       "webhookId": "e4933502-fe0f-4abe-917b-3020359e93a5",
+      "credentials": {
+        "ciscoWebexOAuth2Api": {
+          "id": "4",
+          "name": "Cisco Webex (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "value": "={{ $json[\"start\"] }}",
+        "dataPropertyName": "MeetingStart",
+        "custom": true,
+        "toFormat": "YYYY-MM-DD HH:mm:ss",
+        "options": {
+          "fromTimezone": "={{ $json[\"timezone\"] }}",
+          "toTimezone": "US/Eastern"
+        }
+      },
+      "id": "9f625117-8872-4d87-b359-a9a0553eecac",
+      "name": "MeetingStart",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 1,
+      "position": [
+        520,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "value": "={{ $json[\"end\"] }}",
+        "dataPropertyName": "MeetingEnd",
+        "custom": true,
+        "toFormat": "YYYY-MM-DD HH:mm:ss",
+        "options": {
+          "fromTimezone": "={{ $json[\"timezone\"] }}",
+          "toTimezone": "US/Eastern"
+        }
+      },
+      "id": "7d92bf3c-1175-457c-a176-e28f0d320766",
+      "name": "MeetingEnd",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 1,
+      "position": [
+        680,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "var date1 = new Date(\"2023-03-19 13:00:00\");\nvar date2 = new Date(\"2023-03-19 14:00:00\");\nvar diffDays = parseInt((date2 - date1) / (1000 * 60)); //gives minute difference \n//one_day means 1000*60*60*24\n//one_hour means 1000*60*60\n//one_minute means 1000*60\n//one_second means 1000\nconsole.log(diffDays)\n\nreturn [{\n  json: {\n    Duration: diffDays\n  }\n}]\n\nreturn $input.all();"
+      },
+      "id": "ac068982-fe79-46dc-b828-850af99b7c95",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        960,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "meeting",
+        "operation": "get",
+        "meetingId": "={{ $json.data.id }}",
+        "options": {}
+      },
+      "id": "9f57dc81-9c6c-48e9-a1b7-666d642774be",
+      "name": "Get Meeting Info1",
+      "type": "n8n-nodes-base.ciscoWebex",
+      "typeVersion": 1,
+      "position": [
+        360,
+        700
+      ],
+      "credentials": {
+        "ciscoWebexOAuth2Api": {
+          "id": "4",
+          "name": "Cisco Webex (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "value": "={{ $json[\"start\"] }}",
+        "dataPropertyName": "MeetingStart",
+        "custom": true,
+        "toFormat": "YYYY-MM-DD HH:mm:ss",
+        "options": {
+          "fromTimezone": "={{ $json[\"timezone\"] }}",
+          "toTimezone": "US/Eastern"
+        }
+      },
+      "id": "a65fe954-2659-4112-b990-04073bb4bced",
+      "name": "MeetingStart1",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 1,
+      "position": [
+        520,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "value": "={{ $json[\"end\"] }}",
+        "dataPropertyName": "MeetingEnd",
+        "custom": true,
+        "toFormat": "YYYY-MM-DD HH:mm:ss",
+        "options": {
+          "fromTimezone": "={{ $json[\"timezone\"] }}",
+          "toTimezone": "US/Eastern"
+        }
+      },
+      "id": "6c2f8412-6b4f-4821-9d6f-f12194482d98",
+      "name": "MeetingEnd1",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 1,
+      "position": [
+        680,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "calendar.event",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "name",
+              "fieldValue": "={{ $json.title }}"
+            },
+            {
+              "fieldName": "description",
+              "fieldValue": "={{ $json.agenda }}"
+            },
+            {
+              "fieldName": "start",
+              "fieldValue": "={{ $json.MeetingStart }}"
+            },
+            {
+              "fieldName": "stop",
+              "fieldValue": "={{ $json.MeetingEnd }}"
+            },
+            {
+              "fieldName": "duration"
+            },
+            {
+              "fieldName": "privacy",
+              "fieldValue": "public"
+            },
+            {
+              "fieldName": "show_as",
+              "fieldValue": "busy"
+            },
+            {
+              "fieldName": "videocall_location",
+              "fieldValue": "={{ $json.webLink }}"
+            },
+            {
+              "fieldName": "location",
+              "fieldValue": "WebEX"
+            },
+            {
+              "fieldName": "duration",
+              "fieldValue": "=var d = DateTime.fromISO('2014-08-06T13:07:04.054').setLocale('UTC');\n\nvar end = DateTime.fromFormat(\"{{ $json[\"MeetingEnd\"] }}\", \"yyyy-MM-dd HH:mm:ss\");\nvar start = DateTime.fromFormat(\"{{ $json[\"MeetingStart\"] }}\", \"yyyy-MM-dd HH:mm:ss\");\n\nvar diffInMinutes = end.diff(start, 'minutes');\nitem.Duration = diffInMinutes.toObject();\n\nconsole.log('Done!');\nreturn item;"
+            },
+            {
+              "fieldName": "start",
+              "fieldValue": "DateTime.fromISO('2014-08-06T13:07:04.054').toFormat('f');"
+            }
+          ]
+        }
+      },
+      "id": "6ac7b81e-50d2-40c1-86b5-7d41b171a598",
+      "name": "Odoo Add Calendar",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        940,
+        520
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "13",
+          "name": "Odoo-Stage (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "calendar.event",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "name",
+              "fieldValue": "={{ $json.title }}"
+            },
+            {
+              "fieldName": "description",
+              "fieldValue": "={{ $json.agenda }}"
+            },
+            {
+              "fieldName": "start",
+              "fieldValue": "={{ $json.MeetingStart }}"
+            },
+            {
+              "fieldName": "stop",
+              "fieldValue": "={{ $json.MeetingEnd }}"
+            },
+            {
+              "fieldName": "duration"
+            },
+            {
+              "fieldName": "privacy",
+              "fieldValue": "public"
+            },
+            {
+              "fieldName": "show_as",
+              "fieldValue": "busy"
+            },
+            {
+              "fieldName": "videocall_location",
+              "fieldValue": "={{ $json.webLink }}"
+            },
+            {
+              "fieldName": "location",
+              "fieldValue": "WebEX"
+            },
+            {
+              "fieldName": "duration",
+              "fieldValue": "={{ \nconst durationInMs = $json[\"MeetingEnd\"] - $json[\"MeetingStart\"];\nconst durationInMinutes  = Math.floor(durationInMs / (1000 * 60));\nconsole.log(`Meeting duration: ${durationInMinutes} minutes`);\n}}"
+            }
+          ]
+        }
+      },
+      "id": "2be4399d-8e17-4998-8925-a7d402a39b44",
+      "name": "Odoo Update Calendar",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        840,
+        700
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "13",
+          "name": "Odoo-Stage (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "meeting",
+        "operation": "get",
+        "meetingId": "={{ $json.data.id }}",
+        "options": {}
+      },
+      "id": "8927e6c5-a3ac-4400-be27-5378012d8c13",
+      "name": "Get Meeting Info2",
+      "type": "n8n-nodes-base.ciscoWebex",
+      "typeVersion": 1,
+      "position": [
+        360,
+        880
+      ],
       "credentials": {
         "ciscoWebexOAuth2Api": {
           "id": "4",
@@ -318,13 +632,13 @@
           ]
         }
       },
-      "id": "6ac7b81e-50d2-40c1-86b5-7d41b171a598",
-      "name": "Odoo Calendar",
+      "id": "8927cc45-84de-44fc-89dd-a6ce00de010a",
+      "name": "Odoo Delete Calendar",
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        940,
-        520
+        520,
+        880
       ],
       "credentials": {
         "odooApi": {
@@ -332,59 +646,6 @@
           "name": "Odoo-Stage (kdessinger)"
         }
       }
-    },
-    {
-      "parameters": {
-        "value": "={{ $json[\"start\"] }}",
-        "dataPropertyName": "MeetingStart",
-        "custom": true,
-        "toFormat": "YYYY-MM-DD HH:mm:ss",
-        "options": {
-          "fromTimezone": "={{ $json[\"timezone\"] }}",
-          "toTimezone": "US/Eastern"
-        }
-      },
-      "id": "9f625117-8872-4d87-b359-a9a0553eecac",
-      "name": "MeetingStart",
-      "type": "n8n-nodes-base.dateTime",
-      "typeVersion": 1,
-      "position": [
-        540,
-        520
-      ]
-    },
-    {
-      "parameters": {
-        "value": "={{ $json[\"end\"] }}",
-        "dataPropertyName": "MeetingEnd",
-        "custom": true,
-        "toFormat": "YYYY-MM-DD HH:mm:ss",
-        "options": {
-          "fromTimezone": "={{ $json[\"timezone\"] }}",
-          "toTimezone": "US/Eastern"
-        }
-      },
-      "id": "7d92bf3c-1175-457c-a176-e28f0d320766",
-      "name": "MeetingEnd",
-      "type": "n8n-nodes-base.dateTime",
-      "typeVersion": 1,
-      "position": [
-        740,
-        520
-      ]
-    },
-    {
-      "parameters": {
-        "jsCode": "const MeetingStart = $input.all().json.MeetingStart;\nconst MeetingEnd = $input.all().json.MeetingEnd;\n\nconst durationInMs = MeetingEnd - MeetingStart; // Subtract the dates to get the duration in milliseconds\nconst durationInMinutes = Math.floor(durationInMs / (1000 * 60)); // Convert milliseconds to minutes and round down\n\n$input.all().json.myNewField = durationInMinutes;\nreturn $input.all();"
-      },
-      "id": "ac068982-fe79-46dc-b828-850af99b7c95",
-      "name": "Code",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 1,
-      "position": [
-        840,
-        700
-      ]
     }
   ],
   "pinData": {
@@ -594,6 +855,6 @@
     }
   ],
   "triggerCount": 4,
-  "updatedAt": "2023-03-13T06:53:54.000Z",
-  "versionId": "ec24973b-9300-4a28-b758-7633940e7c19"
+  "updatedAt": "2023-03-13T18:27:20.000Z",
+  "versionId": "f79775e7-548d-4336-86c9-c506f9ec8ef2"
 }
