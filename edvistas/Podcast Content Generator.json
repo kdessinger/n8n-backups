@@ -1,0 +1,269 @@
+{
+  "active": false,
+  "connections": {
+    "Image Generator1": {
+      "main": [
+        []
+      ]
+    },
+    "When clicking \"Execute Workflow\"": {
+      "main": [
+        [
+          {
+            "node": "Podcast Story Maker1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Podcast Story Maker": {
+      "main": [
+        [
+          {
+            "node": "Post to Production",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Podcast Story Maker1": {
+      "main": [
+        [
+          {
+            "node": "Set Variables",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Variables": {
+      "main": [
+        [
+          {
+            "node": "Podcast Story Maker",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-03-14T05:28:38.335Z",
+  "id": "31",
+  "name": "Podcast Content Generator",
+  "nodes": [
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "Podcast Name",
+              "value": "The Educational Vista's Podcast"
+            },
+            {
+              "name": "topic",
+              "value": "Education"
+            },
+            {
+              "name": "duration",
+              "value": "60"
+            },
+            {
+              "name": "subtopics",
+              "value": "Home Schooling"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "2f1cedcf-edae-4411-9759-2e123baf82a1",
+      "name": "Set Variables",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        1120,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "=mail.message",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "email_from",
+              "fieldValue": "odoobot@edvistas.com"
+            },
+            {
+              "fieldName": "message_type",
+              "fieldValue": "comment"
+            },
+            {
+              "fieldName": "model",
+              "fieldValue": "mail.channel"
+            },
+            {
+              "fieldName": "record_name",
+              "fieldValue": "=OpenAI:{{ $json[\"created\"] }}"
+            },
+            {
+              "fieldName": "body",
+              "fieldValue": "={{ $json.text }}"
+            },
+            {
+              "fieldName": "res_id",
+              "fieldValue": "={{ 197 }}"
+            },
+            {
+              "fieldName": "subtype_id",
+              "fieldValue": "=1"
+            },
+            {
+              "fieldName": "attachment_ids",
+              "fieldValue": "={{ $binary.data }}"
+            }
+          ]
+        }
+      },
+      "id": "14ae4fe8-68d3-4ff3-8932-48de9bee34c9",
+      "name": "Post to Production",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        1580,
+        300
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "prompt": "=Podcast, studio, talking, {{ $json[\"topic\"] }}, {{ $json[\"text\"] }}",
+        "options": {
+          "n": 2,
+          "size": "512x512"
+        }
+      },
+      "id": "d0407253-96ca-47d4-a152-86614db27ebb",
+      "name": "Image Generator1",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        1360,
+        180
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "id": "2183cb85-03a5-4612-9aa6-9a7f86939319",
+      "name": "When clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        660,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "prompt": "=Write a script for a podcast named \"[{{ $json[\"Podcast Name\"] }}]\" on the topic of [{{ $json[\"topic\"] }}] with a duration of [{{ $json[\"duration\"] }}] minutes. The script should incorporate the engaging strategies for podcasts, keys of a good podcast, keys to a good podcast script, and the keys on how to start a successful podcast. Focus on providing value to the listeners, making the content interesting and engaging, and encouraging interaction. Start with an introduction that sets the tone for the episode, followed by a structured outline that covers key topics related to [{{ $json[\"topic\"] }}, {{ $json[\"text\"] }}]. Use storytelling techniques, such as personal anecdotes and examples, to make the content more relatable and engaging. End with a clear call to action, such as inviting listeners to share their experiences with things related to the topics in this podcast and asking for feedback. Put \"[Music Plays]\" in the introduction and Conclusions. Output to HTML and use /H4 and /H5 formatting.",
+        "options": {
+          "frequency_penalty": 0,
+          "maxTokens": 3752,
+          "presence_penalty": 0,
+          "temperature": 0.7,
+          "topP": 1
+        }
+      },
+      "id": "22b24427-454f-4034-99ef-fa472a5a04a5",
+      "name": "Podcast Story Maker",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        1360,
+        400
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "prompt": "=Give me three popular subtopics in the education industry.  output only the three items and comma delimit them. ",
+        "options": {
+          "frequency_penalty": 0,
+          "maxTokens": 100,
+          "presence_penalty": 0,
+          "temperature": 0.7,
+          "topP": 1
+        }
+      },
+      "id": "e1890c23-e5b8-423b-9f6b-bf64fae072ac",
+      "name": "Podcast Story Maker1",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        900,
+        300
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2022-12-09T05:43:36.104Z",
+      "updatedAt": "2022-12-09T05:43:36.104Z",
+      "id": "12",
+      "name": "odoo"
+    },
+    {
+      "createdAt": "2023-02-14T20:17:22.566Z",
+      "updatedAt": "2023-02-14T20:17:22.566Z",
+      "id": "22",
+      "name": "ChatGPT"
+    },
+    {
+      "createdAt": "2023-03-14T05:28:48.099Z",
+      "updatedAt": "2023-03-14T05:28:48.099Z",
+      "id": "26",
+      "name": "Podcast"
+    },
+    {
+      "createdAt": "2023-03-14T05:29:10.368Z",
+      "updatedAt": "2023-03-14T05:29:10.368Z",
+      "id": "27",
+      "name": "DALL-E"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2023-03-14T06:01:48.000Z",
+  "versionId": "05fce0d7-cdd2-4054-bb66-91e1278cd538"
+}
