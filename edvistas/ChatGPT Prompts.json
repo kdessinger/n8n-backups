@@ -39,17 +39,6 @@
         ]
       ]
     },
-    "Password Generator": {
-      "main": [
-        [
-          {
-            "node": "Crypto",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Image Generator": {
       "main": [
         [
@@ -61,22 +50,22 @@
         ]
       ]
     },
-    "When clicking \"Execute Workflow\"": {
+    "Code1": {
       "main": [
         [
           {
-            "node": "Image Generator",
+            "node": "Write Binary File",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Code1": {
+    "When clicking \"Execute Workflow\"": {
       "main": [
         [
           {
-            "node": "Write Binary File",
+            "node": "Image Generator",
             "type": "main",
             "index": 0
           }
@@ -155,22 +144,11 @@
       }
     },
     {
-      "parameters": {},
-      "id": "fbfdcd90-3c8d-4f72-9904-597c05ff19b6",
-      "name": "When clicking \"Execute Workflow\"",
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
-      "position": [
-        380,
-        -40
-      ]
-    },
-    {
       "parameters": {
         "resource": "image",
-        "prompt": "exotic bird, painting, highly detailed, ornate, intricate, black, orange, yellow, gold, green, violet, blue, cyan, ultra real, long, swirling feather, gorgeous, fairytale, starry background, dreamlike style, fantasy, surreal environment.",
+        "prompt": "exotic peacock, painting, highly detailed, ornate, intricate, black, orange, yellow, gold, green, violet, blue, cyan, ultra real, long, swirling feather, gorgeous, fairytale, starry background, dreamlike style, fantasy, surreal environment.",
         "options": {
-          "n": 2
+          "n": 1
         }
       },
       "id": "d42b5776-6395-4dd4-bf3d-dde985316b5f",
@@ -178,8 +156,8 @@
       "type": "n8n-nodes-base.openAi",
       "typeVersion": 1,
       "position": [
-        1340,
-        320
+        780,
+        -40
       ],
       "credentials": {
         "openAiApi": {
@@ -220,7 +198,7 @@
       "type": "n8n-nodes-base.openAi",
       "typeVersion": 1,
       "position": [
-        760,
+        940,
         320
       ],
       "credentials": {
@@ -254,42 +232,6 @@
     },
     {
       "parameters": {
-        "mode": "runOnceForEachItem",
-        "jsCode": "function generateRandomFileName() {\n  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';\n  let fileName = '';\n  const fileExtension = '.txt'; // Change this to your desired file extension\n\n  for (let i = 0; i < 10; i++) { // Change 10 to the desired length of the file name\n    fileName += characters.charAt(Math.floor(Math.random() * characters.length));\n  }\n\n  return fileName + fileExtension;\n}\n\nconsole.log(generateRandomFileName()); // Example output: \"l7K3qoGvzB.txt\"\n"
-      },
-      "id": "e641aa8a-f537-4ae1-8528-bab17ba61cff",
-      "name": "Code",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 1,
-      "position": [
-        380,
-        320
-      ]
-    },
-    {
-      "parameters": {
-        "prompt": "I want you to act as a prompt generator. Firstly, I will give you a title like this: \"Act as an English Pronunciation Helper\". Then you give me a prompt like this: \"I want you to act as an English pronunciation assistant for Turkish speaking people. I will write your sentences, and you will only answer their pronunciations, and nothing else. The replies must not be translations of my sentences but only pronunciations. Pronunciations should use Turkish Latin letters for phonetics. Do not write explanations on replies. My first sentence is \"how the weather is in Istanbul?\".\" (You should adapt the sample prompt according to the title I gave. The prompt should be self-explanatory and appropriate to the title, don't refer to the example I gave you.). My first title is \"Act as a Code Review Helper\" (Give me prompt only)",
-        "options": {
-          "maxTokens": 200
-        }
-      },
-      "id": "94b9fb1f-d3c3-4876-a6ee-eb13c1c58172",
-      "name": "prompt generator",
-      "type": "n8n-nodes-base.openAi",
-      "typeVersion": 1,
-      "position": [
-        580,
-        320
-      ],
-      "credentials": {
-        "openAiApi": {
-          "id": "29",
-          "name": "OpenAi (infoedvistas)"
-        }
-      }
-    },
-    {
-      "parameters": {
         "prompt": "=I want you to act as a dream interpreter. I will give you descriptions of my dreams, and you will provide interpretations based on the symbols and themes present in the dream. Do not provide personal opinions or assumptions about the dreamer. Provide only factual interpretations based on the information given. My first dream is about losing all your teeth and being happy about it.  ",
         "options": {
           "maxTokens": 200
@@ -300,7 +242,7 @@
       "type": "n8n-nodes-base.openAi",
       "typeVersion": 1,
       "position": [
-        940,
+        1120,
         320
       ],
       "credentials": {
@@ -322,37 +264,13 @@
       "type": "n8n-nodes-base.openAi",
       "typeVersion": 1,
       "position": [
-        1120,
+        1300,
         320
       ],
       "credentials": {
         "openAiApi": {
           "id": "29",
           "name": "OpenAi (infoedvistas)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "authentication": "headerAuth",
-        "requestMethod": "POST",
-        "url": "https://api.openai.com/v1/engines/text-davinci-001/completions",
-        "jsonParameters": true,
-        "options": {},
-        "bodyParametersJson": "{\n  \"prompt\": \"Create an upbeat Monday welcome message to the employees of Educational Vistas.  Here is a description of the company: Educational Vistas, Inc. was founded as a New York State S corporation on May 27th, 1993. Our original mission statement “Quality Education is the Salvation of our Nation” still drives everything that we do. We are wholly-family founded and owned. Our 30 years of proven success have been accomplished by combining the best of educational pedagogy and practice with cutting-edge technology and software. Currently, we provide products and/or services to almost 500 school districts, Boards of Cooperative Services (BOCES), Regional Information Centers (RIC’s), Charter Schools, Parochial Schools, and NYS Youth Detention Centers all across NY state. We are also the largest and oldest New York State assessment scoring company. Each year, our 700-800 certified  New York State teachers score hundreds of thousands of State assessments in English Language Arts (ELA), Mathematics, Science, and all NYS Regents Assessments that are required for high school graduation. Our own assessments have been approved by the New York State Department (NYSED) for use with Student Learning Objectives (SLOs) for any district in the State. Our SurVate™ secure survey system is also the number one solution that schools use to gather school climate data in their efforts to reduce bullying and disruptive incidents. In New York City, EVI is the only approved assessment scoring alternative for character schools that do not want to use their scoring consortium. The NYC Department of Education allows us to not only score but also scan, verify, and upload this critical data directly to the NYC Department of Assessment. We also provide the most comprehensive reading literacy assessment – Degrees of Reading Power (DRP) under contract to any NYC school that requests it. Our DataMate™ product serves as both the on-line assessment platform and the report management portal. Our Curriculum Developer (CD) is the web-based software management system where all unit development and distribution will occur for the State-wide curriculum project under the direction of the Capital Region BOCES called “The Partnership.” Over 200 school districts and 19 BOCES have already signed up to participate. As a New York State company based in Schenectady, we strive every day to provide the best products, services, and employment opportunities to our growing list of clients and employees. We had a 24% increase in revenue in 2022 and are projecting even more growth in the coming years.\", \n  \"temperature\": 0.7,\n  \"max_tokens\": 180,\n  \"top_p\": 1,\n  \"frequency_penalty\": 0,\n  \"presence_penalty\": 0\n}"
-      },
-      "name": "ChatGPT (Manual Auth)",
-      "type": "n8n-nodes-base.httpRequest",
-      "position": [
-        380,
-        140
-      ],
-      "typeVersion": 1,
-      "id": "f3b1ff90-f03d-4d9b-8072-ee5aa0987413",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "30",
-          "name": "OpenAI (infoedvistas)"
         }
       }
     },
@@ -372,8 +290,8 @@
       "type": "n8n-nodes-base.openAi",
       "typeVersion": 1,
       "position": [
-        860,
-        20
+        1740,
+        280
       ],
       "credentials": {
         "openAiApi": {
@@ -411,8 +329,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 1,
       "position": [
-        580,
-        -60
+        1520,
+        220
       ]
     },
     {
@@ -461,8 +379,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        1120,
-        -60
+        1960,
+        200
       ],
       "alwaysOutputData": true,
       "credentials": {
@@ -486,8 +404,8 @@
       "type": "n8n-nodes-base.openAi",
       "typeVersion": 1,
       "position": [
-        860,
-        -140
+        1740,
+        120
       ],
       "credentials": {
         "openAiApi": {
@@ -498,29 +416,14 @@
     },
     {
       "parameters": {
-        "value": "={{ $json.text }}",
-        "dataPropertyName": "key",
-        "encoding": "base64"
-      },
-      "id": "2af8788c-32d9-4ba5-82be-a8935bf29d94",
-      "name": "Crypto",
-      "type": "n8n-nodes-base.crypto",
-      "typeVersion": 1,
-      "position": [
-        1500,
-        140
-      ]
-    },
-    {
-      "parameters": {
         "fileName": "=/mnt/share/_tmp/{{ $binary.data.fileName }}{{ $node[\"Image Generator\"].parameter[\"options\"][\"n\"] }}.{{ $binary.data.fileExtension }}",
         "options": {}
       },
       "name": "Write Binary File",
       "type": "n8n-nodes-base.writeBinaryFile",
       "position": [
-        1700,
-        320
+        1140,
+        -40
       ],
       "typeVersion": 1,
       "id": "d1c66294-6aca-4a7f-937f-2a5e4d0569e3"
@@ -534,8 +437,65 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        1520,
+        960,
+        -40
+      ]
+    },
+    {
+      "parameters": {
+        "model": "gpt-3.5-turbo",
+        "prompt": "=I want you to act as a prompt generator. Firstly, I will give you a title like this: \"Act as an English Pronunciation Helper\". Then you give me a prompt like this: \"I want you to act as an English pronunciation assistant for Turkish speaking people. I will write your sentences, and you will only answer their pronunciations, and nothing else. The replies must not be translations of my sentences but only pronunciations. Pronunciations should use Turkish Latin letters for phonetics. Do not write explanations on replies. My first sentence is \"how the weather is in Istanbul?\".\" (You should adapt the sample prompt according to the title I gave. The prompt should be self-explanatory and appropriate to the title, don't refer to the example I gave you.). My first title is \"Act as a Code Review Helper\" (Give me prompt only)",
+        "options": {
+          "maxTokens": 200
+        }
+      },
+      "id": "94b9fb1f-d3c3-4876-a6ee-eb13c1c58172",
+      "name": "prompt generator 1",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        580,
         320
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "gpt-3.5-turbo",
+        "prompt": "=I want you to become my Prompt Creator. Your goal is to help me craft the best possible prompt for my needs. The prompt will be used by you, ChatGPT. You will follow the following process: 1. Your first response will be to ask me what the prompt should be about. I will provide my answer, but we will need to improve it through continual iterations by going through the next steps. 2. Based on my input, you will generate 3 sections. a) Revised prompt (provide your rewritten prompt. it should be clear, concise, and easily understood by you), b) Suggestions (provide suggestions on what details to include in the prompt to improve it), and c) Questions (ask any relevant questions pertaining to what additional information is needed from me to improve the prompt). 3. We will continue this iterative process with me providing additional information to you and you updating the prompt in the Revised prompt section until it's complete.",
+        "options": {
+          "maxTokens": 200
+        }
+      },
+      "id": "2b1cfc1e-fd31-4cb8-8ed9-e3f5eae1bb0c",
+      "name": "prompt generator 2",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        760,
+        320
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "16d69343-c956-444a-8940-22b199a38ec1",
+      "name": "When clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        580,
+        -40
       ]
     }
   ],
@@ -588,6 +548,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-03-10T06:45:12.000Z",
-  "versionId": "4532cbd5-efe3-4835-8b7c-fc231777db32"
+  "updatedAt": "2023-03-14T06:28:55.000Z",
+  "versionId": "09c2e0b6-3e9f-4367-a266-4ad7e7c67c0b"
 }
