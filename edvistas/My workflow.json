@@ -1,11 +1,11 @@
 {
   "active": false,
   "connections": {
-    "Get all workflows": {
+    "Set URL": {
       "main": [
         [
           {
-            "node": "Parse potentially affected workflows",
+            "node": "Fetch Website",
             "type": "main",
             "index": 0
           }
@@ -16,29 +16,106 @@
       "main": [
         [
           {
-            "node": "Get all workflows",
+            "node": "Set URL",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Parse potentially affected workflows": {
+    "Item Lists": {
       "main": [
         [
           {
-            "node": "Generate Report",
+            "node": "Extract Fields",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Generate Report": {
+    "Format Date": {
       "main": [
         [
           {
-            "node": "Serve HTML Report",
+            "node": "Create RSS Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Complete Link": {
+      "main": [
+        [
+          {
+            "node": "Format Date",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Posts": {
+      "main": [
+        [
+          {
+            "node": "Item Lists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Website": {
+      "main": [
+        [
+          {
+            "node": "Extract Posts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Fields": {
+      "main": [
+        [
+          {
+            "node": "Complete Link",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create RSS Items": {
+      "main": [
+        [
+          {
+            "node": "Prepare Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Response": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On clicking 'execute'": {
+      "main": [
+        [
+          {
+            "node": "Set URL",
             "type": "main",
             "index": 0
           }
@@ -46,165 +123,234 @@
       ]
     }
   },
-  "createdAt": "2023-03-03T15:26:40.963Z",
-  "id": "28",
+  "createdAt": "2023-03-15T14:22:38.455Z",
+  "id": "32",
   "name": "My workflow",
   "nodes": [
     {
-      "parameters": {
-        "content": "# ⚠️ When and how to use this workflow\n\nIf you previously upgraded to n8n version `0.214.3`, some of your workflows might have accidentally been re-wired in the wrong way. This affected nodes which have more than 1 output, such as `If`, `Switch`, and `Compare Datasets`.\n\nThis workflow helps you identify potentially affected workflows and nodes that you should  check.\n\n**❗️Please ensure to run this workflow as the instance owner❗️**\n\n1. Configure the \"Get all workflows\" node to use your n8n API key. (You can find/create your API key under \"Settings > n8n API\")\n2. If you have community nodes installed that have more than 1 output, add them to the constant `MULTI_OUTPUT_NODES` in the \"Parse potentially affected workflows\" code node.\n3. Activate the workflow\n4. Visit `{YOUR_INSTANCE_URL}/webhooks/affected-workflows` from your browser\n5. The report will list potentially affected workflows/nodes.\n    1. The square brackets after the workflow name list the potentially affected nodes\n    2. Inspect each reported workflow individually (you can click on a row to open it in a new tab)\n    3. **Verify that the correct outbound connectors are used to connect subsequent nodes.**",
-        "height": 468,
-        "width": 1074
-      },
-      "id": "26ab8f88-e354-495d-b18f-e1126f6d64d3",
-      "name": "Sticky Note",
-      "type": "n8n-nodes-base.stickyNote",
+      "parameters": {},
+      "name": "On clicking 'execute'",
+      "type": "n8n-nodes-base.manualTrigger",
       "position": [
-        1220,
-        60
-      ],
-      "typeVersion": 1
-    },
-    {
-      "parameters": {
-        "filters": {}
-      },
-      "id": "62d2746f-6672-4b7b-9afb-decaf9bb2263",
-      "name": "Get all workflows",
-      "type": "n8n-nodes-base.n8n",
-      "position": [
-        1380,
-        560
+        460,
+        660
       ],
       "typeVersion": 1,
-      "credentials": {
-        "n8nApi": {
-          "id": "16",
-          "name": "admin@edvistas.com"
-        }
-      }
+      "id": "595180f7-eedd-4c89-aeea-2813f33c32b2"
     },
     {
       "parameters": {
-        "path": "affected-workflows",
-        "responseMode": "responseNode",
+        "fieldToSplitOut": "post",
+        "options": {}
+      },
+      "name": "Item Lists",
+      "type": "n8n-nodes-base.itemLists",
+      "position": [
+        1340,
+        660
+      ],
+      "typeVersion": 1,
+      "id": "e11bc3ee-d447-422f-9479-4e396807155d"
+    },
+    {
+      "parameters": {
+        "extractionValues": {
+          "values": [
+            {
+              "key": "post",
+              "cssSelector": ".blog-listing__post-content",
+              "returnValue": "html",
+              "returnArray": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Extract Posts",
+      "type": "n8n-nodes-base.htmlExtract",
+      "position": [
+        1120,
+        660
+      ],
+      "typeVersion": 1,
+      "id": "7270e657-42ec-4150-b503-31a7b014e9d2"
+    },
+    {
+      "parameters": {
+        "url": "={{$json[\"base_domain\"]}}/blog/category/release",
+        "responseFormat": "string",
         "options": {
-          "rawBody": false,
-          "responseHeaders": {
-            "entries": [
-              {
-                "name": "Content-Type",
-                "value": "text/html; charset=utf-8"
-              }
-            ]
-          }
+          "timeout": 10000
         }
       },
-      "id": "77d668b8-03d1-40e7-bac0-2396db459a90",
+      "name": "Fetch Website",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        900,
+        660
+      ],
+      "typeVersion": 1,
+      "id": "1fd24d6f-4437-4c9b-9fcd-b50a181df81f"
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "base_domain",
+              "value": "https://baserow.io"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Set URL",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        680,
+        660
+      ],
+      "typeVersion": 1,
+      "id": "6bcf8138-2fef-4b04-be6d-1ee58a779ba2"
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "link",
+              "value": "={{$item(0).$node[\"Set URL\"].json[\"base_domain\"]}}{{$json[\"link\"]}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Complete Link",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        460,
+        860
+      ],
+      "typeVersion": 1,
+      "id": "1c7c4fa3-cf36-4949-a47b-52619f53da0f"
+    },
+    {
+      "parameters": {
+        "value": "={{$json[\"date\"]}}",
+        "dataPropertyName": "date",
+        "toFormat": "YYYY-MM-DD",
+        "options": {}
+      },
+      "name": "Format Date",
+      "type": "n8n-nodes-base.dateTime",
+      "position": [
+        680,
+        860
+      ],
+      "typeVersion": 1,
+      "id": "edcc35e8-d88c-4cff-bb26-34c99d4989c5"
+    },
+    {
+      "parameters": {
+        "functionCode": "return {\n  rss_item: \n`<item>\n  <title>${item.title}</title>\n  <link>${item.link}</link>\n  <description>${item.description}</description>\n  <pubDate>${item.date}</pubDate>\n</item>`\n}"
+      },
+      "name": "Create RSS Items",
+      "type": "n8n-nodes-base.functionItem",
+      "position": [
+        900,
+        860
+      ],
+      "typeVersion": 1,
+      "id": "5b6690fb-012c-4381-80c3-4822c0898107"
+    },
+    {
+      "parameters": {
+        "path": "baserow-releases",
+        "responseMode": "responseNode",
+        "options": {}
+      },
       "name": "Webhook",
       "type": "n8n-nodes-base.webhook",
       "position": [
-        1220,
-        560
+        460,
+        460
       ],
-      "webhookId": "9f6c90b5-1d0a-4dca-8009-2ee39a4f8002",
-      "typeVersion": 1
-    },
-    {
-      "parameters": {
-        "jsCode": "// Define an array of objects representing node types that have multiple outputs.\n// Each object specifies the node type and the number of outputs it has.\nconst MULTI_OUTPUT_NODES = [\n  { type: 'n8n-nodes-base.compareDatasets', outputs: 4 }, \n  { type: 'n8n-nodes-base.switch', outputs: 4}, \n  { type: 'n8n-nodes-base.if', outputs: 2}\n]\n\n// Initialize an empty array to store the affected workflows.\nconst affectedWorkflows = [];\n\n// Loop through each item in the $input array.\nfor (const item of $input.all()) {\n  // Get the workflow data from the item.\n  const workflowData = item.json;\n\n  const nodes = workflowData.nodes;\n  const connections = workflowData.connections;\n\n  // Initialize an empty array to store the potentially affected connections.\n  const potentiallyAffectedNodes = [];\n\n  for (const connectionName of Object.keys(connections)) {\n    const connection = connections[connectionName];\n    // Match connection by its name to get the node data\n    const connectionNode = nodes.find(node => node.name === connectionName);\n\n    // Check if the connection node is a multi-output node.\n    const matchedMultiOutputNode = MULTI_OUTPUT_NODES.find(n => n.type === connectionNode.type);\n    if(matchedMultiOutputNode) {\n      const connectedOutputs = connection.main.filter(c => c && c.length > 0);\n\n      // Check if the connection has empty outputs.\n      const hasEmptyOutputs = connectedOutputs.length <  matchedMultiOutputNode.outputs;\n\n      // If there are no connected outputs, skip this connection, it couldn't been affected by the migration\n      if(connectedOutputs.length === 0) continue;\n\n      // If the connection has empty outputs, it might have been affected by the wrong connections migration\n      // which filtered-out empty indexes\n      if(hasEmptyOutputs) potentiallyAffectedNodes.push(connectionName);\n    }\n  }\n\n  if(potentiallyAffectedNodes.length > 0) {\n    affectedWorkflows.push(\n      { \n        workflowId: workflowData.id, \n        workflowName: workflowData.name,\n        active: workflowData.active, \n        potentiallyAffectedNodes\n      }\n    )\n  }\n}\n\nreturn {workflows: affectedWorkflows};\n"
-      },
-      "id": "b35e9ee7-292b-40dd-a49e-83c4f274bade",
-      "name": "Parse potentially affected workflows",
-      "type": "n8n-nodes-base.code",
-      "position": [
-        1720,
-        560
-      ],
+      "webhookId": "27c1e4db-568f-4bf9-9474-0898ce1173f7",
       "typeVersion": 1,
-      "alwaysOutputData": true
-    },
-    {
-      "parameters": {
-        "content": "# 👆\n\nIn case you have community nodes installed, add them to `MULTI_OUTPUT_NODES`",
-        "height": 194,
-        "width": 236
-      },
-      "id": "a31afa4f-8204-4150-a7a2-3d9794cd5b11",
-      "name": "Sticky Note1",
-      "type": "n8n-nodes-base.stickyNote",
-      "position": [
-        1720,
-        720
-      ],
-      "typeVersion": 1
-    },
-    {
-      "parameters": {
-        "content": "# 👆\n\nConfigure this node to use your n8n API credential",
-        "height": 197,
-        "width": 208
-      },
-      "id": "d1b02e30-fb48-45b0-bc6c-ecea643c1a3a",
-      "name": "Sticky Note2",
-      "type": "n8n-nodes-base.stickyNote",
-      "position": [
-        1380,
-        720
-      ],
-      "typeVersion": 1
-    },
-    {
-      "parameters": {
-        "html": "\n<!DOCTYPE html>\n\n<html>\n<head>\n  <meta charset=\"UTF-8\" />\n  <title>n8n workflows report</title>\n</head>\n<body>\n  <div class=\"container\">\n    <h1>Affected workflows:</h1>\n    <ul id=\"list\"></ul>\n  </div>\n</body>\n</html>\n\n<style>\n.container {\n  background-color: #ffffff;\n  text-align: center;\n  padding: 16px;\n  border-radius: 8px;\n}\n\nh1 {\n  color: #ff6d5a;\n  font-size: 24px;\n  font-weight: bold;\n  padding: 8px;\n}\n\nh2 {\n  color: #909399;\n  font-size: 18px;\n  font-weight: bold;\n  padding: 8px;\n}\n\nul {\n  list-style: none;\n  text-align: left;\n  padding: 0;\n}\n\nli {\n  margin: 8px 0;\n}\n\na {\n  color: #409eff;\n  text-decoration: none;\n  transition: color 0.2s ease-in-out;\n}\n\na:hover {\n  color: #ff9900;\n}\n</style>"
-      },
-      "id": "17f8bf4b-aa47-4299-8101-5b6a77d91f18",
-      "name": "Generate Report",
-      "type": "n8n-nodes-base.html",
-      "position": [
-        2040,
-        560
-      ],
-      "typeVersion": 1
+      "id": "137e99a0-2998-42c9-890f-cb4896e6d40f"
     },
     {
       "parameters": {
         "respondWith": "text",
-        "responseBody": "={{ $node[\"Generate Report\"].parameter[\"html\"] }}\n<script>\nconst { workflows } = {{  JSON.stringify($node[\"Parse potentially affected workflows\"].json) }}\n\nconst $list = document.getElementById('list');\n// Append LI element to the UL element for each item in the affectedWorkflows array\nworkflows.forEach((workflow) => {\n  const $listItem = document.createElement('li');\n  if(!workflow) return;\n  const title = `<a \n target=\"_blank\" href=\"//${window.location.host}/workflow/${workflow.workflowId}\">ID: ${workflow.workflowId}: ${workflow.workflowName} [${workflow.potentiallyAffectedNodes.join(', ')}]</a>`\n  $listItem.innerHTML = title\n  $list.appendChild($listItem);\n});\n\n</script>",
+        "responseBody": "={{$json[\"feed\"]}}",
         "options": {
           "responseHeaders": {
             "entries": [
               {
-                "name": "Content-Type",
-                "value": "text/html; charset=utf-8"
+                "name": "content-type",
+                "value": "application/xml"
               }
             ]
           }
         }
       },
-      "id": "dd211f34-0fe5-4c4b-b78f-c08427eeb483",
-      "name": "Serve HTML Report",
+      "name": "Respond to Webhook",
       "type": "n8n-nodes-base.respondToWebhook",
       "position": [
-        2200,
-        560
+        1340,
+        860
       ],
-      "typeVersion": 1
+      "typeVersion": 1,
+      "id": "1cde77e1-a26c-4664-a8d9-f1e5c4cfdab4"
     },
     {
       "parameters": {
-        "content": "# 👆\n\nFind the generated report at  `{YOUR_INSTANCE_URL}/webhooks/affected-workflows`",
-        "height": 194,
-        "width": 451
+        "functionCode": "let feed =\n`<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<rss version=\"2.0\">\n\n<channel>\n  <title>Baserow Releases</title>\n  <link>https://baserow.io/blog/category/release</link>\n  <description>Stay up to date with the latest changes and updates of Baserow</description>\n  ${items.map(e => e.json.rss_item).join('\\n')}\n</channel>\n\n</rss>`;\n\nreturn [{\n  json: {\n    feed: feed\n  }\n}];"
       },
-      "id": "cc18c8f3-529c-497a-929f-38392bf83898",
-      "name": "Sticky Note3",
-      "type": "n8n-nodes-base.stickyNote",
+      "name": "Prepare Response",
+      "type": "n8n-nodes-base.function",
       "position": [
-        2200,
-        720
+        1120,
+        860
       ],
-      "typeVersion": 1
+      "typeVersion": 1,
+      "id": "c5bfdc17-b155-4ccd-9eef-9234bf14022b"
+    },
+    {
+      "parameters": {
+        "dataPropertyName": "post",
+        "extractionValues": {
+          "values": [
+            {
+              "key": "date",
+              "cssSelector": ".blog-listing__post-info > strong"
+            },
+            {
+              "key": "title",
+              "cssSelector": ".blog-listing__post-title"
+            },
+            {
+              "key": "link",
+              "cssSelector": ".blog-listing__post-title > a",
+              "returnValue": "attribute",
+              "attribute": "href"
+            },
+            {
+              "key": "description",
+              "cssSelector": ".blog-listing__post-description"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Extract Fields",
+      "type": "n8n-nodes-base.htmlExtract",
+      "position": [
+        1560,
+        660
+      ],
+      "typeVersion": 1,
+      "id": "ea8d1846-dc84-4294-bfea-dcdc06a4bac5"
     }
   ],
   "pinData": {},
@@ -212,6 +358,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-03-03T15:26:40.963Z",
-  "versionId": "a180cb30-dee4-46ee-b5d5-919fe8745f96"
+  "updatedAt": "2023-03-15T14:22:38.455Z",
+  "versionId": "3819d73a-f385-4607-8c22-67a57ec51f66"
 }
