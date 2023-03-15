@@ -8,6 +8,11 @@
             "node": "MeetingStart",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -63,9 +68,9 @@
       "main": [
         [
           {
-            "node": "Code",
+            "node": "Merge",
             "type": "main",
-            "index": 0
+            "index": 1
           }
         ]
       ]
@@ -123,6 +128,17 @@
       "main": [
         [
           {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
             "node": "Odoo Add Calendar",
             "type": "main",
             "index": 0
@@ -145,8 +161,8 @@
       "type": "n8n-nodes-base.ciscoWebexTrigger",
       "typeVersion": 1,
       "position": [
-        680,
-        320
+        -60,
+        500
       ],
       "webhookId": "309ef9eb-0e9c-4c06-85a6-5ca205f93f91",
       "credentials": {
@@ -167,8 +183,8 @@
       "type": "n8n-nodes-base.ciscoWebexTrigger",
       "typeVersion": 1,
       "position": [
-        -40,
-        320
+        -240,
+        300
       ],
       "webhookId": "fff83038-660f-4b39-ace6-9808a1868a96",
       "credentials": {
@@ -189,8 +205,8 @@
       "type": "n8n-nodes-base.ciscoWebexTrigger",
       "typeVersion": 1,
       "position": [
-        140,
-        320
+        -60,
+        300
       ],
       "webhookId": "f14dc782-49f4-467d-9a14-e7fec75521a9",
       "credentials": {
@@ -211,8 +227,8 @@
       "type": "n8n-nodes-base.ciscoWebexTrigger",
       "typeVersion": 1,
       "position": [
-        320,
-        320
+        120,
+        300
       ],
       "webhookId": "e9bbf4c6-bd27-4643-b38e-16c25fb1c940",
       "credentials": {
@@ -233,8 +249,8 @@
       "type": "n8n-nodes-base.ciscoWebexTrigger",
       "typeVersion": 1,
       "position": [
-        500,
-        320
+        -240,
+        500
       ],
       "webhookId": "e2cf07cd-0938-4de7-a588-6572081b0932",
       "credentials": {
@@ -359,15 +375,15 @@
     },
     {
       "parameters": {
-        "jsCode": "var date1 = new Date(\"2023-03-19 13:00:00\");\nvar date2 = new Date(\"2023-03-19 14:00:00\");\nvar diffDays = parseInt((date2 - date1) / (1000 * 60)); //gives minute difference \n//one_day means 1000*60*60*24\n//one_hour means 1000*60*60\n//one_minute means 1000*60\n//one_second means 1000\nconsole.log(diffDays)\n\nreturn [{\n  json: {\n    Duration: diffDays\n  }\n}]\n\nreturn $input.all();"
+        "jsCode": "const start = new Date(items[0].json.start);\nconst end = new Date(items[0].json.end);\nconst durationInMinutes = Math.floor((end - start) / 60000);\nconsole.log(`Meeting duration: ${durationInMinutes} minutes`);\n\nreturn { json: { Duration: durationInMinutes }};\n\n\n"
       },
       "id": "ac068982-fe79-46dc-b828-850af99b7c95",
       "name": "Code",
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        960,
-        340
+        600,
+        380
       ]
     },
     {
@@ -455,7 +471,8 @@
               "fieldValue": "={{ $json.MeetingEnd }}"
             },
             {
-              "fieldName": "duration"
+              "fieldName": "duration",
+              "fieldValue": "{{ $json.Duration }}"
             },
             {
               "fieldName": "privacy",
@@ -472,14 +489,6 @@
             {
               "fieldName": "location",
               "fieldValue": "WebEX"
-            },
-            {
-              "fieldName": "duration",
-              "fieldValue": "=var d = DateTime.fromISO('2014-08-06T13:07:04.054').setLocale('UTC');\n\nvar end = DateTime.fromFormat(\"{{ $json[\"MeetingEnd\"] }}\", \"yyyy-MM-dd HH:mm:ss\");\nvar start = DateTime.fromFormat(\"{{ $json[\"MeetingStart\"] }}\", \"yyyy-MM-dd HH:mm:ss\");\n\nvar diffInMinutes = end.diff(start, 'minutes');\nitem.Duration = diffInMinutes.toObject();\n\nconsole.log('Done!');\nreturn item;"
-            },
-            {
-              "fieldName": "start",
-              "fieldValue": "DateTime.fromISO('2014-08-06T13:07:04.054').toFormat('f');"
             }
           ]
         }
@@ -489,7 +498,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        940,
+        1080,
         520
       ],
       "credentials": {
@@ -646,6 +655,21 @@
           "name": "Odoo-Stage (kdessinger)"
         }
       }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combinationMode": "mergeByPosition",
+        "options": {}
+      },
+      "id": "80d2ac6a-d47b-4f71-8dd4-812897f514ff",
+      "name": "Merge",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2,
+      "position": [
+        900,
+        520
+      ]
     }
   ],
   "pinData": {
@@ -855,6 +879,6 @@
     }
   ],
   "triggerCount": 4,
-  "updatedAt": "2023-03-13T18:27:20.000Z",
-  "versionId": "f79775e7-548d-4336-86c9-c506f9ec8ef2"
+  "updatedAt": "2023-03-15T15:57:53.000Z",
+  "versionId": "69c938af-b177-465a-9fe7-11b75ccfb8d0"
 }
