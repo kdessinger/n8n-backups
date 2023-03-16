@@ -375,7 +375,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const start = new Date(items[0].json.start);\nconst end = new Date(items[0].json.end);\nconst durationInMinutes = Math.floor((end - start) / 60000);\nconsole.log(`Meeting duration: ${durationInMinutes} minutes`);\n\nreturn { json: { Duration: durationInMinutes }};\n\n\n"
+        "jsCode": "const start = new Date(items[0].json.start);\nconst end = new Date(items[0].json.end);\nconst durationInHours = Math.floor((end - start) / 60000 / 60);\nconsole.log(`Meeting duration: ${durationInHours} minutes`);\n\nreturn { json: { Duration: durationInHours }};\n\n\n"
       },
       "id": "ac068982-fe79-46dc-b828-850af99b7c95",
       "name": "Code",
@@ -472,7 +472,7 @@
             },
             {
               "fieldName": "duration",
-              "fieldValue": "{{ $json.Duration }}"
+              "fieldValue": "={{ $json.Duration }}"
             },
             {
               "fieldName": "privacy",
@@ -489,6 +489,10 @@
             {
               "fieldName": "location",
               "fieldValue": "WebEX"
+            },
+            {
+              "fieldName": "attendee_ids",
+              "fieldValue": "={{10}}"
             }
           ]
         }
@@ -503,8 +507,8 @@
       ],
       "credentials": {
         "odooApi": {
-          "id": "13",
-          "name": "Odoo-Stage (kdessinger)"
+          "id": "12",
+          "name": "Odoo-Prod (Administrator)"
         }
       }
     },
@@ -879,6 +883,6 @@
     }
   ],
   "triggerCount": 4,
-  "updatedAt": "2023-03-15T15:57:53.000Z",
-  "versionId": "69c938af-b177-465a-9fe7-11b75ccfb8d0"
+  "updatedAt": "2023-03-15T16:11:09.000Z",
+  "versionId": "d98d85de-54d5-4a6f-a7cb-b43468bf4f10"
 }
