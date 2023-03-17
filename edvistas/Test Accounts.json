@@ -1,22 +1,6 @@
 {
   "active": false,
-  "connections": {
-    "Nextcloud": {
-      "main": [
-        []
-      ]
-    },
-    "NocoDB": {
-      "main": [
-        []
-      ]
-    },
-    "Microsoft SQL": {
-      "main": [
-        []
-      ]
-    }
-  },
+  "connections": {},
   "createdAt": "2022-02-10T21:57:15.216Z",
   "id": "3",
   "name": "Test Accounts",
@@ -54,7 +38,7 @@
       "type": "n8n-nodes-base.emailReadImap",
       "typeVersion": 1,
       "position": [
-        -740,
+        -760,
         -40
       ],
       "id": "5dd0d930-4679-41de-9ed3-e03232e1679f",
@@ -148,7 +132,10 @@
       }
     },
     {
-      "parameters": {},
+      "parameters": {
+        "operation": "getAll",
+        "returnAll": true
+      },
       "id": "ee4a8a73-e44a-4347-8638-decfb86584c2",
       "name": "Bitwarden",
       "type": "n8n-nodes-base.bitwarden",
@@ -272,7 +259,7 @@
       "type": "n8n-nodes-base.facebookTrigger",
       "typeVersion": 1,
       "position": [
-        -560,
+        -580,
         320
       ],
       "webhookId": "9e652740-9141-4bd1-916c-1da761c87efd"
@@ -3261,6 +3248,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-03-13T05:07:38.000Z",
-  "versionId": "525ddd9a-d91c-45ce-8188-8e391e1ebc98"
+  "updatedAt": "2023-03-16T19:04:11.000Z",
+  "versionId": "369c9e5f-4e93-4da1-a25d-35a0ed941c69"
 }
