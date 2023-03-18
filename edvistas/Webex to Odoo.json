@@ -10,7 +10,7 @@
             "index": 0
           },
           {
-            "node": "Code",
+            "node": "Code1",
             "type": "main",
             "index": 0
           }
@@ -68,9 +68,9 @@
       "main": [
         [
           {
-            "node": "Merge",
+            "node": "Code",
             "type": "main",
-            "index": 1
+            "index": 0
           }
         ]
       ]
@@ -119,23 +119,7 @@
         ]
       ]
     },
-    "Odoo Add Calendar": {
-      "main": [
-        []
-      ]
-    },
     "Code": {
-      "main": [
-        [
-          {
-            "node": "Merge",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Merge": {
       "main": [
         [
           {
@@ -161,8 +145,8 @@
       "type": "n8n-nodes-base.ciscoWebexTrigger",
       "typeVersion": 1,
       "position": [
-        -60,
-        500
+        -340,
+        460
       ],
       "webhookId": "309ef9eb-0e9c-4c06-85a6-5ca205f93f91",
       "credentials": {
@@ -183,8 +167,8 @@
       "type": "n8n-nodes-base.ciscoWebexTrigger",
       "typeVersion": 1,
       "position": [
-        -240,
-        300
+        -520,
+        260
       ],
       "webhookId": "fff83038-660f-4b39-ace6-9808a1868a96",
       "credentials": {
@@ -205,8 +189,8 @@
       "type": "n8n-nodes-base.ciscoWebexTrigger",
       "typeVersion": 1,
       "position": [
-        -60,
-        300
+        -340,
+        260
       ],
       "webhookId": "f14dc782-49f4-467d-9a14-e7fec75521a9",
       "credentials": {
@@ -227,8 +211,8 @@
       "type": "n8n-nodes-base.ciscoWebexTrigger",
       "typeVersion": 1,
       "position": [
-        120,
-        300
+        -160,
+        260
       ],
       "webhookId": "e9bbf4c6-bd27-4643-b38e-16c25fb1c940",
       "credentials": {
@@ -249,8 +233,8 @@
       "type": "n8n-nodes-base.ciscoWebexTrigger",
       "typeVersion": 1,
       "position": [
-        -240,
-        500
+        -520,
+        460
       ],
       "webhookId": "e2cf07cd-0938-4de7-a588-6572081b0932",
       "credentials": {
@@ -302,8 +286,8 @@
       "type": "n8n-nodes-base.ciscoWebex",
       "typeVersion": 1,
       "position": [
-        360,
-        520
+        280,
+        420
       ],
       "credentials": {
         "ciscoWebexOAuth2Api": {
@@ -349,8 +333,8 @@
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 1,
       "position": [
-        520,
-        520
+        440,
+        420
       ]
     },
     {
@@ -369,21 +353,21 @@
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 1,
       "position": [
-        680,
-        520
+        600,
+        420
       ]
     },
     {
       "parameters": {
-        "jsCode": "const start = new Date(items[0].json.start);\nconst end = new Date(items[0].json.end);\nconst durationInHours = Math.floor((end - start) / 60000 / 60);\nconsole.log(`Meeting duration: ${durationInHours} minutes`);\n\nreturn { json: { Duration: durationInHours }};\n\n\n"
+        "jsCode": "const start = new Date(items[0].json.MeetingStart);\nconst end = new Date(items[0].json.MeetingEnd);\nconst durationInHours = Math.floor((end - start) / 60000 / 60);\nconsole.log(`Meeting duration: ${durationInHours} minutes`);\n\nreturn { json: { \n  id: items[0].json.id, \n  meetingNumber: items[0].json.meetingNumber, \n  title: items[0].json.title,  \n  agenda: items[0].json.agenda,  \n  password: items[0].json.password,  \n  MeetingStart: items[0].json.MeetingStart,\n  MeetingEnd: items[0].json.MeetingEnd,  \n  duration: durationInHours,\n  hostDisplayName: items[0].json.hostDisplayName,  \n  hostEmail: items[0].json.hostEmail,  \n  webLink: items[0].json.webLink,  \n  callInNumber: items[0].json.telephony.callInNumbers[0].callInNumber  \n}};\n\n\n"
       },
       "id": "ac068982-fe79-46dc-b828-850af99b7c95",
       "name": "Code",
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        600,
-        380
+        800,
+        420
       ]
     },
     {
@@ -472,7 +456,7 @@
             },
             {
               "fieldName": "duration",
-              "fieldValue": "={{ $json.Duration }}"
+              "fieldValue": "={{ $json.duration }}"
             },
             {
               "fieldName": "privacy",
@@ -502,8 +486,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        1080,
-        520
+        1000,
+        420
       ],
       "credentials": {
         "odooApi": {
@@ -662,17 +646,30 @@
     },
     {
       "parameters": {
-        "mode": "combine",
-        "combinationMode": "mergeByPosition",
-        "options": {}
+        "content": "## A meeting is created\ndata is formatted and passed to the Odoo calendar",
+        "height": 263.4660925726588,
+        "width": 967.7502691065662
       },
-      "id": "80d2ac6a-d47b-4f71-8dd4-812897f514ff",
-      "name": "Merge",
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 2,
+      "id": "8c3b38c3-b4d7-4ba0-9737-1871432bbd1d",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
       "position": [
-        900,
-        520
+        240,
+        320.23681377825636
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const start = new Date(items[0].json.start);\nconst end = new Date(items[0].json.end);\nconst durationInHours = Math.floor((end - start) / 60000 / 60);\nconsole.log(`Meeting duration: ${durationInHours} minutes`);\n\nreturn { json: { \n  //id: items[0].json.id, \n  //meetingNumber: items[0].json.meetingNumber, \n  title: items[0].json.title,  \n  agenda: items[0].json.agenda,  \n  password: items[0].json.password,\n  \n  MeetingStart: start.toString(),\n  MeetingEnd: end.toDateString(),\n  \n  duration: durationInHours,\n  hostDisplayName: items[0].json.hostDisplayName,  \n  hostEmail: items[0].json.hostEmail,  \n  webLink: items[0].json.webLink,  \n  callInNumber: items[0].json.telephony.callInNumbers[0].callInNumber  \n}};\n\n\n"
+      },
+      "id": "79ae0b90-d447-4769-85c0-592e870dd356",
+      "name": "Code1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        700,
+        280
       ]
     }
   ],
@@ -883,6 +880,6 @@
     }
   ],
   "triggerCount": 4,
-  "updatedAt": "2023-03-15T16:11:09.000Z",
-  "versionId": "d98d85de-54d5-4a6f-a7cb-b43468bf4f10"
+  "updatedAt": "2023-03-17T18:22:08.000Z",
+  "versionId": "f8139bb6-c3c8-4c2b-a406-c2047a329d21"
 }
