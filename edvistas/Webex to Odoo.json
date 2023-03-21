@@ -68,7 +68,7 @@
       "main": [
         [
           {
-            "node": "Code",
+            "node": "Get Duration",
             "type": "main",
             "index": 0
           }
@@ -101,7 +101,7 @@
       "main": [
         [
           {
-            "node": "Odoo Update Calendar",
+            "node": "Get Duration1",
             "type": "main",
             "index": 0
           }
@@ -119,11 +119,22 @@
         ]
       ]
     },
-    "Code": {
+    "Get Duration": {
       "main": [
         [
           {
             "node": "Odoo Add Calendar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Duration1": {
+      "main": [
+        [
+          {
+            "node": "Odoo Update Calendar",
             "type": "main",
             "index": 0
           }
@@ -135,116 +146,6 @@
   "id": "29",
   "name": "Webex to Odoo",
   "nodes": [
-    {
-      "parameters": {
-        "event": "deleted",
-        "filters": {}
-      },
-      "id": "a43b2345-4305-42b2-8c96-a85b95c4804b",
-      "name": "Webex Meeting Deleted",
-      "type": "n8n-nodes-base.ciscoWebexTrigger",
-      "typeVersion": 1,
-      "position": [
-        -340,
-        460
-      ],
-      "webhookId": "309ef9eb-0e9c-4c06-85a6-5ca205f93f91",
-      "credentials": {
-        "ciscoWebexOAuth2Api": {
-          "id": "4",
-          "name": "Cisco Webex (kdessinger)"
-        }
-      },
-      "disabled": true
-    },
-    {
-      "parameters": {
-        "event": "created",
-        "filters": {}
-      },
-      "id": "37148117-5894-4007-8925-9ae4218061fa",
-      "name": "Webex Meeting Created",
-      "type": "n8n-nodes-base.ciscoWebexTrigger",
-      "typeVersion": 1,
-      "position": [
-        -520,
-        260
-      ],
-      "webhookId": "fff83038-660f-4b39-ace6-9808a1868a96",
-      "credentials": {
-        "ciscoWebexOAuth2Api": {
-          "id": "4",
-          "name": "Cisco Webex (kdessinger)"
-        }
-      },
-      "disabled": true
-    },
-    {
-      "parameters": {
-        "event": "updated",
-        "filters": {}
-      },
-      "id": "431f1a6c-165c-4886-ba2d-c559677c0b70",
-      "name": "Webex Meeting Changed",
-      "type": "n8n-nodes-base.ciscoWebexTrigger",
-      "typeVersion": 1,
-      "position": [
-        -340,
-        260
-      ],
-      "webhookId": "f14dc782-49f4-467d-9a14-e7fec75521a9",
-      "credentials": {
-        "ciscoWebexOAuth2Api": {
-          "id": "4",
-          "name": "Cisco Webex (kdessinger)"
-        }
-      },
-      "disabled": true
-    },
-    {
-      "parameters": {
-        "event": "started",
-        "filters": {}
-      },
-      "id": "2ad78e0d-b796-4d83-9681-5e9db8c092ff",
-      "name": "Webex Meeting Started",
-      "type": "n8n-nodes-base.ciscoWebexTrigger",
-      "typeVersion": 1,
-      "position": [
-        -160,
-        260
-      ],
-      "webhookId": "e9bbf4c6-bd27-4643-b38e-16c25fb1c940",
-      "credentials": {
-        "ciscoWebexOAuth2Api": {
-          "id": "4",
-          "name": "Cisco Webex (kdessinger)"
-        }
-      },
-      "disabled": true
-    },
-    {
-      "parameters": {
-        "event": "ended",
-        "filters": {}
-      },
-      "id": "fb4e0427-17d5-41f3-a377-78f82900af4e",
-      "name": "Webex Meeting Ended",
-      "type": "n8n-nodes-base.ciscoWebexTrigger",
-      "typeVersion": 1,
-      "position": [
-        -520,
-        460
-      ],
-      "webhookId": "e2cf07cd-0938-4de7-a588-6572081b0932",
-      "credentials": {
-        "ciscoWebexOAuth2Api": {
-          "id": "4",
-          "name": "Cisco Webex (kdessinger)"
-        }
-      },
-      "disabled": true
-    },
     {
       "parameters": {
         "dataType": "string",
@@ -270,8 +171,8 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 1,
       "position": [
-        60,
-        700
+        -80,
+        720
       ]
     },
     {
@@ -286,7 +187,7 @@
       "type": "n8n-nodes-base.ciscoWebex",
       "typeVersion": 1,
       "position": [
-        280,
+        240,
         420
       ],
       "credentials": {
@@ -306,8 +207,8 @@
       "type": "n8n-nodes-base.ciscoWebexTrigger",
       "typeVersion": 1,
       "position": [
-        -80,
-        700
+        -260,
+        720
       ],
       "webhookId": "e4933502-fe0f-4abe-917b-3020359e93a5",
       "credentials": {
@@ -353,20 +254,7 @@
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 1,
       "position": [
-        600,
-        420
-      ]
-    },
-    {
-      "parameters": {
-        "jsCode": "const start = new Date(items[0].json.MeetingStart);\nconst end = new Date(items[0].json.MeetingEnd);\nconst durationInHours = Math.floor((end - start) / 60000 / 60);\nconsole.log(`Meeting duration: ${durationInHours} minutes`);\n\nreturn { json: { \n  id: items[0].json.id, \n  meetingNumber: items[0].json.meetingNumber, \n  title: items[0].json.title,  \n  agenda: items[0].json.agenda,  \n  password: items[0].json.password,  \n  MeetingStart: items[0].json.MeetingStart,\n  MeetingEnd: items[0].json.MeetingEnd,  \n  duration: durationInHours,\n  hostDisplayName: items[0].json.hostDisplayName,  \n  hostEmail: items[0].json.hostEmail,  \n  webLink: items[0].json.webLink,  \n  callInNumber: items[0].json.telephony.callInNumbers[0].callInNumber  \n}};\n\n\n"
-      },
-      "id": "ac068982-fe79-46dc-b828-850af99b7c95",
-      "name": "Code",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 1,
-      "position": [
-        800,
+        640,
         420
       ]
     },
@@ -382,8 +270,8 @@
       "type": "n8n-nodes-base.ciscoWebex",
       "typeVersion": 1,
       "position": [
-        360,
-        680
+        240,
+        720
       ],
       "credentials": {
         "ciscoWebexOAuth2Api": {
@@ -408,8 +296,8 @@
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 1,
       "position": [
-        520,
-        680
+        440,
+        720
       ]
     },
     {
@@ -428,8 +316,8 @@
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 1,
       "position": [
-        680,
-        680
+        640,
+        720
       ]
     },
     {
@@ -486,7 +374,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        1000,
+        1040,
         420
       ],
       "credentials": {
@@ -549,8 +437,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        840,
-        680
+        1040,
+        720
       ],
       "credentials": {
         "odooApi": {
@@ -571,8 +459,8 @@
       "type": "n8n-nodes-base.ciscoWebex",
       "typeVersion": 1,
       "position": [
-        360,
-        880
+        240,
+        1000
       ],
       "credentials": {
         "ciscoWebexOAuth2Api": {
@@ -634,8 +522,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        520,
-        880
+        440,
+        1000
       ],
       "credentials": {
         "odooApi": {
@@ -647,16 +535,16 @@
     {
       "parameters": {
         "content": "## A meeting is created\ndata is formatted and passed to the Odoo calendar",
-        "height": 263.4660925726588,
-        "width": 967.7502691065662
+        "height": 284.3839143895833,
+        "width": 1012.5741729999756
       },
       "id": "8c3b38c3-b4d7-4ba0-9737-1871432bbd1d",
       "name": "Sticky Note",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        240,
-        320.23681377825636
+        200,
+        320
       ]
     },
     {
@@ -668,164 +556,68 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        700,
-        280
+        1240,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const start = new Date(items[0].json.MeetingStart);\nconst end = new Date(items[0].json.MeetingEnd);\nconst durationInHours = Math.floor((end - start) / 60000 / 60);\nconsole.log(`Meeting duration: ${durationInHours} minutes`);\n\nreturn { json: { \n  id: items[0].json.id, \n  meetingNumber: items[0].json.meetingNumber, \n  title: items[0].json.title,  \n  agenda: items[0].json.agenda,  \n  password: items[0].json.password,  \n  MeetingStart: items[0].json.MeetingStart,\n  MeetingEnd: items[0].json.MeetingEnd,  \n  duration: durationInHours,\n  hostDisplayName: items[0].json.hostDisplayName,  \n  hostEmail: items[0].json.hostEmail,  \n  webLink: items[0].json.webLink,  \n  callInNumber: items[0].json.telephony.callInNumbers[0].callInNumber  \n}};\n\n\n"
+      },
+      "id": "ac068982-fe79-46dc-b828-850af99b7c95",
+      "name": "Get Duration",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        840,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## A meeting is updated\ndata is formatted and passed to the Odoo calendar",
+        "height": 259.3616295573337,
+        "width": 1012.5741729999756
+      },
+      "id": "1f2bba07-8af3-46a7-a8d4-a8f39c42564b",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        200,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## A meeting is deleted\ndata is formatted and passed to the Odoo calendar",
+        "height": 284.3839143895833,
+        "width": 1012.5741729999756
+      },
+      "id": "b303e8c2-c563-46ed-9d17-c888e956b334",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        200,
+        900
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const start = new Date(items[0].json.MeetingStart);\nconst end = new Date(items[0].json.MeetingEnd);\nconst durationInHours = Math.floor((end - start) / 60000 / 60);\nconsole.log(`Meeting duration: ${durationInHours} minutes`);\n\nreturn { json: { \n  id: items[0].json.id, \n  meetingNumber: items[0].json.meetingNumber, \n  title: items[0].json.title,  \n  agenda: items[0].json.agenda,  \n  password: items[0].json.password,  \n  MeetingStart: items[0].json.MeetingStart,\n  MeetingEnd: items[0].json.MeetingEnd,  \n  duration: durationInHours,\n  hostDisplayName: items[0].json.hostDisplayName,  \n  hostEmail: items[0].json.hostEmail,  \n  webLink: items[0].json.webLink,  \n  callInNumber: items[0].json.telephony.callInNumbers[0].callInNumber  \n}};\n\n\n"
+      },
+      "id": "80b6ee31-ea8c-4d9f-913c-16d42ce2d097",
+      "name": "Get Duration1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        840,
+        720
       ]
     }
   ],
   "pinData": {
-    "Webex Meeting Created": [
-      {
-        "json": {
-          "id": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svZDM0MDdlYTMtYWRhNS00NjBkLTkxZWYtMDEwY2E5NjA4ZTQy",
-          "name": "n8n-webhook:https://n8n.edvistas.com/webhook-test/fff83038-660f-4b39-ace6-9808a1868a96/webhook",
-          "targetUrl": "https://n8n.edvistas.com/webhook-test/fff83038-660f-4b39-ace6-9808a1868a96/webhook",
-          "resource": "meetings",
-          "event": "created",
-          "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9hYjQ1NTg3Ni1jMWUxLTQ2MjUtOTAzNS0wNGRmMmNhNzA3YjU",
-          "createdBy": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hYTFlZTYyNC00MmM2LTQxMzQtYjcwNy1mZmI4YmRmMDJhZWQ",
-          "appId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0M4NmRmODMzOTM1YjYzYTg0ZTE0YWQ2NmU4OTJjNWNmNDQyNzZiNGM3NjU5ZWQwYjZmM2QzNmI2ZTUzZDRhNThm",
-          "ownedBy": "creator",
-          "status": "active",
-          "created": "2023-03-11T08:27:09.713Z",
-          "data": {
-            "id": "e4cd62ba5b974c36b51b8ba7b0d7c1c1",
-            "meetingNumber": "26312043813",
-            "meetingType": "meetingSeries",
-            "timezone": "UTC",
-            "start": "2023-03-12T19:35:00Z",
-            "end": "2023-03-12T20:35:00Z",
-            "hostUserId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hYTFlZTYyNC00MmM2LTQxMzQtYjcwNy1mZmI4YmRmMDJhZWQ",
-            "state": "active",
-            "hostEmail": "kdessinger@edvistas.com",
-            "siteUrl": "educationalvistasinc.my.webex.com",
-            "orgId": "ab455876-c1e1-4625-9035-04df2ca707b5",
-            "hostType": "1001001"
-          }
-        }
-      }
-    ],
-    "Webex Meeting Changed": [
-      {
-        "json": {
-          "id": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svMDlhNzdkYjUtYzU2Ni00MmNiLTkwN2QtYWYzYjUyOTM5M2Vm",
-          "name": "n8n-webhook:https://n8n.edvistas.com/webhook-test/f14dc782-49f4-467d-9a14-e7fec75521a9/webhook",
-          "targetUrl": "https://n8n.edvistas.com/webhook-test/f14dc782-49f4-467d-9a14-e7fec75521a9/webhook",
-          "resource": "meetings",
-          "event": "updated",
-          "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9hYjQ1NTg3Ni1jMWUxLTQ2MjUtOTAzNS0wNGRmMmNhNzA3YjU",
-          "createdBy": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hYTFlZTYyNC00MmM2LTQxMzQtYjcwNy1mZmI4YmRmMDJhZWQ",
-          "appId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0M4NmRmODMzOTM1YjYzYTg0ZTE0YWQ2NmU4OTJjNWNmNDQyNzZiNGM3NjU5ZWQwYjZmM2QzNmI2ZTUzZDRhNThm",
-          "ownedBy": "creator",
-          "status": "active",
-          "created": "2023-03-12T07:07:45.007Z",
-          "data": {
-            "id": "e4cd62ba5b974c36b51b8ba7b0d7c1c1",
-            "meetingNumber": "26312043813",
-            "meetingType": "meetingSeries",
-            "timezone": "UTC",
-            "start": "2023-03-12T16:30:00Z",
-            "end": "2023-03-12T17:30:00Z",
-            "hostUserId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hYTFlZTYyNC00MmM2LTQxMzQtYjcwNy1mZmI4YmRmMDJhZWQ",
-            "state": "active",
-            "hostEmail": "kdessinger@edvistas.com",
-            "siteUrl": "educationalvistasinc.my.webex.com",
-            "orgId": "ab455876-c1e1-4625-9035-04df2ca707b5",
-            "hostType": "1001001"
-          }
-        }
-      }
-    ],
-    "Webex Meeting Started": [
-      {
-        "json": {
-          "id": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svYjk3OTMwYmMtZTYyZS00ZWJjLTljMjktNTUyYjA2NzU0MTVk",
-          "name": "n8n-webhook:https://n8n.edvistas.com/webhook-test/e9bbf4c6-bd27-4643-b38e-16c25fb1c940/webhook",
-          "targetUrl": "https://n8n.edvistas.com/webhook-test/e9bbf4c6-bd27-4643-b38e-16c25fb1c940/webhook",
-          "resource": "meetings",
-          "event": "started",
-          "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9hYjQ1NTg3Ni1jMWUxLTQ2MjUtOTAzNS0wNGRmMmNhNzA3YjU",
-          "createdBy": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hYTFlZTYyNC00MmM2LTQxMzQtYjcwNy1mZmI4YmRmMDJhZWQ",
-          "appId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0M4NmRmODMzOTM1YjYzYTg0ZTE0YWQ2NmU4OTJjNWNmNDQyNzZiNGM3NjU5ZWQwYjZmM2QzNmI2ZTUzZDRhNThm",
-          "ownedBy": "creator",
-          "status": "active",
-          "created": "2023-03-12T07:09:07.859Z",
-          "data": {
-            "id": "e4cd62ba5b974c36b51b8ba7b0d7c1c1_I_254609443419895210",
-            "meetingNumber": "26312043813",
-            "meetingType": "meeting",
-            "timezone": "UTC",
-            "start": "2023-03-12T07:09:30Z",
-            "hostUserId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hYTFlZTYyNC00MmM2LTQxMzQtYjcwNy1mZmI4YmRmMDJhZWQ",
-            "state": "inProgress",
-            "hostEmail": "kdessinger@edvistas.com",
-            "siteUrl": "educationalvistasinc.my.webex.com",
-            "orgId": "ab455876-c1e1-4625-9035-04df2ca707b5"
-          }
-        }
-      }
-    ],
-    "Webex Meeting Ended": [
-      {
-        "json": {
-          "id": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svNjQwZDgwNWItY2VkMy00OTI3LThjNDQtMDhlZDk2OWRiNTEx",
-          "name": "n8n-webhook:https://n8n.edvistas.com/webhook-test/e2cf07cd-0938-4de7-a588-6572081b0932/webhook",
-          "targetUrl": "https://n8n.edvistas.com/webhook-test/e2cf07cd-0938-4de7-a588-6572081b0932/webhook",
-          "resource": "meetings",
-          "event": "ended",
-          "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9hYjQ1NTg3Ni1jMWUxLTQ2MjUtOTAzNS0wNGRmMmNhNzA3YjU",
-          "createdBy": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hYTFlZTYyNC00MmM2LTQxMzQtYjcwNy1mZmI4YmRmMDJhZWQ",
-          "appId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0M4NmRmODMzOTM1YjYzYTg0ZTE0YWQ2NmU4OTJjNWNmNDQyNzZiNGM3NjU5ZWQwYjZmM2QzNmI2ZTUzZDRhNThm",
-          "ownedBy": "creator",
-          "status": "active",
-          "created": "2023-03-12T07:11:27.328Z",
-          "data": {
-            "id": "e4cd62ba5b974c36b51b8ba7b0d7c1c1_I_254695148893550217",
-            "meetingNumber": "26312043813",
-            "meetingType": "meeting",
-            "timezone": "UTC",
-            "start": "2023-03-12T07:11:09Z",
-            "end": "2023-03-12T07:11:32Z",
-            "hostUserId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hYTFlZTYyNC00MmM2LTQxMzQtYjcwNy1mZmI4YmRmMDJhZWQ",
-            "state": "ended",
-            "hostEmail": "kdessinger@edvistas.com",
-            "siteUrl": "educationalvistasinc.my.webex.com",
-            "orgId": "ab455876-c1e1-4625-9035-04df2ca707b5"
-          }
-        }
-      }
-    ],
-    "Webex Meeting Deleted": [
-      {
-        "json": {
-          "id": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svZDFmNTUzNTctZDJjNy00NjU3LTg3ZGQtNTUzN2E4YTM5NjFj",
-          "name": "n8n-webhook:https://n8n.edvistas.com/webhook-test/309ef9eb-0e9c-4c06-85a6-5ca205f93f91/webhook",
-          "targetUrl": "https://n8n.edvistas.com/webhook-test/309ef9eb-0e9c-4c06-85a6-5ca205f93f91/webhook",
-          "resource": "meetings",
-          "event": "deleted",
-          "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9hYjQ1NTg3Ni1jMWUxLTQ2MjUtOTAzNS0wNGRmMmNhNzA3YjU",
-          "createdBy": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hYTFlZTYyNC00MmM2LTQxMzQtYjcwNy1mZmI4YmRmMDJhZWQ",
-          "appId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0M4NmRmODMzOTM1YjYzYTg0ZTE0YWQ2NmU4OTJjNWNmNDQyNzZiNGM3NjU5ZWQwYjZmM2QzNmI2ZTUzZDRhNThm",
-          "ownedBy": "creator",
-          "status": "active",
-          "created": "2023-03-12T07:32:37.590Z",
-          "data": {
-            "id": "e4cd62ba5b974c36b51b8ba7b0d7c1c1",
-            "meetingNumber": "26312043813",
-            "meetingType": "meetingSeries",
-            "timezone": "UTC",
-            "start": "2023-03-12T16:30:00Z",
-            "end": "2023-03-12T17:30:00Z",
-            "hostUserId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hYTFlZTYyNC00MmM2LTQxMzQtYjcwNy1mZmI4YmRmMDJhZWQ",
-            "state": "active",
-            "hostEmail": "kdessinger@edvistas.com",
-            "siteUrl": "educationalvistasinc.my.webex.com",
-            "orgId": "ab455876-c1e1-4625-9035-04df2ca707b5",
-            "hostType": "1001001"
-          }
-        }
-      }
-    ],
     "Webex by Cisco Trigger": [
       {
         "json": {
@@ -880,6 +672,6 @@
     }
   ],
   "triggerCount": 4,
-  "updatedAt": "2023-03-19T23:32:46.000Z",
-  "versionId": "5b0f67b7-203f-4ef1-a092-57dadb6bd0a9"
+  "updatedAt": "2023-03-20T17:21:37.000Z",
+  "versionId": "e45c5890-928a-4c6a-8feb-3a2768224636"
 }
