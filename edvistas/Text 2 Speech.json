@@ -5,7 +5,51 @@
       "main": [
         [
           {
-            "node": "Globals1",
+            "node": "GetFile",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LoadMP3": {
+      "main": [
+        [
+          {
+            "node": "Whisper Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GetFile": {
+      "main": [
+        [
+          {
+            "node": "LoadMP3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Whisper Request": {
+      "main": [
+        [
+          {
+            "node": "Move Binary Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Move Binary Data": {
+      "main": [
+        [
+          {
+            "node": "Write Binary File",
             "type": "main",
             "index": 0
           }
@@ -17,22 +61,16 @@
         []
       ]
     },
-    "Globals1": {
+    "FTP": {
       "main": [
-        [
-          {
-            "node": "Read Binary Files",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
-    "Read Binary Files": {
+    "Execute Command": {
       "main": [
         [
           {
-            "node": "HTTP Request",
+            "node": "Item Lists",
             "type": "main",
             "index": 0
           }
@@ -46,7 +84,7 @@
   "nodes": [
     {
       "parameters": {
-        "fileName": "/mnt/share/_convert/Speech_2_Text/output.txt",
+        "fileName": "={{ $binary.data.fileName }}",
         "options": {
           "append": false
         }
@@ -54,7 +92,7 @@
       "name": "Write Binary File",
       "type": "n8n-nodes-base.writeBinaryFile",
       "position": [
-        960,
+        1020,
         240
       ],
       "typeVersion": 1,
@@ -66,58 +104,23 @@
       "type": "n8n-nodes-base.start",
       "typeVersion": 1,
       "position": [
-        60,
+        20,
         240
       ],
       "id": "20b747e9-5284-46e2-91d4-43c7513a6afc"
     },
     {
       "parameters": {
-        "values": {
-          "string": [
-            {
-              "name": "File",
-              "value": "/mnt/share/_convert/Speech_2_Text/whisper.mp3"
-            },
-            {
-              "name": "FilePath",
-              "value": "/mnt/share/_convert/Speech_2_Text"
-            },
-            {
-              "name": "FileName",
-              "value": "whisper"
-            },
-            {
-              "name": "FileType",
-              "value": ".mp3"
-            },
-            {
-              "name": "FileTypeDest",
-              "value": ".txt"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "fbac74a3-1d1b-4b21-8197-ff2c1291d098",
-      "name": "Globals1",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 1,
-      "position": [
-        280,
-        240
-      ]
-    },
-    {
-      "parameters": {
         "method": "POST",
         "url": "https://api.openai.com/v1/audio/transcriptions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
             {
-              "name": "Authorization",
-              "value": "Bearer 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"
+              "name": "content-type",
+              "value": "multipart/form-data"
             }
           ]
         },
@@ -127,36 +130,169 @@
           "parameters": [
             {
               "name": "=model",
-              "value": "=whisper-1"
+              "value": "whisper-1"
             },
             {
+              "name": "=response_format",
+              "value": "text"
+            },
+            {
+              "parameterType": "formBinaryData",
               "name": "file",
-              "value": "{{ $binary.data }}"
+              "inputDataFieldName": "data"
             }
           ]
         },
-        "options": {}
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "text",
+              "outputPropertyName": "text"
+            }
+          }
+        }
       },
       "id": "f436c98c-4a1e-4fd6-b38c-2b64e1385e8d",
-      "name": "HTTP Request",
+      "name": "Whisper Request",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        720,
+        620,
         240
-      ]
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "23",
+          "name": "OpenAI (kdessinger)"
+        }
+      }
     },
     {
       "parameters": {
         "fileSelector": "={{ $json.File }}"
       },
       "id": "143547a4-8142-4f21-8b12-dd1297bedc49",
-      "name": "Read Binary Files",
+      "name": "LoadMP3",
       "type": "n8n-nodes-base.readBinaryFiles",
       "typeVersion": 1,
       "position": [
-        500,
+        420,
         240
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "FilePath",
+              "value": "/mnt/share/_convert/Speech_2_Text/"
+            },
+            {
+              "name": "FileName",
+              "value": "edvistas_3-21-23"
+            },
+            {
+              "name": "FileType",
+              "value": ".mp3"
+            },
+            {
+              "name": "FileTypeDest",
+              "value": ".txt"
+            },
+            {
+              "name": "File",
+              "value": "={{ $parameter[\"values\"][\"string\"][0][\"value\"] }}{{ $parameter[\"values\"][\"string\"][1][\"value\"] }}{{ $parameter[\"values\"][\"string\"][2][\"value\"] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "fbac74a3-1d1b-4b21-8197-ff2c1291d098",
+      "name": "GetFile",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        220,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "jsonToBinary",
+        "convertAllData": false,
+        "sourceKey": "text",
+        "destinationKey": "=data",
+        "options": {
+          "fileName": "={{ $node[\"GetFile\"].json[\"FilePath\"] }}{{ $node[\"GetFile\"].json[\"FileName\"] }}{{ $node[\"GetFile\"].json[\"FileTypeDest\"] }}",
+          "keepSource": true,
+          "mimeType": "text/plain"
+        }
+      },
+      "id": "024aad0b-04e5-4fe2-8e03-744f5dfab6c4",
+      "name": "Move Binary Data",
+      "type": "n8n-nodes-base.moveBinaryData",
+      "typeVersion": 1,
+      "position": [
+        820,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "protocol": "sftp",
+        "operation": "list",
+        "path": "/mnt/DataVolume/share/_convert/Speech_2_Text/"
+      },
+      "id": "51490d41-26ff-414a-917e-75ea197a31d7",
+      "name": "FTP",
+      "type": "n8n-nodes-base.ftp",
+      "typeVersion": 1,
+      "position": [
+        20,
+        80
+      ],
+      "credentials": {
+        "sftp": {
+          "id": "36",
+          "name": "SFTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "command": "ls -1  /mnt/share/_convert/Speech_2_Text | grep -Ev '\\.(txt)$'"
+      },
+      "id": "65f64f1d-928b-4138-8be6-68afda94bf8f",
+      "name": "Execute Command",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        260,
+        80
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "summarize",
+        "fieldsToSummarize": {
+          "values": [
+            {}
+          ]
+        },
+        "options": {
+          "disableDotNotation": false,
+          "outputFormat": "separateItems",
+          "skipEmptySplitFields": false
+        }
+      },
+      "id": "6600acf3-322c-453b-a712-44371706129e",
+      "name": "Item Lists",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 2,
+      "position": [
+        460,
+        80
       ]
     }
   ],
@@ -186,6 +322,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-03-22T03:44:45.000Z",
-  "versionId": "c331cf4d-2672-4af7-97a4-6af48e4a59f5"
+  "updatedAt": "2023-03-22T06:31:20.000Z",
+  "versionId": "4ce0ae4b-ad60-4922-ae24-2c224092fc34"
 }
