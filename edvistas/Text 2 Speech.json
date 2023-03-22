@@ -1,0 +1,191 @@
+{
+  "active": false,
+  "connections": {
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "Globals1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Write Binary File": {
+      "main": [
+        []
+      ]
+    },
+    "Globals1": {
+      "main": [
+        [
+          {
+            "node": "Read Binary Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Binary Files": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-03-22T03:28:24.318Z",
+  "id": "33",
+  "name": "Text 2 Speech",
+  "nodes": [
+    {
+      "parameters": {
+        "fileName": "/mnt/share/_convert/Speech_2_Text/output.txt",
+        "options": {
+          "append": false
+        }
+      },
+      "name": "Write Binary File",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "position": [
+        960,
+        240
+      ],
+      "typeVersion": 1,
+      "id": "8e03cc03-5de4-4a1e-83fd-eea6f7ebc8c1"
+    },
+    {
+      "parameters": {},
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "position": [
+        60,
+        240
+      ],
+      "id": "20b747e9-5284-46e2-91d4-43c7513a6afc"
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "File",
+              "value": "/mnt/share/_convert/Speech_2_Text/whisper.mp3"
+            },
+            {
+              "name": "FilePath",
+              "value": "/mnt/share/_convert/Speech_2_Text"
+            },
+            {
+              "name": "FileName",
+              "value": "whisper"
+            },
+            {
+              "name": "FileType",
+              "value": ".mp3"
+            },
+            {
+              "name": "FileTypeDest",
+              "value": ".txt"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "fbac74a3-1d1b-4b21-8197-ff2c1291d098",
+      "name": "Globals1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        280,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/audio/transcriptions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer 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"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "=model",
+              "value": "=whisper-1"
+            },
+            {
+              "name": "file",
+              "value": "{{ $binary.data }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "f436c98c-4a1e-4fd6-b38c-2b64e1385e8d",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        720,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "fileSelector": "={{ $json.File }}"
+      },
+      "id": "143547a4-8142-4f21-8b12-dd1297bedc49",
+      "name": "Read Binary Files",
+      "type": "n8n-nodes-base.readBinaryFiles",
+      "typeVersion": 1,
+      "position": [
+        500,
+        240
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "callerPolicy": "any"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2022-11-01T19:25:43.994Z",
+      "updatedAt": "2022-11-01T19:25:43.994Z",
+      "id": "4",
+      "name": "Convert"
+    },
+    {
+      "createdAt": "2023-03-22T03:28:15.251Z",
+      "updatedAt": "2023-03-22T03:28:15.251Z",
+      "id": "28",
+      "name": "mp3"
+    },
+    {
+      "createdAt": "2023-03-22T03:28:21.163Z",
+      "updatedAt": "2023-03-22T03:28:21.163Z",
+      "id": "29",
+      "name": "txt"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2023-03-22T03:44:45.000Z",
+  "versionId": "c331cf4d-2672-4af7-97a4-6af48e4a59f5"
+}
