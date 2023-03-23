@@ -603,8 +603,8 @@
       "type": "n8n-nodes-base.n8nTrainingCustomerMessenger",
       "typeVersion": 1,
       "position": [
-        320,
-        140
+        500,
+        -200
       ]
     },
     {
@@ -619,6 +619,28 @@
         320,
         320
       ]
+    },
+    {
+      "parameters": {
+        "events": [
+          "invitee.created"
+        ]
+      },
+      "id": "232a1da8-d0c2-40a6-8dc5-bf74ddebf3ab",
+      "name": "Calendly Trigger",
+      "type": "n8n-nodes-base.calendlyTrigger",
+      "typeVersion": 1,
+      "position": [
+        320,
+        140
+      ],
+      "webhookId": "260046b2-09d4-48e1-8f21-a23ad88cc390",
+      "credentials": {
+        "calendlyApi": {
+          "id": "38",
+          "name": "Calendly (kdessinger-V2)"
+        }
+      }
     }
   ],
   "pinData": {
@@ -790,6 +812,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-03-17T16:49:43.000Z",
-  "versionId": "6d376dee-9ebd-41a6-b9f2-4aa3b9fe3d40"
+  "updatedAt": "2023-03-22T19:34:27.000Z",
+  "versionId": "cc47bd5f-8ecc-4e7e-9935-d1b7c52091b1"
 }
