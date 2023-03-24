@@ -641,6 +641,59 @@
           "name": "Calendly (kdessinger-V2)"
         }
       }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sms.8x8.com/api/v1/subaccounts/EdVistas_0pPE6_hq/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "source",
+              "value": "+"
+            },
+            {
+              "name": "destination",
+              "value": "+5125144925"
+            },
+            {
+              "name": "text",
+              "value": "Hello World!"
+            },
+            {
+              "name": "encoding",
+              "value": "AUTO5518"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "7f1fe6e6-44f9-48d8-a66e-0d0735240163",
+      "name": "8x8 SMS",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        500,
+        -40
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "39",
+          "name": "8x8 (kdessinger)"
+        }
+      }
     }
   ],
   "pinData": {
@@ -812,6 +865,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-03-22T19:34:27.000Z",
-  "versionId": "cc47bd5f-8ecc-4e7e-9935-d1b7c52091b1"
+  "updatedAt": "2023-03-24T15:54:32.000Z",
+  "versionId": "e5c8e334-7e2d-47af-93a1-2fd35e95fc9b"
 }
