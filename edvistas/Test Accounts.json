@@ -648,16 +648,29 @@
         "url": "https://sms.8x8.com/api/v1/subaccounts/EdVistas_0pPE6_hq/messages",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
-        "sendQuery": true,
-        "queryParameters": {
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
           "parameters": [
             {
               "name": "source",
-              "value": "+"
+              "value": "Edvistas"
             },
             {
               "name": "destination",
-              "value": "+5125144925"
+              "value": "+15125144925"
             },
             {
               "name": "text",
@@ -665,16 +678,23 @@
             },
             {
               "name": "encoding",
-              "value": "AUTO5518"
-            }
-          ]
-        },
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
+              "value": "AUTO"
+            },
             {
-              "name": "Content-Type",
-              "value": "application/json"
+              "name": "scheduled"
+            },
+            {
+              "name": "expiry"
+            },
+            {
+              "name": "dlrCallbackUrl"
+            },
+            {
+              "name": "clientIp"
+            },
+            {
+              "name": "track",
+              "value": "Outcome"
             }
           ]
         },
@@ -687,6 +707,38 @@
       "position": [
         500,
         -40
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "39",
+          "name": "8x8 (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://lookup.8x8.com/api/v1/subaccounts/EdVistas_0pPE6_hq/phones/15125144928?country=US&type=format",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "84c9c5c1-71f5-414c-b57c-3ddaa46eb65d",
+      "name": "8x8 Number Verify",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        500,
+        120
       ],
       "credentials": {
         "httpHeaderAuth": {
@@ -865,6 +917,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-03-24T15:54:32.000Z",
-  "versionId": "e5c8e334-7e2d-47af-93a1-2fd35e95fc9b"
+  "updatedAt": "2023-03-24T16:20:40.000Z",
+  "versionId": "e2374a01-baca-4b2c-9b16-0b8647b8801e"
 }
