@@ -444,8 +444,8 @@
       "typeVersion": 1,
       "credentials": {
         "openAiApi": {
-          "id": "27",
-          "name": "[UPDATE ME]"
+          "id": "24",
+          "name": "OpenAi (kdessinger)"
         }
       }
     },
@@ -455,12 +455,15 @@
           "item": [
             {
               "mode": "everyMinute"
+            },
+            {
+              "mode": "everyHour"
             }
           ]
         },
-        "simple": false,
-        "filters": {},
-        "options": {}
+        "filters": {
+          "readStatus": "unread"
+        }
       },
       "id": "7105b689-9f9c-4354-aad9-8f1abb6c0a06",
       "name": "On email received",
@@ -1340,6 +1343,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-03-17T06:06:12.773Z",
-  "versionId": "dcf62a86-676a-48b4-b115-0f7a9c69452a"
+  "updatedAt": "2023-03-26T03:06:19.000Z",
+  "versionId": "aec4ce14-ba96-4aa1-bc07-fbbfb96a709b"
 }
