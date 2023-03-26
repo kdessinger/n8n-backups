@@ -455,12 +455,10 @@
           "item": [
             {
               "mode": "everyMinute"
-            },
-            {
-              "mode": "everyHour"
             }
           ]
         },
+        "authentication": "serviceAccount",
         "filters": {
           "readStatus": "unread"
         }
@@ -474,9 +472,9 @@
       ],
       "typeVersion": 1,
       "credentials": {
-        "gmailOAuth2": {
+        "googleApi": {
           "id": "26",
-          "name": "[UPDATE ME]"
+          "name": "kdessinger@gmail.com"
         }
       }
     },
@@ -569,6 +567,7 @@
     },
     {
       "parameters": {
+        "authentication": "serviceAccount",
         "operation": "reply",
         "messageId": "={{ $node[\"On email received\"].json.id }}",
         "emailType": "html",
@@ -584,9 +583,9 @@
       ],
       "typeVersion": 2,
       "credentials": {
-        "gmailOAuth2": {
+        "googleApi": {
           "id": "26",
-          "name": "[UPDATE ME]"
+          "name": "kdessinger@gmail.com"
         }
       }
     },
@@ -1343,6 +1342,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-03-26T03:06:19.000Z",
-  "versionId": "aec4ce14-ba96-4aa1-bc07-fbbfb96a709b"
+  "updatedAt": "2023-03-26T04:42:15.000Z",
+  "versionId": "d88c8217-186b-485e-b3a8-b6ff080009c2"
 }
