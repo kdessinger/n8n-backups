@@ -134,7 +134,7 @@
     {
       "parameters": {
         "operation": "getAll",
-        "limit": 5
+        "returnAll": true
       },
       "id": "ee4a8a73-e44a-4347-8638-decfb86584c2",
       "name": "Bitwarden",
@@ -917,6 +917,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-03-24T16:20:40.000Z",
-  "versionId": "e2374a01-baca-4b2c-9b16-0b8647b8801e"
+  "updatedAt": "2023-03-31T14:49:05.000Z",
+  "versionId": "b7334df8-ebaf-4c7d-8560-b5c9117a2072"
 }
