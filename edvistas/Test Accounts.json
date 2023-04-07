@@ -717,7 +717,6 @@
     },
     {
       "parameters": {
-        "method": "POST",
         "url": "https://lookup.8x8.com/api/v1/subaccounts/EdVistas_0pPE6_hq/phones/15125144928?country=US&type=format",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
@@ -917,6 +916,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-03-31T14:49:05.000Z",
-  "versionId": "b7334df8-ebaf-4c7d-8560-b5c9117a2072"
+  "updatedAt": "2023-04-07T03:11:16.000Z",
+  "versionId": "33b8e786-5496-4981-be34-461a7d69816e"
 }
