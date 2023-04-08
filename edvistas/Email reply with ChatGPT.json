@@ -41,6 +41,11 @@
             "node": "Send reply to recipient",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -128,17 +133,6 @@
         [
           {
             "node": "Email template",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "On email received": {
-      "main": [
-        [
-          {
-            "node": "Identify trigger #1",
             "type": "main",
             "index": 0
           }
@@ -421,6 +415,17 @@
           }
         ]
       ]
+    },
+    "Email Trigger (IMAP)": {
+      "main": [
+        [
+          {
+            "node": "Identify trigger #1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2023-03-31T17:06:59.837Z",
@@ -444,36 +449,8 @@
       "typeVersion": 1,
       "credentials": {
         "openAiApi": {
-          "id": "27",
-          "name": "[UPDATE ME]"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "pollTimes": {
-          "item": [
-            {
-              "mode": "everyMinute"
-            }
-          ]
-        },
-        "simple": false,
-        "filters": {},
-        "options": {}
-      },
-      "id": "7105b689-9f9c-4354-aad9-8f1abb6c0a06",
-      "name": "On email received",
-      "type": "n8n-nodes-base.gmailTrigger",
-      "position": [
-        -1600,
-        660
-      ],
-      "typeVersion": 1,
-      "credentials": {
-        "gmailOAuth2": {
-          "id": "26",
-          "name": "[UPDATE ME]"
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
         }
       }
     },
@@ -576,8 +553,8 @@
       "name": "Send reply to recipient",
       "type": "n8n-nodes-base.gmail",
       "position": [
-        1220,
-        -160
+        1240,
+        -320
       ],
       "typeVersion": 2,
       "credentials": {
@@ -1236,7 +1213,7 @@
       "parameters": {
         "content": "## Send a ChatGPT email reply when email received and save responses to Google Sheets\nThis workflow sends a OpenAI GPT reply when an email is received from specific email recipients. It then saves the initial email and the GPT response to an automatically generated Google spreadsheet. Subsequent GPT responses will be added to the same spreadsheet. Additionally, when feedback is given for any of the GPT responses, it will be recorded to the spreasheet, which can then be used later to fine-tune the GPT model.\n\n### How it works\nThis workflow is essentially a two-in-one workflow. It triggers off from two different nodes and have very different functionality from each trigger.\n\n**`On email received`**:\n1. Triggers off on the `On email received` node.\n2. Extract the email body from the email.\n3. Generate a response from the email body using the `OpenAI` node.\n4. Reply to the email sender using the `Send reply to recipient` node. A feedback link is also included in the email body which will trigger the `On feedback given` node. This is used to fine-tune the GPT model.\n5. Save the email body and OpenAI response to a Google Sheet. If a sheet does not exist, it will be created.\n\n\n**`On feedback given`**:\n1. Triggers off when a feedback link is clicked in the emailed GPT response.\n2. The feedback, either positive or negative, for that specific GPT response is then recorded to the Google Sheet.\n",
         "height": 680.5491163173024,
-        "width": 516.6954377311955
+        "width": 544.6028139378573
       },
       "id": "6e7586db-f437-4450-a1c7-e5ea7e8767b0",
       "name": "Sticky Note1",
@@ -1268,7 +1245,7 @@
       "name": "Determine which trigger ran",
       "type": "n8n-nodes-base.switch",
       "position": [
-        -800,
+        -780,
         780
       ],
       "typeVersion": 1
@@ -1333,6 +1310,47 @@
         400
       ],
       "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "postProcessAction": "nothing",
+        "options": {}
+      },
+      "id": "7cc28b9f-6758-4287-9ad1-fdfbcabf22aa",
+      "name": "Email Trigger (IMAP)",
+      "type": "n8n-nodes-base.emailReadImap",
+      "typeVersion": 2,
+      "position": [
+        -1600,
+        660
+      ],
+      "credentials": {
+        "imap": {
+          "id": "10",
+          "name": "Email (odoo@edvistas.com)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "emailFormat": "html",
+        "html": "={{ $json.html }}",
+        "options": {}
+      },
+      "id": "45053795-407f-4be6-87da-1823155e1d13",
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [
+        1240,
+        -160
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "27",
+          "name": "SMTP (mx.gowls.com)"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -1353,6 +1371,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-03-31T17:07:11.000Z",
-  "versionId": "9b6d2f09-a7b3-42d6-9bbc-8a16ef14a316"
+  "updatedAt": "2023-04-07T20:46:49.000Z",
+  "versionId": "bb3249d8-c0b4-48f3-86d7-5109df88c6ee"
 }
