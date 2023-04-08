@@ -290,7 +290,7 @@
     {
       "parameters": {
         "fromEmail": "noreply@edvistas.com",
-        "toEmail": "kdessinger@edvistas.com",
+        "toEmail": "admin@edvistas.com",
         "subject": "COVID Trace - Potential Exposure Alert",
         "text": "=Public Saftey Alert Detected!\nDate: {{ $json.Date }}\nName: {{ $json[\"Staff_Name\"] }}\nEmail: {{ $json[\"Email\"] }}\n\nPlease note that a during a screening test a Guest or Staff member has reported a potential exposure risk to the Covid-19 Virus. Please check the submitted records in EduFrom: https://apps.edvistas.com/forms/formView.aspx?formId={{ $json[\"Formid\"] }}&referId={{ $json[\"referid\"] }}\n\n",
         "options": {
@@ -775,6 +775,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-03-08T17:20:15.000Z",
-  "versionId": "8acf60da-d257-4d71-a6a1-3695405fd210"
+  "updatedAt": "2023-04-07T19:57:58.000Z",
+  "versionId": "28cec565-ec63-4e81-aa09-02917bbb3cf6"
 }
