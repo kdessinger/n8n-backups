@@ -56,16 +56,6 @@
         ]
       ]
     },
-    "Write Binary File": {
-      "main": [
-        []
-      ]
-    },
-    "FTP": {
-      "main": [
-        []
-      ]
-    },
     "Execute Command": {
       "main": [
         [
@@ -268,7 +258,7 @@
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
       "position": [
-        260,
+        220,
         80
       ]
     },
@@ -291,8 +281,28 @@
       "type": "n8n-nodes-base.itemLists",
       "typeVersion": 2,
       "position": [
-        460,
+        420,
         80
+      ]
+    },
+    {
+      "parameters": {
+        "triggerOn": "folder",
+        "path": "/mnt/share/_convert/Speech_2_Text/",
+        "events": [
+          "add"
+        ],
+        "options": {
+          "followSymlinks": true
+        }
+      },
+      "id": "eebfe09f-c507-45e4-b205-48e886920f1a",
+      "name": "Local File Trigger",
+      "type": "n8n-nodes-base.localFileTrigger",
+      "typeVersion": 1,
+      "position": [
+        -180,
+        240
       ]
     }
   ],
@@ -322,6 +332,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-03-22T06:31:20.000Z",
-  "versionId": "4ce0ae4b-ad60-4922-ae24-2c224092fc34"
+  "updatedAt": "2023-04-07T20:51:04.000Z",
+  "versionId": "c1b71eb2-ad06-42ea-ae91-ccd9e2ac1390"
 }
