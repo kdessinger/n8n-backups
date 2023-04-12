@@ -3,13 +3,7 @@
   "connections": {
     "Start": {
       "main": [
-        [
-          {
-            "node": "GetFile",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "LoadMP3": {
@@ -25,13 +19,7 @@
     },
     "GetFile": {
       "main": [
-        [
-          {
-            "node": "LoadMP3",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Whisper Request": {
@@ -66,6 +54,11 @@
           }
         ]
       ]
+    },
+    "FTP": {
+      "main": [
+        []
+      ]
     }
   },
   "createdAt": "2023-03-22T03:28:24.318Z",
@@ -82,7 +75,7 @@
       "name": "Write Binary File",
       "type": "n8n-nodes-base.writeBinaryFile",
       "position": [
-        1020,
+        800,
         240
       ],
       "typeVersion": 1,
@@ -94,8 +87,8 @@
       "type": "n8n-nodes-base.start",
       "typeVersion": 1,
       "position": [
-        20,
-        240
+        -520,
+        120
       ],
       "id": "20b747e9-5284-46e2-91d4-43c7513a6afc"
     },
@@ -147,7 +140,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        620,
+        400,
         240
       ],
       "credentials": {
@@ -166,7 +159,7 @@
       "type": "n8n-nodes-base.readBinaryFiles",
       "typeVersion": 1,
       "position": [
-        420,
+        200,
         240
       ]
     },
@@ -203,8 +196,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 1,
       "position": [
-        220,
-        240
+        -180,
+        420
       ]
     },
     {
@@ -224,7 +217,7 @@
       "type": "n8n-nodes-base.moveBinaryData",
       "typeVersion": 1,
       "position": [
-        820,
+        600,
         240
       ]
     },
@@ -239,7 +232,7 @@
       "type": "n8n-nodes-base.ftp",
       "typeVersion": 1,
       "position": [
-        20,
+        -180,
         80
       ],
       "credentials": {
@@ -258,8 +251,8 @@
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
       "position": [
-        220,
-        80
+        200,
+        60
       ]
     },
     {
@@ -281,8 +274,8 @@
       "type": "n8n-nodes-base.itemLists",
       "typeVersion": 2,
       "position": [
-        420,
-        80
+        400,
+        60
       ]
     },
     {
@@ -303,6 +296,42 @@
       "position": [
         -180,
         240
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "folder",
+        "operation": "list",
+        "path": "/_convert/Speech_2_Text"
+      },
+      "id": "27227a4f-529a-4042-85db-c881d1b0d899",
+      "name": "Nextcloud",
+      "type": "n8n-nodes-base.nextCloud",
+      "typeVersion": 1,
+      "position": [
+        -180,
+        -80
+      ],
+      "credentials": {
+        "nextCloudApi": {
+          "id": "18",
+          "name": "NextCloud (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Monitor a folder and get the file name(s) of new file(s).\n**Choose One** to edit to get the file name",
+        "height": 802.2888154608027,
+        "width": 352.9770840827728
+      },
+      "id": "5c5063c6-d3fa-4f90-8699-540b13c613eb",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -269.673209167749,
+        -220
       ]
     }
   ],
@@ -332,6 +361,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-04-07T20:51:04.000Z",
-  "versionId": "c1b71eb2-ad06-42ea-ae91-ccd9e2ac1390"
+  "updatedAt": "2023-04-12T03:42:43.000Z",
+  "versionId": "39436fa8-99da-4ded-a157-b771a612f0b5"
 }
