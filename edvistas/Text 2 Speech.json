@@ -1,11 +1,6 @@
 {
   "active": false,
   "connections": {
-    "Start": {
-      "main": [
-        []
-      ]
-    },
     "LoadMP3": {
       "main": [
         [
@@ -15,11 +10,6 @@
             "index": 0
           }
         ]
-      ]
-    },
-    "GetFile": {
-      "main": [
-        []
       ]
     },
     "Whisper Request": {
@@ -44,7 +34,29 @@
         ]
       ]
     },
-    "Execute Command": {
+    "Nextcloud": {
+      "main": [
+        [
+          {
+            "node": "IF Larger Than 25MB",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF Larger Than 25MB": {
+      "main": [
+        [
+          {
+            "node": "Split Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Files": {
       "main": [
         [
           {
@@ -53,11 +65,6 @@
             "index": 0
           }
         ]
-      ]
-    },
-    "FTP": {
-      "main": [
-        []
       ]
     }
   },
@@ -75,8 +82,8 @@
       "name": "Write Binary File",
       "type": "n8n-nodes-base.writeBinaryFile",
       "position": [
-        800,
-        240
+        1120,
+        320
       ],
       "typeVersion": 1,
       "id": "8e03cc03-5de4-4a1e-83fd-eea6f7ebc8c1"
@@ -87,8 +94,8 @@
       "type": "n8n-nodes-base.start",
       "typeVersion": 1,
       "position": [
-        -520,
-        120
+        220,
+        340
       ],
       "id": "20b747e9-5284-46e2-91d4-43c7513a6afc"
     },
@@ -140,8 +147,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        400,
-        240
+        720,
+        320
       ],
       "credentials": {
         "httpHeaderAuth": {
@@ -159,8 +166,8 @@
       "type": "n8n-nodes-base.readBinaryFiles",
       "typeVersion": 1,
       "position": [
-        200,
-        240
+        520,
+        320
       ]
     },
     {
@@ -217,8 +224,8 @@
       "type": "n8n-nodes-base.moveBinaryData",
       "typeVersion": 1,
       "position": [
-        600,
-        240
+        920,
+        320
       ]
     },
     {
@@ -244,19 +251,6 @@
     },
     {
       "parameters": {
-        "command": "ls -1  /mnt/share/_convert/Speech_2_Text | grep -Ev '\\.(txt)$'"
-      },
-      "id": "65f64f1d-928b-4138-8be6-68afda94bf8f",
-      "name": "Execute Command",
-      "type": "n8n-nodes-base.executeCommand",
-      "typeVersion": 1,
-      "position": [
-        200,
-        60
-      ]
-    },
-    {
-      "parameters": {
         "operation": "summarize",
         "fieldsToSummarize": {
           "values": [
@@ -274,8 +268,8 @@
       "type": "n8n-nodes-base.itemLists",
       "typeVersion": 2,
       "position": [
-        400,
-        60
+        740,
+        100
       ]
     },
     {
@@ -333,6 +327,40 @@
         -269.673209167749,
         -220
       ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.contentLength }}",
+              "operation": "larger",
+              "value2": 25000000
+            }
+          ]
+        }
+      },
+      "id": "1f7294a5-06aa-4385-944a-66e0e1562ed9",
+      "name": "IF Larger Than 25MB",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        240,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "command": "ls -1  /mnt/share/_convert/Speech_2_Text | grep -Ev '\\.(txt)$'"
+      },
+      "id": "65f64f1d-928b-4138-8be6-68afda94bf8f",
+      "name": "Split Files",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        500,
+        -20
+      ]
     }
   ],
   "pinData": {},
@@ -361,6 +389,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-04-12T03:42:43.000Z",
-  "versionId": "39436fa8-99da-4ded-a157-b771a612f0b5"
+  "updatedAt": "2023-04-12T04:13:26.000Z",
+  "versionId": "3bad9365-9285-4774-b39b-8f9c12e92115"
 }
