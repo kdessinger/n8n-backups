@@ -53,6 +53,13 @@
             "type": "main",
             "index": 0
           }
+        ],
+        [
+          {
+            "node": "LoadMP3",
+            "type": "main",
+            "index": 0
+          }
         ]
       ]
     },
@@ -60,7 +67,7 @@
       "main": [
         [
           {
-            "node": "Item Lists",
+            "node": "Nextcloud1",
             "type": "main",
             "index": 0
           }
@@ -86,6 +93,24 @@
             "type": "main",
             "index": 0
           }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Nextcloud1": {
+      "main": [
+        [
+          {
+            "node": "LoadMP3",
+            "type": "main",
+            "index": 0
+          }
         ]
       ]
     }
@@ -104,8 +129,8 @@
       "name": "Write Binary File",
       "type": "n8n-nodes-base.writeBinaryFile",
       "position": [
-        1120,
-        320
+        1240,
+        40
       ],
       "typeVersion": 1,
       "id": "8e03cc03-5de4-4a1e-83fd-eea6f7ebc8c1"
@@ -158,6 +183,7 @@
         "options": {
           "response": {
             "response": {
+              "fullResponse": true,
               "responseFormat": "text",
               "outputPropertyName": "text"
             }
@@ -169,8 +195,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        720,
-        320
+        880,
+        40
       ],
       "credentials": {
         "httpHeaderAuth": {
@@ -181,15 +207,15 @@
     },
     {
       "parameters": {
-        "fileSelector": "={{ $json.File }}"
+        "fileSelector": "=/mnt/share/{{ $json.path }}"
       },
       "id": "143547a4-8142-4f21-8b12-dd1297bedc49",
       "name": "LoadMP3",
       "type": "n8n-nodes-base.readBinaryFiles",
       "typeVersion": 1,
       "position": [
-        520,
-        320
+        700,
+        40
       ]
     },
     {
@@ -246,8 +272,8 @@
       "type": "n8n-nodes-base.moveBinaryData",
       "typeVersion": 1,
       "position": [
-        920,
-        320
+        1060,
+        40
       ]
     },
     {
@@ -273,29 +299,6 @@
     },
     {
       "parameters": {
-        "operation": "summarize",
-        "fieldsToSummarize": {
-          "values": [
-            {}
-          ]
-        },
-        "options": {
-          "disableDotNotation": false,
-          "outputFormat": "separateItems",
-          "skipEmptySplitFields": false
-        }
-      },
-      "id": "6600acf3-322c-453b-a712-44371706129e",
-      "name": "Item Lists",
-      "type": "n8n-nodes-base.itemLists",
-      "typeVersion": 2,
-      "position": [
-        860,
-        -40
-      ]
-    },
-    {
-      "parameters": {
         "triggerOn": "folder",
         "path": "/mnt/share/_convert/Speech_2_Text/",
         "events": [
@@ -312,7 +315,8 @@
       "position": [
         -180,
         240
-      ]
+      ],
+      "disabled": true
     },
     {
       "parameters": {
@@ -357,7 +361,7 @@
             {
               "value1": "={{ $json.contentLength }}",
               "operation": "larger",
-              "value2": 25000000
+              "value2": 24117248
             }
           ]
         }
@@ -367,8 +371,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        420,
-        -80
+        360,
+        -140
       ]
     },
     {
@@ -380,8 +384,8 @@
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
       "position": [
-        640,
-        -180
+        520,
+        -300
       ]
     },
     {
@@ -401,9 +405,41 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        200,
-        20
+        120,
+        -180
       ]
+    },
+    {
+      "parameters": {},
+      "id": "61e7aa63-8aee-4450-b877-ea3525a7642e",
+      "name": "No Operation, do nothing",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        260,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "folder",
+        "operation": "list",
+        "path": "/_convert/Speech_2_Text"
+      },
+      "id": "3602a0dd-d57e-4a63-9d11-7b1594b9f583",
+      "name": "Nextcloud1",
+      "type": "n8n-nodes-base.nextCloud",
+      "typeVersion": 1,
+      "position": [
+        700,
+        -300
+      ],
+      "credentials": {
+        "nextCloudApi": {
+          "id": "18",
+          "name": "NextCloud (kdessinger)"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -432,6 +468,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-04-13T03:51:50.000Z",
-  "versionId": "a3444a91-a393-4f18-b086-daed3a742db5"
+  "updatedAt": "2023-04-13T06:08:22.000Z",
+  "versionId": "95f5d444-54b0-4320-a755-9414bc336793"
 }
