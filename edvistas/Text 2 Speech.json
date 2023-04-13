@@ -38,7 +38,7 @@
       "main": [
         [
           {
-            "node": "IF Larger Than 25MB",
+            "node": "Get audio files",
             "type": "main",
             "index": 0
           }
@@ -61,6 +61,28 @@
         [
           {
             "node": "Item Lists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "Nextcloud",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get audio files": {
+      "main": [
+        [
+          {
+            "node": "IF Larger Than 25MB",
             "type": "main",
             "index": 0
           }
@@ -94,8 +116,8 @@
       "type": "n8n-nodes-base.start",
       "typeVersion": 1,
       "position": [
-        220,
-        340
+        -520,
+        100
       ],
       "id": "20b747e9-5284-46e2-91d4-43c7513a6afc"
     },
@@ -268,8 +290,8 @@
       "type": "n8n-nodes-base.itemLists",
       "typeVersion": 2,
       "position": [
-        740,
-        100
+        860,
+        -40
       ]
     },
     {
@@ -345,21 +367,42 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        240,
-        120
+        420,
+        -80
       ]
     },
     {
       "parameters": {
-        "command": "ls -1  /mnt/share/_convert/Speech_2_Text | grep -Ev '\\.(txt)$'"
+        "command": "=./splitaudiofile.sh /mnt/share/{{ $json.path }}"
       },
       "id": "65f64f1d-928b-4138-8be6-68afda94bf8f",
       "name": "Split Files",
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
       "position": [
-        500,
-        -20
+        640,
+        -180
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.contentType }}",
+              "operation": "contains",
+              "value2": "audio"
+            }
+          ]
+        }
+      },
+      "id": "b7914181-4220-442a-b5be-eebae56bb4d7",
+      "name": "Get audio files",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        200,
+        20
       ]
     }
   ],
@@ -389,6 +432,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-04-12T04:13:26.000Z",
-  "versionId": "3bad9365-9285-4774-b39b-8f9c12e92115"
+  "updatedAt": "2023-04-13T03:51:50.000Z",
+  "versionId": "a3444a91-a393-4f18-b086-daed3a742db5"
 }
