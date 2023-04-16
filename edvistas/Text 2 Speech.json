@@ -96,7 +96,7 @@
         ],
         [
           {
-            "node": "No Operation, do nothing",
+            "node": "No audio files, do nothing",
             "type": "main",
             "index": 0
           }
@@ -129,8 +129,8 @@
       "name": "Write Binary File",
       "type": "n8n-nodes-base.writeBinaryFile",
       "position": [
-        1240,
-        40
+        1440,
+        -180
       ],
       "typeVersion": 1,
       "id": "8e03cc03-5de4-4a1e-83fd-eea6f7ebc8c1"
@@ -195,8 +195,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        880,
-        40
+        1080,
+        -180
       ],
       "credentials": {
         "httpHeaderAuth": {
@@ -214,8 +214,8 @@
       "type": "n8n-nodes-base.readBinaryFiles",
       "typeVersion": 1,
       "position": [
-        700,
-        40
+        900,
+        -180
       ]
     },
     {
@@ -272,8 +272,8 @@
       "type": "n8n-nodes-base.moveBinaryData",
       "typeVersion": 1,
       "position": [
-        1060,
-        40
+        1260,
+        -180
       ]
     },
     {
@@ -371,8 +371,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        360,
-        -140
+        320,
+        -200
       ]
     },
     {
@@ -384,7 +384,7 @@
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
       "position": [
-        520,
+        540,
         -300
       ]
     },
@@ -410,17 +410,6 @@
       ]
     },
     {
-      "parameters": {},
-      "id": "61e7aa63-8aee-4450-b877-ea3525a7642e",
-      "name": "No Operation, do nothing",
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [
-        260,
-        120
-      ]
-    },
-    {
       "parameters": {
         "resource": "folder",
         "operation": "list",
@@ -440,6 +429,17 @@
           "name": "NextCloud (kdessinger)"
         }
       }
+    },
+    {
+      "parameters": {},
+      "id": "61e7aa63-8aee-4450-b877-ea3525a7642e",
+      "name": "No audio files, do nothing",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        320,
+        -40
+      ]
     }
   ],
   "pinData": {},
@@ -468,6 +468,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-04-13T06:08:22.000Z",
-  "versionId": "95f5d444-54b0-4320-a755-9414bc336793"
+  "updatedAt": "2023-04-15T22:56:49.000Z",
+  "versionId": "0a16d97b-d0e2-4e99-baff-783cc1e8e07f"
 }
