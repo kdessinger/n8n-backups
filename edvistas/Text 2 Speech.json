@@ -25,7 +25,13 @@
     },
     "IF Larger Than 25MB": {
       "main": [
-        [],
+        [
+          {
+            "node": "Split Files",
+            "type": "main",
+            "index": 0
+          }
+        ],
         [
           {
             "node": "Load Nextcloud File",
@@ -79,7 +85,7 @@
       "main": [
         [
           {
-            "node": "Load Local File",
+            "node": "Load Nextcloud File",
             "type": "main",
             "index": 0
           }
@@ -206,8 +212,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1080,
-        -180
+        1091,
+        -360
       ],
       "credentials": {
         "httpHeaderAuth": {
@@ -363,7 +369,7 @@
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
       "position": [
-        520,
+        540,
         -320
       ]
     },
@@ -431,8 +437,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        868.8196569183656,
-        -320
+        880,
+        -500
       ]
     },
     {
@@ -445,8 +451,8 @@
       "type": "n8n-nodes-base.nextCloud",
       "typeVersion": 1,
       "position": [
-        900,
-        0
+        911,
+        -180
       ],
       "credentials": {
         "nextCloudApi": {
@@ -464,8 +470,8 @@
       "type": "n8n-nodes-base.readBinaryFiles",
       "typeVersion": 1,
       "position": [
-        900,
-        -180
+        911,
+        -360
       ]
     },
     {
@@ -485,8 +491,8 @@
       "type": "n8n-nodes-base.moveBinaryData",
       "typeVersion": 1,
       "position": [
-        1260,
-        -180
+        1271,
+        -360
       ]
     },
     {
@@ -499,8 +505,8 @@
       "name": "Save File to Disk",
       "type": "n8n-nodes-base.writeBinaryFile",
       "position": [
-        1440,
-        -180
+        1451,
+        -360
       ],
       "typeVersion": 1,
       "id": "8e03cc03-5de4-4a1e-83fd-eea6f7ebc8c1"
@@ -516,8 +522,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1410.0619172607694,
-        -320
+        1421,
+        -500
       ]
     },
     {
@@ -569,8 +575,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1080,
-        0
+        1091,
+        -180
       ],
       "credentials": {
         "httpHeaderAuth": {
@@ -595,8 +601,8 @@
       "type": "n8n-nodes-base.moveBinaryData",
       "typeVersion": 1,
       "position": [
-        1260,
-        0
+        1271,
+        -180
       ],
       "alwaysOutputData": true
     },
@@ -610,8 +616,8 @@
       "type": "n8n-nodes-base.nextCloud",
       "typeVersion": 1,
       "position": [
-        1440,
-        0
+        1451,
+        -180
       ],
       "credentials": {
         "nextCloudApi": {
@@ -688,6 +694,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-04-16T21:56:30.000Z",
-  "versionId": "bfe85796-c0cd-4082-bc7a-27e22789b1c0"
+  "updatedAt": "2023-04-18T18:38:57.000Z",
+  "versionId": "b6e2c2a1-1a5f-42ac-ba89-dfb0e4eefdc3"
 }
