@@ -362,6 +362,7 @@
     },
     {
       "parameters": {
+        "executeOnce": false,
         "command": "=/home/node/.n8n/scripts/splitaudiofile.sh /mnt/share/{{ $json.path }}"
       },
       "id": "65f64f1d-928b-4138-8be6-68afda94bf8f",
@@ -635,8 +636,23 @@
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
       "position": [
-        240,
-        -500
+        440,
+        -660
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Need instructions on how to install n8n nativly?\n**click** here for a guide. [Guide](https://i12bretro.github.io/tutorials/0784.html)",
+        "height": 117.89351703909519,
+        "width": 347.1801384459393
+      },
+      "id": "c2a9e1fd-5a53-425d-90e4-9068889a3ba7",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        60,
+        -660
       ]
     }
   ],
@@ -694,6 +710,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-04-18T18:38:57.000Z",
-  "versionId": "b6e2c2a1-1a5f-42ac-ba89-dfb0e4eefdc3"
+  "updatedAt": "2023-06-04T04:02:52.000Z",
+  "versionId": "a9505cd9-2ab4-4273-9137-8486443c1e71"
 }
