@@ -146,6 +146,28 @@
           }
         ]
       ]
+    },
+    "Local File Trigger": {
+      "main": [
+        [
+          {
+            "node": "Nextcloud",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Local File Trigger1": {
+      "main": [
+        [
+          {
+            "node": "Nextcloud",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2023-03-22T03:28:24.318Z",
@@ -158,10 +180,11 @@
       "type": "n8n-nodes-base.start",
       "typeVersion": 1,
       "position": [
-        -460,
-        -180
+        -520,
+        -100
       ],
-      "id": "20b747e9-5284-46e2-91d4-43c7513a6afc"
+      "id": "20b747e9-5284-46e2-91d4-43c7513a6afc",
+      "disabled": true
     },
     {
       "parameters": {
@@ -300,8 +323,7 @@
       "position": [
         -180,
         -300
-      ],
-      "disabled": true
+      ]
     },
     {
       "parameters": {
@@ -654,6 +676,27 @@
         60,
         -660
       ]
+    },
+    {
+      "parameters": {
+        "triggerOn": "folder",
+        "path": "/mnt/share/",
+        "events": [
+          "add"
+        ],
+        "options": {
+          "followSymlinks": true
+        }
+      },
+      "id": "ccfc1c9a-22e5-4255-a575-c508e414e631",
+      "name": "Local File Trigger1",
+      "type": "n8n-nodes-base.localFileTrigger",
+      "typeVersion": 1,
+      "position": [
+        -520,
+        80
+      ],
+      "disabled": true
     }
   ],
   "pinData": {
@@ -710,6 +753,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-06-04T04:02:52.000Z",
-  "versionId": "a9505cd9-2ab4-4273-9137-8486443c1e71"
+  "updatedAt": "2023-06-09T06:12:25.000Z",
+  "versionId": "85e08386-1712-4235-a7ee-7adbe069150d"
 }
