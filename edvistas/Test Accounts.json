@@ -914,8 +914,15 @@
   },
   "settings": {},
   "staticData": null,
-  "tags": [],
+  "tags": [
+    {
+      "createdAt": "2023-06-10T20:28:15.224Z",
+      "updatedAt": "2023-06-10T20:28:15.224Z",
+      "id": "33",
+      "name": "Playground"
+    }
+  ],
   "triggerCount": 0,
-  "updatedAt": "2023-04-07T03:11:16.000Z",
-  "versionId": "33b8e786-5496-4981-be34-461a7d69816e"
+  "updatedAt": "2023-06-10T20:29:10.000Z",
+  "versionId": "460a7d89-dead-49af-aaba-799e9db161b9"
 }
