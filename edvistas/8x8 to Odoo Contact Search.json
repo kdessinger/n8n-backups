@@ -154,7 +154,7 @@
       "credentials": {
         "odooApi": {
           "id": "12",
-          "name": "Odoo-Prod (Administrator)"
+          "name": "Odoo (Administrator)"
         }
       }
     },
@@ -327,9 +327,15 @@
       "updatedAt": "2022-12-09T05:43:38.988Z",
       "id": "13",
       "name": "voip"
+    },
+    {
+      "createdAt": "2023-06-10T20:20:06.155Z",
+      "updatedAt": "2023-06-10T20:20:06.155Z",
+      "id": "32",
+      "name": "done"
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-06-03T04:23:27.000Z",
-  "versionId": "ca1de262-886d-4d5a-b8cc-6530cefa7bc9"
+  "updatedAt": "2023-06-10T20:20:08.000Z",
+  "versionId": "79c9ab8d-ae2d-4c6a-9dad-41457b93d3d9"
 }
