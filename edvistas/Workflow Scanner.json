@@ -216,9 +216,15 @@
       "updatedAt": "2022-10-19T03:37:58.555Z",
       "id": "2",
       "name": "n8n"
+    },
+    {
+      "createdAt": "2023-06-10T20:29:40.879Z",
+      "updatedAt": "2023-06-10T20:29:40.879Z",
+      "id": "34",
+      "name": "system"
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-03-09T02:34:14.000Z",
-  "versionId": "02d5a2d7-6250-4194-b6d0-89e1c0eb0617"
+  "updatedAt": "2023-06-10T20:29:42.000Z",
+  "versionId": "feaf0845-eca1-4c14-b900-62421f076f07"
 }
