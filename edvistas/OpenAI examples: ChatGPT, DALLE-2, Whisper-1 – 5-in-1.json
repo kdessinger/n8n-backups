@@ -748,8 +748,21 @@
   "pinData": {},
   "settings": {},
   "staticData": null,
-  "tags": [],
+  "tags": [
+    {
+      "createdAt": "2023-06-10T20:20:06.155Z",
+      "updatedAt": "2023-06-10T20:20:06.155Z",
+      "id": "32",
+      "name": "done"
+    },
+    {
+      "createdAt": "2023-06-10T20:30:49.533Z",
+      "updatedAt": "2023-06-10T20:30:49.533Z",
+      "id": "35",
+      "name": "example"
+    }
+  ],
   "triggerCount": 0,
-  "updatedAt": "2023-03-22T04:38:41.629Z",
-  "versionId": "c4ccf2ab-1b93-41e4-ad5c-c3b7831a7ea8"
+  "updatedAt": "2023-06-10T20:30:51.000Z",
+  "versionId": "f7df4642-f636-4010-a3fa-95ba4ff35160"
 }
