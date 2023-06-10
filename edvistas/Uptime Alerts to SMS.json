@@ -155,9 +155,15 @@
       "updatedAt": "2023-03-03T15:41:27.787Z",
       "id": "24",
       "name": "SMS"
+    },
+    {
+      "createdAt": "2023-06-10T20:20:06.155Z",
+      "updatedAt": "2023-06-10T20:20:06.155Z",
+      "id": "32",
+      "name": "done"
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-03-03T15:41:35.000Z",
-  "versionId": "9aa48858-6e46-4aeb-9fe6-e2924a1a84de"
+  "updatedAt": "2023-06-10T21:25:07.000Z",
+  "versionId": "29644933-c54f-4cb4-8e13-25fe05105cdc"
 }
