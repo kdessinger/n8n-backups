@@ -545,9 +545,15 @@
       "updatedAt": "2023-02-24T06:02:51.704Z",
       "id": "23",
       "name": "Prompts"
+    },
+    {
+      "createdAt": "2023-06-10T20:28:15.224Z",
+      "updatedAt": "2023-06-10T20:28:15.224Z",
+      "id": "33",
+      "name": "Playground"
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-03-14T06:28:55.000Z",
-  "versionId": "09c2e0b6-3e9f-4367-a266-4ad7e7c67c0b"
+  "updatedAt": "2023-06-10T20:28:21.000Z",
+  "versionId": "3d82312e-7a26-442d-b4f2-4725bc4710e5"
 }
