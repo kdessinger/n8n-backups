@@ -154,8 +154,15 @@
   "pinData": {},
   "settings": {},
   "staticData": null,
-  "tags": [],
+  "tags": [
+    {
+      "createdAt": "2023-06-10T20:19:21.457Z",
+      "updatedAt": "2023-06-10T20:19:21.457Z",
+      "id": "31",
+      "name": "uc"
+    }
+  ],
   "triggerCount": 0,
-  "updatedAt": "2023-03-31T19:46:26.000Z",
-  "versionId": "be47e459-378c-4e5b-b393-312d3dbd6338"
+  "updatedAt": "2023-06-10T20:23:19.000Z",
+  "versionId": "c1f7b825-8b33-4b7b-8ae6-9bdf276f58a1"
 }
