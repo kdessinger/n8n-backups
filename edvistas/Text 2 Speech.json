@@ -183,8 +183,7 @@
         -520,
         -100
       ],
-      "id": "20b747e9-5284-46e2-91d4-43c7513a6afc",
-      "disabled": true
+      "id": "20b747e9-5284-46e2-91d4-43c7513a6afc"
     },
     {
       "parameters": {
@@ -323,7 +322,8 @@
       "position": [
         -180,
         -300
-      ]
+      ],
+      "disabled": true
     },
     {
       "parameters": {
@@ -697,6 +697,41 @@
         80
       ],
       "disabled": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "operation": "notEqual"
+            }
+          ],
+          "dateTime": [
+            {
+              "value1": "2023-06-03T03:23:46.284Z",
+              "operation": "before",
+              "value2": "2023-06-10T03:23:51.788Z"
+            }
+          ],
+          "number": [
+            {
+              "operation": "isEmpty"
+            }
+          ],
+          "string": [
+            {}
+          ]
+        },
+        "combineConditions": "OR"
+      },
+      "id": "2a870a73-ac07-4544-83c7-db74cb8f9ee0",
+      "name": "Filter",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 1,
+      "position": [
+        640,
+        100
+      ]
     }
   ],
   "pinData": {
@@ -753,6 +788,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-06-09T06:12:25.000Z",
-  "versionId": "85e08386-1712-4235-a7ee-7adbe069150d"
+  "updatedAt": "2023-06-10T03:47:06.000Z",
+  "versionId": "25488cb1-24fb-4ccc-ad40-ac3da94dbc5c"
 }
