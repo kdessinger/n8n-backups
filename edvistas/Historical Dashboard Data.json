@@ -345,8 +345,21 @@
   "pinData": {},
   "settings": {},
   "staticData": null,
-  "tags": [],
+  "tags": [
+    {
+      "createdAt": "2023-06-10T20:19:21.457Z",
+      "updatedAt": "2023-06-10T20:19:21.457Z",
+      "id": "31",
+      "name": "uc"
+    },
+    {
+      "createdAt": "2023-06-10T21:44:29.997Z",
+      "updatedAt": "2023-06-10T21:44:29.997Z",
+      "id": "36",
+      "name": "MSSQL"
+    }
+  ],
   "triggerCount": 0,
-  "updatedAt": "2023-03-01T01:59:14.000Z",
-  "versionId": "9a480215-41b4-4166-b173-537a26153883"
+  "updatedAt": "2023-06-10T21:44:35.000Z",
+  "versionId": "233729a6-b54b-4d3d-9aa8-8640e749be15"
 }
