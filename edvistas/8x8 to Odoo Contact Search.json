@@ -38,7 +38,7 @@
       "main": [
         [
           {
-            "node": "No Operation, do nothing",
+            "node": "Open New Contact",
             "type": "main",
             "index": 0
           }
@@ -184,10 +184,9 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1,
       "position": [
-        1660,
+        1460,
         260
-      ],
-      "disabled": true
+      ]
     },
     {
       "parameters": {
@@ -293,17 +292,6 @@
         180
       ],
       "alwaysOutputData": false
-    },
-    {
-      "parameters": {},
-      "id": "e505b826-cbc2-4ed4-89d4-76ba867579b4",
-      "name": "No Operation, do nothing",
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [
-        1460,
-        260
-      ]
     }
   ],
   "pinData": {},
@@ -336,6 +324,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-06-10T20:20:08.000Z",
-  "versionId": "79c9ab8d-ae2d-4c6a-9dad-41457b93d3d9"
+  "updatedAt": "2023-06-13T03:40:10.000Z",
+  "versionId": "80ce6aaa-341f-4050-857b-833cf43795e0"
 }
