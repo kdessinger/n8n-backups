@@ -212,8 +212,8 @@
     },
     {
       "parameters": {
-        "operation": "getAll",
-        "limit": 3,
+        "operation": "get",
+        "contactId": "25",
         "options": {}
       },
       "id": "e43c4bde-690b-4eb6-867f-e0847ef089c0",
@@ -393,7 +393,11 @@
     },
     {
       "parameters": {
-        "resource": "invoice"
+        "resource": "invoice",
+        "operation": "getAll",
+        "filters": {
+          "query": ""
+        }
       },
       "id": "1095882f-5bae-4af7-bd14-3e8f02713016",
       "name": "QuickBooks Online",
@@ -423,8 +427,7 @@
     },
     {
       "parameters": {
-        "resource": "alerts",
-        "operation": "get"
+        "resource": "metrics"
       },
       "id": "b610fe39-1c70-40b3-a068-8b024018641e",
       "name": "Metabase",
@@ -540,8 +543,7 @@
     },
     {
       "parameters": {
-        "resource": "chat",
-        "operation": "setDescription"
+        "operation": "member"
       },
       "id": "03ef7ad1-5271-4167-b1ee-e4a14275e354",
       "name": "Telegram",
@@ -560,7 +562,6 @@
     },
     {
       "parameters": {
-        "resource": "attachmentAction",
         "event": "all",
         "filters": {}
       },
@@ -582,7 +583,9 @@
     },
     {
       "parameters": {
-        "additionalFields": {}
+        "additionalFields": {
+          "calName": ""
+        }
       },
       "id": "941a1465-e13c-407a-a8b6-fa582271f28c",
       "name": "iCalendar",
@@ -622,6 +625,7 @@
     },
     {
       "parameters": {
+        "scope": "organization",
         "events": [
           "invitee.created"
         ]
@@ -637,8 +641,8 @@
       "webhookId": "260046b2-09d4-48e1-8f21-a23ad88cc390",
       "credentials": {
         "calendlyApi": {
-          "id": "38",
-          "name": "Calendly (kdessinger-V2)"
+          "id": "37",
+          "name": "Calendly (kdessinger-V1)"
         }
       }
     },
@@ -745,56 +749,24 @@
           "name": "8x8 (kdessinger)"
         }
       }
+    },
+    {
+      "parameters": {
+        "events": [
+          "init"
+        ]
+      },
+      "id": "aa2dca68-2ccc-4e40-bf0d-c0d6f58f1c31",
+      "name": "n8n Trigger",
+      "type": "n8n-nodes-base.n8nTrigger",
+      "typeVersion": 1,
+      "position": [
+        500,
+        320
+      ]
     }
   ],
   "pinData": {
-    "OpenWeatherMap": [
-      {
-        "json": {
-          "coord": {
-            "lon": -73.3401,
-            "lat": 42.7495
-          },
-          "weather": [
-            {
-              "id": 804,
-              "main": "Clouds",
-              "description": "overcast clouds",
-              "icon": "04d"
-            }
-          ],
-          "base": "stations",
-          "main": {
-            "temp": 39.15,
-            "feels_like": 39.15,
-            "temp_min": 35.08,
-            "temp_max": 42.44,
-            "pressure": 1007,
-            "humidity": 56
-          },
-          "visibility": 10000,
-          "wind": {
-            "speed": 0,
-            "deg": 0
-          },
-          "clouds": {
-            "all": 100
-          },
-          "dt": 1679064181,
-          "sys": {
-            "type": 1,
-            "id": 3797,
-            "country": "US",
-            "sunrise": 1679050945,
-            "sunset": 1679094072
-          },
-          "timezone": -14400,
-          "id": 0,
-          "name": "Petersburg",
-          "cod": 200
-        }
-      }
-    ],
     "Nextcloud": [
       {
         "json": {
@@ -916,6 +888,12 @@
   "staticData": null,
   "tags": [
     {
+      "createdAt": "2023-06-10T20:20:06.155Z",
+      "updatedAt": "2023-06-10T20:20:06.155Z",
+      "id": "32",
+      "name": "done"
+    },
+    {
       "createdAt": "2023-06-10T20:28:15.224Z",
       "updatedAt": "2023-06-10T20:28:15.224Z",
       "id": "33",
@@ -923,6 +901,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-06-10T20:29:10.000Z",
-  "versionId": "460a7d89-dead-49af-aaba-799e9db161b9"
+  "updatedAt": "2023-06-13T03:23:55.000Z",
+  "versionId": "fbf5cc8f-a929-4552-b42e-d964320e2e8e"
 }
