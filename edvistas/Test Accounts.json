@@ -1,6 +1,80 @@
 {
   "active": false,
-  "connections": {},
+  "connections": {
+    "Synthesia Create": {
+      "main": [
+        [
+          {
+            "node": "Synthesia Check Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Synthesia Check Status": {
+      "main": [
+        [
+          {
+            "node": "Is it done?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Write Binary File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI1": {
+      "main": [
+        [
+          {
+            "node": "Synthesia Create",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is it done?": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Synthesia Check Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
   "createdAt": "2022-02-10T21:57:15.216Z",
   "id": "3",
   "name": "Test Accounts",
@@ -764,6 +838,166 @@
         500,
         320
       ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.synthesia.io/v2/videos",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"test\":true,\"input\":[{\"scriptText\":\"{{ $json[\"message\"][\"content\"] }}\",\"avatar\":\"anna_costume1_cameraA\",\"background\":\"green_screen\"}]}",
+        "options": {}
+      },
+      "id": "9f286104-047d-45aa-9de5-9e7deb77de4b",
+      "name": "Synthesia Create",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        -760,
+        540
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "41",
+          "name": "Synthesia"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://api.synthesia.io/v2/videos/{{ $json[\"id\"] }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "id": "4e99dce6-09ac-4c3f-96cb-bd77f99917f0",
+      "name": "Synthesia Check Status",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        -580,
+        540
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "41",
+          "name": "Synthesia"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://api.synthesia.io/v2/videos/{{ $json[\"id\"] }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "07f3fa89-ef6b-4ee3-a2a5-eb9d6d099502",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        -180,
+        520
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "41",
+          "name": "Synthesia"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fileName": "/mnt/share/_tmp",
+        "options": {}
+      },
+      "id": "f8877844-10ee-44cf-99fe-e3b89f22241b",
+      "name": "Write Binary File",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "typeVersion": 1,
+      "position": [
+        160,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "prompt": {
+          "messages": [
+            {
+              "role": "assistant",
+              "content": "You are a professional stand up comedian.  When even you are asked a question you always reply with a witty and funny line. "
+            },
+            {
+              "content": "Tell me about something that happened related to the education industry. "
+            }
+          ]
+        },
+        "options": {
+          "maxTokens": 800
+        }
+      },
+      "id": "5959289d-2a79-4091-8805-c69e9cb92f7d",
+      "name": "OpenAI1",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        -940,
+        540
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "=in_progress",
+              "value2": "in_progress"
+            }
+          ]
+        }
+      },
+      "id": "84f4ea43-2fad-40ac-ac80-4f54e676aeca",
+      "name": "Is it done?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -400,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "unit": "minutes"
+      },
+      "id": "d99a30df-99ea-463b-851c-0f480df2a798",
+      "name": "Wait",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [
+        -480,
+        680
+      ],
+      "webhookId": "1560615b-a498-46e0-8ad9-35fa2ab26355"
     }
   ],
   "pinData": {
@@ -882,6 +1116,17 @@
           "eTag": "640f43eb83cae"
         }
       }
+    ],
+    "Synthesia Create": [
+      {
+        "json": {
+          "createdAt": 1686687495,
+          "id": "0e1937d1-350c-435a-bb22-8184a5731e6d",
+          "lastUpdatedAt": 1686687495,
+          "status": "in_progress",
+          "visibility": "private"
+        }
+      }
     ]
   },
   "settings": {},
@@ -901,6 +1146,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-06-13T03:23:55.000Z",
-  "versionId": "fbf5cc8f-a929-4552-b42e-d964320e2e8e"
+  "updatedAt": "2023-06-13T20:32:20.000Z",
+  "versionId": "f4560602-909f-4972-826f-0bd83a3b6a69"
 }
