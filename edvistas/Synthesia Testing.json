@@ -1,0 +1,351 @@
+{
+  "active": false,
+  "connections": {
+    "Synthesia Create": {
+      "main": [
+        [
+          {
+            "node": "Synthesia Check Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Synthesia Check Status": {
+      "main": [
+        [
+          {
+            "node": "Is it ready?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking \"Execute Workflow\"": {
+      "main": [
+        [
+          {
+            "node": "Get a funny",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download file": {
+      "main": [
+        [
+          {
+            "node": "Save to _tmp",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait 1 min": {
+      "main": [
+        [
+          {
+            "node": "Synthesia Check Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is it ready?": {
+      "main": [
+        [
+          {
+            "node": "Download file",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait 1 min",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Email Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get a funny": {
+      "main": [
+        [
+          {
+            "node": "Random Avatar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Random Avatar": {
+      "main": [
+        [
+          {
+            "node": "Synthesia Create",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-06-14T16:49:04.167Z",
+  "id": "38",
+  "name": "Synthesia Testing",
+  "nodes": [
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.synthesia.io/v2/videos",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"test\": true,\n    \"title\": \"Automated Video Creation\",\n    \"description\": \"This video was created using n8n Workflow!\",\n    \"visibility\": \"public\",\n    \"ctaSettings\": {\n        \"label\": \"Click me!\",\n        \"url\": \"https://www.synthesia.io\"\n    },\n    \"callbackId\": \"kdessinger@edvistas.com\",\n    \"input\": [{\n        \"scriptText\": \"This is my first synthetic video, made with the Synthesia API!\",\n        \"avatar\": \"{{ $json[\"Avatar\"] }}\",\n        \"avatarSettings\": {\n            \"horizontalAlign\": \"center\",\n            \"scale\": 1.0,\n            \"style\": \"rectangular\",\n            \"backgroundColor\": \"#F2F7FF\",\n            \"seamless\": false\n        },\n        \"background\": \"{{ $json[\"Screen\"] }}\",\n        \"backgroundSettings\": {\n            \"videoSettings\": {\n                \"shortBackgroundContentMatchMode\": \"freeze\",\n                \"longBackgroundContentMatchMode\": \"trim\"\n            }\n        }\n    }],\n    \"soundtrack\": \"urban\"\n}",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "972b8ca7-ef1d-413f-b104-c3afa4a6f0cc",
+      "name": "Synthesia Create",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        80,
+        620
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "41",
+          "name": "Synthesia (infoedvistas)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://api.synthesia.io/v2/videos/{{ $json[\"id\"] }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "id": "6b37503e-82e6-4416-b9b8-f9732969595d",
+      "name": "Synthesia Check Status",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        280,
+        620
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "41",
+          "name": "Synthesia (infoedvistas)"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "787704fb-0c00-441c-9de2-b1141c56ce80",
+      "name": "When clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -520,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.download }}",
+        "options": {}
+      },
+      "id": "09c161b3-d8fa-4ec4-8f54-c5991bde4bd2",
+      "name": "Download file",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        700,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "fileName": "=/mnt/share/_tmp/{{ $json[\"id\"] }}.{{ $binary.data.fileExtension }}",
+        "options": {}
+      },
+      "id": "42bc0b5d-1234-4d84-93d7-8d4b8d4144cd",
+      "name": "Save to _tmp",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "typeVersion": 1,
+      "position": [
+        880,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "unit": "minutes"
+      },
+      "id": "36da5c6d-9ad0-4405-a784-ca2805896f32",
+      "name": "Wait 1 min",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [
+        700,
+        620
+      ],
+      "webhookId": "1560615b-a498-46e0-8ad9-35fa2ab26355"
+    },
+    {
+      "parameters": {
+        "fromEmail": "admin@edvistas.com",
+        "toEmail": "kdessinger@edvistas.com",
+        "subject": "Synthesia Automation Error",
+        "text": "=An error has occurred while trying to process a video on the Synthesia platform.\nfile ID: {{ $json.id }}\nhost: https://app.synthesia.io\nURL: https://app.synthesia.io/#/video-edit/{{ $json.id }}\n",
+        "options": {
+          "allowUnauthorizedCerts": true,
+          "replyTo": "support@edvistas.com"
+        }
+      },
+      "id": "bff78f21-49a3-4131-8f8e-74727c26c562",
+      "name": "Email Error",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [
+        700,
+        820
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "27",
+          "name": "SMTP (mx.gowls.com)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataType": "string",
+        "value1": "={{ $json.status }}",
+        "rules": {
+          "rules": [
+            {
+              "value2": "complete"
+            },
+            {
+              "value2": "in_progress",
+              "output": 1
+            },
+            {
+              "value2": "error",
+              "output": 2
+            }
+          ]
+        }
+      },
+      "id": "1891a199-5b57-45fd-b43e-07a7464bc9e9",
+      "name": "Is it ready?",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        480,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "prompt": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "Your output needs to be in plain text and replace any quotation marks (\") with a space ( )"
+            },
+            {
+              "role": "assistant",
+              "content": "You are a professional stand up comedian. When you are asked a question you always reply with a witty and funny line. "
+            },
+            {
+              "content": "Tell something about the education industry. "
+            }
+          ]
+        },
+        "options": {
+          "maxTokens": 800
+        }
+      },
+      "id": "4504d91b-89ab-4883-aff6-8624a9a076f9",
+      "name": "Get a funny",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        -320,
+        620
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Avatar list\nconst Avatar = [\n  \"anna_costume1_cameraA\",\n  \"bridget_costume1_cameraA\",\n  \"bridget_costume2_cameraA\",\n  \"11b26380-ed22-490b-8ccb-afb34559bc99\",\n  \"jack_costume1_cameraA\",\n  \"jack_costume2_cameraA\",\n  \"james_costume1_cameraA\",\n  \"jonathan_costume1_cameraA\",\n  \"katherine_costume1_cameraA\",\n  \"kenneth_costume1_cameraA\",\n  \"laura_costume1_cameraA\",\n  \"mallory_costume1_cameraA\",\n  \"mallory_costume2_cameraA\",\n  \"marcus_costume1_cameraA\",\n  \"mia_costume1_cameraA\",\n  \"mia_costume2_cameraA\",\n  \"nina_costume1_cameraA\",\n  \"quharrison\",\n  \"richard_costume1_cameraA\",\n  \"ruby_costume1_cameraA\",\n  \"santa_costume1_cameraA\",\n  \"santa_costume2_cameraA\",\n  \"sofia_costume1_cameraA\",\n  \"sofia_costume2_cameraA\",\n  \"sonia_costume1_cameraA\",\n  \"sonia_costume2_cameraA\",\n  \"veronika_costume1_cameraA\",\n  \"vincent_costume1_cameraA\",\n  \"vincent_costume2_cameraA\"\n];\n\n// Screen List\nconst Screen = [\n  \"green_screen\",\n  \"white_studio\",\n  \"white_cafe\",\n  \"luxury_lobby\",\n  \"large_window\",\n  \"white_meeting_room\",\n  \"open_office\"\n];\n\n// random output function\nconst randomAvatar = Avatar[Math.floor(Math.random() * Avatar.length)];\nconst randomScreen = Screen[Math.floor(Math.random() * Screen.length)];\nitem.json.Avatar = randomAvatar;\nitem.json.Screen = randomScreen;\nreturn item;"
+      },
+      "id": "1bfce8d4-94ac-4e03-b7ec-5c2f84c5b154",
+      "name": "Random Avatar",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        -120,
+        620
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2023-02-14T20:17:22.566Z",
+      "updatedAt": "2023-02-14T20:17:22.566Z",
+      "id": "22",
+      "name": "ChatGPT"
+    },
+    {
+      "createdAt": "2023-06-10T20:20:06.155Z",
+      "updatedAt": "2023-06-10T20:20:06.155Z",
+      "id": "32",
+      "name": "done"
+    },
+    {
+      "createdAt": "2023-06-14T18:12:39.036Z",
+      "updatedAt": "2023-06-14T18:12:39.036Z",
+      "id": "37",
+      "name": "Synthesia"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2023-06-14T23:47:47.000Z",
+  "versionId": "e29f38e7-7a7f-4543-8bb7-f7ada0ad2843"
+}
