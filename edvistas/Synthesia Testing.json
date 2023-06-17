@@ -116,14 +116,8 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n    \"test\": true,\n    \"title\": \"Automated Video Creation\",\n    \"description\": \"This video was created using n8n Workflow!\",\n    \"visibility\": \"public\",\n    \"ctaSettings\": {\n        \"label\": \"Click me!\",\n        \"url\": \"https://www.synthesia.io\"\n    },\n    \"callbackId\": \"kdessinger@edvistas.com\",\n    \"input\": [{\n        \"scriptText\": \"This is my first synthetic video, made with the Synthesia API!\",\n        \"avatar\": \"{{ $json[\"Avatar\"] }}\",\n        \"avatarSettings\": {\n            \"horizontalAlign\": \"center\",\n            \"scale\": 1.0,\n            \"style\": \"rectangular\",\n            \"backgroundColor\": \"#F2F7FF\",\n            \"seamless\": false\n        },\n        \"background\": \"{{ $json[\"Screen\"] }}\",\n        \"backgroundSettings\": {\n            \"videoSettings\": {\n                \"shortBackgroundContentMatchMode\": \"freeze\",\n                \"longBackgroundContentMatchMode\": \"trim\"\n            }\n        }\n    }],\n    \"soundtrack\": \"urban\"\n}",
-        "options": {
-          "response": {
-            "response": {
-              "fullResponse": true
-            }
-          }
-        }
+        "jsonBody": "={\n    \"test\": true,\n    \"title\": \"Automated Video Creation\",\n    \"description\": \"This video was created using n8n Workflow!\",\n    \"visibility\": \"public\",\n    \"ctaSettings\": {\n        \"label\": \"Click me!\",\n        \"url\": \"https://www.synthesia.io\"\n    },\n    \"callbackId\": \"kdessinger@edvistas.com\",\n    \"input\": [{\n        \"scriptText\": \"{{ $json[\"message\"][\"content\"].replace(/\"/g, '') }}\",\n        \"avatar\": \"{{ $json[\"Avatar\"] }}\",\n        \"avatarSettings\": {\n            \"horizontalAlign\": \"center\",\n            \"scale\": 1.0,\n            \"style\": \"rectangular\",\n            \"backgroundColor\": \"#F2F7FF\",\n            \"seamless\": false\n        },\n        \"background\": \"{{ $json[\"Screen\"] }}\",\n        \"backgroundSettings\": {\n            \"videoSettings\": {\n                \"shortBackgroundContentMatchMode\": \"freeze\",\n                \"longBackgroundContentMatchMode\": \"trim\"\n            }\n        }\n    }],\n    \"soundtrack\": \"urban\"\n}",
+        "options": {}
       },
       "id": "972b8ca7-ef1d-413f-b104-c3afa4a6f0cc",
       "name": "Synthesia Create",
@@ -281,10 +275,10 @@
             },
             {
               "role": "assistant",
-              "content": "You are a professional stand up comedian. When you are asked a question you always reply with a witty and funny line. "
+              "content": "You are a professional stand up comedian with expert skills at making people laugh. When you are asked a question you always reply with humor."
             },
             {
-              "content": "Tell something about the education industry. "
+              "content": "So really, what's up the education industry?"
             }
           ]
         },
@@ -310,7 +304,7 @@
     {
       "parameters": {
         "mode": "runOnceForEachItem",
-        "jsCode": "// Avatar list\nconst Avatar = [\n  \"anna_costume1_cameraA\",\n  \"bridget_costume1_cameraA\",\n  \"bridget_costume2_cameraA\",\n  \"11b26380-ed22-490b-8ccb-afb34559bc99\",\n  \"jack_costume1_cameraA\",\n  \"jack_costume2_cameraA\",\n  \"james_costume1_cameraA\",\n  \"jonathan_costume1_cameraA\",\n  \"katherine_costume1_cameraA\",\n  \"kenneth_costume1_cameraA\",\n  \"laura_costume1_cameraA\",\n  \"mallory_costume1_cameraA\",\n  \"mallory_costume2_cameraA\",\n  \"marcus_costume1_cameraA\",\n  \"mia_costume1_cameraA\",\n  \"mia_costume2_cameraA\",\n  \"nina_costume1_cameraA\",\n  \"quharrison\",\n  \"richard_costume1_cameraA\",\n  \"ruby_costume1_cameraA\",\n  \"santa_costume1_cameraA\",\n  \"santa_costume2_cameraA\",\n  \"sofia_costume1_cameraA\",\n  \"sofia_costume2_cameraA\",\n  \"sonia_costume1_cameraA\",\n  \"sonia_costume2_cameraA\",\n  \"veronika_costume1_cameraA\",\n  \"vincent_costume1_cameraA\",\n  \"vincent_costume2_cameraA\"\n];\n\n// Screen List\nconst Screen = [\n  \"green_screen\",\n  \"white_studio\",\n  \"white_cafe\",\n  \"luxury_lobby\",\n  \"large_window\",\n  \"white_meeting_room\",\n  \"open_office\"\n];\n\n// random output function\nconst randomAvatar = Avatar[Math.floor(Math.random() * Avatar.length)];\nconst randomScreen = Screen[Math.floor(Math.random() * Screen.length)];\nitem.json.Avatar = randomAvatar;\nitem.json.Screen = randomScreen;\nreturn item;"
+        "jsCode": "// Avatar list\nconst Avatar = [\n  \"anna_costume1_cameraA\",\n  \"bridget_costume1_cameraA\",\n  \"bridget_costume2_cameraA\",\n  \"11b26380-ed22-490b-8ccb-afb34559bc99\",\n  \"jack_costume1_cameraA\",\n  \"jack_costume2_cameraA\",\n  \"james_costume1_cameraA\",\n  \"jonathan_costume1_cameraA\",\n  \"katherine_costume1_cameraA\",\n  \"kenneth_costume1_cameraA\",\n  \"laura_costume1_cameraA\",\n  \"mallory_costume1_cameraA\",\n  \"mallory_costume2_cameraA\",\n  \"marcus_costume1_cameraA\",\n  \"mia_costume1_cameraA\",\n  \"mia_costume2_cameraA\",\n  \"nina_costume1_cameraA\",\n  \"quharrison\",\n  \"richard_costume1_cameraA\",\n  \"ruby_costume1_cameraA\",\n  \"santa_costume1_cameraA\",\n  \"santa_costume2_cameraA\",\n  \"sofia_costume1_cameraA\",\n  \"sofia_costume2_cameraA\",\n  \"sonia_costume1_cameraA\",\n  \"sonia_costume2_cameraA\",\n  \"veronika_costume1_cameraA\",\n  \"vincent_costume1_cameraA\",\n  \"vincent_costume2_cameraA\"\n];\n\n// Screen List\nconst Screen = [\n  \"green_screen\",\n  \"white_studio\",\n  \"white_cafe\",\n  \"luxury_lobby\",\n  \"large_window\",\n  \"white_meeting_room\",\n  \"open_office\"\n];\n\n\n// random output function\nconst randomAvatar = Avatar[Math.floor(Math.random() * Avatar.length)];\nconst randomScreen = Screen[Math.floor(Math.random() * Screen.length)];\nitem.json.Avatar = randomAvatar;\nitem.json.Screen = randomScreen;\nreturn item;"
       },
       "id": "1bfce8d4-94ac-4e03-b7ec-5c2f84c5b154",
       "name": "Random Avatar",
@@ -346,6 +340,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-06-14T23:47:47.000Z",
-  "versionId": "e29f38e7-7a7f-4543-8bb7-f7ada0ad2843"
+  "updatedAt": "2023-06-16T20:54:24.000Z",
+  "versionId": "fb52454b-c5b9-47c0-ac27-427c8e46861b"
 }
