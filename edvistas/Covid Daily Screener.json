@@ -69,7 +69,7 @@
       "typeVersion": 1,
       "position": [
         620,
-        200
+        240
       ]
     },
     {
@@ -302,8 +302,8 @@
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2,
       "position": [
-        940,
-        280
+        860,
+        340
       ],
       "credentials": {
         "smtp": {
@@ -320,7 +320,7 @@
       "typeVersion": 1,
       "position": [
         620,
-        380
+        420
       ]
     }
   ],
@@ -562,6 +562,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-06-16T05:37:16.000Z",
-  "versionId": "428b7cb8-764a-4a7d-857b-b40ebda1dd4d"
+  "updatedAt": "2023-06-17T20:15:37.000Z",
+  "versionId": "ffba33b5-a4fe-45ea-9512-b77fc1e02407"
 }
