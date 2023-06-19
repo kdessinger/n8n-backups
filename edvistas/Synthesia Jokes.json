@@ -102,6 +102,11 @@
           }
         ]
       ]
+    },
+    "Self-Help": {
+      "main": [
+        []
+      ]
     }
   },
   "createdAt": "2023-06-14T16:49:04.167Z",
@@ -116,7 +121,7 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n    \"test\": true,\n    \"title\": \"Automated Video Creation\",\n    \"description\": \"This video was created using n8n Workflow!\",\n    \"visibility\": \"public\",\n    \"ctaSettings\": {\n        \"label\": \"Click me!\",\n        \"url\": \"https://www.synthesia.io\"\n    },\n    \"callbackId\": \"kdessinger@edvistas.com\",\n    \"input\": [{\n        \"scriptText\": \"{{ $json[\"message\"][\"content\"].replace(/\"/g, '') }}\",\n        \"avatar\": \"{{ $json[\"Avatar\"] }}\",\n        \"avatarSettings\": {\n            \"horizontalAlign\": \"center\",\n            \"scale\": 1.0,\n            \"style\": \"rectangular\",\n            \"backgroundColor\": \"#F2F7FF\",\n            \"seamless\": false\n        },\n        \"background\": \"{{ $json[\"Screen\"] }}\",\n        \"backgroundSettings\": {\n            \"videoSettings\": {\n                \"shortBackgroundContentMatchMode\": \"freeze\",\n                \"longBackgroundContentMatchMode\": \"trim\"\n            }\n        }\n    }],\n    \"soundtrack\": \"urban\"\n}",
+        "jsonBody": "={\n    \"test\": true,\n    \"title\": \"Automated Video Creation\",\n    \"description\": \"This video was created using n8n Workflow!\",\n    \"visibility\": \"public\",\n    \"ctaSettings\": {\n        \"label\": \"Click me!\",\n        \"url\": \"https://www.synthesia.io\"\n    },\n    \"callbackId\": \"kdessinger@edvistas.com\",\n    \"input\": [{\n        \"scriptText\": \"{{ $json[\"message\"][\"content\"].replace(/[\"\\n]/g, '') }}\",\n        \"avatar\": \"{{ $json[\"Avatar\"] }}\",\n        \"avatarSettings\": {\n            \"horizontalAlign\": \"center\",\n            \"scale\": 1.0,\n            \"style\": \"rectangular\",\n            \"backgroundColor\": \"#F2F7FF\",\n            \"seamless\": false\n        },\n        \"background\": \"{{ $json[\"Screen\"] }}\",\n        \"backgroundSettings\": {\n            \"videoSettings\": {\n                \"shortBackgroundContentMatchMode\": \"freeze\",\n                \"longBackgroundContentMatchMode\": \"trim\"\n            }\n        }\n    }],\n    \"soundtrack\": \"urban\"\n}",
         "options": {}
       },
       "id": "972b8ca7-ef1d-413f-b104-c3afa4a6f0cc",
@@ -163,7 +168,7 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -520,
+        -560,
         620
       ]
     },
@@ -291,7 +296,7 @@
       "type": "n8n-nodes-base.openAi",
       "typeVersion": 1,
       "position": [
-        -320,
+        -340,
         620
       ],
       "credentials": {
@@ -314,6 +319,44 @@
         -120,
         620
       ]
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "prompt": {
+          "messages": [
+            {
+              "role": "assistant",
+              "content": "I want you to act as a self-help book. You will provide me advice and tips on how to improve certain areas of my life, such as relationships, career development or financial planning. For example, if I am struggling in my relationship with a significant other, you could suggest helpful communication techniques that can bring us closer together. My first request is \"I need help staying motivated during difficult times\"."
+            },
+            {
+              "content": "give me some examples of how I can stay motivated"
+            },
+            {
+              "role": "system",
+              "content": "your response needs to be in plain text and will be displayed on a teleprompter"
+            }
+          ]
+        },
+        "options": {
+          "maxTokens": 1500
+        }
+      },
+      "id": "80d381e4-94d2-46b6-8cb6-4e8139fc6b26",
+      "name": "Self-Help",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        -340,
+        420
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      },
+      "disabled": true
     }
   ],
   "pinData": {},
@@ -340,6 +383,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-06-18T05:34:04.000Z",
-  "versionId": "43cde4f8-d005-4f00-8ead-d36bfebabb3c"
+  "updatedAt": "2023-06-18T18:30:32.000Z",
+  "versionId": "49617ced-33a2-4452-87ee-034d13d3f769"
 }
