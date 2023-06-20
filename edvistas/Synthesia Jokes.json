@@ -275,7 +275,7 @@
             },
             {
               "role": "assistant",
-              "content": "I want you to act as a stand-up comedian. I will provide you with some topics related to current events and you will use your wit, creativity, and observational skills to create a routine based on those topics. You should also be sure to incorporate personal anecdotes or experiences into the routine in order to make it more relatable and engaging for the audience. My first request is \"I want an humorous take on the education industry.\""
+              "content": "I want you to act as a stand-up comedian. When ever you are asked a question you will reply with a humorous response. "
             },
             {
               "content": "So really, what's up the education industry?"
@@ -304,7 +304,7 @@
     {
       "parameters": {
         "mode": "runOnceForEachItem",
-        "jsCode": "// Avatar list\nconst Avatar = [\n  \"anna_costume1_cameraA\",\n  \"bridget_costume1_cameraA\",\n  \"bridget_costume2_cameraA\",\n  \"11b26380-ed22-490b-8ccb-afb34559bc99\",\n  \"jack_costume1_cameraA\",\n  \"jack_costume2_cameraA\",\n  \"james_costume1_cameraA\",\n  \"jonathan_costume1_cameraA\",\n  \"kenneth_costume1_cameraA\",\n  \"laura_costume1_cameraA\",\n  \"mallory_costume1_cameraA\",\n  \"mallory_costume2_cameraA\",\n  \"marcus_costume1_cameraA\",\n  \"mia_costume1_cameraA\",\n  \"mia_costume2_cameraA\",\n  \"nina_costume1_cameraA\",\n  \"quharrison\",\n  \"richard_costume1_cameraA\",\n  \"ruby_costume1_cameraA\",\n  \"santa_costume1_cameraA\",\n  \"santa_costume2_cameraA\",\n  \"sofia_costume1_cameraA\",\n  \"sofia_costume2_cameraA\",\n  \"sonia_costume1_cameraA\",\n  \"sonia_costume2_cameraA\",\n  \"veronika_costume1_cameraA\",\n  \"vincent_costume1_cameraA\",\n  \"vincent_costume2_cameraA\"\n];\n\n// Screen List\nconst Screen = [\n  \"green_screen\",\n  \"white_studio\",\n  \"white_cafe\",\n  \"luxury_lobby\",\n  \"large_window\",\n  \"white_meeting_room\",\n  \"open_office\"\n];\n\n\n// random output function\nconst randomAvatar = Avatar[Math.floor(Math.random() * Avatar.length)];\nconst randomScreen = Screen[Math.floor(Math.random() * Screen.length)];\nitem.json.Avatar = randomAvatar;\nitem.json.Screen = randomScreen;\nreturn item;"
+        "jsCode": "// Avatar list\nconst Avatar = [\n  \"anna_costume1_cameraA\",\n  \"bridget_costume1_cameraA\",\n  \"bridget_costume2_cameraA\",\n  \"11b26380-ed22-490b-8ccb-afb34559bc99\",\n  \"jack_costume1_cameraA\",\n  \"jack_costume2_cameraA\",\n  \"james_costume1_cameraA\",\n  \"jonathan_costume1_cameraA\",\n  \"kenneth_costume1_cameraA\",\n  \"laura_costume1_cameraA\",\n  \"mallory_costume1_cameraA\",\n  \"mallory_costume2_cameraA\",\n  \"marcus_costume1_cameraA\",\n  \"mia_costume1_cameraA\",\n  \"mia_costume2_cameraA\",\n  \"nina_costume1_cameraA\",\n  \"quharrison\",\n  \"richard_costume1_cameraA\",\n  \"ruby_costume1_cameraA\",\n  \"santa_costume1_cameraA\",\n  \"santa_costume2_cameraA\",\n  \"sofia_costume2_cameraA\",\n  \"sonia_costume1_cameraA\",\n  \"sonia_costume2_cameraA\",\n  \"veronika_costume1_cameraA\",\n  \"vincent_costume1_cameraA\",\n  \"vincent_costume2_cameraA\"\n];\n\n// Screen List\nconst Screen = [\n  \"green_screen\",\n  \"white_studio\",\n  \"white_cafe\",\n  \"luxury_lobby\",\n  \"large_window\",\n  \"white_meeting_room\",\n  \"open_office\"\n];\n\n\n// random output function\nconst randomAvatar = Avatar[Math.floor(Math.random() * Avatar.length)];\nconst randomScreen = Screen[Math.floor(Math.random() * Screen.length)];\nitem.json.Avatar = randomAvatar;\nitem.json.Screen = randomScreen;\nreturn item;"
       },
       "id": "1bfce8d4-94ac-4e03-b7ec-5c2f84c5b154",
       "name": "Random Avatar",
@@ -378,6 +378,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-06-19T15:56:22.000Z",
-  "versionId": "af962620-f87b-41bb-bedc-562d5927ffc6"
+  "updatedAt": "2023-06-19T19:09:38.000Z",
+  "versionId": "1022aa76-b870-4187-88b3-35c132d412c0"
 }
