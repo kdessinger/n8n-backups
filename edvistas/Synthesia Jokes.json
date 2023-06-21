@@ -60,7 +60,7 @@
       "main": [
         [
           {
-            "node": "Download file",
+            "node": "Generate Filename",
             "type": "main",
             "index": 0
           }
@@ -81,6 +81,22 @@
         ]
       ]
     },
+    "Random Avatar": {
+      "main": [
+        [
+          {
+            "node": "Synthesia Create",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Math Teacher": {
+      "main": [
+        []
+      ]
+    },
     "Get a funny": {
       "main": [
         [
@@ -92,11 +108,11 @@
         ]
       ]
     },
-    "Random Avatar": {
+    "Generate Filename": {
       "main": [
         [
           {
-            "node": "Synthesia Create",
+            "node": "Download file",
             "type": "main",
             "index": 0
           }
@@ -163,13 +179,13 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -560,
+        -520,
         620
       ]
     },
     {
       "parameters": {
-        "url": "={{ $json.download }}",
+        "url": "={{ $('Is it ready?').item.json[\"download\"] }}",
         "options": {}
       },
       "id": "09c161b3-d8fa-4ec4-8f54-c5991bde4bd2",
@@ -177,13 +193,13 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        700,
-        440
+        900,
+        460
       ]
     },
     {
       "parameters": {
-        "fileName": "=/mnt/share/_tmp/{{ $json[\"id\"] }}.{{ $binary.data.fileExtension }}",
+        "fileName": "=/mnt/share/_tmp/{{ $('Generate Filename').item.json[\"message\"][\"content\"] }}",
         "options": {}
       },
       "id": "42bc0b5d-1234-4d84-93d7-8d4b8d4144cd",
@@ -191,8 +207,8 @@
       "type": "n8n-nodes-base.writeBinaryFile",
       "typeVersion": 1,
       "position": [
-        880,
-        440
+        1100,
+        460
       ]
     },
     {
@@ -283,7 +299,7 @@
           ]
         },
         "options": {
-          "maxTokens": 800
+          "maxTokens": 400
         }
       },
       "id": "4504d91b-89ab-4883-aff6-8624a9a076f9",
@@ -291,7 +307,7 @@
       "type": "n8n-nodes-base.openAi",
       "typeVersion": 1,
       "position": [
-        -340,
+        -320,
         620
       ],
       "credentials": {
@@ -304,7 +320,7 @@
     {
       "parameters": {
         "mode": "runOnceForEachItem",
-        "jsCode": "// Avatar list\nconst Avatar = [\n  \"anna_costume1_cameraA\",\n  \"bridget_costume1_cameraA\",\n  \"bridget_costume2_cameraA\",\n  \"11b26380-ed22-490b-8ccb-afb34559bc99\",\n  \"jack_costume1_cameraA\",\n  \"jack_costume2_cameraA\",\n  \"james_costume1_cameraA\",\n  \"jonathan_costume1_cameraA\",\n  \"kenneth_costume1_cameraA\",\n  \"laura_costume1_cameraA\",\n  \"mallory_costume1_cameraA\",\n  \"mallory_costume2_cameraA\",\n  \"marcus_costume1_cameraA\",\n  \"mia_costume1_cameraA\",\n  \"mia_costume2_cameraA\",\n  \"nina_costume1_cameraA\",\n  \"quharrison\",\n  \"richard_costume1_cameraA\",\n  \"ruby_costume1_cameraA\",\n  \"santa_costume1_cameraA\",\n  \"santa_costume2_cameraA\",\n  \"sofia_costume2_cameraA\",\n  \"sonia_costume1_cameraA\",\n  \"sonia_costume2_cameraA\",\n  \"veronika_costume1_cameraA\",\n  \"vincent_costume1_cameraA\",\n  \"vincent_costume2_cameraA\"\n];\n\n// Screen List\nconst Screen = [\n  \"green_screen\",\n  \"white_studio\",\n  \"white_cafe\",\n  \"luxury_lobby\",\n  \"large_window\",\n  \"white_meeting_room\",\n  \"open_office\"\n];\n\n\n// random output function\nconst randomAvatar = Avatar[Math.floor(Math.random() * Avatar.length)];\nconst randomScreen = Screen[Math.floor(Math.random() * Screen.length)];\nitem.json.Avatar = randomAvatar;\nitem.json.Screen = randomScreen;\nreturn item;"
+        "jsCode": "// Avatar list\nconst Avatar = [\n  \"anna_costume1_cameraA\",\n  \"bridget_costume1_cameraA\",\n  \"bridget_costume2_cameraA\",\n  \"11b26380-ed22-490b-8ccb-afb34559bc99\",\n  \"jack_costume1_cameraA\",\n  \"jack_costume2_cameraA\",\n  \"james_costume1_cameraA\",\n  \"jonathan_costume1_cameraA\",\n  \"kenneth_costume1_cameraA\",\n  \"laura_costume1_cameraA\",\n  \"mallory_costume1_cameraA\",\n  \"mallory_costume2_cameraA\",\n  \"marcus_costume1_cameraA\",\n  \"mia_costume1_cameraA\",\n  \"mia_costume2_cameraA\",\n  \"nina_costume1_cameraA\",\n  \"quharrison\",\n  \"richard_costume1_cameraA\",\n  \"ruby_costume1_cameraA\",\n  \"santa_costume1_cameraA\",\n  \"santa_costume2_cameraA\",\n  \"sonia_costume1_cameraA\",\n  \"sonia_costume2_cameraA\",\n  \"veronika_costume1_cameraA\",\n  \"vincent_costume1_cameraA\",\n  \"vincent_costume2_cameraA\"\n];\n\n// Screen List\nconst Screen = [\n  \"green_screen\",\n  \"white_studio\",\n  \"white_cafe\",\n  \"luxury_lobby\",\n  \"large_window\",\n  \"white_meeting_room\",\n  \"open_office\"\n];\n\n\n// random output function\nconst randomAvatar = Avatar[Math.floor(Math.random() * Avatar.length)];\nconst randomScreen = Screen[Math.floor(Math.random() * Screen.length)];\nitem.json.Avatar = randomAvatar;\nitem.json.Screen = randomScreen;\nreturn item;"
       },
       "id": "1bfce8d4-94ac-4e03-b7ec-5c2f84c5b154",
       "name": "Random Avatar",
@@ -342,8 +358,8 @@
       "type": "n8n-nodes-base.openAi",
       "typeVersion": 1,
       "position": [
-        -340,
-        420
+        -400,
+        360
       ],
       "credentials": {
         "openAiApi": {
@@ -352,6 +368,78 @@
         }
       },
       "disabled": true
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "prompt": {
+          "messages": [
+            {
+              "role": "assistant",
+              "content": "I want you to act as a math teacher. I will provide some mathematical equations or concepts, and it will be your job to explain them in easy-to-understand terms. This could include providing step-by-step instructions for solving a problem, demonstrating various techniques with visuals or suggesting online resources for further study. My first request is \"I need help understanding how probability works.\""
+            },
+            {
+              "content": "please explain how probability works"
+            },
+            {
+              "role": "system",
+              "content": "your response needs to be in plain text and will be displayed on a teleprompter"
+            }
+          ]
+        },
+        "options": {
+          "maxTokens": 1500
+        }
+      },
+      "id": "1096b7dd-9942-4f52-9501-1cd35b3df059",
+      "name": "Math Teacher",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        -180,
+        360
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "prompt": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "Act as a file name generator. I will provide you with a short paragraph or an article and you will generate an appropriate computer file name. The file name will have words from the article.  The file name will contain no spaces at all but you can use underscore '_' characters in place of spaces. The file name should never have special characters except for the underscore.  The filename will always have a .mp4 extension. The filename should be less than 30 characters long. Here is an example.\n\"You are my sunshine my only sunshine you make me happy when sky's are grey\"  \nMy_Sunshine.mp4"
+            },
+            {
+              "content": "=\"{{ $('Random Avatar').item.json[\"message\"][\"content\"] }}\""
+            }
+          ]
+        },
+        "options": {
+          "maxTokens": 20,
+          "temperature": 0.9
+        }
+      },
+      "id": "65bd96dc-2762-46e0-a549-ac44cd9ba74b",
+      "name": "Generate Filename",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        700,
+        460
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -378,6 +466,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-06-19T19:09:38.000Z",
-  "versionId": "1022aa76-b870-4187-88b3-35c132d412c0"
+  "updatedAt": "2023-06-21T00:27:54.000Z",
+  "versionId": "51cb3d4a-fe0f-4263-9a4b-66d29a35c834"
 }
