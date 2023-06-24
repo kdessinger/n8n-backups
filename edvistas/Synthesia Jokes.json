@@ -27,7 +27,7 @@
       "main": [
         [
           {
-            "node": "Get a funny",
+            "node": "Settings",
             "type": "main",
             "index": 0
           }
@@ -85,23 +85,18 @@
       "main": [
         [
           {
-            "node": "Synthesia Create",
+            "node": "IF",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Math Teacher": {
-      "main": [
-        []
-      ]
-    },
     "Get a funny": {
       "main": [
         [
           {
-            "node": "Random Avatar",
+            "node": "Synthesia Create",
             "type": "main",
             "index": 0
           }
@@ -113,6 +108,46 @@
         [
           {
             "node": "Download file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Settings": {
+      "main": [
+        [
+          {
+            "node": "Random Avatar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email Error": {
+      "main": [
+        [
+          {
+            "node": "Stop and Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF": {
+      "main": [
+        [
+          {
+            "node": "Get a funny",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Synthesia Create",
             "type": "main",
             "index": 0
           }
@@ -132,7 +167,7 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n    \"test\": true,\n    \"title\": \"Automated Video Creation\",\n    \"description\": \"This video was created using n8n Workflow!\",\n    \"visibility\": \"public\",\n    \"ctaSettings\": {\n        \"label\": \"Click me!\",\n        \"url\": \"https://www.synthesia.io\"\n    },\n    \"callbackId\": \"kdessinger@edvistas.com\",\n    \"input\": [{\n        \"scriptText\": \"{{ $json[\"message\"][\"content\"].replace(/[\"\\n]/g, '') }}\",\n        \"avatar\": \"{{ $json[\"Avatar\"] }}\",\n        \"avatarSettings\": {\n            \"horizontalAlign\": \"center\",\n            \"scale\": 1.0,\n            \"style\": \"rectangular\",\n            \"backgroundColor\": \"#F2F7FF\",\n            \"seamless\": false\n        },\n        \"background\": \"{{ $json[\"Screen\"] }}\",\n        \"backgroundSettings\": {\n            \"videoSettings\": {\n                \"shortBackgroundContentMatchMode\": \"freeze\",\n                \"longBackgroundContentMatchMode\": \"trim\"\n            }\n        }\n    }],\n    \"soundtrack\": \"urban\"\n}",
+        "jsonBody": "={\n    \"test\": {{ $('Settings').item.json[\"Test_Mode?\"] }},\n    \"title\": \"{{ $('Settings').item.json[\"title\"] }}\",\n    \"description\": \"{{ $('Settings').item.json[\"description\"] }}\",\n    \"visibility\": \"{{ $('Settings').item.json[\"visibility\"] }}\",\n    \"ctaSettings\": {\n        \"label\": \"{{ $('Settings').item.json[\"label\"] }}\",\n        \"url\": \"{{ $('Settings').item.json[\"url\"] }}\"\n    },\n    \"callbackId\": \"{{ $('Settings').item.json[\"email\"] }}\",\n    \"input\": [{\n        \"scriptText\": \"{{ $json[\"message\"][\"content\"].replace(/[\"\\n]/g, '') }}\",\n        \"avatar\": \"{{ $('Settings').item.json[\"Avatar\"] }}\",\n        \"avatarSettings\": {\n            \"horizontalAlign\": \"center\",\n            \"scale\": 1.0,\n            \"style\": \"rectangular\",\n            \"backgroundColor\": \"#F2F7FF\",\n            \"seamless\": false\n        },\n        \"background\": \"{{ $('Settings').item.json[\"Screen\"] }}\",\n        \"backgroundSettings\": {\n            \"videoSettings\": {\n                \"shortBackgroundContentMatchMode\": \"freeze\",\n                \"longBackgroundContentMatchMode\": \"trim\"\n            }\n        }\n    }],\n    \"soundtrack\": \"{{ $('Settings').item.json[\"soundtrack\"] }}\"\n}",
         "options": {}
       },
       "id": "972b8ca7-ef1d-413f-b104-c3afa4a6f0cc",
@@ -140,8 +175,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        80,
-        620
+        40,
+        660
       ],
       "credentials": {
         "httpHeaderAuth": {
@@ -179,8 +214,8 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -520,
-        620
+        -1060,
+        640
       ]
     },
     {
@@ -299,7 +334,8 @@
           ]
         },
         "options": {
-          "maxTokens": 400
+          "maxTokens": 400,
+          "temperature": 0.7
         }
       },
       "id": "4504d91b-89ab-4883-aff6-8624a9a076f9",
@@ -307,8 +343,8 @@
       "type": "n8n-nodes-base.openAi",
       "typeVersion": 1,
       "position": [
-        -320,
-        620
+        -220,
+        540
       ],
       "credentials": {
         "openAiApi": {
@@ -320,15 +356,15 @@
     {
       "parameters": {
         "mode": "runOnceForEachItem",
-        "jsCode": "// Avatar list\nconst Avatar = [\n  \"anna_costume1_cameraA\",\n  \"bridget_costume1_cameraA\",\n  \"bridget_costume2_cameraA\",\n  \"11b26380-ed22-490b-8ccb-afb34559bc99\",\n  \"jack_costume1_cameraA\",\n  \"jack_costume2_cameraA\",\n  \"james_costume1_cameraA\",\n  \"jonathan_costume1_cameraA\",\n  \"kenneth_costume1_cameraA\",\n  \"laura_costume1_cameraA\",\n  \"mallory_costume1_cameraA\",\n  \"mallory_costume2_cameraA\",\n  \"marcus_costume1_cameraA\",\n  \"mia_costume1_cameraA\",\n  \"mia_costume2_cameraA\",\n  \"nina_costume1_cameraA\",\n  \"quharrison\",\n  \"richard_costume1_cameraA\",\n  \"ruby_costume1_cameraA\",\n  \"santa_costume1_cameraA\",\n  \"santa_costume2_cameraA\",\n  \"sonia_costume1_cameraA\",\n  \"sonia_costume2_cameraA\",\n  \"veronika_costume1_cameraA\",\n  \"vincent_costume1_cameraA\",\n  \"vincent_costume2_cameraA\"\n];\n\n// Screen List\nconst Screen = [\n  \"green_screen\",\n  \"white_studio\",\n  \"white_cafe\",\n  \"luxury_lobby\",\n  \"large_window\",\n  \"white_meeting_room\",\n  \"open_office\"\n];\n\n\n// random output function\nconst randomAvatar = Avatar[Math.floor(Math.random() * Avatar.length)];\nconst randomScreen = Screen[Math.floor(Math.random() * Screen.length)];\nitem.json.Avatar = randomAvatar;\nitem.json.Screen = randomScreen;\nreturn item;"
+        "jsCode": "// Avatar list\n\nconst Avatar = [\n  \"anna_costume1_cameraA\",\n  \"bridget_costume1_cameraA\",\n  \"bridget_costume2_cameraA\",\n  \"11b26380-ed22-490b-8ccb-afb34559bc99\",\n  \"jack_costume1_cameraA\",\n  \"jack_costume2_cameraA\",\n  \"james_costume1_cameraA\",\n  \"jonathan_costume1_cameraA\",\n  \"kenneth_costume1_cameraA\",\n  \"laura_costume1_cameraA\",\n  \"mallory_costume1_cameraA\",\n  \"mallory_costume2_cameraA\",\n  \"marcus_costume1_cameraA\",\n  \"mia_costume1_cameraA\",\n  \"mia_costume2_cameraA\",\n  \"nina_costume1_cameraA\",\n  \"quharrison\",\n  \"richard_costume1_cameraA\",\n  \"ruby_costume1_cameraA\",\n  \"santa_costume1_cameraA\",\n  \"santa_costume2_cameraA\",\n  \"sonia_costume1_cameraA\",\n  \"sonia_costume2_cameraA\",\n  \"veronika_costume1_cameraA\",\n  \"vincent_costume1_cameraA\",\n  \"vincent_costume2_cameraA\"\n];\n\n// Screen List\nconst Screen = [\n  \"green_screen\",\n  \"white_studio\",\n  \"white_cafe\",\n  \"luxury_lobby\",\n  \"large_window\",\n  \"white_meeting_room\",\n  \"open_office\"\n];\n\n\n// random output function\nconst randomAvatar = Avatar[Math.floor(Math.random() * Avatar.length)];\nconst randomScreen = Screen[Math.floor(Math.random() * Screen.length)];\n\nif ($json[\"Random_Avatar?\"]) {\n  item.json.Avatar = randomAvatar;\n}\n\nif ($json[\"Random_Screen?\"]) {\n  item.json.Screen = randomScreen;\n}\n\nreturn item;"
       },
       "id": "1bfce8d4-94ac-4e03-b7ec-5c2f84c5b154",
       "name": "Random Avatar",
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        -120,
-        620
+        -660,
+        640
       ]
     },
     {
@@ -358,8 +394,8 @@
       "type": "n8n-nodes-base.openAi",
       "typeVersion": 1,
       "position": [
-        -400,
-        360
+        120,
+        120
       ],
       "credentials": {
         "openAiApi": {
@@ -396,8 +432,8 @@
       "type": "n8n-nodes-base.openAi",
       "typeVersion": 1,
       "position": [
-        -180,
-        360
+        340,
+        120
       ],
       "credentials": {
         "openAiApi": {
@@ -440,6 +476,111 @@
           "name": "OpenAi (kdessinger)"
         }
       }
+    },
+    {
+      "parameters": {
+        "values": {
+          "boolean": [
+            {
+              "name": "Random_Avatar?"
+            },
+            {
+              "name": "Random_Screen?"
+            },
+            {
+              "name": "Random_Script?"
+            },
+            {
+              "name": "Test_Mode?",
+              "value": true
+            }
+          ],
+          "string": [
+            {
+              "name": "Avatar",
+              "value": "anna_costume1_cameraA"
+            },
+            {
+              "name": "Screen",
+              "value": "green_screen"
+            },
+            {
+              "name": "message.content",
+              "value": "Fact! Human beings can use only a small fraction of Earth’s water. In school, we were taught that most (specifically, 71 percent) of the planet’s surface is covered in water. While that’s true, humans can use only 0.007 percent of that water, according to National Geographic. That’s because only about 2.5 percent of Earth’s water is fresh water, and only 1 percent of that is accessible. The rest makes up glaciers and snowfields."
+            },
+            {
+              "name": "soundtrack",
+              "value": "urban"
+            },
+            {
+              "name": "title",
+              "value": "Automated Video Creation"
+            },
+            {
+              "name": "description",
+              "value": "This video was created using n8n Workflow!"
+            },
+            {
+              "name": "visibility",
+              "value": "public"
+            },
+            {
+              "name": "label",
+              "value": "Click me!"
+            },
+            {
+              "name": "url",
+              "value": "https://www.edvistas.com"
+            },
+            {
+              "name": "email",
+              "value": "kdessinger@edvistas.com"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "003a45dc-5e9c-4fe7-8889-c1111f04c208",
+      "name": "Settings",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        -860,
+        640
+      ]
+    },
+    {
+      "parameters": {
+        "errorMessage": "An error has occurred while trying to process a video on the Synthesia platform. \nfile ID: {{ $json.id }}"
+      },
+      "id": "b44235cd-01ff-49b4-9566-36af30ae080f",
+      "name": "Stop and Error",
+      "type": "n8n-nodes-base.stopAndError",
+      "typeVersion": 1,
+      "position": [
+        900,
+        820
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json['Random_Script?'] }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "1199e3f2-5a52-45a6-be43-76f963de07ee",
+      "name": "IF",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -460,
+        640
+      ]
     }
   ],
   "pinData": {},
@@ -466,6 +607,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-06-21T00:27:54.000Z",
-  "versionId": "51cb3d4a-fe0f-4263-9a4b-66d29a35c834"
+  "updatedAt": "2023-06-24T03:45:50.000Z",
+  "versionId": "3e8f22f6-8d9c-4425-88c0-a853bcbfca2a"
 }
