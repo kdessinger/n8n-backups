@@ -1,0 +1,678 @@
+{
+  "active": false,
+  "connections": {
+    "Synthesia Create": {
+      "main": [
+        [
+          {
+            "node": "Synthesia Check Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Synthesia Check Status": {
+      "main": [
+        [
+          {
+            "node": "Is it ready?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking \"Execute Workflow\"": {
+      "main": [
+        [
+          {
+            "node": "Settings",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download file": {
+      "main": [
+        [
+          {
+            "node": "Save to _tmp",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait 1 min": {
+      "main": [
+        [
+          {
+            "node": "Synthesia Check Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is it ready?": {
+      "main": [
+        [
+          {
+            "node": "Generate Filename",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait 1 min",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Email Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Random Avatar": {
+      "main": [
+        [
+          {
+            "node": "Use ChatGPT?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Filename": {
+      "main": [
+        [
+          {
+            "node": "Download file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email Error": {
+      "main": [
+        [
+          {
+            "node": "Stop and Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Settings": {
+      "main": [
+        [
+          {
+            "node": "Random Avatar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "stand-up comedian": {
+      "main": [
+        [
+          {
+            "node": "Synthesia Create",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Use ChatGPT?": {
+      "main": [
+        [
+          {
+            "node": "stand-up comedian",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Synthesia Create",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-06-14T16:49:04.167Z",
+  "id": "38",
+  "name": "Synthesia",
+  "nodes": [
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.synthesia.io/v2/videos",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"test\": {{ $('Settings').item.json[\"Test_Mode?\"] }},\n    \"title\": \"{{ $('Settings').item.json[\"title\"] }}\",\n    \"description\": \"{{ $('Settings').item.json[\"description\"] }}\",\n    \"visibility\": \"{{ $('Settings').item.json[\"visibility\"] }}\",\n    \"ctaSettings\": {\n        \"label\": \"{{ $('Settings').item.json[\"label\"] }}\",\n        \"url\": \"{{ $('Settings').item.json[\"url\"] }}\"\n    },\n    \"callbackId\": \"{{ $('Settings').item.json[\"email\"] }}\",\n    \"input\": [{\n        \"scriptText\": \"{{ $json[\"message\"][\"content\"].replace(/[\"\\n]/g, '') }}\",\n        \"avatar\": \"{{ $('Settings').item.json[\"Avatar\"] }}\",\n        \"avatarSettings\": {\n            \"horizontalAlign\": \"center\",\n            \"scale\": 1.0,\n            \"style\": \"rectangular\",\n            \"backgroundColor\": \"#F2F7FF\",\n            \"seamless\": false\n        },\n        \"background\": \"{{ $('Settings').item.json[\"Screen\"] }}\",\n        \"backgroundSettings\": {\n            \"videoSettings\": {\n                \"shortBackgroundContentMatchMode\": \"freeze\",\n                \"longBackgroundContentMatchMode\": \"trim\"\n            }\n        }\n    }],\n    \"soundtrack\": \"{{ $('Settings').item.json[\"soundtrack\"] }}\"\n}",
+        "options": {}
+      },
+      "id": "972b8ca7-ef1d-413f-b104-c3afa4a6f0cc",
+      "name": "Synthesia Create",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        -20,
+        640
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "41",
+          "name": "Synthesia (infoedvistas)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://api.synthesia.io/v2/videos/{{ $json[\"id\"] }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "id": "6b37503e-82e6-4416-b9b8-f9732969595d",
+      "name": "Synthesia Check Status",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        280,
+        620
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "41",
+          "name": "Synthesia (infoedvistas)"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "787704fb-0c00-441c-9de2-b1141c56ce80",
+      "name": "When clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1060,
+        640
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{ $('Is it ready?').item.json[\"download\"] }}",
+        "options": {}
+      },
+      "id": "09c161b3-d8fa-4ec4-8f54-c5991bde4bd2",
+      "name": "Download file",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        900,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "fileName": "=/mnt/share/_tmp/{{ $('Generate Filename').item.json[\"message\"][\"content\"] }}",
+        "options": {}
+      },
+      "id": "42bc0b5d-1234-4d84-93d7-8d4b8d4144cd",
+      "name": "Save to _tmp",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "typeVersion": 1,
+      "position": [
+        1080,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "unit": "minutes"
+      },
+      "id": "36da5c6d-9ad0-4405-a784-ca2805896f32",
+      "name": "Wait 1 min",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [
+        700,
+        620
+      ],
+      "webhookId": "1560615b-a498-46e0-8ad9-35fa2ab26355"
+    },
+    {
+      "parameters": {
+        "fromEmail": "admin@edvistas.com",
+        "toEmail": "kdessinger@edvistas.com",
+        "subject": "Synthesia Automation Error",
+        "text": "=An error has occurred while trying to process a video on the Synthesia platform.\nfile ID: {{ $json.id }}\nhost: https://app.synthesia.io\nURL: https://app.synthesia.io/#/video-edit/{{ $json.id }}\n",
+        "options": {
+          "allowUnauthorizedCerts": true,
+          "replyTo": "support@edvistas.com"
+        }
+      },
+      "id": "bff78f21-49a3-4131-8f8e-74727c26c562",
+      "name": "Email Error",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [
+        700,
+        840
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "27",
+          "name": "SMTP (mx.gowls.com)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataType": "string",
+        "value1": "={{ $json.status }}",
+        "rules": {
+          "rules": [
+            {
+              "value2": "complete"
+            },
+            {
+              "value2": "in_progress",
+              "output": 1
+            },
+            {
+              "value2": "error",
+              "output": 2
+            }
+          ]
+        }
+      },
+      "id": "1891a199-5b57-45fd-b43e-07a7464bc9e9",
+      "name": "Is it ready?",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        480,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Avatar list\n\nconst Avatar = [\n  \"anna_costume1_cameraA\",\n  \"bridget_costume1_cameraA\",\n  \"bridget_costume2_cameraA\",\n  \"11b26380-ed22-490b-8ccb-afb34559bc99\",\n  \"jack_costume1_cameraA\",\n  \"jack_costume2_cameraA\",\n  \"james_costume1_cameraA\",\n  \"jonathan_costume1_cameraA\",\n  \"kenneth_costume1_cameraA\",\n  \"laura_costume1_cameraA\",\n  \"mallory_costume1_cameraA\",\n  \"mallory_costume2_cameraA\",\n  \"marcus_costume1_cameraA\",\n  \"mia_costume1_cameraA\",\n  \"mia_costume2_cameraA\",\n  \"nina_costume1_cameraA\",\n  \"quharrison\",\n  \"richard_costume1_cameraA\",\n  \"ruby_costume1_cameraA\",\n  \"santa_costume1_cameraA\",\n  \"santa_costume2_cameraA\",\n  \"sonia_costume1_cameraA\",\n  \"sonia_costume2_cameraA\",\n  \"veronika_costume1_cameraA\",\n  \"vincent_costume1_cameraA\",\n  \"vincent_costume2_cameraA\"\n];\n\n// Screen List\nconst Screen = [\n  \"green_screen\",\n  \"white_studio\",\n  \"white_cafe\",\n  \"luxury_lobby\",\n  \"large_window\",\n  \"white_meeting_room\",\n  \"open_office\"\n];\n\n\n// random output function\nconst randomAvatar = Avatar[Math.floor(Math.random() * Avatar.length)];\nconst randomScreen = Screen[Math.floor(Math.random() * Screen.length)];\n\nif ($json[\"Random_Avatar?\"]) {\n  item.json.Avatar = randomAvatar;\n}\n\nif ($json[\"Random_Screen?\"]) {\n  item.json.Screen = randomScreen;\n}\n\nreturn item;"
+      },
+      "id": "1bfce8d4-94ac-4e03-b7ec-5c2f84c5b154",
+      "name": "Random Avatar",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        -660,
+        640
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "prompt": {
+          "messages": [
+            {
+              "role": "assistant",
+              "content": "I want you to act as a math teacher. I will provide some mathematical equations or concepts, and it will be your job to explain them in easy-to-understand terms. This could include providing step-by-step instructions for solving a problem, demonstrating various techniques with visuals or suggesting online resources for further study. "
+            },
+            {
+              "content": "=I need help understanding how {{ $('Settings').item.json[\"Subject\"] }} works."
+            },
+            {
+              "role": "system",
+              "content": "your response needs to be in plain text and will be displayed on a teleprompter"
+            }
+          ]
+        },
+        "options": {
+          "maxTokens": 1500
+        }
+      },
+      "id": "1096b7dd-9942-4f52-9501-1cd35b3df059",
+      "name": "Math Teacher",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        -900,
+        420
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "prompt": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "Act as a file name generator. I will provide you with a short paragraph or an article and you will generate an appropriate computer file name. The file name will have words from the article.  The file name will contain no spaces at all but you can use underscore '_' characters in place of spaces. The file name should never have special characters except for the underscore.  The filename will always have a .mp4 extension. The filename should be less than 30 characters long. Here is an example.\n\"You are my sunshine my only sunshine you make me happy when sky's are grey\"  \nMy_Sunshine.mp4"
+            },
+            {
+              "content": "=\"{{ $('Random Avatar').item.json[\"message\"][\"content\"] }}\""
+            }
+          ]
+        },
+        "options": {
+          "maxTokens": 20,
+          "temperature": 0.9
+        }
+      },
+      "id": "65bd96dc-2762-46e0-a549-ac44cd9ba74b",
+      "name": "Generate Filename",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        700,
+        440
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "errorMessage": "An error has occurred while trying to process a video on the Synthesia platform. \nfile ID: {{ $json.id }}"
+      },
+      "id": "b44235cd-01ff-49b4-9566-36af30ae080f",
+      "name": "Stop and Error",
+      "type": "n8n-nodes-base.stopAndError",
+      "typeVersion": 1,
+      "position": [
+        900,
+        840
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "boolean": [
+            {
+              "name": "Random_Avatar?",
+              "value": true
+            },
+            {
+              "name": "Random_Screen?",
+              "value": true
+            },
+            {
+              "name": "Random_Script?",
+              "value": true
+            },
+            {
+              "name": "Test_Mode?",
+              "value": true
+            }
+          ],
+          "string": [
+            {
+              "name": "Avatar",
+              "value": "anna_costume1_cameraA"
+            },
+            {
+              "name": "Screen",
+              "value": "green_screen"
+            },
+            {
+              "name": "Subject",
+              "value": "Education"
+            },
+            {
+              "name": "message.content",
+              "value": "Fact! Human beings can use only a small fraction of Earth’s water. In school, we were taught that most (specifically, 71 percent) of the planet’s surface is covered in water. While that’s true, humans can use only 0.007 percent of that water, according to National Geographic. That’s because only about 2.5 percent of Earth’s water is fresh water, and only 1 percent of that is accessible. The rest makes up glaciers and snowfields."
+            },
+            {
+              "name": "soundtrack",
+              "value": "urban"
+            },
+            {
+              "name": "title",
+              "value": "Automated Video Creation"
+            },
+            {
+              "name": "description",
+              "value": "This video was created using n8n Workflow!"
+            },
+            {
+              "name": "visibility",
+              "value": "public"
+            },
+            {
+              "name": "label",
+              "value": "Click me!"
+            },
+            {
+              "name": "url",
+              "value": "https://www.edvistas.com"
+            },
+            {
+              "name": "email",
+              "value": "kdessinger@edvistas.com"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a383669a-8d01-4801-9069-75d7759ef651",
+      "name": "Settings",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        -860,
+        640
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "prompt": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "Your output will be passed an an API data call and needs to be in plain text"
+            },
+            {
+              "role": "assistant",
+              "content": "I want you to act as a stand-up comedian. When ever you are asked a question you will reply with a humorous response. "
+            },
+            {
+              "content": "=So really, what is up {{ $('Settings').item.json[\"Subject\"] }} these days anyway?"
+            }
+          ]
+        },
+        "options": {
+          "maxTokens": 400,
+          "temperature": 0.7
+        }
+      },
+      "id": "4504d91b-89ab-4883-aff6-8624a9a076f9",
+      "name": "stand-up comedian",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        -240,
+        460
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json['Random_Script?'] }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "1199e3f2-5a52-45a6-be43-76f963de07ee",
+      "name": "Use ChatGPT?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -460,
+        640
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Your Professors \nSwap out the chatGPT professors based on the topic of choice. Remember to enable the node first. ",
+        "height": 296.8341409899669,
+        "width": 522.0835303434293
+      },
+      "id": "eb0645b1-5e98-4aa0-81b5-3780e3c70e2a",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -980,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "prompt": {
+          "messages": [
+            {
+              "role": "assistant",
+              "content": "I want you to act as a Guidance Counselor. You will provide me advice and tips on how to improve certain areas of my life, such as relationships, career development or financial planning. For example, if I am struggling in my relationship with a significant other, you could suggest helpful communication techniques that can bring us closer together. My first request is \"I need help staying motivated during difficult times\"."
+            },
+            {
+              "content": "give me some examples of how I can stay motivated"
+            },
+            {
+              "role": "system",
+              "content": "your response needs to be in plain text and will be displayed on a teleprompter"
+            }
+          ]
+        },
+        "options": {
+          "maxTokens": 1500
+        }
+      },
+      "id": "80d381e4-94d2-46b6-8cb6-4e8139fc6b26",
+      "name": "Guidance Counselor",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        -680,
+        420
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "## Output ##",
+        "height": 213.36626150638284,
+        "width": 678.921920067421
+      },
+      "id": "2483d83f-6cda-493f-ab80-2561ea710ef5",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        591.9028777762443,
+        377.94371153943945
+      ]
+    },
+    {
+      "parameters": {
+        "content": "**Add a teacher who will correct a students test and then give that student a run down of why their answer was wrong**",
+        "height": 104.05857556977938
+      },
+      "id": "45ca6021-86b1-46c6-90c5-b920f007bc23",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -320,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## ERROR",
+        "height": 211.52499618572966,
+        "width": 369.5485618384058
+      },
+      "id": "5bbb1e81-4079-4b59-a0a4-e042fd777650",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        660,
+        780
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2023-02-14T20:17:22.566Z",
+      "updatedAt": "2023-02-14T20:17:22.566Z",
+      "id": "22",
+      "name": "ChatGPT"
+    },
+    {
+      "createdAt": "2023-06-10T20:20:06.155Z",
+      "updatedAt": "2023-06-10T20:20:06.155Z",
+      "id": "32",
+      "name": "done"
+    },
+    {
+      "createdAt": "2023-06-14T18:12:39.036Z",
+      "updatedAt": "2023-06-14T18:12:39.036Z",
+      "id": "37",
+      "name": "Synthesia"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2023-06-24T17:41:12.000Z",
+  "versionId": "a89302d0-f027-47ba-8542-0f31b0ab6989"
+}
