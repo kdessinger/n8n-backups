@@ -38,7 +38,7 @@
       "main": [
         [
           {
-            "node": "Save to _tmp",
+            "node": "Nextcloud",
             "type": "main",
             "index": 0
           }
@@ -167,7 +167,7 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n    \"test\": {{ $('Settings').item.json[\"Test_Mode?\"] }},\n    \"title\": \"{{ $('Settings').item.json[\"title\"] }}\",\n    \"description\": \"{{ $('Settings').item.json[\"description\"] }}\",\n    \"visibility\": \"{{ $('Settings').item.json[\"visibility\"] }}\",\n    \"ctaSettings\": {\n        \"label\": \"{{ $('Settings').item.json[\"label\"] }}\",\n        \"url\": \"{{ $('Settings').item.json[\"url\"] }}\"\n    },\n    \"callbackId\": \"{{ $('Settings').item.json[\"email\"] }}\",\n    \"input\": [{\n        \"scriptText\": \"{{ $json[\"message\"][\"content\"].replace(/[\"\\n]/g, '') }}\",\n        \"avatar\": \"{{ $('Settings').item.json[\"Avatar\"] }}\",\n        \"avatarSettings\": {\n            \"horizontalAlign\": \"center\",\n            \"scale\": 1.0,\n            \"style\": \"rectangular\",\n            \"backgroundColor\": \"#F2F7FF\",\n            \"seamless\": false\n        },\n        \"background\": \"{{ $('Settings').item.json[\"Screen\"] }}\",\n        \"backgroundSettings\": {\n            \"videoSettings\": {\n                \"shortBackgroundContentMatchMode\": \"freeze\",\n                \"longBackgroundContentMatchMode\": \"trim\"\n            }\n        }\n    }],\n    \"soundtrack\": \"{{ $('Settings').item.json[\"soundtrack\"] }}\"\n}",
+        "jsonBody": "={\n    \"test\": {{ $('Settings').item.json[\"Test_Mode?\"] }},\n    \"title\": \"{{ $('Settings').item.json[\"title\"] }}\",\n    \"description\": \"{{ $('Settings').item.json[\"description\"] }}\",\n    \"visibility\": \"{{ $('Settings').item.json[\"visibility\"] }}\",\n    \"ctaSettings\": {\n        \"label\": \"{{ $('Settings').item.json[\"label\"] }}\",\n        \"url\": \"{{ $('Settings').item.json[\"url\"] }}\"\n    },\n    \"callbackId\": \"{{ $('Settings').item.json[\"email\"] }}\",\n    \"input\": [{\n        \"scriptText\": \"{{ $json[\"message\"][\"content\"].replace(/[\"\\n]/g, '') }}\",\n        \"avatar\": \"{{ $('Random Avatar').item.json[\"Avatar\"] }}\",\n        \"avatarSettings\": {\n            \"horizontalAlign\": \"center\",\n            \"scale\": 1.0,\n            \"style\": \"rectangular\",\n            \"backgroundColor\": \"#F2F7FF\",\n            \"seamless\": false\n        },\n        \"background\": \"{{ $('Random Avatar').item.json[\"Screen\"] }}\",\n        \"backgroundSettings\": {\n            \"videoSettings\": {\n                \"shortBackgroundContentMatchMode\": \"freeze\",\n                \"longBackgroundContentMatchMode\": \"trim\"\n            }\n        }\n    }],\n    \"soundtrack\": \"{{ $('Settings').item.json[\"soundtrack\"] }}\"\n}",
         "options": {}
       },
       "id": "972b8ca7-ef1d-413f-b104-c3afa4a6f0cc",
@@ -175,7 +175,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        -20,
+        40,
         640
       ],
       "credentials": {
@@ -198,7 +198,7 @@
       "typeVersion": 4.1,
       "position": [
         280,
-        620
+        640
       ],
       "credentials": {
         "httpHeaderAuth": {
@@ -242,8 +242,8 @@
       "type": "n8n-nodes-base.writeBinaryFile",
       "typeVersion": 1,
       "position": [
-        1080,
-        440
+        1100,
+        240
       ]
     },
     {
@@ -255,8 +255,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1,
       "position": [
-        700,
-        620
+        720,
+        640
       ],
       "webhookId": "1560615b-a498-46e0-8ad9-35fa2ab26355"
     },
@@ -312,7 +312,7 @@
       "typeVersion": 1,
       "position": [
         480,
-        620
+        640
       ]
     },
     {
@@ -357,7 +357,7 @@
       "typeVersion": 1,
       "position": [
         -900,
-        420
+        400
       ],
       "credentials": {
         "openAiApi": {
@@ -377,7 +377,7 @@
               "content": "Act as a file name generator. I will provide you with a short paragraph or an article and you will generate an appropriate computer file name. The file name will have words from the article.  The file name will contain no spaces at all but you can use underscore '_' characters in place of spaces. The file name should never have special characters except for the underscore.  The filename will always have a .mp4 extension. The filename should be less than 30 characters long. Here is an example.\n\"You are my sunshine my only sunshine you make me happy when sky's are grey\"  \nMy_Sunshine.mp4"
             },
             {
-              "content": "=\"{{ $('Random Avatar').item.json[\"message\"][\"content\"] }}\""
+              "content": "=\"{{ $('stand-up comedian').item.json[\"message\"][\"content\"] }}\""
             }
           ]
         },
@@ -507,7 +507,7 @@
               "content": "I want you to act as a stand-up comedian. When ever you are asked a question you will reply with a humorous response. "
             },
             {
-              "content": "=So really, what is up {{ $('Settings').item.json[\"Subject\"] }} these days anyway?"
+              "content": "=So really, what is up with {{ $('Settings').item.json[\"Subject\"] }} these days anyway?"
             }
           ]
         },
@@ -563,7 +563,7 @@
       "typeVersion": 1,
       "position": [
         -980,
-        300
+        280
       ]
     },
     {
@@ -594,7 +594,7 @@
       "typeVersion": 1,
       "position": [
         -680,
-        420
+        400
       ],
       "credentials": {
         "openAiApi": {
@@ -636,8 +636,8 @@
     {
       "parameters": {
         "content": "## ERROR",
-        "height": 211.52499618572966,
-        "width": 369.5485618384058
+        "height": 215.6626095157959,
+        "width": 402.6494684789352
       },
       "id": "5bbb1e81-4079-4b59-a0a4-e042fd777650",
       "name": "Sticky Note3",
@@ -645,12 +645,46 @@
       "typeVersion": 1,
       "position": [
         660,
-        780
+        794.4816466552317
       ]
+    },
+    {
+      "parameters": {},
+      "id": "7577e143-dd12-4a90-ba97-185e6a06cc7b",
+      "name": "Merge",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        -220,
+        800
+      ]
+    },
+    {
+      "parameters": {
+        "path": "=/!Share_(S%3A)/_tmp/{{ $('Generate Filename').item.json[\"message\"][\"content\"] }}",
+        "binaryDataUpload": true
+      },
+      "id": "1d1e8f7f-4b0e-45f9-85e0-2483b5235b56",
+      "name": "Nextcloud",
+      "type": "n8n-nodes-base.nextCloud",
+      "typeVersion": 1,
+      "position": [
+        1100,
+        440
+      ],
+      "credentials": {
+        "nextCloudApi": {
+          "id": "18",
+          "name": "NextCloud (kdessinger)"
+        }
+      }
     }
   ],
   "pinData": {},
-  "settings": {},
+  "settings": {
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
   "staticData": null,
   "tags": [
     {
@@ -673,6 +707,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-06-24T17:41:12.000Z",
-  "versionId": "a89302d0-f027-47ba-8542-0f31b0ab6989"
+  "updatedAt": "2023-06-25T07:27:23.000Z",
+  "versionId": "582c0635-a602-44a7-ab76-fa86a697eeeb"
 }
