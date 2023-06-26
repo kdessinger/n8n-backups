@@ -1,110 +1,43 @@
 {
   "active": false,
   "connections": {
-    "Set URL": {
+    "Switch": {
       "main": [
         [
           {
-            "node": "Fetch Website",
+            "node": "Set",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Set1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Set2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Set3",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Webhook": {
+    "Function": {
       "main": [
         [
           {
-            "node": "Set URL",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Item Lists": {
-      "main": [
-        [
-          {
-            "node": "Extract Fields",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Format Date": {
-      "main": [
-        [
-          {
-            "node": "Create RSS Items",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Complete Link": {
-      "main": [
-        [
-          {
-            "node": "Format Date",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Extract Posts": {
-      "main": [
-        [
-          {
-            "node": "Item Lists",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Fetch Website": {
-      "main": [
-        [
-          {
-            "node": "Extract Posts",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Extract Fields": {
-      "main": [
-        [
-          {
-            "node": "Complete Link",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Create RSS Items": {
-      "main": [
-        [
-          {
-            "node": "Prepare Response",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Prepare Response": {
-      "main": [
-        [
-          {
-            "node": "Respond to Webhook",
+            "node": "Switch",
             "type": "main",
             "index": 0
           }
@@ -115,16 +48,82 @@
       "main": [
         [
           {
-            "node": "Set URL",
+            "node": "Function",
             "type": "main",
             "index": 0
           }
         ]
       ]
+    },
+    "Set": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set1": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Set2": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge1": {
+      "main": [
+        [
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Set3": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
     }
   },
-  "createdAt": "2023-03-15T14:22:38.455Z",
-  "id": "32",
+  "createdAt": "2023-06-26T05:10:01.934Z",
+  "id": "40",
   "name": "My workflow",
   "nodes": [
     {
@@ -132,225 +131,175 @@
       "name": "On clicking 'execute'",
       "type": "n8n-nodes-base.manualTrigger",
       "position": [
-        460,
-        660
+        -1620,
+        440
       ],
       "typeVersion": 1,
-      "id": "595180f7-eedd-4c89-aeea-2813f33c32b2"
+      "id": "19c8c9fd-7ce4-4992-b8f5-c5ff53b455a3"
     },
     {
       "parameters": {
-        "fieldToSplitOut": "post",
-        "options": {}
+        "functionCode": "return [\n  {\n    json: {\n      id: 0,\n    }\n  },\n  {\n    json: {\n      id: 1,\n    }\n  },\n  {\n    json: {\n      id: 2,\n    }\n  },\n  {\n    json: {\n      id: 3,\n    }\n  }\n];\n"
       },
-      "name": "Item Lists",
-      "type": "n8n-nodes-base.itemLists",
-      "position": [
-        1340,
-        660
-      ],
-      "typeVersion": 1,
-      "id": "e11bc3ee-d447-422f-9479-4e396807155d"
-    },
-    {
-      "parameters": {
-        "extractionValues": {
-          "values": [
-            {
-              "key": "post",
-              "cssSelector": ".blog-listing__post-content",
-              "returnValue": "html",
-              "returnArray": true
-            }
-          ]
-        },
-        "options": {}
-      },
-      "name": "Extract Posts",
-      "type": "n8n-nodes-base.htmlExtract",
-      "position": [
-        1120,
-        660
-      ],
-      "typeVersion": 1,
-      "id": "7270e657-42ec-4150-b503-31a7b014e9d2"
-    },
-    {
-      "parameters": {
-        "url": "={{$json[\"base_domain\"]}}/blog/category/release",
-        "responseFormat": "string",
-        "options": {
-          "timeout": 10000
-        }
-      },
-      "name": "Fetch Website",
-      "type": "n8n-nodes-base.httpRequest",
-      "position": [
-        900,
-        660
-      ],
-      "typeVersion": 1,
-      "id": "1fd24d6f-4437-4c9b-9fcd-b50a181df81f"
-    },
-    {
-      "parameters": {
-        "values": {
-          "string": [
-            {
-              "name": "base_domain",
-              "value": "https://baserow.io"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "name": "Set URL",
-      "type": "n8n-nodes-base.set",
-      "position": [
-        680,
-        660
-      ],
-      "typeVersion": 1,
-      "id": "6bcf8138-2fef-4b04-be6d-1ee58a779ba2"
-    },
-    {
-      "parameters": {
-        "values": {
-          "string": [
-            {
-              "name": "link",
-              "value": "={{$item(0).$node[\"Set URL\"].json[\"base_domain\"]}}{{$json[\"link\"]}}"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "name": "Complete Link",
-      "type": "n8n-nodes-base.set",
-      "position": [
-        460,
-        860
-      ],
-      "typeVersion": 1,
-      "id": "1c7c4fa3-cf36-4949-a47b-52619f53da0f"
-    },
-    {
-      "parameters": {
-        "value": "={{$json[\"date\"]}}",
-        "dataPropertyName": "date",
-        "toFormat": "YYYY-MM-DD",
-        "options": {}
-      },
-      "name": "Format Date",
-      "type": "n8n-nodes-base.dateTime",
-      "position": [
-        680,
-        860
-      ],
-      "typeVersion": 1,
-      "id": "edcc35e8-d88c-4cff-bb26-34c99d4989c5"
-    },
-    {
-      "parameters": {
-        "functionCode": "return {\n  rss_item: \n`<item>\n  <title>${item.title}</title>\n  <link>${item.link}</link>\n  <description>${item.description}</description>\n  <pubDate>${item.date}</pubDate>\n</item>`\n}"
-      },
-      "name": "Create RSS Items",
-      "type": "n8n-nodes-base.functionItem",
-      "position": [
-        900,
-        860
-      ],
-      "typeVersion": 1,
-      "id": "5b6690fb-012c-4381-80c3-4822c0898107"
-    },
-    {
-      "parameters": {
-        "path": "baserow-releases",
-        "responseMode": "responseNode",
-        "options": {}
-      },
-      "name": "Webhook",
-      "type": "n8n-nodes-base.webhook",
-      "position": [
-        460,
-        460
-      ],
-      "webhookId": "27c1e4db-568f-4bf9-9474-0898ce1173f7",
-      "typeVersion": 1,
-      "id": "137e99a0-2998-42c9-890f-cb4896e6d40f"
-    },
-    {
-      "parameters": {
-        "respondWith": "text",
-        "responseBody": "={{$json[\"feed\"]}}",
-        "options": {
-          "responseHeaders": {
-            "entries": [
-              {
-                "name": "content-type",
-                "value": "application/xml"
-              }
-            ]
-          }
-        }
-      },
-      "name": "Respond to Webhook",
-      "type": "n8n-nodes-base.respondToWebhook",
-      "position": [
-        1340,
-        860
-      ],
-      "typeVersion": 1,
-      "id": "1cde77e1-a26c-4664-a8d9-f1e5c4cfdab4"
-    },
-    {
-      "parameters": {
-        "functionCode": "let feed =\n`<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<rss version=\"2.0\">\n\n<channel>\n  <title>Baserow Releases</title>\n  <link>https://baserow.io/blog/category/release</link>\n  <description>Stay up to date with the latest changes and updates of Baserow</description>\n  ${items.map(e => e.json.rss_item).join('\\n')}\n</channel>\n\n</rss>`;\n\nreturn [{\n  json: {\n    feed: feed\n  }\n}];"
-      },
-      "name": "Prepare Response",
+      "name": "Function",
       "type": "n8n-nodes-base.function",
       "position": [
-        1120,
-        860
+        -1420,
+        440
       ],
       "typeVersion": 1,
-      "id": "c5bfdc17-b155-4ccd-9eef-9234bf14022b"
+      "id": "58f68c6a-2a99-48c3-92f7-f1543c6faee7"
     },
     {
       "parameters": {
-        "dataPropertyName": "post",
-        "extractionValues": {
-          "values": [
+        "values": {
+          "string": [
             {
-              "key": "date",
-              "cssSelector": ".blog-listing__post-info > strong"
-            },
-            {
-              "key": "title",
-              "cssSelector": ".blog-listing__post-title"
-            },
-            {
-              "key": "link",
-              "cssSelector": ".blog-listing__post-title > a",
-              "returnValue": "attribute",
-              "attribute": "href"
-            },
-            {
-              "key": "description",
-              "cssSelector": ".blog-listing__post-description"
+              "name": "name",
+              "value": "n8n"
             }
           ]
         },
         "options": {}
       },
-      "name": "Extract Fields",
-      "type": "n8n-nodes-base.htmlExtract",
+      "name": "Set",
+      "type": "n8n-nodes-base.set",
       "position": [
-        1560,
-        660
+        -1020,
+        220
       ],
       "typeVersion": 1,
-      "id": "ea8d1846-dc84-4294-bfea-dcdc06a4bac5"
+      "id": "65b4947c-7f55-4d61-866e-c9e667264c9b"
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "name",
+              "value": "nodemation"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Set1",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        -1020,
+        360
+      ],
+      "typeVersion": 1,
+      "id": "3415b020-ef57-4e7c-932c-1c7a85d87093"
+    },
+    {
+      "parameters": {
+        "value1": "={{$node[\"Function\"].json[\"id\"]}}",
+        "rules": {
+          "rules": [
+            {
+              "operation": "equal"
+            },
+            {
+              "operation": "equal",
+              "value2": 1,
+              "output": 1
+            },
+            {
+              "operation": "equal",
+              "value2": 2,
+              "output": 2
+            }
+          ]
+        },
+        "fallbackOutput": 3
+      },
+      "name": "Switch",
+      "type": "n8n-nodes-base.switch",
+      "position": [
+        -1220,
+        440
+      ],
+      "typeVersion": 1,
+      "id": "ef0ad296-1bc4-4f0a-8a63-03beb473e5e1"
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "name",
+              "value": "nathan"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Set2",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        -1020,
+        500
+      ],
+      "typeVersion": 1,
+      "id": "d13173ad-140d-4df6-9bd7-21efbbdb60c8"
+    },
+    {
+      "parameters": {
+        "mode": "chooseBranch",
+        "output": "input2"
+      },
+      "id": "b1179a37-4ccc-4516-9502-dbba18768fad",
+      "name": "Merge",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        -800,
+        280
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "d9aa172c-55d6-4bee-9ebe-12d97356a0ef",
+      "name": "Merge1",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        -800,
+        560
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "1fd8b9da-f0f5-41b7-ba6d-f2e627b2bf87",
+      "name": "Merge2",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        -600,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "name",
+              "value": "n8n.io"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Set3",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        -1020,
+        640
+      ],
+      "typeVersion": 1,
+      "id": "8b0f2005-235c-4688-8423-acaef446e126"
     }
   ],
   "pinData": {},
@@ -358,6 +307,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-03-15T14:22:38.455Z",
-  "versionId": "3819d73a-f385-4607-8c22-67a57ec51f66"
+  "updatedAt": "2023-06-26T05:10:01.934Z",
+  "versionId": "ce077aab-bbbb-4651-8dfd-0c42b401d6f1"
 }
