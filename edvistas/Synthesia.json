@@ -244,7 +244,8 @@
       "position": [
         1100,
         240
-      ]
+      ],
+      "disabled": true
     },
     {
       "parameters": {
@@ -479,6 +480,10 @@
             {
               "name": "email",
               "value": "kdessinger@edvistas.com"
+            },
+            {
+              "name": "Save_Location",
+              "value": "/!Share_(S:)/_tmp"
             }
           ]
         },
@@ -615,8 +620,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        591.9028777762443,
-        377.94371153943945
+        580,
+        400
       ]
     },
     {
@@ -655,13 +660,13 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 2.1,
       "position": [
-        -220,
+        -260,
         800
       ]
     },
     {
       "parameters": {
-        "path": "=/!Share_(S%3A)/_tmp/{{ $('Generate Filename').item.json[\"message\"][\"content\"] }}",
+        "path": "={{ $('Settings').item.json[\"Save_Location\"] }}/{{ $('Generate Filename').item.json[\"message\"][\"content\"] }}",
         "binaryDataUpload": true
       },
       "id": "1d1e8f7f-4b0e-45f9-85e0-2483b5235b56",
@@ -680,7 +685,23 @@
       }
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Generate Filename": [
+      {
+        "json": {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "Edu_Debt.mp4"
+          },
+          "finish_reason": "stop"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
   "settings": {
     "saveManualExecutions": true,
     "callerPolicy": "workflowsFromSameOwner"
@@ -707,6 +728,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-06-25T07:27:23.000Z",
-  "versionId": "582c0635-a602-44a7-ab76-fa86a697eeeb"
+  "updatedAt": "2023-06-26T18:49:59.000Z",
+  "versionId": "533db5b1-f188-4de1-a116-e133ade61aa1"
 }
