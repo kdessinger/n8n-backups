@@ -129,7 +129,7 @@
       "main": [
         [
           {
-            "node": "Synthesia Create",
+            "node": "Merge",
             "type": "main",
             "index": 0
           }
@@ -145,6 +145,17 @@
             "index": 0
           }
         ],
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
         [
           {
             "node": "Synthesia Create",
@@ -175,7 +186,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        40,
+        80,
         640
       ],
       "credentials": {
@@ -214,7 +225,7 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -1060,
+        -1100,
         640
       ]
     },
@@ -326,7 +337,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        -660,
+        -700,
         640
       ]
     },
@@ -357,8 +368,8 @@
       "type": "n8n-nodes-base.openAi",
       "typeVersion": 1,
       "position": [
-        -900,
-        400
+        -1060,
+        300
       ],
       "credentials": {
         "openAiApi": {
@@ -378,7 +389,7 @@
               "content": "Act as a file name generator. I will provide you with a short paragraph or an article and you will generate an appropriate computer file name. The file name will have words from the article.  The file name will contain no spaces at all but you can use underscore '_' characters in place of spaces. The file name should never have special characters except for the underscore.  The filename will always have a .mp4 extension. The filename should be less than 30 characters long. Here is an example.\n\"You are my sunshine my only sunshine you make me happy when sky's are grey\"  \nMy_Sunshine.mp4"
             },
             {
-              "content": "=\"{{ $('stand-up comedian').item.json[\"message\"][\"content\"] }}\""
+              "content": "=\"{{ $('Merge').item.json[\"message\"][\"content\"] }}\""
             }
           ]
         },
@@ -494,7 +505,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 2,
       "position": [
-        -860,
+        -900,
         640
       ]
     },
@@ -526,8 +537,8 @@
       "type": "n8n-nodes-base.openAi",
       "typeVersion": 1,
       "position": [
-        -240,
-        460
+        -300,
+        500
       ],
       "credentials": {
         "openAiApi": {
@@ -552,7 +563,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        -460,
+        -500,
         640
       ]
     },
@@ -560,15 +571,15 @@
       "parameters": {
         "content": "## Your Professors \nSwap out the chatGPT professors based on the topic of choice. Remember to enable the node first. ",
         "height": 296.8341409899669,
-        "width": 522.0835303434293
+        "width": 745.5565472840743
       },
       "id": "eb0645b1-5e98-4aa0-81b5-3780e3c70e2a",
       "name": "Sticky Note",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -980,
-        280
+        -1100,
+        180
       ]
     },
     {
@@ -598,8 +609,8 @@
       "type": "n8n-nodes-base.openAi",
       "typeVersion": 1,
       "position": [
-        -680,
-        400
+        -860,
+        300
       ],
       "credentials": {
         "openAiApi": {
@@ -660,8 +671,8 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 2.1,
       "position": [
-        -260,
-        800
+        -120,
+        640
       ]
     },
     {
@@ -685,23 +696,7 @@
       }
     }
   ],
-  "pinData": {
-    "Generate Filename": [
-      {
-        "json": {
-          "index": 0,
-          "message": {
-            "role": "assistant",
-            "content": "Edu_Debt.mp4"
-          },
-          "finish_reason": "stop"
-        },
-        "pairedItem": {
-          "item": 0
-        }
-      }
-    ]
-  },
+  "pinData": {},
   "settings": {
     "saveManualExecutions": true,
     "callerPolicy": "workflowsFromSameOwner"
@@ -728,6 +723,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-06-26T18:49:59.000Z",
-  "versionId": "533db5b1-f188-4de1-a116-e133ade61aa1"
+  "updatedAt": "2023-06-28T19:17:18.000Z",
+  "versionId": "892c90c2-3def-4035-a9e9-4abf7ddc0f94"
 }
