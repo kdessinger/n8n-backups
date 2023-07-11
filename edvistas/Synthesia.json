@@ -41,6 +41,11 @@
             "node": "Nextcloud",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Save to _tmp",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -253,8 +258,8 @@
       "type": "n8n-nodes-base.writeBinaryFile",
       "typeVersion": 1,
       "position": [
-        1100,
-        240
+        1080,
+        440
       ],
       "disabled": true
     },
@@ -494,7 +499,7 @@
             },
             {
               "name": "Save_Location",
-              "value": "/!Share_(S:)/_tmp"
+              "value": "/!Share/_tmp"
             }
           ]
         },
@@ -685,8 +690,8 @@
       "type": "n8n-nodes-base.nextCloud",
       "typeVersion": 1,
       "position": [
-        1100,
-        440
+        1080,
+        240
       ],
       "credentials": {
         "nextCloudApi": {
@@ -704,25 +709,25 @@
   "staticData": null,
   "tags": [
     {
+      "id": "22",
       "createdAt": "2023-02-14T20:17:22.566Z",
       "updatedAt": "2023-02-14T20:17:22.566Z",
-      "id": "22",
       "name": "ChatGPT"
     },
     {
+      "id": "32",
       "createdAt": "2023-06-10T20:20:06.155Z",
       "updatedAt": "2023-06-10T20:20:06.155Z",
-      "id": "32",
       "name": "done"
     },
     {
+      "id": "37",
       "createdAt": "2023-06-14T18:12:39.036Z",
       "updatedAt": "2023-06-14T18:12:39.036Z",
-      "id": "37",
       "name": "Synthesia"
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-06-28T19:17:18.000Z",
-  "versionId": "892c90c2-3def-4035-a9e9-4abf7ddc0f94"
+  "updatedAt": "2023-07-11T19:11:47.000Z",
+  "versionId": "8ce737a1-a883-464e-804f-b70013947ba0"
 }
