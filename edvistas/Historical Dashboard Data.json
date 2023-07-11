@@ -34,38 +34,11 @@
         ]
       ]
     },
-    "Set": {
-      "main": [
-        [
-          {
-            "node": "Spreadsheet File",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "SplitInBatches": {
-      "main": [
-        [
-          {
-            "node": "Date & Time",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Microsoft SQL (EVICore)": {
       "main": [
         [
           {
-            "node": "Set",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "SplitInBatches",
+            "node": "Date & Time",
             "type": "main",
             "index": 0
           }
@@ -93,6 +66,17 @@
           }
         ]
       ]
+    },
+    "Date & Time": {
+      "main": [
+        [
+          {
+            "node": "Spreadsheet File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2022-02-10T21:57:15.216Z",
@@ -113,15 +97,15 @@
     {
       "parameters": {
         "operation": "toFile",
+        "fileFormat": "csv",
         "options": {
-          "fileName": "dashboard_historical.xls",
-          "sheetName": "Sheet1"
+          "fileName": "dashboard_historical.csv"
         }
       },
       "name": "Spreadsheet File",
       "type": "n8n-nodes-base.spreadsheetFile",
       "position": [
-        700,
+        680,
         300
       ],
       "typeVersion": 1,
@@ -129,14 +113,14 @@
     },
     {
       "parameters": {
-        "fileName": "/mnt/share/_tmp/kjd_dashboards_historical.xls",
+        "fileName": "=/mnt/share/_tmp/{{ $binary.data.fileName }}",
         "options": {}
       },
       "name": "Write Binary File",
       "type": "n8n-nodes-base.writeBinaryFile",
       "position": [
-        900,
-        420
+        880,
+        300
       ],
       "typeVersion": 1,
       "id": "3a71c752-bacd-408a-a349-7ccbd679d677"
@@ -163,60 +147,20 @@
     },
     {
       "parameters": {
-        "values": {
-          "string": [
-            {
-              "name": "=Data",
-              "value": "=YYYY"
-            },
-            {}
-          ],
-          "number": []
-        },
-        "options": {
-          "dotNotation": false
-        }
-      },
-      "name": "Set",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 1,
-      "position": [
-        540,
-        420
-      ],
-      "id": "1257099e-589a-4c09-bd25-1c4b2278b9e4"
-    },
-    {
-      "parameters": {
-        "action": "calculate",
-        "value": "=Date",
-        "dataPropertyName": "=NewDate",
-        "options": {
-          "fromFormat": "YYYY-MM-DD HH:mm:ss"
-        }
+        "value": "={{ $json.Date }}",
+        "dataPropertyName": "Date",
+        "custom": true,
+        "toFormat": "YYYY-MM-DD HH:mm:ss",
+        "options": {}
       },
       "name": "Date & Time",
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 1,
       "position": [
-        840,
-        160
+        480,
+        300
       ],
       "id": "89fd8851-c874-4b27-9196-73156f21d9c7"
-    },
-    {
-      "parameters": {
-        "batchSize": 3,
-        "options": {}
-      },
-      "name": "SplitInBatches",
-      "type": "n8n-nodes-base.splitInBatches",
-      "typeVersion": 1,
-      "position": [
-        540,
-        160
-      ],
-      "id": "2a3e6025-70ca-49a1-80d2-61ba9359e3cd"
     },
     {
       "parameters": {
@@ -241,34 +185,14 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "SELECT TOP (10) [Date],[CC_Code],[Seq],[Line],[SignerID],[Signer Name],[Status],[NomineeID],[Nominee_Name],[Nominee_Affiliation],[sigTotal],[ScanURL],[DataURL]FROM [PEF].[dbo].[Signers] ORDER BY Abs(SEQ), Line "
-      },
-      "name": "Microsoft SQL (PEF)",
-      "type": "n8n-nodes-base.microsoftSql",
-      "typeVersion": 1,
-      "position": [
-        100,
-        0
-      ],
-      "id": "594d19e2-4cf6-46e2-893a-4ff8ae865f37",
-      "credentials": {
-        "microsoftSql": {
-          "id": "9",
-          "name": "SQL01.edvistas.local (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "executeQuery",
         "query": "SELECT TOP (10) * FROM Northwind..Products"
       },
       "name": "Northwinds Products",
       "type": "n8n-nodes-base.microsoftSql",
       "typeVersion": 1,
       "position": [
-        340,
-        0
+        380,
+        80
       ],
       "id": "e4e05343-a633-4785-99ea-0edc27349afa",
       "credentials": {
@@ -313,8 +237,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 1,
       "position": [
-        560,
-        0
+        580,
+        80
       ]
     },
     {
@@ -338,7 +262,7 @@
       "typeVersion": 1,
       "position": [
         780,
-        0
+        80
       ]
     }
   ],
@@ -347,19 +271,19 @@
   "staticData": null,
   "tags": [
     {
+      "id": "31",
       "createdAt": "2023-06-10T20:19:21.457Z",
       "updatedAt": "2023-06-10T20:19:21.457Z",
-      "id": "31",
       "name": "uc"
     },
     {
+      "id": "36",
       "createdAt": "2023-06-10T21:44:29.997Z",
       "updatedAt": "2023-06-10T21:44:29.997Z",
-      "id": "36",
       "name": "MSSQL"
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-06-10T21:44:35.000Z",
-  "versionId": "233729a6-b54b-4d3d-9aa8-8640e749be15"
+  "updatedAt": "2023-07-10T23:38:21.000Z",
+  "versionId": "cdb1c428-1ee4-452d-9c0b-d1bddd524864"
 }
