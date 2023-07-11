@@ -535,21 +535,21 @@
   "staticData": null,
   "tags": [
     {
+      "id": "22",
       "createdAt": "2023-02-14T20:17:22.566Z",
       "updatedAt": "2023-02-14T20:17:22.566Z",
-      "id": "22",
       "name": "ChatGPT"
     },
     {
+      "id": "23",
       "createdAt": "2023-02-24T06:02:51.704Z",
       "updatedAt": "2023-02-24T06:02:51.704Z",
-      "id": "23",
       "name": "Prompts"
     },
     {
+      "id": "33",
       "createdAt": "2023-06-10T20:28:15.224Z",
       "updatedAt": "2023-06-10T20:28:15.224Z",
-      "id": "33",
       "name": "Playground"
     }
   ],
