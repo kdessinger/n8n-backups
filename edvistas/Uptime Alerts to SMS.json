@@ -145,21 +145,21 @@
   "staticData": null,
   "tags": [
     {
+      "id": "12",
       "createdAt": "2022-12-09T05:43:36.104Z",
       "updatedAt": "2022-12-09T05:43:36.104Z",
-      "id": "12",
       "name": "odoo"
     },
     {
+      "id": "24",
       "createdAt": "2023-03-03T15:41:27.787Z",
       "updatedAt": "2023-03-03T15:41:27.787Z",
-      "id": "24",
       "name": "SMS"
     },
     {
+      "id": "32",
       "createdAt": "2023-06-10T20:20:06.155Z",
       "updatedAt": "2023-06-10T20:20:06.155Z",
-      "id": "32",
       "name": "done"
     }
   ],
