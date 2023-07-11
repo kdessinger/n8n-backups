@@ -234,33 +234,33 @@
   "staticData": null,
   "tags": [
     {
+      "id": "12",
       "createdAt": "2022-12-09T05:43:36.104Z",
       "updatedAt": "2022-12-09T05:43:36.104Z",
-      "id": "12",
       "name": "odoo"
     },
     {
+      "id": "22",
       "createdAt": "2023-02-14T20:17:22.566Z",
       "updatedAt": "2023-02-14T20:17:22.566Z",
-      "id": "22",
       "name": "ChatGPT"
     },
     {
+      "id": "26",
       "createdAt": "2023-03-14T05:28:48.099Z",
       "updatedAt": "2023-03-14T05:28:48.099Z",
-      "id": "26",
       "name": "Podcast"
     },
     {
+      "id": "27",
       "createdAt": "2023-03-14T05:29:10.368Z",
       "updatedAt": "2023-03-14T05:29:10.368Z",
-      "id": "27",
       "name": "DALL-E"
     },
     {
+      "id": "31",
       "createdAt": "2023-06-10T20:19:21.457Z",
       "updatedAt": "2023-06-10T20:19:21.457Z",
-      "id": "31",
       "name": "uc"
     }
   ],
