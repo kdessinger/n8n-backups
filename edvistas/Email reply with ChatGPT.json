@@ -1358,15 +1358,15 @@
   "staticData": null,
   "tags": [
     {
+      "id": "22",
       "createdAt": "2023-02-14T20:17:22.566Z",
       "updatedAt": "2023-02-14T20:17:22.566Z",
-      "id": "22",
       "name": "ChatGPT"
     },
     {
+      "id": "30",
       "createdAt": "2023-03-31T17:07:07.225Z",
       "updatedAt": "2023-03-31T17:07:07.225Z",
-      "id": "30",
       "name": "Email"
     }
   ],
