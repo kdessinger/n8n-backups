@@ -1,0 +1,799 @@
+{
+  "active": false,
+  "connections": {
+    "Whisper Request": {
+      "main": [
+        [
+          {
+            "node": "Create Text File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Nextcloud": {
+      "main": [
+        [
+          {
+            "node": "Get audio files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF Larger Than 25MB": {
+      "main": [
+        [
+          {
+            "node": "Split Files",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Load Nextcloud File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Files": {
+      "main": [
+        [
+          {
+            "node": "Nextcloud1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "Nextcloud",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get audio files": {
+      "main": [
+        [
+          {
+            "node": "IF Larger Than 25MB",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Non audio files, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Nextcloud1": {
+      "main": [
+        [
+          {
+            "node": "Load Nextcloud File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Load Local File": {
+      "main": [
+        [
+          {
+            "node": "Whisper Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Text File": {
+      "main": [
+        [
+          {
+            "node": "Save File to Disk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Load Nextcloud File": {
+      "main": [
+        [
+          {
+            "node": "Whisper Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Whisper Request1": {
+      "main": [
+        [
+          {
+            "node": "Create Text File1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Text File1": {
+      "main": [
+        [
+          {
+            "node": "Load Nextcloud File1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Local File Trigger": {
+      "main": [
+        [
+          {
+            "node": "Nextcloud",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Local File Trigger1": {
+      "main": [
+        [
+          {
+            "node": "Nextcloud",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-03-22T03:28:24.318Z",
+  "id": "33",
+  "name": "Speech 2 Text",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "position": [
+        -520,
+        -100
+      ],
+      "id": "20b747e9-5284-46e2-91d4-43c7513a6afc"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/audio/transcriptions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "content-type",
+              "value": "multipart/form-data"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "=model",
+              "value": "whisper-1"
+            },
+            {
+              "name": "=response_format",
+              "value": "text"
+            },
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "data"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "responseFormat": "text",
+              "outputPropertyName": "text"
+            }
+          }
+        }
+      },
+      "id": "f436c98c-4a1e-4fd6-b38c-2b64e1385e8d",
+      "name": "Whisper Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1091,
+        -360
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "23",
+          "name": "OpenAI (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "FilePath",
+              "value": "/mnt/share/_convert/Speech_2_Text/"
+            },
+            {
+              "name": "FileName",
+              "value": "edvistas_3-21-23"
+            },
+            {
+              "name": "FileType",
+              "value": ".mp3"
+            },
+            {
+              "name": "FileTypeDest",
+              "value": ".txt"
+            },
+            {
+              "name": "File",
+              "value": "={{ $parameter[\"values\"][\"string\"][0][\"value\"] }}{{ $parameter[\"values\"][\"string\"][1][\"value\"] }}{{ $parameter[\"values\"][\"string\"][2][\"value\"] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "fbac74a3-1d1b-4b21-8197-ff2c1291d098",
+      "name": "GetFile",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        -180,
+        260
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "protocol": "sftp",
+        "operation": "list",
+        "path": "/mnt/DataVolume/share/_convert/Speech_2_Text/"
+      },
+      "id": "51490d41-26ff-414a-917e-75ea197a31d7",
+      "name": "FTP",
+      "type": "n8n-nodes-base.ftp",
+      "typeVersion": 1,
+      "position": [
+        -180,
+        80
+      ],
+      "credentials": {
+        "sftp": {
+          "id": "36",
+          "name": "SFTP account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "triggerOn": "folder",
+        "path": "/mnt/share/_convert/Speech_2_Text/",
+        "events": [
+          "add"
+        ],
+        "options": {
+          "followSymlinks": true
+        }
+      },
+      "id": "eebfe09f-c507-45e4-b205-48e886920f1a",
+      "name": "Local File Trigger",
+      "type": "n8n-nodes-base.localFileTrigger",
+      "typeVersion": 1,
+      "position": [
+        -180,
+        -300
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "resource": "folder",
+        "operation": "list",
+        "path": "/_convert/Speech_2_Text"
+      },
+      "id": "27227a4f-529a-4042-85db-c881d1b0d899",
+      "name": "Nextcloud",
+      "type": "n8n-nodes-base.nextCloud",
+      "typeVersion": 1,
+      "position": [
+        -180,
+        -100
+      ],
+      "credentials": {
+        "nextCloudApi": {
+          "id": "18",
+          "name": "NextCloud (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Monitor a folder and get the file name(s) of new file(s).\n**Choose One** to edit to get the file name",
+        "height": 844.5256671025343,
+        "width": 352.9770840827728
+      },
+      "id": "5c5063c6-d3fa-4f90-8699-540b13c613eb",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -301.9719780702487,
+        -427.45747718144196
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.contentLength }}",
+              "operation": "larger",
+              "value2": 24117248
+            }
+          ]
+        }
+      },
+      "id": "1f7294a5-06aa-4385-944a-66e0e1562ed9",
+      "name": "IF Larger Than 25MB",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        320,
+        -200
+      ]
+    },
+    {
+      "parameters": {
+        "executeOnce": false,
+        "command": "=/home/node/.n8n/scripts/splitaudiofile.sh /mnt/share/{{ $json.path }}"
+      },
+      "id": "65f64f1d-928b-4138-8be6-68afda94bf8f",
+      "name": "Split Files",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        540,
+        -320
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.contentType }}",
+              "operation": "contains",
+              "value2": "audio"
+            }
+          ]
+        }
+      },
+      "id": "b7914181-4220-442a-b5be-eebae56bb4d7",
+      "name": "Get audio files",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        120,
+        -180
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "folder",
+        "operation": "list",
+        "path": "/_convert/Speech_2_Text"
+      },
+      "id": "3602a0dd-d57e-4a63-9d11-7b1594b9f583",
+      "name": "Nextcloud1",
+      "type": "n8n-nodes-base.nextCloud",
+      "typeVersion": 1,
+      "position": [
+        700,
+        -320
+      ],
+      "credentials": {
+        "nextCloudApi": {
+          "id": "18",
+          "name": "NextCloud (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "61e7aa63-8aee-4450-b877-ea3525a7642e",
+      "name": "Non audio files, do nothing",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        320,
+        -40
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Load File \n**Read Binary** use a local file or **Nextcloud**",
+        "height": 521.497759639518,
+        "width": 161.18034308163465
+      },
+      "id": "cac68e87-8f42-4f02-a872-49d50b6c9aef",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        880,
+        -500
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "path": "={{ $json.path }}"
+      },
+      "id": "27416983-9cff-4fcb-9ffb-d315a1c746bd",
+      "name": "Load Nextcloud File",
+      "type": "n8n-nodes-base.nextCloud",
+      "typeVersion": 1,
+      "position": [
+        911,
+        -180
+      ],
+      "credentials": {
+        "nextCloudApi": {
+          "id": "18",
+          "name": "NextCloud (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fileSelector": "=/mnt/share/{{ $json.path }}"
+      },
+      "id": "143547a4-8142-4f21-8b12-dd1297bedc49",
+      "name": "Load Local File",
+      "type": "n8n-nodes-base.readBinaryFiles",
+      "typeVersion": 1,
+      "position": [
+        911,
+        -360
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "jsonToBinary",
+        "convertAllData": false,
+        "sourceKey": "text",
+        "destinationKey": "=data",
+        "options": {
+          "fileName": "=/mnt/share/{{ $json.path }}",
+          "keepSource": true,
+          "mimeType": "=text/plain"
+        }
+      },
+      "id": "024aad0b-04e5-4fe2-8e03-744f5dfab6c4",
+      "name": "Create Text File",
+      "type": "n8n-nodes-base.moveBinaryData",
+      "typeVersion": 1,
+      "position": [
+        1271,
+        -360
+      ]
+    },
+    {
+      "parameters": {
+        "fileName": "={{ $binary.data.fileName }}",
+        "options": {
+          "append": false
+        }
+      },
+      "name": "Save File to Disk",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "position": [
+        1451,
+        -360
+      ],
+      "typeVersion": 1,
+      "id": "8e03cc03-5de4-4a1e-83fd-eea6f7ebc8c1"
+    },
+    {
+      "parameters": {
+        "content": "## Save File \n**Write Binary** use a local file or **Nextcloud**",
+        "height": 521.497759639518,
+        "width": 159.9380827392308
+      },
+      "id": "68056679-a223-449c-9471-60acaa11760c",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1421,
+        -500
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/audio/transcriptions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "content-type",
+              "value": "multipart/form-data"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "=model",
+              "value": "whisper-1"
+            },
+            {
+              "name": "=response_format",
+              "value": "text"
+            },
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "data"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "responseFormat": "text",
+              "outputPropertyName": "text"
+            }
+          }
+        }
+      },
+      "id": "41ca3364-a714-4c72-ba3e-ce86bf54569c",
+      "name": "Whisper Request1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1091,
+        -180
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "23",
+          "name": "OpenAI (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "jsonToBinary",
+        "convertAllData": false,
+        "sourceKey": "text",
+        "options": {
+          "fileName": "={{ $node[\"Load Nextcloud File\"].json.path }}.txt",
+          "keepSource": true,
+          "mimeType": "={{ $json.headers[\"content-type\"] }}"
+        }
+      },
+      "id": "d8d5f77d-bb6f-40e9-a50f-38417cc8cd5b",
+      "name": "Create Text File1",
+      "type": "n8n-nodes-base.moveBinaryData",
+      "typeVersion": 1,
+      "position": [
+        1271,
+        -180
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "path": "={{ $binary.data.fileName }}",
+        "binaryDataUpload": true
+      },
+      "id": "b6327e5f-85ff-470d-b89f-2e784a7a4137",
+      "name": "Load Nextcloud File1",
+      "type": "n8n-nodes-base.nextCloud",
+      "typeVersion": 1,
+      "position": [
+        1451,
+        -180
+      ],
+      "credentials": {
+        "nextCloudApi": {
+          "id": "18",
+          "name": "NextCloud (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "command": "=ls /mnt/share{{ $node[\"Nextcloud\"].parameter[\"path\"] }}"
+      },
+      "id": "0f029121-56af-4c78-a748-2a0f25c33bb9",
+      "name": "Execute Command",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        440,
+        -660
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Need instructions on how to install n8n nativly?\n**click** here for a guide. [Guide](https://i12bretro.github.io/tutorials/0784.html)",
+        "height": 117.89351703909519,
+        "width": 347.1801384459393
+      },
+      "id": "c2a9e1fd-5a53-425d-90e4-9068889a3ba7",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        60,
+        -660
+      ]
+    },
+    {
+      "parameters": {
+        "triggerOn": "folder",
+        "path": "/mnt/share/",
+        "events": [
+          "add"
+        ],
+        "options": {
+          "followSymlinks": true
+        }
+      },
+      "id": "ccfc1c9a-22e5-4255-a575-c508e414e631",
+      "name": "Local File Trigger1",
+      "type": "n8n-nodes-base.localFileTrigger",
+      "typeVersion": 1,
+      "position": [
+        -520,
+        80
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "operation": "notEqual"
+            }
+          ],
+          "dateTime": [
+            {
+              "value1": "2023-06-03T03:23:46.284Z",
+              "operation": "before",
+              "value2": "2023-06-10T03:23:51.788Z"
+            }
+          ],
+          "number": [
+            {
+              "operation": "isEmpty"
+            }
+          ],
+          "string": [
+            {}
+          ]
+        },
+        "combineConditions": "OR"
+      },
+      "id": "2a870a73-ac07-4544-83c7-db74cb8f9ee0",
+      "name": "Filter",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 1,
+      "position": [
+        560,
+        -40
+      ]
+    }
+  ],
+  "pinData": {
+    "Whisper Request": [
+      {
+        "json": {
+          "text": "Because like Christine said, she's doing registrations now for July. Next week, next Friday, her March batch will close. If she gets notification in June that three of the ten people have canceled, but they're sending these other three people, she's got to take the first three out and then add the second three. And the other... And Erin, just so... Maybe this will help clarify for you. So let's say Christine is coming and now she's coming with two non-members. Let's say she... One of those people cancels and the other person is a member. That's going to change the price because a member and a non-member. Let's say she adds someone. That may make it a team now because if it's four or more, it's a team. And now that has a different price. So you can't... I don't think we can just say, okay, it's an equal exchange, that I'm dropping one but I'm adding one. Erin's not coming, Kenny's coming, so we don't have to change anything. It's the same price, but maybe Kenny's a member or a non-member or a team. I thought of substituting simply just to change one. But basically, always treat it as two-step. One is remove, not two-step, but basically remove the current attendee and the new attendee, recalculate the cost. If there's anything related to money, then you have to either cancel or change the payment or have another... Yeah, we would adjust it. Adjust it, just put a patch, right? So even if the money is the same, you still want to do the same whole process? Mm-hmm. Especially because with CPLE credits, we have to know who was attending, what events were offering, so we're tracking the correct credits and we're providing the correct information. Okay. So four or more as a team, is that like a business rule for savings? No. Okay. Let me make life easy. There are no rules. Oh, that was... Sometimes they change it. Sometimes it's three or more. Sometimes... It's been four or more lately, so maybe that's what Aaron and her... Let me just recap this one, just the whole work there. If nobody changes, then that's fine, but if some attendee needs to cancel and a new attendee, then you... Well, that depends on whether the payment has made or not. It depends on whether... So let's say Darlene opens a batch for me, a purchase order batch, and it closes on March 31st. So I put the team in on March 7th, and on the 14th, they tell me that there's changes. I can still go in and make that changes. Now, let's say it's April 4th. That March batch is closed, so Darlene has opened up a new purchase order batch for me for April. So I can't make changes to the March batch because it's closed. Yeah, I know, I know. But what I'm asking before, anything related to payments, I mean just because you say you accidentally choose the wrong member or whatever reason, that should be very straightforward. You just simply go back to the registration, remove the attendee, add the new one, recalculate the cost. I don't know if I'm confused or not. Typically, we don't know whether the batch is open or not. Yeah, correct? Yeah, it's – No, no, no, I'm not talking about – just to say you enter a list of the attendee, but you find someone you enter – And the batch is open, and I want to make a change. No, no, no. I'm just saying you receive a purchase order, say you want to enter 10 people into the system. But after you finish, you realize one of the members, you choose the wrong person. You pick Sally A. Smith instead of Sally L. Smith. That should be straightforward. You simply go there, just remove, add another one. There's nothing to do with – After this is finished, you make sure the purchase order, everything is entered correctly. Now we are waiting for the payments. And then we receive the payments, enter the information. If the batch is, say, the next day or the next few days, you find that something happens, say you have to – any reason, you have to replace one of the attendees, cancel, or add a new one, then you have to see whether the batch is still open or not. If the batch is closed, you have to have another correction batch to adjust the payment because after – You are still able to enter new attendees, remove attendees, add new attendees, whatever. But after the cost gets calculated, then you have to see whether the batch is open or not. Is that what you do? Because I'm afraid I don't make myself very clear. No, it's a little bit complicated. If the batch is open, then Christine can make any of the adjustments she needs to. But once Darlene closes the batch, whether she's replacing people, whether she's adding people, then that has to be done in a new batch. Yes. And typically, everything is done before payment because 99% of the school districts that we deal with do not pay us until after the event is over because they have to do their internal checks and balances to make sure that those people did attend so that they pay us. Right. So 99% should be fine. You still have the chance to simply just change the attendee without just making so many correction batches. But you said there's still a chance that this correction needs to be made after the batch closes, right? Yes, because when we have early registrations, like for the July event right now, there's a number of things that could happen. People could change vacation plans. There could be a retreat that everybody's required to go on that's in the planning stages that they're not aware of. But no matter what, purely on the event side, I mean, on the event registration module, nothing to do with payment. No matter what, you should be able to change the list, the attendee list, right? Do you still want – I mean, if there are three different times that you may be able to change the attendee list, is that just after you finish, you see a typo. This is the first. The second is that everything is done, but the batch is still open, but the payment is made. So I just simply cancel the previous version to change one, right? Because the batch is still open. I'm still able to make the adjustment. No. There's not a payment. When Darlene's going to make a payment, batches are closed. She can't make a payment on an open batch. The batch has to be closed in order for her to make a payment. But here we made a payment. We select an open batch. No. No. No. Because if – let's say I have an invoice and I mail the invoice out. The invoice comes back with a check. That Darlene – Darlene will close that out. She puts the payment in. I don't put the payment in. Darlene does that. The only time Christine puts the payment in is if there's a check that comes with the event registrations or a purchase order. If she gets a purchase order and she processes it and sends it out with an invoice and they send the invoice back with a check, she never sees that. That strictly stays with Darlene. In that sense, how can you make the payments in the system? Every way you make a payment, you select the open batch, right? No, she creates her own batches when she makes payments. She can't pay off an open batch. She needs to create her own batch for payments because her – the batch with the payments in it has to equal her deposit to the checking account. Yeah, I understand. That's why she needs to open her own batches. Say, maybe we should go through the system so we can make sure I understand. Say I just created an event for tomorrow, a test event. So now I just created two temporary ones. Oh, category. Maybe I should change that. Let me just delete this one. Say I create an event. So now I want to add two attendees as a group. So what I should do is say I just search, whatever, and add one. This is too small. I can just put it here. Yeah, that's it. Can you do the control minus? I'm not good at that. Oh, my God. Sorry, I have to change this. I didn't expect that. So many places. I did it with a small amount. You have a very big monitor. Hopefully you can understand what I'm trying to point. If you cannot see it, I'll read it. But select the one and still too small. I have to select the cool button. I will change this one, make it scrollable. And if you just want one attendee as a group, no group, just simply click register. Otherwise, you click add more attendees. Then it will open the attendee list. It will let you enter the second and more person. So say I add a Diane and a Jack. So now before I can click the register, I'll put both of them. Then you will be able to register them as a group. Okay. And I select the same program. Now, the first question I get, I made a typo. It is not a Jack name. I should select someone else. Then I can just open this one and then select a different person. The Jack. So save. So now it's switched. That's what I'm saying, the first thing. The second thing I know, the total cost of these people registered is by making. Where should I see the invoice? I should click this one. Sorry, the UI, I will adjust it. That's why I have a lot of questions. Because these two people are registered at the same time as a group. So you will see one invoice. And you will see the program cost. This one for another person and total cost is 100. Make sense? So I'm assuming here it's a report I haven't tested thoroughly. Suppose here you can print the invoice just like this one. Once you receive the payment, so now the first question regarding payments is that. Payments go through Darlene directly. You have no clue how much money, how big the check is. But what Darlene told you is that the purchase will tell you the purchase order. Will she tell you the. The invoice will tell us the purchase order. Because we'll type in the purchase order number. So that should be on the invoice. Yeah, it is not shown here. Let me see if this one works. But basically invoice does have a purchase order. Okay. Yeah, I can still change the list here. So here I have the order called purchase order. It bills to, let me just remove, let me redo this one. So that it will set a bill to the school district. So add a first person, select the program. And another person, select program. So I just bill to say district. So that the system behind the scene will find which entity this invoice should be associated to. Not the member, but the school district mentioned here. After register. Okay, so now I have a total of 150. But if you say I want to update the purchase order once you receive the. Oh, the purchase order you already just go with, come with the attendee list, right? The registration. Right, so yeah, yeah. But anyway, you can come back and change the purchase order. So now, yeah, I'll do it. Should I just list the purchase order here? Probably, yeah. That's very important to you. Okay, yeah. And here, now I'm just waiting for the payment. And Donnie will give you a notice that this purchase order number for what district, for which event, right? Donna Lynn will let me know that they paid. Right, but what information will she tell you? The badge number, the purchase order number, the event? No, she actually will show, so if she receives a check, and it's a lot of school districts who will not return the invoice with the check. So she receives just a check, let's say, from North Colony School District. It's a check for $150.\n",
+          "headers": {
+            "date": "Sun, 16 Apr 2023 17:01:16 GMT",
+            "content-type": "text/plain; charset=utf-8",
+            "content-length": "11228",
+            "connection": "close",
+            "openai-organization": "user-gs9ftto9kjyfkofjtmdje6ui",
+            "openai-processing-ms": "33613",
+            "openai-version": "2020-10-01",
+            "strict-transport-security": "max-age=15724800; includeSubDomains",
+            "x-ratelimit-limit-requests": "50",
+            "x-ratelimit-remaining-requests": "49",
+            "x-ratelimit-reset-requests": "1.2s",
+            "x-request-id": "f70e8126ce8273cb0e8ccf5102b3ab1a",
+            "cf-cache-status": "DYNAMIC",
+            "server": "cloudflare",
+            "cf-ray": "7b8dfc597b0e17a5-EWR",
+            "alt-svc": "h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400"
+          },
+          "statusCode": 200,
+          "statusMessage": "OK"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "callerPolicy": "any"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "id": "4",
+      "createdAt": "2022-11-01T19:25:43.994Z",
+      "updatedAt": "2022-11-01T19:25:43.994Z",
+      "name": "Convert"
+    },
+    {
+      "id": "28",
+      "createdAt": "2023-03-22T03:28:15.251Z",
+      "updatedAt": "2023-03-22T03:28:15.251Z",
+      "name": "mp3"
+    },
+    {
+      "id": "29",
+      "createdAt": "2023-03-22T03:28:21.163Z",
+      "updatedAt": "2023-03-22T03:28:21.163Z",
+      "name": "txt"
+    },
+    {
+      "id": "31",
+      "createdAt": "2023-06-10T20:19:21.457Z",
+      "updatedAt": "2023-06-10T20:19:21.457Z",
+      "name": "uc"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2023-07-11T20:12:47.000Z",
+  "versionId": "30b2cf0b-1dd4-4dce-8ee0-ee272f362cdc"
+}
