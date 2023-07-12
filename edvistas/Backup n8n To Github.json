@@ -364,7 +364,7 @@
       "name": "Every 12 hours",
       "type": "n8n-nodes-base.cron",
       "position": [
-        600,
+        620,
         460
       ],
       "typeVersion": 1
@@ -482,6 +482,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-06-10T21:28:42.000Z",
-  "versionId": "795f1f4f-75f1-4735-af5a-062f51a3a40e"
+  "updatedAt": "2023-07-11T20:06:08.000Z",
+  "versionId": "b8bafbde-8b3c-43b7-8661-b74b5ceaf406"
 }
