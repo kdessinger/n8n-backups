@@ -99,7 +99,7 @@
         "operation": "toFile",
         "fileFormat": "csv",
         "options": {
-          "fileName": "dashboard_historical.csv"
+          "fileName": "dashboard.csv"
         }
       },
       "name": "Spreadsheet File",
@@ -113,7 +113,7 @@
     },
     {
       "parameters": {
-        "fileName": "=/mnt/share/_tmp/{{ $binary.data.fileName }}",
+        "fileName": "=/mnt/share/_reports/{{ $binary.data.fileName }}",
         "options": {}
       },
       "name": "Write Binary File",
@@ -151,7 +151,10 @@
         "dataPropertyName": "Date",
         "custom": true,
         "toFormat": "YYYY-MM-DD HH:mm:ss",
-        "options": {}
+        "options": {
+          "fromTimezone": "UTC",
+          "toTimezone": "Universal"
+        }
       },
       "name": "Date & Time",
       "type": "n8n-nodes-base.dateTime",
@@ -284,6 +287,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-07-10T23:38:21.000Z",
-  "versionId": "cdb1c428-1ee4-452d-9c0b-d1bddd524864"
+  "updatedAt": "2023-07-11T20:21:30.000Z",
+  "versionId": "6422aaeb-bce9-4078-a55c-9ea850299277"
 }
