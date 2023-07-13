@@ -260,8 +260,7 @@
       "position": [
         1080,
         440
-      ],
-      "disabled": true
+      ]
     },
     {
       "parameters": {
@@ -576,7 +575,7 @@
       "parameters": {
         "content": "## Your Professors \nSwap out the chatGPT professors based on the topic of choice. Remember to enable the node first. ",
         "height": 296.8341409899669,
-        "width": 745.5565472840743
+        "width": 612.393082753288
       },
       "id": "eb0645b1-5e98-4aa0-81b5-3780e3c70e2a",
       "name": "Sticky Note",
@@ -698,7 +697,8 @@
           "id": "18",
           "name": "NextCloud (kdessinger)"
         }
-      }
+      },
+      "disabled": true
     }
   ],
   "pinData": {},
@@ -728,6 +728,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-07-11T19:11:47.000Z",
-  "versionId": "8ce737a1-a883-464e-804f-b70013947ba0"
+  "updatedAt": "2023-07-13T02:44:48.000Z",
+  "versionId": "41f77b70-5d74-4704-a590-8f95f3173e0f"
 }
