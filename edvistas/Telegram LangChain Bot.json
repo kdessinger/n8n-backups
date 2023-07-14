@@ -1,0 +1,438 @@
+{
+  "active": false,
+  "connections": {
+    "Check chat ID": {
+      "main": [
+        [
+          {
+            "node": "Send typing action [TELEGRAM] [1]",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send typing action [TELEGRAM] [2]",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait 3 seconds": {
+      "main": [
+        [
+          {
+            "node": "Send unauthorized info [TELEGRAM]",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate answer [OPENAI]": {
+      "main": [
+        [
+          {
+            "node": "Send response [TELEGRAM]",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check if start": {
+      "main": [
+        [
+          {
+            "node": "No operation",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Check chat ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram trigger": {
+      "main": [
+        [
+          {
+            "node": "Check if start",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send typing action [TELEGRAM] [1]": {
+      "main": [
+        [
+          {
+            "node": "Generate answer [OPENAI]",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send typing action [TELEGRAM] [2]": {
+      "main": [
+        [
+          {
+            "node": "Wait 3 seconds",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-07-13T20:48:16.104Z",
+  "id": "wEQICHqk6v3QemIA",
+  "name": "Telegram LangChain Bot",
+  "nodes": [
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.message.chat.id }}",
+              "operation": "equal"
+            }
+          ]
+        }
+      },
+      "id": "7d57c774-963a-4664-9867-0c5d494e5c77",
+      "name": "Check chat ID",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        1700,
+        860
+      ]
+    },
+    {
+      "parameters": {
+        "amount": 3,
+        "unit": "seconds"
+      },
+      "id": "c7af8e01-f20b-4b66-9244-3a90543be509",
+      "name": "Wait 3 seconds",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [
+        2180,
+        1020
+      ],
+      "webhookId": "5927178d-1fed-4ee6-bcad-c83fec83c92a"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $node['Telegram trigger'].json.message.chat.id }}",
+        "text": "I'm not authorized to speak with you. ",
+        "additionalFields": {}
+      },
+      "id": "859142f6-4114-4323-83ca-dba55834a5d6",
+      "name": "Send unauthorized info [TELEGRAM]",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        2380,
+        1020
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "1",
+          "name": "Telegram (WorkfloowsAI)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $node['Check chat ID'].json.message.chat.id }}",
+        "text": "={{$node['Generate answer [OPENAI]'].json.message.content }}",
+        "additionalFields": {}
+      },
+      "id": "48a14815-e302-4309-86ac-773389ebe021",
+      "name": "Send response [TELEGRAM]",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        2380,
+        660
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "1",
+          "name": "Telegram (WorkfloowsAI)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "prompt": {
+          "messages": [
+            {
+              "role": "assistant",
+              "content": "You're an assistant called WorkfloowsAI. Your task is to help user with daily tasks."
+            },
+            {
+              "role": "assistant",
+              "content": "="
+            },
+            {
+              "content": "={{ $node[\"Telegram trigger\"].json[\"message\"][\"text\"] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "2fb4c02f-3f4d-4ce2-b6e1-d648d368fc52",
+      "name": "Generate answer [OPENAI]",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        2180,
+        660
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "2",
+          "name": "OpenAi (Workfloows)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.message.text }}",
+              "value2": "/start"
+            }
+          ]
+        }
+      },
+      "id": "5e156d9f-8288-4b03-849d-e0c6afabd65d",
+      "name": "Check if start",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        1480,
+        680
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "5e225d1c-121e-4e44-bfa4-50af5e6a18bc",
+      "name": "No operation",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1700,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## ⚠️ Note\n\n1. Complete video guide for this workflow is available [on my YouTube](https://www.youtube.com/watch?v=Gc2lW5BiGDQ). \n2. Remember to add your credentials and configure nodes (covered in the video guide).\n3. If you like this workflow, please subscribe to [my YouTube channel](https://www.youtube.com/@workfloows) and/or [my newsletter](https://workfloows.com/).\n\n**Thank you for your support!**",
+        "height": 258.9141682442004,
+        "width": 382.8182353336517
+      },
+      "id": "ea1f9643-58b9-4cf8-8afe-218394459104",
+      "name": "Sticky Note5",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1240,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "id": "2ea271fb-59c5-4644-864e-433cedbbabe5",
+      "name": "Telegram trigger",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1,
+      "position": [
+        1280,
+        680
+      ],
+      "webhookId": "64456f84-9a61-4ccc-a28c-3aca7a498103",
+      "credentials": {
+        "telegramApi": {
+          "id": "1",
+          "name": "Telegram (WorkfloowsAI)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Trigger\nRemember to add credentials of your Telegram bot.",
+        "height": 339.51767272727324,
+        "width": 182.4715262478496
+      },
+      "id": "33a18f30-eee1-4631-a5c3-1b8e380cd659",
+      "name": "Sticky Note6",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1240,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Ignore start\nThis node will ignore initial ```/start``` message that is sent by first conversation with bot.",
+        "height": 339.51767272727324,
+        "width": 182.4715262478496
+      },
+      "id": "c66ff7c7-cb45-4337-af32-2197255df8a8",
+      "name": "Sticky Note7",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1440,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Authorize\nChange default value ```0``` to your 10-digit chat ID to authorize conversation and disable other people to talk to your bot.",
+        "height": 367.74256847311284,
+        "width": 182.4715262478496
+      },
+      "id": "73f41e17-4c25-4896-8080-e228d25dc926",
+      "name": "Sticky Note8",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1660,
+        660
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "sendChatAction",
+        "chatId": "={{ $json.message.chat.id }}"
+      },
+      "id": "961b20b9-ffe2-490d-b88b-a30146a788aa",
+      "name": "Send typing action [TELEGRAM] [1]",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        1980,
+        660
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "1",
+          "name": "Telegram (WorkfloowsAI)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Send \"unauthorized\" message\nWhen unknown user (chat ID) wants to come into interaction with bot, workflow will send \"typing\" action, wait 3 seconds and respond: *\"I'm not authorized to speak with you\"*.",
+        "height": 339.42690909090965,
+        "width": 643.3545239632286
+      },
+      "id": "eb58721e-3913-4cb4-92ae-277e21f0901e",
+      "name": "Sticky Note9",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1920,
+        880
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Generate response\nThis sequence sends \"typing action\", gets answer from GPT and returns message to authorized user. Feel free to play with prompt, configuration etc.",
+        "height": 339.42690909090965,
+        "width": 643.3545239632286
+      },
+      "id": "bc05e292-8e33-4320-8940-310eebfaeb0b",
+      "name": "Sticky Note11",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1920,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "sendChatAction",
+        "chatId": "={{ $json.message.chat.id }}"
+      },
+      "id": "5656821a-4577-406e-a91c-1cdb2a4a6d98",
+      "name": "Send typing action [TELEGRAM] [2]",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        1980,
+        1020
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "1",
+          "name": "Telegram (WorkfloowsAI)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## 🦜🔗 Add LangChain \n\n**This is just a basic workflow.** If you want to make your bot more powerful, consider installing [FlowiseAI](https://flowiseai.com/) (LangChain UI) on your server and connecting your bot via simple cURL (HTTP Request node). I cover example [in my YouTube video](https://www.youtube.com/watch?v=Gc2lW5BiGDQ).\n\nInstallation guides and other data about FlowiseAI can be found [here](https://github.com/FlowiseAI/Flowise).",
+        "height": 258.16986559669937,
+        "width": 345.7880926620822
+      },
+      "id": "16b97190-8ae5-4633-a6c3-357e8f1532ba",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        880,
+        240
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [
+    {
+      "id": "22",
+      "createdAt": "2023-02-14T20:17:22.566Z",
+      "updatedAt": "2023-02-14T20:17:22.566Z",
+      "name": "ChatGPT"
+    },
+    {
+      "id": "EqBToVDB8fT8LGAD",
+      "createdAt": "2023-07-13T20:48:22.683Z",
+      "updatedAt": "2023-07-13T20:48:22.683Z",
+      "name": "Telegram"
+    },
+    {
+      "id": "oVYiUHq2l1FayKEJ",
+      "createdAt": "2023-07-13T20:48:34.207Z",
+      "updatedAt": "2023-07-13T20:48:34.207Z",
+      "name": "Bot"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2023-07-13T20:48:37.000Z",
+  "versionId": "799bf0ed-0977-483a-92c3-bb80299cb9c3"
+}
