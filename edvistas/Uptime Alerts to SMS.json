@@ -5,12 +5,12 @@
       "main": [
         [
           {
-            "node": "Twilio SMS",
+            "node": "Post to Odoo",
             "type": "main",
             "index": 0
           },
           {
-            "node": "Post to Odoo",
+            "node": "Twilio SMS",
             "type": "main",
             "index": 0
           }
@@ -37,28 +37,6 @@
       ],
       "webhookId": "d201c9fa-57bf-417f-a911-7a168c6cd0ad",
       "id": "3f676677-7087-4ee6-837d-c68af9d1835a"
-    },
-    {
-      "parameters": {
-        "from": "+15188968042",
-        "to": "+15125144925",
-        "message": "={{ $json[\"body\"][\"msg\"] }}",
-        "options": {}
-      },
-      "name": "Twilio SMS",
-      "type": "n8n-nodes-base.twilio",
-      "typeVersion": 1,
-      "position": [
-        400,
-        420
-      ],
-      "id": "9da6537c-6419-49a8-b018-bab8ee8aabbd",
-      "credentials": {
-        "twilioApi": {
-          "id": "3",
-          "name": "Twilio (kdessinger)"
-        }
-      }
     },
     {
       "parameters": {
@@ -110,6 +88,28 @@
         "odooApi": {
           "id": "22",
           "name": "Odoo (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "from": "+15185357502",
+        "to": "+15125144925",
+        "message": "={{ $json[\"body\"][\"msg\"] }}",
+        "options": {}
+      },
+      "name": "Twilio SMS",
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [
+        400,
+        420
+      ],
+      "id": "755e8b00-7fed-444c-8e7c-54daae1e062a",
+      "credentials": {
+        "twilioApi": {
+          "id": "3",
+          "name": "Twilio (kdessinger)"
         }
       }
     }
@@ -164,6 +164,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-06-10T21:25:07.000Z",
-  "versionId": "29644933-c54f-4cb4-8e13-25fe05105cdc"
+  "updatedAt": "2023-07-13T20:27:37.000Z",
+  "versionId": "e7dfce4b-2f1d-4d44-b888-af486023d45c"
 }
