@@ -8,11 +8,6 @@
             "node": "MeetingStart",
             "type": "main",
             "index": 0
-          },
-          {
-            "node": "Code1",
-            "type": "main",
-            "index": 0
           }
         ]
       ]
@@ -364,7 +359,7 @@
             },
             {
               "fieldName": "attendee_ids",
-              "fieldValue": "={{10}}"
+              "fieldValue": "="
             }
           ]
         }
@@ -473,49 +468,7 @@
       "parameters": {
         "resource": "custom",
         "customResource": "calendar.event",
-        "fieldsToCreateOrUpdate": {
-          "fields": [
-            {
-              "fieldName": "name",
-              "fieldValue": "={{ $json.title }}"
-            },
-            {
-              "fieldName": "description",
-              "fieldValue": "={{ $json.agenda }}"
-            },
-            {
-              "fieldName": "start",
-              "fieldValue": "={{ $json.MeetingStart }}"
-            },
-            {
-              "fieldName": "stop",
-              "fieldValue": "={{ $json.MeetingEnd }}"
-            },
-            {
-              "fieldName": "duration"
-            },
-            {
-              "fieldName": "privacy",
-              "fieldValue": "public"
-            },
-            {
-              "fieldName": "show_as",
-              "fieldValue": "busy"
-            },
-            {
-              "fieldName": "videocall_location",
-              "fieldValue": "={{ $json.webLink }}"
-            },
-            {
-              "fieldName": "location",
-              "fieldValue": "WebEX"
-            },
-            {
-              "fieldName": "duration",
-              "fieldValue": "={{ \nconst durationInMs = $json[\"MeetingEnd\"] - $json[\"MeetingStart\"];\nconst durationInMinutes  = Math.floor(durationInMs / (1000 * 60));\nconsole.log(`Meeting duration: ${durationInMinutes} minutes`);\n}}"
-            }
-          ]
-        }
+        "operation": "delete"
       },
       "id": "8927cc45-84de-44fc-89dd-a6ce00de010a",
       "name": "Odoo Delete Calendar",
@@ -545,19 +498,6 @@
       "position": [
         200,
         320
-      ]
-    },
-    {
-      "parameters": {
-        "jsCode": "const start = new Date(items[0].json.start);\nconst end = new Date(items[0].json.end);\nconst durationInHours = Math.floor((end - start) / 60000 / 60);\nconsole.log(`Meeting duration: ${durationInHours} minutes`);\n\nreturn { json: { \n  //id: items[0].json.id, \n  //meetingNumber: items[0].json.meetingNumber, \n  title: items[0].json.title,  \n  agenda: items[0].json.agenda,  \n  password: items[0].json.password,\n  \n  MeetingStart: start.toString(),\n  MeetingEnd: end.toDateString(),\n  \n  duration: durationInHours,\n  hostDisplayName: items[0].json.hostDisplayName,  \n  hostEmail: items[0].json.hostEmail,  \n  webLink: items[0].json.webLink,  \n  callInNumber: items[0].json.telephony.callInNumbers[0].callInNumber  \n}};\n\n\n"
-      },
-      "id": "79ae0b90-d447-4769-85c0-592e870dd356",
-      "name": "Code1",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 1,
-      "position": [
-        1260,
-        560
       ]
     },
     {
@@ -615,30 +555,141 @@
         840,
         720
       ]
+    },
+    {
+      "parameters": {
+        "content": "## Working...",
+        "height": 80,
+        "width": 156.3374571054918
+      },
+      "id": "6d068c51-2add-45fd-982d-155a35a2ee70",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1060,
+        260
+      ]
     }
   ],
   "pinData": {
+    "Get Meeting Info": [
+      {
+        "json": {
+          "id": "c42df9e7e3cd47ffa1204869838860ec",
+          "meetingNumber": "26306596167",
+          "title": "Test Topic",
+          "agenda": "This is the meeting agenda",
+          "password": "ecPvfrcM433",
+          "phoneAndVideoSystemPassword": "32783726",
+          "meetingType": "meetingSeries",
+          "state": "active",
+          "timezone": "UTC",
+          "start": "2023-07-15T17:00:00Z",
+          "end": "2023-07-15T18:00:00Z",
+          "hostUserId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hYTFlZTYyNC00MmM2LTQxMzQtYjcwNy1mZmI4YmRmMDJhZWQ",
+          "hostDisplayName": "Kenn Dessinger",
+          "hostEmail": "kdessinger@edvistas.com",
+          "hostKey": "692813",
+          "siteUrl": "educationalvistasinc.my.webex.com",
+          "webLink": "https://educationalvistasinc.my.webex.com/educationalvistasinc.my/j.php?MTID=m0fb3e5f551388a2b85906a0091539346",
+          "sipAddress": "26306596167@webex.com",
+          "dialInIpAddress": "173.243.2.68",
+          "enabledAutoRecordMeeting": false,
+          "allowAnyUserToBeCoHost": false,
+          "allowFirstUserToBeCoHost": false,
+          "allowAuthenticatedDevices": true,
+          "enabledJoinBeforeHost": true,
+          "joinBeforeHostMinutes": 5,
+          "enableConnectAudioBeforeHost": true,
+          "excludePassword": false,
+          "publicMeeting": false,
+          "reminderTime": 15,
+          "enableAutomaticLock": false,
+          "unlockedMeetingJoinSecurity": "allowJoin",
+          "telephony": {
+            "accessCode": "26306596167",
+            "callInNumbers": [
+              {
+                "label": "US Toll",
+                "callInNumber": "+1-415-655-0003",
+                "tollType": "toll"
+              }
+            ],
+            "links": [
+              {
+                "rel": "globalCallinNumbers",
+                "href": "/v1/meetings/c42df9e7e3cd47ffa1204869838860ec/globalCallinNumbers",
+                "method": "GET"
+              }
+            ]
+          },
+          "meetingOptions": {
+            "enabledChat": true,
+            "enabledVideo": true,
+            "enabledNote": true,
+            "noteType": "allowAll",
+            "enabledFileTransfer": true,
+            "enabledUCFRichMedia": false
+          },
+          "attendeePrivileges": {
+            "enabledShareContent": true,
+            "enabledSaveDocument": false,
+            "enabledPrintDocument": false,
+            "enabledAnnotate": false,
+            "enabledViewParticipantList": true,
+            "enabledViewThumbnails": false,
+            "enabledRemoteControl": true,
+            "enabledViewAnyDocument": false,
+            "enabledViewAnyPage": false,
+            "enabledContactOperatorPrivately": false,
+            "enabledChatHost": true,
+            "enabledChatPresenter": true,
+            "enabledChatOtherParticipants": true
+          },
+          "sessionTypeId": 3,
+          "scheduledType": "meeting",
+          "simultaneousInterpretation": {
+            "enabled": false
+          },
+          "enabledBreakoutSessions": false,
+          "audioConnectionOptions": {
+            "audioConnectionType": "webexAudio",
+            "enabledTollFreeCallIn": false,
+            "enabledGlobalCallIn": true,
+            "enabledAudienceCallBack": false,
+            "entryAndExitTone": "noTone",
+            "allowHostToUnmuteParticipants": false,
+            "allowAttendeeToUnmuteSelf": true,
+            "muteAttendeeUponEntry": false
+          }
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
     "Webex by Cisco Trigger": [
       {
         "json": {
-          "id": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svYmRhY2FiYTAtYmVmYS00ZDM3LTgzODEtNzc2N2RiOWFlN2Nj",
+          "id": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svZGUyZWVlM2QtMGM4Mi00MWI1LTk4NzAtN2U2YTc5ZGYyZWRh",
           "name": "n8n-webhook:https://n8n.edvistas.com/webhook-test/e4933502-fe0f-4abe-917b-3020359e93a5/webhook",
           "targetUrl": "https://n8n.edvistas.com/webhook-test/e4933502-fe0f-4abe-917b-3020359e93a5/webhook",
           "resource": "meetings",
-          "event": "created",
+          "event": "deleted",
           "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9hYjQ1NTg3Ni1jMWUxLTQ2MjUtOTAzNS0wNGRmMmNhNzA3YjU",
           "createdBy": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hYTFlZTYyNC00MmM2LTQxMzQtYjcwNy1mZmI4YmRmMDJhZWQ",
           "appId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0M4NmRmODMzOTM1YjYzYTg0ZTE0YWQ2NmU4OTJjNWNmNDQyNzZiNGM3NjU5ZWQwYjZmM2QzNmI2ZTUzZDRhNThm",
           "ownedBy": "creator",
           "status": "active",
-          "created": "2023-03-13T05:42:14.083Z",
+          "created": "2023-07-14T17:58:27.295Z",
           "data": {
-            "id": "b01dad7bc8cb486cad56bffc5e30847e",
-            "meetingNumber": "26346043750",
+            "id": "c42df9e7e3cd47ffa1204869838860ec",
+            "meetingNumber": "26306596167",
             "meetingType": "meetingSeries",
             "timezone": "UTC",
-            "start": "2023-03-19T17:00:00Z",
-            "end": "2023-03-19T18:00:00Z",
+            "start": "2023-07-15T17:00:00Z",
+            "end": "2023-07-15T18:00:00Z",
             "hostUserId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hYTFlZTYyNC00MmM2LTQxMzQtYjcwNy1mZmI4YmRmMDJhZWQ",
             "state": "active",
             "hostEmail": "kdessinger@edvistas.com",
@@ -646,6 +697,9 @@
             "orgId": "ab455876-c1e1-4625-9035-04df2ca707b5",
             "hostType": "1001001"
           }
+        },
+        "pairedItem": {
+          "item": 0
         }
       }
     ]
@@ -653,7 +707,7 @@
   "settings": {},
   "staticData": {
     "node:Webex by Cisco Trigger": {
-      "webhookId": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svYmRhY2FiYTAtYmVmYS00ZDM3LTgzODEtNzc2N2RiOWFlN2Nj",
+      "webhookId": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svZGUyZWVlM2QtMGM4Mi00MWI1LTk4NzAtN2U2YTc5ZGYyZWRh",
       "secret": "107c687ee654e759c75eb828439aabab"
     }
   },
@@ -678,6 +732,6 @@
     }
   ],
   "triggerCount": 4,
-  "updatedAt": "2023-07-12T04:28:04.000Z",
-  "versionId": "8f632e46-38ca-442d-9306-2233469a342e"
+  "updatedAt": "2023-07-14T18:01:12.000Z",
+  "versionId": "981fd541-ef72-4d9a-9963-ac48881004aa"
 }
