@@ -1,0 +1,675 @@
+{
+  "active": true,
+  "connections": {
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Get Meeting Create",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get Meeting Update",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get Odoo ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MeetingStart": {
+      "main": [
+        [
+          {
+            "node": "MeetingEnd",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MeetingEnd": {
+      "main": [
+        [
+          {
+            "node": "Get Create Duration",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webex Trigger (kdessinger)": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Meeting Create": {
+      "main": [
+        [
+          {
+            "node": "MeetingStart",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Meeting Update": {
+      "main": [
+        [
+          {
+            "node": "MeetingStart Update",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MeetingStart Update": {
+      "main": [
+        [
+          {
+            "node": "MeetingEnd Update",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MeetingEnd Update": {
+      "main": [
+        [
+          {
+            "node": "Get Update Duration",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Update Duration": {
+      "main": [
+        [
+          {
+            "node": "Get ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Create Duration": {
+      "main": [
+        [
+          {
+            "node": "Create Meeting",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get ID": {
+      "main": [
+        [
+          {
+            "node": "Update Meeting",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Odoo ID": {
+      "main": [
+        [
+          {
+            "node": "Delete Meeting",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webex Trigger (bbouchard)": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-07-17T21:15:31.475Z",
+  "id": "JRTFpvd6xcXZeZ25",
+  "name": "Webex 2 Odoo",
+  "nodes": [
+    {
+      "parameters": {
+        "dataType": "string",
+        "value1": "={{ $json.event }}",
+        "rules": {
+          "rules": [
+            {
+              "value2": "created"
+            },
+            {
+              "value2": "updated",
+              "output": 1
+            },
+            {
+              "value2": "deleted",
+              "output": 2
+            }
+          ]
+        }
+      },
+      "id": "4b67a6e4-a98c-432b-8cbd-4fef86e845f8",
+      "name": "Switch",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        740
+      ]
+    },
+    {
+      "parameters": {
+        "value": "={{ $json[\"start\"] }}",
+        "dataPropertyName": "MeetingStart",
+        "custom": true,
+        "toFormat": "YYYY-MM-DD HH:mm:ss",
+        "options": {
+          "fromTimezone": "={{ $json.timezone }}",
+          "toTimezone": "={{ $json.timezone }}"
+        }
+      },
+      "id": "4da56303-b5ca-40f2-8b39-26b8391452f0",
+      "name": "MeetingStart",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 1,
+      "position": [
+        440,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "value": "={{ $json[\"end\"] }}",
+        "dataPropertyName": "MeetingEnd",
+        "custom": true,
+        "toFormat": "YYYY-MM-DD HH:mm:ss",
+        "options": {
+          "fromTimezone": "={{ $json[\"timezone\"] }}",
+          "toTimezone": "={{ $json.timezone }}"
+        }
+      },
+      "id": "20096846-9f03-4797-a26a-596be4f7d545",
+      "name": "MeetingEnd",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 1,
+      "position": [
+        640,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Meeting is created\ndata is formatted and passed to the Odoo calendar",
+        "height": 284.3839143895833,
+        "width": 1031.2262443842494
+      },
+      "id": "94dddf77-4fe3-414a-a382-174807f641b1",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        200,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Meeting is updated\ndata is formatted and passed to the Odoo calendar",
+        "height": 281.9765096322892,
+        "width": 1280.502198421141
+      },
+      "id": "874870fc-0570-47af-91c9-20842abf629b",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        200,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Meeting is deleted\ndata is formatted and passed to the Odoo calendar",
+        "height": 284.3839143895833,
+        "width": 427.41415106050124
+      },
+      "id": "3b98a6f7-cf22-4a6c-883c-5740785e7a22",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        200,
+        920
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "calendar.event",
+        "operation": "delete",
+        "customResourceId": "={{ $json.id }}"
+      },
+      "id": "f225413b-c2d6-470b-96a5-e529821f7152",
+      "name": "Delete Meeting",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        440,
+        1020
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "12",
+          "name": "Odoo (Administrator)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "event": "all",
+        "filters": {}
+      },
+      "id": "cb32a529-be1d-4baf-8622-deb759e45ce9",
+      "name": "Webex Trigger (kdessinger)",
+      "type": "n8n-nodes-base.ciscoWebexTrigger",
+      "typeVersion": 1,
+      "position": [
+        -300,
+        720
+      ],
+      "webhookId": "c6b5bc85-cb96-4f68-85bf-f783129860b3",
+      "credentials": {
+        "ciscoWebexOAuth2Api": {
+          "id": "4",
+          "name": "Cisco Webex (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "meeting",
+        "operation": "get",
+        "meetingId": "={{ $json.data.id }}",
+        "options": {}
+      },
+      "id": "e53d8010-c6f6-4a57-b574-5d83af07a1b8",
+      "name": "Get Meeting Create",
+      "type": "n8n-nodes-base.ciscoWebex",
+      "typeVersion": 1,
+      "position": [
+        240,
+        420
+      ],
+      "credentials": {
+        "ciscoWebexOAuth2Api": {
+          "id": "4",
+          "name": "Cisco Webex (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "meeting",
+        "operation": "get",
+        "meetingId": "={{ $json.data.id }}",
+        "options": {}
+      },
+      "id": "8bd080dd-a84a-45e8-8322-47048cce0112",
+      "name": "Get Meeting Update",
+      "type": "n8n-nodes-base.ciscoWebex",
+      "typeVersion": 1,
+      "position": [
+        240,
+        720
+      ],
+      "credentials": {
+        "ciscoWebexOAuth2Api": {
+          "id": "4",
+          "name": "Cisco Webex (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "value": "={{ $json[\"start\"] }}",
+        "dataPropertyName": "MeetingStart",
+        "custom": true,
+        "toFormat": "YYYY-MM-DD HH:mm:ss",
+        "options": {
+          "fromTimezone": "={{ $json.timezone }}",
+          "toTimezone": "={{ $json.timezone }}"
+        }
+      },
+      "id": "2afe501f-df9a-4e80-8102-3800fe6b7255",
+      "name": "MeetingStart Update",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 1,
+      "position": [
+        440,
+        720
+      ]
+    },
+    {
+      "parameters": {
+        "value": "={{ $json[\"end\"] }}",
+        "dataPropertyName": "MeetingEnd",
+        "custom": true,
+        "toFormat": "YYYY-MM-DD HH:mm:ss",
+        "options": {
+          "fromTimezone": "={{ $json[\"timezone\"] }}",
+          "toTimezone": "={{ $json.timezone }}"
+        }
+      },
+      "id": "0deb0502-17b1-4500-9c7b-acd9935acc6d",
+      "name": "MeetingEnd Update",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 1,
+      "position": [
+        640,
+        720
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const start = new Date(items[0].json.MeetingStart);\nconst end = new Date(items[0].json.MeetingEnd);\nconst durationInHours = Math.floor((end - start) / 60000 / 60);\nconsole.log(`Meeting duration: ${durationInHours} minutes`);\n\nreturn { json: { \n  id: items[0].json.id, \n  meetingNumber: items[0].json.meetingNumber, \n  title: items[0].json.title,  \n  agenda: items[0].json.agenda,  \n  password: items[0].json.password,\n  start: items[0].json.start,\n  end: items[0].json.end,\n  MeetingStart: items[0].json.MeetingStart,\n  MeetingEnd: items[0].json.MeetingEnd,  \n  duration: durationInHours,\n  timezone: items[0].json.timezone,\n  reminderTime: items[0].json.reminderTime,\n  hostDisplayName: items[0].json.hostDisplayName,  \n  hostEmail: items[0].json.hostEmail,  \n  webLink: items[0].json.webLink,  \n  callInNumber: items[0].json.telephony.callInNumbers[0].callInNumber  \n}};\n\n\n"
+      },
+      "id": "7398a722-1199-4735-888e-73f2f411a7b7",
+      "name": "Get Update Duration",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        840,
+        720
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const start = new Date(items[0].json.MeetingStart);\nconst end = new Date(items[0].json.MeetingEnd);\nconst durationInHours = Math.floor((end - start) / 60000 / 60);\nconsole.log(`Meeting duration: ${durationInHours} minutes`);\n\nreturn { json: { \n  id: items[0].json.id, \n  meetingNumber: items[0].json.meetingNumber, \n  title: items[0].json.title,  \n  agenda: items[0].json.agenda,  \n  password: items[0].json.password,\n  start: items[0].json.start,\n  end: items[0].json.end,\n  MeetingStart: items[0].json.MeetingStart,\n  MeetingEnd: items[0].json.MeetingEnd,  \n  duration: durationInHours,\n  timezone: items[0].json.timezone,\n  reminderTime: items[0].json.reminderTime,\n  hostDisplayName: items[0].json.hostDisplayName,  \n  hostEmail: items[0].json.hostEmail,  \n  webLink: items[0].json.webLink,  \n  callInNumber: items[0].json.telephony.callInNumbers[0].callInNumber  \n}};\n\n\n"
+      },
+      "id": "c7b56aae-6c2d-48e4-bf0d-e5e5a88390d4",
+      "name": "Get Create Duration",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        840,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "calendar.event",
+        "operation": "getAll",
+        "options": {},
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "location",
+              "value": "=WebEX ({{ $json[\"meetingNumber\"] }})"
+            }
+          ]
+        }
+      },
+      "id": "11d89025-6ac2-4789-b483-3374b1115421",
+      "name": "Get ID",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        720
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "12",
+          "name": "Odoo (Administrator)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "calendar.event",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "name",
+              "fieldValue": "={{ $json.title }}"
+            },
+            {
+              "fieldName": "description",
+              "fieldValue": "={{ $json.agenda }}"
+            },
+            {
+              "fieldName": "start",
+              "fieldValue": "={{ $json.MeetingStart }}"
+            },
+            {
+              "fieldName": "stop",
+              "fieldValue": "={{ $json.MeetingEnd }}"
+            },
+            {
+              "fieldName": "duration",
+              "fieldValue": "={{ $json.duration }}"
+            },
+            {
+              "fieldName": "privacy",
+              "fieldValue": "confidential"
+            },
+            {
+              "fieldName": "show_as",
+              "fieldValue": "busy"
+            },
+            {
+              "fieldName": "videocall_location",
+              "fieldValue": "={{ $json.webLink }}"
+            },
+            {
+              "fieldName": "location",
+              "fieldValue": "=WebEX ({{ $json[\"meetingNumber\"] }})"
+            },
+            {
+              "fieldName": "attendee_ids"
+            },
+            {
+              "fieldName": "event_tz",
+              "fieldValue": "America/New_York"
+            }
+          ]
+        }
+      },
+      "id": "6f89082f-6efa-4b7d-be04-0f17b23e67ff",
+      "name": "Create Meeting",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        420
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "12",
+          "name": "Odoo (Administrator)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "calendar.event",
+        "operation": "update",
+        "customResourceId": "={{ $json.id }}",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "name",
+              "fieldValue": "={{ $('Get Update Duration').item.json.title }}"
+            },
+            {
+              "fieldName": "description",
+              "fieldValue": "={{ $('Get Update Duration').item.json.agenda }}"
+            },
+            {
+              "fieldName": "start",
+              "fieldValue": "={{ $('Get Update Duration').item.json.MeetingStart }}"
+            },
+            {
+              "fieldName": "stop",
+              "fieldValue": "={{ $('Get Update Duration').item.json.MeetingEnd }}"
+            },
+            {
+              "fieldName": "duration",
+              "fieldValue": "={{ $('Get Update Duration').item.json.duration }}"
+            },
+            {
+              "fieldName": "privacy",
+              "fieldValue": "confidential"
+            },
+            {
+              "fieldName": "show_as",
+              "fieldValue": "busy"
+            },
+            {
+              "fieldName": "videocall_location",
+              "fieldValue": "={{ $('Get Update Duration').item.json.webLink }}"
+            }
+          ]
+        }
+      },
+      "id": "3361a5cc-aab7-4b1b-af48-a9e1795ca9da",
+      "name": "Update Meeting",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        1240,
+        720
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "12",
+          "name": "Odoo (Administrator)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "calendar.event",
+        "operation": "getAll",
+        "options": {},
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "location",
+              "value": "=WebEX ({{ $json[\"data\"][\"meetingNumber\"] }})"
+            }
+          ]
+        }
+      },
+      "id": "acbb5742-7f35-4ee5-9822-1cb1ae4735b6",
+      "name": "Get Odoo ID",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        240,
+        1020
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "12",
+          "name": "Odoo (Administrator)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "event": "all",
+        "filters": {}
+      },
+      "id": "1500e2db-0a30-4e2c-b6a5-75126fff6fdf",
+      "name": "Webex Trigger (bbouchard)",
+      "type": "n8n-nodes-base.ciscoWebexTrigger",
+      "typeVersion": 1,
+      "position": [
+        -300,
+        540
+      ],
+      "webhookId": "325cbb23-c703-43b6-b220-203f7d3a5c4a",
+      "credentials": {
+        "ciscoWebexOAuth2Api": {
+          "id": "z0S6TOwCxfAYhSaQ",
+          "name": "Cisco Webex (bbouchard)"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": {
+    "node:Webex Trigger (kdessinger)": {
+      "secret": "107c687ee654e759c75eb828439aabab",
+      "webhookId": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svMWY2NGUzZDQtMzUyZC00ZGE2LWIxOGEtY2QzYzk2NWRlYmU4"
+    },
+    "node:Webex Trigger (bbouchard)": {
+      "secret": "40cf74ac48bbe0852cf23cd769d065b4",
+      "webhookId": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svYmVlYzg0ZjAtYmM3OC00YTM4LWJmNzAtYTU2NjNmYzJjNGEz"
+    }
+  },
+  "tags": [
+    {
+      "id": "12",
+      "createdAt": "2022-12-09T05:43:36.104Z",
+      "updatedAt": "2022-12-09T05:43:36.104Z",
+      "name": "odoo"
+    },
+    {
+      "id": "25",
+      "createdAt": "2023-03-11T08:29:05.672Z",
+      "updatedAt": "2023-03-11T08:29:05.672Z",
+      "name": "WebEx"
+    },
+    {
+      "id": "31",
+      "createdAt": "2023-06-10T20:19:21.457Z",
+      "updatedAt": "2023-06-10T20:19:21.457Z",
+      "name": "uc"
+    }
+  ],
+  "triggerCount": 2,
+  "updatedAt": "2023-07-17T21:50:32.000Z",
+  "versionId": "a3a109fe-aad6-4465-af61-25e2d1184e30"
+}
