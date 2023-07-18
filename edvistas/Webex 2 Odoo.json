@@ -157,6 +157,17 @@
           }
         ]
       ]
+    },
+    "Webex Trigger (pcooper)": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2023-07-17T21:15:31.475Z",
@@ -310,7 +321,7 @@
       "typeVersion": 1,
       "position": [
         -300,
-        720
+        740
       ],
       "webhookId": "c6b5bc85-cb96-4f68-85bf-f783129860b3",
       "credentials": {
@@ -635,6 +646,27 @@
           "name": "Cisco Webex (bbouchard)"
         }
       }
+    },
+    {
+      "parameters": {
+        "event": "all",
+        "filters": {}
+      },
+      "id": "74364898-eb65-4d91-862b-d8a4b4fea3e0",
+      "name": "Webex Trigger (pcooper)",
+      "type": "n8n-nodes-base.ciscoWebexTrigger",
+      "typeVersion": 1,
+      "position": [
+        -300,
+        940
+      ],
+      "webhookId": "9fde2eea-9bc6-4e85-924d-2196000f4c28",
+      "credentials": {
+        "ciscoWebexOAuth2Api": {
+          "id": "fCG6jscxTrSeIkl1",
+          "name": "Cisco Webex (pcooper)"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -642,11 +674,15 @@
   "staticData": {
     "node:Webex Trigger (kdessinger)": {
       "secret": "107c687ee654e759c75eb828439aabab",
-      "webhookId": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svMWY2NGUzZDQtMzUyZC00ZGE2LWIxOGEtY2QzYzk2NWRlYmU4"
+      "webhookId": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svODQ3OThmMjAtOWI5Ni00OWExLWJiNTAtMzE5YzI0M2JiZGVi"
     },
     "node:Webex Trigger (bbouchard)": {
       "secret": "40cf74ac48bbe0852cf23cd769d065b4",
-      "webhookId": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svYmVlYzg0ZjAtYmM3OC00YTM4LWJmNzAtYTU2NjNmYzJjNGEz"
+      "webhookId": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svNjI2OGI0NjAtYjIyOC00MmVhLTg5OGQtMGU1OTYyNTY3NGVi"
+    },
+    "node:Webex Trigger (pcooper)": {
+      "webhookId": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svNWIwNDg1ZTMtYzgxMC00MjRlLWI4MTAtMDY4NjYwZWMxNzcw",
+      "secret": "a9ddc9918a9805105a1183b293a38541"
     }
   },
   "tags": [
@@ -669,7 +705,7 @@
       "name": "uc"
     }
   ],
-  "triggerCount": 2,
-  "updatedAt": "2023-07-17T21:50:32.000Z",
-  "versionId": "a3a109fe-aad6-4465-af61-25e2d1184e30"
+  "triggerCount": 3,
+  "updatedAt": "2023-07-18T13:54:32.000Z",
+  "versionId": "7eaa677d-601e-491c-a121-543a0730d420"
 }
