@@ -23,6 +23,13 @@
             "type": "main",
             "index": 0
           }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
         ]
       ]
     },
@@ -219,7 +226,7 @@
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 1,
       "position": [
-        440,
+        520,
         420
       ]
     },
@@ -239,7 +246,7 @@
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 1,
       "position": [
-        640,
+        720,
         420
       ]
     },
@@ -254,13 +261,13 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        200,
+        280,
         320
       ]
     },
     {
       "parameters": {
-        "content": "## Meeting is updated\ndata is formatted and passed to the Odoo calendar",
+        "content": "## Meeting is updated\ndata is changed on the Odoo calendar",
         "height": 281.9765096322892,
         "width": 1280.502198421141
       },
@@ -275,7 +282,7 @@
     },
     {
       "parameters": {
-        "content": "## Meeting is deleted\ndata is formatted and passed to the Odoo calendar",
+        "content": "## Meeting is deleted\ndata is removed from the Odoo calendar",
         "height": 284.3839143895833,
         "width": 427.41415106050124
       },
@@ -284,7 +291,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        200,
+        260,
         920
       ]
     },
@@ -300,7 +307,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        440,
+        500,
         1020
       ],
       "credentials": {
@@ -343,7 +350,7 @@
       "type": "n8n-nodes-base.ciscoWebex",
       "typeVersion": 1,
       "position": [
-        240,
+        320,
         420
       ],
       "credentials": {
@@ -437,7 +444,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        840,
+        920,
         420
       ]
     },
@@ -528,7 +535,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        1040,
+        1120,
         420
       ],
       "credentials": {
@@ -616,7 +623,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        240,
+        300,
         1020
       ],
       "credentials": {
@@ -667,6 +674,17 @@
           "name": "Cisco Webex (pcooper)"
         }
       }
+    },
+    {
+      "parameters": {},
+      "id": "d526700d-cdca-49ec-9df3-7e34b2c2828c",
+      "name": "No Operation, do nothing",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        60,
+        980
+      ]
     }
   ],
   "pinData": {},
@@ -674,15 +692,15 @@
   "staticData": {
     "node:Webex Trigger (kdessinger)": {
       "secret": "107c687ee654e759c75eb828439aabab",
-      "webhookId": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svODQ3OThmMjAtOWI5Ni00OWExLWJiNTAtMzE5YzI0M2JiZGVi"
+      "webhookId": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svMzg4MTFiZDMtMzc3ZC00Mjg1LTljYmMtNTAwM2EzNTE2MWZi"
     },
     "node:Webex Trigger (bbouchard)": {
       "secret": "40cf74ac48bbe0852cf23cd769d065b4",
-      "webhookId": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svNjI2OGI0NjAtYjIyOC00MmVhLTg5OGQtMGU1OTYyNTY3NGVi"
+      "webhookId": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svZTg3MDU4NGMtYmFkZC00MTM2LWIzODQtZTcxZWY1NmU0M2Uy"
     },
     "node:Webex Trigger (pcooper)": {
-      "webhookId": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svNWIwNDg1ZTMtYzgxMC00MjRlLWI4MTAtMDY4NjYwZWMxNzcw",
-      "secret": "a9ddc9918a9805105a1183b293a38541"
+      "secret": "a9ddc9918a9805105a1183b293a38541",
+      "webhookId": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svZWU0ZDIxOGUtNDAxYS00NTUxLThmMDMtMWI4YzY2ZDZkNzgx"
     }
   },
   "tags": [
@@ -706,6 +724,6 @@
     }
   ],
   "triggerCount": 3,
-  "updatedAt": "2023-07-18T13:54:32.000Z",
-  "versionId": "7eaa677d-601e-491c-a121-543a0730d420"
+  "updatedAt": "2023-07-19T15:10:10.000Z",
+  "versionId": "2b0650ac-b99f-4226-87da-794e95726e1f"
 }
