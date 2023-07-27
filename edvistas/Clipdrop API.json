@@ -1,0 +1,407 @@
+{
+  "active": false,
+  "connections": {
+    "Read Binary Files": {
+      "main": [
+        [
+          {
+            "node": "Upscale Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set": {
+      "main": [
+        [
+          {
+            "node": "Write Binary File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upscale Image": {
+      "main": [
+        [
+          {
+            "node": "Set",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set1": {
+      "main": [
+        [
+          {
+            "node": "Text 2 Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Text 2 Image": {
+      "main": [
+        [
+          {
+            "node": "Write Binary File1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Binary Files1": {
+      "main": [
+        [
+          {
+            "node": "Remove Text",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set2": {
+      "main": [
+        [
+          {
+            "node": "Write Binary File2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Remove Text": {
+      "main": [
+        [
+          {
+            "node": "Set2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking \"Execute Workflow\"": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2023-07-26T20:38:53.162Z",
+  "id": "86pPkz1Uw2GOBm5w",
+  "name": "Clipdrop API",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "ea316228-785d-4e83-a03d-f29f65deca19",
+      "name": "When clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        420,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "fileSelector": "/mnt/share/_tmp/0021.jpg"
+      },
+      "id": "f7b5a444-2e3d-4e2f-9f99-3342390ae1f5",
+      "name": "Read Binary Files",
+      "type": "n8n-nodes-base.readBinaryFiles",
+      "typeVersion": 1,
+      "position": [
+        700,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "fileName": "={{ $json.filename }}",
+        "options": {
+          "append": false
+        }
+      },
+      "id": "bc2e89a8-cf50-4eb2-bd6a-0085b2a271d2",
+      "name": "Write Binary File",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "typeVersion": 1,
+      "position": [
+        1380,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "filename",
+              "value": "={{ $('Read Binary Files').item.binary.data.directory }}/{{ $('Upscale Image').params[\"bodyParameters\"][\"parameters\"][0][\"name\"] }}{{ $('Upscale Image').params[\"bodyParameters\"][\"parameters\"][0][\"value\"] }}_{{ $('Read Binary Files').item.binary.data.fileName }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "302662f0-5d85-46d6-95ac-bc174a9162dc",
+      "name": "Set",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        1160,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://clipdrop-api.co/super-resolution/v1",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-api-key",
+              "value": "382f3e3cc29e67b05acb3f15c0651dd94ed03f8e5b48436c96097877759e80632286ac3bb24935b87cdd0b97101aeb70"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "upscale",
+              "value": "4"
+            },
+            {
+              "parameterType": "formBinaryData",
+              "name": "image_file",
+              "inputDataFieldName": "data"
+            }
+          ]
+        },
+        "options": {
+          "allowUnauthorizedCerts": true,
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "id": "03573662-1f2a-435f-8589-901ec36112f5",
+      "name": "Upscale Image",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        940,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "Prompt",
+              "value": "A Billboard sign that read \"Educational Vistas next exit\" off a major highway. Photo Realistic"
+            },
+            {
+              "name": "FileName",
+              "value": "billboard_evi.png"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c1c8d39c-bcd8-468d-9101-6960c2af1332",
+      "name": "Set1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        700,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "fileName": "=/mnt/share/_tmp/{{ $('Set1').params[\"values\"][\"string\"][1][\"value\"] }}",
+        "options": {
+          "append": false
+        }
+      },
+      "id": "a3f70180-06a6-47a0-b21b-f4a526b9c33c",
+      "name": "Write Binary File1",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "typeVersion": 1,
+      "position": [
+        1160,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://clipdrop-api.co/text-to-image/v1",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-api-key",
+              "value": "382f3e3cc29e67b05acb3f15c0651dd94ed03f8e5b48436c96097877759e80632286ac3bb24935b87cdd0b97101aeb70"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "prompt",
+              "value": "={{ $json.Prompt }}"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "id": "0fa1d7ce-9fd3-4f34-8d22-3e1e6a0c993d",
+      "name": "Text 2 Image",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        940,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "fileSelector": "/mnt/share/_tmp/billboard_evi.png"
+      },
+      "id": "6b253be1-b135-4e34-92cb-4e5054e31a20",
+      "name": "Read Binary Files1",
+      "type": "n8n-nodes-base.readBinaryFiles",
+      "typeVersion": 1,
+      "position": [
+        700,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "fileName": "={{ $json.filename }}",
+        "options": {
+          "append": false
+        }
+      },
+      "id": "828cfb1a-9723-40a5-9d19-0e2ce504fbbf",
+      "name": "Write Binary File2",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "typeVersion": 1,
+      "position": [
+        1380,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "filename",
+              "value": "={{ $('Read Binary Files1').item.binary.data.directory }}/notext_{{ $('Read Binary Files1').item.binary.data.fileName }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "af34b45d-d7f7-4d15-ab00-756feb926fdb",
+      "name": "Set2",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        1160,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://clipdrop-api.co/remove-text/v1",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-api-key",
+              "value": "382f3e3cc29e67b05acb3f15c0651dd94ed03f8e5b48436c96097877759e80632286ac3bb24935b87cdd0b97101aeb70"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "image_file",
+              "inputDataFieldName": "data"
+            }
+          ]
+        },
+        "options": {
+          "allowUnauthorizedCerts": true,
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "id": "1d4746ce-a783-4c04-a9a5-3f08c10e25cc",
+      "name": "Remove Text",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        940,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Clipdrop API\nTo see the API calls Click the [Guide](https://clipdrop.co/apis/docs/)",
+        "height": 96,
+        "width": 264
+      },
+      "id": "6c09cf7c-eca6-453f-826d-170c13cbfddf",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        360,
+        300
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2023-07-26T23:42:08.000Z",
+  "versionId": "1a7b1711-c356-4b90-9d42-95fda0f9be53"
+}
