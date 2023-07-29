@@ -12,7 +12,7 @@
         ],
         [
           {
-            "node": "All Good, Do Nothing1",
+            "node": "Covid Alert! Send Email",
             "type": "main",
             "index": 0
           }
@@ -302,8 +302,8 @@
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2,
       "position": [
-        860,
-        340
+        620,
+        420
       ],
       "credentials": {
         "smtp": {
@@ -311,17 +311,6 @@
           "name": "SMTP (mx.gowls.com)"
         }
       }
-    },
-    {
-      "parameters": {},
-      "id": "51072484-e475-48c3-8bd6-c76cffc7e686",
-      "name": "All Good, Do Nothing1",
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [
-        620,
-        420
-      ]
     }
   ],
   "pinData": {
@@ -562,6 +551,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-06-17T20:15:37.000Z",
-  "versionId": "ffba33b5-a4fe-45ea-9512-b77fc1e02407"
+  "updatedAt": "2023-07-28T19:03:13.000Z",
+  "versionId": "1b491bcd-72cf-4aea-b705-9e0039fe3c38"
 }
