@@ -91,7 +91,13 @@
     },
     "When clicking \"Execute Workflow\"": {
       "main": [
-        []
+        [
+          {
+            "node": "Set1",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
@@ -106,7 +112,7 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        420,
+        700,
         440
       ]
     },
@@ -119,7 +125,7 @@
       "type": "n8n-nodes-base.readBinaryFiles",
       "typeVersion": 1,
       "position": [
-        700,
+        980,
         260
       ]
     },
@@ -135,7 +141,7 @@
       "type": "n8n-nodes-base.writeBinaryFile",
       "typeVersion": 1,
       "position": [
-        1380,
+        1660,
         260
       ]
     },
@@ -156,7 +162,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 2,
       "position": [
-        1160,
+        1440,
         260
       ]
     },
@@ -202,7 +208,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        940,
+        1220,
         260
       ]
     },
@@ -212,11 +218,11 @@
           "string": [
             {
               "name": "Prompt",
-              "value": "A Billboard sign that read \"Educational Vistas next exit\" off a major highway. Photo Realistic"
+              "value": "ancient map, Paper quilling, paper cut art, paper illustration::5 very detailed, 8k::2"
             },
             {
               "name": "FileName",
-              "value": "billboard_evi.png"
+              "value": "paper_lust.png"
             }
           ]
         },
@@ -227,7 +233,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 2,
       "position": [
-        700,
+        980,
         440
       ]
     },
@@ -243,7 +249,7 @@
       "type": "n8n-nodes-base.writeBinaryFile",
       "typeVersion": 1,
       "position": [
-        1160,
+        1440,
         440
       ]
     },
@@ -283,7 +289,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        940,
+        1220,
         440
       ]
     },
@@ -296,7 +302,7 @@
       "type": "n8n-nodes-base.readBinaryFiles",
       "typeVersion": 1,
       "position": [
-        700,
+        980,
         620
       ]
     },
@@ -312,7 +318,7 @@
       "type": "n8n-nodes-base.writeBinaryFile",
       "typeVersion": 1,
       "position": [
-        1380,
+        1660,
         620
       ]
     },
@@ -333,7 +339,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 2,
       "position": [
-        1160,
+        1440,
         620
       ]
     },
@@ -375,7 +381,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        940,
+        1220,
         620
       ]
     },
@@ -390,18 +396,20 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        360,
-        300
+        680,
+        260
       ]
     }
   ],
   "pinData": {},
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner"
   },
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-07-26T23:42:08.000Z",
-  "versionId": "1a7b1711-c356-4b90-9d42-95fda0f9be53"
+  "updatedAt": "2023-07-28T18:55:34.000Z",
+  "versionId": "5deeb41c-bc91-49cc-82e4-5c9c231f2234"
 }
