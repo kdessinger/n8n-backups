@@ -129,8 +129,21 @@
   "pinData": {},
   "settings": {},
   "staticData": null,
-  "tags": [],
+  "tags": [
+    {
+      "id": "12",
+      "createdAt": "2022-12-09T05:43:36.104Z",
+      "updatedAt": "2022-12-09T05:43:36.104Z",
+      "name": "odoo"
+    },
+    {
+      "id": "kqf2NqvduRmuLzdN",
+      "createdAt": "2023-07-28T19:16:19.587Z",
+      "updatedAt": "2023-07-28T19:16:19.587Z",
+      "name": "API"
+    }
+  ],
   "triggerCount": 0,
-  "updatedAt": "2022-11-15T15:43:41.293Z",
-  "versionId": "e39cf449-8456-4107-918c-d8a7a5edeb6a"
+  "updatedAt": "2023-07-28T19:16:20.000Z",
+  "versionId": "5b8054bb-3995-4954-81a8-5fe8bf10f6c3"
 }
