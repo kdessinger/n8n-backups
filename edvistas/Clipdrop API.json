@@ -218,11 +218,11 @@
           "string": [
             {
               "name": "Prompt",
-              "value": "ancient map, Paper quilling, paper cut art, paper illustration::5 very detailed, 8k::2"
+              "value": "A shiny Purple Panda sitting at a bus stop in the rain eating a tie-dyed banana. very detailed, photo realistic, 8k::2"
             },
             {
               "name": "FileName",
-              "value": "paper_lust.png"
+              "value": "panda_bus.png"
             }
           ]
         },
@@ -410,6 +410,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-07-28T18:55:34.000Z",
-  "versionId": "5deeb41c-bc91-49cc-82e4-5c9c231f2234"
+  "updatedAt": "2023-08-02T13:22:46.000Z",
+  "versionId": "e56b3fa4-0bd3-48f4-bb62-024d0bd42892"
 }
