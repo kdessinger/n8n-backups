@@ -212,15 +212,15 @@
   "staticData": null,
   "tags": [
     {
-      "id": "2",
       "createdAt": "2022-10-19T03:37:58.555Z",
       "updatedAt": "2022-10-19T03:37:58.555Z",
+      "id": "2",
       "name": "n8n"
     },
     {
-      "id": "34",
       "createdAt": "2023-06-10T20:29:40.879Z",
       "updatedAt": "2023-06-10T20:29:40.879Z",
+      "id": "34",
       "name": "system"
     }
   ],
