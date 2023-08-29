@@ -1,312 +1,238 @@
 {
   "active": false,
   "connections": {
-    "Switch": {
+    "(EVICore) Last Login": {
       "main": [
         [
           {
-            "node": "Set",
+            "node": "FixDate V1",
             "type": "main",
             "index": 0
-          }
-        ],
-        [
+          },
           {
-            "node": "Set1",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Set2",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Set3",
+            "node": "FixDate V2",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Function": {
+    "FixDate V1": {
       "main": [
         [
           {
-            "node": "Switch",
+            "node": "Spreadsheet File1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "On clicking 'execute'": {
+    "(EVICore) Last Login1": {
       "main": [
         [
           {
-            "node": "Function",
+            "node": "FixDate V3",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Set": {
+    "FixDate V3": {
       "main": [
         [
           {
-            "node": "Merge",
+            "node": "Odoo",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Set1": {
+    "When clicking \"Execute Workflow\"": {
       "main": [
         [
           {
-            "node": "Merge",
-            "type": "main",
-            "index": 1
-          }
-        ]
-      ]
-    },
-    "Set2": {
-      "main": [
-        [
-          {
-            "node": "Merge1",
+            "node": "(EVICore) Last Login1",
             "type": "main",
             "index": 0
-          }
-        ]
-      ]
-    },
-    "Merge": {
-      "main": [
-        [
-          {
-            "node": "Merge2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Merge1": {
-      "main": [
-        [
-          {
-            "node": "Merge2",
-            "type": "main",
-            "index": 1
-          }
-        ]
-      ]
-    },
-    "Set3": {
-      "main": [
-        [
-          {
-            "node": "Merge1",
-            "type": "main",
-            "index": 1
           }
         ]
       ]
     }
   },
-  "createdAt": "2023-06-26T05:10:01.934Z",
-  "id": "40",
+  "createdAt": "2023-08-28T19:41:49.331Z",
+  "id": "4ZLWW2K8FuB58NqJ",
   "name": "My workflow",
   "nodes": [
     {
+      "parameters": {
+        "operation": "toFile",
+        "fileFormat": "xlsx",
+        "options": {
+          "fileName": "output.xlsx"
+        }
+      },
+      "id": "43dd354b-a06e-4c86-b239-91f1aa393386",
+      "name": "Spreadsheet File1",
+      "type": "n8n-nodes-base.spreadsheetFile",
+      "typeVersion": 1,
+      "position": [
+        160,
+        -160
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "WITH LastLoginRanked AS (\n    SELECT d.id AS districtID, d.name AS DistrictName, u.id as useridkey, u.userid, u.firstname, u.lastname, up.lastlogin,\n    ROW_NUMBER() OVER (PARTITION BY d.id ORDER BY up.lastlogin DESC) AS rn\n\tFROM evitesting.dbo.ecDistricts d\n\tJOIN evitesting.dbo.ecUsers u ON d.id = u.districtid\n\tLEFT JOIN (SELECT useridkey, MAX(lastlogin) AS lastlogin FROM evitesting.dbo.userproperties GROUP BY useridkey) up ON u.id = up.useridkey\n\tWHERE u.active = 1      -- Show active users only\n\tand u.adminaccount = 0  -- Hide admin logins\n)\nSELECT districtID, DistrictName, useridkey, userid, firstname, lastname, lastlogin\nFROM LastLoginRanked\nWHERE rn = 1\nOrder by districtID, userid;\n"
+      },
+      "name": "(EVICore) Last Login",
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1,
+      "position": [
+        -300,
+        -240
+      ],
+      "id": "77c1a9ea-c17d-46e6-a9c2-c2376d2fd7c8",
+      "credentials": {
+        "microsoftSql": {
+          "id": "8",
+          "name": "DB1.DS1.GOWLS.COM (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "formatDate",
+        "date": "={{ $json.lastlogin }}",
+        "format": "custom",
+        "customFormat": "yyyy-MM-dd HH:mm:ss",
+        "outputFieldName": "lastlogin",
+        "options": {}
+      },
+      "id": "95e81d8a-6d2a-4346-9602-998eae74691a",
+      "name": "FixDate V2",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        -40,
+        -320
+      ]
+    },
+    {
+      "parameters": {
+        "value": "={{ $json.lastlogin }}",
+        "dataPropertyName": "lastlogin",
+        "custom": true,
+        "toFormat": "YYYY-MM-DD HH:mm:ss",
+        "options": {}
+      },
+      "id": "7065235f-c512-4c9a-b718-f70c9d48427c",
+      "name": "FixDate V1",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        -160
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "toFile",
+        "fileFormat": "xlsx",
+        "options": {
+          "fileName": "output.xlsx"
+        }
+      },
+      "id": "7afcb003-5614-4232-b6e0-3bab03e69919",
+      "name": "Spreadsheet File",
+      "type": "n8n-nodes-base.spreadsheetFile",
+      "typeVersion": 1,
+      "position": [
+        740,
+        580
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "WITH LastLoginRanked AS (\n    SELECT d.id AS districtID, d.name AS DistrictName, u.id as useridkey, u.userid, u.firstname, u.lastname, up.lastlogin,\n    ROW_NUMBER() OVER (PARTITION BY d.id ORDER BY up.lastlogin DESC) AS rn\n\tFROM evitesting.dbo.ecDistricts d\n\tJOIN evitesting.dbo.ecUsers u ON d.id = u.districtid\n\tLEFT JOIN (SELECT useridkey, MAX(lastlogin) AS lastlogin FROM evitesting.dbo.userproperties GROUP BY useridkey) up ON u.id = up.useridkey\n\tWHERE u.active = 1      -- Show active users only\n\tand u.adminaccount = 0  -- Hide admin logins\n)\nSELECT districtID, DistrictName, useridkey, userid, firstname, lastname, lastlogin\nFROM LastLoginRanked\nWHERE rn = 1\nOrder by districtID, userid;\n"
+      },
+      "name": "(EVICore) Last Login1",
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1,
+      "position": [
+        740,
+        340
+      ],
+      "id": "410c5a88-de28-48f0-9980-7b9cd507d7f0",
+      "credentials": {
+        "microsoftSql": {
+          "id": "8",
+          "name": "DB1.DS1.GOWLS.COM (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "value": "={{ $json.lastlogin }}",
+        "dataPropertyName": "lastlogin",
+        "custom": true,
+        "toFormat": "YYYY-MM-DD HH:mm:ss",
+        "options": {}
+      },
+      "id": "f440d4c4-560d-4e41-8df3-d28b31f426ca",
+      "name": "FixDate V3",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 1,
+      "position": [
+        960,
+        340
+      ]
+    },
+    {
       "parameters": {},
-      "name": "On clicking 'execute'",
+      "id": "b1b8ddb3-7f5e-4234-8933-282d67770c0a",
+      "name": "When clicking \"Execute Workflow\"",
       "type": "n8n-nodes-base.manualTrigger",
-      "position": [
-        -1620,
-        440
-      ],
       "typeVersion": 1,
-      "id": "19c8c9fd-7ce4-4992-b8f5-c5ff53b455a3"
-    },
-    {
-      "parameters": {
-        "functionCode": "return [\n  {\n    json: {\n      id: 0,\n    }\n  },\n  {\n    json: {\n      id: 1,\n    }\n  },\n  {\n    json: {\n      id: 2,\n    }\n  },\n  {\n    json: {\n      id: 3,\n    }\n  }\n];\n"
-      },
-      "name": "Function",
-      "type": "n8n-nodes-base.function",
       "position": [
-        -1420,
-        440
-      ],
-      "typeVersion": 1,
-      "id": "58f68c6a-2a99-48c3-92f7-f1543c6faee7"
-    },
-    {
-      "parameters": {
-        "values": {
-          "string": [
-            {
-              "name": "name",
-              "value": "n8n"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "name": "Set",
-      "type": "n8n-nodes-base.set",
-      "position": [
-        -1020,
-        220
-      ],
-      "typeVersion": 1,
-      "id": "65b4947c-7f55-4d61-866e-c9e667264c9b"
-    },
-    {
-      "parameters": {
-        "values": {
-          "string": [
-            {
-              "name": "name",
-              "value": "nodemation"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "name": "Set1",
-      "type": "n8n-nodes-base.set",
-      "position": [
-        -1020,
-        360
-      ],
-      "typeVersion": 1,
-      "id": "3415b020-ef57-4e7c-932c-1c7a85d87093"
-    },
-    {
-      "parameters": {
-        "value1": "={{$node[\"Function\"].json[\"id\"]}}",
-        "rules": {
-          "rules": [
-            {
-              "operation": "equal"
-            },
-            {
-              "operation": "equal",
-              "value2": 1,
-              "output": 1
-            },
-            {
-              "operation": "equal",
-              "value2": 2,
-              "output": 2
-            }
-          ]
-        },
-        "fallbackOutput": 3
-      },
-      "name": "Switch",
-      "type": "n8n-nodes-base.switch",
-      "position": [
-        -1220,
-        440
-      ],
-      "typeVersion": 1,
-      "id": "ef0ad296-1bc4-4f0a-8a63-03beb473e5e1"
-    },
-    {
-      "parameters": {
-        "values": {
-          "string": [
-            {
-              "name": "name",
-              "value": "nathan"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "name": "Set2",
-      "type": "n8n-nodes-base.set",
-      "position": [
-        -1020,
-        500
-      ],
-      "typeVersion": 1,
-      "id": "d13173ad-140d-4df6-9bd7-21efbbdb60c8"
-    },
-    {
-      "parameters": {
-        "mode": "chooseBranch",
-        "output": "input2"
-      },
-      "id": "b1179a37-4ccc-4516-9502-dbba18768fad",
-      "name": "Merge",
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 2.1,
-      "position": [
-        -800,
-        280
-      ]
-    },
-    {
-      "parameters": {},
-      "id": "d9aa172c-55d6-4bee-9ebe-12d97356a0ef",
-      "name": "Merge1",
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 2.1,
-      "position": [
-        -800,
-        560
-      ]
-    },
-    {
-      "parameters": {},
-      "id": "1fd8b9da-f0f5-41b7-ba6d-f2e627b2bf87",
-      "name": "Merge2",
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 2.1,
-      "position": [
-        -600,
-        420
+        520,
+        340
       ]
     },
     {
       "parameters": {
-        "values": {
-          "string": [
-            {
-              "name": "name",
-              "value": "n8n.io"
-            }
-          ]
-        },
-        "options": {}
+        "operation": "getAll",
+        "options": {
+          "fieldsList": []
+        }
       },
-      "name": "Set3",
-      "type": "n8n-nodes-base.set",
-      "position": [
-        -1020,
-        640
-      ],
+      "id": "560ac947-456c-40d0-9fb8-fd9ec3eddf1c",
+      "name": "Odoo",
+      "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
-      "id": "8b0f2005-235c-4688-8423-acaef446e126"
+      "position": [
+        1180,
+        340
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "12",
+          "name": "Odoo (Administrator)"
+        }
+      }
     }
   ],
   "pinData": {},
-  "settings": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-06-26T05:10:01.934Z",
-  "versionId": "ce077aab-bbbb-4651-8dfd-0c42b401d6f1"
+  "updatedAt": "2023-08-28T19:41:49.331Z",
+  "versionId": "9381bb0a-9173-42c8-990b-adb315d391b1"
 }
