@@ -821,17 +821,6 @@
         1380,
         460
       ]
-    },
-    {
-      "parameters": {},
-      "id": "ac0edd9c-3e36-41be-88ff-6f094e362e88",
-      "name": "Execute Workflow",
-      "type": "n8n-nodes-base.executeWorkflow",
-      "typeVersion": 1,
-      "position": [
-        -600,
-        740
-      ]
     }
   ],
   "pinData": {},
@@ -868,6 +857,6 @@
     }
   ],
   "triggerCount": 3,
-  "updatedAt": "2023-07-19T20:56:02.000Z",
-  "versionId": "e55bc9ba-9f73-4c45-a2b9-389106fd5ec1"
+  "updatedAt": "2023-09-08T21:01:39.000Z",
+  "versionId": "9535f342-e9f6-40a6-b123-92e9d20b7463"
 }
