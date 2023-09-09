@@ -8,11 +8,6 @@
             "node": "FixDate V1",
             "type": "main",
             "index": 0
-          },
-          {
-            "node": "FixDate V2",
-            "type": "main",
-            "index": 0
           }
         ]
       ]
@@ -79,8 +74,8 @@
       "type": "n8n-nodes-base.spreadsheetFile",
       "typeVersion": 1,
       "position": [
-        160,
-        -160
+        940,
+        60
       ]
     },
     {
@@ -92,8 +87,8 @@
       "type": "n8n-nodes-base.microsoftSql",
       "typeVersion": 1,
       "position": [
-        -300,
-        -240
+        520,
+        60
       ],
       "id": "77c1a9ea-c17d-46e6-a9c2-c2376d2fd7c8",
       "credentials": {
@@ -102,24 +97,6 @@
           "name": "DB1.DS1.GOWLS.COM (kdessinger)"
         }
       }
-    },
-    {
-      "parameters": {
-        "operation": "formatDate",
-        "date": "={{ $json.lastlogin }}",
-        "format": "custom",
-        "customFormat": "yyyy-MM-dd HH:mm:ss",
-        "outputFieldName": "lastlogin",
-        "options": {}
-      },
-      "id": "95e81d8a-6d2a-4346-9602-998eae74691a",
-      "name": "FixDate V2",
-      "type": "n8n-nodes-base.dateTime",
-      "typeVersion": 2,
-      "position": [
-        -40,
-        -320
-      ]
     },
     {
       "parameters": {
@@ -134,8 +111,8 @@
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 1,
       "position": [
-        -40,
-        -160
+        740,
+        60
       ]
     },
     {
@@ -233,6 +210,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-08-28T19:41:49.331Z",
-  "versionId": "9381bb0a-9173-42c8-990b-adb315d391b1"
+  "updatedAt": "2023-09-08T20:24:49.000Z",
+  "versionId": "b718b70e-a938-40cc-bf36-43faafb77f9d"
 }
