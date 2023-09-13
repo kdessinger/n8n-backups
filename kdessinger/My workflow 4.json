@@ -5,7 +5,7 @@
       "main": [
         [
           {
-            "node": "Sort",
+            "node": "Filter",
             "type": "main",
             "index": 0
           }
@@ -16,7 +16,7 @@
       "main": [
         [
           {
-            "node": "Set",
+            "node": "Set Headings",
             "type": "main",
             "index": 0
           }
@@ -27,7 +27,34 @@
       "main": [
         [
           {
-            "node": "Odoo",
+            "node": "Get Contacts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Sort",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter1": {
+      "main": [
+        []
+      ]
+    },
+    "Get Contacts": {
+      "main": [
+        [
+          {
+            "node": "Filter1",
             "type": "main",
             "index": 0
           }
@@ -46,14 +73,15 @@
       "type": "n8n-nodes-base.start",
       "typeVersion": 1,
       "position": [
-        160,
-        60
+        -140,
+        160
       ]
     },
     {
       "parameters": {
         "resource": "note",
         "operation": "getAll",
+        "returnAll": true,
         "options": {
           "fieldsList": [
             "display_name",
@@ -68,7 +96,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        400,
+        100,
         60
       ],
       "credentials": {
@@ -77,27 +105,6 @@
           "name": "Odoo-Stage (kdessinger)"
         }
       }
-    },
-    {
-      "parameters": {
-        "values": {
-          "string": [
-            {
-              "name": "Stage",
-              "value": "={{$json[\"stage_id\"][1]}}"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "7b5c4684-1065-42f1-a37b-0f39ea3fe0f0",
-      "name": "Set",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 1,
-      "position": [
-        780,
-        60
-      ]
     },
     {
       "parameters": {
@@ -116,9 +123,119 @@
       "type": "n8n-nodes-base.itemLists",
       "typeVersion": 1,
       "position": [
-        600,
+        500,
         60
       ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json[\"stage_id\"][1] }}",
+              "value2": "AI Prompts"
+            }
+          ]
+        }
+      },
+      "id": "a0e8da6e-216e-48fc-8ec0-9b126364b84b",
+      "name": "Filter",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 1,
+      "position": [
+        300,
+        60
+      ]
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "id",
+              "value": "={{ $json.id }}"
+            },
+            {
+              "name": "Name",
+              "value": "={{ $json.display_name }}"
+            },
+            {
+              "name": "memo",
+              "value": "={{ $json.memo }}"
+            },
+            {
+              "name": "Stage",
+              "value": "={{$json[\"stage_id\"][1]}}"
+            },
+            {
+              "name": "User",
+              "value": "={{$json[\"user_id\"][1]}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "7b5c4684-1065-42f1-a37b-0f39ea3fe0f0",
+      "name": "Set Headings",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        700,
+        60
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.EVI_DistID }}",
+              "operation": "notEqual"
+            }
+          ]
+        }
+      },
+      "id": "b3d462cc-cc40-423e-89d1-58bd504294cf",
+      "name": "Filter1",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 1,
+      "position": [
+        300,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {
+          "fieldsList": [
+            "active",
+            "display_name",
+            "is_company",
+            "EVI_DistID",
+            "EVI_DistName",
+            "EVI_Last_login",
+            "EVI_LastSync",
+            "sistype"
+          ]
+        }
+      },
+      "id": "d44da647-f1fa-4547-82e5-5921b1e84afd",
+      "name": "Get Contacts",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        100,
+        260
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "15",
+          "name": "Odoo-Stage (kdessinger)"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -126,6 +243,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2022-10-18T06:08:14.304Z",
-  "versionId": "4fd32482-78e4-45b2-b8fc-5459f9bf4ec1"
+  "updatedAt": "2023-09-13T03:53:55.000Z",
+  "versionId": "e8d3744d-5228-44b1-82ae-0ec69318336e"
 }
