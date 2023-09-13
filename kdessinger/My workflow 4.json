@@ -193,6 +193,12 @@
               "value1": "={{ $json.EVI_DistID }}",
               "operation": "notEqual"
             }
+          ],
+          "boolean": [
+            {
+              "value1": "={{ $json.active }}",
+              "value2": true
+            }
           ]
         }
       },
@@ -212,8 +218,8 @@
         "options": {
           "fieldsList": [
             "active",
-            "display_name",
             "is_company",
+            "display_name",
             "EVI_DistID",
             "EVI_DistName",
             "EVI_Last_login",
@@ -243,6 +249,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-09-13T03:53:55.000Z",
-  "versionId": "e8d3744d-5228-44b1-82ae-0ec69318336e"
+  "updatedAt": "2023-09-13T05:09:15.000Z",
+  "versionId": "1e5aea42-2d44-46e3-858a-8c93f1c4968d"
 }
