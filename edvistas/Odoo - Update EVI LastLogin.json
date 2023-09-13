@@ -1,0 +1,297 @@
+{
+  "active": true,
+  "connections": {
+    "Get Contacts": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Update Odoo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "FixDate": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "LastLogin Query": {
+      "main": [
+        [
+          {
+            "node": "FixDate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get Contacts",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "LastLogin Query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-08-28T19:41:49.331Z",
+  "id": "4ZLWW2K8FuB58NqJ",
+  "name": "Odoo - Update EVI LastLogin",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {
+          "fieldsList": [
+            "active",
+            "display_name",
+            "EVI_DistID",
+            "EVI_DistName",
+            "EVI_Last_login"
+          ]
+        }
+      },
+      "id": "17d7bb58-7e09-41e7-a575-6cdbb56b6c3c",
+      "name": "Get Contacts",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        480,
+        20
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "14",
+          "name": "Odoo-Stage (Administrator)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "EVI_DistID",
+              "field2": "districtID"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "68237245-fa71-424d-b32b-26a141f6126e",
+      "name": "Merge",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        900,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Update the EVI_LastLogin field in Odoo",
+        "height": 463,
+        "width": 1153
+      },
+      "id": "98e4837a-deab-45cb-bde9-380be22ea2f0",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        191,
+        -85
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.EVI_DistID }}",
+              "operation": "notEqual"
+            }
+          ],
+          "boolean": [
+            {
+              "value1": "={{ $json.active }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "85050912-e8cb-4e2a-99da-8043cfd3a4cf",
+      "name": "Filter",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 1,
+      "position": [
+        680,
+        20
+      ]
+    },
+    {
+      "parameters": {
+        "value": "={{ $json.lastlogin }}",
+        "dataPropertyName": "EVI_Last_login",
+        "custom": true,
+        "toFormat": "YYYY-MM-DD HH:mm:ss",
+        "options": {
+          "toTimezone": "Etc/GMT-4"
+        }
+      },
+      "id": "7065235f-c512-4c9a-b718-f70c9d48427c",
+      "name": "FixDate",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 1,
+      "position": [
+        680,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "WITH LastLoginRanked AS (\n    SELECT d.id AS districtID, d.name AS DistrictName, u.id as useridkey, u.userid, u.firstname, u.lastname, up.lastlogin,\n    ROW_NUMBER() OVER (PARTITION BY d.id ORDER BY up.lastlogin DESC) AS rn\n\tFROM evitesting.dbo.ecDistricts d\n\tJOIN evitesting.dbo.ecUsers u ON d.id = u.districtid\n\tLEFT JOIN (SELECT useridkey, MAX(lastlogin) AS lastlogin FROM evitesting.dbo.userproperties GROUP BY useridkey) up ON u.id = up.useridkey\n\tWHERE u.active = 1      -- Show active users only\n\tand u.adminaccount = 0  -- Hide admin logins\n)\nSELECT districtID, DistrictName, lastlogin\nFROM LastLoginRanked\nWHERE rn = 1 and lastlogin is not null\nOrder by districtID, userid;\n"
+      },
+      "name": "LastLogin Query",
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1,
+      "position": [
+        480,
+        200
+      ],
+      "id": "77c1a9ea-c17d-46e6-a9c2-c2376d2fd7c8",
+      "credentials": {
+        "microsoftSql": {
+          "id": "8",
+          "name": "DB1.DS1.GOWLS.COM (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "triggerAtDay": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "triggerAtHour": 6
+            }
+          ]
+        }
+      },
+      "id": "89c8f71c-f16d-4957-9ede-a9aa87df906d",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        260,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "res.partner",
+        "operation": "update",
+        "customResourceId": "={{ $json.id }}",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "EVI_Last_login",
+              "fieldValue": "={{ $json.EVI_Last_login }}"
+            }
+          ]
+        }
+      },
+      "id": "508aa114-aa90-4adb-b69a-c6cad79c3cd9",
+      "name": "Update Odoo",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        1100,
+        100
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "14",
+          "name": "Odoo-Stage (Administrator)"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrencyRules": []
+    }
+  },
+  "tags": [
+    {
+      "createdAt": "2022-12-09T05:43:36.104Z",
+      "updatedAt": "2022-12-09T05:43:36.104Z",
+      "id": "12",
+      "name": "odoo"
+    },
+    {
+      "createdAt": "2023-06-10T21:44:29.997Z",
+      "updatedAt": "2023-06-10T21:44:29.997Z",
+      "id": "36",
+      "name": "MSSQL"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2023-09-13T15:58:52.000Z",
+  "versionId": "0ff651e8-fb97-4e19-9a69-67f7ac76a977"
+}
