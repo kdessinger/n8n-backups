@@ -135,15 +135,15 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 2.1,
       "position": [
-        1120,
+        1100,
         120
       ]
     },
     {
       "parameters": {
         "content": "## Sync Datamate with Odoo",
-        "height": 454,
-        "width": 1398
+        "height": 437,
+        "width": 1348
       },
       "id": "98e4837a-deab-45cb-bde9-380be22ea2f0",
       "name": "Sticky Note",
@@ -151,7 +151,7 @@
       "typeVersion": 1,
       "position": [
         191,
-        -76
+        -59
       ]
     },
     {
@@ -281,7 +281,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        1320,
+        1300,
         120
       ],
       "credentials": {
@@ -342,6 +342,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-09-13T21:44:09.000Z",
-  "versionId": "10e81439-7446-40cd-b4d8-19062c3867ef"
+  "updatedAt": "2023-09-14T13:11:36.000Z",
+  "versionId": "b56f8e16-bdb9-455b-969f-364830e27282"
 }
