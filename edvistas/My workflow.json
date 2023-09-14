@@ -1,55 +1,43 @@
 {
   "active": false,
   "connections": {
-    "(EVICore) Last Login": {
+    "Get Contacts": {
       "main": [
         [
           {
-            "node": "FixDate V1",
+            "node": "IF",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "FixDate V1": {
+    "Filter": {
+      "main": [
+        []
+      ]
+    },
+    "IF": {
+      "main": [
+        []
+      ]
+    },
+    "Set": {
       "main": [
         [
           {
-            "node": "Spreadsheet File1",
+            "node": "Get Contacts",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "(EVICore) Last Login1": {
+    "Get Tags": {
       "main": [
         [
           {
-            "node": "FixDate V3",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "FixDate V3": {
-      "main": [
-        [
-          {
-            "node": "Odoo",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "When clicking \"Execute Workflow\"": {
-      "main": [
-        [
-          {
-            "node": "(EVICore) Last Login1",
+            "node": "IF",
             "type": "main",
             "index": 0
           }
@@ -57,143 +45,32 @@
       ]
     }
   },
-  "createdAt": "2023-08-28T19:41:49.331Z",
-  "id": "4ZLWW2K8FuB58NqJ",
+  "createdAt": "2023-09-13T21:44:35.092Z",
+  "id": "R3exrELZFhj5SeTL",
   "name": "My workflow",
   "nodes": [
     {
       "parameters": {
-        "operation": "toFile",
-        "fileFormat": "xlsx",
-        "options": {
-          "fileName": "output.xlsx"
-        }
-      },
-      "id": "43dd354b-a06e-4c86-b239-91f1aa393386",
-      "name": "Spreadsheet File1",
-      "type": "n8n-nodes-base.spreadsheetFile",
-      "typeVersion": 1,
-      "position": [
-        940,
-        60
-      ]
-    },
-    {
-      "parameters": {
-        "operation": "executeQuery",
-        "query": "WITH LastLoginRanked AS (\n    SELECT d.id AS districtID, d.name AS DistrictName, u.id as useridkey, u.userid, u.firstname, u.lastname, up.lastlogin,\n    ROW_NUMBER() OVER (PARTITION BY d.id ORDER BY up.lastlogin DESC) AS rn\n\tFROM evitesting.dbo.ecDistricts d\n\tJOIN evitesting.dbo.ecUsers u ON d.id = u.districtid\n\tLEFT JOIN (SELECT useridkey, MAX(lastlogin) AS lastlogin FROM evitesting.dbo.userproperties GROUP BY useridkey) up ON u.id = up.useridkey\n\tWHERE u.active = 1      -- Show active users only\n\tand u.adminaccount = 0  -- Hide admin logins\n)\nSELECT districtID, DistrictName, useridkey, userid, firstname, lastname, lastlogin\nFROM LastLoginRanked\nWHERE rn = 1\nOrder by districtID, userid;\n"
-      },
-      "name": "(EVICore) Last Login",
-      "type": "n8n-nodes-base.microsoftSql",
-      "typeVersion": 1,
-      "position": [
-        520,
-        60
-      ],
-      "id": "77c1a9ea-c17d-46e6-a9c2-c2376d2fd7c8",
-      "credentials": {
-        "microsoftSql": {
-          "id": "8",
-          "name": "DB1.DS1.GOWLS.COM (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "value": "={{ $json.lastlogin }}",
-        "dataPropertyName": "lastlogin",
-        "custom": true,
-        "toFormat": "YYYY-MM-DD HH:mm:ss",
-        "options": {}
-      },
-      "id": "7065235f-c512-4c9a-b718-f70c9d48427c",
-      "name": "FixDate V1",
-      "type": "n8n-nodes-base.dateTime",
-      "typeVersion": 1,
-      "position": [
-        740,
-        60
-      ]
-    },
-    {
-      "parameters": {
-        "operation": "toFile",
-        "fileFormat": "xlsx",
-        "options": {
-          "fileName": "output.xlsx"
-        }
-      },
-      "id": "7afcb003-5614-4232-b6e0-3bab03e69919",
-      "name": "Spreadsheet File",
-      "type": "n8n-nodes-base.spreadsheetFile",
-      "typeVersion": 1,
-      "position": [
-        740,
-        580
-      ]
-    },
-    {
-      "parameters": {
-        "operation": "executeQuery",
-        "query": "WITH LastLoginRanked AS (\n    SELECT d.id AS districtID, d.name AS DistrictName, u.id as useridkey, u.userid, u.firstname, u.lastname, up.lastlogin,\n    ROW_NUMBER() OVER (PARTITION BY d.id ORDER BY up.lastlogin DESC) AS rn\n\tFROM evitesting.dbo.ecDistricts d\n\tJOIN evitesting.dbo.ecUsers u ON d.id = u.districtid\n\tLEFT JOIN (SELECT useridkey, MAX(lastlogin) AS lastlogin FROM evitesting.dbo.userproperties GROUP BY useridkey) up ON u.id = up.useridkey\n\tWHERE u.active = 1      -- Show active users only\n\tand u.adminaccount = 0  -- Hide admin logins\n)\nSELECT districtID, DistrictName, useridkey, userid, firstname, lastname, lastlogin\nFROM LastLoginRanked\nWHERE rn = 1\nOrder by districtID, userid;\n"
-      },
-      "name": "(EVICore) Last Login1",
-      "type": "n8n-nodes-base.microsoftSql",
-      "typeVersion": 1,
-      "position": [
-        740,
-        340
-      ],
-      "id": "410c5a88-de28-48f0-9980-7b9cd507d7f0",
-      "credentials": {
-        "microsoftSql": {
-          "id": "8",
-          "name": "DB1.DS1.GOWLS.COM (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "value": "={{ $json.lastlogin }}",
-        "dataPropertyName": "lastlogin",
-        "custom": true,
-        "toFormat": "YYYY-MM-DD HH:mm:ss",
-        "options": {}
-      },
-      "id": "f440d4c4-560d-4e41-8df3-d28b31f426ca",
-      "name": "FixDate V3",
-      "type": "n8n-nodes-base.dateTime",
-      "typeVersion": 1,
-      "position": [
-        960,
-        340
-      ]
-    },
-    {
-      "parameters": {},
-      "id": "b1b8ddb3-7f5e-4234-8933-282d67770c0a",
-      "name": "When clicking \"Execute Workflow\"",
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
-      "position": [
-        520,
-        340
-      ]
-    },
-    {
-      "parameters": {
         "operation": "getAll",
+        "returnAll": true,
         "options": {
-          "fieldsList": []
+          "fieldsList": [
+            "active",
+            "display_name",
+            "EVI_DistID",
+            "EVI_DistName",
+            "EVI_Last_login",
+            "category_id"
+          ]
         }
       },
-      "id": "560ac947-456c-40d0-9fb8-fd9ec3eddf1c",
-      "name": "Odoo",
+      "id": "4dab47a4-ca48-4e8f-94d1-2a965f5da5d7",
+      "name": "Get Contacts",
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        1180,
-        340
+        800,
+        220
       ],
       "credentials": {
         "odooApi": {
@@ -201,6 +78,117 @@
           "name": "Odoo (Administrator)"
         }
       }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.EVI_DistID }}",
+              "operation": "equal",
+              "value2": 924
+            }
+          ]
+        }
+      },
+      "id": "353bc023-0071-4514-958a-65cac64cc072",
+      "name": "Filter",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.category_id.includes(71) }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "a0494289-3cbf-43d0-819e-7584e14a3860",
+      "name": "IF",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        1020,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "res.partner.category",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {
+          "fieldsList": [
+            "id",
+            "name",
+            "color",
+            "active"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "name",
+              "value": "Aims"
+            }
+          ]
+        }
+      },
+      "id": "95797821-d9af-4c05-9ea1-6764591100ba",
+      "name": "Get Tags",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        800,
+        400
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "12",
+          "name": "Odoo (Administrator)"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "79af74a3-2e08-40cb-a2b8-cc1cd52bab0d",
+      "name": "When clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        500,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "Software",
+              "value": "Aims"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "40ec515c-6750-46f0-a3af-732581a5827f",
+      "name": "Set",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        500,
+        220
+      ]
     }
   ],
   "pinData": {},
@@ -210,6 +198,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-09-08T20:24:49.000Z",
-  "versionId": "b718b70e-a938-40cc-bf36-43faafb77f9d"
+  "updatedAt": "2023-09-13T22:15:24.000Z",
+  "versionId": "e67bcc6f-09ee-42c0-9a3a-785023054f14"
 }
