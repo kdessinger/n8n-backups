@@ -82,6 +82,50 @@
           }
         ]
       ]
+    },
+    "Get Contacts1": {
+      "main": [
+        [
+          {
+            "node": "Sort",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Spreadsheet": {
+      "main": [
+        [
+          {
+            "node": "Convert to Array",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Load Binary File": {
+      "main": [
+        [
+          {
+            "node": "Spreadsheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to Array": {
+      "main": [
+        [
+          {
+            "node": "Get Contacts1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2023-08-28T19:41:49.331Z",
@@ -310,6 +354,114 @@
           "name": "DB1.DS1.GOWLS.COM (kdessinger)"
         }
       }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "res.partner",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {
+          "fieldsList": [
+            "display_name",
+            "EVI_DistID",
+            "EVI_DistName"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "EVI_DistID",
+              "operator": "in",
+              "value": "={{ $json.id }}"
+            }
+          ]
+        }
+      },
+      "id": "dbbd3c4a-e05d-4ffe-8914-b23fe6283286",
+      "name": "Get Contacts1",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        900,
+        500
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "12",
+          "name": "Odoo (Administrator)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "concatenateItems",
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "id"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "7f996fbb-0b58-4bcc-b72c-00f70382cb76",
+      "name": "Convert to Array",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 3,
+      "position": [
+        700,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "options": {
+          "headerRow": true
+        }
+      },
+      "id": "b6f25790-12b0-4f21-965c-b234d272685c",
+      "name": "Spreadsheet",
+      "type": "n8n-nodes-base.spreadsheetFile",
+      "typeVersion": 2,
+      "position": [
+        500,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "fileSelector": "/mnt/share/_tmp/drp.xlsx"
+      },
+      "id": "b165af34-d3e1-4ae1-bf39-2a5ccadbd957",
+      "name": "Load Binary File",
+      "type": "n8n-nodes-base.readBinaryFiles",
+      "typeVersion": 1,
+      "position": [
+        300,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "sort",
+        "sortFieldsUi": {
+          "sortField": [
+            {
+              "fieldName": "EVI_DistID"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "01acee1d-bb30-47c9-ac6a-4425e5915b27",
+      "name": "Sort",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 3,
+      "position": [
+        1100,
+        500
+      ]
     }
   ],
   "pinData": {},
@@ -342,6 +494,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-09-14T13:11:36.000Z",
-  "versionId": "b56f8e16-bdb9-455b-969f-364830e27282"
+  "updatedAt": "2023-09-14T20:00:23.000Z",
+  "versionId": "82db8415-c34b-4e80-a2d4-e9cf7b70b997"
 }
