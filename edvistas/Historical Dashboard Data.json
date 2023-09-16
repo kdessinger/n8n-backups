@@ -45,28 +45,6 @@
         ]
       ]
     },
-    "Northwinds Products": {
-      "main": [
-        [
-          {
-            "node": "Add Data",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Add Data": {
-      "main": [
-        [
-          {
-            "node": "Backordered?",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Date & Time": {
       "main": [
         [
@@ -214,89 +192,6 @@
     },
     {
       "parameters": {
-        "operation": "executeQuery",
-        "query": "SELECT TOP (10) * FROM Northwind..Products"
-      },
-      "name": "Northwinds Products",
-      "type": "n8n-nodes-base.microsoftSql",
-      "typeVersion": 1,
-      "position": [
-        380,
-        80
-      ],
-      "id": "e4e05343-a633-4785-99ea-0edc27349afa",
-      "credentials": {
-        "microsoftSql": {
-          "id": "9",
-          "name": "SQL01.edvistas.local (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "values": {
-          "string": [
-            {
-              "name": "Source",
-              "value": "n8n"
-            }
-          ],
-          "number": [
-            {
-              "name": "SKU",
-              "value": "={{ $json[\"SupplierID\"] }}{{ $json[\"ProductID\"] }}{{ $json[\"CategoryID\"] }}-{{ $json[\"ReorderLevel\"] }}-{{ $json[\"UnitPrice\"] }}{{ $json[\"UnitsInStock\"] }}{{ $json[\"UnitsOnOrder\"] }}"
-            }
-          ],
-          "boolean": [
-            {
-              "name": "InStock",
-              "value": "={{ $json[\"UnitsInStock\"] > 0}}"
-            },
-            {
-              "name": "Reorder",
-              "value": "={{ $json[\"ReorderLevel\"] >= $json[\"UnitsInStock\"] }}"
-            }
-          ]
-        },
-        "options": {
-          "dotNotation": true
-        }
-      },
-      "id": "1d8e03ee-12ce-4642-8408-532d9207043b",
-      "name": "Add Data",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 1,
-      "position": [
-        580,
-        80
-      ]
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "boolean": [
-            {
-              "value1": "={{ $json.Discontinued }}",
-              "value2": true
-            },
-            {
-              "value1": "={{ $json.Reorder }}",
-              "value2": true
-            }
-          ]
-        }
-      },
-      "id": "86b313f2-3216-41de-8216-fa308750a117",
-      "name": "Backordered?",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 1,
-      "position": [
-        780,
-        80
-      ]
-    },
-    {
-      "parameters": {
         "operation": "toFile",
         "fileFormat": "xlsx",
         "options": {
@@ -308,8 +203,8 @@
       "type": "n8n-nodes-base.spreadsheetFile",
       "typeVersion": 1,
       "position": [
-        580,
-        -80
+        760,
+        100
       ]
     },
     {
@@ -321,8 +216,8 @@
       "type": "n8n-nodes-base.microsoftSql",
       "typeVersion": 1,
       "position": [
-        120,
-        -160
+        300,
+        20
       ],
       "id": "da529647-4266-4706-9cd1-a872b486b386",
       "credentials": {
@@ -346,8 +241,8 @@
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 2,
       "position": [
-        380,
-        -240
+        560,
+        -60
       ]
     },
     {
@@ -363,8 +258,8 @@
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 1,
       "position": [
-        380,
-        -80
+        560,
+        100
       ]
     }
   ],
@@ -386,6 +281,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-08-09T23:19:58.000Z",
-  "versionId": "c3722c78-6ef1-4860-b55a-9da7a90d44f1"
+  "updatedAt": "2023-09-15T21:08:57.000Z",
+  "versionId": "3237af5f-27ea-440d-b74b-099ab0b1062a"
 }
