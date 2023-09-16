@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "Switch": {
       "main": [
@@ -49,17 +49,6 @@
         [
           {
             "node": "Get Create Duration",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Webex Trigger (kdessinger)": {
-      "main": [
-        [
-          {
-            "node": "Switch1",
             "type": "main",
             "index": 0
           }
@@ -148,28 +137,6 @@
         [
           {
             "node": "Delete Meeting",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Webex Trigger (bbouchard)": {
-      "main": [
-        [
-          {
-            "node": "Switch",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Webex Trigger (pcooper)": {
-      "main": [
-        [
-          {
-            "node": "Switch2",
             "type": "main",
             "index": 0
           }
@@ -459,10 +426,43 @@
           }
         ]
       ]
+    },
+    "Webex (bbouchard)": {
+      "main": [
+        [
+          {
+            "node": "Switch1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webex (pcooper)": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webex (kdessinger)": {
+      "main": [
+        [
+          {
+            "node": "Switch2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
-  "createdAt": "2023-09-08T21:19:48.619Z",
-  "id": "kUL1RhSzeIVQERY5",
+  "createdAt": "2023-09-15T20:54:37.132Z",
+  "id": "WL7QzJYItj90l98a",
   "name": "WebEx/Odoo Sync",
   "nodes": [
     {
@@ -486,13 +486,13 @@
         },
         "fallbackOutput": 3
       },
-      "id": "e875c249-b92c-4045-b69a-fc78a80fd14b",
+      "id": "9d52c617-e642-4ffa-aa70-ae5453801b5f",
       "name": "Switch",
       "type": "n8n-nodes-base.switch",
       "typeVersion": 1,
       "position": [
-        -2580,
-        900
+        -5100,
+        3080
       ]
     },
     {
@@ -506,13 +506,13 @@
           "toTimezone": "={{ $json.timezone }}"
         }
       },
-      "id": "ed521e60-5384-42cd-a5ab-5e035e012a70",
+      "id": "344586f9-1ac3-4176-a0ac-e4048dc5289e",
       "name": "MeetingStart",
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 1,
       "position": [
-        -2060,
-        560
+        -4580,
+        2740
       ]
     },
     {
@@ -526,13 +526,13 @@
           "toTimezone": "={{ $json.timezone }}"
         }
       },
-      "id": "b43865ae-67e7-4321-a0b1-4b71cb58249d",
+      "id": "1c3598fa-978c-4d97-b227-ef9befe3d65a",
       "name": "MeetingEnd",
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 1,
       "position": [
-        -1860,
-        560
+        -4380,
+        2740
       ]
     },
     {
@@ -541,13 +541,13 @@
         "height": 284.3839143895833,
         "width": 1031.2262443842494
       },
-      "id": "3f1cca5c-051e-4979-8c59-e594f5894dea",
+      "id": "0537f34e-e101-4eb9-ac7f-bbd32ead92a3",
       "name": "Sticky Note",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -2300,
-        460
+        -4820,
+        2640
       ]
     },
     {
@@ -556,13 +556,13 @@
         "height": 281.9765096322892,
         "width": 1280.502198421141
       },
-      "id": "50008a68-e7c1-4822-9fae-f063c36f6ae6",
+      "id": "1ff19fa3-42b3-45c6-a222-9f8b4caaa6a8",
       "name": "Sticky Note1",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -2300,
-        780
+        -4820,
+        2960
       ]
     },
     {
@@ -571,13 +571,13 @@
         "height": 284.3839143895833,
         "width": 427.41415106050124
       },
-      "id": "814c9a8f-d5c5-4dcf-bdb9-20d2638193af",
+      "id": "d1374f9e-6369-4a36-a04a-15785c6c2e7c",
       "name": "Sticky Note2",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -2080,
-        1100
+        -4600,
+        3280
       ]
     },
     {
@@ -587,13 +587,13 @@
         "operation": "delete",
         "customResourceId": "={{ $json.id }}"
       },
-      "id": "3722ff34-8b14-4542-b238-aeb20c33673a",
+      "id": "ecc1b877-24cf-459e-97a2-23aadb373aa5",
       "name": "Delete Meeting",
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -1840,
-        1200
+        -4360,
+        3380
       ],
       "credentials": {
         "odooApi": {
@@ -604,39 +604,18 @@
     },
     {
       "parameters": {
-        "event": "all",
-        "filters": {}
-      },
-      "id": "5efa3205-79cf-434b-a9c6-7ce37173f222",
-      "name": "Webex Trigger (kdessinger)",
-      "type": "n8n-nodes-base.ciscoWebexTrigger",
-      "typeVersion": 1,
-      "position": [
-        -680,
-        860
-      ],
-      "webhookId": "c6b5bc85-cb96-4f68-85bf-f783129860b3",
-      "credentials": {
-        "ciscoWebexOAuth2Api": {
-          "id": "4",
-          "name": "Cisco Webex (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {
         "resource": "meeting",
         "operation": "get",
         "meetingId": "={{ $json.data.id }}",
         "options": {}
       },
-      "id": "eacfa022-e281-4209-95dd-446d1070bbc9",
+      "id": "4c7845c3-6741-4960-ab2f-bb94a322b557",
       "name": "Get Meeting Create",
       "type": "n8n-nodes-base.ciscoWebex",
       "typeVersion": 1,
       "position": [
-        -2260,
-        560
+        -4780,
+        2740
       ],
       "credentials": {
         "ciscoWebexOAuth2Api": {
@@ -652,13 +631,13 @@
         "meetingId": "={{ $json.data.id }}",
         "options": {}
       },
-      "id": "154beb26-edb0-40fb-8a6b-898de61c81e4",
+      "id": "a435e707-0633-449c-9546-3f5848106540",
       "name": "Get Meeting Update",
       "type": "n8n-nodes-base.ciscoWebex",
       "typeVersion": 1,
       "position": [
-        -2260,
-        880
+        -4780,
+        3060
       ],
       "credentials": {
         "ciscoWebexOAuth2Api": {
@@ -678,13 +657,13 @@
           "toTimezone": "={{ $json.timezone }}"
         }
       },
-      "id": "886bffcf-48db-4ddb-940b-3635275192a1",
+      "id": "6a5f20a8-8d5e-4d25-8464-c547bfa3c0d2",
       "name": "MeetingStart Update",
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 1,
       "position": [
-        -2060,
-        880
+        -4580,
+        3060
       ]
     },
     {
@@ -698,39 +677,39 @@
           "toTimezone": "={{ $json.timezone }}"
         }
       },
-      "id": "a107f754-4f87-4dba-8b14-b1d327314d89",
+      "id": "36f949c1-71ea-40c7-8abc-93aa5a52425f",
       "name": "MeetingEnd Update",
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 1,
       "position": [
-        -1860,
-        880
+        -4380,
+        3060
       ]
     },
     {
       "parameters": {
         "jsCode": "const start = new Date(items[0].json.MeetingStart);\nconst end = new Date(items[0].json.MeetingEnd);\nconst durationInHours = Math.floor((end - start) / 60000 / 60);\nconsole.log(`Meeting duration: ${durationInHours} minutes`);\n\nreturn { json: { \n  id: items[0].json.id, \n  meetingNumber: items[0].json.meetingNumber, \n  title: items[0].json.title,  \n  agenda: items[0].json.agenda,  \n  password: items[0].json.password,\n  start: items[0].json.start,\n  end: items[0].json.end,\n  MeetingStart: items[0].json.MeetingStart,\n  MeetingEnd: items[0].json.MeetingEnd,  \n  duration: durationInHours,\n  timezone: items[0].json.timezone,\n  reminderTime: items[0].json.reminderTime,\n  hostDisplayName: items[0].json.hostDisplayName,  \n  hostEmail: items[0].json.hostEmail,  \n  webLink: items[0].json.webLink,  \n  callInNumber: items[0].json.telephony.callInNumbers[0].callInNumber  \n}};\n\n\n"
       },
-      "id": "10232029-cd9f-4465-b6ad-537c2fe91499",
+      "id": "692be855-a46d-4a32-a06e-dc79a4267214",
       "name": "Get Update Duration",
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        -1660,
-        880
+        -4180,
+        3060
       ]
     },
     {
       "parameters": {
         "jsCode": "const start = new Date(items[0].json.MeetingStart);\nconst end = new Date(items[0].json.MeetingEnd);\nconst durationInHours = Math.floor((end - start) / 60000 / 60);\nconsole.log(`Meeting duration: ${durationInHours} minutes`);\n\nreturn { json: { \n  id: items[0].json.id, \n  meetingNumber: items[0].json.meetingNumber, \n  title: items[0].json.title,  \n  agenda: items[0].json.agenda,  \n  password: items[0].json.password,\n  start: items[0].json.start,\n  end: items[0].json.end,\n  MeetingStart: items[0].json.MeetingStart,\n  MeetingEnd: items[0].json.MeetingEnd,  \n  duration: durationInHours,\n  timezone: items[0].json.timezone,\n  reminderTime: items[0].json.reminderTime,\n  hostDisplayName: items[0].json.hostDisplayName,  \n  hostEmail: items[0].json.hostEmail,  \n  webLink: items[0].json.webLink,  \n  callInNumber: items[0].json.telephony.callInNumbers[0].callInNumber  \n}};\n\n\n"
       },
-      "id": "66189336-7f6d-4497-b803-6db8abde53f9",
+      "id": "be2eef56-4c22-4c52-be78-3584f7869ecb",
       "name": "Get Create Duration",
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        -1660,
-        560
+        -4180,
+        2740
       ]
     },
     {
@@ -748,13 +727,13 @@
           ]
         }
       },
-      "id": "6be81f9a-1fa2-426d-ae5d-78426832567a",
+      "id": "fe756209-5844-4228-97e7-5e2f522ec121",
       "name": "Get ID",
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -1460,
-        880
+        -3980,
+        3060
       ],
       "credentials": {
         "odooApi": {
@@ -815,13 +794,13 @@
           ]
         }
       },
-      "id": "319a8374-906b-465a-bb19-40998fb4bc96",
+      "id": "b68968aa-c4a9-4aef-96bb-4ab372f48be7",
       "name": "Create Meeting",
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -1460,
-        560
+        -3980,
+        2740
       ],
       "credentials": {
         "odooApi": {
@@ -873,13 +852,13 @@
           ]
         }
       },
-      "id": "143c7ae1-9213-49d0-a152-a936bfa5b8c4",
+      "id": "18a19414-3be3-4e43-a248-fe7d391d00a5",
       "name": "Update Meeting",
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -1260,
-        880
+        -3780,
+        3060
       ],
       "credentials": {
         "odooApi": {
@@ -903,13 +882,13 @@
           ]
         }
       },
-      "id": "5b3c7b56-4558-4634-ad1d-038b829e092a",
+      "id": "22fb1df1-7b52-4d1a-9239-181e46974cb4",
       "name": "Get Odoo ID",
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -2040,
-        1200
+        -4560,
+        3380
       ],
       "credentials": {
         "odooApi": {
@@ -919,56 +898,14 @@
       }
     },
     {
-      "parameters": {
-        "event": "all",
-        "filters": {}
-      },
-      "id": "1fc4f1bd-2ab2-4187-a503-eff38bd17317",
-      "name": "Webex Trigger (bbouchard)",
-      "type": "n8n-nodes-base.ciscoWebexTrigger",
-      "typeVersion": 1,
-      "position": [
-        -2760,
-        900
-      ],
-      "webhookId": "325cbb23-c703-43b6-b220-203f7d3a5c4a",
-      "credentials": {
-        "ciscoWebexOAuth2Api": {
-          "id": "z0S6TOwCxfAYhSaQ",
-          "name": "Cisco Webex (bbouchard)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "event": "all",
-        "filters": {}
-      },
-      "id": "3e72dedd-535f-422e-b543-b49f656ae29f",
-      "name": "Webex Trigger (pcooper)",
-      "type": "n8n-nodes-base.ciscoWebexTrigger",
-      "typeVersion": 1,
-      "position": [
-        -2020,
-        1580
-      ],
-      "webhookId": "9fde2eea-9bc6-4e85-924d-2196000f4c28",
-      "credentials": {
-        "ciscoWebexOAuth2Api": {
-          "id": "fCG6jscxTrSeIkl1",
-          "name": "Cisco Webex (pcooper)"
-        }
-      }
-    },
-    {
       "parameters": {},
-      "id": "570293c0-c769-4a51-9553-54bbbc8d9bd5",
+      "id": "e9b8039d-f1b8-409c-8246-bd8fed1a68e7",
       "name": "Do Nothing",
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        -2280,
-        1200
+        -4800,
+        3380
       ]
     },
     {
@@ -992,13 +929,13 @@
         },
         "fallbackOutput": 3
       },
-      "id": "e21cc3af-0344-43ac-86b6-f652367ff85d",
+      "id": "a189a1f6-c0bb-43ec-8e3c-701e79da8eed",
       "name": "Switch1",
       "type": "n8n-nodes-base.switch",
       "typeVersion": 1,
       "position": [
-        -480,
-        860
+        -3000,
+        3040
       ]
     },
     {
@@ -1012,13 +949,13 @@
           "toTimezone": "={{ $json.timezone }}"
         }
       },
-      "id": "611db00e-98a8-4786-8b15-acee291cd00a",
+      "id": "2b9d6fba-a63a-46fe-8c78-384050136786",
       "name": "MeetingStart1",
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 1,
       "position": [
-        40,
-        520
+        -2480,
+        2700
       ]
     },
     {
@@ -1032,13 +969,13 @@
           "toTimezone": "={{ $json.timezone }}"
         }
       },
-      "id": "63f4365b-16d8-4c2b-9443-2c8c5505617b",
+      "id": "427f7810-bbdc-404f-84f9-5625bcf3bf8d",
       "name": "MeetingEnd1",
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 1,
       "position": [
-        240,
-        520
+        -2280,
+        2700
       ]
     },
     {
@@ -1047,13 +984,13 @@
         "height": 284.3839143895833,
         "width": 1031.2262443842494
       },
-      "id": "7481a376-747a-4f4c-93dc-ff5f13ba836c",
+      "id": "f110fdfe-795c-44f9-bbec-abe901a6cadd",
       "name": "Sticky Note3",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -200,
-        420
+        -2720,
+        2600
       ]
     },
     {
@@ -1062,13 +999,13 @@
         "height": 281.9765096322892,
         "width": 1280.502198421141
       },
-      "id": "74faf5ee-937c-4244-abbd-ff5cb7c226f0",
+      "id": "7707f7ba-c900-4091-a194-0e9486eaa189",
       "name": "Sticky Note4",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -200,
-        740
+        -2720,
+        2920
       ]
     },
     {
@@ -1077,13 +1014,13 @@
         "height": 284.3839143895833,
         "width": 427.41415106050124
       },
-      "id": "948ccff8-cc46-4995-ab7e-1178c09d2a70",
+      "id": "0527a9eb-7d27-43b8-b766-945984fee78f",
       "name": "Sticky Note5",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        20,
-        1060
+        -2500,
+        3240
       ]
     },
     {
@@ -1093,13 +1030,13 @@
         "operation": "delete",
         "customResourceId": "={{ $json.id }}"
       },
-      "id": "421d7b7e-6242-46d5-b759-88daf8b0bff1",
+      "id": "cf88c056-b04c-4d50-a9ce-c6c914ea1a6c",
       "name": "Delete Meeting1",
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        260,
-        1160
+        -2260,
+        3340
       ],
       "credentials": {
         "odooApi": {
@@ -1115,13 +1052,13 @@
         "meetingId": "={{ $json.data.id }}",
         "options": {}
       },
-      "id": "11dbc7a3-89c2-4d62-8799-a360f0863c39",
+      "id": "c5dd13a7-122d-432a-9a2e-95bcc07ea367",
       "name": "Get Meeting Create1",
       "type": "n8n-nodes-base.ciscoWebex",
       "typeVersion": 1,
       "position": [
-        -160,
-        520
+        -2680,
+        2700
       ],
       "credentials": {
         "ciscoWebexOAuth2Api": {
@@ -1137,13 +1074,13 @@
         "meetingId": "={{ $json.data.id }}",
         "options": {}
       },
-      "id": "53b64c1b-19ef-418b-8590-302f403e1301",
+      "id": "70cbab0a-5e17-47be-a6aa-e27ba3b40eff",
       "name": "Get Meeting Update1",
       "type": "n8n-nodes-base.ciscoWebex",
       "typeVersion": 1,
       "position": [
-        -160,
-        840
+        -2680,
+        3020
       ],
       "credentials": {
         "ciscoWebexOAuth2Api": {
@@ -1163,13 +1100,13 @@
           "toTimezone": "={{ $json.timezone }}"
         }
       },
-      "id": "986b642e-a0b3-4e12-8704-ce848e4b2ccb",
+      "id": "aa9320e4-6924-466d-9ed6-628bc6b533a1",
       "name": "MeetingStart Update1",
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 1,
       "position": [
-        40,
-        840
+        -2480,
+        3020
       ]
     },
     {
@@ -1183,39 +1120,39 @@
           "toTimezone": "={{ $json.timezone }}"
         }
       },
-      "id": "bea179f8-2d35-4e46-91f0-4501fae79d1f",
+      "id": "b03f7ae7-13f7-4579-bbf6-6a178ca3bccb",
       "name": "MeetingEnd Update1",
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 1,
       "position": [
-        240,
-        840
+        -2280,
+        3020
       ]
     },
     {
       "parameters": {
         "jsCode": "const start = new Date(items[0].json.MeetingStart);\nconst end = new Date(items[0].json.MeetingEnd);\nconst durationInHours = Math.floor((end - start) / 60000 / 60);\nconsole.log(`Meeting duration: ${durationInHours} minutes`);\n\nreturn { json: { \n  id: items[0].json.id, \n  meetingNumber: items[0].json.meetingNumber, \n  title: items[0].json.title,  \n  agenda: items[0].json.agenda,  \n  password: items[0].json.password,\n  start: items[0].json.start,\n  end: items[0].json.end,\n  MeetingStart: items[0].json.MeetingStart,\n  MeetingEnd: items[0].json.MeetingEnd,  \n  duration: durationInHours,\n  timezone: items[0].json.timezone,\n  reminderTime: items[0].json.reminderTime,\n  hostDisplayName: items[0].json.hostDisplayName,  \n  hostEmail: items[0].json.hostEmail,  \n  webLink: items[0].json.webLink,  \n  callInNumber: items[0].json.telephony.callInNumbers[0].callInNumber  \n}};\n\n\n"
       },
-      "id": "6e0b2975-7008-4eaf-b36b-8eedd5f1cddd",
+      "id": "26eb58d1-bb26-4c6a-8da3-ab02ac077240",
       "name": "Get Update Duration1",
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        440,
-        840
+        -2080,
+        3020
       ]
     },
     {
       "parameters": {
         "jsCode": "const start = new Date(items[0].json.MeetingStart);\nconst end = new Date(items[0].json.MeetingEnd);\nconst durationInHours = Math.floor((end - start) / 60000 / 60);\nconsole.log(`Meeting duration: ${durationInHours} minutes`);\n\nreturn { json: { \n  id: items[0].json.id, \n  meetingNumber: items[0].json.meetingNumber, \n  title: items[0].json.title,  \n  agenda: items[0].json.agenda,  \n  password: items[0].json.password,\n  start: items[0].json.start,\n  end: items[0].json.end,\n  MeetingStart: items[0].json.MeetingStart,\n  MeetingEnd: items[0].json.MeetingEnd,  \n  duration: durationInHours,\n  timezone: items[0].json.timezone,\n  reminderTime: items[0].json.reminderTime,\n  hostDisplayName: items[0].json.hostDisplayName,  \n  hostEmail: items[0].json.hostEmail,  \n  webLink: items[0].json.webLink,  \n  callInNumber: items[0].json.telephony.callInNumbers[0].callInNumber  \n}};\n\n\n"
       },
-      "id": "4002c197-cd4b-4e0b-bb71-7ac8b070d4e7",
+      "id": "23a33b94-e3c0-4f10-86fa-d746a300755d",
       "name": "Get Create Duration1",
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        440,
-        520
+        -2080,
+        2700
       ]
     },
     {
@@ -1233,13 +1170,13 @@
           ]
         }
       },
-      "id": "4c5d85b6-0c96-409b-b463-e9069ccae493",
+      "id": "71d850c5-39fa-4428-a16e-1c09c909567b",
       "name": "Get ID1",
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        640,
-        840
+        -1880,
+        3020
       ],
       "credentials": {
         "odooApi": {
@@ -1300,13 +1237,13 @@
           ]
         }
       },
-      "id": "260cc960-b9c8-46bf-8ad1-61d65c7e319b",
+      "id": "4ddf5984-b20e-424b-ba97-bf8a5b3d2be9",
       "name": "Create Meeting1",
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        640,
-        520
+        -1880,
+        2700
       ],
       "credentials": {
         "odooApi": {
@@ -1358,13 +1295,13 @@
           ]
         }
       },
-      "id": "b6ce9011-7f74-4a14-8c48-4a90b3ec0d39",
+      "id": "7332cb83-3bd9-488f-a1e9-2a78e16148e5",
       "name": "Update Meeting1",
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        840,
-        840
+        -1680,
+        3020
       ],
       "credentials": {
         "odooApi": {
@@ -1388,13 +1325,13 @@
           ]
         }
       },
-      "id": "33e0c32f-5a67-4039-b156-5a391692eec8",
+      "id": "f62311eb-ceb9-45df-b6e9-1c2a2ab094c9",
       "name": "Get Odoo ID1",
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        60,
-        1160
+        -2460,
+        3340
       ],
       "credentials": {
         "odooApi": {
@@ -1405,13 +1342,13 @@
     },
     {
       "parameters": {},
-      "id": "986266b6-0684-4269-91a1-53f7352ba7c8",
+      "id": "12c3ea95-fa3c-4265-90be-67a342ccfaa6",
       "name": "Do Nothing1",
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        -180,
-        1160
+        -2700,
+        3340
       ]
     },
     {
@@ -1435,13 +1372,13 @@
         },
         "fallbackOutput": 3
       },
-      "id": "6c40f220-5127-4743-a79c-b77ebf31d5eb",
+      "id": "6ad3f8ab-9e2d-41c8-9066-d0967f27892d",
       "name": "Switch2",
       "type": "n8n-nodes-base.switch",
       "typeVersion": 1,
       "position": [
-        -1780,
-        1580
+        -4300,
+        3760
       ]
     },
     {
@@ -1455,13 +1392,13 @@
           "toTimezone": "={{ $json.timezone }}"
         }
       },
-      "id": "629a70e9-2b15-4a54-99c3-3ff4cb08484d",
+      "id": "11cb53a2-7cdd-4039-852b-60b441b7e757",
       "name": "MeetingStart2",
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 1,
       "position": [
-        -1180,
-        1240
+        -3700,
+        3420
       ]
     },
     {
@@ -1475,13 +1412,13 @@
           "toTimezone": "={{ $json.timezone }}"
         }
       },
-      "id": "503e2900-b8bc-4f7d-987d-9d99e1505a02",
+      "id": "a1974716-ab55-40cc-8cc0-b73f441691bf",
       "name": "MeetingEnd2",
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 1,
       "position": [
-        -980,
-        1240
+        -3500,
+        3420
       ]
     },
     {
@@ -1490,13 +1427,13 @@
         "height": 284.3839143895833,
         "width": 1031.2262443842494
       },
-      "id": "52616b99-bbb9-4d11-828c-c62361453422",
+      "id": "438a2878-c660-413a-9745-a20b30c2937d",
       "name": "Sticky Note6",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -1420,
-        1140
+        -3940,
+        3320
       ]
     },
     {
@@ -1505,13 +1442,13 @@
         "height": 281.9765096322892,
         "width": 1280.502198421141
       },
-      "id": "61c26f8c-da22-4fa6-85b8-1e047d0dc6d8",
+      "id": "dfbad803-d5b4-4089-8b28-e87753988e49",
       "name": "Sticky Note7",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -1420,
-        1460
+        -3940,
+        3640
       ]
     },
     {
@@ -1520,13 +1457,13 @@
         "height": 284.3839143895833,
         "width": 427.41415106050124
       },
-      "id": "2145a0c3-a1f4-4d99-b1d9-1bf2f555f222",
+      "id": "62b0c331-589d-48a9-8297-23492a74ff4b",
       "name": "Sticky Note8",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -1200,
-        1780
+        -3720,
+        3960
       ]
     },
     {
@@ -1536,13 +1473,13 @@
         "operation": "delete",
         "customResourceId": "={{ $json.id }}"
       },
-      "id": "562bde3d-b2c9-4477-89c5-c270fabae3fd",
+      "id": "1018ce09-a41a-4fdc-846d-73395a4cc661",
       "name": "Delete Meeting2",
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -960,
-        1880
+        -3480,
+        4060
       ],
       "credentials": {
         "odooApi": {
@@ -1558,13 +1495,13 @@
         "meetingId": "={{ $json.data.id }}",
         "options": {}
       },
-      "id": "79a4cb45-1e52-4a2f-b6b3-4275e386feee",
+      "id": "36d4409c-3950-4a87-8643-4327434140b9",
       "name": "Get Meeting Create2",
       "type": "n8n-nodes-base.ciscoWebex",
       "typeVersion": 1,
       "position": [
-        -1380,
-        1240
+        -3900,
+        3420
       ],
       "credentials": {
         "ciscoWebexOAuth2Api": {
@@ -1580,13 +1517,13 @@
         "meetingId": "={{ $json.data.id }}",
         "options": {}
       },
-      "id": "17792e07-0c33-4155-a9b3-a531109270af",
+      "id": "36f119f6-8829-40ce-b7db-cd5458bbfac1",
       "name": "Get Meeting Update2",
       "type": "n8n-nodes-base.ciscoWebex",
       "typeVersion": 1,
       "position": [
-        -1380,
-        1560
+        -3900,
+        3740
       ],
       "credentials": {
         "ciscoWebexOAuth2Api": {
@@ -1606,13 +1543,13 @@
           "toTimezone": "={{ $json.timezone }}"
         }
       },
-      "id": "6f564119-e360-41b8-924e-8da847365404",
+      "id": "a8281064-aa23-426f-99ff-bf3a8efd3bdc",
       "name": "MeetingStart Update2",
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 1,
       "position": [
-        -1180,
-        1560
+        -3700,
+        3740
       ]
     },
     {
@@ -1626,39 +1563,39 @@
           "toTimezone": "={{ $json.timezone }}"
         }
       },
-      "id": "9b41eeb6-59e2-4491-aba4-cabd1849c1b7",
+      "id": "4e325f3e-dd35-4ec6-bd39-05de3d9d6cac",
       "name": "MeetingEnd Update2",
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 1,
       "position": [
-        -980,
-        1560
+        -3500,
+        3740
       ]
     },
     {
       "parameters": {
         "jsCode": "const start = new Date(items[0].json.MeetingStart);\nconst end = new Date(items[0].json.MeetingEnd);\nconst durationInHours = Math.floor((end - start) / 60000 / 60);\nconsole.log(`Meeting duration: ${durationInHours} minutes`);\n\nreturn { json: { \n  id: items[0].json.id, \n  meetingNumber: items[0].json.meetingNumber, \n  title: items[0].json.title,  \n  agenda: items[0].json.agenda,  \n  password: items[0].json.password,\n  start: items[0].json.start,\n  end: items[0].json.end,\n  MeetingStart: items[0].json.MeetingStart,\n  MeetingEnd: items[0].json.MeetingEnd,  \n  duration: durationInHours,\n  timezone: items[0].json.timezone,\n  reminderTime: items[0].json.reminderTime,\n  hostDisplayName: items[0].json.hostDisplayName,  \n  hostEmail: items[0].json.hostEmail,  \n  webLink: items[0].json.webLink,  \n  callInNumber: items[0].json.telephony.callInNumbers[0].callInNumber  \n}};\n\n\n"
       },
-      "id": "9ef5563c-a617-45fa-a0fc-845d38db5bb6",
+      "id": "2bd7f545-8b1f-4fee-80b7-9f61bd7d3b92",
       "name": "Get Update Duration2",
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        -780,
-        1560
+        -3300,
+        3740
       ]
     },
     {
       "parameters": {
         "jsCode": "const start = new Date(items[0].json.MeetingStart);\nconst end = new Date(items[0].json.MeetingEnd);\nconst durationInHours = Math.floor((end - start) / 60000 / 60);\nconsole.log(`Meeting duration: ${durationInHours} minutes`);\n\nreturn { json: { \n  id: items[0].json.id, \n  meetingNumber: items[0].json.meetingNumber, \n  title: items[0].json.title,  \n  agenda: items[0].json.agenda,  \n  password: items[0].json.password,\n  start: items[0].json.start,\n  end: items[0].json.end,\n  MeetingStart: items[0].json.MeetingStart,\n  MeetingEnd: items[0].json.MeetingEnd,  \n  duration: durationInHours,\n  timezone: items[0].json.timezone,\n  reminderTime: items[0].json.reminderTime,\n  hostDisplayName: items[0].json.hostDisplayName,  \n  hostEmail: items[0].json.hostEmail,  \n  webLink: items[0].json.webLink,  \n  callInNumber: items[0].json.telephony.callInNumbers[0].callInNumber  \n}};\n\n\n"
       },
-      "id": "1aa3a361-7357-497c-a9d8-fe82c77f0b2e",
+      "id": "ef480cc2-ffbf-444a-85a3-93525b654280",
       "name": "Get Create Duration2",
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        -780,
-        1240
+        -3300,
+        3420
       ]
     },
     {
@@ -1676,13 +1613,13 @@
           ]
         }
       },
-      "id": "e196d641-9c62-438c-a092-b6b7c808f8df",
+      "id": "f0f1272e-5971-49dc-84b0-b0ae2012aeb9",
       "name": "Get ID2",
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -580,
-        1560
+        -3100,
+        3740
       ],
       "credentials": {
         "odooApi": {
@@ -1743,13 +1680,13 @@
           ]
         }
       },
-      "id": "ec43ca7e-92ad-403e-8f9c-9885672af839",
+      "id": "ac6a2b35-03e4-407e-96a9-f68fc587082f",
       "name": "Create Meeting2",
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -580,
-        1240
+        -3100,
+        3420
       ],
       "credentials": {
         "odooApi": {
@@ -1801,13 +1738,13 @@
           ]
         }
       },
-      "id": "99406d57-1387-42e4-a4c9-99a076baadd3",
+      "id": "16679aca-c093-477d-8e5d-c5b096b6f2b7",
       "name": "Update Meeting2",
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -380,
-        1560
+        -2900,
+        3740
       ],
       "credentials": {
         "odooApi": {
@@ -1831,13 +1768,13 @@
           ]
         }
       },
-      "id": "994e2deb-1ce7-46eb-8042-062cd96477c5",
+      "id": "bdf7a42b-fd1d-4526-b2fb-ac22d5978238",
       "name": "Get Odoo ID2",
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -1160,
-        1880
+        -3680,
+        4060
       ],
       "credentials": {
         "odooApi": {
@@ -1848,21 +1785,100 @@
     },
     {
       "parameters": {},
-      "id": "302db8c0-60c2-4c13-98a6-a40772b74300",
+      "id": "b8b034ed-9484-4dd6-95e0-08fd85e8241d",
       "name": "Do Nothing2",
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        -1400,
-        1880
+        -3920,
+        4060
       ]
+    },
+    {
+      "parameters": {
+        "event": "all",
+        "filters": {}
+      },
+      "id": "8fdae8bc-a525-496f-8942-d93974874c96",
+      "name": "Webex (bbouchard)",
+      "type": "n8n-nodes-base.ciscoWebexTrigger",
+      "typeVersion": 1,
+      "position": [
+        -3220,
+        3040
+      ],
+      "webhookId": "ab5d705f-bb47-421e-adfa-6530bc764dbe",
+      "credentials": {
+        "ciscoWebexOAuth2Api": {
+          "id": "z0S6TOwCxfAYhSaQ",
+          "name": "Cisco Webex (bbouchard)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "event": "all",
+        "filters": {}
+      },
+      "id": "1497d820-bc74-4420-9ce2-d7b5fbd7caeb",
+      "name": "Webex (pcooper)",
+      "type": "n8n-nodes-base.ciscoWebexTrigger",
+      "typeVersion": 1,
+      "position": [
+        -5340,
+        3080
+      ],
+      "webhookId": "50fb14dd-d8bf-464a-99fd-c21ed5cba687",
+      "credentials": {
+        "ciscoWebexOAuth2Api": {
+          "id": "z0S6TOwCxfAYhSaQ",
+          "name": "Cisco Webex (bbouchard)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "event": "all",
+        "filters": {}
+      },
+      "id": "95e7c6ae-a53f-409a-b49e-d348748bde14",
+      "name": "Webex (kdessinger)",
+      "type": "n8n-nodes-base.ciscoWebexTrigger",
+      "typeVersion": 1,
+      "position": [
+        -4560,
+        3760
+      ],
+      "webhookId": "ca420c09-0e1a-4d4c-9e39-d8cd316e4e02",
+      "credentials": {
+        "ciscoWebexOAuth2Api": {
+          "id": "4",
+          "name": "Cisco Webex (kdessinger)"
+        }
+      }
     }
   ],
   "pinData": {},
   "settings": {
     "executionOrder": "v1"
   },
-  "staticData": null,
+  "staticData": {
+    "node:Webex by Cisco Trigger": {
+      "secret": "107c687ee654e759c75eb828439aabab"
+    },
+    "node:Webex (bbouchard)": {
+      "webhookId": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svMGVkOWVmMjUtODMzNC00MjhhLTk2MWMtMTg3NWYzYTZhNzFl",
+      "secret": "40cf74ac48bbe0852cf23cd769d065b4"
+    },
+    "node:Webex (pcooper)": {
+      "webhookId": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svMDY4ZTA2YzUtNGRlNy00MmFkLThhOTMtOTU5YmU0MTQyMzAx",
+      "secret": "40cf74ac48bbe0852cf23cd769d065b4"
+    },
+    "node:Webex (kdessinger)": {
+      "webhookId": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svMjE1YmIzM2ItYjQ1NC00NTAzLTg5MzMtNGNmYWJhYTdkNDUx",
+      "secret": "107c687ee654e759c75eb828439aabab"
+    }
+  },
   "tags": [
     {
       "createdAt": "2022-12-09T05:43:36.104Z",
@@ -1883,7 +1899,7 @@
       "name": "uc"
     }
   ],
-  "triggerCount": 0,
-  "updatedAt": "2023-09-14T21:06:49.000Z",
-  "versionId": "1b2801b4-6ea7-4829-99c7-5e2df29ce2db"
+  "triggerCount": 3,
+  "updatedAt": "2023-09-15T21:07:52.000Z",
+  "versionId": "162158db-071f-40df-978e-274950c9a62a"
 }
