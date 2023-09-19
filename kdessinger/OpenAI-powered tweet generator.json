@@ -25,13 +25,7 @@
     },
     "Format Results": {
       "main": [
-        [
-          {
-            "node": "Twitter",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "ChatGPT Request": {
@@ -100,7 +94,7 @@
       "typeVersion": 1,
       "position": [
         1180,
-        420
+        440
       ],
       "alwaysOutputData": true,
       "credentials": {
@@ -121,7 +115,7 @@
       "typeVersion": 1,
       "position": [
         1180,
-        80
+        60
       ],
       "credentials": {
         "odooApi": {
@@ -154,7 +148,7 @@
             },
             {
               "name": "Content",
-              "value": "={{$node[\"ChatGPT Request\"].json[\"choices\"][0][\"text\"]}}"
+              "value": "={{ $json.choices[0].message.content }}"
             },
             {
               "name": "Engine",
@@ -175,7 +169,30 @@
     },
     {
       "parameters": {
-        "prompt": "=Generate a tweet, with under 100 characters, about and including the hashtag {{$node[\"Choose a random item\"].json[\"hashtag\"]}}",
+        "text": "=",
+        "additionalFields": {}
+      },
+      "id": "6c4c8f8f-bedd-495c-963b-73474abf722b",
+      "name": "Twitter",
+      "type": "n8n-nodes-base.twitter",
+      "typeVersion": 1,
+      "position": [
+        1220,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "model": "gpt-3.5-turbo-16k",
+        "prompt": {
+          "messages": [
+            {
+              "role": "assistant",
+              "content": "=Generate a tweet, with under 100 characters, about and including the hashtag  {{ $json.hashtag }}"
+            }
+          ]
+        },
         "simplifyOutput": false,
         "options": {
           "frequency_penalty": 0,
@@ -185,7 +202,7 @@
           "topP": 1
         }
       },
-      "id": "36217079-6dac-4b7d-ab88-1e3b1fea12fe",
+      "id": "8db327b3-1cac-4b2d-9aba-df9917b0e1cb",
       "name": "ChatGPT Request",
       "type": "n8n-nodes-base.openAi",
       "typeVersion": 1,
@@ -199,20 +216,6 @@
           "name": "OpenAi (kdessinger)"
         }
       }
-    },
-    {
-      "parameters": {
-        "text": "=",
-        "additionalFields": {}
-      },
-      "id": "6c4c8f8f-bedd-495c-963b-73474abf722b",
-      "name": "Twitter",
-      "type": "n8n-nodes-base.twitter",
-      "typeVersion": 1,
-      "position": [
-        1180,
-        240
-      ]
     }
   ],
   "pinData": {},
@@ -227,6 +230,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-03-26T04:11:14.000Z",
-  "versionId": "6c7137b4-9c6b-4532-98aa-9f42d4c9fe0d"
+  "updatedAt": "2023-09-19T05:24:06.000Z",
+  "versionId": "76f4b8fb-520b-42ef-aac5-68e6c7ccb1bf"
 }
