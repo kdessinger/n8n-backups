@@ -1,28 +1,6 @@
 {
   "active": true,
   "connections": {
-    "Get Contacts": {
-      "main": [
-        [
-          {
-            "node": "Merge",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Merge": {
-      "main": [
-        [
-          {
-            "node": "Update Odoo",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Schedule Trigger": {
       "main": [
         [
@@ -33,6 +11,16 @@
           },
           {
             "node": "Evicore Query",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Contacts1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Load Binary File1",
             "type": "main",
             "index": 0
           }
@@ -46,17 +34,6 @@
             "node": "FixDate LastSync",
             "type": "main",
             "index": 0
-          }
-        ]
-      ]
-    },
-    "FixDate LastSync": {
-      "main": [
-        [
-          {
-            "node": "Merge",
-            "type": "main",
-            "index": 1
           }
         ]
       ]
@@ -181,6 +158,39 @@
           }
         ]
       ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Update Odoo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Contacts": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "FixDate LastSync": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2023-08-28T19:41:49.331Z",
@@ -216,8 +226,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        480,
-        20
+        380,
+        40
       ],
       "credentials": {
         "odooApi": {
@@ -228,38 +238,16 @@
     },
     {
       "parameters": {
-        "mode": "combine",
-        "mergeByFields": {
-          "values": [
-            {
-              "field1": "EVI_DistID",
-              "field2": "districtID"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "68237245-fa71-424d-b32b-26a141f6126e",
-      "name": "Merge",
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 2.1,
-      "position": [
-        1100,
-        120
-      ]
-    },
-    {
-      "parameters": {
         "content": "## Sync Datamate with Odoo",
         "height": 437,
-        "width": 1348
+        "width": 1101.626968177837
       },
       "id": "98e4837a-deab-45cb-bde9-380be22ea2f0",
       "name": "Sticky Note",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        191,
+        351,
         -59
       ]
     },
@@ -286,8 +274,8 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.1,
       "position": [
-        260,
-        120
+        -20,
+        420
       ]
     },
     {
@@ -305,8 +293,8 @@
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 1,
       "position": [
-        680,
-        200
+        580,
+        220
       ],
       "notesInFlow": false,
       "notes": "Odoo will remove 4 hours from the EVI_Last_login field so use a +4 in the Time Zone to compensate."
@@ -326,8 +314,8 @@
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 1,
       "position": [
-        880,
-        200
+        800,
+        220
       ],
       "notesInFlow": false,
       "notes": "Odoo will remove 4 hours from the EVI_Last_login field so use a +4 in the Time Zone to compensate."
@@ -368,8 +356,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        1300,
-        120
+        1240,
+        100
       ],
       "credentials": {
         "odooApi": {
@@ -381,14 +369,14 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "/* Last Login user for each district */\nWITH LastLoginRanked AS (\n    SELECT d.id AS districtID, d.name AS DistrictName, u.id as useridkey, u.userid, u.firstname, u.lastname, up.lastlogin,\n    ROW_NUMBER() OVER (PARTITION BY d.id ORDER BY up.lastlogin DESC) AS rn\n\tFROM evitesting.dbo.ecDistricts d\n\tJOIN evitesting.dbo.ecUsers u ON d.id = u.districtid\n\tLEFT JOIN (SELECT useridkey, MAX(lastlogin) AS lastlogin FROM evitesting.dbo.userproperties GROUP BY useridkey) up ON u.id = up.useridkey\n\tWHERE u.active = 1      -- Show active users only\n\tand u.adminaccount = 0  -- Hide admin logins\n)\nSELECT llr.districtID, DistrictName, statecode, lastlogin, LastSync, sistype\nFROM LastLoginRanked llr\nleft join (SELECT districtid, MAX(s.Updated) LastSync FROM evicore..students s WHERE s.Updated IS NOT NULL GROUP BY s.districtid) lou on llr.districtID = lou.districtid\nleft join evicore..districts d on llr.districtID = d.id\nWHERE rn = 1 --and lastlogin is not null\nOrder by DistrictName;\n"
+        "query": "/* Last Login user for each district */\nWITH LastLoginRanked AS (\n    SELECT d.id AS districtID, d.name AS DistrictName, u.id as useridkey, u.userid, u.firstname, u.lastname, up.lastlogin,\n    ROW_NUMBER() OVER (PARTITION BY d.id ORDER BY up.lastlogin DESC) AS rn\n\tFROM evitesting.dbo.ecDistricts d\n\tLEFT JOIN evitesting.dbo.ecUsers u ON d.id = u.districtid\n\tLEFT JOIN (SELECT useridkey, MAX(lastlogin) AS lastlogin FROM evitesting.dbo.userproperties GROUP BY useridkey) up ON u.id = up.useridkey\n)\nSELECT llr.districtID, DistrictName, lastlogin, LastSync, sistype, statecode\nFROM LastLoginRanked llr\nleft join (SELECT districtid, MAX(s.Updated) LastSync FROM evicore..students s WHERE s.Updated IS NOT NULL GROUP BY s.districtid) lou on llr.districtID = lou.districtid --LastSync\njoin evicore..districts d on llr.districtID = d.id\nWHERE rn = 1 --and lastlogin is not null\nOrder by DistrictName;\n"
       },
       "name": "Evicore Query",
       "type": "n8n-nodes-base.microsoftSql",
       "typeVersion": 1,
       "position": [
-        480,
-        200
+        380,
+        220
       ],
       "id": "77c1a9ea-c17d-46e6-a9c2-c2376d2fd7c8",
       "credentials": {
@@ -415,8 +403,8 @@
       "type": "n8n-nodes-base.itemLists",
       "typeVersion": 3,
       "position": [
-        820,
-        460
+        -460,
+        940
       ]
     },
     {
@@ -430,8 +418,8 @@
       "type": "n8n-nodes-base.spreadsheetFile",
       "typeVersion": 2,
       "position": [
-        620,
-        460
+        -660,
+        940
       ]
     },
     {
@@ -443,8 +431,8 @@
       "type": "n8n-nodes-base.readBinaryFiles",
       "typeVersion": 1,
       "position": [
-        420,
-        460
+        -860,
+        940
       ]
     },
     {
@@ -464,8 +452,8 @@
       "type": "n8n-nodes-base.itemLists",
       "typeVersion": 3,
       "position": [
-        1220,
-        460
+        -60,
+        940
       ]
     },
     {
@@ -496,8 +484,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        1020,
-        460
+        -260,
+        940
       ],
       "credentials": {
         "odooApi": {
@@ -517,8 +505,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        340,
-        400
+        -940,
+        880
       ]
     },
     {
@@ -551,8 +539,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        640,
-        700
+        400,
+        480
       ],
       "credentials": {
         "odooApi": {
@@ -570,8 +558,8 @@
       "type": "n8n-nodes-base.readBinaryFiles",
       "typeVersion": 1,
       "position": [
-        440,
-        900
+        400,
+        640
       ]
     },
     {
@@ -586,8 +574,8 @@
       "type": "n8n-nodes-base.spreadsheetFile",
       "typeVersion": 2,
       "position": [
-        640,
-        900
+        600,
+        640
       ]
     },
     {
@@ -608,23 +596,23 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 2.1,
       "position": [
-        900,
-        820
+        840,
+        520
       ]
     },
     {
       "parameters": {
         "content": "## Enrollment Update",
         "height": 409.6079061759667,
-        "width": 985.4506387147117
+        "width": 918.4371740590835
       },
       "id": "67d332ae-c644-4256-891e-2a1174feda53",
       "name": "Sticky Note2",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        340,
-        660
+        360,
+        400
       ]
     },
     {
@@ -651,8 +639,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        1120,
-        820
+        1060,
+        520
       ],
       "credentials": {
         "odooApi": {
@@ -670,8 +658,8 @@
       "type": "n8n-nodes-base.readBinaryFiles",
       "typeVersion": 1,
       "position": [
-        -420,
-        680
+        440,
+        940
       ]
     },
     {
@@ -685,8 +673,8 @@
       "type": "n8n-nodes-base.spreadsheetFile",
       "typeVersion": 2,
       "position": [
-        -240,
-        680
+        640,
+        940
       ]
     },
     {
@@ -694,7 +682,7 @@
         "conditions": {
           "string": [
             {
-              "value1": "={{ $json.aims }}",
+              "value1": "={{ $json.nyScoring }}",
               "value2": "X"
             }
           ]
@@ -705,8 +693,8 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 1,
       "position": [
-        -60,
-        680
+        840,
+        940
       ]
     },
     {
@@ -720,8 +708,30 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -540,
-        560
+        360,
+        840
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "EVI_DistID",
+              "field2": "districtID"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "2f372b26-9e4e-4a1c-afa6-431a026948d0",
+      "name": "Merge",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        1020,
+        100
       ]
     }
   ],
@@ -755,6 +765,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-09-19T21:17:10.000Z",
-  "versionId": "2c1afc5c-f3a8-499d-a12f-b5728861fdcd"
+  "updatedAt": "2023-09-20T15:10:25.000Z",
+  "versionId": "dc48d4e9-d368-44d6-9415-796ba7d78c36"
 }
