@@ -116,9 +116,70 @@
         ]
       ]
     },
-    "Sort": {
+    "Load Binary File1": {
       "main": [
-        []
+        [
+          {
+            "node": "Spreadsheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Contacts1": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Spreadsheet1": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge1": {
+      "main": [
+        [
+          {
+            "node": "Update Odoo Enrollment",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Load Binary File2": {
+      "main": [
+        [
+          {
+            "node": "Spreadsheet File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Spreadsheet File": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
@@ -294,6 +355,10 @@
             {
               "fieldName": "EVI_Last_login",
               "fieldValue": "={{ $json.lastlogin === null ? null : $json.EVI_Last_login }}"
+            },
+            {
+              "fieldName": "stateID",
+              "fieldValue": "={{ $json.statecode }}"
             }
           ]
         }
@@ -316,7 +381,7 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "/* Last Login user for each district */\nWITH LastLoginRanked AS (\n    SELECT d.id AS districtID, d.name AS DistrictName, u.id as useridkey, u.userid, u.firstname, u.lastname, up.lastlogin,\n    ROW_NUMBER() OVER (PARTITION BY d.id ORDER BY up.lastlogin DESC) AS rn\n\tFROM evitesting.dbo.ecDistricts d\n\tJOIN evitesting.dbo.ecUsers u ON d.id = u.districtid\n\tLEFT JOIN (SELECT useridkey, MAX(lastlogin) AS lastlogin FROM evitesting.dbo.userproperties GROUP BY useridkey) up ON u.id = up.useridkey\n\tWHERE u.active = 1      -- Show active users only\n\tand u.adminaccount = 0  -- Hide admin logins\n)\nSELECT llr.districtID, DistrictName, lastlogin, LastSync, sistype\nFROM LastLoginRanked llr\nleft join (SELECT districtid, MAX(s.Updated) LastSync FROM evicore..students s WHERE s.Updated IS NOT NULL GROUP BY s.districtid) lou on llr.districtID = lou.districtid\nleft join evicore..districts d on llr.districtID = d.id\nWHERE rn = 1 --and lastlogin is not null\nOrder by DistrictName;\n"
+        "query": "/* Last Login user for each district */\nWITH LastLoginRanked AS (\n    SELECT d.id AS districtID, d.name AS DistrictName, u.id as useridkey, u.userid, u.firstname, u.lastname, up.lastlogin,\n    ROW_NUMBER() OVER (PARTITION BY d.id ORDER BY up.lastlogin DESC) AS rn\n\tFROM evitesting.dbo.ecDistricts d\n\tJOIN evitesting.dbo.ecUsers u ON d.id = u.districtid\n\tLEFT JOIN (SELECT useridkey, MAX(lastlogin) AS lastlogin FROM evitesting.dbo.userproperties GROUP BY useridkey) up ON u.id = up.useridkey\n\tWHERE u.active = 1      -- Show active users only\n\tand u.adminaccount = 0  -- Hide admin logins\n)\nSELECT llr.districtID, DistrictName, statecode, lastlogin, LastSync, sistype\nFROM LastLoginRanked llr\nleft join (SELECT districtid, MAX(s.Updated) LastSync FROM evicore..students s WHERE s.Updated IS NOT NULL GROUP BY s.districtid) lou on llr.districtID = lou.districtid\nleft join evicore..districts d on llr.districtID = d.id\nWHERE rn = 1 --and lastlogin is not null\nOrder by DistrictName;\n"
       },
       "name": "Evicore Query",
       "type": "n8n-nodes-base.microsoftSql",
@@ -455,6 +520,209 @@
         340,
         400
       ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "res.partner",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {
+          "fieldsList": [
+            "active",
+            "display_name",
+            "EVI_DistID",
+            "EVI_DistName",
+            "EVI_Last_login",
+            "stateID"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "stateID",
+              "operator": "notEqual"
+            }
+          ]
+        }
+      },
+      "id": "56fdeeda-cbac-4cf3-a10e-c860ba51eb14",
+      "name": "Get Contacts1",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        640,
+        700
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "12",
+          "name": "Odoo (Administrator)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fileSelector": "/mnt/share/_reports/enrollment-public-district-2022-23-all-students.xlsx"
+      },
+      "id": "08400c91-8c6e-405e-9306-0e90169e3df9",
+      "name": "Load Binary File1",
+      "type": "n8n-nodes-base.readBinaryFiles",
+      "typeVersion": 1,
+      "position": [
+        440,
+        900
+      ]
+    },
+    {
+      "parameters": {
+        "options": {
+          "headerRow": true,
+          "sheetName": "District 2023 All Students"
+        }
+      },
+      "id": "2cb0e65a-9e10-40a8-8644-bf672f4808b4",
+      "name": "Spreadsheet1",
+      "type": "n8n-nodes-base.spreadsheetFile",
+      "typeVersion": 2,
+      "position": [
+        640,
+        900
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "stateID",
+              "field2": "STATEID"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "5d008a7c-ca4d-457f-a496-8e75443aa01f",
+      "name": "Merge1",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        900,
+        820
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Enrollment Update",
+        "height": 409.6079061759667,
+        "width": 985.4506387147117
+      },
+      "id": "67d332ae-c644-4256-891e-2a1174feda53",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        340,
+        660
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "res.partner",
+        "operation": "update",
+        "customResourceId": "={{ $json.id }}",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "enrollment",
+              "fieldValue": "={{ $json['PK12 TOTAL'] }}"
+            },
+            {
+              "fieldName": "gradeLevel",
+              "fieldValue": "={{ $json.Grade_Levels }}"
+            }
+          ]
+        }
+      },
+      "id": "882e056a-5f28-48e7-a31c-3b1de8a9b6e6",
+      "name": "Update Odoo Enrollment",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        1120,
+        820
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "12",
+          "name": "Odoo (Administrator)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fileSelector": "/mnt/share/_reports/Products by District.csv"
+      },
+      "id": "24e79bd1-9bec-4a7e-b2dc-d797d0b439e8",
+      "name": "Load Binary File2",
+      "type": "n8n-nodes-base.readBinaryFiles",
+      "typeVersion": 1,
+      "position": [
+        -420,
+        680
+      ]
+    },
+    {
+      "parameters": {
+        "options": {
+          "headerRow": true
+        }
+      },
+      "id": "d9ddc68c-ab13-4565-a20d-cbe98ba9940b",
+      "name": "Spreadsheet File",
+      "type": "n8n-nodes-base.spreadsheetFile",
+      "typeVersion": 2,
+      "position": [
+        -240,
+        680
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.aims }}",
+              "value2": "X"
+            }
+          ]
+        }
+      },
+      "id": "9b3e4354-f835-4a9f-a389-c0fe255d0db2",
+      "name": "Filter",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        680
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Products by District\n",
+        "height": 305.06444113688957,
+        "width": 802.9131031072778
+      },
+      "id": "c4315039-7fca-4b7b-a29d-8aa72cd2a254",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -540,
+        560
+      ]
     }
   ],
   "pinData": {},
@@ -487,6 +755,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-09-15T19:33:44.000Z",
-  "versionId": "405e419b-43c4-49af-89dd-996e2c6175b5"
+  "updatedAt": "2023-09-19T21:17:10.000Z",
+  "versionId": "2c1afc5c-f3a8-499d-a12f-b5728861fdcd"
 }
