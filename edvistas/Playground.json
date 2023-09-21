@@ -90,16 +90,24 @@
   "nodes": [
     {
       "parameters": {
+        "resource": "custom",
+        "customResource": "res.partner",
         "operation": "getAll",
         "returnAll": true,
         "options": {
-          "fieldsList": [
-            "active",
-            "display_name",
-            "EVI_DistID",
-            "EVI_DistName",
-            "EVI_Last_login",
-            "category_id"
+          "fieldsList": []
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "EVI_DistID",
+              "operator": "greaterThen",
+              "value": "=0"
+            },
+            {
+              "fieldName": "category_id",
+              "value": "={{ $json.id }}"
+            }
           ]
         }
       },
@@ -143,7 +151,7 @@
         "resource": "custom",
         "customResource": "res.partner.category",
         "operation": "getAll",
-        "limit": 10,
+        "returnAll": true,
         "options": {
           "fieldsList": [
             "id",
@@ -156,7 +164,7 @@
           "filter": [
             {
               "fieldName": "name",
-              "value": "Aims"
+              "value": "={{ $json.Software }}"
             }
           ]
         }
@@ -193,7 +201,7 @@
           "string": [
             {
               "name": "Software",
-              "value": "Aims"
+              "value": "Scoring"
             }
           ]
         },
@@ -335,6 +343,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-09-15T20:40:59.000Z",
-  "versionId": "79d29e8d-1b1d-4b06-ad9b-48139c504c88"
+  "updatedAt": "2023-09-20T18:36:04.000Z",
+  "versionId": "b4397375-6902-4ee9-a718-b07a8023204b"
 }
