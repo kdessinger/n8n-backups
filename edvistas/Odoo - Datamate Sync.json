@@ -137,33 +137,11 @@
         ]
       ]
     },
-    "Load Binary File2": {
-      "main": [
-        [
-          {
-            "node": "Spreadsheet File",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Spreadsheet File": {
-      "main": [
-        [
-          {
-            "node": "Filter",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Merge": {
       "main": [
         [
           {
-            "node": "Update Odoo",
+            "node": "Update Odoo Contacts",
             "type": "main",
             "index": 0
           }
@@ -188,6 +166,50 @@
             "node": "Merge",
             "type": "main",
             "index": 1
+          }
+        ]
+      ]
+    },
+    "Get Contacts2": {
+      "main": [
+        [
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Evicore Query1": {
+      "main": [
+        [
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge2": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Update Odoo Tags",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -275,7 +297,7 @@
       "typeVersion": 1.1,
       "position": [
         -20,
-        420
+        480
       ]
     },
     {
@@ -319,52 +341,6 @@
       ],
       "notesInFlow": false,
       "notes": "Odoo will remove 4 hours from the EVI_Last_login field so use a +4 in the Time Zone to compensate."
-    },
-    {
-      "parameters": {
-        "resource": "custom",
-        "customResource": "res.partner",
-        "operation": "update",
-        "customResourceId": "={{ $json.id }}",
-        "fieldsToCreateOrUpdate": {
-          "fields": [
-            {
-              "fieldName": "EVI_DistName",
-              "fieldValue": "={{ $json.DistrictName }}"
-            },
-            {
-              "fieldName": "sistype",
-              "fieldValue": "={{ $json.sistype }}"
-            },
-            {
-              "fieldName": "EVI_LastSync",
-              "fieldValue": "={{ $json.LastSync == null ? null : $json.EVI_LastSync }}"
-            },
-            {
-              "fieldName": "EVI_Last_login",
-              "fieldValue": "={{ $json.lastlogin === null ? null : $json.EVI_Last_login }}"
-            },
-            {
-              "fieldName": "stateID",
-              "fieldValue": "={{ $json.statecode }}"
-            }
-          ]
-        }
-      },
-      "id": "d86ee248-706c-4f27-9b11-e04917b4a01b",
-      "name": "Update Odoo",
-      "type": "n8n-nodes-base.odoo",
-      "typeVersion": 1,
-      "position": [
-        1240,
-        100
-      ],
-      "credentials": {
-        "odooApi": {
-          "id": "12",
-          "name": "Odoo (Administrator)"
-        }
-      }
     },
     {
       "parameters": {
@@ -651,57 +627,9 @@
     },
     {
       "parameters": {
-        "fileSelector": "/mnt/share/_reports/Products by District.csv"
-      },
-      "id": "24e79bd1-9bec-4a7e-b2dc-d797d0b439e8",
-      "name": "Load Binary File2",
-      "type": "n8n-nodes-base.readBinaryFiles",
-      "typeVersion": 1,
-      "position": [
-        440,
-        940
-      ]
-    },
-    {
-      "parameters": {
-        "options": {
-          "headerRow": true
-        }
-      },
-      "id": "d9ddc68c-ab13-4565-a20d-cbe98ba9940b",
-      "name": "Spreadsheet File",
-      "type": "n8n-nodes-base.spreadsheetFile",
-      "typeVersion": 2,
-      "position": [
-        640,
-        940
-      ]
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "string": [
-            {
-              "value1": "={{ $json.nyScoring }}",
-              "value2": "X"
-            }
-          ]
-        }
-      },
-      "id": "9b3e4354-f835-4a9f-a389-c0fe255d0db2",
-      "name": "Filter",
-      "type": "n8n-nodes-base.filter",
-      "typeVersion": 1,
-      "position": [
-        840,
-        940
-      ]
-    },
-    {
-      "parameters": {
-        "content": "## Products by District\n",
-        "height": 305.06444113688957,
-        "width": 802.9131031072778
+        "content": "## Update Scoring Tags",
+        "height": 424.1972408930528,
+        "width": 920.1328014439664
       },
       "id": "c4315039-7fca-4b7b-a29d-8aa72cd2a254",
       "name": "Sticky Note3",
@@ -733,6 +661,180 @@
         1020,
         100
       ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "res.partner",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {
+          "fieldsList": [
+            "display_name",
+            "EVI_DistID",
+            "category_id"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "category_id",
+              "operator": "notIn",
+              "value": "={{ 16 }}"
+            },
+            {
+              "fieldName": "EVI_DistID",
+              "operator": "notEqual"
+            }
+          ]
+        }
+      },
+      "id": "fa8a382a-0084-4fc4-b4f6-ab006f114650",
+      "name": "Get Contacts2",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        440,
+        920
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "12",
+          "name": "Odoo (Administrator)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "EVI_DistID",
+              "field2": "id"
+            }
+          ]
+        },
+        "outputDataFrom": "input1",
+        "options": {}
+      },
+      "id": "2c00c0a0-e63b-485f-ae9e-c2ce731211db",
+      "name": "Merge2",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        680,
+        1000
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT d.id, d.name\nFROM evicore..districts d join evitesting..districts et on d.id = et.id\nWhere et.nyScoringDistrict = 1 or et.nyScoringDistrict is null\nORDER by d.id\n"
+      },
+      "name": "Evicore Query1",
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1,
+      "position": [
+        440,
+        1100
+      ],
+      "id": "0bd09cd7-ed1e-424d-84b7-b4b54f914802",
+      "credentials": {
+        "microsoftSql": {
+          "id": "8",
+          "name": "DB1.DS1.GOWLS.COM (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.category_id.push(16);\n}\n\nreturn $input.all();"
+      },
+      "id": "6fa3a42b-1393-4d54-be85-c0ed8030e53b",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        880,
+        1000
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "res.partner",
+        "operation": "update",
+        "customResourceId": "={{ $json.id }}",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "category_id",
+              "fieldValue": "={{ $json.category_id }}"
+            }
+          ]
+        }
+      },
+      "id": "df956c16-3bce-4665-8447-8eee8123adc9",
+      "name": "Update Odoo Tags",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        1080,
+        1000
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "12",
+          "name": "Odoo (Administrator)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "res.partner",
+        "operation": "update",
+        "customResourceId": "={{ $json.id }}",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "EVI_DistName",
+              "fieldValue": "={{ $json.DistrictName }}"
+            },
+            {
+              "fieldName": "sistype",
+              "fieldValue": "={{ $json.sistype }}"
+            },
+            {
+              "fieldName": "EVI_LastSync",
+              "fieldValue": "={{ $json.LastSync == null ? null : $json.EVI_LastSync }}"
+            },
+            {
+              "fieldName": "EVI_Last_login",
+              "fieldValue": "={{ $json.lastlogin === null ? null : $json.EVI_Last_login }}"
+            },
+            {
+              "fieldName": "stateID",
+              "fieldValue": "={{ $json.statecode }}"
+            }
+          ]
+        }
+      },
+      "id": "d86ee248-706c-4f27-9b11-e04917b4a01b",
+      "name": "Update Odoo Contacts",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        1240,
+        100
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "12",
+          "name": "Odoo (Administrator)"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -765,6 +867,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-09-20T15:10:25.000Z",
-  "versionId": "dc48d4e9-d368-44d6-9415-796ba7d78c36"
+  "updatedAt": "2023-09-20T19:40:42.000Z",
+  "versionId": "6da63f6b-a867-43e3-8081-027d8da6e5de"
 }
