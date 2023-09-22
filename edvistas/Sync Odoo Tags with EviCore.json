@@ -1,103 +1,16 @@
 {
   "active": false,
   "connections": {
-    "Bars Districts": {
-      "main": [
-        [
-          {
-            "node": "Bars Matches",
-            "type": "main",
-            "index": 1
-          },
-          {
-            "node": "Bars Non-Matching",
-            "type": "main",
-            "index": 1
-          }
-        ]
-      ]
-    },
-    "Bars Matches": {
-      "main": [
-        [
-          {
-            "node": "Insert Bars Tags",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Bars Non-Matching": {
-      "main": [
-        [
-          {
-            "node": "Delete Bars Tags",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Insert Bars Tags": {
-      "main": [
-        [
-          {
-            "node": "Merge Bars",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Delete Bars Tags": {
-      "main": [
-        [
-          {
-            "node": "Merge Bars",
-            "type": "main",
-            "index": 1
-          }
-        ]
-      ]
-    },
-    "Merge Bars": {
-      "main": [
-        [
-          {
-            "node": "Update Bars Tags",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Sync_Bars": {
-      "main": [
-        [
-          {
-            "node": "Get Contacts",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Bars Districts",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Get Contacts": {
       "main": [
         [
           {
-            "node": "Bars Matches",
+            "node": "Matches",
             "type": "main",
             "index": 0
           },
           {
-            "node": "Bars Non-Matching",
+            "node": "Non-Matching",
             "type": "main",
             "index": 0
           }
@@ -108,18 +21,116 @@
       "main": [
         [
           {
-            "node": "Set",
+            "node": "Merge",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Set": {
+    "Get Queries": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
       "main": [
         [
           {
             "node": "Microsoft SQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Microsoft SQL": {
+      "main": [
+        [
+          {
+            "node": "Non-Matching",
+            "type": "main",
+            "index": 1
+          },
+          {
+            "node": "Matches",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Non-Matching": {
+      "main": [
+        [
+          {
+            "node": "Delete Tags",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Matches": {
+      "main": [
+        [
+          {
+            "node": "Insert Tags",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert Tags": {
+      "main": [
+        [
+          {
+            "node": "Merge Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete Tags": {
+      "main": [
+        [
+          {
+            "node": "Merge Data",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Sync_Bars": {
+      "main": [
+        [
+          {
+            "node": "Get Tags",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Queries",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Data": {
+      "main": [
+        [
+          {
+            "node": "Update Odoo Tags",
             "type": "main",
             "index": 0
           }
@@ -142,155 +153,9 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        840,
-        180
+        1100,
+        -500
       ]
-    },
-    {
-      "parameters": {
-        "operation": "executeQuery",
-        "query": "/* Bars Districts */\nSELECT d.id, d.name\nFROM evicore..districts d \njoin evitesting..districts t on d.id = t.id\nWhere t.enabled=1 and t.barsDistrict=1 "
-      },
-      "name": "Bars Districts",
-      "type": "n8n-nodes-base.microsoftSql",
-      "typeVersion": 1,
-      "position": [
-        900,
-        540
-      ],
-      "id": "4f44a994-39e5-4039-b389-00ebda1806c0",
-      "credentials": {
-        "microsoftSql": {
-          "id": "8",
-          "name": "DB1.DS1.GOWLS.COM (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "mode": "combine",
-        "mergeByFields": {
-          "values": [
-            {
-              "field1": "EVI_DistID",
-              "field2": "id"
-            }
-          ]
-        },
-        "outputDataFrom": "input1",
-        "options": {}
-      },
-      "id": "a2a1295c-0ba3-4c48-8793-7fc975256377",
-      "name": "Bars Matches",
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 2.1,
-      "position": [
-        1200,
-        340
-      ]
-    },
-    {
-      "parameters": {
-        "mode": "combine",
-        "mergeByFields": {
-          "values": [
-            {
-              "field1": "EVI_DistID",
-              "field2": "id"
-            }
-          ]
-        },
-        "joinMode": "keepNonMatches",
-        "outputDataFrom": "input1",
-        "options": {}
-      },
-      "id": "e7a801a7-bf9f-4e7a-a063-3440687c229b",
-      "name": "Bars Non-Matching",
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 2.1,
-      "position": [
-        1200,
-        520
-      ]
-    },
-    {
-      "parameters": {
-        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  const category_id = item.json.category_id;\n  \n  if (!category_id.includes(75)) {\n    category_id.push(75);\n  }\n}\n\nreturn $input.all();\n"
-      },
-      "id": "854fe4d1-2992-45a2-b972-6ed719034e3d",
-      "name": "Insert Bars Tags",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        1420,
-        340
-      ]
-    },
-    {
-      "parameters": {
-        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  const category_id = item.json.category_id;\n  \n  if (category_id.includes(75)) {\n    const index = category_id.indexOf(75);\n    category_id.splice(index, 1);\n  }\n}\n\nreturn $input.all();\n\n"
-      },
-      "id": "001a8353-b18b-408e-a10d-390b6535e696",
-      "name": "Delete Bars Tags",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        1420,
-        520
-      ]
-    },
-    {
-      "parameters": {
-        "mode": "combine",
-        "mergeByFields": {
-          "values": [
-            {
-              "field1": "id",
-              "field2": "id"
-            }
-          ]
-        },
-        "joinMode": "keepEverything",
-        "options": {}
-      },
-      "id": "39126ef7-51b4-4707-b974-a44bd04c913a",
-      "name": "Merge Bars",
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 2.1,
-      "position": [
-        1660,
-        440
-      ]
-    },
-    {
-      "parameters": {
-        "resource": "custom",
-        "customResource": "res.partner",
-        "operation": "update",
-        "customResourceId": "={{ $json.id }}",
-        "fieldsToCreateOrUpdate": {
-          "fields": [
-            {
-              "fieldName": "category_id",
-              "fieldValue": "={{ $json.category_id }}"
-            }
-          ]
-        }
-      },
-      "id": "a37c3918-73b0-43fd-9795-5f19287ab3b6",
-      "name": "Update Bars Tags",
-      "type": "n8n-nodes-base.odoo",
-      "typeVersion": 1,
-      "position": [
-        1880,
-        440
-      ],
-      "credentials": {
-        "odooApi": {
-          "id": "12",
-          "name": "Odoo (Administrator)"
-        }
-      }
     },
     {
       "parameters": {},
@@ -299,8 +164,8 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1,
       "position": [
-        560,
-        440
+        400,
+        -140
       ]
     },
     {
@@ -330,8 +195,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        900,
-        320
+        1160,
+        -360
       ],
       "credentials": {
         "odooApi": {
@@ -367,8 +232,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        560,
-        -100
+        720,
+        -240
       ],
       "credentials": {
         "odooApi": {
@@ -380,15 +245,15 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "{{ $json.Query }}"
+        "query": "{{ $json.query }}"
       },
       "id": "58a3ab01-c13f-420f-9be1-70a34f234c2b",
       "name": "Microsoft SQL",
       "type": "n8n-nodes-base.microsoftSql",
       "typeVersion": 1,
       "position": [
-        1000,
-        -100
+        1160,
+        -140
       ],
       "credentials": {
         "microsoftSql": {
@@ -399,23 +264,185 @@
     },
     {
       "parameters": {
-        "values": {
-          "string": [
+        "operation": "executeQuery",
+        "query": "SELECT *, name as product\nFROM EdVistas..Odoo_tags\nWHERE query is not null;"
+      },
+      "id": "2debe8b7-499c-42bc-ba92-ed47ded52221",
+      "name": "Get Queries",
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1,
+      "position": [
+        720,
+        -60
+      ],
+      "credentials": {
+        "microsoftSql": {
+          "id": "9",
+          "name": "SQL01.edvistas.local (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "mergeByFields": {
+          "values": [
             {
-              "name": "Query",
-              "value": "/* Datamate Basic Districts */ SELECT d.id, d.name FROM evicore..districts d  join evitesting..districts t on d.id = t.id Where t.enabled=1 and t.dmversion='Basic'"
+              "field1": "id",
+              "field2": "tagId"
             }
           ]
         },
         "options": {}
       },
-      "id": "b88fb162-9d9a-4238-a874-005822ff8420",
-      "name": "Set",
-      "type": "n8n-nodes-base.set",
+      "id": "fdac2d8d-362d-470e-89b0-532dafd26f2c",
+      "name": "Merge",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        960,
+        -140
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Cycle through each Tag\nThis will iterate through each product and run an\n update query based on the product.",
+        "height": 487.83689154001183,
+        "width": 696.143159378677
+      },
+      "id": "5265374c-5ddb-441a-945c-d173bbef2517",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        660,
+        -377.5122513827125
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "EVI_DistID",
+              "field2": "id"
+            }
+          ]
+        },
+        "joinMode": "keepNonMatches",
+        "outputDataFrom": "input1",
+        "options": {}
+      },
+      "id": "e7a801a7-bf9f-4e7a-a063-3440687c229b",
+      "name": "Non-Matching",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        1460,
+        -160
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "EVI_DistID",
+              "field2": "id"
+            }
+          ]
+        },
+        "outputDataFrom": "input1",
+        "options": {}
+      },
+      "id": "a2a1295c-0ba3-4c48-8793-7fc975256377",
+      "name": "Matches",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        1460,
+        -340
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  const category_id = item.json.category_id;\n  \n  if (!category_id.includes(75)) {\n    category_id.push(75);\n  }\n}\n\nreturn $input.all();\n"
+      },
+      "id": "854fe4d1-2992-45a2-b972-6ed719034e3d",
+      "name": "Insert Tags",
+      "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        780,
-        -100
+        1680,
+        -340
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  const category_id = item.json.category_id;\n  \n  if (category_id.includes(75)) {\n    const index = category_id.indexOf(75);\n    category_id.splice(index, 1);\n  }\n}\n\nreturn $input.all();\n\n"
+      },
+      "id": "001a8353-b18b-408e-a10d-390b6535e696",
+      "name": "Delete Tags",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1680,
+        -160
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "res.partner",
+        "operation": "update",
+        "customResourceId": "={{ $json.id }}",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "category_id",
+              "fieldValue": "={{ $json.category_id }}"
+            }
+          ]
+        }
+      },
+      "id": "a37c3918-73b0-43fd-9795-5f19287ab3b6",
+      "name": "Update Odoo Tags",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        2140,
+        -240
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "12",
+          "name": "Odoo (Administrator)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "id",
+              "field2": "id"
+            }
+          ]
+        },
+        "joinMode": "keepEverything",
+        "options": {}
+      },
+      "id": "39126ef7-51b4-4707-b974-a44bd04c913a",
+      "name": "Merge Data",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        1900,
+        -240
       ]
     }
   ],
@@ -445,6 +472,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-09-21T20:55:54.000Z",
-  "versionId": "b39f186b-2c72-43d8-b1b8-1c5f246b00af"
+  "updatedAt": "2023-09-22T15:39:45.000Z",
+  "versionId": "0ff4bdfd-df7e-44e3-82e6-9210aa5a6d88"
 }
