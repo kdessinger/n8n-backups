@@ -49,50 +49,6 @@
         ]
       ]
     },
-    "Spreadsheet": {
-      "main": [
-        [
-          {
-            "node": "Convert to Array",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Load Binary File": {
-      "main": [
-        [
-          {
-            "node": "Spreadsheet",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Convert to Array": {
-      "main": [
-        [
-          {
-            "node": "Get Specific Districts",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Get Specific Districts": {
-      "main": [
-        [
-          {
-            "node": "Sort",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Load Binary File1": {
       "main": [
         [
@@ -166,50 +122,6 @@
             "node": "Merge",
             "type": "main",
             "index": 1
-          }
-        ]
-      ]
-    },
-    "Get Contacts2": {
-      "main": [
-        [
-          {
-            "node": "Merge2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Evicore Query1": {
-      "main": [
-        [
-          {
-            "node": "Merge2",
-            "type": "main",
-            "index": 1
-          }
-        ]
-      ]
-    },
-    "Merge2": {
-      "main": [
-        [
-          {
-            "node": "Code",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Code": {
-      "main": [
-        [
-          {
-            "node": "Update Odoo Tags",
-            "type": "main",
-            "index": 0
           }
         ]
       ]
@@ -364,129 +276,6 @@
     },
     {
       "parameters": {
-        "operation": "concatenateItems",
-        "fieldsToAggregate": {
-          "fieldToAggregate": [
-            {
-              "fieldToAggregate": "id"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "7f996fbb-0b58-4bcc-b72c-00f70382cb76",
-      "name": "Convert to Array",
-      "type": "n8n-nodes-base.itemLists",
-      "typeVersion": 3,
-      "position": [
-        -460,
-        940
-      ]
-    },
-    {
-      "parameters": {
-        "options": {
-          "headerRow": true
-        }
-      },
-      "id": "b6f25790-12b0-4f21-965c-b234d272685c",
-      "name": "Spreadsheet",
-      "type": "n8n-nodes-base.spreadsheetFile",
-      "typeVersion": 2,
-      "position": [
-        -660,
-        940
-      ]
-    },
-    {
-      "parameters": {
-        "fileSelector": "/mnt/share/_tmp/drp.xlsx"
-      },
-      "id": "b165af34-d3e1-4ae1-bf39-2a5ccadbd957",
-      "name": "Load Binary File",
-      "type": "n8n-nodes-base.readBinaryFiles",
-      "typeVersion": 1,
-      "position": [
-        -860,
-        940
-      ]
-    },
-    {
-      "parameters": {
-        "operation": "sort",
-        "sortFieldsUi": {
-          "sortField": [
-            {
-              "fieldName": "EVI_DistID"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "01acee1d-bb30-47c9-ac6a-4425e5915b27",
-      "name": "Sort",
-      "type": "n8n-nodes-base.itemLists",
-      "typeVersion": 3,
-      "position": [
-        -60,
-        940
-      ]
-    },
-    {
-      "parameters": {
-        "resource": "custom",
-        "customResource": "res.partner",
-        "operation": "getAll",
-        "returnAll": true,
-        "options": {
-          "fieldsList": [
-            "display_name",
-            "EVI_DistID",
-            "EVI_DistName"
-          ]
-        },
-        "filterRequest": {
-          "filter": [
-            {
-              "fieldName": "EVI_DistID",
-              "operator": "in",
-              "value": "={{ $json.id }}"
-            }
-          ]
-        }
-      },
-      "id": "dbbd3c4a-e05d-4ffe-8914-b23fe6283286",
-      "name": "Get Specific Districts",
-      "type": "n8n-nodes-base.odoo",
-      "typeVersion": 1,
-      "position": [
-        -260,
-        940
-      ],
-      "credentials": {
-        "odooApi": {
-          "id": "12",
-          "name": "Odoo (Administrator)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "content": "## DRP Districts",
-        "height": 231.00457906343476,
-        "width": 1114.9948896894043
-      },
-      "id": "24b1f024-b336-4fd6-96d2-ab71df5bbdfd",
-      "name": "Sticky Note1",
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        -940,
-        880
-      ]
-    },
-    {
-      "parameters": {
         "resource": "custom",
         "customResource": "res.partner",
         "operation": "getAll",
@@ -627,21 +416,6 @@
     },
     {
       "parameters": {
-        "content": "## Update Scoring Tags",
-        "height": 424.1972408930528,
-        "width": 920.1328014439664
-      },
-      "id": "c4315039-7fca-4b7b-a29d-8aa72cd2a254",
-      "name": "Sticky Note3",
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        360,
-        840
-      ]
-    },
-    {
-      "parameters": {
         "mode": "combine",
         "mergeByFields": {
           "values": [
@@ -661,134 +435,6 @@
         1020,
         100
       ]
-    },
-    {
-      "parameters": {
-        "resource": "custom",
-        "customResource": "res.partner",
-        "operation": "getAll",
-        "returnAll": true,
-        "options": {
-          "fieldsList": [
-            "display_name",
-            "EVI_DistID",
-            "category_id"
-          ]
-        },
-        "filterRequest": {
-          "filter": [
-            {
-              "fieldName": "category_id",
-              "operator": "notIn",
-              "value": "={{ 16 }}"
-            },
-            {
-              "fieldName": "EVI_DistID",
-              "operator": "notEqual"
-            }
-          ]
-        }
-      },
-      "id": "fa8a382a-0084-4fc4-b4f6-ab006f114650",
-      "name": "Get Contacts2",
-      "type": "n8n-nodes-base.odoo",
-      "typeVersion": 1,
-      "position": [
-        440,
-        920
-      ],
-      "credentials": {
-        "odooApi": {
-          "id": "12",
-          "name": "Odoo (Administrator)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "mode": "combine",
-        "mergeByFields": {
-          "values": [
-            {
-              "field1": "EVI_DistID",
-              "field2": "id"
-            }
-          ]
-        },
-        "outputDataFrom": "input1",
-        "options": {}
-      },
-      "id": "2c00c0a0-e63b-485f-ae9e-c2ce731211db",
-      "name": "Merge2",
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 2.1,
-      "position": [
-        680,
-        1000
-      ]
-    },
-    {
-      "parameters": {
-        "operation": "executeQuery",
-        "query": "SELECT d.id, d.name\nFROM evicore..districts d join evitesting..districts et on d.id = et.id\nWhere et.nyScoringDistrict = 1 or et.nyScoringDistrict is null\nORDER by d.id\n"
-      },
-      "name": "Evicore Query1",
-      "type": "n8n-nodes-base.microsoftSql",
-      "typeVersion": 1,
-      "position": [
-        440,
-        1100
-      ],
-      "id": "0bd09cd7-ed1e-424d-84b7-b4b54f914802",
-      "credentials": {
-        "microsoftSql": {
-          "id": "8",
-          "name": "DB1.DS1.GOWLS.COM (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.category_id.push(16);\n}\n\nreturn $input.all();"
-      },
-      "id": "6fa3a42b-1393-4d54-be85-c0ed8030e53b",
-      "name": "Code",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        880,
-        1000
-      ]
-    },
-    {
-      "parameters": {
-        "resource": "custom",
-        "customResource": "res.partner",
-        "operation": "update",
-        "customResourceId": "={{ $json.id }}",
-        "fieldsToCreateOrUpdate": {
-          "fields": [
-            {
-              "fieldName": "category_id",
-              "fieldValue": "={{ $json.category_id }}"
-            }
-          ]
-        }
-      },
-      "id": "df956c16-3bce-4665-8447-8eee8123adc9",
-      "name": "Update Odoo Tags",
-      "type": "n8n-nodes-base.odoo",
-      "typeVersion": 1,
-      "position": [
-        1080,
-        1000
-      ],
-      "credentials": {
-        "odooApi": {
-          "id": "12",
-          "name": "Odoo (Administrator)"
-        }
-      }
     },
     {
       "parameters": {
@@ -867,6 +513,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-09-20T19:40:42.000Z",
-  "versionId": "6da63f6b-a867-43e3-8081-027d8da6e5de"
+  "updatedAt": "2023-09-21T18:20:04.000Z",
+  "versionId": "16da3602-5bec-4dee-882e-2677e3892572"
 }
