@@ -51,22 +51,22 @@
             "index": 0
           },
           {
-            "node": "Get Contacts3",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Bars Districts",
-            "type": "main",
-            "index": 0
-          },
-          {
             "node": "Get Contacts4",
             "type": "main",
             "index": 0
           },
           {
             "node": "CD Districts",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Contacts3",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Bars Districts",
             "type": "main",
             "index": 0
           }
@@ -1534,6 +1534,19 @@
           "name": "Odoo (Administrator)"
         }
       }
+    },
+    {
+      "parameters": {
+        "workflowId": "aINvgZvdOoAi6E6H"
+      },
+      "id": "41e17ce6-7cdd-4f3f-a5dd-88f6cbcef8f9",
+      "name": "Sync Bars Districts",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        200,
+        -20
+      ]
     }
   ],
   "pinData": {
@@ -1696,6 +1709,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-09-21T16:37:02.000Z",
-  "versionId": "2be6ea01-6d14-4a65-91f0-3f3fba2912e7"
+  "updatedAt": "2023-09-22T16:23:15.000Z",
+  "versionId": "05a3ce5e-b75c-4ed6-b6a7-c29b07b53a10"
 }
