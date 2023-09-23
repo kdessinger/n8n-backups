@@ -21,7 +21,7 @@
       "main": [
         [
           {
-            "node": "Merge",
+            "node": "Queries",
             "type": "main",
             "index": 0
           }
@@ -32,34 +32,7 @@
       "main": [
         [
           {
-            "node": "Merge",
-            "type": "main",
-            "index": 1
-          }
-        ]
-      ]
-    },
-    "Merge": {
-      "main": [
-        [
-          {
-            "node": "Microsoft SQL",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Microsoft SQL": {
-      "main": [
-        [
-          {
-            "node": "Non-Matching",
-            "type": "main",
-            "index": 1
-          },
-          {
-            "node": "Matches",
+            "node": "Queries",
             "type": "main",
             "index": 1
           }
@@ -136,6 +109,33 @@
           }
         ]
       ]
+    },
+    "EVIDB": {
+      "main": [
+        [
+          {
+            "node": "Non-Matching",
+            "type": "main",
+            "index": 1
+          },
+          {
+            "node": "Matches",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Queries": {
+      "main": [
+        [
+          {
+            "node": "EVIDB",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2023-09-21T18:22:28.150Z",
@@ -145,16 +145,16 @@
     {
       "parameters": {
         "content": "## Sync Odoo Tags with District Software\nThe Workflow will set the scoring tags on all EVI districts that are designated as a scoring district. \nThis is a Sync operation so it will remove add and remove tags from odoo to match EVICore.\n",
-        "height": 554.1972408930528,
-        "width": 1317.6636615332295
+        "height": 479.14473496714237,
+        "width": 808.5574963358035
       },
       "id": "80fcbb37-8bcc-42e1-b79f-1c7690d632af",
       "name": "Sticky Note3",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1100,
-        -500
+        1445.0175019753042,
+        -460
       ]
     },
     {
@@ -164,7 +164,7 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1,
       "position": [
-        400,
+        420,
         -140
       ]
     },
@@ -196,7 +196,7 @@
       "typeVersion": 1,
       "position": [
         1160,
-        -360
+        -340
       ],
       "credentials": {
         "odooApi": {
@@ -245,26 +245,6 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "{{ $json.query }}"
-      },
-      "id": "58a3ab01-c13f-420f-9be1-70a34f234c2b",
-      "name": "Microsoft SQL",
-      "type": "n8n-nodes-base.microsoftSql",
-      "typeVersion": 1,
-      "position": [
-        1160,
-        -140
-      ],
-      "credentials": {
-        "microsoftSql": {
-          "id": "8",
-          "name": "DB1.DS1.GOWLS.COM (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "executeQuery",
         "query": "SELECT *, name as product\nFROM EdVistas..Odoo_tags\nWHERE query is not null;"
       },
       "id": "2debe8b7-499c-42bc-ba92-ed47ded52221",
@@ -284,31 +264,9 @@
     },
     {
       "parameters": {
-        "mode": "combine",
-        "mergeByFields": {
-          "values": [
-            {
-              "field1": "id",
-              "field2": "tagId"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "fdac2d8d-362d-470e-89b0-532dafd26f2c",
-      "name": "Merge",
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 2.1,
-      "position": [
-        960,
-        -140
-      ]
-    },
-    {
-      "parameters": {
         "content": "## Cycle through each Tag\nThis will iterate through each product and run an\n update query based on the product.",
-        "height": 487.83689154001183,
-        "width": 696.143159378677
+        "height": 479.0807658486557,
+        "width": 612.3345277614103
       },
       "id": "5265374c-5ddb-441a-945c-d173bbef2517",
       "name": "Sticky Note",
@@ -363,34 +321,37 @@
       "typeVersion": 2.1,
       "position": [
         1460,
-        -340
+        -320
       ]
     },
     {
       "parameters": {
-        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  const category_id = item.json.category_id;\n  \n  if (!category_id.includes(75)) {\n    category_id.push(75);\n  }\n}\n\nreturn $input.all();\n"
+        "jsCode": "const tagid = $('Queries').item.json.tagId;\n\nfor (const item of $input.all()) {\n  const category_id = item.json.category_id;\n  \n  if (!category_id.includes(tagid)) {\n    category_id.push(tagid);\n  }\n}\n\nconsole.log(tagid); // Output the value of tagid to the console\nreturn $input.all();"
       },
       "id": "854fe4d1-2992-45a2-b972-6ed719034e3d",
       "name": "Insert Tags",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1680,
-        -340
-      ]
+        1660,
+        -320
+      ],
+      "disabled": true
     },
     {
       "parameters": {
-        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  const category_id = item.json.category_id;\n  \n  if (category_id.includes(75)) {\n    const index = category_id.indexOf(75);\n    category_id.splice(index, 1);\n  }\n}\n\nreturn $input.all();\n\n"
+        "mode": "runOnceForEachItem",
+        "jsCode": "const tagid = $('Queries').item.json.tagId;\n\nfor (const item of $input) {\n  const category_id = item.json.category_id;\n  \n  if (category_id.includes(tagid)) {\n    const index = category_id.indexOf(tagid);\n    category_id.splice(index, 1);\n  }\n}\n\nconsole.log(tagid); // Output the value of tagid to the console\nreturn $input;\n"
       },
       "id": "001a8353-b18b-408e-a10d-390b6535e696",
       "name": "Delete Tags",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1680,
+        1660,
         -160
-      ]
+      ],
+      "disabled": true
     },
     {
       "parameters": {
@@ -412,7 +373,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        2140,
+        2060,
         -240
       ],
       "credentials": {
@@ -420,7 +381,8 @@
           "id": "12",
           "name": "Odoo (Administrator)"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -441,14 +403,59 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 2.1,
       "position": [
-        1900,
+        1880,
         -240
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "{{ $json.query }}"
+      },
+      "id": "58a3ab01-c13f-420f-9be1-70a34f234c2b",
+      "name": "EVIDB",
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1,
+      "position": [
+        1160,
+        -140
+      ],
+      "alwaysOutputData": false,
+      "credentials": {
+        "microsoftSql": {
+          "id": "8",
+          "name": "DB1.DS1.GOWLS.COM (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "id",
+              "field2": "tagId"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "fdac2d8d-362d-470e-89b0-532dafd26f2c",
+      "name": "Queries",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        960,
+        -140
       ]
     }
   ],
   "pinData": {},
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner"
   },
   "staticData": null,
   "tags": [
@@ -472,6 +479,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-09-22T15:39:45.000Z",
-  "versionId": "0ff4bdfd-df7e-44e3-82e6-9210aa5a6d88"
+  "updatedAt": "2023-09-22T21:04:29.000Z",
+  "versionId": "415a34fd-4e50-4317-b45b-360840c35f3b"
 }
