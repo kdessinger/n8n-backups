@@ -711,8 +711,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        200,
-        200
+        220,
+        260
       ],
       "credentials": {
         "odooApi": {
@@ -1534,19 +1534,6 @@
           "name": "Odoo (Administrator)"
         }
       }
-    },
-    {
-      "parameters": {
-        "workflowId": "aINvgZvdOoAi6E6H"
-      },
-      "id": "41e17ce6-7cdd-4f3f-a5dd-88f6cbcef8f9",
-      "name": "Sync Bars Districts",
-      "type": "n8n-nodes-base.executeWorkflow",
-      "typeVersion": 1,
-      "position": [
-        200,
-        -20
-      ]
     }
   ],
   "pinData": {
@@ -1709,6 +1696,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-09-22T16:23:15.000Z",
-  "versionId": "05a3ce5e-b75c-4ed6-b6a7-c29b07b53a10"
+  "updatedAt": "2023-09-25T14:18:59.000Z",
+  "versionId": "5b7f28c9-784e-4f5d-aad4-4500ee513224"
 }
