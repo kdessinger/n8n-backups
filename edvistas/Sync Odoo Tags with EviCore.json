@@ -43,7 +43,7 @@
       "main": [
         [
           {
-            "node": "Delete Tags",
+            "node": "Remove Tags",
             "type": "main",
             "index": 0
           }
@@ -66,33 +66,6 @@
         [
           {
             "node": "Merge Data",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Delete Tags": {
-      "main": [
-        [
-          {
-            "node": "Merge Data",
-            "type": "main",
-            "index": 1
-          }
-        ]
-      ]
-    },
-    "Sync_Bars": {
-      "main": [
-        [
-          {
-            "node": "Get Tags",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Get Queries",
             "type": "main",
             "index": 0
           }
@@ -136,6 +109,33 @@
           }
         ]
       ]
+    },
+    "Sync_Tags": {
+      "main": [
+        [
+          {
+            "node": "Get Tags",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Queries",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Remove Tags": {
+      "main": [
+        [
+          {
+            "node": "Merge Data",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2023-09-21T18:22:28.150Z",
@@ -155,17 +155,6 @@
       "position": [
         1445.0175019753042,
         -460
-      ]
-    },
-    {
-      "parameters": {},
-      "id": "b485d5c4-d1f9-43c8-af6f-a33cf3188b8f",
-      "name": "Sync_Bars",
-      "type": "n8n-nodes-base.executeWorkflowTrigger",
-      "typeVersion": 1,
-      "position": [
-        420,
-        -140
       ]
     },
     {
@@ -245,7 +234,7 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "SELECT *, name as product\nFROM EdVistas..Odoo_tags\nWHERE query is not null;"
+        "query": "SELECT *\nFROM EdVistas..Odoo_tags\nWHERE query is not null;"
       },
       "id": "2debe8b7-499c-42bc-ba92-ed47ded52221",
       "name": "Get Queries",
@@ -326,7 +315,8 @@
     },
     {
       "parameters": {
-        "jsCode": "const tagid = $('Queries').item.json.tagId;\n\nfor (const item of $input.all()) {\n  const category_id = item.json.category_id;\n  \n  if (!category_id.includes(tagid)) {\n    category_id.push(tagid);\n  }\n}\n\nconsole.log(tagid); // Output the value of tagid to the console\nreturn $input.all();"
+        "mode": "runOnceForEachItem",
+        "jsCode": "const tagid = $node[\"Queries\"].json[\"tagId\"]; \n\nfor (const item of $input.item) {\n  const category_id = item.json.category_id;\n  \n  if (!category_id.includes(tagid)) {\n    const index = category_id.indexOf(tagid);\n    category_id.push(tagid);\n  }\n}\n\nconsole.log(tagid); // Output the value of tagid to the console\nreturn $input;\n\n\n\n\n\n\n\n\n\n\n"
       },
       "id": "854fe4d1-2992-45a2-b972-6ed719034e3d",
       "name": "Insert Tags",
@@ -335,23 +325,7 @@
       "position": [
         1660,
         -320
-      ],
-      "disabled": true
-    },
-    {
-      "parameters": {
-        "mode": "runOnceForEachItem",
-        "jsCode": "const tagid = $('Queries').item.json.tagId;\n\nfor (const item of $input) {\n  const category_id = item.json.category_id;\n  \n  if (category_id.includes(tagid)) {\n    const index = category_id.indexOf(tagid);\n    category_id.splice(index, 1);\n  }\n}\n\nconsole.log(tagid); // Output the value of tagid to the console\nreturn $input;\n"
-      },
-      "id": "001a8353-b18b-408e-a10d-390b6535e696",
-      "name": "Delete Tags",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        1660,
-        -160
-      ],
-      "disabled": true
+      ]
     },
     {
       "parameters": {
@@ -449,6 +423,31 @@
         960,
         -140
       ]
+    },
+    {
+      "parameters": {},
+      "id": "b485d5c4-d1f9-43c8-af6f-a33cf3188b8f",
+      "name": "Sync_Tags",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        420,
+        -140
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const tagid = $('Queries').item.json.tagId;\n\nfor (const item of $input.item) {\n  const category_id = item.json.category_id;\n  \n  if (category_id.includes(tagid)) {\n    const index = category_id.indexOf(tagid);\n    category_id.splice(index, 1);\n  }\n}\n\nconsole.log(tagid); // Output the value of tagid to the console\nreturn $input;\n"
+      },
+      "id": "001a8353-b18b-408e-a10d-390b6535e696",
+      "name": "Remove Tags",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1660,
+        -160
+      ]
     }
   ],
   "pinData": {},
@@ -479,6 +478,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-09-22T21:04:29.000Z",
-  "versionId": "415a34fd-4e50-4317-b45b-360840c35f3b"
+  "updatedAt": "2023-09-25T15:46:48.000Z",
+  "versionId": "fa6cc789-f379-47e8-bd11-1c91209d275e"
 }
