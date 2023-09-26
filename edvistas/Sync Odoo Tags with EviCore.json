@@ -122,6 +122,11 @@
             "node": "Get Queries",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Get Contacts",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -136,6 +141,39 @@
           }
         ]
       ]
+    },
+    "Get Contacts1": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Queries1": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Item Lists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2023-09-21T18:22:28.150Z",
@@ -146,14 +184,14 @@
       "parameters": {
         "content": "## Sync Odoo Tags with District Software\nThe Workflow will set the scoring tags on all EVI districts that are designated as a scoring district. \nThis is a Sync operation so it will remove add and remove tags from odoo to match EVICore.\n",
         "height": 479.14473496714237,
-        "width": 808.5574963358035
+        "width": 810.7172785977352
       },
       "id": "80fcbb37-8bcc-42e1-b79f-1c7690d632af",
       "name": "Sticky Note3",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1445.0175019753042,
+        1442.8577197133727,
         -460
       ]
     },
@@ -165,7 +203,7 @@
         "returnAll": true,
         "options": {
           "fieldsList": [
-            "display_name",
+            "name",
             "EVI_DistID",
             "category_id"
           ]
@@ -184,8 +222,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        1160,
-        -340
+        720,
+        -380
       ],
       "credentials": {
         "odooApi": {
@@ -222,7 +260,7 @@
       "typeVersion": 1,
       "position": [
         720,
-        -240
+        -220
       ],
       "credentials": {
         "odooApi": {
@@ -234,7 +272,7 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "SELECT *\nFROM EdVistas..Odoo_tags\nWHERE query is not null;"
+        "query": "SELECT *\nFROM EdVistas..Odoo_tags\n--WHERE query is not null;"
       },
       "id": "2debe8b7-499c-42bc-ba92-ed47ded52221",
       "name": "Get Queries",
@@ -254,7 +292,7 @@
     {
       "parameters": {
         "content": "## Cycle through each Tag\nThis will iterate through each product and run an\n update query based on the product.",
-        "height": 479.0807658486557,
+        "height": 593.5492257310304,
         "width": 612.3345277614103
       },
       "id": "5265374c-5ddb-441a-945c-d173bbef2517",
@@ -263,7 +301,7 @@
       "typeVersion": 1,
       "position": [
         660,
-        -377.5122513827125
+        -491.9807112650873
       ]
     },
     {
@@ -315,8 +353,7 @@
     },
     {
       "parameters": {
-        "mode": "runOnceForEachItem",
-        "jsCode": "const tagid = $node[\"Queries\"].json[\"tagId\"]; \n\nfor (const item of $input.item) {\n  const category_id = item.json.category_id;\n  \n  if (!category_id.includes(tagid)) {\n    const index = category_id.indexOf(tagid);\n    category_id.push(tagid);\n  }\n}\n\nconsole.log(tagid); // Output the value of tagid to the console\nreturn $input;\n\n\n\n\n\n\n\n\n\n\n"
+        "jsCode": "// Access the category_id array\nconst category_id = items[0].json.category_id;\n//console.log(category_id);\n\n// Define the variable from $node\nconst tagId = $node[\"Queries\"].json[\"tagId\"];\n//console.log(tagId);\n\n// Check if the value (tagId) is not in the array\nif (!category_id.includes(tagId)) {\n  // Add the value (tagId) to the array\n  category_id.push(tagId);\n}\n\n// Return the modified item\nreturn items;\n"
       },
       "id": "854fe4d1-2992-45a2-b972-6ed719034e3d",
       "name": "Insert Tags",
@@ -347,7 +384,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        2060,
+        2080,
         -240
       ],
       "credentials": {
@@ -431,14 +468,13 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1,
       "position": [
-        420,
-        -140
+        440,
+        -220
       ]
     },
     {
       "parameters": {
-        "mode": "runOnceForEachItem",
-        "jsCode": "const tagid = $('Queries').item.json.tagId;\n\nfor (const item of $input.item) {\n  const category_id = item.json.category_id;\n  \n  if (category_id.includes(tagid)) {\n    const index = category_id.indexOf(tagid);\n    category_id.splice(index, 1);\n  }\n}\n\nconsole.log(tagid); // Output the value of tagid to the console\nreturn $input;\n"
+        "jsCode": "// Access the category_id array\nconst category_id = items[0].json.category_id;\nconsole.log(category_id);\n\n// Define the variable from $node\nconst tagId = $node[\"Queries\"].json[\"tagId\"];\nconsole.log(tagId);\n\n// Check if the value (tagId) is not in the array\nif (category_id.includes(tagId)) {\n  const index = category.indexOf(tagid);\n  category_id.splice(index, 1);\n}\n\n// Return the modified item\nreturn items;\n"
       },
       "id": "001a8353-b18b-408e-a10d-390b6535e696",
       "name": "Remove Tags",
@@ -447,6 +483,106 @@
       "position": [
         1660,
         -160
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "WITH DistrictProducts AS (\n    SELECT\n\t\tid,\n        district,\n        ('3, ' + STRING_AGG(CONVERT(NVARCHAR(20), tagId), ', ')) AS Products\n    FROM (\n        SELECT\n\t\t\tid,\n            district,\n            Product,\n            tagId\n        FROM (            \n\t\t\t\t/* Aims Districts */\n\t\t\t\tSELECT d.id as id, d.name as district, 'Aims' as Product, 71 as tagId\n\t\t\t\tFROM evicore..districts d\n\t\t\t\tleft join aims..districts a on d.id = a.id\n\t\t\t\tWhere enabled=1 --and aimsyear >= YEAR(GETDATE())\n\t\t\t\tUNION\n\t\t\t\t/* Bars Districts */\n\t\t\t\tSELECT d.id as id, d.name as district, 'Bars' as Product, 75 as tagId\n\t\t\t\tFROM evicore..districts d \n\t\t\t\tjoin evitesting..districts t on d.id = t.id\n\t\t\t\tWhere t.enabled=1 and t.barsDistrict=1 \n\t\t\t\tUNION\n\t\t\t\t/* Curriculum Developer Districts */\n\t\t\t\tSELECT d.id as id, d.name as district, 'CD' as Product, 74 as tagId\n\t\t\t\tFROM evicore..districts d\n\t\t\t\tleft join rbemcd..districts r on d.id = r.districtid\n\t\t\t\tWhere  r.enabled=1 \n\t\t\t\tUNION\n\t\t\t\t/* Datamate Basic Districts */\n\t\t\t\tSELECT d.id as id, d.name as district, 'DataMate' as Product, 47 as tagId\n\t\t\t\tFROM evicore..districts d \n\t\t\t\tjoin evitesting..districts t on d.id = t.id\n\t\t\t\tWhere t.enabled=1 and t.dmversion='Basic'\n\t\t\t\tUNION\n\t\t\t\t/* Datamate Live Districts */\n\t\t\t\tSELECT d.id as id, d.name as district, 'DataMate:Live' as Product, 77 as tagId\n\t\t\t\tFROM evicore..districts d \n\t\t\t\tjoin evitesting..districts t on d.id = t.id\n\t\t\t\tWhere t.enabled=1 and t.dmversion='Live'\n\t\t\t\tUNION\n\t\t\t\t/* DRP Districts */\n\t\t\t\tSELECT d.id as id, d.name as district, 'DRP' as Product, 46 as tagId\n\t\t\t\tFROM evicore..districts d\n\t\t\t\tjoin evitesting..districts e on d.id = e.id\n\t\t\t\tWhere e.drpDistrict = 1\n\t\t\t\tUNION\n\t\t\t\t/* EduForm Districts */\n\t\t\t\tSELECT d.id as id, d.name as district, 'EduForm' as Product, 69 as tagId\n\t\t\t\tFROM evicore..districts d\n\t\t\t\tleft join eviForms..districts f on d.id = f.id\n\t\t\t\tWhere f.enabled=1 \n\t\t\t\tUNION\n\t\t\t\t/* EduView Districts */\n\t\t\t\tSELECT d.id as id, d.name as district, 'DataMate' as Product, 47 as tagId\n\t\t\t\tFROM evicore..districts d\n\t\t\t\tleft join eduviewEvi..rptDistricts ev on d.id = ev.id\n\t\t\t\tWhere ev.disabled=0\n\t\t\t\tUNION\n\t\t\t\t/* Datamate Elite Districts */\n\t\t\t\tSELECT d.id as id, d.name as district, 'Elite' as Product, 76 as tagId\n\t\t\t\tFROM evicore..districts d \n\t\t\t\tjoin evitesting..districts t on d.id = t.id\n\t\t\t\tWhere t.enabled=1 and t.datamateElite=1\n\t\t\t\tUNION\n\t\t\t\t/* SafeSchools Districts */\n\t\t\t\tSELECT d.id as id, d.name as district, 'SafeSchool' as Product, 73 as tagId\n\t\t\t\tFROM evicore..districts d\n\t\t\t\tleft join safeschools..district ss on d.id = ss.id\n\t\t\t\tWhere ss.enabled=1 \n\t\t\t\tUNION\n\t\t\t\t/* Scoring Districts */\n\t\t\t\tSELECT d.id as id, d.name as district, 'Scoring' as Product, 16 as tagId\n\t\t\t\tFROM evicore..districts d \n\t\t\t\tjoin evitesting..districts t on d.id = t.id\n\t\t\t\tWhere t.nyScoringDistrict = 1 and enabled = 1\n\t\t\t\tUNION\n\t\t\t\t/* StaffTrac Districts */\n\t\t\t\tSELECT d.id as id, d.name as district, 'StaffTrac' as Product, 70 as tagId\n\t\t\t\tFROM evicore..districts d\n\t\t\t\tleft join stafftrac..districts s on d.id = s.id\n\t\t\t\tWhere s.id is not null and s.enabled=1\n\t\t\t\tUNION\n\t\t\t\t/* Survate */\n\t\t\t\tSELECT d.id as id, d.name as district, 'Survate' as Product, 81 as tagId\n\t\t\t\tFROM evicore..districts d\n\t\t\t\tleft join eviSurvate..districts sv on d.id = sv.id\n\t\t\t\tWhere enabled=1\n\t\t\t\tUNION\n\t\t\t\t/* TransSync Districts */\n\t\t\t\tSelect id, name as district, 'TransSync' as Product, 82 as tagId\n\t\t\t\tFROM evicore..districts\n\t\t\t\tWhere enableTransSync=1\n\n        ) AS SourceData\n        GROUP BY id, district, Product, tagId\n    ) AS PivotData\n    GROUP BY id, district\n)\nSELECT\n\tid,\n    district,\n    Products\nFROM DistrictProducts\nORDER BY district;\n"
+      },
+      "id": "74737cb0-0bcb-43b1-b451-5a3d5b7bc742",
+      "name": "Get Queries1",
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1,
+      "position": [
+        720,
+        320
+      ],
+      "credentials": {
+        "microsoftSql": {
+          "id": "8",
+          "name": "DB1.DS1.GOWLS.COM (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "res.partner",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {
+          "fieldsList": [
+            "name",
+            "EVI_DistID",
+            "category_id"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "EVI_DistID",
+              "operator": "notEqual"
+            }
+          ]
+        }
+      },
+      "id": "31209bd3-a16a-41e9-a943-1bcf1949c56c",
+      "name": "Get Contacts1",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        720,
+        160
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "12",
+          "name": "Odoo (Administrator)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "EVI_DistID",
+              "field2": "id"
+            }
+          ]
+        },
+        "options": {
+          "clashHandling": {
+            "values": {
+              "resolveClash": "preferInput1"
+            }
+          }
+        }
+      },
+      "id": "9d84c209-1c9e-4bb4-8401-df385fe7d343",
+      "name": "Merge",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        940,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "Products",
+        "include": "allOtherFields",
+        "options": {}
+      },
+      "id": "25a5e80e-4c38-4fa4-837e-484700a007af",
+      "name": "Item Lists",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 3,
+      "position": [
+        1160,
+        240
       ]
     }
   ],
@@ -478,6 +614,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-09-25T15:46:48.000Z",
-  "versionId": "fa6cc789-f379-47e8-bd11-1c91209d275e"
+  "updatedAt": "2023-09-25T22:26:04.000Z",
+  "versionId": "7d7164f3-c6f8-4229-9c50-2e86eecd490a"
 }
