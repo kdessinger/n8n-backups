@@ -5,23 +5,7 @@
       "main": [
         [
           {
-            "node": "Non-Matching",
-            "type": "main",
-            "index": 0
-          },
-          {
             "node": "Matching",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Non-Matching": {
-      "main": [
-        [
-          {
-            "node": "Null",
             "type": "main",
             "index": 0
           }
@@ -53,11 +37,6 @@
     "Pivot Table": {
       "main": [
         [
-          {
-            "node": "Non-Matching",
-            "type": "main",
-            "index": 1
-          },
           {
             "node": "Matching",
             "type": "main",
@@ -178,7 +157,7 @@
       "typeVersion": 1,
       "position": [
         780,
-        -340
+        -320
       ],
       "credentials": {
         "odooApi": {
@@ -186,31 +165,6 @@
           "name": "Odoo (Administrator)"
         }
       }
-    },
-    {
-      "parameters": {
-        "mode": "combine",
-        "mergeByFields": {
-          "values": [
-            {
-              "field1": "EVI_DistID",
-              "field2": "distId"
-            }
-          ]
-        },
-        "joinMode": "keepNonMatches",
-        "options": {
-          "fuzzyCompare": true
-        }
-      },
-      "id": "e7a801a7-bf9f-4e7a-a063-3440687c229b",
-      "name": "Non-Matching",
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 2.1,
-      "position": [
-        1260,
-        -160
-      ]
     },
     {
       "parameters": {
@@ -226,7 +180,7 @@
             },
             {
               "fieldName": "EVI_License",
-              "fieldValue": "={{ $json.concatenated_Product.replace(/District, /g, ''); }}"
+              "fieldValue": "={{ $json.concatenated_Product.replace(/(District|Business), /g, ''); }}"
             }
           ]
         }
@@ -236,8 +190,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        1460,
-        -320
+        1440,
+        -300
       ],
       "credentials": {
         "odooApi": {
@@ -249,7 +203,7 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "/* All Districts */\nSELECT d.id as distId, d.name as district, \ncase when isbusiness=1 then 'Business' else 'District' end Product, \ncase when isbusiness=1 then '43' else '3' end tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nWhere t.enabled=1\nUNION\n\n/* Aims Districts */\nSELECT d.id, d.name as district, 'Aims' as Product, 71 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join aims..districts a on d.id = a.id\nWhere t.enabled=1 and a.enabled=1 --and aimsyear >= YEAR(GETDATE())\nUNION\n\n/* Bars Districts */\nSELECT d.id, d.name as district, 'Bars' as Product, 75 as tagId\nFROM evicore..districts d \nleft join evitesting..districts t on d.id = t.id\nWhere t.enabled=1 and t.barsDistrict=1 \nUNION\n\n/* Curriculum Developer Districts */\nSELECT d.id, d.name as district, 'CD' as Product, 74 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join rbemcd..districts r on d.id = r.districtid\nWhere t.enabled=1 and r.enabled=1 \nUNION\n\n/* Datamate Basic Districts */\nSELECT d.id, d.name as district, 'DataMate' as Product, 47 as tagId\nFROM evicore..districts d \nleft join evitesting..districts t on d.id = t.id\nWhere t.enabled=1 and t.dmversion='Basic'\nUNION\n\n/* Datamate Live Districts */\nSELECT d.id, d.name as district, 'DataMate:Live' as Product, 77 as tagId\nFROM evicore..districts d \nleft join evitesting..districts t on d.id = t.id\nWhere t.enabled=1 and t.dmversion='Live'\nUNION\n\n/* DRP Districts */\nSELECT d.id, d.name as district, 'DRP' as Product, 46 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nWhere t.enabled=1 and t.drpDistrict = 1\nUNION\n\n/* EduForm Districts */\nSELECT d.id, d.name as district, 'EduForm' as Product, 69 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join eviForms..districts f on d.id = f.id\nWhere t.enabled=1 and f.enabled=1 \nUNION\n\n/* EduView Districts */\nSELECT d.id, d.name as district, 'DataMate' as Product, 47 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join eduviewEvi..rptDistricts ev on d.id = ev.id\nWhere t.enabled=1 and ev.disabled=0\nUNION\n\n/* Datamate Elite Districts */\nSELECT d.id, d.name as district, 'Elite' as Product, 76 as tagId\nFROM evicore..districts d \nleft join evitesting..districts t on d.id = t.id\nWhere t.enabled=1 and t.datamateElite=1\nUNION\n\n/* SafeSchools Districts */\nSELECT d.id, d.name as district, 'SafeSchool' as Product, 73 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join safeschools..district ss on d.id = ss.id\nWhere t.enabled=1 and ss.enabled=1 \nUNION\n\n/* Scoring Districts */\nSELECT d.id, d.name as district, 'Scoring' as Product, 16 as tagId\nFROM evicore..districts d \nleft join evitesting..districts t on d.id = t.id\nWhere t.enabled=1 and t.nyScoringDistrict = 1\nUNION\n\n/* StaffTrac Districts */\nSELECT d.id, d.name as district, 'StaffTrac' as Product, 70 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join stafftrac..districts s on d.id = s.id\nWhere t.enabled=1 and s.enabled=1\nUNION\n\n/* Survate */\nSELECT d.id, d.name as district, 'Survate' as Product, 81 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join eviSurvate..districts sv on d.id = sv.id\nWhere t.enabled=1 and sv.enabled=1\nUNION\n\n/* TransSync Districts */\nSelect d.id, name as district, 'TransSync' as Product, 82 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nWhere t.enabled=1 and enableTransSync=1\n\n"
+        "query": "/* All Districts */\nSELECT d.id as distId, d.name as district, \ncase when isbusiness=1 then 'Business' else 'District' end Product, \ncase when isbusiness=1 then '43' else '3' end tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nWhere t.enabled=1\nUNION\n\n/* Aims Districts */\nSELECT d.id, d.name as district, 'Aims' as Product, 71 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join aims..districts a on d.id = a.id\nWhere t.enabled=1 and a.enabled=1 --and aimsyear >= YEAR(GETDATE())\nUNION\n\n/* Bars Districts */\nSELECT d.id, d.name as district, 'Bars' as Product, 75 as tagId\nFROM evicore..districts d \nleft join evitesting..districts t on d.id = t.id\nWhere t.enabled=1 and t.barsDistrict=1 \nUNION\n\n/* Curriculum Developer Districts */\nSELECT d.id, d.name as district, 'CD' as Product, 74 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join rbemcd..districts r on d.id = r.districtid\nWhere t.enabled=1 and r.enabled=1 \nUNION\n\n/* Datamate Basic Districts */\nSELECT d.id, d.name as district, 'DataMate' as Product, 47 as tagId\nFROM evicore..districts d \nleft join evitesting..districts t on d.id = t.id\nWhere t.enabled=1 and t.dmversion='Basic'\nUNION\n\n/* Datamate Live Districts */\nSELECT d.id, d.name as district, 'DataMate:Live' as Product, 77 as tagId\nFROM evicore..districts d \nleft join evitesting..districts t on d.id = t.id\nWhere t.enabled=1 and t.dmversion='Live'\nUNION\n\n/* DRP Districts */\nSELECT d.id, d.name as district, 'DRP' as Product, 46 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nWhere t.enabled=1 and t.drpDistrict = 1\nUNION\n\n/* EduForm Districts */\nSELECT d.id, d.name as district, 'EduForm' as Product, 69 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join eviForms..districts f on d.id = f.id\nWhere t.enabled=1 and f.enabled=1 \nUNION\n\n/* EduView Districts */\nSELECT d.id, d.name as district, 'EduView' as Product, 80 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join eduviewEvi..rptDistricts ev on d.id = ev.id\nWhere t.enabled=1 and ev.disabled=0\nUNION\n\n/* Datamate Elite Districts */\nSELECT d.id, d.name as district, 'Elite' as Product, 76 as tagId\nFROM evicore..districts d \nleft join evitesting..districts t on d.id = t.id\nWhere t.enabled=1 and t.datamateElite=1\nUNION\n\n/* SafeSchools Districts */\nSELECT d.id, d.name as district, 'SafeSchool' as Product, 73 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join safeschools..district ss on d.id = ss.id\nWhere t.enabled=1 and ss.enabled=1 \nUNION\n\n/* Scoring Districts */\nSELECT d.id, d.name as district, 'Scoring' as Product, 16 as tagId\nFROM evicore..districts d \nleft join evitesting..districts t on d.id = t.id\nWhere t.enabled=1 and t.nyScoringDistrict = 1\nUNION\n\n/* StaffTrac Districts */\nSELECT d.id, d.name as district, 'StaffTrac' as Product, 70 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join stafftrac..districts s on d.id = s.id\nWhere t.enabled=1 and s.enabled=1\nUNION\n\n/* Survate */\nSELECT d.id, d.name as district, 'Survate' as Product, 81 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join eviSurvate..districts sv on d.id = sv.id\nWhere t.enabled=1 and sv.enabled=1\nUNION\n\n/* TransSync Districts */\nSelect d.id, name as district, 'TransSync' as Product, 82 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nWhere t.enabled=1 and enableTransSync=1\n\n"
       },
       "id": "6d1cc7b1-b796-4a9c-8cce-0dca2a746761",
       "name": "Products by District",
@@ -286,8 +240,8 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 2.1,
       "position": [
-        1260,
-        -320
+        1220,
+        -300
       ]
     },
     {
@@ -373,17 +327,6 @@
       ]
     },
     {
-      "parameters": {},
-      "id": "c5c64204-486b-45c3-b4d7-34c1641bff86",
-      "name": "Null",
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [
-        1460,
-        -160
-      ]
-    },
-    {
       "parameters": {
         "rule": {
           "interval": [
@@ -459,6 +402,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2023-09-26T23:07:46.000Z",
-  "versionId": "b595eb97-f5d2-4a79-a1ff-3e68f615abd7"
+  "updatedAt": "2023-09-27T14:19:41.000Z",
+  "versionId": "bd0ae169-e638-45b8-8439-ff02b7b4922a"
 }
