@@ -1,0 +1,162 @@
+{
+  "active": false,
+  "connections": {
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Microsoft SQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Microsoft SQL": {
+      "main": [
+        [
+          {
+            "node": "Fix Date",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fix Date": {
+      "main": [
+        [
+          {
+            "node": "Spreadsheet File1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Spreadsheet File1": {
+      "main": [
+        [
+          {
+            "node": "Write Binary File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-09-27T20:22:55.258Z",
+  "id": "VE30hvBsBs48MFvt",
+  "name": "Historical Dashboard Counts",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "3c748b0b-08e5-487b-84b8-648253b132ef",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        880,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SET NOCOUNT ON\nPrint 'TimeStamp,AIMS,Courses,Datamate Elite,Datamate Live,Datamate Basic,Districts,Forms,Guardians,SafeSchools,Schools,SMS,Staff,StaffTrac,Students,Surveys,Users,Item Bank'\n\nDECLARE @NoDist table (ID SmallInt) Insert into @NoDist values (-1), (21), (804), (805), (806), (815)\nDECLARE @tdate smalldatetime set @tdate = GetDate()\n\nSelect * from (\nSelect 'AIMS' as Name, Count(*) as Count, @tdate Date FROM aims..districts a Where a.enabled=1 and a.id not in(Select ID from @NoDist)\nunion select 'Courses' Name, Count(*) Count, @tdate Date FROM rbemcd..courses r Where r.districtid >0 and r.districtid not in(Select ID from @NoDist)\nunion select 'Datamate Elite' Name, Count(*) Count, @tdate Date from evitesting..districts e WHERE e.enabled=1 and e.id not in(Select ID from @NoDist) and e.datamateElite = 1\nunion select 'Datamate Live' Name, Count(*) Count, @tdate Date FROM evitesting..districts e WHERE e.enabled=1 and e.id not in(Select ID from @NoDist) and e.dmversion = 'Live'\nunion select 'Datamate Basic' Name, Count(*) Count, @tdate Date FROM evitesting..districts e WHERE e.enabled=1 and e.id not in(Select ID from @NoDist) and e.dmversion = 'Basic'\nunion select 'Districts' as Name, Count(*) Count, @tdate Date from eviForms..ecDistricts d Where d.id not in(Select ID from @NoDist)\nunion select 'Forms' as Name, Count(*) Count, @tdate Date  from eviForms..forms Where complete=0\nunion select 'Guardians' as Name, Count(*) Count, @tdate Date from eviForms..ecGuardians\nunion select 'SafeSchools' as Name, Count(*) Count, @tdate Date from safeschools..district ss Where ss.enabled=1 and (ss.trial = 0 or ss.trial is null) and ss.id not in(Select ID from @NoDist)\nunion select 'Schools' as Name, Count(*) Count, @tdate Date  from eviForms..ecschools \nunion select 'SMS' as Name, Sum(segments) Count, @tdate Date From eviForms..smsLog \nunion select 'Staff' as Name, Count(*) Count, @tdate Date  from eviForms..ecStaff sf where disabled=0 and sf.districtId not in (Select ID from @NoDist)\nunion select 'StaffTrac' as Name, Count(*) Count, @tdate Date FROM stafftrac..districts st Where st.enabled=1 and st.id not in (Select ID from @NoDist)\nunion select 'Students' as Name, Count(*) Count, @tdate Date  from eviForms..ecStudents s where active=1 and s.districtid not in (Select ID from @NoDist)\nunion select 'Surveys' as Name, Count(*) Count, @tdate Date FROM eviSurvate..surveys sv Where sv.disable=0 and sv.districtid not in (Select ID from @NoDist)\nunion select 'Users' as Name, Count(*) Count, @tdate Date  from eviForms..ecUsers u where u.active=1 and u.districtid not in (Select ID from @NoDist)\nunion select 'ItemBank' as Name, Count(*) Count, @tdate Date FROM evitesting..questionBank q\n ) l\n Pivot (\n\tSum(l.count) For l.name\n\tIn ([AIMS],[Courses],[Datamate Elite],[Datamate Live],[Datamate Basic],[Districts],[Forms],[Guardians],[SafeSchools],[Schools],[SMS],[Staff],[StaffTrac],[Students],[Surveys],[Users],[ItemBank])\n ) as pivotTable"
+      },
+      "id": "80272609-9f0e-4951-92d9-cabca17b15b2",
+      "name": "Microsoft SQL",
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1,
+      "position": [
+        1080,
+        480
+      ],
+      "credentials": {
+        "microsoftSql": {
+          "id": "8",
+          "name": "DB1.DS1.GOWLS.COM (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "value": "={{ $json.Date }}",
+        "dataPropertyName": "=Date",
+        "custom": true,
+        "toFormat": "MM/DD/YYYY hh:mm A",
+        "options": {
+          "fromTimezone": "UTC",
+          "toTimezone": "Universal"
+        }
+      },
+      "id": "67feaced-ab34-4ec5-be5d-6a01c9154b2d",
+      "name": "Fix Date",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 1,
+      "position": [
+        1280,
+        480
+      ],
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "operation": "toFile",
+        "fileFormat": "csv",
+        "options": {
+          "fileName": "=dashboards_Historical.csv",
+          "headerRow": false
+        }
+      },
+      "id": "c53604b7-d050-46e7-bc96-10ce8d7b535d",
+      "name": "Spreadsheet File1",
+      "type": "n8n-nodes-base.spreadsheetFile",
+      "typeVersion": 2,
+      "position": [
+        1480,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "fileName": "/mnt/share/_reports/dashboards_Historical.csv",
+        "options": {
+          "append": true
+        }
+      },
+      "id": "afecf094-078f-4140-8ce2-ec9dd2bf2cf5",
+      "name": "Write Binary File",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "typeVersion": 1,
+      "position": [
+        1680,
+        480
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2023-06-10T21:44:29.997Z",
+      "updatedAt": "2023-06-10T21:44:29.997Z",
+      "id": "36",
+      "name": "MSSQL"
+    },
+    {
+      "createdAt": "2023-09-27T20:24:32.111Z",
+      "updatedAt": "2023-09-27T20:24:32.111Z",
+      "id": "zbD8ysqk4JayoUDN",
+      "name": "Excel"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2023-09-27T22:06:39.000Z",
+  "versionId": "e302e3ae-6370-43df-a9e6-c0d5961e10c7"
+}
