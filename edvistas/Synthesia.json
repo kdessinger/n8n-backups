@@ -649,7 +649,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -320,
+        -360,
         320
       ]
     },
@@ -690,7 +690,7 @@
       "typeVersion": 1,
       "position": [
         1080,
-        240
+        220
       ],
       "credentials": {
         "nextCloudApi": {
@@ -728,6 +728,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-07-13T02:44:48.000Z",
-  "versionId": "41f77b70-5d74-4704-a590-8f95f3173e0f"
+  "updatedAt": "2023-09-27T19:53:32.000Z",
+  "versionId": "8458f0fa-c9b5-4693-87f8-55c8162e4c60"
 }
