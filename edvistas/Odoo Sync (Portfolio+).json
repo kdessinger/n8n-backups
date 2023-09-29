@@ -1,0 +1,426 @@
+{
+  "active": false,
+  "connections": {
+    "Get Contacts": {
+      "main": [
+        [
+          {
+            "node": "Matching",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Matching": {
+      "main": [
+        [
+          {
+            "node": "Update Odoo Tags",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pivot Table": {
+      "main": [
+        [
+          {
+            "node": "Matching",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Workflow": {
+      "main": [
+        [
+          {
+            "node": "Get Contacts",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Read Binary Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Get Contacts",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Read Binary Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Manual": {
+      "main": [
+        [
+          {
+            "node": "Get Contacts",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Read Binary Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule": {
+      "main": [
+        [
+          {
+            "node": "Get Contacts",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Read Binary Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Spreadsheet File": {
+      "main": [
+        [
+          {
+            "node": "Pivot Table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Binary Files": {
+      "main": [
+        [
+          {
+            "node": "Spreadsheet File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-09-28T20:36:08.907Z",
+  "id": "KPAFMED211O9xFjm",
+  "name": "Odoo Sync (Portfolio+)",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "# Sync Odoo Tags with District Software (Products)\n### This node will update Odoo Contacts that have a EVI District number present in the 'EVI_DistID' field.\n##### Tags contain product names that a specific district have activated in [EVICore](https://apps.edvistas.com). This workflow query [EVICore](https://apps.edvistas.com)for the most up to date list of Products by District. All contacts in Odoo with a value in the 'EVI_DistID' field will be used in this dataset.\n\n**This is a **Sync** operation so it will add and remove remove tags from odoo that match [EVICore](https://apps.edvistas.com).\n",
+        "height": 610.9027580150877,
+        "width": 993.3244395852091
+      },
+      "id": "c2d5d5f8-4df5-4195-b20b-ef9c0e4f6339",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        684.9344366064581,
+        -564.0998437172274
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "res.partner",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {
+          "fieldsList": [
+            "name",
+            "EVI_DistID",
+            "category_id"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "EVI_DistID",
+              "operator": "notEqual"
+            }
+          ]
+        }
+      },
+      "id": "39ef90b5-146d-4163-b5ff-356c51495b99",
+      "name": "Get Contacts",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        780,
+        -320
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "12",
+          "name": "Odoo (Administrator)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "res.partner",
+        "operation": "update",
+        "customResourceId": "={{ $json.id }}",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "category_id",
+              "fieldValue": "={{ $json.appended_tagId }}"
+            },
+            {
+              "fieldName": "EVI_License",
+              "fieldValue": "={{ $json.concatenated_Product.replace(/(District|Business), /g, ''); }}"
+            }
+          ]
+        }
+      },
+      "id": "495170fa-4a7a-4a85-a84c-89ba2f497539",
+      "name": "Update Odoo Tags",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        1440,
+        -300
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "12",
+          "name": "Odoo (Administrator)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "EVI_DistID",
+              "field2": "distId"
+            }
+          ]
+        },
+        "options": {
+          "fuzzyCompare": true
+        }
+      },
+      "id": "a43ae69e-2840-431c-a1fb-1ae8ba09f6f1",
+      "name": "Matching",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        1220,
+        -300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "summarize",
+        "fieldsToSummarize": {
+          "values": [
+            {
+              "aggregation": "concatenate",
+              "field": "Product",
+              "includeEmpty": true,
+              "separateBy": ", "
+            },
+            {
+              "aggregation": "append",
+              "field": "tagId",
+              "includeEmpty": true
+            }
+          ]
+        },
+        "fieldsToSplitBy": "distId, district",
+        "options": {}
+      },
+      "id": "5b831fa2-aa52-4fbd-b2c6-b1b77fa8dbc0",
+      "name": "Pivot Table",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 3,
+      "position": [
+        1160,
+        -140
+      ]
+    },
+    {
+      "parameters": {
+        "content": "# Triggers\nactivate workflow to enable",
+        "height": 719.064845088409,
+        "width": 212.77512108632297
+      },
+      "id": "d0bfa2a7-0501-426f-b32a-4121018e9bc7",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        400,
+        -560
+      ]
+    },
+    {
+      "parameters": {
+        "path": "odoo/sync /products/edge",
+        "options": {}
+      },
+      "id": "c591a8b7-689e-4770-a469-e8976e4e422d",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        460,
+        -313
+      ],
+      "webhookId": "82afb44e-3b28-4ce8-a9df-5bf133a84fb5"
+    },
+    {
+      "parameters": {},
+      "id": "a0ebe2af-20cb-49b6-9a2f-35168a5f4bb5",
+      "name": "Manual",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        460,
+        -453
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "90d759ea-4b2d-4a84-b220-6cd11e8c104b",
+      "name": "Workflow",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        460,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "triggerAtDay": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "triggerAtHour": 6
+            },
+            {
+              "field": "weeks",
+              "triggerAtDay": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "triggerAtHour": 11
+            },
+            {
+              "field": "weeks",
+              "triggerAtDay": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "triggerAtHour": 15
+            }
+          ]
+        }
+      },
+      "id": "f34bb9eb-3fbb-4109-82d8-32fea13e6f45",
+      "name": "Schedule",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        460,
+        -160
+      ]
+    },
+    {
+      "parameters": {
+        "fileSelector": "/mnt/share/_reports/Portfolio(+)_Districts.xlsx"
+      },
+      "id": "c2eb0555-0623-4059-8561-328327c88ee4",
+      "name": "Read Binary Files",
+      "type": "n8n-nodes-base.readBinaryFiles",
+      "typeVersion": 1,
+      "position": [
+        780,
+        -140
+      ]
+    },
+    {
+      "parameters": {
+        "options": {
+          "headerRow": true
+        }
+      },
+      "id": "7e57cdfc-3ef1-4902-bb40-32f25cc9080a",
+      "name": "Spreadsheet File",
+      "type": "n8n-nodes-base.spreadsheetFile",
+      "typeVersion": 2,
+      "position": [
+        960,
+        -140
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": {
+    "node:Schedule": {
+      "recurrencyRules": []
+    }
+  },
+  "tags": [
+    {
+      "createdAt": "2022-12-09T05:43:36.104Z",
+      "updatedAt": "2022-12-09T05:43:36.104Z",
+      "id": "12",
+      "name": "odoo"
+    },
+    {
+      "createdAt": "2023-06-10T21:44:29.997Z",
+      "updatedAt": "2023-06-10T21:44:29.997Z",
+      "id": "36",
+      "name": "MSSQL"
+    }
+  ],
+  "triggerCount": 2,
+  "updatedAt": "2023-09-28T20:38:47.000Z",
+  "versionId": "6dbb5e90-e318-4eca-acdb-25bf95d50608"
+}
