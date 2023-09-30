@@ -216,7 +216,7 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 2.1,
       "position": [
-        820,
+        800,
         500
       ]
     },
@@ -359,6 +359,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2023-09-26T23:03:55.000Z",
-  "versionId": "b47e2920-9c6d-4444-8d4d-49a2e4c63cb0"
+  "updatedAt": "2023-09-29T20:02:58.000Z",
+  "versionId": "ffaca250-3cac-45f0-93cb-c260e1b1b0ae"
 }
