@@ -27,14 +27,14 @@
       "main": [
         [
           {
-            "node": "Spreadsheet File1",
+            "node": "Spreadsheet File",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Spreadsheet File1": {
+    "Spreadsheet File": {
       "main": [
         [
           {
@@ -104,24 +104,6 @@
     },
     {
       "parameters": {
-        "operation": "toFile",
-        "fileFormat": "csv",
-        "options": {
-          "fileName": "=dashboards_Historical.csv",
-          "headerRow": false
-        }
-      },
-      "id": "c53604b7-d050-46e7-bc96-10ce8d7b535d",
-      "name": "Spreadsheet File1",
-      "type": "n8n-nodes-base.spreadsheetFile",
-      "typeVersion": 2,
-      "position": [
-        1480,
-        480
-      ]
-    },
-    {
-      "parameters": {
         "fileName": "/mnt/share/_reports/dashboards_Historical.csv",
         "options": {
           "append": true
@@ -133,6 +115,24 @@
       "typeVersion": 1,
       "position": [
         1680,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "toFile",
+        "fileFormat": "csv",
+        "options": {
+          "fileName": "=dashboards_Historical.csv",
+          "headerRow": false
+        }
+      },
+      "id": "c53604b7-d050-46e7-bc96-10ce8d7b535d",
+      "name": "Spreadsheet File",
+      "type": "n8n-nodes-base.spreadsheetFile",
+      "typeVersion": 2,
+      "position": [
+        1480,
         480
       ]
     }
@@ -157,6 +157,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-09-27T22:06:39.000Z",
-  "versionId": "e302e3ae-6370-43df-a9e6-c0d5961e10c7"
+  "updatedAt": "2023-09-29T20:58:07.000Z",
+  "versionId": "a2d93e5f-c3f1-43e0-8526-9d586403b0e4"
 }
