@@ -1,0 +1,451 @@
+{
+  "active": true,
+  "connections": {
+    "FixDate LastLogin": {
+      "main": [
+        [
+          {
+            "node": "FixDate LastSync",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Evicore Query": {
+      "main": [
+        [
+          {
+            "node": "FixDate LastLogin",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "FixDate LastSync": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Manual": {
+      "main": [
+        [
+          {
+            "node": "Get Odoo Contacts",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Evicore Query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Odoo Contacts": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Get Odoo Contacts",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Evicore Query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule": {
+      "main": [
+        [
+          {
+            "node": "Get Odoo Contacts",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Evicore Query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Workflow": {
+      "main": [
+        [
+          {
+            "node": "Get Odoo Contacts",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Evicore Query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Update Odoo Contacts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-09-29T17:24:06.463Z",
+  "id": "DipEvEPSTFgkWXxV",
+  "name": "Odoo Sync (EviCore)",
+  "nodes": [
+    {
+      "parameters": {
+        "value": "={{ $json.lastlogin }}",
+        "dataPropertyName": "EVI_Last_login",
+        "custom": true,
+        "toFormat": "YYYY-MM-DD HH:mm:ss",
+        "options": {
+          "toTimezone": "Etc/GMT-4"
+        }
+      },
+      "id": "f1a71bf9-8db2-4db6-84c9-5a2b83c309f4",
+      "name": "FixDate LastLogin",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 1,
+      "position": [
+        3380,
+        920
+      ],
+      "notesInFlow": false,
+      "notes": "Odoo will remove 4 hours from the EVI_Last_login field so use a +4 in the Time Zone to compensate."
+    },
+    {
+      "parameters": {
+        "value": "={{ $json.LastSync  }}",
+        "dataPropertyName": "EVI_LastSync",
+        "custom": true,
+        "toFormat": "YYYY-MM-DD HH:mm:ss",
+        "options": {
+          "toTimezone": "Etc/GMT-4"
+        }
+      },
+      "id": "48efaf92-3a0d-46c0-834e-8dcaa8c48ef0",
+      "name": "FixDate LastSync",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 1,
+      "position": [
+        3580,
+        920
+      ],
+      "notesInFlow": false,
+      "notes": "Odoo will remove 4 hours from the EVI_Last_login field so use a +4 in the Time Zone to compensate."
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "/* Last Login user for each district */\nWITH LastLoginRanked AS (\n    SELECT d.id AS districtID, d.name AS DistrictName, u.id as useridkey, u.userid, u.firstname, u.lastname, up.lastlogin,\n    ROW_NUMBER() OVER (PARTITION BY d.id ORDER BY up.lastlogin DESC) AS rn\n\tFROM evitesting.dbo.ecDistricts d\n\tLEFT JOIN evitesting.dbo.ecUsers u ON d.id = u.districtid\n\tLEFT JOIN (SELECT useridkey, MAX(lastlogin) AS lastlogin FROM evitesting.dbo.userproperties GROUP BY useridkey) up ON u.id = up.useridkey\n)\nSELECT llr.districtID, DistrictName, lastlogin, LastSync, sistype, statecode\nFROM LastLoginRanked llr\nleft join (SELECT districtid, MAX(s.Updated) LastSync FROM evicore..students s WHERE s.Updated IS NOT NULL GROUP BY s.districtid) lou on llr.districtID = lou.districtid --LastSync\njoin evicore..districts d on llr.districtID = d.id\nWHERE rn = 1 --and lastlogin is not null\nOrder by DistrictName;\n"
+      },
+      "name": "Evicore Query",
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1,
+      "position": [
+        3180,
+        920
+      ],
+      "id": "eae0f81a-982e-421e-ac90-106110fddff1",
+      "credentials": {
+        "microsoftSql": {
+          "id": "8",
+          "name": "DB1.DS1.GOWLS.COM (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "res.partner",
+        "operation": "update",
+        "customResourceId": "={{ $json.id }}",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "EVI_DistName",
+              "fieldValue": "={{ $json.DistrictName }}"
+            },
+            {
+              "fieldName": "sistype",
+              "fieldValue": "={{ $json.sistype }}"
+            },
+            {
+              "fieldName": "EVI_LastSync",
+              "fieldValue": "={{ $json.LastSync == null ? null : $json.EVI_LastSync }}"
+            },
+            {
+              "fieldName": "EVI_Last_login",
+              "fieldValue": "={{ $json.lastlogin === null ? null : $json.EVI_Last_login }}"
+            },
+            {
+              "fieldName": "stateID",
+              "fieldValue": "={{ $json.statecode }}"
+            }
+          ]
+        }
+      },
+      "id": "6749210f-5b48-4762-91f4-5f02030674e4",
+      "name": "Update Odoo Contacts",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        3960,
+        760
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "12",
+          "name": "Odoo (Administrator)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Sync Datamate with Odoo\n### This node will update Odoo Contacts that have a EVI District number present in the 'EVI_DistID' field.\n##### This info is found on the Odoo contacts under the 'Integration' tab.  The following fields will be updated:\nEVI District Name, EVI Last Sync, EVI Last Login, Student Info System, State District ID.\n\n**This is a **Sync** operation so it will add and remove remove tags from odoo that match [EVICore](https://apps.edvistas.com).\n",
+        "height": 528.1925551441133,
+        "width": 1040.4471527014061
+      },
+      "id": "1e9beb7a-0d62-4bae-a9c9-1822a516fd0a",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3140,
+        548.4821179247186
+      ]
+    },
+    {
+      "parameters": {
+        "path": "odoo/sync /evicore",
+        "options": {}
+      },
+      "id": "7357df5a-64bd-4a82-bd21-f810356b77bb",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        2860,
+        747
+      ],
+      "webhookId": "2ea717ea-44c6-4a8a-a8be-83a8396f0130"
+    },
+    {
+      "parameters": {},
+      "id": "802450dd-cddb-4f9b-9953-b247f5f24c89",
+      "name": "Manual",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        2860,
+        607
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "dd1df8e7-cca4-4243-8918-f3e9cd0372c2",
+      "name": "Workflow",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        2860,
+        1060
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "triggerAtDay": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "triggerAtHour": 6
+            },
+            {
+              "field": "weeks",
+              "triggerAtDay": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "triggerAtHour": 11
+            },
+            {
+              "field": "weeks",
+              "triggerAtDay": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "triggerAtHour": 15
+            },
+            {
+              "field": "weeks",
+              "triggerAtDay": [
+                1,
+                2,
+                5,
+                4,
+                3
+              ],
+              "triggerAtHour": 17
+            }
+          ]
+        }
+      },
+      "id": "d75f8ffa-df5f-4ee4-926c-30f332883304",
+      "name": "Schedule",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        2860,
+        900
+      ]
+    },
+    {
+      "parameters": {
+        "content": "# Triggers\nactivate workflow to enable",
+        "height": 719.064845088409,
+        "width": 212.77512108632297
+      },
+      "id": "e12499e3-9072-448d-b02e-326f7a520726",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2800,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "res.partner",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {
+          "fieldsList": [
+            "active",
+            "display_name",
+            "EVI_DistID",
+            "EVI_DistName",
+            "EVI_Last_login"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "EVI_DistID",
+              "operator": "notEqual"
+            }
+          ]
+        }
+      },
+      "id": "4c0170da-0513-4be9-afca-e754c5cd668a",
+      "name": "Get Odoo Contacts",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        3180,
+        740
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "12",
+          "name": "Odoo (Administrator)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "EVI_DistID",
+              "field2": "districtID"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "0be5fd82-8056-406d-9829-c20dcf8dd0e9",
+      "name": "Merge",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        3760,
+        760
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {
+    "node:Schedule": {
+      "recurrencyRules": []
+    }
+  },
+  "tags": [
+    {
+      "createdAt": "2022-12-09T05:43:36.104Z",
+      "updatedAt": "2022-12-09T05:43:36.104Z",
+      "id": "12",
+      "name": "odoo"
+    },
+    {
+      "createdAt": "2023-09-29T18:54:01.860Z",
+      "updatedAt": "2023-09-29T18:54:01.860Z",
+      "id": "Sl85YMFRpXn5g4Db",
+      "name": "evicore"
+    }
+  ],
+  "triggerCount": 2,
+  "updatedAt": "2023-09-29T21:20:29.000Z",
+  "versionId": "42e644dc-5d60-4944-9b54-92c440aafc28"
+}
