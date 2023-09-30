@@ -16,7 +16,7 @@
       "main": [
         [
           {
-            "node": "Update Odoo Tags",
+            "node": "Edit Fields",
             "type": "main",
             "index": 0
           }
@@ -119,6 +119,17 @@
           }
         ]
       ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Update Odoo Tags",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2023-09-28T20:36:08.907Z",
@@ -127,17 +138,17 @@
   "nodes": [
     {
       "parameters": {
-        "content": "# Sync Odoo Tags with District Software (Products)\n### This node will update Odoo Contacts that have a EVI District number present in the 'EVI_DistID' field.\n##### Tags contain product names that a specific district have activated in [EVICore](https://apps.edvistas.com). This workflow query [EVICore](https://apps.edvistas.com)for the most up to date list of Products by District. All contacts in Odoo with a value in the 'EVI_DistID' field will be used in this dataset.\n\n**This is a **Sync** operation so it will add and remove remove tags from odoo that match [EVICore](https://apps.edvistas.com).\n",
+        "content": "# Sync Odoo Tags with Edge Doc Customers\n### This node will update Odoo Contacts that have a EVI District number present in the 'EVI_DistID' field.\n##### Tags contain product names that a specific district have activated in [EVICore](https://apps.edvistas.com). This workflow query [EVICore](https://apps.edvistas.com)for the most up to date list of Products by District. All contacts in Odoo with a value in the 'EVI_DistID' field will be used in this dataset.\n\n**This is a **Sync** operation so it will add and remove remove tags from odoo that match [EVICore](https://apps.edvistas.com).\n",
         "height": 610.9027580150877,
-        "width": 993.3244395852091
+        "width": 1221.561785145882
       },
       "id": "c2d5d5f8-4df5-4195-b20b-ef9c0e4f6339",
       "name": "Sticky Note3",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        684.9344366064581,
-        -564.0998437172274
+        684,
+        -564
       ]
     },
     {
@@ -150,7 +161,8 @@
           "fieldsList": [
             "name",
             "EVI_DistID",
-            "category_id"
+            "category_id",
+            "EVI_License"
           ]
         },
         "filterRequest": {
@@ -201,7 +213,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        1440,
+        1700,
         -300
       ],
       "credentials": {
@@ -218,7 +230,7 @@
           "values": [
             {
               "field1": "EVI_DistID",
-              "field2": "distId"
+              "field2": "EVI_DIST_ID"
             }
           ]
         },
@@ -231,7 +243,7 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 2.1,
       "position": [
-        1220,
+        1300,
         -300
       ]
     },
@@ -253,7 +265,7 @@
             }
           ]
         },
-        "fieldsToSplitBy": "distId, district",
+        "fieldsToSplitBy": "EVI_DIST_ID",
         "options": {}
       },
       "id": "5b831fa2-aa52-4fbd-b2c6-b1b77fa8dbc0",
@@ -261,7 +273,7 @@
       "type": "n8n-nodes-base.itemLists",
       "typeVersion": 3,
       "position": [
-        1160,
+        1140,
         -140
       ]
     },
@@ -368,7 +380,7 @@
     },
     {
       "parameters": {
-        "fileSelector": "/mnt/share/_reports/Portfolio(+)_Districts.xlsx"
+        "fileSelector": "/mnt/share/_reports/Portfolio_Districts.xlsx"
       },
       "id": "c2eb0555-0623-4059-8561-328327c88ee4",
       "name": "Read Binary Files",
@@ -382,7 +394,8 @@
     {
       "parameters": {
         "options": {
-          "headerRow": true
+          "headerRow": true,
+          "sheetName": "Portfolio"
         }
       },
       "id": "7e57cdfc-3ef1-4902-bb40-32f25cc9080a",
@@ -392,6 +405,32 @@
       "position": [
         960,
         -140
+      ]
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "appended_tagId",
+              "type": "arrayValue",
+              "arrayValue": "=[{{ $json.category_id }},{{ $json.appended_tagId }}]"
+            },
+            {
+              "name": "concatenated_Product",
+              "stringValue": "={{ $json.EVI_License.replace(/(, ,|District|Business|false|, Portfolio\\(\\+\\))(?:, |$)/gi, ''); }}, {{ $json.concatenated_Product }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "31c66712-6e2d-4737-b13f-09f0df11d3cd",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [
+        1500,
+        -300
       ]
     }
   ],
@@ -421,6 +460,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2023-09-28T20:38:47.000Z",
-  "versionId": "6dbb5e90-e318-4eca-acdb-25bf95d50608"
+  "updatedAt": "2023-09-29T20:57:10.000Z",
+  "versionId": "4882db8c-ac7a-4725-97f2-b165b4bd693b"
 }
