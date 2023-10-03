@@ -16,7 +16,7 @@
       "main": [
         [
           {
-            "node": "Merge",
+            "node": "Merge2",
             "type": "main",
             "index": 0
           }
@@ -34,22 +34,11 @@
         ]
       ]
     },
-    "Merge": {
-      "main": [
-        [
-          {
-            "node": "Matching",
-            "type": "main",
-            "index": 1
-          }
-        ]
-      ]
-    },
     "Products by District": {
       "main": [
         [
           {
-            "node": "Pivot Table",
+            "node": "Merge1",
             "type": "main",
             "index": 0
           }
@@ -71,7 +60,7 @@
       "main": [
         [
           {
-            "node": "Merge",
+            "node": "Merge2",
             "type": "main",
             "index": 1
           }
@@ -106,6 +95,11 @@
             "node": "Products by District",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Read Binary Files",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -125,6 +119,11 @@
           },
           {
             "node": "Products by District",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Read Binary Files",
             "type": "main",
             "index": 0
           }
@@ -148,6 +147,11 @@
             "node": "Products by District",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Read Binary Files",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -169,6 +173,55 @@
             "node": "Get Odoo Contacts",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Read Binary Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Spreadsheet File": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Read Binary Files": {
+      "main": [
+        [
+          {
+            "node": "Spreadsheet File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge1": {
+      "main": [
+        [
+          {
+            "node": "Pivot Table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge2": {
+      "main": [
+        [
+          {
+            "node": "Matching",
+            "type": "main",
+            "index": 1
           }
         ]
       ]
@@ -264,7 +317,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        4140,
+        4320,
         660
       ],
       "credentials": {
@@ -277,8 +330,8 @@
     {
       "parameters": {
         "content": "# Sync Datamate with Odoo\n### This node will update Odoo Contacts that have a EVI District number present in the 'EVI_DistID' field.\n##### This info is found on the Odoo contacts under the 'Integration' tab.  The following fields will be updated:\nEVI District Name, EVI Last Sync, EVI Last Login, Student Info System, State District ID.\n\n**This is a **Sync** operation so it will add and remove remove tags from odoo that match [EVICore](https://apps.edvistas.com).\n",
-        "height": 694.7408927456152,
-        "width": 1276.266146145722
+        "height": 919.4102304906131,
+        "width": 1454.5816546942929
       },
       "id": "8b5bf087-8ce5-4835-abf4-2fe0b22e0944",
       "name": "Sticky Note1",
@@ -300,9 +353,10 @@
       "typeVersion": 1,
       "position": [
         2720,
-        787
+        807
       ],
-      "webhookId": "2ea717ea-44c6-4a8a-a8be-83a8396f0130"
+      "webhookId": "2ea717ea-44c6-4a8a-a8be-83a8396f0130",
+      "disabled": true
     },
     {
       "parameters": {},
@@ -312,7 +366,7 @@
       "typeVersion": 1,
       "position": [
         2720,
-        647
+        667
       ]
     },
     {
@@ -323,8 +377,9 @@
       "typeVersion": 1,
       "position": [
         2720,
-        1100
-      ]
+        1120
+      ],
+      "disabled": true
     },
     {
       "parameters": {
@@ -383,8 +438,9 @@
       "typeVersion": 1.1,
       "position": [
         2720,
-        940
-      ]
+        960
+      ],
+      "disabled": true
     },
     {
       "parameters": {
@@ -398,7 +454,7 @@
       "typeVersion": 1,
       "position": [
         2660,
-        540
+        560
       ]
     },
     {
@@ -443,31 +499,6 @@
     },
     {
       "parameters": {
-        "mode": "combine",
-        "mergeByFields": {
-          "values": [
-            {
-              "field1": "districtID",
-              "field2": "distId"
-            }
-          ]
-        },
-        "joinMode": "enrichInput1",
-        "options": {
-          "fuzzyCompare": true
-        }
-      },
-      "id": "5846e494-0c76-4d8d-94bf-d41bf9aff6d0",
-      "name": "Merge",
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 2.1,
-      "position": [
-        3760,
-        820
-      ]
-    },
-    {
-      "parameters": {
         "operation": "executeQuery",
         "query": "/* All Districts */\nSELECT d.id as distId, d.name as district, \ncase when isbusiness=1 then 'Business' else 'District' end Product, \ncase when isbusiness=1 then '43' else '3' end tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nWhere t.enabled=1\nUNION\n\n/* Aims Districts */\nSELECT d.id, d.name as district, 'Aims' as Product, 71 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join aims..districts a on d.id = a.id\nWhere t.enabled=1 and a.enabled=1 --and aimsyear >= YEAR(GETDATE())\nUNION\n\n/* Bars Districts */\nSELECT d.id, d.name as district, 'Bars' as Product, 75 as tagId\nFROM evicore..districts d \nleft join evitesting..districts t on d.id = t.id\nWhere t.enabled=1 and t.barsDistrict=1 \nUNION\n\n/* Curriculum Developer Districts */\nSELECT d.id, d.name as district, 'CD' as Product, 74 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join rbemcd..districts r on d.id = r.districtid\nWhere t.enabled=1 and r.enabled=1 \nUNION\n\n/* Datamate Basic Districts */\nSELECT d.id, d.name as district, 'DataMate' as Product, 47 as tagId\nFROM evicore..districts d \nleft join evitesting..districts t on d.id = t.id\nWhere t.enabled=1 and t.dmversion='Basic'\nUNION\n\n/* Datamate Live Districts */\nSELECT d.id, d.name as district, 'DataMate:Live' as Product, 77 as tagId\nFROM evicore..districts d \nleft join evitesting..districts t on d.id = t.id\nWhere t.enabled=1 and t.dmversion='Live'\nUNION\n\n/* DRP Districts */\nSELECT d.id, d.name as district, 'DRP' as Product, 46 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nWhere t.enabled=1 and t.drpDistrict = 1\nUNION\n\n/* EduForm Districts */\nSELECT d.id, d.name as district, 'EduForm' as Product, 69 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join eviForms..districts f on d.id = f.id\nWhere t.enabled=1 and f.enabled=1 \nUNION\n\n/* EduView Districts */\nSELECT d.id, d.name as district, 'EduView' as Product, 80 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join eduviewEvi..rptDistricts ev on d.id = ev.id\nWhere t.enabled=1 and ev.disabled=0\nUNION\n\n/* Datamate Elite Districts */\nSELECT d.id, d.name as district, 'Elite' as Product, 76 as tagId\nFROM evicore..districts d \nleft join evitesting..districts t on d.id = t.id\nWhere t.enabled=1 and t.datamateElite=1\nUNION\n\n/* SafeSchools Districts */\nSELECT d.id, d.name as district, 'SafeSchool' as Product, 73 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join safeschools..district ss on d.id = ss.id\nWhere t.enabled=1 and ss.enabled=1 \nUNION\n\n/* Scoring Districts */\nSELECT d.id, d.name as district, 'Scoring' as Product, 16 as tagId\nFROM evicore..districts d \nleft join evitesting..districts t on d.id = t.id\nWhere t.enabled=1 and t.nyScoringDistrict = 1\nUNION\n\n/* StaffTrac Districts */\nSELECT d.id, d.name as district, 'StaffTrac' as Product, 70 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join stafftrac..districts s on d.id = s.id\nWhere t.enabled=1 and s.enabled=1\nUNION\n\n/* Survate */\nSELECT d.id, d.name as district, 'Survate' as Product, 81 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join eviSurvate..districts sv on d.id = sv.id\nWhere t.enabled=1 and sv.enabled=1\nUNION\n\n/* TransSync Districts */\nSelect d.id, name as district, 'TransSync' as Product, 82 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nWhere t.enabled=1 and enableTransSync=1\n\n"
       },
@@ -477,7 +508,7 @@
       "typeVersion": 1,
       "position": [
         3120,
-        960
+        980
       ],
       "credentials": {
         "microsoftSql": {
@@ -506,7 +537,7 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 2.1,
       "position": [
-        3940,
+        4080,
         660
       ]
     },
@@ -528,7 +559,7 @@
             }
           ]
         },
-        "fieldsToSplitBy": "distId, district",
+        "fieldsToSplitBy": "distId",
         "options": {}
       },
       "id": "89546040-d3a1-4d4b-9594-a85b272f3608",
@@ -536,15 +567,15 @@
       "type": "n8n-nodes-base.itemLists",
       "typeVersion": 3,
       "position": [
-        3520,
-        960
+        3720,
+        1000
       ]
     },
     {
       "parameters": {
         "content": "# Sync Odoo Tags with District Software (Products)\n### This node will update Odoo Contacts that have a EVI District number present in the 'EVI_DistID' field.\n##### Tags contain product names that a specific district have activated in [EVICore](https://apps.edvistas.com). This workflow query [EVICore](https://apps.edvistas.com)for the most up to date list of Products by District. All contacts in Odoo with a value in the 'EVI_DistID' field will be used in this dataset.\n\n**This is a **Sync** operation so it will add and remove remove tags from odoo that match [EVICore](https://apps.edvistas.com).\n",
-        "height": 188.85851032599913,
-        "width": 1274.9515899912683
+        "height": 182.48406684739106,
+        "width": 1456.8773414432437
       },
       "id": "3754547d-a426-4318-9f88-83376a188164",
       "name": "Sticky Note",
@@ -552,7 +583,7 @@
       "typeVersion": 1,
       "position": [
         3080,
-        1120
+        1340
       ]
     },
     {
@@ -574,6 +605,70 @@
           "name": "DB1.DS1.GOWLS.COM (kdessinger)"
         }
       }
+    },
+    {
+      "parameters": {
+        "options": {
+          "headerRow": true,
+          "sheetName": "Extract"
+        }
+      },
+      "id": "2e7ad8e9-f93e-4cc8-8356-11f63f430522",
+      "name": "Spreadsheet File",
+      "type": "n8n-nodes-base.spreadsheetFile",
+      "typeVersion": 2,
+      "position": [
+        3340,
+        1160
+      ]
+    },
+    {
+      "parameters": {
+        "fileSelector": "/mnt/share/_reports/Portfolio_Districts.xlsx"
+      },
+      "id": "2f3c1533-d2f6-494f-a5ce-e33878f10f24",
+      "name": "Read Binary Files",
+      "type": "n8n-nodes-base.readBinaryFiles",
+      "typeVersion": 1,
+      "position": [
+        3120,
+        1160
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "53fac31e-3e4f-4e9c-ab9c-a96e563604ec",
+      "name": "Merge1",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        3520,
+        1000
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "districtID",
+              "field2": "distId"
+            }
+          ]
+        },
+        "options": {
+          "fuzzyCompare": true
+        }
+      },
+      "id": "5846e494-0c76-4d8d-94bf-d41bf9aff6d0",
+      "name": "Merge2",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        3900,
+        820
+      ]
     }
   ],
   "pinData": {},
@@ -600,6 +695,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2023-10-02T13:45:29.000Z",
-  "versionId": "fabe0202-b63e-4c15-8c20-e1881bfaccab"
+  "updatedAt": "2023-10-02T19:59:56.000Z",
+  "versionId": "00a5b0a8-76e5-4cd3-8215-42ad986a7473"
 }
