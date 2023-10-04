@@ -294,7 +294,7 @@
     },
     {
       "parameters": {
-        "path": "odoo/sync /products/edge",
+        "path": "odoo/sync/edge",
         "options": {}
       },
       "id": "c591a8b7-689e-4770-a469-e8976e4e422d",
@@ -460,6 +460,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2023-09-29T20:57:10.000Z",
-  "versionId": "4882db8c-ac7a-4725-97f2-b165b4bd693b"
+  "updatedAt": "2023-10-03T21:52:16.000Z",
+  "versionId": "4ae919d0-a110-4800-807d-cda3141f9384"
 }
