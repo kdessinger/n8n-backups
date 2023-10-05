@@ -55,33 +55,6 @@
           }
         ]
       ]
-    },
-    "(EVICore) Last Login": {
-      "main": [
-        [
-          {
-            "node": "FixDate V1",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "FixDate V2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "FixDate V1": {
-      "main": [
-        [
-          {
-            "node": "Spreadsheet File1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
     }
   },
   "createdAt": "2022-02-10T21:57:15.216Z",
@@ -189,78 +162,6 @@
           "name": "DB1.DS1.GOWLS.COM (kdessinger)"
         }
       }
-    },
-    {
-      "parameters": {
-        "operation": "toFile",
-        "fileFormat": "xlsx",
-        "options": {
-          "fileName": "output.xlsx"
-        }
-      },
-      "id": "ed8b8cfe-068d-4681-b0c3-49e585277473",
-      "name": "Spreadsheet File1",
-      "type": "n8n-nodes-base.spreadsheetFile",
-      "typeVersion": 1,
-      "position": [
-        760,
-        100
-      ]
-    },
-    {
-      "parameters": {
-        "operation": "executeQuery",
-        "query": "WITH LastLoginRanked AS (\n    SELECT d.id AS districtID, d.name AS DistrictName, u.id as useridkey, u.userid, u.firstname, u.lastname, up.lastlogin,\n    ROW_NUMBER() OVER (PARTITION BY d.id ORDER BY up.lastlogin DESC) AS rn\n\tFROM evitesting.dbo.ecDistricts d\n\tJOIN evitesting.dbo.ecUsers u ON d.id = u.districtid\n\tLEFT JOIN (SELECT useridkey, MAX(lastlogin) AS lastlogin FROM evitesting.dbo.userproperties GROUP BY useridkey) up ON u.id = up.useridkey\n\tWHERE u.active = 1      -- Show active users only\n\tand u.adminaccount = 0  -- Hide admin logins\n)\nSELECT districtID, DistrictName, useridkey, userid, firstname, lastname, lastlogin\nFROM LastLoginRanked\nWHERE rn = 1\nOrder by districtID, userid;\n"
-      },
-      "name": "(EVICore) Last Login",
-      "type": "n8n-nodes-base.microsoftSql",
-      "typeVersion": 1,
-      "position": [
-        300,
-        20
-      ],
-      "id": "da529647-4266-4706-9cd1-a872b486b386",
-      "credentials": {
-        "microsoftSql": {
-          "id": "8",
-          "name": "DB1.DS1.GOWLS.COM (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "formatDate",
-        "date": "={{ $json.lastlogin }}",
-        "format": "custom",
-        "customFormat": "yyyy-MM-dd HH:mm:ss",
-        "outputFieldName": "lastlogin",
-        "options": {}
-      },
-      "id": "884fd860-f9f9-4c4c-a4a2-fa6ec72e78ca",
-      "name": "FixDate V2",
-      "type": "n8n-nodes-base.dateTime",
-      "typeVersion": 2,
-      "position": [
-        560,
-        -60
-      ]
-    },
-    {
-      "parameters": {
-        "value": "={{ $json.lastlogin }}",
-        "dataPropertyName": "lastlogin",
-        "custom": true,
-        "toFormat": "YYYY-MM-DD HH:mm:ss",
-        "options": {}
-      },
-      "id": "7548e14f-ecb7-4b7d-add7-b3bcea56d0b2",
-      "name": "FixDate V1",
-      "type": "n8n-nodes-base.dateTime",
-      "typeVersion": 1,
-      "position": [
-        560,
-        100
-      ]
     }
   ],
   "pinData": {},
@@ -281,6 +182,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-09-15T21:08:57.000Z",
-  "versionId": "3237af5f-27ea-440d-b74b-099ab0b1062a"
+  "updatedAt": "2023-10-04T21:42:06.000Z",
+  "versionId": "bf9ac05b-cc6a-4008-b839-d5587800339a"
 }
