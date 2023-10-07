@@ -1,0 +1,158 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking \"Execute Workflow\"": {
+      "main": [
+        [
+          {
+            "node": "Microsoft SQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Microsoft SQL": {
+      "main": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Item Lists": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2023-10-06T23:34:01.215Z",
+  "id": "3ZKBfq8ceZhBjFhF",
+  "name": "Daily Evicore Report",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "58423caa-1c67-467b-aeb7-939693a72bf4",
+      "name": "When clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        1000,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT  Top 2 *\nFROM EdVistas..datacounts\nORDER BY TimeStamp DESC"
+      },
+      "id": "9835eae1-17d0-4303-9a9d-68d056c3025e",
+      "name": "Microsoft SQL",
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1,
+      "position": [
+        1220,
+        420
+      ],
+      "credentials": {
+        "microsoftSql": {
+          "id": "9",
+          "name": "SQL01.edvistas.local (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "prompt": {
+          "messages": [
+            {
+              "role": "assistant",
+              "content": "Your job is to review JSON data count records and explain in simple language what changed today. Be sure to read the changes between each record. For example say \"3 new districts were created today\", \"We lost 1 AIMS customer today\""
+            },
+            {
+              "content": "DATA:\n{\"json\": {\"TimeStamp\": \"2023-10-06T18:00:00.000Z\", \"AIMS\": 17, \"Courses\": 1701, \"Datamate Elite\": 85, \"Datamate Live\": 83, \"Datamate Basic\": 528, \"Districts\": 968, \"Forms\": 2345, \"Guardians\": 6286350, \"SafeSchools\": 59, \"Schools\": 12735, \"SMS\": 5886679, \"Staff\": 13550, \"StaffTrac\": 108, \"Students\": 5636315, \"Surveys\": 501, \"Users\": 114770, \"ItemBank\": 66131}, \"pairedItem\": {\"item\": 0, \"input\": 0}},{\"json\": {\"TimeStamp\": \"2023-10-05T09:00:00.000Z\", \"AIMS\": 17, \"Courses\": 1692, \"Datamate Elite\": 85, \"Datamate Live\": 80, \"Datamate Basic\": 531, \"Districts\": 968, \"Forms\": 2345, \"Guardians\": 6286017, \"SafeSchools\": 59, \"Schools\": 12710, \"SMS\": 5886679, \"Staff\": 13540, \"StaffTrac\": 108, \"Students\": 5635569, \"Surveys\": 501, \"Users\": 114664, \"ItemBank\": 66131}}\n"
+            }
+          ]
+        },
+        "simplifyOutput": false,
+        "options": {
+          "maxTokens": 200
+        }
+      },
+      "id": "751adeb7-0521-4aec-8e7a-6daf3e487cee",
+      "name": "OpenAI",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        1440,
+        420
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "summarize",
+        "fieldsToSummarize": {
+          "values": [
+            {
+              "aggregation": "concatenate",
+              "field": "AIMS"
+            },
+            {
+              "aggregation": "countUnique",
+              "field": "Courses"
+            }
+          ]
+        },
+        "options": {
+          "outputFormat": "separateItems"
+        }
+      },
+      "id": "c3adeecd-e913-49c9-9068-7bbe6f84c7e6",
+      "name": "Item Lists",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 3,
+      "position": [
+        1400,
+        180
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2023-02-14T20:17:22.566Z",
+      "updatedAt": "2023-02-14T20:17:22.566Z",
+      "id": "22",
+      "name": "ChatGPT"
+    },
+    {
+      "createdAt": "2023-06-10T21:44:29.997Z",
+      "updatedAt": "2023-06-10T21:44:29.997Z",
+      "id": "36",
+      "name": "MSSQL"
+    },
+    {
+      "createdAt": "2023-09-29T18:54:01.860Z",
+      "updatedAt": "2023-09-29T18:54:01.860Z",
+      "id": "Sl85YMFRpXn5g4Db",
+      "name": "evicore"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2023-10-07T00:09:25.000Z",
+  "versionId": "25cb6e67-7d29-4c8f-b82b-b22d787d1da6"
+}
