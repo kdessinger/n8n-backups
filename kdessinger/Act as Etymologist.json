@@ -1,0 +1,300 @@
+{
+  "active": false,
+  "connections": {
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "Word",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Act as Etymologist": {
+      "main": [
+        [
+          {
+            "node": "HTML Generator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Word": {
+      "main": [
+        [
+          {
+            "node": "Act as Etymologist",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTML Generator": {
+      "main": [
+        [
+          {
+            "node": "HTML1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Word",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-10-08T00:36:27.944Z",
+  "id": "Mf9buct2tg5IwybR",
+  "name": "Act as Etymologist",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "position": [
+        -260,
+        180
+      ],
+      "typeVersion": 1,
+      "id": "0d63f753-018e-4ebb-a0f7-9e3f7d4af35e"
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "=mail.message",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "email_from",
+              "fieldValue": "datamate@edvistas.com"
+            },
+            {
+              "fieldName": "message_type",
+              "fieldValue": "email"
+            },
+            {
+              "fieldName": "model",
+              "fieldValue": "mail.channel"
+            },
+            {
+              "fieldName": "record_name",
+              "fieldValue": "={{ $json[\"Group\"] }}"
+            },
+            {
+              "fieldName": "body",
+              "fieldValue": "={{ $node[\"Get Affirmations\"].json[\"affirmation\"] }}"
+            },
+            {
+              "fieldName": "res_id",
+              "fieldValue": "={{ $json[\"id\"] }}"
+            }
+          ]
+        }
+      },
+      "id": "6bcdada4-924c-4d0a-afd0-e5eae3008758",
+      "name": "Post Message",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        1080,
+        240
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "odooApi": {
+          "id": "14",
+          "name": "odoo-stage (Admin)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Triggers\n",
+        "height": 385.64102564102603
+      },
+      "id": "3805360d-2735-4182-9733-be1948d3ce78",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -320,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Post Results",
+        "height": 472.82051282051225
+      },
+      "id": "0dbcf629-a549-477a-b479-3b4934ac54a6",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        60
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Generate Content",
+        "height": 384.61538461538476,
+        "width": 908.1456907872006
+      },
+      "id": "278edf0b-5391-4c3d-888e-626f9ca619fb",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -20,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "model": "gpt-3.5-turbo-16k",
+        "prompt": {
+          "messages": [
+            {
+              "role": "assistant",
+              "content": "=I want you to act as a etymologist. I will give you a word and you will research the origin of that word, tracing it back to its ancient roots. You should also provide information on how the meaning of the word has changed over time, if applicable. My first request is \"I want to trace the origins of the word '{{ $json[\"data\"] }}'.\""
+            }
+          ]
+        },
+        "options": {
+          "frequency_penalty": 0,
+          "maxTokens": 400,
+          "presence_penalty": 0,
+          "temperature": 0.7,
+          "topP": 1
+        }
+      },
+      "id": "42ac509b-30a6-4997-9628-91a21b373a13",
+      "name": "Act as Etymologist",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        220,
+        240
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "24",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "html": "{{ $json.message.content }}"
+      },
+      "id": "e39ccbe3-b124-4655-a399-50047324f422",
+      "name": "HTML1",
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1,
+      "position": [
+        620,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "data",
+              "stringValue": "Spelling"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "d59ab570-5b09-476d-a8d9-901c1ab294f9",
+      "name": "Word",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [
+        20,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "model": "gpt-3.5-turbo-16k",
+        "prompt": {
+          "messages": [
+            {
+              "role": "assistant",
+              "content": "=I want you to act as an HTML Generating machine. I will provide you with the inputs [Subject] and [Body] as the content and your will generate an elogent looking one page website. Make sure to use eye catching colors, bolds, underlines, italics, and format the heading correctly. You should use your knowledge of UX/UI design principles, coding languages, website development tools etc. Output your resluts as html. "
+            },
+            {
+              "content": "=Subject=The Etymology of the word {{ $('Word').item.json.data }}\nBody= {{ $json.message.content }} "
+            }
+          ]
+        },
+        "options": {
+          "frequency_penalty": 0,
+          "maxTokens": 1200,
+          "presence_penalty": 0,
+          "temperature": 0.7,
+          "topP": 1
+        }
+      },
+      "id": "7fd40d31-923c-4267-9b79-b843abe38be7",
+      "name": "HTML Generator",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        420,
+        240
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "24",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "152bc206-f5fd-4473-ad34-12d6ae28edf4",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        -260,
+        320
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2023-03-26T04:11:10.869Z",
+      "updatedAt": "2023-03-26T04:11:10.869Z",
+      "id": "3",
+      "name": "Tweet"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2023-10-08T01:24:02.000Z",
+  "versionId": "fff1a4bd-ccc6-4647-a328-6f3dc4ebb23f"
+}
