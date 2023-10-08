@@ -1,0 +1,150 @@
+{
+  "active": false,
+  "connections": {
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "OpenWeatherMap",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenWeatherMap": {
+      "main": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-10-08T07:54:08.652Z",
+  "id": "d6UIzPOtp0dHUDu3",
+  "meta": null,
+  "name": "Receive the weather information of any city",
+  "nodes": [
+    {
+      "parameters": {
+        "format": "imperial",
+        "cityName": "={{ $json.query }}"
+      },
+      "name": "OpenWeatherMap",
+      "type": "n8n-nodes-base.openWeatherMap",
+      "position": [
+        480,
+        240
+      ],
+      "typeVersion": 1,
+      "id": "7f5c2f6f-643a-4ceb-85b9-f80551147474",
+      "credentials": {
+        "openWeatherMapApi": {
+          "id": "UjJoqtdRjIwxNxvL",
+          "name": "OpenWeatherMap (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "09f743e1-da04-401b-838a-f74a25c0d752",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        240,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "prompt": "=This is JSON output from OpenWeatherMap. All units are in imperial format (Fahrenheit miles/hour). Create a plain text interpretation of the weather data. Include units rounded to whole numbers in the output. Exclude information about sunrise and sunset time.\n\nJSON weather data: {{ JSON.stringify($json) }}\n\nPlain text interpretation: ",
+        "options": {
+          "maxTokens": 250,
+          "temperature": 0.1
+        }
+      },
+      "id": "f62dfc0a-5218-4725-9c6f-06d607c730bc",
+      "name": "OpenAI",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        700,
+        240
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "24",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "response",
+              "stringValue": "={{ $json.text }}"
+            }
+          ]
+        },
+        "include": "none",
+        "options": {}
+      },
+      "id": "40143f9b-ce43-4da0-9ef4-cea7cded1fd5",
+      "name": "Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.1,
+      "position": [
+        920,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "query",
+              "stringValue": "Schenectady"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a2eb1ecd-3a7b-4b52-9c18-4394bd1371de",
+      "name": "Sample City",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.1,
+      "position": [
+        240,
+        60
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2023-10-08T08:41:47.000Z",
+  "versionId": "6a1dab75-c3e3-442e-bfff-722ed2605e5f"
+}
