@@ -1,0 +1,248 @@
+{
+  "active": false,
+  "connections": {
+    "Wikipedia": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chat OpenAI": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On new manual Chat Message": {
+      "main": [
+        [
+          {
+            "node": "Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Weather Tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SerpAPI": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-10-08T07:44:27.079Z",
+  "id": "10TCukYhpP8DulJc",
+  "meta": null,
+  "name": "[AI/LangChain] AI chatbot that can query the web",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "64419b72-401d-4ae1-b095-876537991e7d",
+      "name": "On new manual Chat Message",
+      "type": "@n8n/n8n-nodes-langchain.manualChatTrigger",
+      "position": [
+        380,
+        240
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "model": "gpt-3.5-turbo-16k",
+        "options": {
+          "temperature": 0.3
+        }
+      },
+      "id": "309b5969-da9c-4ad3-9131-00d0aa62d880",
+      "name": "Chat OpenAI",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "position": [
+        420,
+        620
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "openAiApi": {
+          "id": "24",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "9229ebe6-8dec-4cec-b005-8c8f335e9406",
+      "name": "SerpAPI",
+      "type": "@n8n/n8n-nodes-langchain.toolSerpApi",
+      "position": [
+        1300,
+        620
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "serpApi": {
+          "id": "Ij7nio1lbgGnxaYT",
+          "name": "SerpAPI (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "837b5813-7db5-40fc-b75a-201e0cd98dde",
+      "name": "Window Buffer Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "position": [
+        740,
+        600
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {},
+      "id": "7d1ab08f-0700-4f9b-918e-e3f154e9cf0d",
+      "name": "Wikipedia",
+      "type": "@n8n/n8n-nodes-langchain.toolWikipedia",
+      "position": [
+        1180,
+        620
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "### Conversational agent will utilise available tools to answer the prompt. ",
+        "height": 211,
+        "width": 422
+      },
+      "id": "cf7cba24-4967-4f08-8dc6-aa85a5b56506",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        600,
+        167
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "### Tools which agent can use to accomplish the task",
+        "height": 185,
+        "width": 490.93006993006975
+      },
+      "id": "d038d6b2-d6eb-4eb4-ab73-144f009f1afd",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        980,
+        540
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "### The conversation history(last 20 messages) is stored in a buffer memory",
+        "height": 185,
+        "width": 300
+      },
+      "id": "38b5b8db-c062-4c08-8604-8a3dd71c7075",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        640,
+        540
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "### Choose the Large Language Model you want to use",
+        "height": 183.44755244755243,
+        "width": 281.3123543123543
+      },
+      "id": "9f5f4e04-ee03-42ab-8302-71d0594f9d9a",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        318.6876456876457,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "name": "Weather tool",
+        "description": "Use this tool to get current weather data for specific city. Input should be name of the city.",
+        "workflowId": "d6UIzPOtp0dHUDu3"
+      },
+      "id": "6527fc20-b9af-4a3e-8ba9-c95d49bea979",
+      "name": "Weather Tool",
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "77edfbb7-6ef0-4933-ad57-e7dfd27fcdab",
+      "name": "Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "position": [
+        680,
+        240
+      ],
+      "typeVersion": 1
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2023-10-08T08:46:19.000Z",
+  "versionId": "e037ea0a-b399-4812-8019-98f2176b7fdf"
+}
