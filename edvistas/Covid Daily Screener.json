@@ -48,8 +48,8 @@
   "nodes": [
     {
       "parameters": {
-        "content": "## Covid Daily Screener\nEduForm Submissions and workflow processees.\nClick to open EVI's form: [5264](https://apps.edvistas.com/forms/formEntry.aspx?formid=5264)\n\n* Fields Catalog shows all Fields used in this EduForm Submission.\n* Webhook - The URL Eduform sumbitted to.\n* EduForm Pivot - Pivots the data into human readable.\n* IF - Logical Test\n* Alert - Various Alert outputs (Email).",
-        "height": 239.67711630610643,
+        "content": "## Covid Daily Screener\nEduForm Submissions and workflow processees.\nClick to open EVI's form: [5264](https://apps.edvistas.com/forms/formEntry.aspx?formid=5264)\n\n- Fields Catalog references all Fields used in this EduForm Submission.\n- The workflow starts with \"Submit Form\" as the entry point.\n- EduForm Pivot - Pivots the data into human readable.\n- IF - Logical Test to see if 'No' option was pressed.\n- Alert - Will send out Alert via Email.",
+        "height": 258.62474720934273,
         "width": 737.8050865341586
       },
       "id": "a6574388-9dc9-4701-824d-f1bfc7986251",
@@ -58,7 +58,7 @@
       "typeVersion": 1,
       "position": [
         -20,
-        -83
+        -101.38202998075178
       ]
     },
     {
@@ -311,6 +311,21 @@
           "name": "SMTP (mx.gowls.com)"
         }
       }
+    },
+    {
+      "parameters": {
+        "content": "The workflow is designed to handle a COVID daily screener form submission process. Let me break down the different components and their purposes:\n\n1. **Sticky Note1**: This node seems to be a visual representation of information and serves as a note or documentation. It contains information about the COVID Daily Screener and provides a link to the form.\n\n2. **All Good, Do Nothing**: This node doesn't have any parameters defined, and its purpose is to do nothing when triggered. It seems like a placeholder or a way to create a pause in the workflow.\n\n3. **IF Screener Answers All No's**: This node is an \"IF\" condition node. It checks whether specific questions in the screener have been answered with \"No.\" The conditions are defined based on the values of `$json.Q1_No`, `$json.Q2_No`, `$json.Q3_No`, and `$json.Q4_No`. If all of these conditions are met (i.e., all answers are \"No\"), it will proceed to the next nodes.\n\n4. **EduForm Pivot**: This node is used to pivot data from the form submission. It appears to extract specific fields from the form submission and set them as key-value pairs. The key names are based on the names of the fields from the form.\n\n5. **Fields Catalogue**: This node seems to catalog or list the fields used in the EduForm submission. It likely provides a structured view of the form fields and their values.\n\n6. **Submit Form (Webhook)**: This node is configured to make an HTTP POST request to a webhook endpoint located at the path \"evi/screener.\" It appears to submit data to an external system, possibly the COVID screener form.\n\n7. **Covid Alert! Send Email**: This node sends an email alert if a potential COVID-19 exposure risk is detected. It includes details like the date, name, email, and a link to the submitted records in EduForm.\n\nThe connections between these nodes define the flow of the workflow:\n\n- The workflow starts with \"Submit Form\" as the entry point.\n- Data from the form submission is passed to the \"EduForm Pivot\" node.\n- The pivoted data is then checked by the \"IF Screener Answers All No's\" node.\n- If all answers are \"No,\" it proceeds to the \"All Good, Do Nothing\" node and then to the \"Covid Alert! Send Email\" node.\n- If any of the conditions in the \"IF Screener Answers All No's\" node are not met, it doesn't proceed to send an alert.\n\nThis workflow appears to be designed to automate the screening process for potential COVID-19 exposure based on the answers provided in the form and send an email alert if certain conditions are met.\n\nPlease note that this workflow is based on the information provided in the JSON configuration, and the actual behavior may depend on the specific implementation and the systems integrated with it.",
+        "height": 813.213978729604,
+        "width": 820.8274511946383
+      },
+      "id": "2068aefd-0336-4db1-b284-896b11045c1d",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        820,
+        -100
+      ]
     }
   ],
   "pinData": {
@@ -551,6 +566,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-07-28T19:03:13.000Z",
-  "versionId": "1b491bcd-72cf-4aea-b705-9e0039fe3c38"
+  "updatedAt": "2023-10-08T04:19:58.000Z",
+  "versionId": "318b5d18-6843-4513-910f-49ff2a85ab15"
 }
