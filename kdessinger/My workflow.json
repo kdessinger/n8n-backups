@@ -15,6 +15,7 @@
   },
   "createdAt": "2022-02-03T15:20:34.779Z",
   "id": "2",
+  "meta": null,
   "name": "My workflow",
   "nodes": [
     {
