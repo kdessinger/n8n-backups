@@ -1,6 +1,17 @@
 {
   "active": false,
   "connections": {
+    "SerpAPI": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "Wikipedia": {
       "ai_tool": [
         [
@@ -55,21 +66,10 @@
           }
         ]
       ]
-    },
-    "SerpAPI": {
-      "ai_tool": [
-        [
-          {
-            "node": "Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
     }
   },
-  "createdAt": "2023-10-08T07:44:27.079Z",
-  "id": "10TCukYhpP8DulJc",
+  "createdAt": "2023-10-08T08:17:01.993Z",
+  "id": "hEfNF6RdWWco7byD",
   "meta": null,
   "name": "[AI/LangChain] AI chatbot that can query the web",
   "nodes": [
@@ -114,7 +114,7 @@
       "name": "SerpAPI",
       "type": "@n8n/n8n-nodes-langchain.toolSerpApi",
       "position": [
-        1300,
+        1000,
         620
       ],
       "typeVersion": 1,
@@ -126,7 +126,9 @@
       }
     },
     {
-      "parameters": {},
+      "parameters": {
+        "contextWindowLength": 20
+      },
       "id": "837b5813-7db5-40fc-b75a-201e0cd98dde",
       "name": "Window Buffer Memory",
       "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
@@ -137,12 +139,25 @@
       "typeVersion": 1
     },
     {
+      "parameters": {
+        "options": {}
+      },
+      "id": "77edfbb7-6ef0-4933-ad57-e7dfd27fcdab",
+      "name": "Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "position": [
+        680,
+        240
+      ],
+      "typeVersion": 1
+    },
+    {
       "parameters": {},
       "id": "7d1ab08f-0700-4f9b-918e-e3f154e9cf0d",
       "name": "Wikipedia",
       "type": "@n8n/n8n-nodes-langchain.toolWikipedia",
       "position": [
-        1180,
+        1120,
         620
       ],
       "typeVersion": 1
@@ -209,8 +224,7 @@
     },
     {
       "parameters": {
-        "name": "Weather tool",
-        "description": "Use this tool to get current weather data for specific city. Input should be name of the city.",
+        "description": "Use this tool to get current weather data for specific cities. Input should be the name of the city.",
         "workflowId": "d6UIzPOtp0dHUDu3"
       },
       "id": "6527fc20-b9af-4a3e-8ba9-c95d49bea979",
@@ -218,22 +232,9 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 1,
       "position": [
-        1040,
+        1240,
         620
       ]
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
-      "id": "77edfbb7-6ef0-4933-ad57-e7dfd27fcdab",
-      "name": "Agent",
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "position": [
-        680,
-        240
-      ],
-      "typeVersion": 1
     }
   ],
   "pinData": {},
@@ -243,6 +244,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-10-08T08:46:19.000Z",
-  "versionId": "e037ea0a-b399-4812-8019-98f2176b7fdf"
+  "updatedAt": "2023-10-08T08:17:01.993Z",
+  "versionId": "c0f2202a-24f3-41ff-92c0-025aa7799503"
 }
