@@ -23,16 +23,27 @@
         ]
       ]
     },
-    "Format Results": {
-      "main": [
-        []
-      ]
-    },
     "ChatGPT Request": {
       "main": [
         [
           {
             "node": "Format Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Results": {
+      "main": [
+        [
+          {
+            "node": "Twitter",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Post Message",
             "type": "main",
             "index": 0
           }
@@ -49,7 +60,7 @@
       "name": "Start",
       "type": "n8n-nodes-base.start",
       "position": [
-        380,
+        180,
         240
       ],
       "typeVersion": 1,
@@ -93,8 +104,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        1180,
-        440
+        1100,
+        146
       ],
       "alwaysOutputData": true,
       "credentials": {
@@ -106,32 +117,12 @@
     },
     {
       "parameters": {
-        "resource": "note",
-        "memo": "={{ $json[\"Content\"] }}"
-      },
-      "id": "b11930c6-898a-42f5-8bd2-c00d2b60c826",
-      "name": "Odoo",
-      "type": "n8n-nodes-base.odoo",
-      "typeVersion": 1,
-      "position": [
-        1180,
-        60
-      ],
-      "credentials": {
-        "odooApi": {
-          "id": "15",
-          "name": "Odoo-Stage (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {
         "functionCode": "// hashtag list\nconst Hashtags = [\n  \"#camp\",\n  \"#life\",\n  \"#camping\",\n  \"#offroading\",\n  \"#quads\",\n  \"#opensource\",\n  \"#docker\",\n  \"#bitcoin\",\n  \"#monero\",\n  \"#crypto\",\n  \"#atvs\",\n  \"#technology\",\n  \"#trending\",\n  \"#AI\",\n  \"#education\",\n  \"#hak5\",\n  \"#n8n\"\n];\n\n// random output function\nconst randomHashtag = Hashtags[Math.floor(Math.random() * Hashtags.length)];\nitem.hashtag = randomHashtag;\nreturn item;"
       },
       "name": "Choose a random item",
       "type": "n8n-nodes-base.functionItem",
       "position": [
-        580,
+        440,
         240
       ],
       "typeVersion": 1,
@@ -161,7 +152,7 @@
       "name": "Format Results",
       "type": "n8n-nodes-base.set",
       "position": [
-        980,
+        840,
         240
       ],
       "typeVersion": 1,
@@ -177,8 +168,8 @@
       "type": "n8n-nodes-base.twitter",
       "typeVersion": 1,
       "position": [
-        1220,
-        240
+        1100,
+        326
       ]
     },
     {
@@ -207,7 +198,7 @@
       "type": "n8n-nodes-base.openAi",
       "typeVersion": 1,
       "position": [
-        780,
+        640,
         240
       ],
       "credentials": {
@@ -216,6 +207,49 @@
           "name": "OpenAi (kdessinger)"
         }
       }
+    },
+    {
+      "parameters": {
+        "content": "## Triggers\n",
+        "height": 385.64102564102586
+      },
+      "id": "48aa8c38-823b-46fa-a917-12c77dde5822",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        100,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Post Results",
+        "height": 472.82051282051225
+      },
+      "id": "1026c1a5-bd98-42bb-b056-fc41376a8cc8",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        60
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Generate Content",
+        "height": 384.61538461538476,
+        "width": 604.1025641025642
+      },
+      "id": "a69ad070-ea9a-48af-a138-5b5d004c9cf3",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        400,
+        100
+      ]
     }
   ],
   "pinData": {},
@@ -230,6 +264,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-09-19T05:24:06.000Z",
-  "versionId": "76f4b8fb-520b-42ef-aac5-68e6c7ccb1bf"
+  "updatedAt": "2023-10-08T00:36:01.000Z",
+  "versionId": "c7a9beeb-e6e0-46a3-8330-6848e2a86adc"
 }
