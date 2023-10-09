@@ -139,7 +139,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -20,
+        40,
         100
       ]
     },
@@ -159,7 +159,7 @@
           "frequency_penalty": 0,
           "maxTokens": 400,
           "presence_penalty": 0,
-          "temperature": 0.7,
+          "temperature": 0.4,
           "topP": 1
         }
       },
@@ -168,7 +168,7 @@
       "type": "n8n-nodes-base.openAi",
       "typeVersion": 1,
       "position": [
-        220,
+        280,
         240
       ],
       "credentials": {
@@ -187,7 +187,7 @@
       "type": "n8n-nodes-base.html",
       "typeVersion": 1,
       "position": [
-        620,
+        680,
         240
       ]
     },
@@ -208,7 +208,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3,
       "position": [
-        20,
+        80,
         240
       ]
     },
@@ -240,7 +240,7 @@
       "type": "n8n-nodes-base.openAi",
       "typeVersion": 1,
       "position": [
-        420,
+        480,
         240
       ],
       "credentials": {
@@ -274,6 +274,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-10-08T19:25:17.000Z",
-  "versionId": "795b07ae-b2ea-4a5e-9487-4bf3d04679b4"
+  "updatedAt": "2023-10-09T04:44:05.000Z",
+  "versionId": "e34ec1e6-fc6d-47cd-b968-fb0da79dabe4"
 }
