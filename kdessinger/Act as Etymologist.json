@@ -1,17 +1,6 @@
 {
   "active": false,
   "connections": {
-    "Start": {
-      "main": [
-        [
-          {
-            "node": "Word",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Act as Etymologist": {
       "main": [
         [
@@ -62,17 +51,6 @@
   "meta": null,
   "name": "Act as Etymologist",
   "nodes": [
-    {
-      "parameters": {},
-      "name": "Start",
-      "type": "n8n-nodes-base.start",
-      "position": [
-        -260,
-        180
-      ],
-      "typeVersion": 1,
-      "id": "0d63f753-018e-4ebb-a0f7-9e3f7d4af35e"
-    },
     {
       "parameters": {
         "resource": "custom",
@@ -219,7 +197,7 @@
           "values": [
             {
               "name": "data",
-              "stringValue": "Spelling"
+              "stringValue": "retire"
             }
           ]
         },
@@ -280,7 +258,7 @@
       "typeVersion": 1,
       "position": [
         -260,
-        320
+        240
       ]
     }
   ],
@@ -296,6 +274,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-10-08T01:24:02.000Z",
-  "versionId": "fff1a4bd-ccc6-4647-a328-6f3dc4ebb23f"
+  "updatedAt": "2023-10-08T19:25:17.000Z",
+  "versionId": "795b07ae-b2ea-4a5e-9487-4bf3d04679b4"
 }
