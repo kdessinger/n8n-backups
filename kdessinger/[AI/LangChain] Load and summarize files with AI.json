@@ -121,7 +121,7 @@
     },
     {
       "parameters": {
-        "loader": "pdfLoader"
+        "loader": "csvLoader"
       },
       "id": "1a370bfe-1723-4b47-a1dc-efb2f38caf1e",
       "name": "Binary Input Loader",
@@ -133,7 +133,9 @@
       "typeVersion": 1
     },
     {
-      "parameters": {},
+      "parameters": {
+        "chunkOverlap": 10
+      },
       "id": "5475aac4-ca36-44ae-83a1-311f6d66bb28",
       "name": "Token Splitter",
       "type": "@n8n/n8n-nodes-langchain.textSplitterTokenSplitter",
@@ -146,7 +148,7 @@
     {
       "parameters": {
         "operation": "download",
-        "path": "/!Clients/PEF Public Employees Federation/2023 October Special Election/Import Files/PEF-Elections-Notice-OCT2023.pdf"
+        "path": "/!Share/_reports/Products by District.csv"
       },
       "id": "a37ac615-f3dd-4f9d-8371-c077f47e30cc",
       "name": "Nextcloud1",
@@ -187,6 +189,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-10-09T18:18:58.000Z",
-  "versionId": "98d71fc3-f241-4b6c-8bab-37c1c73c43bb"
+  "updatedAt": "2023-10-10T05:03:12.000Z",
+  "versionId": "7778b140-dac6-43de-8766-28b840eb795d"
 }
