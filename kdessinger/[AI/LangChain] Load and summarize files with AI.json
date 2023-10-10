@@ -1,6 +1,73 @@
 {
   "active": false,
-  "connections": {},
+  "connections": {
+    "Binary Input Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Summarization Chain",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Summarization Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Token Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Binary Input Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking \"Execute Workflow\"": {
+      "main": [
+        [
+          {
+            "node": "Nextcloud1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Nextcloud1": {
+      "main": [
+        [
+          {
+            "node": "Summarization Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Summarization Chain": {
+      "main": [
+        [
+          {
+            "node": "HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
   "createdAt": "2023-10-09T04:53:45.548Z",
   "id": "G93qd7ckZD0Wv07Y",
   "meta": null,
@@ -42,7 +109,7 @@
       "type": "@n8n/n8n-nodes-langchain.lmOpenAi",
       "position": [
         840,
-        420
+        460
       ],
       "typeVersion": 1,
       "credentials": {
@@ -71,15 +138,15 @@
       "name": "Token Splitter",
       "type": "@n8n/n8n-nodes-langchain.textSplitterTokenSplitter",
       "position": [
-        940,
-        560
+        1080,
+        580
       ],
       "typeVersion": 1
     },
     {
       "parameters": {
         "operation": "download",
-        "path": "/Public/eBooks/Publishers/Microsoft/Introducing Windows Server 2016.pdf"
+        "path": "/!Clients/PEF Public Employees Federation/2023 October Special Election/Import Files/PEF-Elections-Notice-OCT2023.pdf"
       },
       "id": "a37ac615-f3dd-4f9d-8371-c077f47e30cc",
       "name": "Nextcloud1",
@@ -91,10 +158,23 @@
       ],
       "credentials": {
         "nextCloudApi": {
-          "id": "z2gkXhk0EPG6w5sI",
-          "name": "NextCloud (kdessinger)"
+          "id": "3",
+          "name": "NextCloud (EdVistas)"
         }
       }
+    },
+    {
+      "parameters": {
+        "html": "<!DOCTYPE html>\n\n<html>\n<head>\n  <meta charset=\"UTF-8\" />\n  <title>Summarization</title>\n</head>\n<body>\n  <div class=\"container\">\n    <h1>Results</h1>\n    <p>{{ $json.response.output_text }}</p>\n  </div>\n</body>\n</html>\n\n<style>\n.container {\n  background-color: #ffffff;\n  text-align: center;\n  padding: 16px;\n  border-radius: 8px;\n}\n\nh1 {\n  color: #ff6d5a;\n  font-size: 24px;\n  font-weight: bold;\n  padding: 8px;\n}\n\nh2 {\n  color: #909399;\n  font-size: 18px;\n  font-weight: bold;\n  padding: 8px;\n}\n</style>\n\n<script>\nconsole.log(\"Hello World!\");\n</script>"
+      },
+      "id": "224ae035-4841-46e9-92bc-f4a45b09ba56",
+      "name": "HTML",
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        240
+      ]
     }
   ],
   "pinData": {},
@@ -107,6 +187,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-10-09T06:16:41.000Z",
-  "versionId": "c722a7d8-c414-4731-8648-1400f7367a71"
+  "updatedAt": "2023-10-09T18:18:58.000Z",
+  "versionId": "98d71fc3-f241-4b6c-8bab-37c1c73c43bb"
 }
