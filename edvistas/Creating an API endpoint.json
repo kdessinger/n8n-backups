@@ -26,6 +26,7 @@
   },
   "createdAt": "2023-02-01T15:14:32.992Z",
   "id": "24",
+  "meta": null,
   "name": "Creating an API endpoint",
   "nodes": [
     {
