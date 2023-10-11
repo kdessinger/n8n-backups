@@ -44,6 +44,7 @@
   },
   "createdAt": "2022-02-21T20:00:11.594Z",
   "id": "4",
+  "meta": null,
   "name": "Weather",
   "nodes": [
     {
