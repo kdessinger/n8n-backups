@@ -66,6 +66,7 @@
   },
   "createdAt": "2023-01-05T07:10:27.933Z",
   "id": "17",
+  "meta": null,
   "name": "8x8 to Odoo Contact Search",
   "nodes": [
     {
@@ -324,6 +325,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-06-13T03:40:10.000Z",
-  "versionId": "80ce6aaa-341f-4050-857b-833cf43795e0"
+  "updatedAt": "2023-10-10T19:45:11.000Z",
+  "versionId": "6118f2bf-db09-4790-a287-7600129f7257"
 }
