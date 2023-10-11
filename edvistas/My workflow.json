@@ -1,43 +1,11 @@
 {
   "active": false,
   "connections": {
-    "Get Contacts": {
+    "Execute Workflow Trigger": {
       "main": [
         [
           {
-            "node": "IF",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Filter": {
-      "main": [
-        []
-      ]
-    },
-    "IF": {
-      "main": [
-        []
-      ]
-    },
-    "Set": {
-      "main": [
-        [
-          {
-            "node": "Get Contacts",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Get Tags": {
-      "main": [
-        [
-          {
-            "node": "IF",
+            "node": "HTML",
             "type": "main",
             "index": 0
           }
@@ -45,149 +13,33 @@
       ]
     }
   },
-  "createdAt": "2023-09-13T21:44:35.092Z",
-  "id": "R3exrELZFhj5SeTL",
+  "createdAt": "2023-10-11T13:50:55.904Z",
+  "id": "kriqnWCNQ7NtUGhJ",
+  "meta": null,
   "name": "My workflow",
   "nodes": [
     {
-      "parameters": {
-        "operation": "getAll",
-        "returnAll": true,
-        "options": {
-          "fieldsList": [
-            "active",
-            "display_name",
-            "EVI_DistID",
-            "EVI_DistName",
-            "EVI_Last_login",
-            "category_id"
-          ]
-        }
-      },
-      "id": "4dab47a4-ca48-4e8f-94d1-2a965f5da5d7",
-      "name": "Get Contacts",
-      "type": "n8n-nodes-base.odoo",
-      "typeVersion": 1,
-      "position": [
-        800,
-        220
-      ],
-      "credentials": {
-        "odooApi": {
-          "id": "12",
-          "name": "Odoo (Administrator)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "number": [
-            {
-              "value1": "={{ $json.EVI_DistID }}",
-              "operation": "equal",
-              "value2": 924
-            }
-          ]
-        }
-      },
-      "id": "353bc023-0071-4514-958a-65cac64cc072",
-      "name": "Filter",
-      "type": "n8n-nodes-base.filter",
-      "typeVersion": 1,
-      "position": [
-        1040,
-        420
-      ]
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "boolean": [
-            {
-              "value1": "={{ $json.category_id.includes(71) }}",
-              "value2": true
-            }
-          ]
-        }
-      },
-      "id": "a0494289-3cbf-43d0-819e-7584e14a3860",
-      "name": "IF",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 1,
-      "position": [
-        1020,
-        220
-      ]
-    },
-    {
-      "parameters": {
-        "resource": "custom",
-        "customResource": "res.partner.category",
-        "operation": "getAll",
-        "returnAll": true,
-        "options": {
-          "fieldsList": [
-            "id",
-            "name",
-            "color",
-            "active"
-          ]
-        },
-        "filterRequest": {
-          "filter": [
-            {
-              "fieldName": "name",
-              "value": "Aims"
-            }
-          ]
-        }
-      },
-      "id": "95797821-d9af-4c05-9ea1-6764591100ba",
-      "name": "Get Tags",
-      "type": "n8n-nodes-base.odoo",
-      "typeVersion": 1,
-      "position": [
-        800,
-        400
-      ],
-      "credentials": {
-        "odooApi": {
-          "id": "12",
-          "name": "Odoo (Administrator)"
-        }
-      }
-    },
-    {
       "parameters": {},
-      "id": "79af74a3-2e08-40cb-a2b8-cc1cd52bab0d",
-      "name": "When clicking \"Execute Workflow\"",
-      "type": "n8n-nodes-base.manualTrigger",
+      "id": "26bffb60-6c0d-44c8-9fd6-ef8ba53f6543",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1,
       "position": [
         500,
-        420
+        360
       ]
     },
     {
       "parameters": {
-        "values": {
-          "string": [
-            {
-              "name": "Software",
-              "value": "Aims"
-            }
-          ]
-        },
-        "options": {}
+        "html": "<!DOCTYPE html>\n<html lang=\"{{ page.lang | default: site.lang | default: \"en-US\" }}\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n\n{% seo %}\n    <link rel=\"stylesheet\" href=\"{{ \"/assets/css/style.css?v=\" | append: site.github.build_revision | relative_url }}\">\n    {% include head-custom.html %}\n    <script async src=\"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6945602608405209\" crossorigin=\"anonymous\"></script>\n  </head>\n  <body>\n    <div class=\"container-lg px-3 my-5 markdown-body\">\n      {% if site.title and site.title != page.title %}\n      <h1><a href=\"{{ \"/\" | absolute_url }}\">{{ site.title }}</a></h1>\n      {% endif %}\n\n      {{ content }}\n\n      {% if site.github.private != true and site.github.license %}\n      <div class=\"footer border-top border-gray-light mt-5 pt-3 text-right text-gray\">\n        Awesome ChatGPT Prompts is open source. {% github_edit_link \"Improve this page\" %}.\n      </div>\n      {% endif %}\n    </div>\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js\" integrity=\"sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=\" crossorigin=\"anonymous\"></script>\n    <script>anchors.add();</script>\n    <script>\n      document.querySelectorAll(\"h2[id^=act] + p + blockquote\").forEach((x) => {\n        x.setAttribute('contentEditable', true);\n        const button = document.createElement('button');\n        button.style.border = '0';\n        button.style.borderRadius = '3px';\n        button.style.fontSize = '1rem';\n        button.style.marginRight = '0.5rem';\n        button.style.padding = '0';\n        button.style.backgroundColor = 'transparent';\n        button.innerHTML = '✂️';\n        button.addEventListener('click', async () => {\n          if (navigator.clipboard) {\n            await navigator.clipboard.writeText(x.innerText);\n            alert('Prompt is copied, now paste this into ChatGPT.');\n          } else {\n            alert('Your browser does not support clipboard copy. Please select the prompt and copy.')\n          }\n        }, false);\n        x.previousElementSibling.previousElementSibling.prepend(button);\n      });\n    </script>\n    <style>video { max-width: 100% !important; }</style>\n    <!-- Google tag (gtag.js) -->\n    <script async src=\"https://www.googletagmanager.com/gtag/js?id=G-MSNHFWTE77\"></script>\n    <script>\n      window.dataLayer = window.dataLayer || [];\n      function gtag(){dataLayer.push(arguments);}\n      gtag('js', new Date());\n\n      gtag('config', 'G-MSNHFWTE77');\n    </script>\n  </body>\n</html>"
       },
-      "id": "40ec515c-6750-46f0-a3af-732581a5827f",
-      "name": "Set",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 2,
+      "id": "1ba040f0-a37d-4533-b987-8268e576534c",
+      "name": "HTML",
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1,
       "position": [
-        500,
-        220
+        720,
+        360
       ]
     }
   ],
@@ -198,6 +50,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-09-13T22:15:24.000Z",
-  "versionId": "e67bcc6f-09ee-42c0-9a3a-785023054f14"
+  "updatedAt": "2023-10-11T13:50:55.904Z",
+  "versionId": "df3550a1-8c5f-4111-b7ca-7da6b3853a58"
 }
