@@ -1,12 +1,6 @@
 {
   "active": false,
-  "connections": {
-    "Synthesia Create": {
-      "main": [
-        []
-      ]
-    }
-  },
+  "connections": {},
   "createdAt": "2022-02-10T21:57:15.216Z",
   "id": "3",
   "meta": null,
@@ -260,6 +254,8 @@
     },
     {
       "parameters": {
+        "databaseId": "63",
+        "tableId": "965",
         "additionalOptions": {}
       },
       "id": "70123373-2082-4466-86b0-a47796784e54",
@@ -797,6 +793,22 @@
           "name": "Synthesia (infoedvistas)"
         }
       }
+    },
+    {
+      "parameters": {
+        "url": "https://support.colohouse.com/rss/index.php?/News/Feed",
+        "options": {
+          "ignoreSSL": true
+        }
+      },
+      "id": "82858dc0-e2b0-4bb3-b191-ff866a705b73",
+      "name": "RSS Read",
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1,
+      "position": [
+        -760,
+        500
+      ]
     }
   ],
   "pinData": {
@@ -934,6 +946,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-06-14T19:04:00.000Z",
-  "versionId": "51072e65-57f4-4208-ab0e-2516666ec297"
+  "updatedAt": "2023-10-11T20:03:07.000Z",
+  "versionId": "4e062bb3-3d02-46c4-b2bc-5a22cf1208ef"
 }
