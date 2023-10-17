@@ -1,0 +1,80 @@
+{
+  "active": false,
+  "connections": {
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "Ntfy",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-10-16T23:51:30.737Z",
+  "id": "hbBAn9DYRcWLren1",
+  "meta": null,
+  "name": "Error Handler",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Error Trigger",
+      "type": "n8n-nodes-base.errorTrigger",
+      "position": [
+        140,
+        240
+      ],
+      "typeVersion": 1,
+      "id": "3826ca95-51ac-426f-918c-01614a04be99"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://ntfy.kdessinger.com",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\"topic\":\"n8n\",\"message\":\"Disk space is low\",\"title\":\"Low disk space alert\",\"tags\":[\"warning\",\"cd\"],\"priority\":4,\"attach\":\"https://filesrv.lan/space.jpg\",\"filename\":\"\",\"click\":\"\",\"actions\":[{\"action\":\"view\",\"label\":\"Admin panel\",\"url\":\"https://filesrv.lan/admin\"}]}",
+        "options": {}
+      },
+      "id": "16e2be11-195d-4355-b15a-8723b20d1285",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        260,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "topic": "n8n",
+        "message": "=\nWorkflow: {{$json[\"workflow\"][\"name\"]}}\nError: {{$json[\"execution\"][\"error\"][\"message\"]}}\nLast node executed: {{$json[\"execution\"][\"lastNodeExecuted\"]}}\nExecution URL: {{$json[\"execution\"][\"url\"]}}\nStacktrace: {{$json[\"execution\"][\"error\"][\"stack\"]}}",
+        "title": "N8N Workflow Failure",
+        "priority": 4,
+        "tags": "no_entry, rotating_light",
+        "additional_fields": {
+          "alternate_url": "https://ntfy.kdessinger.com"
+        }
+      },
+      "id": "1a20f135-6fc9-4a97-ba36-7492656646a8",
+      "name": "Ntfy",
+      "type": "n8n-nodes-ntfy.Ntfy",
+      "typeVersion": 1,
+      "position": [
+        360,
+        240
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2023-10-17T00:17:34.000Z",
+  "versionId": "b40b647b-3c17-490f-ba59-d81cd953a8de"
+}
