@@ -33,6 +33,12 @@
       "parameters": {
         "method": "POST",
         "url": "https://ntfy.kdessinger.com",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {}
+          ]
+        },
         "sendBody": true,
         "specifyBody": "json",
         "jsonBody": "{\"topic\":\"n8n\",\"message\":\"Disk space is low\",\"title\":\"Low disk space alert\",\"tags\":[\"warning\",\"cd\"],\"priority\":4,\"attach\":\"https://filesrv.lan/space.jpg\",\"filename\":\"\",\"click\":\"\",\"actions\":[{\"action\":\"view\",\"label\":\"Admin panel\",\"url\":\"https://filesrv.lan/admin\"}]}",
@@ -75,6 +81,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-10-17T00:17:34.000Z",
-  "versionId": "b40b647b-3c17-490f-ba59-d81cd953a8de"
+  "updatedAt": "2023-10-18T00:17:30.000Z",
+  "versionId": "6cae4c30-70bd-4540-a479-0af66d9ed681"
 }
