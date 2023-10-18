@@ -36,7 +36,7 @@
     },
     {
       "parameters": {
-        "from": "+18442026677",
+        "from": "+15185357994",
         "to": "+15125144925",
         "message": "={{ $json[\"body\"][\"msg\"] }}",
         "options": {}
@@ -58,10 +58,16 @@
     }
   ],
   "pinData": {},
-  "settings": {},
+  "settings": {
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": 300,
+    "executionOrder": "v1",
+    "errorWorkflow": "hbBAn9DYRcWLren1"
+  },
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2023-01-28T01:31:39.000Z",
-  "versionId": "fe409aff-b063-475e-9ef0-77b703b9dfd8"
+  "updatedAt": "2023-10-18T00:20:01.000Z",
+  "versionId": "faed1bfa-1cbd-434f-9d0d-3af27af9fe1f"
 }
