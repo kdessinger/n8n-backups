@@ -385,48 +385,8 @@
         "rule": {
           "interval": [
             {
-              "field": "weeks",
-              "triggerAtDay": [
-                1,
-                2,
-                3,
-                4,
-                5
-              ],
-              "triggerAtHour": 6
-            },
-            {
-              "field": "weeks",
-              "triggerAtDay": [
-                1,
-                2,
-                3,
-                4,
-                5
-              ],
-              "triggerAtHour": 11
-            },
-            {
-              "field": "weeks",
-              "triggerAtDay": [
-                1,
-                2,
-                3,
-                4,
-                5
-              ],
-              "triggerAtHour": 15
-            },
-            {
-              "field": "weeks",
-              "triggerAtDay": [
-                1,
-                2,
-                5,
-                4,
-                3
-              ],
-              "triggerAtHour": 17
+              "field": "cronExpression",
+              "expression": "0 5-17 * * 1-5"
             }
           ]
         }
@@ -438,7 +398,9 @@
       "position": [
         2720,
         980
-      ]
+      ],
+      "notesInFlow": true,
+      "notes": "every-hour (M-F 5AM-5PM)\n"
     },
     {
       "parameters": {
@@ -702,6 +664,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2023-10-05T14:48:09.000Z",
-  "versionId": "8965a40e-de4f-4f0e-ae38-190fb7959299"
+  "updatedAt": "2023-10-18T17:49:27.000Z",
+  "versionId": "d24fcb36-404b-4dda-84f8-fc90b32d6682"
 }
