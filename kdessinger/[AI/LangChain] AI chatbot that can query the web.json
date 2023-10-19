@@ -101,8 +101,8 @@
       "name": "On new manual Chat Message",
       "type": "@n8n/n8n-nodes-langchain.manualChatTrigger",
       "position": [
-        320,
-        140
+        340,
+        100
       ],
       "typeVersion": 1
     },
@@ -277,8 +277,8 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1,
       "position": [
-        320,
-        320
+        340,
+        340
       ]
     }
   ],
@@ -289,6 +289,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-10-08T19:46:31.000Z",
-  "versionId": "4c9bb62c-bcfc-42bf-8638-d5efa24f8b94"
+  "updatedAt": "2023-10-19T02:34:04.000Z",
+  "versionId": "49bb72c0-bf8d-4aba-a288-c516b57fcf7e"
 }
