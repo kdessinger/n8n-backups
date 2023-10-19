@@ -22,11 +22,6 @@
           }
         ]
       ]
-    },
-    "Item Lists": {
-      "main": [
-        []
-      ]
     }
   },
   "createdAt": "2023-10-06T23:34:01.215Z",
@@ -123,8 +118,8 @@
       "type": "n8n-nodes-base.itemLists",
       "typeVersion": 3,
       "position": [
-        1400,
-        180
+        1220,
+        240
       ]
     }
   ],
@@ -154,6 +149,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-10-07T00:09:25.000Z",
-  "versionId": "25cb6e67-7d29-4c8f-b82b-b22d787d1da6"
+  "updatedAt": "2023-10-18T16:31:26.000Z",
+  "versionId": "15210f3a-25c9-4735-aa6f-19ebc857e3a4"
 }
