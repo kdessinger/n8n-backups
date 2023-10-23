@@ -36,13 +36,7 @@
     },
     "Execute Workflow Trigger": {
       "main": [
-        [
-          {
-            "node": "Word",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     }
   },
@@ -220,7 +214,7 @@
           "messages": [
             {
               "role": "assistant",
-              "content": "=I want you to act as an HTML Generating machine. I will provide you with the inputs [Subject] and [Body] as the content and your will generate an elogent looking one page website. Make sure to use eye catching colors, bolds, underlines, italics, and format the heading correctly. You should use your knowledge of UX/UI design principles, coding languages, website development tools etc. Output your resluts as html. "
+              "content": "=I want you to act as an HTML Generating machine. I will provide you with the inputs [Subject] and [Body] as the content and you will generate an elogent looking one page website. Make sure to use eye catching colors, bolds, underlines, italics, and format the heading correctly. You should use your knowledge of UX/UI design principles, coding languages, website development tools etc. Output your resluts as html. "
             },
             {
               "content": "=Subject=The Etymology of the word {{ $('Word').item.json.data }}\nBody= {{ $json.message.content }} "
@@ -274,6 +268,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-10-22T02:22:04.000Z",
-  "versionId": "37d26d57-3dea-4e7c-a4f7-9375f23849cb"
+  "updatedAt": "2023-10-22T18:11:25.000Z",
+  "versionId": "4ca85578-cb31-4233-8f04-7ef23e63fb28"
 }
