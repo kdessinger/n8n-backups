@@ -88,6 +88,11 @@
           }
         ]
       ]
+    },
+    "Agent": {
+      "main": [
+        []
+      ]
     }
   },
   "createdAt": "2023-10-08T07:44:27.079Z",
@@ -284,11 +289,15 @@
   ],
   "pinData": {},
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": 300,
+    "errorWorkflow": "hbBAn9DYRcWLren1"
   },
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-10-19T02:34:04.000Z",
-  "versionId": "49bb72c0-bf8d-4aba-a288-c516b57fcf7e"
+  "updatedAt": "2023-10-24T05:11:48.000Z",
+  "versionId": "2ace6e3c-b9ad-411a-9806-be462be6d97a"
 }
