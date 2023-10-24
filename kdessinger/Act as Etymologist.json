@@ -36,7 +36,13 @@
     },
     "Execute Workflow Trigger": {
       "main": [
-        []
+        [
+          {
+            "node": "Word",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
@@ -257,7 +263,13 @@
     }
   ],
   "pinData": {},
-  "settings": {},
+  "settings": {
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": 300,
+    "executionOrder": "v1",
+    "errorWorkflow": "hbBAn9DYRcWLren1"
+  },
   "staticData": null,
   "tags": [
     {
@@ -268,6 +280,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-10-22T18:11:25.000Z",
-  "versionId": "4ca85578-cb31-4233-8f04-7ef23e63fb28"
+  "updatedAt": "2023-10-24T05:13:13.000Z",
+  "versionId": "e34ce2d8-d24c-478a-b9a1-8b53bfb6416d"
 }
