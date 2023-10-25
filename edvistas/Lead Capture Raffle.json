@@ -1,0 +1,243 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2023-10-24T19:32:46.457Z",
+  "id": "Z7wIYubXAtAIHYc2",
+  "meta": null,
+  "name": "Lead Capture Raffle",
+  "nodes": [
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "crm.lead",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "name"
+            },
+            {
+              "fieldName": "phone"
+            },
+            {}
+          ]
+        }
+      },
+      "id": "422ce9fc-606c-4ffe-b434-abe8981c3c37",
+      "name": "Odoo",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        740,
+        440
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Inputs\nData entering into this workflow!",
+        "height": 462.38887984287646,
+        "width": 288
+      },
+      "id": "5bfe0970-cf24-40cc-a8c4-6de7e481ae2f",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        300,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Processes\nWhat do you want to do with the data?",
+        "height": 605,
+        "width": 1133.546875
+      },
+      "id": "29f886fa-dd42-4302-912e-bb99364a60f4",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        660,
+        99
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Outputs\nWhere should we put this data?",
+        "height": 320,
+        "width": 374.5666663569698
+      },
+      "id": "6ac11c78-a2fd-4de7-a69f-1f23a6e43580",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1855.2222211898993,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "table": "Leads"
+      },
+      "id": "48e84195-ad7d-4830-907b-7298f41cfb96",
+      "name": "Microsoft SQL",
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1,
+      "position": [
+        740,
+        260
+      ],
+      "credentials": {
+        "microsoftSql": {
+          "id": "9",
+          "name": "SQL01.edvistas.local (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "42f5b763-fcde-457b-a413-ab9b55ade04e",
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [
+        1980,
+        360
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "27",
+          "name": "SMTP (mx.gowls.com)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "databaseId": "7",
+        "additionalOptions": {}
+      },
+      "id": "cef7e51c-0c33-4622-a27c-1b49a4244424",
+      "name": "Baserow",
+      "type": "n8n-nodes-base.baserow",
+      "typeVersion": 1,
+      "position": [
+        980,
+        440
+      ],
+      "credentials": {
+        "baserowApi": {
+          "id": "26",
+          "name": "Baserow (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "path": "leadcapture/giveaway",
+        "options": {}
+      },
+      "id": "2cc8a054-7c1f-4616-8e94-9ed18a0742af",
+      "name": "EduForm",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        360,
+        300
+      ],
+      "webhookId": "a7cea2a7-957d-4a18-89ab-cea2ebfa9fe6"
+    },
+    {
+      "parameters": {
+        "form": "232965239570161"
+      },
+      "id": "f3f2ed2e-c17c-48be-a0c3-b79a988221c7",
+      "name": "JotForm",
+      "type": "n8n-nodes-base.jotFormTrigger",
+      "typeVersion": 1,
+      "position": [
+        360,
+        460
+      ],
+      "webhookId": "ad1e0569-0c21-45f0-9b9d-ee8125d3d1fa",
+      "credentials": {
+        "jotFormApi": {
+          "id": "33",
+          "name": "JotForm account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "toFile",
+        "options": {}
+      },
+      "id": "a81f8b29-03d5-47f7-a1e0-e3d562a705b6",
+      "name": "Spreadsheet File",
+      "type": "n8n-nodes-base.spreadsheetFile",
+      "typeVersion": 2,
+      "position": [
+        980,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "Campagin"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b7de1b4d-e11d-4b62-848e-d6769c5b91c5",
+      "name": "Set Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.1,
+      "position": [
+        1220,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "options": {}
+      },
+      "id": "6ec5092e-b9dc-431a-b6c3-419bb10566e2",
+      "name": "MemberTrac",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1220,
+        440
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2023-10-24T19:33:13.703Z",
+      "updatedAt": "2023-10-24T19:33:13.703Z",
+      "id": "f1mWXWQlyc2lKlHI",
+      "name": "Leads"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2023-10-24T20:29:42.000Z",
+  "versionId": "4a10f5a9-5161-4515-83cb-45369a27bee4"
+}
