@@ -70,7 +70,7 @@
     {
       "parameters": {
         "content": "## Outputs\nWhere should we put this data?",
-        "height": 320,
+        "height": 545.152710329097,
         "width": 374.5666663569698
       },
       "id": "6ac11c78-a2fd-4de7-a69f-1f23a6e43580",
@@ -78,8 +78,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1855.2222211898993,
-        240
+        1880,
+        120
       ]
     },
     {
@@ -110,8 +110,8 @@
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2,
       "position": [
-        1980,
-        360
+        2005,
+        240
       ],
       "credentials": {
         "smtp": {
@@ -222,13 +222,30 @@
         1220,
         440
       ]
+    },
+    {
+      "parameters": {
+        "workflowId": "RMGsRy908UOekKo3"
+      },
+      "id": "1b4b31f1-ded1-48de-9f48-66d7082159fa",
+      "name": "Activity Log",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        2000,
+        440
+      ]
     }
   ],
   "pinData": {},
   "settings": {
     "executionOrder": "v1"
   },
-  "staticData": null,
+  "staticData": {
+    "node:JotForm": {
+      "webhookId": "0"
+    }
+  },
   "tags": [
     {
       "createdAt": "2023-10-24T19:33:13.703Z",
@@ -238,6 +255,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-10-24T20:29:42.000Z",
-  "versionId": "4a10f5a9-5161-4515-83cb-45369a27bee4"
+  "updatedAt": "2023-10-27T13:44:49.000Z",
+  "versionId": "b4dcaf9c-ad6b-4d6f-89d7-55e5220db394"
 }
