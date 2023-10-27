@@ -1,0 +1,272 @@
+{
+  "active": false,
+  "connections": {
+    "Get Channel ID": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set Values",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Ntfy",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Post Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Values": {
+      "main": [
+        [
+          {
+            "node": "Get Channel ID",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-10-26T20:56:58.677Z",
+  "id": "RMGsRy908UOekKo3",
+  "meta": null,
+  "name": "Activity Log",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "c47619b4-9220-459b-b534-b60572cef793",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        -380,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "topic": "Alerts",
+        "message": "={{ $json.Message }}",
+        "title": "={{ $json.Title }}",
+        "click": "={{ $json.ClickURL }}",
+        "tags": "={{ $json.Tags }}",
+        "additional_fields": {
+          "alternate_url": "https://ntfy.edvistas.com"
+        }
+      },
+      "id": "9377267e-7401-4071-aad0-2d6b0c817116",
+      "name": "Ntfy",
+      "type": "n8n-nodes-ntfy.Ntfy",
+      "typeVersion": 1,
+      "position": [
+        760,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "=mail.message",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "email_from",
+              "fieldValue": "odoobot@edvistas.com"
+            },
+            {
+              "fieldName": "message_type",
+              "fieldValue": "comment"
+            },
+            {
+              "fieldName": "model",
+              "fieldValue": "mail.channel"
+            },
+            {
+              "fieldName": "record_name",
+              "fieldValue": "=ntfy: {{ $json.Title }}"
+            },
+            {
+              "fieldName": "body",
+              "fieldValue": "={{ $json.Message }}<BR>\n{{ $json.ClickURL }}"
+            },
+            {
+              "fieldName": "res_id",
+              "fieldValue": "={{ $json[\"id\"] }}"
+            }
+          ]
+        }
+      },
+      "id": "ad4b52ae-44ff-4a02-92de-af765b0b6880",
+      "name": "Post Message",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        760,
+        400
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "mail.channel",
+        "operation": "getAll",
+        "limit": 1,
+        "options": {
+          "fieldsList": [
+            "id",
+            "name",
+            "description",
+            "public",
+            "active"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "name",
+              "value": "={{ $json[\"Channel\"] }}"
+            }
+          ]
+        }
+      },
+      "id": "9b347a60-65ab-4569-a6eb-96a33c5dcb7c",
+      "name": "Get Channel ID",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        140,
+        500
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "Channel",
+              "field2": "name"
+            }
+          ]
+        },
+        "joinMode": "enrichInput1",
+        "options": {}
+      },
+      "id": "937e2ed2-fcdf-48f2-9d2b-2c66592c4538",
+      "name": "Merge",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        380,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "dataType": "string"
+      },
+      "id": "e94499a1-b347-43af-a88a-d12a1a124221",
+      "name": "Switch",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        -240,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "Message",
+              "stringValue": "This is a test message..  Does it work?"
+            },
+            {
+              "name": "Title",
+              "stringValue": "Testing 1..2..3?"
+            },
+            {
+              "name": "Priority",
+              "type": "numberValue",
+              "numberValue": "4"
+            },
+            {
+              "name": "Tags",
+              "type": "arrayValue",
+              "arrayValue": "[ 'skull', '-1' ]"
+            },
+            {
+              "name": "ClickURL",
+              "stringValue": "https://ntfy.edvistas.com"
+            },
+            {
+              "name": "Channel",
+              "stringValue": "Activity Log"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "f6dde9d6-eb20-4a60-98bf-9c5a0d3bd8d0",
+      "name": "Set Values",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.1,
+      "position": [
+        -100,
+        380
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2023-10-26T21:48:37.000Z",
+  "versionId": "6cdf4272-f80a-47c6-bf89-e1a061d6cdad"
+}
