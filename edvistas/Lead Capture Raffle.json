@@ -22,6 +22,101 @@
           }
         ]
       ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Add Lead to Odoo",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Set Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email": {
+      "main": [
+        [
+          {
+            "node": "Post to Activity Log",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Fields": {
+      "main": [
+        [
+          {
+            "node": "Spreadsheet File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Spreadsheet File": {
+      "main": [
+        [
+          {
+            "node": "MemberTrac",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MemberTrac": {
+      "main": [
+        [
+          {
+            "node": "Microsoft SQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Microsoft SQL": {
+      "main": [
+        [
+          {
+            "node": "Baserow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Baserow": {
+      "main": [
+        [
+          {
+            "node": "Post to Activity Log",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add Lead to Odoo": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2023-10-24T19:32:46.457Z",
@@ -29,37 +124,6 @@
   "meta": null,
   "name": "Lead Capture Raffle",
   "nodes": [
-    {
-      "parameters": {
-        "resource": "custom",
-        "customResource": "crm.lead",
-        "fieldsToCreateOrUpdate": {
-          "fields": [
-            {
-              "fieldName": "name"
-            },
-            {
-              "fieldName": "phone"
-            },
-            {}
-          ]
-        }
-      },
-      "id": "422ce9fc-606c-4ffe-b434-abe8981c3c37",
-      "name": "Odoo",
-      "type": "n8n-nodes-base.odoo",
-      "typeVersion": 1,
-      "position": [
-        1400,
-        260
-      ],
-      "credentials": {
-        "odooApi": {
-          "id": "22",
-          "name": "Odoo (OdooBot)"
-        }
-      }
-    },
     {
       "parameters": {
         "content": "## Inputs\nData entering into this workflow!",
@@ -114,8 +178,8 @@
       "type": "n8n-nodes-base.microsoftSql",
       "typeVersion": 1,
       "position": [
-        820,
-        260
+        1360,
+        460
       ],
       "credentials": {
         "microsoftSql": {
@@ -153,7 +217,7 @@
       "type": "n8n-nodes-base.baserow",
       "typeVersion": 1,
       "position": [
-        960,
+        1580,
         460
       ],
       "credentials": {
@@ -188,7 +252,7 @@
       "typeVersion": 1,
       "position": [
         80,
-        480
+        500
       ],
       "webhookId": "ad1e0569-0c21-45f0-9b9d-ee8125d3d1fa",
       "credentials": {
@@ -208,8 +272,8 @@
       "type": "n8n-nodes-base.spreadsheetFile",
       "typeVersion": 2,
       "position": [
-        1100,
-        260
+        940,
+        460
       ]
     },
     {
@@ -228,7 +292,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.1,
       "position": [
-        700,
+        720,
         460
       ]
     },
@@ -242,7 +306,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        1240,
+        1120,
         460
       ]
     },
@@ -256,7 +320,7 @@
       "typeVersion": 1,
       "position": [
         2000,
-        440
+        460
       ]
     },
     {
@@ -283,6 +347,37 @@
         400,
         400
       ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "crm.lead",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "name"
+            },
+            {
+              "fieldName": "phone"
+            },
+            {}
+          ]
+        }
+      },
+      "id": "422ce9fc-606c-4ffe-b434-abe8981c3c37",
+      "name": "Add Lead to Odoo",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        720,
+        220
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
+        }
+      }
     }
   ],
   "pinData": {
@@ -329,6 +424,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-10-27T21:20:59.000Z",
-  "versionId": "6e0aec7a-b08b-4a06-9c81-453a21f62fae"
+  "updatedAt": "2023-10-28T06:14:24.000Z",
+  "versionId": "775584a5-f6dc-4d8f-92da-101cb664728a"
 }
