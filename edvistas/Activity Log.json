@@ -212,7 +212,7 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 1,
       "position": [
-        -240,
+        -100,
         220
       ]
     },
@@ -267,6 +267,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-10-26T21:48:37.000Z",
-  "versionId": "6cdf4272-f80a-47c6-bf89-e1a061d6cdad"
+  "updatedAt": "2023-10-27T21:20:57.000Z",
+  "versionId": "7f610eee-86af-45d5-941c-23ca4c92ece2"
 }
