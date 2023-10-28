@@ -1,6 +1,29 @@
 {
   "active": false,
-  "connections": {},
+  "connections": {
+    "JotForm": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "EduForm": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
   "createdAt": "2023-10-24T19:32:46.457Z",
   "id": "Z7wIYubXAtAIHYc2",
   "meta": null,
@@ -27,8 +50,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        740,
-        440
+        1400,
+        260
       ],
       "credentials": {
         "odooApi": {
@@ -48,8 +71,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        300,
-        180
+        20,
+        200
       ]
     },
     {
@@ -91,7 +114,7 @@
       "type": "n8n-nodes-base.microsoftSql",
       "typeVersion": 1,
       "position": [
-        740,
+        820,
         260
       ],
       "credentials": {
@@ -130,8 +153,8 @@
       "type": "n8n-nodes-base.baserow",
       "typeVersion": 1,
       "position": [
-        980,
-        440
+        960,
+        460
       ],
       "credentials": {
         "baserowApi": {
@@ -150,8 +173,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
-        360,
-        300
+        80,
+        320
       ],
       "webhookId": "a7cea2a7-957d-4a18-89ab-cea2ebfa9fe6"
     },
@@ -164,8 +187,8 @@
       "type": "n8n-nodes-base.jotFormTrigger",
       "typeVersion": 1,
       "position": [
-        360,
-        460
+        80,
+        480
       ],
       "webhookId": "ad1e0569-0c21-45f0-9b9d-ee8125d3d1fa",
       "credentials": {
@@ -185,7 +208,7 @@
       "type": "n8n-nodes-base.spreadsheetFile",
       "typeVersion": 2,
       "position": [
-        980,
+        1100,
         260
       ]
     },
@@ -205,8 +228,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.1,
       "position": [
-        1220,
-        260
+        700,
+        460
       ]
     },
     {
@@ -219,8 +242,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        1220,
-        440
+        1240,
+        460
       ]
     },
     {
@@ -228,16 +251,67 @@
         "workflowId": "RMGsRy908UOekKo3"
       },
       "id": "1b4b31f1-ded1-48de-9f48-66d7082159fa",
-      "name": "Activity Log",
+      "name": "Post to Activity Log",
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1,
       "position": [
         2000,
         440
       ]
+    },
+    {
+      "parameters": {
+        "value1": 1,
+        "rules": {
+          "rules": [
+            {
+              "value2": 1
+            },
+            {
+              "operation": "notEqual",
+              "value2": 1,
+              "output": 1
+            }
+          ]
+        }
+      },
+      "id": "b6a0ac22-e90a-4ea5-9cea-83b3cd5e2b24",
+      "name": "Switch",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        400,
+        400
+      ]
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "JotForm": [
+      {
+        "json": {
+          "Full Name": {
+            "first": "Kenn",
+            "last": "Dessinger"
+          },
+          "Phone Number": {
+            "full": "(518) 344-7022"
+          },
+          "E-mail": "kdessinger@edvistas.com",
+          "receive notifications?": [
+            ""
+          ],
+          "Would you like more information on any of our products?": [
+            "Datamate",
+            "Portfoilio(+)",
+            "StaffTrac"
+          ]
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1"
   },
@@ -255,6 +329,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-10-27T13:44:49.000Z",
-  "versionId": "b4dcaf9c-ad6b-4d6f-89d7-55e5220db394"
+  "updatedAt": "2023-10-27T21:20:59.000Z",
+  "versionId": "6e0aec7a-b08b-4a06-9c81-453a21f62fae"
 }
