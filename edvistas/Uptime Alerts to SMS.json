@@ -67,7 +67,7 @@
             },
             {
               "fieldName": "res_id",
-              "fieldValue": "={{ 16 }}"
+              "fieldValue": "={{ 227 }}"
             },
             {
               "fieldName": "subtype_id",
@@ -104,7 +104,7 @@
       "typeVersion": 1,
       "position": [
         400,
-        420
+        400
       ],
       "id": "755e8b00-7fed-444c-8e7c-54daae1e062a",
       "credentials": {
@@ -165,6 +165,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-07-13T20:27:37.000Z",
-  "versionId": "e7dfce4b-2f1d-4d44-b888-af486023d45c"
+  "updatedAt": "2023-11-01T02:24:43.000Z",
+  "versionId": "a018723e-d1cf-48dc-b1bc-54ecfecc9b9a"
 }
