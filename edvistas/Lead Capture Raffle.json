@@ -197,8 +197,8 @@
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2,
       "position": [
-        2005,
-        240
+        2000,
+        220
       ],
       "credentials": {
         "smtp": {
@@ -424,6 +424,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-10-28T06:14:24.000Z",
-  "versionId": "775584a5-f6dc-4d8f-92da-101cb664728a"
+  "updatedAt": "2023-10-31T16:38:10.000Z",
+  "versionId": "7c39791f-4d85-4980-9819-1ef6b62d16f5"
 }
