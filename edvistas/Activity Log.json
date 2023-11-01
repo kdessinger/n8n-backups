@@ -88,8 +88,8 @@
       "type": "n8n-nodes-ntfy.Ntfy",
       "typeVersion": 1,
       "position": [
-        760,
-        220
+        640,
+        280
       ]
     },
     {
@@ -130,8 +130,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        760,
-        400
+        640,
+        480
       ],
       "alwaysOutputData": true,
       "credentials": {
@@ -213,7 +213,7 @@
       "typeVersion": 1,
       "position": [
         -100,
-        220
+        200
       ]
     },
     {
@@ -222,25 +222,25 @@
           "values": [
             {
               "name": "Message",
-              "stringValue": "This is a test message..  Does it work?"
+              "stringValue": "The NextCloud server is fully operational again."
             },
             {
               "name": "Title",
-              "stringValue": "Testing 1..2..3?"
+              "stringValue": "NextCloud is back up!"
             },
             {
               "name": "Priority",
               "type": "numberValue",
-              "numberValue": "4"
+              "numberValue": "5"
             },
             {
               "name": "Tags",
               "type": "arrayValue",
-              "arrayValue": "[ 'skull', '-1' ]"
+              "arrayValue": "[ 'hugs', '+1' ]"
             },
             {
               "name": "ClickURL",
-              "stringValue": "https://ntfy.edvistas.com"
+              "stringValue": "https://uptime.edvistas.local/status/systems"
             },
             {
               "name": "Channel",
@@ -267,6 +267,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-10-27T21:20:57.000Z",
-  "versionId": "7f610eee-86af-45d5-941c-23ca4c92ece2"
+  "updatedAt": "2023-10-31T18:45:09.000Z",
+  "versionId": "6119dc40-2d57-4472-9160-193b84145c71"
 }
