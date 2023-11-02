@@ -222,11 +222,11 @@
           "values": [
             {
               "name": "Message",
-              "stringValue": "The NextCloud server is fully operational again."
+              "stringValue": "Nextcloud services have been restored."
             },
             {
               "name": "Title",
-              "stringValue": "NextCloud is back up!"
+              "stringValue": "NextCloud Restored"
             },
             {
               "name": "Priority",
@@ -240,7 +240,7 @@
             },
             {
               "name": "ClickURL",
-              "stringValue": "https://uptime.edvistas.local/status/systems"
+              "stringValue": "https://cloud.edvistas.com"
             },
             {
               "name": "Channel",
@@ -267,6 +267,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-10-31T18:45:09.000Z",
-  "versionId": "6119dc40-2d57-4472-9160-193b84145c71"
+  "updatedAt": "2023-11-02T00:16:39.000Z",
+  "versionId": "ef83d332-be82-4acb-9189-5a05eaf4dcdb"
 }
