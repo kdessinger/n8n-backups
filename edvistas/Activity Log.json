@@ -68,8 +68,8 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1,
       "position": [
-        -380,
-        380
+        -360,
+        260
       ]
     },
     {
@@ -88,8 +88,8 @@
       "type": "n8n-nodes-ntfy.Ntfy",
       "typeVersion": 1,
       "position": [
-        640,
-        280
+        460,
+        120
       ]
     },
     {
@@ -130,8 +130,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        640,
-        480
+        460,
+        280
       ],
       "alwaysOutputData": true,
       "credentials": {
@@ -170,8 +170,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        140,
-        500
+        80,
+        320
       ],
       "credentials": {
         "odooApi": {
@@ -199,8 +199,8 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 2.1,
       "position": [
-        380,
-        400
+        240,
+        200
       ]
     },
     {
@@ -212,8 +212,8 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 1,
       "position": [
-        -100,
-        200
+        -260,
+        40
       ]
     },
     {
@@ -256,7 +256,7 @@
       "typeVersion": 3.1,
       "position": [
         -100,
-        380
+        180
       ]
     }
   ],
@@ -267,6 +267,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-11-02T00:16:39.000Z",
-  "versionId": "ef83d332-be82-4acb-9189-5a05eaf4dcdb"
+  "updatedAt": "2023-11-04T04:23:45.000Z",
+  "versionId": "4a446481-db98-43bd-8462-aafe15df294c"
 }
