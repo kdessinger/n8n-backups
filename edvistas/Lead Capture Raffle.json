@@ -5,7 +5,7 @@
       "main": [
         [
           {
-            "node": "Switch",
+            "node": "Add Lead to Odoo",
             "type": "main",
             "index": 0
           }
@@ -14,104 +14,30 @@
     },
     "EduForm": {
       "main": [
-        [
-          {
-            "node": "Switch",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Switch": {
       "main": [
-        [
-          {
-            "node": "Add Lead to Odoo",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Set Fields",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Send Email": {
-      "main": [
-        [
-          {
-            "node": "Post to Activity Log",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        [],
+        []
       ]
     },
     "Set Fields": {
       "main": [
-        [
-          {
-            "node": "Spreadsheet File",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Spreadsheet File": {
-      "main": [
-        [
-          {
-            "node": "MemberTrac",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "MemberTrac": {
-      "main": [
-        [
-          {
-            "node": "Microsoft SQL",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Microsoft SQL": {
       "main": [
-        [
-          {
-            "node": "Baserow",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Baserow": {
-      "main": [
-        [
-          {
-            "node": "Post to Activity Log",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Add Lead to Odoo": {
       "main": [
         [
           {
-            "node": "Send Email",
+            "node": "Post to Activity Log",
             "type": "main",
             "index": 0
           }
@@ -135,8 +61,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        20,
-        200
+        260,
+        100
       ]
     },
     {
@@ -178,52 +104,13 @@
       "type": "n8n-nodes-base.microsoftSql",
       "typeVersion": 1,
       "position": [
-        1360,
-        460
+        800,
+        -60
       ],
       "credentials": {
         "microsoftSql": {
           "id": "9",
           "name": "SQL01.edvistas.local (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
-      "id": "42f5b763-fcde-457b-a413-ab9b55ade04e",
-      "name": "Send Email",
-      "type": "n8n-nodes-base.emailSend",
-      "typeVersion": 2,
-      "position": [
-        2000,
-        220
-      ],
-      "credentials": {
-        "smtp": {
-          "id": "27",
-          "name": "SMTP (mx.gowls.com)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "databaseId": "7",
-        "additionalOptions": {}
-      },
-      "id": "cef7e51c-0c33-4622-a27c-1b49a4244424",
-      "name": "Baserow",
-      "type": "n8n-nodes-base.baserow",
-      "typeVersion": 1,
-      "position": [
-        1580,
-        460
-      ],
-      "credentials": {
-        "baserowApi": {
-          "id": "26",
-          "name": "Baserow (kdessinger)"
         }
       }
     },
@@ -237,22 +124,23 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
-        80,
-        320
+        320,
+        220
       ],
       "webhookId": "a7cea2a7-957d-4a18-89ab-cea2ebfa9fe6"
     },
     {
       "parameters": {
-        "form": "232965239570161"
+        "form": "232965239570161",
+        "onlyAnswers": false
       },
       "id": "f3f2ed2e-c17c-48be-a0c3-b79a988221c7",
       "name": "JotForm",
       "type": "n8n-nodes-base.jotFormTrigger",
       "typeVersion": 1,
       "position": [
-        80,
-        500
+        320,
+        400
       ],
       "webhookId": "ad1e0569-0c21-45f0-9b9d-ee8125d3d1fa",
       "credentials": {
@@ -261,20 +149,6 @@
           "name": "JotForm account"
         }
       }
-    },
-    {
-      "parameters": {
-        "operation": "toFile",
-        "options": {}
-      },
-      "id": "a81f8b29-03d5-47f7-a1e0-e3d562a705b6",
-      "name": "Spreadsheet File",
-      "type": "n8n-nodes-base.spreadsheetFile",
-      "typeVersion": 2,
-      "position": [
-        940,
-        460
-      ]
     },
     {
       "parameters": {
@@ -292,22 +166,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.1,
       "position": [
-        720,
-        460
-      ]
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "options": {}
-      },
-      "id": "6ec5092e-b9dc-431a-b6c3-419bb10566e2",
-      "name": "MemberTrac",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.1,
-      "position": [
-        1120,
-        460
+        360,
+        -60
       ]
     },
     {
@@ -319,21 +179,21 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1,
       "position": [
-        2000,
-        460
+        1960,
+        400
       ]
     },
     {
       "parameters": {
-        "value1": 1,
+        "dataType": "string",
+        "value1": "={{ $input.params.form }}",
         "rules": {
           "rules": [
             {
-              "value2": 1
+              "value2": "{{ $('JotForm').params[\"form\"] }}"
             },
             {
-              "operation": "notEqual",
-              "value2": 1,
+              "value2": "{{ $('EduForm').params[\"form\"] }}",
               "output": 1
             }
           ]
@@ -344,8 +204,8 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 1,
       "position": [
-        400,
-        400
+        580,
+        -60
       ]
     },
     {
@@ -369,8 +229,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        720,
-        220
+        740,
+        400
       ],
       "credentials": {
         "odooApi": {
@@ -384,22 +244,50 @@
     "JotForm": [
       {
         "json": {
-          "Full Name": {
-            "first": "Kenn",
-            "last": "Dessinger"
+          "action": "",
+          "webhookURL": "https://n8n.edvistas.com/webhook-test/ad1e0569-0c21-45f0-9b9d-ee8125d3d1fa/webhook",
+          "username": "kdessinger",
+          "formID": "232965239570161",
+          "type": "WEB",
+          "customParams": "",
+          "product": "",
+          "formTitle": "Edvistas Raffle Ticket",
+          "customTitle": "",
+          "customTitleParams": "Array",
+          "submissionID": "5748816469116572513",
+          "event": "",
+          "documentID": "",
+          "teamID": "",
+          "subject": "",
+          "deviceIDs": "Array",
+          "isSilent": "",
+          "customBody": "",
+          "customBodyParams": "Array",
+          "trackAction": "Array",
+          "rawRequest": {
+            "Affiliation": "Educational Vistas Inc.",
+            "Position": "I.T. Manager",
+            "Full Name": {
+              "first": "Kenneth",
+              "last": "Dessinger"
+            },
+            "Phone Number": {
+              "full": "(518) 344-7022"
+            },
+            "E-mail": "kdessinger@edvistas.com",
+            "Would you like more information on any of our products?": [
+              "Datamate",
+              "Eduform / EduView",
+              "Survate"
+            ],
+            "Campaign": "Character.org-2023"
           },
-          "Phone Number": {
-            "full": "(518) 344-7022"
-          },
-          "E-mail": "kdessinger@edvistas.com",
-          "receive notifications?": [
-            ""
-          ],
-          "Would you like more information on any of our products?": [
-            "Datamate",
-            "Portfoilio(+)",
-            "StaffTrac"
-          ]
+          "fromTable": "",
+          "appID": "",
+          "pretty": "Affiliation:Educational Vistas Inc., Position:I.T. Manager, Full Name:Kenneth Dessinger, Phone Number:(518) 344-7022, E-mail:kdessinger@edvistas.com, Would you like more information on any of our products?:Datamate Eduform / EduView Survate, Campaign:Character.org-2023",
+          "unread": "",
+          "parent": "",
+          "ip": "71.244.121.19"
         },
         "pairedItem": {
           "item": 0
@@ -424,6 +312,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-10-31T16:38:10.000Z",
-  "versionId": "7c39791f-4d85-4980-9819-1ef6b62d16f5"
+  "updatedAt": "2023-11-04T05:10:04.000Z",
+  "versionId": "4f736e42-e701-4a77-91e0-aeb705a3c41f"
 }
