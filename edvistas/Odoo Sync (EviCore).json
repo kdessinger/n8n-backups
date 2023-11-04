@@ -78,32 +78,6 @@
         ]
       ]
     },
-    "Manual": {
-      "main": [
-        [
-          {
-            "node": "Get Odoo Contacts",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Evicore",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Products by District",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Read Binary Files",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Webhook": {
       "main": [
         [
@@ -330,8 +304,8 @@
     },
     {
       "parameters": {
-        "content": "## Sync Datamate with Odoo\n### This node will update Odoo Contacts that have a EVI District number present in the 'EVI_DistID' field.\n##### This info is found on the Odoo contacts under the 'Integration' tab.  The following fields will be updated:\nEVI District Name, EVI Last Sync, EVI Last Login, Student Info System, State District ID.\n\n**This is a **Sync** operation so it will add and remove remove tags from odoo that match [EVICore](https://apps.edvistas.com).\n",
-        "height": 937.8185167299152,
+        "content": "# Sync Odoo Tags with the EVICore database\n### This node will update [Odoo Contacts](https://odoo.edvistas.com/web?debug=1#menu_id=111&action=139) which have the EVI District value present in the 'EVI_DistID' field.\n##### This info is found on the [Odoo contacts](https://odoo.edvistas.com/web?debug=1#menu_id=111&action=139) under the 'Integration' tab.  The following fields will be updated:\nTags, EVI District Name, EVI Last Sync, EVI Last Login, Student Info System, State District ID.\n##### Tags contain product names that a specific district have activated in [EVICore](https://apps.edvistas.com).\n\n**This is a **Sync** operation so it will add and remove remove tags from odoo that match [EVICore](https://apps.edvistas.com).",
+        "height": 939.6935167299152,
         "width": 1454.5816546942929
       },
       "id": "8b5bf087-8ce5-4835-abf4-2fe0b22e0944",
@@ -354,20 +328,9 @@
       "typeVersion": 1,
       "position": [
         2720,
-        800
+        680
       ],
       "webhookId": "2ea717ea-44c6-4a8a-a8be-83a8396f0130"
-    },
-    {
-      "parameters": {},
-      "id": "6d909a99-746d-4165-9e8d-adefe51664af",
-      "name": "Manual",
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
-      "position": [
-        2720,
-        647
-      ]
     },
     {
       "parameters": {},
@@ -377,7 +340,7 @@
       "typeVersion": 1,
       "position": [
         2720,
-        1160
+        1100
       ]
     },
     {
@@ -397,7 +360,7 @@
       "typeVersion": 1.1,
       "position": [
         2720,
-        980
+        880
       ],
       "notesInFlow": true,
       "notes": "every-hour (M-F 5AM-5PM)\n"
@@ -414,7 +377,7 @@
       "typeVersion": 1,
       "position": [
         2660,
-        540
+        480
       ]
     },
     {
@@ -529,21 +492,6 @@
       "position": [
         3720,
         1000
-      ]
-    },
-    {
-      "parameters": {
-        "content": "# Sync Odoo Tags with District Software (Products)\n### This node will update Odoo Contacts that have a EVI District number present in the 'EVI_DistID' field.\n##### Tags contain product names that a specific district have activated in [EVICore](https://apps.edvistas.com). This workflow query [EVICore](https://apps.edvistas.com)for the most up to date list of Products by District. All contacts in Odoo with a value in the 'EVI_DistID' field will be used in this dataset.\n\n**This is a **Sync** operation so it will add and remove remove tags from odoo that match [EVICore](https://apps.edvistas.com).\n",
-        "height": 182.48406684739106,
-        "width": 1456.8773414432437
-      },
-      "id": "3754547d-a426-4318-9f88-83376a188164",
-      "name": "Sticky Note",
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        3080,
-        1340
       ]
     },
     {
@@ -664,6 +612,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2023-10-18T17:49:27.000Z",
-  "versionId": "d24fcb36-404b-4dda-84f8-fc90b32d6682"
+  "updatedAt": "2023-11-04T04:16:35.000Z",
+  "versionId": "07037643-6821-44de-9ab3-88fa2d96d795"
 }
