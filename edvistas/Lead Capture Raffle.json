@@ -12,28 +12,18 @@
         ]
       ]
     },
-    "EduForm": {
-      "main": [
-        []
-      ]
-    },
-    "Switch": {
-      "main": [
-        [],
-        []
-      ]
-    },
-    "Set Fields": {
-      "main": [
-        []
-      ]
-    },
-    "Microsoft SQL": {
-      "main": [
-        []
-      ]
-    },
     "Add Lead to Odoo": {
+      "main": [
+        [
+          {
+            "node": "Rename Keys",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rename Keys": {
       "main": [
         [
           {
@@ -53,7 +43,7 @@
     {
       "parameters": {
         "content": "## Inputs\nData entering into this workflow!",
-        "height": 462.38887984287646,
+        "height": 519.4307548167068,
         "width": 288
       },
       "id": "5bfe0970-cf24-40cc-a8c4-6de7e481ae2f",
@@ -62,14 +52,14 @@
       "typeVersion": 1,
       "position": [
         260,
-        100
+        174.3272916325633
       ]
     },
     {
       "parameters": {
         "content": "## Processes\nWhat do you want to do with the data?",
-        "height": 605,
-        "width": 1133.546875
+        "height": 530.672708367436,
+        "width": 898.4652084411912
       },
       "id": "29f886fa-dd42-4302-912e-bb99364a60f4",
       "name": "Sticky Note1",
@@ -77,13 +67,13 @@
       "typeVersion": 1,
       "position": [
         660,
-        99
+        173.32729163256397
       ]
     },
     {
       "parameters": {
         "content": "## Outputs\nWhere should we put this data?",
-        "height": 545.152710329097,
+        "height": 520.9531270068671,
         "width": 374.5666663569698
       },
       "id": "6ac11c78-a2fd-4de7-a69f-1f23a6e43580",
@@ -91,8 +81,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1880,
-        120
+        1700,
+        200
       ]
     },
     {
@@ -104,8 +94,8 @@
       "type": "n8n-nodes-base.microsoftSql",
       "typeVersion": 1,
       "position": [
-        800,
-        -60
+        1240,
+        -20
       ],
       "credentials": {
         "microsoftSql": {
@@ -125,7 +115,7 @@
       "typeVersion": 1,
       "position": [
         320,
-        220
+        520
       ],
       "webhookId": "a7cea2a7-957d-4a18-89ab-cea2ebfa9fe6"
     },
@@ -140,7 +130,7 @@
       "typeVersion": 1,
       "position": [
         320,
-        400
+        340
       ],
       "webhookId": "ad1e0569-0c21-45f0-9b9d-ee8125d3d1fa",
       "credentials": {
@@ -166,8 +156,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.1,
       "position": [
-        360,
-        -60
+        780,
+        -20
       ]
     },
     {
@@ -179,8 +169,8 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1,
       "position": [
-        1960,
-        400
+        1780,
+        354
       ]
     },
     {
@@ -204,8 +194,8 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 1,
       "position": [
-        580,
-        -60
+        1000,
+        -20
       ]
     },
     {
@@ -229,8 +219,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        740,
-        400
+        720,
+        340
       ],
       "credentials": {
         "odooApi": {
@@ -238,6 +228,19 @@
           "name": "Odoo (OdooBot)"
         }
       }
+    },
+    {
+      "parameters": {
+        "additionalOptions": {}
+      },
+      "id": "1c10ae1b-c76e-4913-87d6-e1dda6528248",
+      "name": "Rename Keys",
+      "type": "n8n-nodes-base.renameKeys",
+      "typeVersion": 1,
+      "position": [
+        940,
+        340
+      ]
     }
   ],
   "pinData": {
@@ -312,6 +315,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-11-04T05:10:04.000Z",
-  "versionId": "4f736e42-e701-4a77-91e0-aeb705a3c41f"
+  "updatedAt": "2023-11-06T05:23:08.000Z",
+  "versionId": "453a719a-b619-40c2-95dd-ea570d1aaebd"
 }
