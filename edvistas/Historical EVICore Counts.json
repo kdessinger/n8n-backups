@@ -73,7 +73,7 @@
     },
     {
       "parameters": {
-        "table": "[EdVistas].[dbo].[datacounts]",
+        "table": "datacounts",
         "columns": "=TimeStamp, AIMS, Courses, Datamate Elite, Datamate Live, Datamate Basic, Districts, Forms, Guardians, SafeSchools, Schools, SMS, Staff, StaffTrac, Students, Surveys, Users, ItemBank"
       },
       "id": "f6d19dda-5dd5-487e-95c5-a383a2c3fa21",
@@ -149,6 +149,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-10-06T23:26:12.000Z",
-  "versionId": "cc443d69-edae-4cdf-b187-2ae769200e2f"
+  "updatedAt": "2023-11-06T19:26:47.000Z",
+  "versionId": "4c5bd298-15ed-4224-a135-89ea7e5f9fa0"
 }
