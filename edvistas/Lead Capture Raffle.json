@@ -5,14 +5,36 @@
       "main": [
         [
           {
-            "node": "Add Lead to Odoo",
+            "node": "Settings",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Add Lead to Odoo": {
+    "EduForm": {
+      "main": [
+        [
+          {
+            "node": "Settings",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Settings": {
+      "main": [
+        [
+          {
+            "node": "Get Medium ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Medium ID": {
       "main": [
         [
           {
@@ -23,11 +45,38 @@
         ]
       ]
     },
+    "Get Campaign ID": {
+      "main": [
+        [
+          {
+            "node": "Rename Keys1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        []
+      ]
+    },
     "Rename Keys": {
       "main": [
         [
           {
-            "node": "Post to Activity Log",
+            "node": "Get Campaign ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rename Keys1": {
+      "main": [
+        [
+          {
+            "node": "Add Lead to Odoo",
             "type": "main",
             "index": 0
           }
@@ -51,23 +100,23 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        260,
-        174.3272916325633
+        80,
+        160
       ]
     },
     {
       "parameters": {
         "content": "## Processes\nWhat do you want to do with the data?",
         "height": 530.672708367436,
-        "width": 898.4652084411912
+        "width": 1323.3361663434712
       },
       "id": "29f886fa-dd42-4302-912e-bb99364a60f4",
       "name": "Sticky Note1",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        660,
-        173.32729163256397
+        640,
+        180
       ]
     },
     {
@@ -81,8 +130,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1700,
-        200
+        2080,
+        180
       ]
     },
     {
@@ -114,23 +163,23 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
-        320,
-        520
+        140,
+        506
       ],
-      "webhookId": "a7cea2a7-957d-4a18-89ab-cea2ebfa9fe6"
+      "webhookId": "a7cea2a7-957d-4a18-89ab-cea2ebfa9fe6",
+      "disabled": true
     },
     {
       "parameters": {
-        "form": "232965239570161",
-        "onlyAnswers": false
+        "form": "232965239570161"
       },
       "id": "f3f2ed2e-c17c-48be-a0c3-b79a988221c7",
       "name": "JotForm",
       "type": "n8n-nodes-base.jotFormTrigger",
       "typeVersion": 1,
       "position": [
-        320,
-        340
+        140,
+        326
       ],
       "webhookId": "ad1e0569-0c21-45f0-9b9d-ee8125d3d1fa",
       "credentials": {
@@ -142,26 +191,6 @@
     },
     {
       "parameters": {
-        "fields": {
-          "values": [
-            {
-              "name": "Campagin"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "b7de1b4d-e11d-4b62-848e-d6769c5b91c5",
-      "name": "Set Fields",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.1,
-      "position": [
-        780,
-        -20
-      ]
-    },
-    {
-      "parameters": {
         "workflowId": "RMGsRy908UOekKo3"
       },
       "id": "1b4b31f1-ded1-48de-9f48-66d7082159fa",
@@ -169,8 +198,8 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1,
       "position": [
-        1780,
-        340
+        2160,
+        320
       ]
     },
     {
@@ -194,7 +223,7 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 1,
       "position": [
-        1000,
+        880,
         -20
       ]
     },
@@ -205,12 +234,45 @@
         "fieldsToCreateOrUpdate": {
           "fields": [
             {
-              "fieldName": "name"
+              "fieldName": "name",
+              "fieldValue": "={{ $('Settings').item.json.Affiliation }}/{{ $('Settings').item.json['Full Name'].first }} {{ $('Settings').item.json['Full Name'].last }}"
             },
             {
-              "fieldName": "phone"
+              "fieldName": "function",
+              "fieldValue": "={{ $('Settings').item.json.Position }}"
             },
-            {}
+            {
+              "fieldName": "contact_name",
+              "fieldValue": "={{ $('Settings').item.json['Full Name'].first }} {{ $('Settings').item.json['Full Name'].last }}"
+            },
+            {
+              "fieldName": "email_from",
+              "fieldValue": "={{ $('Settings').item.json['E-mail'] }}"
+            },
+            {
+              "fieldName": "phone",
+              "fieldValue": "={{ $('Settings').item.json['Phone Number'].full }}"
+            },
+            {
+              "fieldName": "source_id",
+              "fieldValue": "={{ 42 }}"
+            },
+            {
+              "fieldName": "medium_id",
+              "fieldValue": "={{ $('Get Medium ID').item.json.id }}"
+            },
+            {
+              "fieldName": "campaign_id",
+              "fieldValue": "={{ $('Get Campaign ID').item.json.id }}"
+            },
+            {
+              "fieldName": "partner_name",
+              "fieldValue": "={{ $('Settings').item.json.Affiliation }}"
+            },
+            {
+              "fieldName": "user_id",
+              "fieldValue": "={{ 26 }}"
+            }
           ]
         }
       },
@@ -219,8 +281,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        720,
-        340
+        1520,
+        400
       ],
       "credentials": {
         "odooApi": {
@@ -231,15 +293,180 @@
     },
     {
       "parameters": {
+        "resource": "custom",
+        "customResource": "utm.campaign",
+        "operation": "getAll",
+        "limit": 1,
+        "options": {
+          "fieldsList": [
+            "id"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "name",
+              "value": "={{ $('Settings').item.json.Campaign }}"
+            }
+          ]
+        }
+      },
+      "id": "84423470-400f-4bda-8f4d-87b5fdf9f6ab",
+      "name": "Get Campaign ID",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        1120,
+        400
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "utm.medium",
+        "operation": "getAll",
+        "options": {
+          "fieldsList": [
+            "id"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "name",
+              "value": "={{ $('Settings').item.json.Medium }}"
+            }
+          ]
+        }
+      },
+      "id": "2546313b-c9e6-45de-811e-8efa6f77e887",
+      "name": "Get Medium ID",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        720,
+        400
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "Medium",
+              "stringValue": "Raffle"
+            },
+            {
+              "name": "Campaign",
+              "stringValue": "={{ $json.Campaign }}"
+            },
+            {
+              "name": "Source",
+              "stringValue": "={{ $json.Source }}"
+            }
+          ]
+        },
+        "options": {
+          "ignoreConversionErrors": true
+        }
+      },
+      "id": "b7de1b4d-e11d-4b62-848e-d6769c5b91c5",
+      "name": "Settings",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.1,
+      "position": [
+        440,
+        400
+      ],
+      "alwaysOutputData": false,
+      "retryOnFail": false
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combinationMode": "multiplex",
+        "options": {}
+      },
+      "id": "c15786f2-b944-4273-b51e-7c7033e523dc",
+      "name": "Merge",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        1480,
+        -20
+      ]
+    },
+    {
+      "parameters": {
+        "mergeByFields": {
+          "values": [
+            {}
+          ]
+        },
+        "options": {}
+      },
+      "id": "4e1b9b06-4664-4c8c-9e54-3878cd158d55",
+      "name": "Compare Datasets",
+      "type": "n8n-nodes-base.compareDatasets",
+      "typeVersion": 2.3,
+      "position": [
+        520,
+        -40
+      ]
+    },
+    {
+      "parameters": {
+        "keys": {
+          "key": [
+            {
+              "currentKey": "id",
+              "newKey": "MediumID"
+            }
+          ]
+        },
         "additionalOptions": {}
       },
-      "id": "1c10ae1b-c76e-4913-87d6-e1dda6528248",
+      "id": "201fdf5c-78ce-4ee8-b3e0-bc4c84065770",
       "name": "Rename Keys",
       "type": "n8n-nodes-base.renameKeys",
       "typeVersion": 1,
       "position": [
-        940,
-        340
+        920,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "keys": {
+          "key": [
+            {
+              "currentKey": "id",
+              "newKey": "CampaignID"
+            }
+          ]
+        },
+        "additionalOptions": {}
+      },
+      "id": "985afa2f-ba02-407a-ac09-8149bcd1a7a7",
+      "name": "Rename Keys1",
+      "type": "n8n-nodes-base.renameKeys",
+      "typeVersion": 1,
+      "position": [
+        1320,
+        400
       ]
     }
   ],
@@ -247,50 +474,22 @@
     "JotForm": [
       {
         "json": {
-          "action": "",
-          "webhookURL": "https://n8n.edvistas.com/webhook-test/ad1e0569-0c21-45f0-9b9d-ee8125d3d1fa/webhook",
-          "username": "kdessinger",
-          "formID": "232965239570161",
-          "type": "WEB",
-          "customParams": "",
-          "product": "",
-          "formTitle": "Edvistas Raffle Ticket",
-          "customTitle": "",
-          "customTitleParams": "Array",
-          "submissionID": "5748816469116572513",
-          "event": "",
-          "documentID": "",
-          "teamID": "",
-          "subject": "",
-          "deviceIDs": "Array",
-          "isSilent": "",
-          "customBody": "",
-          "customBodyParams": "Array",
-          "trackAction": "Array",
-          "rawRequest": {
-            "Affiliation": "Educational Vistas Inc.",
-            "Position": "I.T. Manager",
-            "Full Name": {
-              "first": "Kenneth",
-              "last": "Dessinger"
-            },
-            "Phone Number": {
-              "full": "(518) 344-7022"
-            },
-            "E-mail": "kdessinger@edvistas.com",
-            "Would you like more information on any of our products?": [
-              "Datamate",
-              "Eduform / EduView",
-              "Survate"
-            ],
-            "Campaign": "Character.org-2023"
+          "Affiliation": "EVI",
+          "Position": "IT",
+          "Full Name": {
+            "first": "Kenn",
+            "last": "Dessinger"
           },
-          "fromTable": "",
-          "appID": "",
-          "pretty": "Affiliation:Educational Vistas Inc., Position:I.T. Manager, Full Name:Kenneth Dessinger, Phone Number:(518) 344-7022, E-mail:kdessinger@edvistas.com, Would you like more information on any of our products?:Datamate Eduform / EduView Survate, Campaign:Character.org-2023",
-          "unread": "",
-          "parent": "",
-          "ip": "71.244.121.19"
+          "Phone Number": {
+            "full": "(518) 344-7022"
+          },
+          "E-mail": "kdessinger@edvistas.com",
+          "Would you like more information on any of our products?": [
+            "AIMS / SELS",
+            "Curriculum Developer",
+            "Datamate"
+          ],
+          "Campaign": "Character.org-2023"
         },
         "pairedItem": {
           "item": 0
@@ -315,6 +514,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-11-06T18:43:54.000Z",
-  "versionId": "e5086630-6680-4711-b913-c094720e52fb"
+  "updatedAt": "2023-11-08T03:52:05.000Z",
+  "versionId": "b45a787a-a017-4376-8040-cc2c03f96be4"
 }
