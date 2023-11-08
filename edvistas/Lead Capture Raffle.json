@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "JotForm": {
       "main": [
@@ -27,18 +27,7 @@
       "main": [
         [
           {
-            "node": "Get Medium ID",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Get Medium ID": {
-      "main": [
-        [
-          {
-            "node": "Rename Keys",
+            "node": "Get Campaign ID",
             "type": "main",
             "index": 0
           }
@@ -49,30 +38,25 @@
       "main": [
         [
           {
-            "node": "Rename Keys1",
+            "node": "Get Tags",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Merge": {
-      "main": [
-        []
-      ]
-    },
-    "Rename Keys": {
+    "Get Tags": {
       "main": [
         [
           {
-            "node": "Get Campaign ID",
+            "node": "Add TagIDs",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Rename Keys1": {
+    "Add TagIDs": {
       "main": [
         [
           {
@@ -115,8 +99,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        640,
-        180
+        580,
+        140
       ]
     },
     {
@@ -179,7 +163,7 @@
       "typeVersion": 1,
       "position": [
         140,
-        326
+        300
       ],
       "webhookId": "ad1e0569-0c21-45f0-9b9d-ee8125d3d1fa",
       "credentials": {
@@ -199,7 +183,7 @@
       "typeVersion": 1,
       "position": [
         2160,
-        320
+        380
       ]
     },
     {
@@ -259,7 +243,7 @@
             },
             {
               "fieldName": "medium_id",
-              "fieldValue": "={{ $('Get Medium ID').item.json.id }}"
+              "fieldValue": "={{ 14 }}"
             },
             {
               "fieldName": "campaign_id",
@@ -271,7 +255,7 @@
             },
             {
               "fieldName": "user_id",
-              "fieldValue": "={{ 26 }}"
+              "fieldValue": "={{ $('Get Campaign ID').item.json.user_id[0] }}"
             }
           ]
         }
@@ -281,7 +265,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        1520,
+        1400,
         400
       ],
       "credentials": {
@@ -299,7 +283,9 @@
         "limit": 1,
         "options": {
           "fieldsList": [
-            "id"
+            "id",
+            "name",
+            "user_id"
           ]
         },
         "filterRequest": {
@@ -316,44 +302,9 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        1120,
+        740,
         400
       ],
-      "credentials": {
-        "odooApi": {
-          "id": "22",
-          "name": "Odoo (OdooBot)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "resource": "custom",
-        "customResource": "utm.medium",
-        "operation": "getAll",
-        "options": {
-          "fieldsList": [
-            "id"
-          ]
-        },
-        "filterRequest": {
-          "filter": [
-            {
-              "fieldName": "name",
-              "value": "={{ $('Settings').item.json.Medium }}"
-            }
-          ]
-        }
-      },
-      "id": "2546313b-c9e6-45de-811e-8efa6f77e887",
-      "name": "Get Medium ID",
-      "type": "n8n-nodes-base.odoo",
-      "typeVersion": 1,
-      "position": [
-        720,
-        400
-      ],
-      "alwaysOutputData": true,
       "credentials": {
         "odooApi": {
           "id": "22",
@@ -366,16 +317,8 @@
         "fields": {
           "values": [
             {
-              "name": "Medium",
-              "stringValue": "Raffle"
-            },
-            {
               "name": "Campaign",
               "stringValue": "={{ $json.Campaign }}"
-            },
-            {
-              "name": "Source",
-              "stringValue": "={{ $json.Source }}"
             }
           ]
         },
@@ -429,43 +372,50 @@
     },
     {
       "parameters": {
-        "keys": {
-          "key": [
-            {
-              "currentKey": "id",
-              "newKey": "MediumID"
-            }
+        "resource": "custom",
+        "customResource": "crm.tag",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {
+          "fieldsList": [
+            "id",
+            "name"
           ]
         },
-        "additionalOptions": {}
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "color",
+              "value": "2"
+            }
+          ]
+        }
       },
-      "id": "201fdf5c-78ce-4ee8-b3e0-bc4c84065770",
-      "name": "Rename Keys",
-      "type": "n8n-nodes-base.renameKeys",
+      "id": "7154770a-351b-4b99-a978-cb8bb93d54ce",
+      "name": "Get Tags",
+      "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        920,
+        960,
         400
-      ]
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
+        }
+      }
     },
     {
       "parameters": {
-        "keys": {
-          "key": [
-            {
-              "currentKey": "id",
-              "newKey": "CampaignID"
-            }
-          ]
-        },
-        "additionalOptions": {}
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $('Settings').all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $input.all(), $('Settings').all();"
       },
-      "id": "985afa2f-ba02-407a-ac09-8149bcd1a7a7",
-      "name": "Rename Keys1",
-      "type": "n8n-nodes-base.renameKeys",
-      "typeVersion": 1,
+      "id": "71e031d5-43f0-4d79-86eb-9dcb762a54c6",
+      "name": "Add TagIDs",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
       "position": [
-        1320,
+        1180,
         400
       ]
     }
@@ -474,8 +424,8 @@
     "JotForm": [
       {
         "json": {
-          "Affiliation": "EVI",
-          "Position": "IT",
+          "Affiliation": "Educational Vistas",
+          "Position": "I.T. Manager",
           "Full Name": {
             "first": "Kenn",
             "last": "Dessinger"
@@ -513,7 +463,7 @@
       "name": "Leads"
     }
   ],
-  "triggerCount": 0,
-  "updatedAt": "2023-11-08T03:52:05.000Z",
-  "versionId": "b45a787a-a017-4376-8040-cc2c03f96be4"
+  "triggerCount": 1,
+  "updatedAt": "2023-11-08T14:19:58.000Z",
+  "versionId": "fcb16013-0a6a-49a1-a9a6-fe83fa776577"
 }
