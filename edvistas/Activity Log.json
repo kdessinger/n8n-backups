@@ -16,7 +16,7 @@
       "main": [
         [
           {
-            "node": "Set Values",
+            "node": "Set Defaults",
             "type": "main",
             "index": 0
           }
@@ -39,7 +39,7 @@
         ]
       ]
     },
-    "Set Values": {
+    "Set Defaults": {
       "main": [
         [
           {
@@ -68,8 +68,8 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1,
       "position": [
-        -360,
-        260
+        -380,
+        180
       ]
     },
     {
@@ -212,8 +212,8 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 1,
       "position": [
-        -260,
-        40
+        -240,
+        -20
       ]
     },
     {
@@ -222,11 +222,11 @@
           "values": [
             {
               "name": "Message",
-              "stringValue": "Nextcloud services have been restored."
+              "stringValue": "A new lead (Darlene F. Atkins) has been entered in the character.org raffle to win a drone. Best of luck to Darlene!"
             },
             {
               "name": "Title",
-              "stringValue": "NextCloud Restored"
+              "stringValue": "New Lead"
             },
             {
               "name": "Priority",
@@ -240,7 +240,7 @@
             },
             {
               "name": "ClickURL",
-              "stringValue": "https://cloud.edvistas.com"
+              "stringValue": "https://tusc.k12.al.us"
             },
             {
               "name": "Channel",
@@ -251,7 +251,7 @@
         "options": {}
       },
       "id": "f6dde9d6-eb20-4a60-98bf-9c5a0d3bd8d0",
-      "name": "Set Values",
+      "name": "Set Defaults",
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.1,
       "position": [
@@ -267,6 +267,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-11-04T04:23:45.000Z",
-  "versionId": "4a446481-db98-43bd-8462-aafe15df294c"
+  "updatedAt": "2023-11-08T06:21:25.000Z",
+  "versionId": "9a2111d8-faf0-4509-b6d3-b6871726d4f2"
 }
