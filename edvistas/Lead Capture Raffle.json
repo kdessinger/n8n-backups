@@ -127,7 +127,7 @@
       "type": "n8n-nodes-base.microsoftSql",
       "typeVersion": 1,
       "position": [
-        1240,
+        1080,
         -20
       ],
       "credentials": {
@@ -207,7 +207,7 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 1,
       "position": [
-        880,
+        840,
         -20
       ]
     },
@@ -273,7 +273,8 @@
           "id": "22",
           "name": "Odoo (OdooBot)"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -348,7 +349,7 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 2.1,
       "position": [
-        1480,
+        1320,
         -20
       ]
     },
@@ -356,7 +357,9 @@
       "parameters": {
         "mergeByFields": {
           "values": [
-            {}
+            {
+              "field1": "="
+            }
           ]
         },
         "options": {}
@@ -366,8 +369,8 @@
       "type": "n8n-nodes-base.compareDatasets",
       "typeVersion": 2.3,
       "position": [
-        520,
-        -40
+        620,
+        -20
       ]
     },
     {
@@ -408,7 +411,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $('Settings').all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $input.all(), $('Settings').all();"
+        "jsCode": "for (const item of $('Settings').all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $('Settings').all();"
       },
       "id": "71e031d5-43f0-4d79-86eb-9dcb762a54c6",
       "name": "Add TagIDs",
@@ -464,6 +467,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-11-08T14:19:58.000Z",
-  "versionId": "fcb16013-0a6a-49a1-a9a6-fe83fa776577"
+  "updatedAt": "2023-11-08T20:25:13.000Z",
+  "versionId": "8eb1bbb6-afd1-424f-be51-284d4282fa8f"
 }
