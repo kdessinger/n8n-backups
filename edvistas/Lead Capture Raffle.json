@@ -75,7 +75,7 @@
   "nodes": [
     {
       "parameters": {
-        "content": "## Inputs\nData entering into this workflow!",
+        "content": "## Triggers\nData entering into this workflow!",
         "height": 519.4307548167068,
         "width": 288
       },
@@ -102,40 +102,6 @@
         580,
         140
       ]
-    },
-    {
-      "parameters": {
-        "content": "## Outputs\nWhere should we put this data?",
-        "height": 520.9531270068671,
-        "width": 374.5666663569698
-      },
-      "id": "6ac11c78-a2fd-4de7-a69f-1f23a6e43580",
-      "name": "Sticky Note2",
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        2080,
-        180
-      ]
-    },
-    {
-      "parameters": {
-        "table": "Leads"
-      },
-      "id": "48e84195-ad7d-4830-907b-7298f41cfb96",
-      "name": "Microsoft SQL",
-      "type": "n8n-nodes-base.microsoftSql",
-      "typeVersion": 1,
-      "position": [
-        1080,
-        -20
-      ],
-      "credentials": {
-        "microsoftSql": {
-          "id": "9",
-          "name": "SQL01.edvistas.local (kdessinger)"
-        }
-      }
     },
     {
       "parameters": {
@@ -182,33 +148,8 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1,
       "position": [
-        2160,
-        380
-      ]
-    },
-    {
-      "parameters": {
-        "dataType": "string",
-        "value1": "={{ $input.params.form }}",
-        "rules": {
-          "rules": [
-            {
-              "value2": "{{ $('JotForm').params[\"form\"] }}"
-            },
-            {
-              "value2": "{{ $('EduForm').params[\"form\"] }}",
-              "output": 1
-            }
-          ]
-        }
-      },
-      "id": "b6a0ac22-e90a-4ea5-9cea-83b3cd5e2b24",
-      "name": "Switch",
-      "type": "n8n-nodes-base.switch",
-      "typeVersion": 1,
-      "position": [
-        840,
-        -20
+        1660,
+        400
       ]
     },
     {
@@ -219,7 +160,7 @@
           "fields": [
             {
               "fieldName": "name",
-              "fieldValue": "={{ $('Settings').item.json.Affiliation }}/{{ $('Settings').item.json['Full Name'].first }} {{ $('Settings').item.json['Full Name'].last }}"
+              "fieldValue": "={{ $('Settings').item.json.Affiliation.toTitleCase() }}/{{ $('Settings').item.json['Full Name'].first.toTitleCase() }} {{ $('Settings').item.json['Full Name'].last.toTitleCase() }}"
             },
             {
               "fieldName": "function",
@@ -227,7 +168,7 @@
             },
             {
               "fieldName": "contact_name",
-              "fieldValue": "={{ $('Settings').item.json['Full Name'].first }} {{ $('Settings').item.json['Full Name'].last }}"
+              "fieldValue": "={{ $('Settings').item.json['Full Name'].first.toTitleCase() }} {{ $('Settings').item.json['Full Name'].last.toTitleCase() }}"
             },
             {
               "fieldName": "email_from",
@@ -251,7 +192,7 @@
             },
             {
               "fieldName": "partner_name",
-              "fieldValue": "={{ $('Settings').item.json.Affiliation }}"
+              "fieldValue": "={{ $('Settings').item.json.Affiliation.toTitleCase() }}"
             },
             {
               "fieldName": "user_id",
@@ -273,8 +214,7 @@
           "id": "22",
           "name": "Odoo (OdooBot)"
         }
-      },
-      "disabled": true
+      }
     },
     {
       "parameters": {
@@ -337,41 +277,6 @@
       ],
       "alwaysOutputData": false,
       "retryOnFail": false
-    },
-    {
-      "parameters": {
-        "mode": "combine",
-        "combinationMode": "multiplex",
-        "options": {}
-      },
-      "id": "c15786f2-b944-4273-b51e-7c7033e523dc",
-      "name": "Merge",
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 2.1,
-      "position": [
-        1320,
-        -20
-      ]
-    },
-    {
-      "parameters": {
-        "mergeByFields": {
-          "values": [
-            {
-              "field1": "="
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "4e1b9b06-4664-4c8c-9e54-3878cd158d55",
-      "name": "Compare Datasets",
-      "type": "n8n-nodes-base.compareDatasets",
-      "typeVersion": 2.3,
-      "position": [
-        620,
-        -20
-      ]
     },
     {
       "parameters": {
@@ -467,6 +372,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-11-08T20:25:13.000Z",
-  "versionId": "8eb1bbb6-afd1-424f-be51-284d4282fa8f"
+  "updatedAt": "2023-11-09T16:24:49.000Z",
+  "versionId": "87f6c65a-bcdb-44c5-9111-82444696a89d"
 }
