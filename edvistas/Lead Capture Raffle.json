@@ -71,11 +71,6 @@
           }
         ]
       ]
-    },
-    "Add Lead to Odoo": {
-      "main": [
-        []
-      ]
     }
   },
   "createdAt": "2023-10-24T19:32:46.457Z",
@@ -170,7 +165,7 @@
           "fields": [
             {
               "fieldName": "name",
-              "fieldValue": "={{ $('Settings').item.json.Affiliation.toTitleCase() }}/{{ $('Settings').item.json['Full Name'].first.toTitleCase() }} {{ $('Settings').item.json['Full Name'].last.toTitleCase() }}"
+              "fieldValue": "={{ $('Settings').item.json.Affiliation.toTitleCase() }}/{{ $('Settings').item.json['Full Name'] }}"
             },
             {
               "fieldName": "function",
@@ -178,7 +173,7 @@
             },
             {
               "fieldName": "contact_name",
-              "fieldValue": "={{ $('Settings').item.json['Full Name'].first.toTitleCase() }} {{ $('Settings').item.json['Full Name'].last.toTitleCase() }}"
+              "fieldValue": "={{ $('Settings').item.json['Full Name'] }} {{ $('Settings').item.json['Full Name'] }}"
             },
             {
               "fieldName": "email_from",
@@ -401,6 +396,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-11-09T18:18:53.000Z",
-  "versionId": "9c98c84f-3298-41ae-923f-7e762c7c9883"
+  "updatedAt": "2023-11-10T16:59:45.000Z",
+  "versionId": "d61c0468-36c5-499a-a28a-93a5c68a3100"
 }
