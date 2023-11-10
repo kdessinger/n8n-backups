@@ -63,8 +63,18 @@
             "node": "Add Lead to Odoo",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Post to Activity Log",
+            "type": "main",
+            "index": 0
           }
         ]
+      ]
+    },
+    "Add Lead to Odoo": {
+      "main": [
+        []
       ]
     }
   },
@@ -148,8 +158,8 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1,
       "position": [
-        1660,
-        400
+        1400,
+        280
       ]
     },
     {
@@ -207,7 +217,7 @@
       "typeVersion": 1,
       "position": [
         1400,
-        400
+        480
       ],
       "credentials": {
         "odooApi": {
@@ -243,7 +253,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        740,
+        700,
         400
       ],
       "credentials": {
@@ -258,8 +268,29 @@
         "fields": {
           "values": [
             {
-              "name": "Campaign",
-              "stringValue": "={{ $json.Campaign }}"
+              "name": "Affiliation",
+              "stringValue": "={{ $json.Affiliation.toLowerCase().toTitleCase() }}"
+            },
+            {
+              "name": "Full Name",
+              "stringValue": "={{ Object.values($json[\"Full Name\"]).join(' ').toLowerCase().toTitleCase() }}"
+            },
+            {
+              "name": "Title",
+              "stringValue": "New Lead"
+            },
+            {
+              "name": "Message",
+              "stringValue": "=A new lead ({{ Object.values($json[\"Full Name\"]).join(' ').toLowerCase().toTitleCase() }}) has been entered in the NJEA-2023 raffle to win a drone. Best of luck to {{ $json[\"Full Name\"][\"first\"].toLowerCase().toTitleCase() }}!"
+            },
+            {
+              "name": "ClickURL",
+              "stringValue": "=https://{{ $json['E-mail'].split('@')[1] }}"
+            },
+            {
+              "name": "Tags",
+              "type": "arrayValue",
+              "arrayValue": "[ 'hugs', '+1' ]"
             }
           ]
         },
@@ -272,7 +303,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.1,
       "position": [
-        440,
+        420,
         400
       ],
       "alwaysOutputData": false,
@@ -304,7 +335,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        960,
+        920,
         400
       ],
       "credentials": {
@@ -323,7 +354,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1180,
+        1120,
         400
       ]
     }
@@ -332,25 +363,23 @@
     "JotForm": [
       {
         "json": {
-          "Affiliation": "Educational Vistas",
+          "Affiliation": "Educational vistas",
           "Position": "I.T. Manager",
           "Full Name": {
-            "first": "Kenn",
-            "last": "Dessinger"
+            "first": "kenn",
+            "last": "DESSINGER"
           },
           "Phone Number": {
             "full": "(518) 344-7022"
           },
           "E-mail": "kdessinger@edvistas.com",
           "Would you like more information on any of our products?": [
-            "AIMS / SELS",
+            "AIMS",
+            "Datamate",
             "Curriculum Developer",
-            "Datamate"
+            "EduForm"
           ],
-          "Campaign": "Character.org-2023"
-        },
-        "pairedItem": {
-          "item": 0
+          "Campaign": "NJEA-2023"
         }
       }
     ]
@@ -372,6 +401,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-11-09T16:24:49.000Z",
-  "versionId": "87f6c65a-bcdb-44c5-9111-82444696a89d"
+  "updatedAt": "2023-11-09T18:18:53.000Z",
+  "versionId": "9c98c84f-3298-41ae-923f-7e762c7c9883"
 }
