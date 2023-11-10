@@ -14,7 +14,13 @@
     },
     "Execute Workflow Trigger": {
       "main": [
-        []
+        [
+          {
+            "node": "Set Defaults",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Merge": {
@@ -37,12 +43,12 @@
       "main": [
         [
           {
-            "node": "Get Channel ID",
+            "node": "Merge",
             "type": "main",
             "index": 0
           },
           {
-            "node": "Merge",
+            "node": "Get Channel ID",
             "type": "main",
             "index": 0
           }
@@ -62,7 +68,7 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1,
       "position": [
-        -420,
+        -320,
         180
       ]
     },
@@ -83,7 +89,7 @@
       "typeVersion": 1,
       "position": [
         460,
-        120
+        100
       ]
     },
     {
@@ -125,7 +131,7 @@
       "typeVersion": 1,
       "position": [
         460,
-        280
+        320
       ],
       "alwaysOutputData": true,
       "credentials": {
@@ -202,26 +208,26 @@
         "fields": {
           "values": [
             {
-              "name": "Message",
-              "stringValue": "A new lead (Cherie Mccann) has been entered in the NJEA-2023 raffle to win a drone. Best of luck to Cherie!"
+              "name": "Title",
+              "stringValue": "={{ $json.Title || 'Enter a Title' }}"
             },
             {
-              "name": "Title",
-              "stringValue": "New Lead"
+              "name": "Message",
+              "stringValue": "={{ $json.Message || 'Enter a Message' }}"
             },
             {
               "name": "Priority",
               "type": "numberValue",
-              "numberValue": "3"
+              "numberValue": "={{ $json.Priority || 3 }}"
             },
             {
               "name": "Tags",
               "type": "arrayValue",
-              "arrayValue": "[ 'hugs', '+1' ]"
+              "arrayValue": "={{ Array.isArray($json.Tags) ? $json.Tags : [ 'hugs', '+1' ] }}"
             },
             {
               "name": "ClickURL",
-              "stringValue": "https://camden.k12.nj.us"
+              "stringValue": "={{ $json.ClickURL || \"https://www.edvistas.com\" }}"
             },
             {
               "name": "Channel",
@@ -231,17 +237,46 @@
         },
         "options": {}
       },
-      "id": "f6dde9d6-eb20-4a60-98bf-9c5a0d3bd8d0",
+      "id": "de4e03b3-cbdd-49ee-9743-c35298ca0674",
       "name": "Set Defaults",
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.1,
       "position": [
-        -140,
+        -100,
         180
       ]
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Execute Workflow Trigger": [
+      {
+        "json": {
+          "Affiliation": "Educational Vistas",
+          "Position": "I.T. Manager",
+          "Full Name": "Kenn Dessinger",
+          "Phone Number": {
+            "full": "(518) 344-7022"
+          },
+          "E-mail": "kdessinger@edvistas.com",
+          "Would you like more information on any of our products?": [
+            "AIMS",
+            "Datamate",
+            "Curriculum Developer",
+            "EduForm"
+          ],
+          "Campaign": "NJEA-2023",
+          "Message": "A new lead (Kenn Dessinger) has been entered in the NJEA-2023 raffle to win a drone. Best of luck to Kenn!",
+          "ClickURL": "https://edvistas.com",
+          "Tags": [
+            "hugs",
+            "+1"
+          ],
+          "Priority": 3,
+          "myNewField": 1
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1",
     "saveManualExecutions": true,
@@ -251,6 +286,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-11-09T16:40:10.000Z",
-  "versionId": "8de2bd8c-2fbb-49ff-b342-d513a22eb846"
+  "updatedAt": "2023-11-09T18:18:42.000Z",
+  "versionId": "364f4695-dc8f-4838-92d7-fefebe802049"
 }
