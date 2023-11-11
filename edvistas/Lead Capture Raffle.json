@@ -5,7 +5,7 @@
       "main": [
         [
           {
-            "node": "Settings",
+            "node": "Data",
             "type": "main",
             "index": 0
           }
@@ -16,18 +16,7 @@
       "main": [
         [
           {
-            "node": "Settings",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Settings": {
-      "main": [
-        [
-          {
-            "node": "Get Campaign ID",
+            "node": "Data",
             "type": "main",
             "index": 0
           }
@@ -63,7 +52,51 @@
             "node": "Add Lead to Odoo",
             "type": "main",
             "index": 0
+          }
+        ]
+      ]
+    },
+    "Data": {
+      "main": [
+        [
+          {
+            "node": "Get Campaign ID",
+            "type": "main",
+            "index": 0
           },
+          {
+            "node": "Activity Log?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add Lead to Odoo": {
+      "main": [
+        [
+          {
+            "node": "Exit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Post to Activity Log": {
+      "main": [
+        [
+          {
+            "node": "Exit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Activity Log?": {
+      "main": [
+        [
           {
             "node": "Post to Activity Log",
             "type": "main",
@@ -81,7 +114,7 @@
     {
       "parameters": {
         "content": "## Triggers\nData entering into this workflow!",
-        "height": 519.4307548167068,
+        "height": 598.9763777155971,
         "width": 288
       },
       "id": "5bfe0970-cf24-40cc-a8c4-6de7e481ae2f",
@@ -90,22 +123,22 @@
       "typeVersion": 1,
       "position": [
         80,
-        160
+        80.45437710110969
       ]
     },
     {
       "parameters": {
-        "content": "## Processes\nWhat do you want to do with the data?",
-        "height": 530.672708367436,
-        "width": 1323.3361663434712
+        "content": "## Processes\nTrigger data will be posted in to Odoo leads.\nOptional write to activity log.",
+        "height": 588.7195142666262,
+        "width": 1331.9356931433515
       },
       "id": "29f886fa-dd42-4302-912e-bb99364a60f4",
       "name": "Sticky Note1",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        580,
-        140
+        571.4004732001197,
+        80
       ]
     },
     {
@@ -118,8 +151,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
-        140,
-        506
+        160,
+        500
       ],
       "webhookId": "a7cea2a7-957d-4a18-89ab-cea2ebfa9fe6",
       "disabled": true
@@ -133,8 +166,8 @@
       "type": "n8n-nodes-base.jotFormTrigger",
       "typeVersion": 1,
       "position": [
-        140,
-        300
+        160,
+        280
       ],
       "webhookId": "ad1e0569-0c21-45f0-9b9d-ee8125d3d1fa",
       "credentials": {
@@ -153,8 +186,8 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1,
       "position": [
-        1400,
-        280
+        1460,
+        220
       ]
     },
     {
@@ -165,23 +198,23 @@
           "fields": [
             {
               "fieldName": "name",
-              "fieldValue": "={{ $('Settings').item.json.Affiliation.toTitleCase() }}/{{ $('Settings').item.json['Full Name'] }}"
+              "fieldValue": "={{ $('Data').item.json.Affiliation.toTitleCase() }}/{{ $('Data').item.json['Full Name'] }}"
             },
             {
               "fieldName": "function",
-              "fieldValue": "={{ $('Settings').item.json.Position }}"
+              "fieldValue": "={{ $('Data').item.json.Position }}"
             },
             {
               "fieldName": "contact_name",
-              "fieldValue": "={{ $('Settings').item.json['Full Name'] }} {{ $('Settings').item.json['Full Name'] }}"
+              "fieldValue": "={{ $('Data').item.json['Full Name'] }} {{ $('Data').item.json['Full Name'] }}"
             },
             {
               "fieldName": "email_from",
-              "fieldValue": "={{ $('Settings').item.json['E-mail'] }}"
+              "fieldValue": "={{ $('Data').item.json['E-mail'] }}"
             },
             {
               "fieldName": "phone",
-              "fieldValue": "={{ $('Settings').item.json['Phone Number'].full }}"
+              "fieldValue": "={{ $('Data').item.json['Phone Number'].full }}"
             },
             {
               "fieldName": "source_id",
@@ -197,7 +230,7 @@
             },
             {
               "fieldName": "partner_name",
-              "fieldValue": "={{ $('Settings').item.json.Affiliation.toTitleCase() }}"
+              "fieldValue": "={{ $('Data').item.json.Affiliation.toTitleCase() }}"
             },
             {
               "fieldName": "user_id",
@@ -211,8 +244,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        1400,
-        480
+        1280,
+        400
       ],
       "credentials": {
         "odooApi": {
@@ -238,7 +271,7 @@
           "filter": [
             {
               "fieldName": "name",
-              "value": "={{ $('Settings').item.json.Campaign }}"
+              "value": "={{ $('Data').item.json.Campaign }}"
             }
           ]
         }
@@ -248,7 +281,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        700,
+        660,
         400
       ],
       "credentials": {
@@ -257,52 +290,6 @@
           "name": "Odoo (OdooBot)"
         }
       }
-    },
-    {
-      "parameters": {
-        "fields": {
-          "values": [
-            {
-              "name": "Affiliation",
-              "stringValue": "={{ $json.Affiliation.toLowerCase().toTitleCase() }}"
-            },
-            {
-              "name": "Full Name",
-              "stringValue": "={{ Object.values($json[\"Full Name\"]).join(' ').toLowerCase().toTitleCase() }}"
-            },
-            {
-              "name": "Title",
-              "stringValue": "New Lead"
-            },
-            {
-              "name": "Message",
-              "stringValue": "=A new lead ({{ Object.values($json[\"Full Name\"]).join(' ').toLowerCase().toTitleCase() }}) has been entered in the NJEA-2023 raffle to win a drone. Best of luck to {{ $json[\"Full Name\"][\"first\"].toLowerCase().toTitleCase() }}!"
-            },
-            {
-              "name": "ClickURL",
-              "stringValue": "=https://{{ $json['E-mail'].split('@')[1] }}"
-            },
-            {
-              "name": "Tags",
-              "type": "arrayValue",
-              "arrayValue": "[ 'hugs', '+1' ]"
-            }
-          ]
-        },
-        "options": {
-          "ignoreConversionErrors": true
-        }
-      },
-      "id": "b7de1b4d-e11d-4b62-848e-d6769c5b91c5",
-      "name": "Settings",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.1,
-      "position": [
-        420,
-        400
-      ],
-      "alwaysOutputData": false,
-      "retryOnFail": false
     },
     {
       "parameters": {
@@ -330,7 +317,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        920,
+        860,
         400
       ],
       "credentials": {
@@ -342,15 +329,120 @@
     },
     {
       "parameters": {
-        "jsCode": "for (const item of $('Settings').all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $('Settings').all();"
+        "jsCode": "for (const item of $('Data').all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $('Data').all();"
       },
       "id": "71e031d5-43f0-4d79-86eb-9dcb762a54c6",
       "name": "Add TagIDs",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1120,
+        1060,
         400
+      ]
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "Affiliation",
+              "stringValue": "={{ $json.Affiliation.toLowerCase().toTitleCase().trim() }}"
+            },
+            {
+              "name": "Full Name",
+              "stringValue": "={{ Object.values($json[\"Full Name\"]).join(' ').toLowerCase().toTitleCase().trim() }}"
+            },
+            {
+              "name": "First Name",
+              "stringValue": "={{ $json['Full Name'].first.toLowerCase().toTitleCase().trim() }}"
+            },
+            {
+              "name": "Last Name",
+              "stringValue": "={{ $json['Full Name'].last.toLowerCase().toTitleCase().trim() }}"
+            },
+            {
+              "name": "Title",
+              "stringValue": "New Lead"
+            },
+            {
+              "name": "Message",
+              "stringValue": "=A new lead ({{ Object.values($json[\"Full Name\"]).join(' ').toLowerCase().toTitleCase().trim() }}) has been entered in the NJEA-2023 raffle to win a drone. Best of luck to {{ $json[\"Full Name\"][\"first\"].toLowerCase().toTitleCase().trim() }}!"
+            },
+            {
+              "name": "ClickURL",
+              "stringValue": "=https://{{ $json['E-mail'].split('@')[1] }}"
+            },
+            {
+              "name": "Tags",
+              "type": "arrayValue",
+              "arrayValue": "[ 'hugs', '+1' ]"
+            },
+            {
+              "name": "LogEvent",
+              "type": "booleanValue",
+              "booleanValue": "={{ $json.LogEvent === false || $json.LogEvent === \"\" ? false : true }}"
+            }
+          ]
+        },
+        "options": {
+          "ignoreConversionErrors": true
+        }
+      },
+      "id": "b7de1b4d-e11d-4b62-848e-d6769c5b91c5",
+      "name": "Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.1,
+      "position": [
+        420,
+        400
+      ],
+      "alwaysOutputData": false,
+      "retryOnFail": false
+    },
+    {
+      "parameters": {},
+      "id": "5a09da55-af03-4dd9-bfa4-b8c79a6a74e9",
+      "name": "Exit",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1720,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $('Data').item.json.LogEvent }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "c083e341-3b3a-46bb-ba24-e065e4871755",
+      "name": "Activity Log?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        660,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Settings",
+        "height": 221.27162844914525,
+        "width": 166.90402220101976
+      },
+      "id": "29f8b585-7720-431a-8d9d-076c026ca2dd",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        387.29739739934024,
+        340.42387614971506
       ]
     }
   ],
@@ -358,21 +450,21 @@
     "JotForm": [
       {
         "json": {
-          "Affiliation": "Educational vistas",
-          "Position": "I.T. Manager",
+          "Affiliation": "Irvington Public Schools ",
+          "Position": "ASD Teacher - STEM",
           "Full Name": {
-            "first": "kenn",
-            "last": "DESSINGER"
+            "first": "Lance",
+            "last": "Hilfman "
           },
           "Phone Number": {
-            "full": "(518) 344-7022"
+            "full": "(732) 277-0097"
           },
-          "E-mail": "kdessinger@edvistas.com",
+          "E-mail": "lhilfman@irvington.k12.nj.us",
           "Would you like more information on any of our products?": [
-            "AIMS",
-            "Datamate",
             "Curriculum Developer",
-            "EduForm"
+            "EduForm",
+            "EduView",
+            "Portfoilio(+)"
           ],
           "Campaign": "NJEA-2023"
         }
@@ -396,6 +488,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-11-10T16:59:45.000Z",
-  "versionId": "d61c0468-36c5-499a-a28a-93a5c68a3100"
+  "updatedAt": "2023-11-10T17:52:55.000Z",
+  "versionId": "099b7471-54d2-437f-b389-801a270d9eb9"
 }
