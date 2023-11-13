@@ -38,18 +38,7 @@
       "main": [
         [
           {
-            "node": "Nextcloud1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Nextcloud1": {
-      "main": [
-        [
-          {
-            "node": "Summarization Chain",
+            "node": "Nextcloud",
             "type": "main",
             "index": 0
           }
@@ -61,6 +50,17 @@
         [
           {
             "node": "HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Nextcloud": {
+      "main": [
+        [
+          {
+            "node": "Summarization Chain",
             "type": "main",
             "index": 0
           }
@@ -121,7 +121,8 @@
     },
     {
       "parameters": {
-        "loader": "csvLoader"
+        "loader": "textLoader",
+        "options": {}
       },
       "id": "1a370bfe-1723-4b47-a1dc-efb2f38caf1e",
       "name": "Binary Input Loader",
@@ -147,11 +148,65 @@
     },
     {
       "parameters": {
+        "html": "<!DOCTYPE html>\n\n<html>\n<head>\n  <meta charset=\"UTF-8\" />\n  <title>Summarization</title>\n</head>\n<body>\n  <div class=\"container\">\n    <h1>Results</h1>\n    <h3>{{ $json.response.output_text }}</h3>\n  </div>\n</body>\n</html>\n\n<style>\n.container {\n  background-color: #ffffff;\n  text-align: center;\n  padding: 16px;\n  border-radius: 8px;\n}\n\nh1 {\n  color: #ff6d5a;\n  font-size: 24px;\n  font-weight: bold;\n  padding: 8px;\n}\n\nh2 {\n  color: #909399;\n  font-size: 18px;\n  font-weight: bold;\n  padding: 8px;\n}\n</style>\n\n<script>\nconsole.log(\"Hello World!\");\n</script>"
+      },
+      "id": "224ae035-4841-46e9-92bc-f4a45b09ba56",
+      "name": "HTML",
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        240
+      ]
+    },
+    {
+      "parameters": {
         "operation": "download",
-        "path": "/!Share/_reports/Products by District.csv"
+        "path": "/Documents/Nextcloud flyer.pdf"
+      },
+      "id": "502e0b2b-b0e0-4887-a829-05e7f81f6446",
+      "name": "Nextcloud PDF",
+      "type": "n8n-nodes-base.nextCloud",
+      "typeVersion": 1,
+      "position": [
+        600,
+        440
+      ],
+      "credentials": {
+        "nextCloudApi": {
+          "id": "3",
+          "name": "NextCloud (EdVistas)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "folder",
+        "operation": "list",
+        "path": "/!Departments/Information Technology/Guides/New_User_Onboarding.txt"
+      },
+      "id": "00898592-0e5f-4290-abc1-40b7ac5d2202",
+      "name": "Folder Explorer",
+      "type": "n8n-nodes-base.nextCloud",
+      "typeVersion": 1,
+      "position": [
+        360,
+        440
+      ],
+      "credentials": {
+        "nextCloudApi": {
+          "id": "3",
+          "name": "NextCloud (EdVistas)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "path": "/!Departments/Information Technology/Guides/New_User_Onboarding.txt"
       },
       "id": "a37ac615-f3dd-4f9d-8371-c077f47e30cc",
-      "name": "Nextcloud1",
+      "name": "Nextcloud",
       "type": "n8n-nodes-base.nextCloud",
       "typeVersion": 1,
       "position": [
@@ -164,19 +219,6 @@
           "name": "NextCloud (EdVistas)"
         }
       }
-    },
-    {
-      "parameters": {
-        "html": "<!DOCTYPE html>\n\n<html>\n<head>\n  <meta charset=\"UTF-8\" />\n  <title>Summarization</title>\n</head>\n<body>\n  <div class=\"container\">\n    <h1>Results</h1>\n    <p>{{ $json.response.output_text }}</p>\n  </div>\n</body>\n</html>\n\n<style>\n.container {\n  background-color: #ffffff;\n  text-align: center;\n  padding: 16px;\n  border-radius: 8px;\n}\n\nh1 {\n  color: #ff6d5a;\n  font-size: 24px;\n  font-weight: bold;\n  padding: 8px;\n}\n\nh2 {\n  color: #909399;\n  font-size: 18px;\n  font-weight: bold;\n  padding: 8px;\n}\n</style>\n\n<script>\nconsole.log(\"Hello World!\");\n</script>"
-      },
-      "id": "224ae035-4841-46e9-92bc-f4a45b09ba56",
-      "name": "HTML",
-      "type": "n8n-nodes-base.html",
-      "typeVersion": 1,
-      "position": [
-        1200,
-        240
-      ]
     }
   ],
   "pinData": {},
@@ -189,6 +231,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-10-10T05:03:12.000Z",
-  "versionId": "7778b140-dac6-43de-8766-28b840eb795d"
+  "updatedAt": "2023-11-13T05:28:09.000Z",
+  "versionId": "8e8b2c87-5d9a-4090-aae6-467905aa679c"
 }
