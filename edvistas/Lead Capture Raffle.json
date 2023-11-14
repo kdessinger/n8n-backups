@@ -106,8 +106,8 @@
       ]
     }
   },
-  "createdAt": "2023-10-24T19:32:46.457Z",
-  "id": "Z7wIYubXAtAIHYc2",
+  "createdAt": "2023-11-13T18:57:16.424Z",
+  "id": "2SqTrQPgAMH8gFIP",
   "meta": null,
   "name": "Lead Capture Raffle",
   "nodes": [
@@ -117,57 +117,59 @@
         "height": 598.9763777155971,
         "width": 288
       },
-      "id": "5bfe0970-cf24-40cc-a8c4-6de7e481ae2f",
+      "id": "fdd0bb77-5148-4c44-824c-c22034fb274a",
       "name": "Sticky Note",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        80,
-        80.45437710110969
+        -31.400473200119677,
+        460.4543771011097
       ]
     },
     {
       "parameters": {
         "content": "## Processes\nTrigger data will be posted in to Odoo leads.\nOptional write to activity log.",
         "height": 588.7195142666262,
-        "width": 1331.9356931433515
+        "width": 1163.169979695706
       },
-      "id": "29f886fa-dd42-4302-912e-bb99364a60f4",
+      "id": "868bf1c3-c37e-4898-a0cc-f52d6182f719",
       "name": "Sticky Note1",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        571.4004732001197,
-        80
+        460,
+        460
       ]
     },
     {
       "parameters": {
+        "httpMethod": "POST",
         "path": "leadcapture/giveaway",
-        "options": {}
+        "options": {
+          "responseData": "true"
+        }
       },
-      "id": "2cc8a054-7c1f-4616-8e94-9ed18a0742af",
+      "id": "8f65554f-5cc8-40be-af6c-7a19bf8b335c",
       "name": "EduForm",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
-        160,
-        500
+        48.59952679988032,
+        880
       ],
-      "webhookId": "a7cea2a7-957d-4a18-89ab-cea2ebfa9fe6",
-      "disabled": true
+      "webhookId": "a7cea2a7-957d-4a18-89ab-cea2ebfa9fe6"
     },
     {
       "parameters": {
         "form": "232965239570161"
       },
-      "id": "f3f2ed2e-c17c-48be-a0c3-b79a988221c7",
+      "id": "e4dd81d7-a683-41e9-9310-3029e82ca6ac",
       "name": "JotForm",
       "type": "n8n-nodes-base.jotFormTrigger",
       "typeVersion": 1,
       "position": [
-        160,
-        280
+        48.59952679988032,
+        660
       ],
       "webhookId": "ad1e0569-0c21-45f0-9b9d-ee8125d3d1fa",
       "credentials": {
@@ -181,13 +183,13 @@
       "parameters": {
         "workflowId": "RMGsRy908UOekKo3"
       },
-      "id": "1b4b31f1-ded1-48de-9f48-66d7082159fa",
+      "id": "f8189686-b53a-468b-b073-6c4f3c812b77",
       "name": "Post to Activity Log",
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1,
       "position": [
-        1460,
-        220
+        1180,
+        600
       ]
     },
     {
@@ -239,13 +241,13 @@
           ]
         }
       },
-      "id": "422ce9fc-606c-4ffe-b434-abe8981c3c37",
+      "id": "070a9d82-0051-4f3f-a83d-5c57d0a3c56a",
       "name": "Add Lead to Odoo",
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        1280,
-        400
+        1168.5995267998803,
+        780
       ],
       "credentials": {
         "odooApi": {
@@ -276,13 +278,13 @@
           ]
         }
       },
-      "id": "84423470-400f-4bda-8f4d-87b5fdf9f6ab",
+      "id": "eedcaaec-16ff-44cc-aa6b-cd153ec37fea",
       "name": "Get Campaign ID",
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        660,
-        400
+        548.5995267998803,
+        780
       ],
       "credentials": {
         "odooApi": {
@@ -312,13 +314,13 @@
           ]
         }
       },
-      "id": "7154770a-351b-4b99-a978-cb8bb93d54ce",
+      "id": "7cc5f9b9-fdf0-4bc2-92ac-3bb6bf7eca3e",
       "name": "Get Tags",
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        860,
-        400
+        748.5995267998803,
+        780
       ],
       "credentials": {
         "odooApi": {
@@ -331,13 +333,13 @@
       "parameters": {
         "jsCode": "for (const item of $('Data').all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $('Data').all();"
       },
-      "id": "71e031d5-43f0-4d79-86eb-9dcb762a54c6",
+      "id": "fe4a71aa-0a65-4092-8c06-3ab82700c675",
       "name": "Add TagIDs",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1060,
-        400
+        948.5995267998803,
+        780
       ]
     },
     {
@@ -388,26 +390,26 @@
           "ignoreConversionErrors": true
         }
       },
-      "id": "b7de1b4d-e11d-4b62-848e-d6769c5b91c5",
+      "id": "dd484a27-46f0-4494-bb24-e913fe026316",
       "name": "Data",
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.1,
       "position": [
-        420,
-        400
+        308.5995267998803,
+        780
       ],
       "alwaysOutputData": false,
       "retryOnFail": false
     },
     {
       "parameters": {},
-      "id": "5a09da55-af03-4dd9-bfa4-b8c79a6a74e9",
+      "id": "71b8413b-da2b-4018-845c-9781c80c9b10",
       "name": "Exit",
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        1720,
-        400
+        1420,
+        780
       ]
     },
     {
@@ -421,13 +423,13 @@
           ]
         }
       },
-      "id": "c083e341-3b3a-46bb-ba24-e065e4871755",
+      "id": "6850bb10-56d2-46c0-ad1f-ddea4621c40d",
       "name": "Activity Log?",
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        660,
-        240
+        548.5995267998803,
+        620
       ]
     },
     {
@@ -436,13 +438,13 @@
         "height": 221.27162844914525,
         "width": 166.90402220101976
       },
-      "id": "29f8b585-7720-431a-8d9d-076c026ca2dd",
+      "id": "194590f1-c085-4036-a467-52f1e3c9a54f",
       "name": "Sticky Note2",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        387.29739739934024,
-        340.42387614971506
+        275.89692419922056,
+        720.423876149715
       ]
     }
   ],
@@ -481,13 +483,19 @@
   },
   "tags": [
     {
+      "createdAt": "2022-12-09T05:43:36.104Z",
+      "updatedAt": "2022-12-09T05:43:36.104Z",
+      "id": "12",
+      "name": "odoo"
+    },
+    {
       "createdAt": "2023-10-24T19:33:13.703Z",
       "updatedAt": "2023-10-24T19:33:13.703Z",
       "id": "f1mWXWQlyc2lKlHI",
       "name": "Leads"
     }
   ],
-  "triggerCount": 1,
-  "updatedAt": "2023-11-10T17:52:55.000Z",
-  "versionId": "099b7471-54d2-437f-b389-801a270d9eb9"
+  "triggerCount": 2,
+  "updatedAt": "2023-11-13T19:31:54.000Z",
+  "versionId": "15e7d02b-4f7e-44ef-aa63-a49ff3e6ba2a"
 }
