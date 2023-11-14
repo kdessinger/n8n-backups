@@ -1,0 +1,58 @@
+{
+  "active": false,
+  "connections": {
+    "Local File Trigger": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2023-11-14T05:28:10.255Z",
+  "id": "3uLdJCqj7eYTn0W7",
+  "meta": null,
+  "name": "Local File Trigger",
+  "nodes": [
+    {
+      "parameters": {
+        "triggerOn": "folder",
+        "path": "/mnt/share/_tmp",
+        "events": [
+          "add"
+        ],
+        "options": {
+          "followSymlinks": true
+        }
+      },
+      "id": "2de306e9-6a18-4566-b971-da19280a4c3b",
+      "name": "Local File Trigger",
+      "type": "n8n-nodes-base.localFileTrigger",
+      "typeVersion": 1,
+      "position": [
+        820,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "command": "ls /mnt"
+      },
+      "id": "840dba8a-1080-4d91-abb4-8030c6ac7250",
+      "name": "Execute Command",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        1020,
+        360
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2023-11-14T05:30:15.000Z",
+  "versionId": "80fbfec9-6ce2-4424-89c0-48bff9998261"
+}
