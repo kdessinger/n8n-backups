@@ -66,6 +66,33 @@
           }
         ]
       ]
+    },
+    "HTML": {
+      "main": [
+        [
+          {
+            "node": "Markdown",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Markdown": {
+      "main": [
+        []
+      ]
+    },
+    "Nextcloud PDF": {
+      "main": [
+        [
+          {
+            "node": "Read PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2023-10-09T04:53:45.548Z",
@@ -169,8 +196,8 @@
       "type": "n8n-nodes-base.nextCloud",
       "typeVersion": 1,
       "position": [
-        600,
-        440
+        360,
+        680
       ],
       "credentials": {
         "nextCloudApi": {
@@ -191,7 +218,7 @@
       "typeVersion": 1,
       "position": [
         360,
-        440
+        460
       ],
       "credentials": {
         "nextCloudApi": {
@@ -219,6 +246,33 @@
           "name": "NextCloud (EdVistas)"
         }
       }
+    },
+    {
+      "parameters": {
+        "html": "={{ $json.html }}",
+        "options": {}
+      },
+      "id": "7bfb2e8c-be95-4741-b3ff-8def4e5f726a",
+      "name": "Markdown",
+      "type": "n8n-nodes-base.markdown",
+      "typeVersion": 1,
+      "position": [
+        1420,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "encrypted": true
+      },
+      "id": "f1ad9ddd-7353-46be-ba44-cfb4bb720ef3",
+      "name": "Read PDF",
+      "type": "n8n-nodes-base.readPDF",
+      "typeVersion": 1,
+      "position": [
+        600,
+        680
+      ]
     }
   ],
   "pinData": {},
@@ -231,6 +285,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-11-13T05:28:09.000Z",
-  "versionId": "8e8b2c87-5d9a-4090-aae6-467905aa679c"
+  "updatedAt": "2023-11-14T05:22:33.000Z",
+  "versionId": "39701168-5bd7-4d34-be34-becd650bb8f5"
 }
