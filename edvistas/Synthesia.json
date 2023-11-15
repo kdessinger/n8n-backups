@@ -169,6 +169,11 @@
           }
         ]
       ]
+    },
+    "Story Teller": {
+      "main": [
+        []
+      ]
     }
   },
   "createdAt": "2023-06-14T16:49:04.167Z",
@@ -521,7 +526,7 @@
           "messages": [
             {
               "role": "system",
-              "content": "Your output will be passed an an API data call and needs to be in plain text"
+              "content": "Your output will be passed as an API data call and needs to be in plain text"
             },
             {
               "role": "assistant",
@@ -700,12 +705,52 @@
         }
       },
       "disabled": true
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "prompt": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "Your output will be passed as an API data call and needs to be in plain text"
+            },
+            {
+              "role": "assistant",
+              "content": "=I want you to act as a storyteller. You will come up with entertaining stories that are engaging, imaginative and captivating for the audience. It can be fairy tales, educational stories or any other type of stories which has the potential to capture people's attention and imagination. Depending on the target audience, you may choose specific themes or topics for your storytelling session e.g., if it’s children then you can talk about animals; If it’s adults then history-based tales might engage them better etc. My first request is \"I need an interesting story on {{ $('Settings').item.json[\"Subject\"] }}.\""
+            },
+            {
+              "content": "=So really, what is up with the {{ $('Settings').item.json[\"Subject\"] }} industry these days?"
+            }
+          ]
+        },
+        "options": {
+          "maxTokens": 2000,
+          "temperature": 0.7
+        }
+      },
+      "id": "33c1b246-a977-463c-8929-b0bbf45e6b0f",
+      "name": "Story Teller",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        -640,
+        300
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
     }
   ],
   "pinData": {},
   "settings": {
     "saveManualExecutions": true,
-    "callerPolicy": "workflowsFromSameOwner"
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": 3600,
+    "executionOrder": "v1"
   },
   "staticData": null,
   "tags": [
@@ -729,6 +774,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-09-27T19:53:32.000Z",
-  "versionId": "8458f0fa-c9b5-4693-87f8-55c8162e4c60"
+  "updatedAt": "2023-11-14T21:20:20.000Z",
+  "versionId": "9c98d28a-8b20-42bf-a55f-b316ddc0102c"
 }
