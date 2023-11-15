@@ -1,22 +1,22 @@
 {
   "active": false,
   "connections": {
-    "Webhook": {
+    "When clicking \"Execute Workflow\"": {
       "main": [
         [
           {
-            "node": "Function",
+            "node": "HTTP Request",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Interval": {
+    "HTTP Request": {
       "main": [
         [
           {
-            "node": "Function",
+            "node": "OpenAI",
             "type": "main",
             "index": 0
           }
@@ -24,101 +24,80 @@
       ]
     }
   },
-  "createdAt": "2022-02-07T23:19:48.077Z",
-  "id": 5,
+  "createdAt": "2023-11-15T05:48:34.882Z",
+  "id": "ingDpLiqbg6wHI7I",
+  "meta": null,
   "name": "My workflow 2",
   "nodes": [
     {
       "parameters": {},
-      "name": "Start",
-      "type": "n8n-nodes-base.start",
+      "id": "e986a969-c6f2-4ab9-986f-8942e5e0bd78",
+      "name": "When clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        400,
-        300
-      ],
-      "id": "801bddeb-3c21-4071-8196-49ad0cc012c1"
+        880,
+        360
+      ]
     },
     {
       "parameters": {
-        "functionCode": "console.log('Execution is working!');\nreturn [\n  {json: {name: 'Omar', age: 34, city: 'Berlin'}}\n];"
-      },
-      "name": "Function",
-      "type": "n8n-nodes-base.function",
-      "position": [
-        760,
-        300
-      ],
-      "typeVersion": 1,
-      "id": "1da43de2-b70f-4808-9e89-7e39f334d1f1"
-    },
-    {
-      "parameters": {},
-      "name": "Interval",
-      "type": "n8n-nodes-base.interval",
-      "position": [
-        560,
-        160
-      ],
-      "typeVersion": 1,
-      "id": "d608ba65-5bc8-4a49-9fbf-34980dcd7f7c"
-    },
-    {
-      "parameters": {
-        "path": "fa8a79cc-0c86-4c8a-91d8-31fd697e448c",
-        "responseMode": "lastNode",
-        "responseData": "allEntries",
+        "method": "POST",
+        "url": "http://10.20.30.136:1234/v1/chat/completions",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n   \"messages\":[{\"role\":\"system\",\"content\":\"Always answer in rhymes.\"},\n   {\"role\":\"user\",\"content\":\"Introduce yourself.\"}],\n   \"temperature\":0.7,\n   \"max_tokens\":-1,\n   \"stream\":false\n}",
         "options": {}
       },
-      "name": "Webhook",
-      "type": "n8n-nodes-base.webhook",
-      "position": [
-        560,
-        460
-      ],
-      "webhookId": "fa8a79cc-0c86-4c8a-91d8-31fd697e448c",
-      "typeVersion": 1,
-      "id": "75720a70-9b1a-470b-a5e5-7f8881fbaeb0"
-    },
-    {
-      "parameters": {
-        "url": "https://www.googleapis.com/customsearch/v1?imgType=photo&key=AIzaSyBQry407hE5VwMaDedHogPuwJeIbAIidQU&cx=e51ced3f3563dfac9&q=street&searchType=image",
-        "options": {}
-      },
-      "name": "HTTP Request1",
+      "id": "c06da65f-e84e-49bb-b588-c366a0e02bb3",
+      "name": "HTTP Request",
       "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
       "position": [
-        1140,
-        140
-      ],
-      "typeVersion": 1,
-      "id": "e7ed9855-67e2-431b-aaa0-2a81f409b993"
+        1100,
+        360
+      ]
     },
     {
       "parameters": {
-        "operation": "getAll",
-        "returnAll": true,
+        "resource": "chat",
+        "model": "gpt-4",
+        "prompt": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "You tend to over think things"
+            },
+            {
+              "content": "Who's on first?"
+            }
+          ]
+        },
         "options": {}
       },
-      "name": "Wordpress",
-      "type": "n8n-nodes-base.wordpress",
+      "id": "3b8d6758-d1b8-491a-aa0b-8361bed7aa72",
+      "name": "OpenAI",
+      "type": "n8n-nodes-base.openAi",
       "typeVersion": 1,
       "position": [
-        1140,
-        440
+        1320,
+        360
       ],
       "credentials": {
-        "wordpressApi": {
-          "id": "6",
-          "name": "Wordpress account"
+        "openAiApi": {
+          "id": "24",
+          "name": "OpenAi (kdessinger)"
         }
-      },
-      "id": "e9aad45a-0dc7-4266-aade-4df88ec17c9e"
+      }
     }
   ],
-  "pinData": null,
-  "settings": {},
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
   "staticData": null,
   "tags": [],
-  "updatedAt": "2022-06-22T03:46:15.523Z"
+  "triggerCount": 0,
+  "updatedAt": "2023-11-15T06:04:33.000Z",
+  "versionId": "0db29b2e-5f25-471b-9148-bfe53357c793"
 }
