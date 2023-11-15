@@ -1,0 +1,492 @@
+{
+  "active": true,
+  "connections": {
+    "EduForm": {
+      "main": [
+        [
+          {
+            "node": "Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Campaign ID": {
+      "main": [
+        [
+          {
+            "node": "Get Medium ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Data": {
+      "main": [
+        [
+          {
+            "node": "Activity Log?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add Lead to Odoo": {
+      "main": [
+        []
+      ]
+    },
+    "Activity Log?": {
+      "main": [
+        []
+      ]
+    },
+    "Get Medium ID": {
+      "main": [
+        [
+          {
+            "node": "Get Source ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Tags ID": {
+      "main": [
+        [
+          {
+            "node": "Assign Tags",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Assign Tags": {
+      "main": [
+        [
+          {
+            "node": "Add Lead to Odoo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Source ID": {
+      "main": [
+        [
+          {
+            "node": "Get Tags ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-11-15T16:40:12.910Z",
+  "id": "ATMdF3LZlboCraVQ",
+  "meta": null,
+  "name": "Testing Posts",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Triggers\nData entering into this workflow!",
+        "height": 598.9763777155971,
+        "width": 240.46565744862318
+      },
+      "id": "8d673303-c1af-462a-91a4-e68d4f84864e",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        20,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Processes\nTrigger data will be posted in to Odoo leads.\nOptional write to activity log.",
+        "height": 598.48479566479,
+        "width": 1243.76804215634
+      },
+      "id": "4eabf12e-ec45-4147-a4e7-d371a4c29af3",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        500,
+        500.1461568591171
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "leadcapture/giveaway2",
+        "options": {
+          "noResponseBody": true
+        }
+      },
+      "id": "73a85107-d9dc-4b90-8dd2-453c0fb53717",
+      "name": "EduForm",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        100,
+        800
+      ],
+      "webhookId": "9d84774e-7632-4ece-889b-338241f2dcce"
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "crm.lead",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "name",
+              "fieldValue": "={{ $('Data').item.json.Affiliation }}/{{ $('Data').item.json['Full Name'] }}"
+            },
+            {
+              "fieldName": "function",
+              "fieldValue": "={{ $('Data').item.json.Position }}"
+            },
+            {
+              "fieldName": "contact_name",
+              "fieldValue": "={{ $('Data').item.json['Full Name'] }}"
+            },
+            {
+              "fieldName": "email_from",
+              "fieldValue": "={{ $('Data').item.json['E-mail'] }}"
+            },
+            {
+              "fieldName": "phone",
+              "fieldValue": "={{ $('Data').item.json['Phone Number'].full }}"
+            },
+            {
+              "fieldName": "source_id",
+              "fieldValue": "={{ $('Get Source ID').item.json[\"id\"] }}"
+            },
+            {
+              "fieldName": "medium_id",
+              "fieldValue": "={{ $('Get Medium ID').item.json[\"id\"] }}"
+            },
+            {
+              "fieldName": "campaign_id",
+              "fieldValue": "={{ $('Get Campaign ID').item.json.id }}"
+            },
+            {
+              "fieldName": "partner_name",
+              "fieldValue": "={{ $('Data').item.json.Affiliation }}"
+            },
+            {
+              "fieldName": "user_id",
+              "fieldValue": "={{ $('Get Campaign ID').item.json.user_id[0] }}"
+            }
+          ]
+        }
+      },
+      "id": "f628d0d1-8772-43b7-a353-be39055b3e02",
+      "name": "Add Lead to Odoo",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        1460,
+        800
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "utm.campaign",
+        "operation": "getAll",
+        "limit": 1,
+        "options": {
+          "fieldsList": [
+            "id",
+            "name",
+            "user_id"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "name",
+              "value": "={{ $('Data').item.json.Campaign }}"
+            }
+          ]
+        }
+      },
+      "id": "73a551bb-2fd5-4ec6-8428-2823931dbcf9",
+      "name": "Get Campaign ID",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        560,
+        800
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "Affiliation",
+              "stringValue": "={{ $json.Affiliation.toLowerCase().toTitleCase().trim() }}"
+            },
+            {
+              "name": "Full Name",
+              "stringValue": "={{ Object.values($json[\"Full Name\"]).join(' ').toLowerCase().toTitleCase().trim() }}"
+            },
+            {
+              "name": "First Name",
+              "stringValue": "={{ $json['Full Name'].first.toLowerCase().toTitleCase().trim() }}"
+            },
+            {
+              "name": "Last Name",
+              "stringValue": "={{ $json['Full Name'].last.toLowerCase().toTitleCase().trim() }}"
+            },
+            {
+              "name": "Title",
+              "stringValue": "New Lead"
+            },
+            {
+              "name": "Message",
+              "stringValue": "=A new lead ({{ Object.values($json[\"Full Name\"]).join(' ').toLowerCase().toTitleCase().trim() }}) has been entered in the {{ $json[\"Campaign\"] }} raffle to win a drone. Best of luck to {{ $json[\"Full Name\"][\"first\"].toLowerCase().toTitleCase().trim() }}!\n\n"
+            },
+            {
+              "name": "ClickURL",
+              "stringValue": "=https://{{ $json['E-mail'].split('@')[1] }}"
+            },
+            {
+              "name": "Tags",
+              "type": "arrayValue",
+              "arrayValue": "[ 'hugs', '+1' ]"
+            },
+            {
+              "name": "LogEvent",
+              "type": "booleanValue",
+              "booleanValue": "={{ $json.LogEvent === false || $json.LogEvent === \"\" ? false : true }}"
+            },
+            {
+              "name": "Medium",
+              "stringValue": "Raffle"
+            }
+          ]
+        },
+        "options": {
+          "ignoreConversionErrors": true
+        }
+      },
+      "id": "d94736d2-2496-4086-84c9-9ea1c93d00cc",
+      "name": "Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.1,
+      "position": [
+        340,
+        800
+      ],
+      "alwaysOutputData": false,
+      "retryOnFail": false
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $('Data').item.json.LogEvent }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "1338d1ae-4791-4449-a373-e47b7f89fa0a",
+      "name": "Activity Log?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        560,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Set Globals\n",
+        "height": 260.05484583728423,
+        "width": 181.61703299073164
+      },
+      "id": "5dc338da-e61e-4062-98a7-87631d040fad",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        292.0776095747707,
+        720
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "utm.medium",
+        "operation": "getAll",
+        "limit": 1,
+        "options": {
+          "fieldsList": [
+            "id",
+            "name"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "name",
+              "value": "={{ $('Data').item.json.Medium }}"
+            }
+          ]
+        }
+      },
+      "id": "7c61a0cf-1541-4666-810e-9d8c4ab326d4",
+      "name": "Get Medium ID",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        740,
+        800
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "crm.tag",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {
+          "fieldsList": [
+            "id",
+            "name"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "color",
+              "value": "2"
+            }
+          ]
+        }
+      },
+      "id": "1cf2d460-e2a6-43c6-8961-03ab8a31c6d3",
+      "name": "Get Tags ID",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        1100,
+        800
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "for (const item of $('Data').all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $('Data').all();"
+      },
+      "id": "7281314e-cae9-4b2f-af12-f1d0d2ea1f12",
+      "name": "Assign Tags",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1280,
+        800
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "utm.source",
+        "operation": "getAll",
+        "limit": 1,
+        "options": {
+          "fieldsList": [
+            "id",
+            "name"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "name",
+              "value": "={{ $('Data').item.json.Campaign }} {{ $('Data').item.json.Medium }}"
+            }
+          ]
+        }
+      },
+      "id": "709ea0f6-3b54-4bde-b908-44be6cc01486",
+      "name": "Get Source ID",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        920,
+        800
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {
+    "node:JotForm": {
+      "webhookId": "0"
+    }
+  },
+  "tags": [
+    {
+      "createdAt": "2022-12-09T05:43:36.104Z",
+      "updatedAt": "2022-12-09T05:43:36.104Z",
+      "id": "12",
+      "name": "odoo"
+    },
+    {
+      "createdAt": "2023-10-24T19:33:13.703Z",
+      "updatedAt": "2023-10-24T19:33:13.703Z",
+      "id": "f1mWXWQlyc2lKlHI",
+      "name": "Leads"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2023-11-15T16:48:19.000Z",
+  "versionId": "95862bc7-5d42-4f20-a23d-43139114222c"
+}
