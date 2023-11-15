@@ -82,22 +82,7 @@
       "main": [
         [
           {
-            "node": "Get Odoo Contacts",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Evicore",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Products by District",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Read Binary Files",
+            "node": "Globals",
             "type": "main",
             "index": 0
           }
@@ -108,22 +93,7 @@
       "main": [
         [
           {
-            "node": "Get Odoo Contacts",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Evicore",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Products by District",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Read Binary Files",
+            "node": "Globals",
             "type": "main",
             "index": 0
           }
@@ -134,22 +104,7 @@
       "main": [
         [
           {
-            "node": "Products by District",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Evicore",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Get Odoo Contacts",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Read Binary Files",
+            "node": "Globals",
             "type": "main",
             "index": 0
           }
@@ -199,6 +154,32 @@
           }
         ]
       ]
+    },
+    "Globals": {
+      "main": [
+        [
+          {
+            "node": "Get Odoo Contacts",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Evicore",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Products by District",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Read Binary Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2023-09-29T21:33:33.630Z",
@@ -213,7 +194,7 @@
         "custom": true,
         "toFormat": "YYYY-MM-DD HH:mm:ss",
         "options": {
-          "toTimezone": "Etc/GMT-4"
+          "toTimezone": "Etc/GMT-5"
         }
       },
       "id": "993ce257-481b-4af4-bb4a-bed3652802f4",
@@ -234,7 +215,7 @@
         "custom": true,
         "toFormat": "YYYY-MM-DD HH:mm:ss",
         "options": {
-          "toTimezone": "Etc/GMT-4"
+          "toTimezone": "Etc/GMT-5"
         }
       },
       "id": "acf804a7-3124-4c35-9380-7f2b3dec9622",
@@ -319,6 +300,7 @@
     },
     {
       "parameters": {
+        "httpMethod": "POST",
         "path": "odoo/sync/evicore",
         "options": {}
       },
@@ -327,7 +309,7 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
-        2720,
+        2580,
         680
       ],
       "webhookId": "2ea717ea-44c6-4a8a-a8be-83a8396f0130"
@@ -339,7 +321,7 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1,
       "position": [
-        2720,
+        2580,
         1100
       ]
     },
@@ -359,7 +341,7 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.1,
       "position": [
-        2720,
+        2580,
         880
       ],
       "notesInFlow": true,
@@ -376,7 +358,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        2660,
+        2520,
         480
       ]
     },
@@ -497,7 +479,7 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "/* Last Login user for each district */\nWITH LastLoginRanked AS (\n    SELECT d.id AS districtID, d.name AS DistrictName, u.id as useridkey, u.userid, u.firstname, u.lastname, up.lastlogin,\n    ROW_NUMBER() OVER (PARTITION BY d.id ORDER BY up.lastlogin DESC) AS rn\n\tFROM evitesting.dbo.ecDistricts d\n\tLEFT JOIN evitesting.dbo.ecUsers u ON d.id = u.districtid\n\tLEFT JOIN (SELECT useridkey, MAX(lastlogin) AS lastlogin FROM evitesting.dbo.userproperties GROUP BY useridkey) up ON u.id = up.useridkey\n)\nSELECT llr.districtID, DistrictName, lastlogin, LastSync, sistype, statecode\nFROM LastLoginRanked llr\nleft join (SELECT districtid, MAX(s.Updated) LastSync FROM evicore..students s WHERE s.Updated IS NOT NULL GROUP BY s.districtid) lou on llr.districtID = lou.districtid --LastSync\njoin evicore..districts d on llr.districtID = d.id\nWHERE rn = 1 --and lastlogin is not null\nOrder by DistrictName;\n"
+        "query": "WITH LastLoginRanked AS (\n    SELECT d.id AS districtID, d.name AS DistrictName, u.id as useridkey, u.userid, u.firstname, u.lastname, up.lastlogin,\n    ROW_NUMBER() OVER (PARTITION BY d.id ORDER BY up.lastlogin DESC) AS rn\n\tFROM evitesting.dbo.ecDistricts d\n\tLEFT JOIN evitesting.dbo.ecUsers u ON d.id = u.districtid\n\tLEFT JOIN (SELECT useridkey, MAX(lastlogin) AS lastlogin FROM evitesting.dbo.userproperties GROUP BY useridkey) up ON u.id = up.useridkey\n)\nSELECT llr.districtID, DistrictName, lastlogin, d.lastDataSync as LastSync, sistype, statecode\nFROM LastLoginRanked llr\njoin evicore..districts d on llr.districtID = d.id\nWHERE rn = 1\nOrder by DistrictName;\n"
       },
       "name": "Evicore",
       "type": "n8n-nodes-base.microsoftSql",
@@ -577,6 +559,24 @@
         3340,
         1160
       ]
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {}
+          ]
+        },
+        "options": {}
+      },
+      "id": "9ce38f07-d289-47d7-a0c4-19bf78cdc0fc",
+      "name": "Globals",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        2840,
+        880
+      ]
     }
   ],
   "pinData": {},
@@ -612,6 +612,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2023-11-04T04:16:35.000Z",
-  "versionId": "07037643-6821-44de-9ab3-88fa2d96d795"
+  "updatedAt": "2023-11-14T22:44:45.000Z",
+  "versionId": "8dd0e2a5-5c9c-488c-b6c2-8a0ce8dfad9d"
 }
