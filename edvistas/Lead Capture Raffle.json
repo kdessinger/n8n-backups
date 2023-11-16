@@ -41,11 +41,6 @@
             "node": "Get Campaign ID",
             "type": "main",
             "index": 0
-          },
-          {
-            "node": "Activity Log?",
-            "type": "main",
-            "index": 0
           }
         ]
       ]
@@ -54,7 +49,7 @@
       "main": [
         [
           {
-            "node": "Exit",
+            "node": "Activity Log?",
             "type": "main",
             "index": 0
           }
@@ -65,7 +60,7 @@
       "main": [
         [
           {
-            "node": "Exit",
+            "node": "Rename Keys",
             "type": "main",
             "index": 0
           }
@@ -77,6 +72,13 @@
         [
           {
             "node": "Post to Activity Log",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Exit",
             "type": "main",
             "index": 0
           }
@@ -126,6 +128,17 @@
           }
         ]
       ]
+    },
+    "Rename Keys": {
+      "main": [
+        [
+          {
+            "node": "Exit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2023-11-13T18:57:16.424Z",
@@ -144,23 +157,23 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        20,
-        500
+        -60,
+        520
       ]
     },
     {
       "parameters": {
         "content": "## Processes\nTrigger data will be posted in to Odoo leads.\nOptional write to activity log.",
-        "height": 588.7195142666262,
-        "width": 1364.206512733692
+        "height": 419.8989003924222,
+        "width": 2035.0851699972256
       },
       "id": "868bf1c3-c37e-4898-a0cc-f52d6182f719",
       "name": "Sticky Note1",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        500,
-        460
+        480,
+        620
       ]
     },
     {
@@ -168,7 +181,7 @@
         "httpMethod": "POST",
         "path": "leadcapture/giveaway",
         "options": {
-          "noResponseBody": true
+          "responseData": "true"
         }
       },
       "id": "8f65554f-5cc8-40be-af6c-7a19bf8b335c",
@@ -176,10 +189,11 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
-        100,
+        0,
         920
       ],
-      "webhookId": "a7cea2a7-957d-4a18-89ab-cea2ebfa9fe6"
+      "webhookId": "a7cea2a7-957d-4a18-89ab-cea2ebfa9fe6",
+      "disabled": true
     },
     {
       "parameters": {
@@ -190,7 +204,7 @@
       "type": "n8n-nodes-base.jotFormTrigger",
       "typeVersion": 1,
       "position": [
-        100,
+        0,
         700
       ],
       "webhookId": "ad1e0569-0c21-45f0-9b9d-ee8125d3d1fa",
@@ -210,8 +224,8 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1,
       "position": [
-        1080,
-        600
+        1900,
+        680
       ]
     },
     {
@@ -340,6 +354,10 @@
               "stringValue": "New Lead"
             },
             {
+              "name": "Medium",
+              "stringValue": "Raffle"
+            },
+            {
               "name": "Message",
               "stringValue": "=A new lead ({{ Object.values($json[\"Full Name\"]).join(' ').toLowerCase().toTitleCase().trim() }}) has been entered in the {{ $json[\"Campaign\"] }} raffle to win a drone. Best of luck to {{ $json[\"Full Name\"][\"first\"].toLowerCase().toTitleCase().trim() }}!\n\n"
             },
@@ -356,10 +374,6 @@
               "name": "LogEvent",
               "type": "booleanValue",
               "booleanValue": "={{ $json.LogEvent === false || $json.LogEvent === \"\" ? false : true }}"
-            },
-            {
-              "name": "Medium",
-              "stringValue": "Raffle"
             }
           ]
         },
@@ -372,7 +386,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.1,
       "position": [
-        340,
+        268,
         800
       ],
       "alwaysOutputData": false,
@@ -385,8 +399,8 @@
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        1680,
-        600
+        2280,
+        820
       ]
     },
     {
@@ -405,22 +419,22 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        540,
-        620
+        1680,
+        800
       ]
     },
     {
       "parameters": {
         "content": "## Set Globals\n",
-        "height": 260.05484583728423,
-        "width": 181.61703299073164
+        "height": 247.28608491288333,
+        "width": 158.40110403727545
       },
       "id": "194590f1-c085-4036-a467-52f1e3c9a54f",
       "name": "Sticky Note2",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        292.0776095747707,
+        240,
         720
       ]
     },
@@ -544,6 +558,27 @@
           "name": "Odoo (OdooBot)"
         }
       }
+    },
+    {
+      "parameters": {
+        "keys": {
+          "key": [
+            {
+              "currentKey": "id",
+              "newKey": "ActivityID"
+            }
+          ]
+        },
+        "additionalOptions": {}
+      },
+      "id": "a441892e-d27b-42a3-a3f6-de4f3a8ac36b",
+      "name": "Rename Keys",
+      "type": "n8n-nodes-base.renameKeys",
+      "typeVersion": 1,
+      "position": [
+        2100,
+        680
+      ]
     }
   ],
   "pinData": {
@@ -567,6 +602,252 @@
             "Portfoilio(+)"
           ],
           "Campaign": "NJEA-2023"
+        }
+      }
+    ],
+    "EduForm": [
+      {
+        "json": {
+          "headers": {
+            "connection": "Keep-Alive",
+            "host": "n8n.edvistas.com",
+            "x-forwarded-scheme": "https",
+            "x-forwarded-proto": "https",
+            "x-forwarded-for": "199.223.255.8",
+            "x-real-ip": "199.223.255.8",
+            "content-length": "3369",
+            "content-type": "application/xml;charset=utf-8"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "queryresult": {
+              "username": "",
+              "password": "",
+              "formid": "8992",
+              "othersystemid": "",
+              "referid": "bdfc9da1-ed1d-4047-95d0-bd6b42270017",
+              "field": [
+                {
+                  "id": "306143",
+                  "name": "txt_header",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "306144",
+                  "name": "Affiliation",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "Educational Vistas"
+                },
+                {
+                  "id": "306145",
+                  "name": "Full Name",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "Kenn"
+                },
+                {
+                  "id": "306146",
+                  "name": "Phone",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "518-344-7022"
+                },
+                {
+                  "id": "306147",
+                  "name": "txt_Affiliation",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "306148",
+                  "name": "txt_Name",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "306149",
+                  "name": "txt_Phone",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "306150",
+                  "name": "txt_email",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "306151",
+                  "name": "Email",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "kdessinger@edvistas.com"
+                },
+                {
+                  "id": "306152",
+                  "name": "Last Name",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "Dessinger"
+                },
+                {
+                  "id": "306153",
+                  "name": "Position",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "IT Manager"
+                },
+                {
+                  "id": "306154",
+                  "name": "txt_Position",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "306245",
+                  "name": "txt_more_info",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "306246",
+                  "name": "Optin_aims",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": "1"
+                },
+                {
+                  "id": "306247",
+                  "name": "optin_cd",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": "1"
+                },
+                {
+                  "id": "306248",
+                  "name": "optin_datamate",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": "1"
+                },
+                {
+                  "id": "306249",
+                  "name": "optin_drp",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": "1"
+                },
+                {
+                  "id": "306250",
+                  "name": "optin_dmp",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": "1"
+                },
+                {
+                  "id": "306251",
+                  "name": "optin_eduview",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": "1"
+                },
+                {
+                  "id": "306252",
+                  "name": "optin_portfolioplus",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": "1"
+                },
+                {
+                  "id": "306253",
+                  "name": "optin_eduform",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": "1"
+                },
+                {
+                  "id": "306254",
+                  "name": "optin_safeschools",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": "1"
+                },
+                {
+                  "id": "306255",
+                  "name": "optin_scoring",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": "1"
+                },
+                {
+                  "id": "306256",
+                  "name": "optin_stafftrac",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": "1"
+                },
+                {
+                  "id": "306257",
+                  "name": "optin_Survate",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": "1"
+                },
+                {
+                  "id": "306258",
+                  "name": "optin_Transsync",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": "1"
+                },
+                {
+                  "id": "306259",
+                  "name": "optout",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": "1"
+                },
+                {
+                  "id": "306260",
+                  "name": "optin_reportplus",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": "1"
+                },
+                {
+                  "id": "306261",
+                  "name": "Campaign",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "XXXX-2023"
+                },
+                {
+                  "id": "306262",
+                  "name": "Medium",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "Raffle"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "Post to Activity Log": [
+      {
+        "json": {
+          "id": 61594
         }
       }
     ]
@@ -593,7 +874,7 @@
       "name": "Leads"
     }
   ],
-  "triggerCount": 2,
-  "updatedAt": "2023-11-15T16:39:59.000Z",
-  "versionId": "ce6b6e19-d79a-4a71-9a36-c3d4c418fb42"
+  "triggerCount": 1,
+  "updatedAt": "2023-11-15T21:31:16.000Z",
+  "versionId": "5e782263-506e-4bc6-98ff-6ffea2893a96"
 }
