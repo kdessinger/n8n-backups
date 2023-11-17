@@ -296,7 +296,13 @@
     }
   ],
   "pinData": {},
-  "settings": {},
+  "settings": {
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": 60,
+    "executionOrder": "v0",
+    "errorWorkflow": "NtBd2hj1eiR2xufe"
+  },
   "staticData": null,
   "tags": [
     {
@@ -325,6 +331,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-10-10T19:45:11.000Z",
-  "versionId": "6118f2bf-db09-4790-a287-7600129f7257"
+  "updatedAt": "2023-11-17T14:17:50.000Z",
+  "versionId": "d3c951c1-03a0-418a-9db6-44d81398d804"
 }
