@@ -750,7 +750,8 @@
     "saveManualExecutions": true,
     "callerPolicy": "workflowsFromSameOwner",
     "executionTimeout": 3600,
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "errorWorkflow": "NtBd2hj1eiR2xufe"
   },
   "staticData": null,
   "tags": [
@@ -774,6 +775,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-11-14T21:20:20.000Z",
-  "versionId": "9c98d28a-8b20-42bf-a55f-b316ddc0102c"
+  "updatedAt": "2023-11-17T14:15:57.000Z",
+  "versionId": "fe3e81ad-6e23-4f1b-b039-dfef2b3dba19"
 }
