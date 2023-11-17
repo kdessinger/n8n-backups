@@ -439,7 +439,9 @@
   "settings": {
     "executionOrder": "v1",
     "saveManualExecutions": true,
-    "callerPolicy": "workflowsFromSameOwner"
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": 60,
+    "errorWorkflow": "NtBd2hj1eiR2xufe"
   },
   "staticData": {
     "node:Schedule": {
@@ -461,6 +463,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2023-10-03T21:52:16.000Z",
-  "versionId": "4ae919d0-a110-4800-807d-cda3141f9384"
+  "updatedAt": "2023-11-17T14:18:11.000Z",
+  "versionId": "0caa140e-10f2-49d4-ae1d-2d2dcc880325"
 }
