@@ -124,7 +124,8 @@
     "executionOrder": "v1",
     "saveManualExecutions": false,
     "callerPolicy": "workflowsFromSameOwner",
-    "executionTimeout": 300
+    "executionTimeout": 300,
+    "errorWorkflow": "NtBd2hj1eiR2xufe"
   },
   "staticData": {
     "node:Schedule Trigger": {
@@ -149,6 +150,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-11-06T19:26:47.000Z",
-  "versionId": "4c5bd298-15ed-4224-a135-89ea7e5f9fa0"
+  "updatedAt": "2023-11-17T14:20:57.000Z",
+  "versionId": "9dcc024c-c77f-4caf-8c82-ed9d83a99595"
 }
