@@ -1,0 +1,63 @@
+{
+  "active": false,
+  "connections": {
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "Ntfy",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-11-16T22:00:58.726Z",
+  "id": "NtBd2hj1eiR2xufe",
+  "meta": null,
+  "name": "Error Handler",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Error Trigger",
+      "type": "n8n-nodes-base.errorTrigger",
+      "position": [
+        1220,
+        320
+      ],
+      "typeVersion": 1,
+      "id": "bdf30294-3851-41f7-8d7d-a78e43ab4480"
+    },
+    {
+      "parameters": {
+        "topic": "n8n",
+        "message": "=Workflow: {{$json[\"workflow\"][\"name\"]}}\nError: {{$json[\"execution\"][\"error\"][\"message\"]}}\nLast node executed: {{$json[\"execution\"][\"lastNodeExecuted\"]}}\nExecution URL: {{$json[\"execution\"][\"url\"]}}\nStacktrace: {{$json[\"execution\"][\"error\"][\"stack\"]}}",
+        "title": "N8N Workflow Failure",
+        "priority": 4,
+        "click": "https://n8n.edvistas.com/workflow/",
+        "tags": "no_entry, rotating_light",
+        "additional_fields": {
+          "alternate_url": "https://ntfy.edvistas.com"
+        }
+      },
+      "id": "66a9f42d-f194-428d-a827-721d2f7b0750",
+      "name": "Ntfy",
+      "type": "n8n-nodes-ntfy.Ntfy",
+      "typeVersion": 1,
+      "position": [
+        1440,
+        320
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2023-11-16T22:03:05.000Z",
+  "versionId": "b2ad9e4e-9332-42be-84d0-419892726166"
+}
