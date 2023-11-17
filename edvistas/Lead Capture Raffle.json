@@ -16,7 +16,7 @@
       "main": [
         [
           {
-            "node": "Data",
+            "node": "EduForm Pivot",
             "type": "main",
             "index": 0
           }
@@ -139,6 +139,17 @@
           }
         ]
       ]
+    },
+    "EduForm Pivot": {
+      "main": [
+        [
+          {
+            "node": "Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2023-11-13T18:57:16.424Z",
@@ -150,14 +161,14 @@
       "parameters": {
         "content": "## Triggers\nData entering into this workflow!",
         "height": 598.9763777155971,
-        "width": 240.46565744862318
+        "width": 357.5444808501312
       },
       "id": "fdd0bb77-5148-4c44-824c-c22034fb274a",
       "name": "Sticky Note",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -60,
+        -200,
         520
       ]
     },
@@ -189,11 +200,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
-        0,
+        -160,
         920
       ],
-      "webhookId": "a7cea2a7-957d-4a18-89ab-cea2ebfa9fe6",
-      "disabled": true
+      "webhookId": "a7cea2a7-957d-4a18-89ab-cea2ebfa9fe6"
     },
     {
       "parameters": {
@@ -204,7 +214,7 @@
       "type": "n8n-nodes-base.jotFormTrigger",
       "typeVersion": 1,
       "position": [
-        0,
+        -80,
         700
       ],
       "webhookId": "ad1e0569-0c21-45f0-9b9d-ee8125d3d1fa",
@@ -252,7 +262,7 @@
             },
             {
               "fieldName": "phone",
-              "fieldValue": "={{ $('Data').item.json['Phone Number'].full }}"
+              "fieldValue": "={{ $json['Phone Number'] }}"
             },
             {
               "fieldName": "source_id",
@@ -339,15 +349,19 @@
             },
             {
               "name": "Full Name",
-              "stringValue": "={{ Object.values($json[\"Full Name\"]).join(' ').toLowerCase().toTitleCase().trim() }}"
+              "stringValue": "={{ $json[\"Full Name\"] === undefined ? $json[\"First Name\"].toLowerCase().toTitleCase().trim() : $json['Full Name'].first.toLowerCase().toTitleCase().trim() }} {{ $json[\"Full Name\"] === undefined ? $json[\"Last Name\"].toLowerCase().toTitleCase().trim() : $json['Full Name'].last.toLowerCase().toTitleCase().trim() }}"
             },
             {
               "name": "First Name",
-              "stringValue": "={{ $json['Full Name'].first.toLowerCase().toTitleCase().trim() }}"
+              "stringValue": "={{ $json[\"Full Name\"] === undefined ? $json[\"First Name\"].toLowerCase().toTitleCase().trim() : $json['Full Name'].first.toLowerCase().toTitleCase().trim() }}"
             },
             {
               "name": "Last Name",
-              "stringValue": "={{ $json['Full Name'].last.toLowerCase().toTitleCase().trim() }}"
+              "stringValue": "={{ $json[\"Full Name\"] === undefined ? $json[\"Last Name\"].toLowerCase().toTitleCase().trim() : $json['Full Name'].last.toLowerCase().toTitleCase().trim() }}"
+            },
+            {
+              "name": "Phone Number",
+              "stringValue": "={{ $json['Phone Number'].full === undefined ?  $json['Phone Number'] :  $json['Phone Number'].full }}"
             },
             {
               "name": "Title",
@@ -359,7 +373,7 @@
             },
             {
               "name": "Message",
-              "stringValue": "=A new lead ({{ Object.values($json[\"Full Name\"]).join(' ').toLowerCase().toTitleCase().trim() }}) has been entered in the {{ $json[\"Campaign\"] }} raffle to win a drone. Best of luck to {{ $json[\"Full Name\"][\"first\"].toLowerCase().toTitleCase().trim() }}!\n\n"
+              "stringValue": "=A new lead ({{ Object.values($json[\"Full Name\"]).join(' ').toLowerCase().toTitleCase().trim() }}) has been entered in the {{ $json[\"Campaign\"] }} raffle to win a drone. Best of luck to {{ $json[\"Full Name\"][\"first\"].toLowerCase().toTitleCase().trim() }}!"
             },
             {
               "name": "ClickURL",
@@ -373,7 +387,7 @@
             {
               "name": "LogEvent",
               "type": "booleanValue",
-              "booleanValue": "={{ $json.LogEvent === false || $json.LogEvent === \"\" ? false : true }}"
+              "booleanValue": "={{ $json.LogEvent === true || $json.LogEvent === undefined ? true : false }}"
             }
           ]
         },
@@ -579,6 +593,170 @@
         2100,
         680
       ]
+    },
+    {
+      "parameters": {
+        "content": "## Fix Tagging Issue"
+      },
+      "id": "9ed8af1f-5a17-49a8-82b8-519769be00e7",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1180,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "Formid",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"formid\"] }}"
+            },
+            {
+              "name": "referid",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"referid\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][0][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][0][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][1][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][1][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][2][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][2][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][3][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][3][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][4][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][4][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][5][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][5][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][6][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][6][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][7][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][7][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][8][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][8][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][9][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][9][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][10][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][10][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][11][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][11][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][12][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][12][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][13][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][13][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][14][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][14][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][15][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][15][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][16][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][16][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][17][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][17][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][18][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][18][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][19][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][19][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][20][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][20][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][21][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][21][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][22][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][22][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][23][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][23][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][24][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][24][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][25][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][25][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][26][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][26][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][27][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][27][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][28][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][28][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][29][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][29][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][30][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][30][\"value\"] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "fbe1a4dd-bd80-439e-8e7c-d8cb376b3772",
+      "name": "EduForm Pivot",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        21,
+        920
+      ],
+      "alwaysOutputData": false
     }
   ],
   "pinData": {
@@ -644,14 +822,14 @@
                 },
                 {
                   "id": "306145",
-                  "name": "Full Name",
+                  "name": "First Name",
                   "type": "1",
                   "txttype": "7",
                   "value": "Kenn"
                 },
                 {
                   "id": "306146",
-                  "name": "Phone",
+                  "name": "Phone Number",
                   "type": "1",
                   "txttype": "7",
                   "value": "518-344-7022"
@@ -686,7 +864,7 @@
                 },
                 {
                   "id": "306151",
-                  "name": "Email",
+                  "name": "E-mail",
                   "type": "1",
                   "txttype": "7",
                   "value": "kdessinger@edvistas.com"
@@ -829,7 +1007,7 @@
                   "name": "Campaign",
                   "type": "1",
                   "txttype": "7",
-                  "value": "XXXX-2023"
+                  "value": "RISE-2023"
                 },
                 {
                   "id": "306262",
@@ -853,7 +1031,10 @@
     ]
   },
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": 60
   },
   "staticData": {
     "node:JotForm": {
@@ -874,7 +1055,7 @@
       "name": "Leads"
     }
   ],
-  "triggerCount": 1,
-  "updatedAt": "2023-11-15T21:31:16.000Z",
-  "versionId": "5e782263-506e-4bc6-98ff-6ffea2893a96"
+  "triggerCount": 2,
+  "updatedAt": "2023-11-16T21:59:24.000Z",
+  "versionId": "f3b2852e-75fc-4b95-ac44-47846b8735cf"
 }
