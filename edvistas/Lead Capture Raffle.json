@@ -1034,7 +1034,8 @@
     "executionOrder": "v1",
     "saveManualExecutions": true,
     "callerPolicy": "workflowsFromSameOwner",
-    "executionTimeout": 60
+    "executionTimeout": 60,
+    "errorWorkflow": "NtBd2hj1eiR2xufe"
   },
   "staticData": {
     "node:JotForm": {
@@ -1056,6 +1057,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2023-11-16T21:59:24.000Z",
-  "versionId": "f3b2852e-75fc-4b95-ac44-47846b8735cf"
+  "updatedAt": "2023-11-17T14:15:03.000Z",
+  "versionId": "0dd11c1f-751b-4620-93f5-233cbb520f94"
 }
