@@ -60,7 +60,7 @@
       "main": [
         [
           {
-            "node": "Rename Keys",
+            "node": "Exit",
             "type": "main",
             "index": 0
           }
@@ -71,7 +71,7 @@
       "main": [
         [
           {
-            "node": "Post to Activity Log",
+            "node": "Load Data",
             "type": "main",
             "index": 0
           }
@@ -129,22 +129,22 @@
         ]
       ]
     },
-    "Rename Keys": {
+    "EduForm Pivot": {
       "main": [
         [
           {
-            "node": "Exit",
+            "node": "Data",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "EduForm Pivot": {
+    "Load Data": {
       "main": [
         [
           {
-            "node": "Data",
+            "node": "Post to Activity Log",
             "type": "main",
             "index": 0
           }
@@ -234,7 +234,7 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1,
       "position": [
-        1900,
+        2080,
         680
       ]
     },
@@ -373,7 +373,7 @@
             },
             {
               "name": "Message",
-              "stringValue": "=A new lead ({{ Object.values($json[\"Full Name\"]).join(' ').toLowerCase().toTitleCase().trim() }}) has been entered in the {{ $json[\"Campaign\"] }} raffle to win a drone. Best of luck to {{ $json[\"Full Name\"][\"first\"].toLowerCase().toTitleCase().trim() }}!"
+              "stringValue": "=A new lead ({{ $json[\"Full Name\"] === undefined ? $json[\"First Name\"].toLowerCase().toTitleCase().trim() : $json['Full Name'].first.toLowerCase().toTitleCase().trim() }} {{ $json[\"Full Name\"] === undefined ? $json[\"Last Name\"].toLowerCase().toTitleCase().trim() : $json['Full Name'].last.toLowerCase().toTitleCase().trim() }}) has been entered in the {{ $json[\"Campaign\"] }} raffle to win a drone. Best of luck to {{ $json[\"Full Name\"] === undefined ? $json[\"First Name\"].toLowerCase().toTitleCase().trim() : $json['Full Name'].first.toLowerCase().toTitleCase().trim() }}!"
             },
             {
               "name": "ClickURL",
@@ -400,7 +400,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.1,
       "position": [
-        268,
+        280,
         800
       ],
       "alwaysOutputData": false,
@@ -575,27 +575,6 @@
     },
     {
       "parameters": {
-        "keys": {
-          "key": [
-            {
-              "currentKey": "id",
-              "newKey": "ActivityID"
-            }
-          ]
-        },
-        "additionalOptions": {}
-      },
-      "id": "a441892e-d27b-42a3-a3f6-de4f3a8ac36b",
-      "name": "Rename Keys",
-      "type": "n8n-nodes-base.renameKeys",
-      "typeVersion": 1,
-      "position": [
-        2100,
-        680
-      ]
-    },
-    {
-      "parameters": {
         "content": "## Fix Tagging Issue"
       },
       "id": "9ed8af1f-5a17-49a8-82b8-519769be00e7",
@@ -757,6 +736,19 @@
         920
       ],
       "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "jsCode": "for (const item of $('Data').all()) {\n  item.json.myNewField = 2;\n}\n\nreturn $('Data').all();"
+      },
+      "id": "c0f15d1a-198f-43a6-b565-c6d2ce05a1a4",
+      "name": "Load Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1880,
+        680
+      ]
     }
   ],
   "pinData": {
@@ -1057,6 +1049,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2023-11-17T14:15:03.000Z",
-  "versionId": "0dd11c1f-751b-4620-93f5-233cbb520f94"
+  "updatedAt": "2023-11-20T16:05:40.000Z",
+  "versionId": "506b41e3-f8f1-4b31-a38a-f478e36d2d60"
 }
