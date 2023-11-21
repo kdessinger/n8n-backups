@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "JotForm": {
       "main": [
@@ -223,8 +223,7 @@
           "id": "33",
           "name": "JotForm account"
         }
-      },
-      "disabled": true
+      }
     },
     {
       "parameters": {
@@ -530,7 +529,7 @@
     },
     {
       "parameters": {
-        "jsCode": "for (const item of $('Data').all()) {\n  item.json.myNewField = 1;\n}\nreturn $('Data').all();"
+        "jsCode": "var optedInTags = [];\n\nfor (const item of $('Data').all()) {\n  if (item.json.optin_aims === \"1\") optedInTags.push(14);\n  if (item.json.optin_cd === \"1\") optedInTags.push(15);\n  if (item.json.optin_datamate === \"1\") optedInTags.push(10);\n  if (item.json.optin_drp === \"1\") optedInTags.push(7);\n  if (item.json.optin_dmp === \"1\") optedInTags.push(48);\n  if (item.json.optin_eduview === \"1\") optedInTags.push(5);\n  if (item.json.optin_eduform === \"1\") optedInTags.push(9);\n  if (item.json.optin_portfolioplus === \"1\") optedInTags.push(26);\n  if (item.json.optin_safeschools === \"1\") optedInTags.push(19);\n  if (item.json.optin_scoring === \"1\") optedInTags.push(16);\n  if (item.json.optin_stafftrac === \"1\") optedInTags.push(17);\n  if (item.json.optin_survate === \"1\") optedInTags.push(47);\n  if (item.json.optin_transsync === \"1\") optedInTags.push(33);\n  item.json.ptags = optedInTags;\n}\n\nreturn $('Data').all();\n"
       },
       "id": "fe4a71aa-0a65-4092-8c06-3ab82700c675",
       "name": "Assign Tags",
@@ -577,19 +576,6 @@
           "name": "Odoo (OdooBot)"
         }
       }
-    },
-    {
-      "parameters": {
-        "content": "## Fix Tagging Issue"
-      },
-      "id": "9ed8af1f-5a17-49a8-82b8-519769be00e7",
-      "name": "Sticky Note4",
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        1180,
-        460
-      ]
     },
     {
       "parameters": {
@@ -737,7 +723,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 1,
       "position": [
-        21,
+        20,
         920
       ],
       "alwaysOutputData": false
@@ -973,21 +959,14 @@
                 },
                 {
                   "id": "306257",
-                  "name": "optin_Survate",
+                  "name": "optin_survate",
                   "type": "3",
                   "txttype": "7",
                   "value": "1"
                 },
                 {
                   "id": "306258",
-                  "name": "optin_Transsync",
-                  "type": "3",
-                  "txttype": "7",
-                  "value": "1"
-                },
-                {
-                  "id": "306259",
-                  "name": "optout",
+                  "name": "optin_transsync",
                   "type": "3",
                   "txttype": "7",
                   "value": "1"
@@ -1051,7 +1030,7 @@
       "name": "Leads"
     }
   ],
-  "triggerCount": 1,
-  "updatedAt": "2023-11-20T18:54:15.000Z",
-  "versionId": "4f1bd517-87da-4b42-834c-a411f09a7252"
+  "triggerCount": 2,
+  "updatedAt": "2023-11-21T16:20:45.000Z",
+  "versionId": "628d28dc-6372-4ce4-8933-bb3a2de1d264"
 }
