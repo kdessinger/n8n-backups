@@ -266,24 +266,16 @@
               "fieldValue": "={{ $json['Phone Number'] }}"
             },
             {
-              "fieldName": "source_id",
-              "fieldValue": "={{ $('Get Source ID').item.json[\"id\"] }}"
-            },
-            {
-              "fieldName": "medium_id",
-              "fieldValue": "={{ $('Get Medium ID').item.json[\"id\"] }}"
-            },
-            {
-              "fieldName": "campaign_id",
-              "fieldValue": "={{ $('Get Campaign ID').item.json.id }}"
-            },
-            {
               "fieldName": "partner_name",
               "fieldValue": "={{ $('Data').item.json.Affiliation }}"
             },
             {
               "fieldName": "user_id",
               "fieldValue": "={{ $('Get Campaign ID').item.json.user_id[0] }}"
+            },
+            {
+              "fieldName": "tag_ids",
+              "fieldValue": "={{ $json.tags }}"
             }
           ]
         }
@@ -298,8 +290,8 @@
       ],
       "credentials": {
         "odooApi": {
-          "id": "22",
-          "name": "Odoo (OdooBot)"
+          "id": "14",
+          "name": "Odoo-Stage (Administrator)"
         }
       }
     },
@@ -382,7 +374,7 @@
               "stringValue": "=https://{{ $json['E-mail'].split('@')[1] }}"
             },
             {
-              "name": "Tags",
+              "name": "Emojis",
               "type": "arrayValue",
               "arrayValue": "[ 'hugs', '+1' ]"
             },
@@ -443,7 +435,7 @@
       "parameters": {
         "content": "## Set Globals\n",
         "height": 247.28608491288333,
-        "width": 158.40110403727545
+        "width": 166.79756002109545
       },
       "id": "159ad615-37d5-4fc8-9068-abea012f5927",
       "name": "Sticky Note2",
@@ -530,7 +522,7 @@
     },
     {
       "parameters": {
-        "jsCode": "for (const item of $('Data').all()) {\n  item.json.myNewField = 1;\n}\n\nvar optedInTags = [];\noptedInTags.push((item.json.optin_aims === \"1\") ? 14 : null);\noptedInTags.push((item.json.optin_cd === \"1\") ? 15 : null);\noptedInTags.push((item.json.optin_datamate === \"1\") ? 10 : null);\noptedInTags.push((item.json.optin_drp === \"1\") ? 7 : null);\noptedInTags.push((item.json.optin_dmp === \"1\") ? 48 : null);\noptedInTags.push((item.json.optin_eduview === \"1\") ? 5 : null);\noptedInTags.push((item.json.optin_eduform === \"1\") ? 9 : null);\noptedInTags.push((item.json.optin_portfolioplus === \"1\") ? 26 : null);\noptedInTags.push((item.json.optin_safeschools === \"1\") ? 19 : null);\noptedInTags.push((item.json.optin_scoring === \"1\") ? 16 : null);\noptedInTags.push((item.json.optin_stafftrac === \"1\") ? 17 : null);\noptedInTags.push((item.json.optin_survate === \"1\") ? 47 : null);\noptedInTags.push((item.json.optin_transsync === \"1\") ? 33 : null);\n\n\nreturn $('Data').all();"
+        "jsCode": "var optedInTags = [];\n\nfor (const item of $('Data').all()) {\n  if (item.json.optin_aims === \"1\") optedInTags.push(14);\n  if (item.json.optin_cd === \"1\") optedInTags.push(15);\n  if (item.json.optin_datamate === \"1\") optedInTags.push(10);\n  if (item.json.optin_drp === \"1\") optedInTags.push(7);\n  if (item.json.optin_dmp === \"1\") optedInTags.push(48);\n  if (item.json.optin_eduview === \"1\") optedInTags.push(5);\n  if (item.json.optin_eduform === \"1\") optedInTags.push(9);\n  if (item.json.optin_portfolioplus === \"1\") optedInTags.push(26);\n  if (item.json.optin_safeschools === \"1\") optedInTags.push(19);\n  if (item.json.optin_scoring === \"1\") optedInTags.push(16);\n  if (item.json.optin_stafftrac === \"1\") optedInTags.push(17);\n  if (item.json.optin_survate === \"1\") optedInTags.push(47);\n  if (item.json.optin_transsync === \"1\") optedInTags.push(33);\n  item.json.tags = optedInTags;\n}\n\nreturn $('Data').all();\n"
       },
       "id": "d38847e2-7740-4ced-8112-1f15f688a247",
       "name": "Assign Tags",
@@ -577,19 +569,6 @@
           "name": "Odoo (OdooBot)"
         }
       }
-    },
-    {
-      "parameters": {
-        "content": "## Fix Tagging Issue"
-      },
-      "id": "e88ec0a9-067b-4e0d-a629-a8d31feb145d",
-      "name": "Sticky Note4",
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        1180,
-        460
-      ]
     },
     {
       "parameters": {
@@ -744,7 +723,7 @@
     },
     {
       "parameters": {
-        "jsCode": "for (const item of $('Data').all()) {\n  item.json.myNewField = 2;\n}\n\nreturn $('Data').all();"
+        "jsCode": "return $('Assign Tags').all();"
       },
       "id": "374fa744-632f-4d8f-a006-1c442a5229d7",
       "name": "Load Data",
@@ -754,6 +733,74 @@
         1880,
         680
       ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "crm.lead",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "name",
+              "fieldValue": "={{ $('Data').item.json.Affiliation }}/{{ $('Data').item.json['Full Name'] }}"
+            },
+            {
+              "fieldName": "function",
+              "fieldValue": "={{ $('Data').item.json.Position }}"
+            },
+            {
+              "fieldName": "contact_name",
+              "fieldValue": "={{ $('Data').item.json['Full Name'] }}"
+            },
+            {
+              "fieldName": "email_from",
+              "fieldValue": "={{ $('Data').item.json['E-mail'] }}"
+            },
+            {
+              "fieldName": "phone",
+              "fieldValue": "={{ $json['Phone Number'] }}"
+            },
+            {
+              "fieldName": "source_id",
+              "fieldValue": "={{ $('Get Source ID').item.json[\"id\"] }}"
+            },
+            {
+              "fieldName": "medium_id",
+              "fieldValue": "={{ $('Get Medium ID').item.json[\"id\"] }}"
+            },
+            {
+              "fieldName": "campaign_id",
+              "fieldValue": "={{ $('Get Campaign ID').item.json.id }}"
+            },
+            {
+              "fieldName": "partner_name",
+              "fieldValue": "={{ $('Data').item.json.Affiliation }}"
+            },
+            {
+              "fieldName": "user_id",
+              "fieldValue": "={{ $('Get Campaign ID').item.json.user_id[0] }}"
+            },
+            {
+              "fieldName": "tag_ids",
+              "fieldValue": "={{ $json.tags }}"
+            }
+          ]
+        }
+      },
+      "id": "b8dff750-7e6c-4d2b-87ce-b865772486b4",
+      "name": "Add Lead to Odoo1",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        1460,
+        1080
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "14",
+          "name": "Odoo-Stage (Administrator)"
+        }
+      }
     }
   ],
   "pinData": {
@@ -906,7 +953,7 @@
                   "name": "optin_cd",
                   "type": "3",
                   "txttype": "7",
-                  "value": "1"
+                  "value": ""
                 },
                 {
                   "id": "306248",
@@ -920,21 +967,21 @@
                   "name": "optin_drp",
                   "type": "3",
                   "txttype": "7",
-                  "value": "1"
+                  "value": ""
                 },
                 {
                   "id": "306250",
                   "name": "optin_dmp",
                   "type": "3",
                   "txttype": "7",
-                  "value": "1"
+                  "value": ""
                 },
                 {
                   "id": "306251",
                   "name": "optin_eduview",
                   "type": "3",
                   "txttype": "7",
-                  "value": "1"
+                  "value": ""
                 },
                 {
                   "id": "306252",
@@ -955,49 +1002,42 @@
                   "name": "optin_safeschools",
                   "type": "3",
                   "txttype": "7",
-                  "value": "1"
+                  "value": ""
                 },
                 {
                   "id": "306255",
                   "name": "optin_scoring",
                   "type": "3",
                   "txttype": "7",
-                  "value": "1"
+                  "value": ""
                 },
                 {
                   "id": "306256",
                   "name": "optin_stafftrac",
                   "type": "3",
                   "txttype": "7",
-                  "value": "1"
+                  "value": ""
                 },
                 {
                   "id": "306257",
-                  "name": "optin_Survate",
+                  "name": "optin_survate",
                   "type": "3",
                   "txttype": "7",
-                  "value": "1"
+                  "value": ""
                 },
                 {
                   "id": "306258",
-                  "name": "optin_Transsync",
+                  "name": "optin_transsync",
                   "type": "3",
                   "txttype": "7",
-                  "value": "1"
-                },
-                {
-                  "id": "306259",
-                  "name": "optout",
-                  "type": "3",
-                  "txttype": "7",
-                  "value": "1"
+                  "value": ""
                 },
                 {
                   "id": "306260",
                   "name": "optin_reportplus",
                   "type": "3",
                   "txttype": "7",
-                  "value": "1"
+                  "value": ""
                 },
                 {
                   "id": "306261",
@@ -1052,6 +1092,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-11-20T23:14:35.000Z",
-  "versionId": "524f113d-9a1d-4ac4-b4f4-43b41993e776"
+  "updatedAt": "2023-11-21T16:48:15.000Z",
+  "versionId": "b2b55566-a61b-4456-a795-9eecb3ae863b"
 }
