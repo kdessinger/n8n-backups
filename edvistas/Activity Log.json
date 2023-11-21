@@ -78,7 +78,7 @@
         "message": "={{ $json.Message }}",
         "title": "={{ $json.Title }}",
         "click": "={{ $json.ClickURL }}",
-        "tags": "={{ $json.Tags }}",
+        "tags": "={{ $json.Emojis }}",
         "additional_fields": {
           "alternate_url": "https://ntfy.edvistas.com"
         }
@@ -267,7 +267,7 @@
           "Campaign": "NJEA-2023",
           "Message": "A new lead (Kenn Dessinger) has been entered in the NJEA-2023 raffle to win a drone. Best of luck to Kenn!",
           "ClickURL": "https://edvistas.com",
-          "Tags": [
+          "Emojis": [
             "hugs",
             "+1"
           ],
@@ -287,6 +287,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-11-17T14:16:12.000Z",
-  "versionId": "ae1238bf-3fe7-4d79-91eb-8669db25887f"
+  "updatedAt": "2023-11-21T16:32:05.000Z",
+  "versionId": "0054e7ef-1d20-4514-aa8d-cd6e7cb118ca"
 }
