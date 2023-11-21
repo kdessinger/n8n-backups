@@ -223,7 +223,8 @@
           "id": "33",
           "name": "JotForm account"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -332,6 +333,7 @@
         540,
         800
       ],
+      "alwaysOutputData": true,
       "credentials": {
         "odooApi": {
           "id": "22",
@@ -481,6 +483,7 @@
         720,
         800
       ],
+      "alwaysOutputData": true,
       "credentials": {
         "odooApi": {
           "id": "22",
@@ -517,6 +520,7 @@
         1080,
         800
       ],
+      "alwaysOutputData": true,
       "credentials": {
         "odooApi": {
           "id": "22",
@@ -526,7 +530,7 @@
     },
     {
       "parameters": {
-        "jsCode": "for (const item of $('Data').all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $('Data').all();"
+        "jsCode": "for (const item of $('Data').all()) {\n  item.json.myNewField = 1;\n}\nreturn $('Data').all();"
       },
       "id": "fe4a71aa-0a65-4092-8c06-3ab82700c675",
       "name": "Assign Tags",
@@ -566,6 +570,7 @@
         900,
         800
       ],
+      "alwaysOutputData": true,
       "credentials": {
         "odooApi": {
           "id": "22",
@@ -891,7 +896,7 @@
                 },
                 {
                   "id": "306246",
-                  "name": "Optin_aims",
+                  "name": "optin_aims",
                   "type": "3",
                   "txttype": "7",
                   "value": "1"
@@ -1030,9 +1035,7 @@
     "errorWorkflow": "NtBd2hj1eiR2xufe"
   },
   "staticData": {
-    "node:JotForm": {
-      "webhookId": "0"
-    }
+    "node:JotForm": {}
   },
   "tags": [
     {
@@ -1048,7 +1051,7 @@
       "name": "Leads"
     }
   ],
-  "triggerCount": 2,
-  "updatedAt": "2023-11-20T16:05:40.000Z",
-  "versionId": "506b41e3-f8f1-4b31-a38a-f478e36d2d60"
+  "triggerCount": 1,
+  "updatedAt": "2023-11-20T18:54:15.000Z",
+  "versionId": "4f1bd517-87da-4b42-834c-a411f09a7252"
 }
