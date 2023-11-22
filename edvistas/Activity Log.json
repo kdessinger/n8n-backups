@@ -245,6 +245,21 @@
         -100,
         180
       ]
+    },
+    {
+      "parameters": {
+        "content": "# Alerts & Notifications\n#### This node will send alerts to various information systems. We are currently using NTFY & Odoo.  \nTo see a list of emoji's click here --> [Emoji List Here](https://ntfy.edvistas.com/docs/emojis/)",
+        "height": 171,
+        "width": 434
+      },
+      "id": "16f8d2c5-0471-4a75-8b66-62e5edc1df7b",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        -20
+      ]
     }
   ],
   "pinData": {
@@ -287,6 +302,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-11-21T16:32:05.000Z",
-  "versionId": "0054e7ef-1d20-4514-aa8d-cd6e7cb118ca"
+  "updatedAt": "2023-11-21T17:41:26.000Z",
+  "versionId": "78e0b7f9-db85-46ba-9eaa-38ad71b757d7"
 }
