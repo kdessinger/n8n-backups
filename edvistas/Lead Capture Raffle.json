@@ -103,6 +103,11 @@
             "node": "Add Lead to Odoo",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "8x8 Number Verify",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -612,174 +617,178 @@
               "value": "={{ $json[\"body\"][\"queryresult\"][\"referid\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][0][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][0][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][0][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][0][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][1][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][1][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][1][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][1][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][2][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][2][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][2][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][2][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][3][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][3][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][3][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][3][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][4][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][4][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][4][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][4][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][5][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][5][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][5][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][5][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][6][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][6][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][6][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][6][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][7][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][7][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][7][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][7][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][8][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][8][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][8][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][8][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][9][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][9][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][9][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][9][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][10][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][10][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][10][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][10][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][11][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][11][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][11][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][11][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][12][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][12][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][12][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][12][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][13][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][13][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][13][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][13][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][14][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][14][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][14][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][14][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][15][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][15][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][15][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][15][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][16][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][16][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][16][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][16][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][17][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][17][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][17][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][17][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][18][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][18][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][18][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][18][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][19][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][19][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][19][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][19][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][20][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][20][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][20][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][20][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][21][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][21][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][21][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][21][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][22][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][22][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][22][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][22][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][23][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][23][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][23][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][23][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][24][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][24][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][24][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][24][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][25][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][25][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][25][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][25][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][26][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][26][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][26][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][26][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][27][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][27][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][27][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][27][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][28][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][28][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][28][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][28][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][29][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][29][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][29][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][29][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][30][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][30][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][30][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][30][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][31][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][31][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][31][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][31][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][32][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][32][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][32][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][32][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][33][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][33][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][33][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][33][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][34][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][34][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][34][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][34][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][35][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][35][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][35][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][35][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][36][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][36][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][36][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][36][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][37][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][37][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][37][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][37][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][38][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][38][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][38][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][38][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][39][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][39][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][39][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][39][\"value\"] }}"
             },
             {
-              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][40][\"name\"] }}",
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][40][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][40][\"name\"] }}",
               "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][40][\"value\"] }}"
+            },
+            {
+              "name": "host",
+              "value": "={{ $json.headers.host }}"
             }
           ]
         },
         "options": {}
       },
-      "id": "019c0730-f50c-4730-9ae8-4f951bfc5f11",
+      "id": "2021d91d-c24c-4627-b058-41f0e7bacfb8",
       "name": "EduForm Pivot",
       "type": "n8n-nodes-base.set",
       "typeVersion": 1,
@@ -788,6 +797,38 @@
         720
       ],
       "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "url": "=https://lookup.8x8.com/api/v1/subaccounts/EdVistas_0pPE6_hq/phones/{{ $json['Phone Number'].replace(/\\D/g, '') }}?country=US&type=format",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "29cee927-ecc6-42e2-88d8-6aa50ebc1457",
+      "name": "8x8 Number Verify",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1460,
+        220
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "39",
+          "name": "8x8 (kdessinger)"
+        }
+      },
+      "disabled": true
     }
   ],
   "pinData": {
@@ -924,7 +965,7 @@
                   "name": "optin_drp",
                   "type": "3",
                   "txttype": "7",
-                  "value": ""
+                  "value": "1"
                 },
                 {
                   "id": "306250",
@@ -945,7 +986,7 @@
                   "name": "optin_portfolioplus",
                   "type": "3",
                   "txttype": "7",
-                  "value": ""
+                  "value": "1"
                 },
                 {
                   "id": "306253",
@@ -1029,7 +1070,7 @@
                   "name": "Phone_p2",
                   "type": "1",
                   "txttype": "7",
-                  "value": "344"
+                  "value": "334"
                 },
                 {
                   "id": "307467",
@@ -1086,6 +1127,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2023-11-22T19:14:09.000Z",
-  "versionId": "5fa7ccb9-f4bc-4024-9206-12b4e959dc56"
+  "updatedAt": "2023-11-23T06:29:07.000Z",
+  "versionId": "78753736-b343-43c5-a3f7-38dc5ab8b404"
 }
