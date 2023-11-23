@@ -223,8 +223,7 @@
           "id": "33",
           "name": "JotForm account"
         }
-      },
-      "disabled": true
+      }
     },
     {
       "parameters": {
@@ -237,8 +236,7 @@
       "position": [
         2040,
         480
-      ],
-      "disabled": true
+      ]
     },
     {
       "parameters": {
@@ -598,8 +596,7 @@
           "id": "22",
           "name": "Odoo (OdooBot)"
         }
-      },
-      "disabled": true
+      }
     },
     {
       "parameters": {
@@ -1070,7 +1067,9 @@
     "errorWorkflow": "NtBd2hj1eiR2xufe"
   },
   "staticData": {
-    "node:JotForm": {}
+    "node:JotForm": {
+      "webhookId": "0"
+    }
   },
   "tags": [
     {
@@ -1086,7 +1085,7 @@
       "name": "Leads"
     }
   ],
-  "triggerCount": 1,
-  "updatedAt": "2023-11-21T23:51:14.000Z",
-  "versionId": "813fcbee-d5e0-456c-98f0-3ff0bc1df7a9"
+  "triggerCount": 2,
+  "updatedAt": "2023-11-22T19:14:09.000Z",
+  "versionId": "5fa7ccb9-f4bc-4024-9206-12b4e959dc56"
 }
