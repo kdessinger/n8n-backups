@@ -35,7 +35,7 @@
         "message": "=Workflow: {{$json[\"workflow\"][\"name\"]}}\nError: {{$json[\"execution\"][\"error\"][\"message\"]}}\nLast node executed: {{$json[\"execution\"][\"lastNodeExecuted\"]}}\nExecution URL: {{$json[\"execution\"][\"url\"]}}\nStacktrace: {{$json[\"execution\"][\"error\"][\"stack\"]}}",
         "title": "N8N Workflow Failure",
         "priority": 4,
-        "click": "https://n8n.edvistas.com/workflow/",
+        "click": "={{$json[\"execution\"][\"url\"]}}",
         "tags": "no_entry, rotating_light",
         "additional_fields": {
           "alternate_url": "https://ntfy.edvistas.com"
@@ -51,13 +51,108 @@
       ]
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Error Trigger": [
+      {
+        "json": {
+          "execution": {
+            "id": "11541",
+            "url": "https://n8n.edvistas.com/workflow/2SqTrQPgAMH8gFIP/executions/11541",
+            "error": {
+              "context": {},
+              "severity": "warning",
+              "name": "NodeApiError",
+              "timestamp": 1700583574180,
+              "node": {
+                "parameters": {
+                  "resource": "custom",
+                  "customResource": "crm.lead",
+                  "operation": "create",
+                  "fieldsToCreateOrUpdate": {
+                    "fields": [
+                      {
+                        "fieldName": "name",
+                        "fieldValue": "={{ $('Data').item.json.Affiliation }}/{{ $('Data').item.json['Full Name'] }}"
+                      },
+                      {
+                        "fieldName": "function",
+                        "fieldValue": "={{ $('Data').item.json.Position }}"
+                      },
+                      {
+                        "fieldName": "contact_name",
+                        "fieldValue": "={{ $('Data').item.json['Full Name'] }}"
+                      },
+                      {
+                        "fieldName": "email_from",
+                        "fieldValue": "={{ $('Data').item.json['E-mail'] }}"
+                      },
+                      {
+                        "fieldName": "phone",
+                        "fieldValue": "={{ $json['Phone Number'] }}"
+                      },
+                      {
+                        "fieldName": "source_id",
+                        "fieldValue": "={{ $('Get Source ID').item.json[\"id\"] }}"
+                      },
+                      {
+                        "fieldName": "medium_id",
+                        "fieldValue": "={{ $('Get Medium ID').item.json[\"id\"] }}"
+                      },
+                      {
+                        "fieldName": "campaign_id",
+                        "fieldValue": "={{ $('Get Campaign ID').item.json.id }}"
+                      },
+                      {
+                        "fieldName": "partner_name",
+                        "fieldValue": "={{ $('Data').item.json.Affiliation }}"
+                      },
+                      {
+                        "fieldName": "user_id",
+                        "fieldValue": "={{ $('Get Campaign ID').item.json.user_id[0] }}"
+                      },
+                      {
+                        "fieldName": "tag_ids",
+                        "fieldValue": "{{ $json.ptags }}"
+                      }
+                    ]
+                  }
+                },
+                "id": "070a9d82-0051-4f3f-a83d-5c57d0a3c56a",
+                "name": "Add Lead to Odoo",
+                "type": "n8n-nodes-base.odoo",
+                "typeVersion": 1,
+                "position": [
+                  1460,
+                  800
+                ],
+                "credentials": {
+                  "odooApi": {
+                    "id": "22",
+                    "name": "Odoo (OdooBot)"
+                  }
+                }
+              },
+              "httpCode": null,
+              "message": "Wrong value for crm.lead.tag_ids: {{ $json.ptags }}",
+              "stack": "NodeApiError: Wrong value for crm.lead.tag_ids: {{ $json.ptags }}\n    at Object.odooCreate (/usr/local/lib/node_modules/n8n/node_modules/n8n-nodes-base/dist/nodes/Odoo/GenericFunctions.js:135:15)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at Object.execute (/usr/local/lib/node_modules/n8n/node_modules/n8n-nodes-base/dist/nodes/Odoo/Odoo.node.js:323:40)\n    at Workflow.runNode (/usr/local/lib/node_modules/n8n/node_modules/n8n-workflow/dist/Workflow.js:670:19)\n    at /usr/local/lib/node_modules/n8n/node_modules/n8n-core/dist/WorkflowExecute.js:652:53"
+            },
+            "lastNodeExecuted": "Add Lead to Odoo",
+            "mode": "webhook"
+          },
+          "workflow": {
+            "id": "2SqTrQPgAMH8gFIP",
+            "name": "Lead Capture Raffle"
+          }
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1"
   },
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-11-16T22:03:05.000Z",
-  "versionId": "b2ad9e4e-9332-42be-84d0-419892726166"
+  "updatedAt": "2023-11-22T19:13:00.000Z",
+  "versionId": "10f2048c-8a77-44a4-aaaa-69e19f9da526"
 }
