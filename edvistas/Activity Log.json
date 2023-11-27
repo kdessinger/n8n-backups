@@ -131,7 +131,7 @@
       "typeVersion": 1,
       "position": [
         460,
-        320
+        300
       ],
       "alwaysOutputData": true,
       "credentials": {
@@ -223,7 +223,7 @@
             {
               "name": "Tags",
               "type": "arrayValue",
-              "arrayValue": "={{ Array.isArray($json.Tags) ? $json.Tags : [ 'hugs', '+1' ] }}"
+              "arrayValue": "={{ $json.Emojis || [ 'hugs', '+1' ] }}"
             },
             {
               "name": "ClickURL",
@@ -250,15 +250,15 @@
       "parameters": {
         "content": "# Alerts & Notifications\n#### This node will send alerts to various information systems. We are currently using NTFY & Odoo.  \nTo see a list of emoji's click here --> [Emoji List Here](https://ntfy.edvistas.com/docs/emojis/)",
         "height": 171,
-        "width": 434
+        "width": 481
       },
       "id": "16f8d2c5-0471-4a75-8b66-62e5edc1df7b",
       "name": "Sticky Note",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -80,
-        -20
+        -160,
+        -40
       ]
     }
   ],
@@ -266,28 +266,14 @@
     "Execute Workflow Trigger": [
       {
         "json": {
-          "Affiliation": "Educational Vistas",
-          "Position": "I.T. Manager",
-          "Full Name": "Kenn Dessinger",
-          "Phone Number": {
-            "full": "(518) 344-7022"
-          },
-          "E-mail": "kdessinger@edvistas.com",
-          "Would you like more information on any of our products?": [
-            "AIMS",
-            "Datamate",
-            "Curriculum Developer",
-            "EduForm"
-          ],
-          "Campaign": "NJEA-2023",
-          "Message": "A new lead (Kenn Dessinger) has been entered in the NJEA-2023 raffle to win a drone. Best of luck to Kenn!",
-          "ClickURL": "https://edvistas.com",
+          "Title": "A New Employee",
+          "Message": "A new employee, Carl Martin, has been added to the Sales Department!  Please take a moment to welcome Carl to The Educational Vistas Team!",
+          "ClickURL": "https://odoo.edvistas.com/web#id=46&menu_id=272&action=401&model=hr.employee&view_type=form",
           "Emojis": [
-            "hugs",
-            "+1"
+            "man",
+            "hugs"
           ],
-          "Priority": 3,
-          "myNewField": 1
+          "Priority": 3
         }
       }
     ]
@@ -302,6 +288,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-11-21T17:41:26.000Z",
-  "versionId": "78e0b7f9-db85-46ba-9eaa-38ad71b757d7"
+  "updatedAt": "2023-11-27T16:56:49.000Z",
+  "versionId": "6145baee-5bfd-431d-b40f-1c63aacad9e9"
 }
