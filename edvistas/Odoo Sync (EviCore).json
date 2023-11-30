@@ -38,7 +38,7 @@
       "main": [
         [
           {
-            "node": "Merge1",
+            "node": "Pivot Table",
             "type": "main",
             "index": 0
           }
@@ -111,44 +111,11 @@
         ]
       ]
     },
-    "Read Binary Files": {
-      "main": [
-        [
-          {
-            "node": "Portfolio(+) Products",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Merge1": {
-      "main": [
-        [
-          {
-            "node": "Pivot Table",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Merge2": {
       "main": [
         [
           {
             "node": "Matching",
-            "type": "main",
-            "index": 1
-          }
-        ]
-      ]
-    },
-    "Portfolio(+) Products": {
-      "main": [
-        [
-          {
-            "node": "Merge1",
             "type": "main",
             "index": 1
           }
@@ -170,11 +137,6 @@
           },
           {
             "node": "Products by District",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Read Binary Files",
             "type": "main",
             "index": 0
           }
@@ -202,8 +164,8 @@
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 1,
       "position": [
-        3320,
-        800
+        940,
+        720
       ],
       "notesInFlow": false,
       "notes": "Odoo will remove 4 hours from the EVI_Last_login field so use a +4 in the Time Zone to compensate."
@@ -223,8 +185,8 @@
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 1,
       "position": [
-        3520,
-        800
+        1140,
+        720
       ],
       "notesInFlow": false,
       "notes": "Odoo will remove 4 hours from the EVI_Last_login field so use a +4 in the Time Zone to compensate."
@@ -273,8 +235,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        4320,
-        660
+        1900,
+        540
       ],
       "credentials": {
         "odooApi": {
@@ -286,21 +248,20 @@
     {
       "parameters": {
         "content": "# Sync Odoo Tags with the EVICore database\n### This node will update [Odoo Contacts](https://odoo.edvistas.com/web?debug=1#menu_id=111&action=139) which have the EVI District value present in the 'EVI_DistID' field.\n##### This info is found on the [Odoo contacts](https://odoo.edvistas.com/web?debug=1#menu_id=111&action=139) under the 'Integration' tab.  The following fields will be updated:\nTags, EVI District Name, EVI Last Sync, EVI Last Login, Student Info System, State District ID.\n##### Tags contain product names that a specific district have activated in [EVICore](https://apps.edvistas.com).\n\n**This is a **Sync** operation so it will add and remove remove tags from odoo that match [EVICore](https://apps.edvistas.com).",
-        "height": 939.6935167299152,
-        "width": 1454.5816546942929
+        "height": 907.2067224443169,
+        "width": 1429.8298114290753
       },
       "id": "8b5bf087-8ce5-4835-abf4-2fe0b22e0944",
       "name": "Sticky Note1",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        3080,
-        400
+        700,
+        280
       ]
     },
     {
       "parameters": {
-        "httpMethod": "POST",
         "path": "odoo/sync/evicore",
         "options": {}
       },
@@ -309,8 +270,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
-        2580,
-        680
+        200,
+        560
       ],
       "webhookId": "2ea717ea-44c6-4a8a-a8be-83a8396f0130"
     },
@@ -321,8 +282,8 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1,
       "position": [
-        2580,
-        1100
+        200,
+        980
       ]
     },
     {
@@ -341,8 +302,8 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.1,
       "position": [
-        2580,
-        880
+        200,
+        760
       ],
       "notesInFlow": true,
       "notes": "every-hour (M-F 5AM-5PM)\n"
@@ -358,8 +319,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        2520,
-        480
+        140,
+        360
       ]
     },
     {
@@ -392,8 +353,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        3120,
-        640
+        740,
+        520
       ],
       "credentials": {
         "odooApi": {
@@ -405,15 +366,15 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "/* All Districts */\nSELECT d.id as distId, d.name as district,\nCASE\n    WHEN d.name LIKE '%Boces%' THEN 'Boces'\n    WHEN d.isbusiness = 1 THEN 'Business'\n    ELSE 'District'\nEND AS Product,\nCASE\n    WHEN d.name LIKE '%Boces%' THEN 2\n    WHEN d.isbusiness = 1 THEN 43\n    ELSE 3\nEND AS tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nWhere t.enabled=1\nUNION\n\n/* Aims Districts */\nSELECT d.id, d.name as district, 'Aims' as Product, 71 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join aims..districts a on d.id = a.id\nWhere a.enabled=1 --and t.enabled=1\nUNION\n\n/* Bars Districts */\nSELECT d.id, d.name as district, 'Bars' as Product, 75 as tagId\nFROM evicore..districts d \nleft join evitesting..districts t on d.id = t.id\nWhere t.barsDistrict=1 --and t.enabled=1\nUNION\n\n/* Curriculum Developer Districts */\nSELECT d.id, d.name as district, 'CD' as Product, 74 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join rbemcd..districts cd on d.id = cd.districtid\nWhere cd.enabled=1 --and t.enabled=1\nUNION\n\n/* Datamate Basic Districts */\nSELECT d.id, d.name as district, 'DataMate' as Product, 47 as tagId\nFROM evicore..districts d \nleft join evitesting..districts t on d.id = t.id\nWhere t.dmversion='Basic' and t.enabled=1\nUNION\n\n/* Datamate Live Districts */\nSELECT d.id, d.name as district, 'DataMate:Live' as Product, 77 as tagId\nFROM evicore..districts d \nleft join evitesting..districts t on d.id = t.id\nWhere t.dmversion='Live' and t.enabled=1\nUNION\n\n/* DRP Districts */\nSELECT d.id, d.name as district, 'DRP' as Product, 46 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nWhere t.drpDistrict = 1 and t.enabled=1\nUNION\n\n/* EduForm Districts */\nSELECT d.id, d.name as district, 'EduForm' as Product, 69 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join eviForms..districts f on d.id = f.id\nWhere f.enabled=1 --and t.enabled=1\nUNION\n\n/* EduView Districts */\nSELECT d.id, d.name as district, 'EduView' as Product, 80 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join eduviewEvi..rptDistricts ev on d.id = ev.id\nWhere ev.disabled=0 --and t.enabled=1\nUNION\n\n/* Datamate Elite Districts */\nSELECT d.id, d.name as district, 'Elite' as Product, 76 as tagId\nFROM evicore..districts d \nleft join evitesting..districts t on d.id = t.id\nWhere t.datamateElite=1 and t.enabled=1\nUNION\n\n/* SafeSchools Districts */\nSELECT d.id, d.name as district, 'SafeSchool' as Product, 73 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join safeschools..district ss on d.id = ss.id\nWhere ss.enabled=1 --and t.enabled=1\nUNION\n\n/* Scoring Districts */\nSELECT d.id, d.name as district, 'Scoring' as Product, 16 as tagId\nFROM evicore..districts d \nleft join evitesting..districts t on d.id = t.id\nWhere t.enabled=1 and t.nyScoringDistrict = 1\nUNION\n\n/* StaffTrac Districts */\nSELECT d.id, d.name as district, 'StaffTrac' as Product, 70 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join stafftrac..districts s on d.id = s.id\nWhere s.enabled=1 --and t.enabled=1\nUNION\n\n/* Survate */\nSELECT d.id, d.name as district, 'Survate' as Product, 81 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join eviSurvate..districts sv on d.id = sv.id\nWhere sv.enabled=1 --and t.enabled=1\nUNION\n\n/* TransSync Districts */\nSelect d.id, name as district, 'TransSync' as Product, 82 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nWhere enableTransSync=1 --and t.enabled=1\n;\n"
+        "query": "/* All Districts */\nSELECT d.id as distId,\nCASE\n    WHEN d.name LIKE '%Boces%' THEN 'Boces'\n    WHEN d.isbusiness = 1 THEN 'Business'\n    ELSE 'District'\nEND AS Product,\nCASE\n    WHEN d.name LIKE '%Boces%' THEN 2\n    WHEN d.isbusiness = 1 THEN 43\n    ELSE 3\nEND AS tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nWhere t.enabled=1\nUNION\n\n/* Aims Districts */\nSELECT d.id, 'Aims' as Product, 71 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join aims..districts a on d.id = a.id\nWhere a.enabled=1 --and t.enabled=1\nUNION\n\n/* Bars Districts */\nSELECT d.id, 'Bars' as Product, 75 as tagId\nFROM evicore..districts d \nleft join evitesting..districts t on d.id = t.id\nWhere t.barsDistrict=1 --and t.enabled=1\nUNION\n\n/* Curriculum Developer Districts */\nSELECT d.id, 'CD' as Product, 74 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join rbemcd..districts cd on d.id = cd.districtid\nWhere cd.enabled=1 --and t.enabled=1\nUNION\n\n/* Datamate Basic Districts */\nSELECT d.id, 'DataMate' as Product, 47 as tagId\nFROM evicore..districts d \nleft join evitesting..districts t on d.id = t.id\nWhere t.dmversion='Basic' and t.enabled=1\nUNION\n\n/* Datamate Live Districts */\nSELECT d.id, 'DataMate:Live' as Product, 77 as tagId\nFROM evicore..districts d \nleft join evitesting..districts t on d.id = t.id\nWhere t.dmversion='Live' and t.enabled=1\nUNION\n\n/* DRP Districts */\nSELECT d.id, 'DRP' as Product, 46 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nWhere t.drpDistrict = 1 and t.enabled=1\nUNION\n\n/* EduForm Districts */\nSELECT d.id, 'EduForm' as Product, 69 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join eviForms..districts f on d.id = f.id\nWhere f.enabled=1 --and t.enabled=1\nUNION\n\n/* EduView Districts */\nSELECT d.id, 'EduView' as Product, 80 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join eduviewEvi..rptDistricts ev on d.id = ev.id\nWhere ev.disabled=0 --and t.enabled=1\nUNION\n\n/* Datamate Elite Districts */\nSELECT d.id, 'Elite' as Product, 76 as tagId\nFROM evicore..districts d \nleft join evitesting..districts t on d.id = t.id\nWhere t.datamateElite=1 and t.enabled=1\nUNION\n\n/* SafeSchools Districts */\nSELECT d.id, 'SafeSchool' as Product, 73 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join safeschools..district ss on d.id = ss.id\nWhere ss.enabled=1 --and t.enabled=1\nUNION\n\n/* Scoring Districts */\nSELECT d.id, 'Scoring' as Product, 16 as tagId\nFROM evicore..districts d \nleft join evitesting..districts t on d.id = t.id\nWhere t.enabled=1 and t.nyScoringDistrict = 1\nUNION\n\n/* StaffTrac Districts */\nSELECT d.id, 'StaffTrac' as Product, 70 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join stafftrac..districts s on d.id = s.id\nWhere s.enabled=1 --and t.enabled=1\nUNION\n\n/* Survate */\nSELECT d.id, 'Survate' as Product, 81 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join eviSurvate..districts sv on d.id = sv.id\nWhere sv.enabled=1 --and t.enabled=1\nUNION\n\n/* TransSync Districts */\nSelect d.id, 'TransSync' as Product, 82 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nWhere enableTransSync=1 --and t.enabled=1\nUNION\n\n/* Portfolio(+) Districts */\nSELECT EviCoreDistrictId as id, 'Portfolio(+)' as Product, 67 as tagId\nFROM WebEDGE_Prod..ClientMain\nWhere Enabled = 1 and EviCoreDistrictId is not null\nUNION\n\n/* Report(+) Districts */\nSELECT EviCoreDistrictId as id, 'Report(+)' as Product, 79 as tagId\nFROM WebEDGE_Prod..ClientMain\nWhere Enabled = 1 and EviCoreDistrictId is not null and ReportPlus = 1\n;"
       },
       "id": "e24cd84d-0408-4f23-8c2b-b09c23922948",
       "name": "Products by District",
       "type": "n8n-nodes-base.microsoftSql",
       "typeVersion": 1,
       "position": [
-        3120,
-        980
+        740,
+        940
       ],
       "credentials": {
         "microsoftSql": {
@@ -442,8 +403,8 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 2.1,
       "position": [
-        4080,
-        660
+        1640,
+        540
       ]
     },
     {
@@ -472,8 +433,8 @@
       "type": "n8n-nodes-base.itemLists",
       "typeVersion": 3,
       "position": [
-        3720,
-        1000
+        1140,
+        940
       ]
     },
     {
@@ -485,8 +446,8 @@
       "type": "n8n-nodes-base.microsoftSql",
       "typeVersion": 1,
       "position": [
-        3120,
-        800
+        740,
+        720
       ],
       "id": "b6c825be-c310-4d85-8674-0a3f4ef7100b",
       "credentials": {
@@ -495,30 +456,6 @@
           "name": "DB1.DS1.GOWLS.COM (kdessinger)"
         }
       }
-    },
-    {
-      "parameters": {
-        "fileSelector": "/mnt/share/_reports/Portfolio_Districts.xlsx"
-      },
-      "id": "2f3c1533-d2f6-494f-a5ce-e33878f10f24",
-      "name": "Read Binary Files",
-      "type": "n8n-nodes-base.readBinaryFiles",
-      "typeVersion": 1,
-      "position": [
-        3120,
-        1160
-      ]
-    },
-    {
-      "parameters": {},
-      "id": "53fac31e-3e4f-4e9c-ab9c-a96e563604ec",
-      "name": "Merge1",
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 2.1,
-      "position": [
-        3520,
-        1000
-      ]
     },
     {
       "parameters": {
@@ -540,31 +477,17 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 2.1,
       "position": [
-        3900,
-        820
-      ]
-    },
-    {
-      "parameters": {
-        "options": {
-          "headerRow": true,
-          "sheetName": "Extract"
-        }
-      },
-      "id": "2e7ad8e9-f93e-4cc8-8356-11f63f430522",
-      "name": "Portfolio(+) Products",
-      "type": "n8n-nodes-base.spreadsheetFile",
-      "typeVersion": 2,
-      "position": [
-        3340,
-        1160
+        1440,
+        740
       ]
     },
     {
       "parameters": {
         "fields": {
           "values": [
-            {}
+            {
+              "name": "source"
+            }
           ]
         },
         "options": {}
@@ -574,12 +497,288 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.2,
       "position": [
-        2840,
-        880
+        460,
+        760
       ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "res.partner.category",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {
+          "fieldsList": [
+            "id",
+            "name",
+            "color",
+            "active"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "color",
+              "value": "2"
+            }
+          ]
+        }
+      },
+      "id": "d0b903dc-cd9c-46cd-a8d5-0ec6a6dece57",
+      "name": "Tags",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        1580,
+        320
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "12",
+          "name": "Odoo (Administrator)"
+        }
+      }
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Tags": [
+      {
+        "json": {
+          "id": 71,
+          "name": "Aims",
+          "color": 2,
+          "active": true
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      },
+      {
+        "json": {
+          "id": 75,
+          "name": "Bars",
+          "color": 2,
+          "active": true
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      },
+      {
+        "json": {
+          "id": 74,
+          "name": "CD",
+          "color": 2,
+          "active": true
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      },
+      {
+        "json": {
+          "id": 78,
+          "name": "Conductor(+)",
+          "color": 2,
+          "active": true
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      },
+      {
+        "json": {
+          "id": 46,
+          "name": "DRP",
+          "color": 2,
+          "active": true
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      },
+      {
+        "json": {
+          "id": 47,
+          "name": "DataMate",
+          "color": 2,
+          "active": true
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      },
+      {
+        "json": {
+          "id": 77,
+          "name": "DataMate:Live",
+          "color": 2,
+          "active": true
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      },
+      {
+        "json": {
+          "id": 69,
+          "name": "EduForm",
+          "color": 2,
+          "active": true
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      },
+      {
+        "json": {
+          "id": 80,
+          "name": "EduView",
+          "color": 2,
+          "active": true
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      },
+      {
+        "json": {
+          "id": 76,
+          "name": "Elite",
+          "color": 2,
+          "active": true
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      },
+      {
+        "json": {
+          "id": 67,
+          "name": "Portfolio(+)",
+          "color": 2,
+          "active": true
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      },
+      {
+        "json": {
+          "id": 79,
+          "name": "Report(+)",
+          "color": 2,
+          "active": true
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      },
+      {
+        "json": {
+          "id": 73,
+          "name": "SafeSchool",
+          "color": 2,
+          "active": true
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      },
+      {
+        "json": {
+          "id": 16,
+          "name": "Scoring",
+          "color": 2,
+          "active": true
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      },
+      {
+        "json": {
+          "id": 70,
+          "name": "StaffTrac",
+          "color": 2,
+          "active": true
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      },
+      {
+        "json": {
+          "id": 81,
+          "name": "Survate",
+          "color": 2,
+          "active": true
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      },
+      {
+        "json": {
+          "id": 82,
+          "name": "TransSync",
+          "color": 2,
+          "active": true
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "Schedule": [
+      {
+        "json": {
+          "timestamp": "2023-11-29T17:00:00.055-05:00",
+          "Readable date": "November 29th 2023, 5:00:00 pm",
+          "Readable time": "5:00:00 pm",
+          "Day of week": "Wednesday",
+          "Year": "2023",
+          "Month": "November",
+          "Day of month": "29",
+          "Hour": "17",
+          "Minute": "00",
+          "Second": "00",
+          "Timezone": "EST -05:00"
+        }
+      }
+    ],
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.edvistas.com",
+            "x-forwarded-scheme": "https",
+            "x-forwarded-proto": "https",
+            "x-forwarded-for": "74.70.149.45",
+            "x-real-ip": "74.70.149.45",
+            "sec-ch-ua": "\"Google Chrome\";v=\"119\", \"Chromium\";v=\"119\", \"Not?A_Brand\";v=\"24\"",
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": "\"Windows\"",
+            "upgrade-insecure-requests": "1",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36",
+            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+            "sec-fetch-site": "none",
+            "sec-fetch-mode": "navigate",
+            "sec-fetch-user": "?1",
+            "sec-fetch-dest": "document",
+            "accept-encoding": "gzip, deflate, br",
+            "accept-language": "en-US,en;q=0.9",
+            "cookie": "rl_page_init_referrer=RudderEncrypt%3AU2FsdGVkX18586vsomkoORzsi%2FtzYOSi5ddd24fwn9APGmiXNhQ%2BmIpRow6SstGc3aOBTi0V%2F%2FVhYjsXfBS8pQ%3D%3D; rl_page_init_referring_domain=RudderEncrypt%3AU2FsdGVkX19FWzSOpTz%2BFvfa52%2BHa643UjE7%2FlSfXQ7GnhhWwl%2BQA1GDuBVCpTvt; ajs_user_id=qe5FvNJ5rKgIi5LEHBjrrm5isCz1; ajs_anonymous_id=a4f97503-ccbb-4ae6-8fbe-515919f2dc1f; amp_e5f096=GLHwoY2d0wxFEXKB7MrJzF...1h712io91.1h712jgv7.0.0.0; amp_e5f096_edvistas.com=GLHwoY2d0wxFEXKB7MrJzF...1h712io99.1h712jh07.2.0.2; crisp-client%2Fsession%2F56f47d75-2ba0-4133-b72f-2a14e8317197=session_5be3b80d-8633-47cd-8efa-8f4f44ff0639; n8n-auth=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRiMzZiN2YxLTg4ZjYtNDZhNy04MTBiLTc3MzcxODdhMmNjNyIsImVtYWlsIjoiYWRtaW5AZWR2aXN0YXMuY29tIiwicGFzc3dvcmQiOiJlYTY5N2RkOTc3OTUwNjVmNzVmODEwNTMxZDljNzhkZThkZTExMGZiNjZiMTg5ODFjYWVjYjY2Y2U3MWNlMTgwIiwiaWF0IjoxNzAxMDk2NjA0LCJleHAiOjE3MDE3MDE0MDR9.v8rXiWgJSZFGn14Aqhvf2iqeYJcpmUSAIjeVROEBdxA; rl_anonymous_id=RudderEncrypt%3AU2FsdGVkX19fu4J5xRhX7HQUxehLnBr2RALd3lvNkgdwwUy0SID%2F4qgF1iMWgBCsjkLl2f%2F8NB19jZYsd7oLUA%3D%3D; rl_user_id=RudderEncrypt%3AU2FsdGVkX1%2FEgE%2BpMikCg%2Bwmcw6qz%2FxOsIWR1IREWDRr5Jn7PmZQN0TqGf6maIDjx18RXzUlPS1KnfCoDoAFg5XKyl6rLerOBHkNSHuZKBymhdXN997yKCQt3CP3JRiyhLbVvak01JWfp%2BTu5dYeawCt4QyTjfrQBym15yEflKU%3D; rl_trait=RudderEncrypt%3AU2FsdGVkX1%2BQFvm6MTfxjxuE%2FP61BVVdKuDpX7MCP9GWTG48cSbSb6%2BZJ9480m8yxQmOxwGDFppYI5lGaXlxTMXLfEiywJbU%2BRdrTu3LAPwXxeWj7BRVOZpoZMky34VcbzMCycKiPat3omr0ZUY0Zw%3D%3D; ph_phc_4URIAm1uYfJO7j8kWSe0J8lc8IqnstRLS7Jx8NcakHo_posthog=%7B%22distinct_id%22%3A%227805be3d76995c8367b59c87757ffb29dae4f96804954874c6ee3c19b9a6bb9b%23db36b7f1-88f6-46a7-810b-7737187a2cc7%22%2C%22%24device_id%22%3A%2218580c03c6311c-06b003a112dc5b-26021151-144000-18580c03c6435b%22%2C%22%24referrer%22%3A%22https%3A%2F%2Fn8n.edvistas.com%2Fworkflow%2F7%22%2C%22%24referring_domain%22%3A%22n8n.edvistas.com%22%2C%22%24sesid%22%3A%5B1701303142792%2C%22018c1d8d-f31c-7031-8920-5acad580c9bf%22%2C1701302891292%5D%2C%22%24user_id%22%3A%227805be3d76995c8367b59c87757ffb29dae4f96804954874c6ee3c19b9a6bb9b%23db36b7f1-88f6-46a7-810b-7737187a2cc7%22%2C%22%24session_recording_enabled_server_side%22%3Afalse%2C%22%24active_feature_flags%22%3A%5B%22015_form_trigger_usecase%22%2C%22009_choosing_trial_plan%22%2C%22011_ask_AI%22%2C%22006_cloud_opt_in%22%2C%22schema-view%22%5D%2C%22%24enabled_feature_flags%22%3A%7B%22015_form_trigger_usecase%22%3A%22variant%22%2C%22009_choosing_trial_plan%22%3A%22variant%22%2C%22011_ask_AI%22%3A%22gpt3%22%2C%22006_cloud_opt_in%22%3A%22control%22%2C%22schema-view%22%3Atrue%7D%2C%22%24feature_flag_payloads%22%3A%7B%7D%2C%22%24autocapture_disabled_server_side%22%3Afalse%2C%22%24stored_person_properties%22%3A%7B%22instance_id%22%3A%227805be3d76995c8367b59c87757ffb29dae4f96804954874c6ee3c19b9a6bb9b%22%2C%22created_at_timestamp%22%3A1663084210884%7D%2C%22%24client_session_props%22%3A%7B%22sessionId%22%3A%22018c1d8d-f31c-7031-8920-5acad580c9bf%22%2C%22props%22%3A%7B%22initialPathName%22%3A%22%2Fworkflow%2FHQyMcbgVeKG9G1FI%22%2C%22referringDomain%22%3A%22n8n.edvistas.com%22%7D%7D%2C%22%24session_recording_network_payload_capture%22%3A%7B%22capturePerformance%22%3Afalse%7D%7D; rl_session=RudderEncrypt%3AU2FsdGVkX1%2BWe3k8v6hrb4qG2hESOe4cpQbQdzSs1KbfxW5bHkrST5ls%2BnkeFjVV6SIhTFdBK45e6aR61KcD9SfnZMbIKHeMH7DtD%2BSXsuwTpP73pni2RL5aTDK6eMS3lTgNJK8G4I6VNn9dccdUxQ%3D%3D"
+          },
+          "params": {},
+          "query": {}
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1",
     "saveManualExecutions": false,
@@ -613,6 +812,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2023-11-17T14:15:42.000Z",
-  "versionId": "05a16801-705a-478a-ab44-d8afc860c7e5"
+  "updatedAt": "2023-11-30T00:17:04.000Z",
+  "versionId": "aa2bf249-ca53-4ae4-89b2-46dc9960b03b"
 }
