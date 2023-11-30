@@ -1,11 +1,11 @@
 {
   "active": false,
   "connections": {
-    "Execute Workflow Trigger": {
+    "When clicking \"Execute Workflow\"": {
       "main": [
         [
           {
-            "node": "HTML",
+            "node": "Execute Workflow",
             "type": "main",
             "index": 0
           }
@@ -13,32 +13,32 @@
       ]
     }
   },
-  "createdAt": "2023-10-11T13:50:55.904Z",
-  "id": "kriqnWCNQ7NtUGhJ",
+  "createdAt": "2023-11-30T00:15:10.319Z",
+  "id": "A3xos1YR44AxQgr7",
   "meta": null,
   "name": "My workflow",
   "nodes": [
     {
       "parameters": {},
-      "id": "26bffb60-6c0d-44c8-9fd6-ef8ba53f6543",
-      "name": "Execute Workflow Trigger",
-      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "id": "c7eede54-b938-4bbf-84a2-4ef610ab7781",
+      "name": "When clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        500,
+        660,
         360
       ]
     },
     {
       "parameters": {
-        "html": "<!DOCTYPE html>\n<html lang=\"{{ page.lang | default: site.lang | default: \"en-US\" }}\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n\n{% seo %}\n    <link rel=\"stylesheet\" href=\"{{ \"/assets/css/style.css?v=\" | append: site.github.build_revision | relative_url }}\">\n    {% include head-custom.html %}\n    <script async src=\"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6945602608405209\" crossorigin=\"anonymous\"></script>\n  </head>\n  <body>\n    <div class=\"container-lg px-3 my-5 markdown-body\">\n      {% if site.title and site.title != page.title %}\n      <h1><a href=\"{{ \"/\" | absolute_url }}\">{{ site.title }}</a></h1>\n      {% endif %}\n\n      {{ content }}\n\n      {% if site.github.private != true and site.github.license %}\n      <div class=\"footer border-top border-gray-light mt-5 pt-3 text-right text-gray\">\n        Awesome ChatGPT Prompts is open source. {% github_edit_link \"Improve this page\" %}.\n      </div>\n      {% endif %}\n    </div>\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js\" integrity=\"sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=\" crossorigin=\"anonymous\"></script>\n    <script>anchors.add();</script>\n    <script>\n      document.querySelectorAll(\"h2[id^=act] + p + blockquote\").forEach((x) => {\n        x.setAttribute('contentEditable', true);\n        const button = document.createElement('button');\n        button.style.border = '0';\n        button.style.borderRadius = '3px';\n        button.style.fontSize = '1rem';\n        button.style.marginRight = '0.5rem';\n        button.style.padding = '0';\n        button.style.backgroundColor = 'transparent';\n        button.innerHTML = '✂️';\n        button.addEventListener('click', async () => {\n          if (navigator.clipboard) {\n            await navigator.clipboard.writeText(x.innerText);\n            alert('Prompt is copied, now paste this into ChatGPT.');\n          } else {\n            alert('Your browser does not support clipboard copy. Please select the prompt and copy.')\n          }\n        }, false);\n        x.previousElementSibling.previousElementSibling.prepend(button);\n      });\n    </script>\n    <style>video { max-width: 100% !important; }</style>\n    <!-- Google tag (gtag.js) -->\n    <script async src=\"https://www.googletagmanager.com/gtag/js?id=G-MSNHFWTE77\"></script>\n    <script>\n      window.dataLayer = window.dataLayer || [];\n      function gtag(){dataLayer.push(arguments);}\n      gtag('js', new Date());\n\n      gtag('config', 'G-MSNHFWTE77');\n    </script>\n  </body>\n</html>"
+        "workflowId": "HQyMcbgVeKG9G1FI"
       },
-      "id": "1ba040f0-a37d-4533-b987-8268e576534c",
-      "name": "HTML",
-      "type": "n8n-nodes-base.html",
+      "id": "e0b0a4aa-a375-4562-a59b-03e68075a508",
+      "name": "Execute Workflow",
+      "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1,
       "position": [
-        720,
+        1060,
         360
       ]
     }
@@ -50,6 +50,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-10-11T13:50:55.904Z",
-  "versionId": "df3550a1-8c5f-4111-b7ca-7da6b3853a58"
+  "updatedAt": "2023-11-30T00:15:10.319Z",
+  "versionId": "8a1b8b8e-5c80-4f86-b26e-d3f091865fa3"
 }
