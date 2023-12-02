@@ -256,7 +256,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        700,
+        660,
         280
       ]
     },
@@ -529,7 +529,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        1580,
+        1640,
         320
       ],
       "credentials": {
@@ -812,6 +812,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2023-11-30T00:17:04.000Z",
-  "versionId": "aa2bf249-ca53-4ae4-89b2-46dc9960b03b"
+  "updatedAt": "2023-12-01T20:48:42.000Z",
+  "versionId": "f7b4e321-66aa-451a-8bbc-f4290f3d2832"
 }
