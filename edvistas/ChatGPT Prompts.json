@@ -43,18 +43,7 @@
       "main": [
         [
           {
-            "node": "Code1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Code1": {
-      "main": [
-        [
-          {
-            "node": "Write Binary File",
+            "node": "Random Filename",
             "type": "main",
             "index": 0
           }
@@ -66,6 +55,17 @@
         [
           {
             "node": "Image Generator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Random Filename": {
+      "main": [
+        [
+          {
+            "node": "Write Binary File",
             "type": "main",
             "index": 0
           }
@@ -147,7 +147,8 @@
     {
       "parameters": {
         "resource": "image",
-        "prompt": "exotic peacock, painting, highly detailed, ornate, intricate, black, orange, yellow, gold, green, violet, blue, cyan, ultra real, long, swirling feather, gorgeous, fairytale, starry background, dreamlike style, fantasy, surreal environment.",
+        "prompt": "Classroom, Education, Learning, Teacher, Technology, Happy, Warm, beautiful, inspiring",
+        "model": "dall-e-3",
         "options": {
           "n": 1
         }
@@ -417,30 +418,17 @@
     },
     {
       "parameters": {
-        "fileName": "=/mnt/share/_tmp/{{ $binary.data.fileName }}{{ $node[\"Image Generator\"].parameter[\"options\"][\"n\"] }}.{{ $binary.data.fileExtension }}",
+        "fileName": "=/mnt/share/_tmp/{{ $binary.data.fileName }}{{ $json[\"myNewField\"] }}.{{ $binary.data.fileExtension }}",
         "options": {}
       },
       "name": "Write Binary File",
       "type": "n8n-nodes-base.writeBinaryFile",
       "position": [
-        1140,
+        1180,
         -40
       ],
       "typeVersion": 1,
       "id": "d1c66294-6aca-4a7f-937f-2a5e4d0569e3"
-    },
-    {
-      "parameters": {
-        "jsCode": "// Loop over input items and add a new field\n// called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $input.all();"
-      },
-      "id": "ebfce7b7-efba-45dd-9216-e5fe2af04552",
-      "name": "Code1",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 1,
-      "position": [
-        960,
-        -40
-      ]
     },
     {
       "parameters": {
@@ -496,6 +484,19 @@
       "typeVersion": 1,
       "position": [
         580,
+        -40
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "for (const item of $input.all()) {\n  const randomNum = getRandomInt(1, 9999);\n  item.json.myNewField = randomNum;\n}\n\nreturn $input.all();\n\nfunction getRandomInt(min, max) {\n  return Math.floor(Math.random() * (max - min)) + min;\n}\n\n"
+      },
+      "id": "ebfce7b7-efba-45dd-9216-e5fe2af04552",
+      "name": "Random Filename",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        980,
         -40
       ]
     }
@@ -555,6 +556,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-06-10T20:28:21.000Z",
-  "versionId": "3d82312e-7a26-442d-b4f2-4725bc4710e5"
+  "updatedAt": "2023-12-16T22:20:29.000Z",
+  "versionId": "58815f42-8b08-4701-861e-e7ebe690b9f5"
 }
