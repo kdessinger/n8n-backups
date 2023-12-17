@@ -303,7 +303,7 @@
             },
             {
               "name": "Phone Number",
-              "stringValue": "={{ $input.item.json.Phone_p1 === \"\" ? \"\" : \"+1 \" + $json[\"Phone_p1\"] }}{{ $input.item.json.Phone_p2 === \"\" ? \"\" : \"-\" + $json[\"Phone_p2\"] }}{{ $input.item.json.Phone_p3 === \"\" ? \"\" : \"-\" + $json[\"Phone_p3\"] }}{{ $input.item.json.Phone_p4 === \"\" ? \"\" : \"ext. \" + $json[\"Phone_p4\"] }}"
+              "stringValue": "={{ $input.item.json.Phone_p1 === \"\" ? \"\" : \"+1 \" + $json[\"Phone_p1\"] }}{{ $input.item.json.Phone_p2 === \"\" ? \"\" : \"-\" + $json[\"Phone_p2\"] }}{{ $input.item.json.Phone_p3 === \"\" ? \"\" : \"-\" + $json[\"Phone_p3\"] }}{{ $input.item.json.Phone_p4 === \"\" ? \"\" : \" ext. \" + $json[\"Phone_p4\"] }}"
             },
             {
               "name": "Title",
@@ -316,6 +316,10 @@
             {
               "name": "Medium",
               "stringValue": "={{ $json[\"Formid\"] === undefined ? 'JotForm' : 'EduForm' }}"
+            },
+            {
+              "name": "Campaign",
+              "stringValue": "={{ $json[\"Campaign\"] === undefined ? 'Unknown' : $json[\"Campaign\"] }}"
             },
             {
               "name": "Message",
@@ -1127,6 +1131,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2023-11-23T06:29:07.000Z",
-  "versionId": "78753736-b343-43c5-a3f7-38dc5ab8b404"
+  "updatedAt": "2023-12-16T20:35:51.000Z",
+  "versionId": "a727bf4c-7e8a-437d-9d21-16ab15dc3cfa"
 }
