@@ -147,7 +147,7 @@
     {
       "parameters": {
         "resource": "image",
-        "prompt": "Classroom, Education, Learning, Teacher, Technology, Happy, Warm, beautiful, inspiring",
+        "prompt": "an ugly christmas sweater design displaying computers wearing santa hats and the text “Happy Holidays from Educational Vistas”",
         "model": "dall-e-3",
         "options": {
           "n": 1
@@ -533,7 +533,12 @@
       }
     ]
   },
-  "settings": {},
+  "settings": {
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionOrder": "v0",
+    "errorWorkflow": "NtBd2hj1eiR2xufe"
+  },
   "staticData": null,
   "tags": [
     {
@@ -556,6 +561,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-12-16T22:20:29.000Z",
-  "versionId": "58815f42-8b08-4701-861e-e7ebe690b9f5"
+  "updatedAt": "2023-12-18T01:09:41.000Z",
+  "versionId": "46ad849c-d6f6-4473-992d-72470c667215"
 }
