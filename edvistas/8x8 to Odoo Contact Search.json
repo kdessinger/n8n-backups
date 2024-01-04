@@ -89,7 +89,7 @@
     },
     {
       "parameters": {
-        "content": "## Simple API contact search in odoo\n\nIn this workflow we will accept a phone number and search odoo for the corresponding record and open to that client.\n\n",
+        "content": "## Simple API contact search in odoo\n\nIn this workflow we will accept a phone number and search odoo for the corresponding record and open to that contact.",
         "height": 140.6222044621179,
         "width": 554.7042175838476
       },
@@ -331,6 +331,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-11-17T14:17:50.000Z",
-  "versionId": "d3c951c1-03a0-418a-9db6-44d81398d804"
+  "updatedAt": "2024-01-03T21:28:22.000Z",
+  "versionId": "6051f5bb-cd51-4f79-911b-212ba886fed1"
 }
