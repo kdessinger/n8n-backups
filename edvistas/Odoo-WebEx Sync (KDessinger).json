@@ -656,7 +656,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// Calculate the meeting duration\nconst start = new Date(items[0].json.start);\nconst end = new Date(items[0].json.end);\nconst durationInHours = (end - start) / (1000 * 60 * 60);\n\n// Format date to 'yyyy-MM-dd HH:mm:ss'\nconst formatDate = (date) => {\n  const year = date.getUTCFullYear();\n  const month = String(date.getUTCMonth() + 1).padStart(2, '0');\n  const day = String(date.getUTCDate()).padStart(2, '0');\n  const hours = String(date.getUTCHours()).padStart(2, '0');\n  const minutes = String(date.getUTCMinutes()).padStart(2, '0');\n  const seconds = String(date.getUTCSeconds()).padStart(2, '0');\n  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;\n};\n\nreturn { json: \n    { \n      id: items[0].json.id, \n      meetingNumber: items[0].json.meetingNumber, \n      title: items[0].json.title,  \n      agenda: items[0].json.agenda,  \n      password: items[0].json.password,\n      start: items[0].json.start,\n      end: items[0].json.end,\n      MeetingStart: formatDate(start),\n      MeetingEnd: formatDate(end),\n      duration: durationInHours,\n      timezone: items[0].json.timezone,\n      reminderTime: items[0].json.reminderTime,\n      hostDisplayName: items[0].json.hostDisplayName,  \n      hostEmail: items[0].json.hostEmail,  \n      webLink: items[0].json.webLink,  \n      callInNumber: items[0].json.telephony.callInNumbers[0].callInNumber  \n    }\n};\n\n"
+        "jsCode": "// Calculate the meeting duration\nconst start = new Date(items[0].json.start);\nconst end = new Date(items[0].json.end);\nconst durationInHours = (end - start) / (1000 * 60 * 60);\n\n// Format date to 'yyyy-MM-dd HH:mm:ss'\nconst formatDate = (date) => {\n  const year = date.getUTCFullYear();\n  const month = String(date.getUTCMonth() + 1).padStart(2, '0');\n  const day = String(date.getUTCDate()).padStart(2, '0');\n  const hours = String(date.getUTCHours()).padStart(2, '0');\n  const minutes = String(date.getUTCMinutes()).padStart(2, '0');\n  const seconds = String(date.getUTCSeconds()).padStart(2, '0');\n  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;\n};\n\nreturn { json: \n    { \n      id: items[0].json.id, \n      meetingNumber: items[0].json.meetingNumber, \n      title: items[0].json.title,  \n      agenda: items[0].json.agenda,  \n      password: items[0].json.password,\n      start: items[0].json.start,\n      end: items[0].json.end,\n      MeetingStart: formatDate(start),\n      MeetingEnd: formatDate(end),\n      duration: durationInHours,\n      timezone: items[0].json.timezone,\n      reminderTime: items[0].json.reminderTime,\n      hostDisplayName: items[0].json.hostDisplayName,  \n      hostEmail: items[0].json.hostEmail,  \n      webLink: items[0].json.webLink\n    }\n};\n\n"
       },
       "id": "b854bd36-19cd-4173-b08e-1fe87843fcfc",
       "name": "Fix Dates & Duration",
@@ -743,7 +743,7 @@
     },
     "node:Webex (Kenn)": {
       "secret": "107c687ee654e759c75eb828439aabab",
-      "webhookId": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svOGRmMzYyYTAtZDdmYi00YjAwLTk4ZTYtOWNiOTZjYjc0YjE5"
+      "webhookId": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svOGY5ZjM0M2UtZDQ1My00OGExLTk5ODctYTEwMzhlZTBiNTkx"
     }
   },
   "tags": [
@@ -755,6 +755,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-01-09T22:48:13.000Z",
-  "versionId": "88e81230-877d-44ab-8103-3837cfeee93f"
+  "updatedAt": "2024-01-10T17:36:50.000Z",
+  "versionId": "68a4f848-4412-4432-9a30-d427505f870b"
 }
