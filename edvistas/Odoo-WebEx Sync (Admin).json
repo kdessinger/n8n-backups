@@ -292,10 +292,6 @@
             {
               "name": "meetingId",
               "value": "={{ $json.id }}"
-            },
-            {
-              "name": "hostEmail",
-              "value": "={{ $json.hostEmail }}"
             }
           ]
         },
@@ -815,7 +811,7 @@
     },
     "node:Webex (Admin)": {
       "secret": "ec71c59abdc230b3d6f3ba90f1626871",
-      "webhookId": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1dFQkhPT0svOTMzZmE5NTEtMDhlZi00YWY5LWI5Y2UtMTZhNDIxZThhMGU5"
+      "webhookId": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1dFQkhPT0svMGE5MmU0YzEtM2FiOS00NmY4LWI2NmEtZTBiMDJmODAyNzIx"
     }
   },
   "tags": [
@@ -827,6 +823,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-01-10T17:36:35.000Z",
-  "versionId": "8525abdf-a031-411c-a9c1-cce60a37d307"
+  "updatedAt": "2024-01-11T14:55:23.000Z",
+  "versionId": "9b252c28-fe88-434c-8ad3-239824f1046c"
 }
