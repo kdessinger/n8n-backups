@@ -119,14 +119,14 @@
         ],
         [
           {
-            "node": "Do Nothing",
+            "node": "Meeting Starting",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Do Nothing1",
+            "node": "Meeting Ending",
             "type": "main",
             "index": 0
           }
@@ -154,6 +154,28 @@
           }
         ]
       ]
+    },
+    "Meeting Starting": {
+      "main": [
+        [
+          {
+            "node": "Log Activity (Starting)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Meeting Ending": {
+      "main": [
+        [
+          {
+            "node": "Log Activity (Ending)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2024-01-09T22:27:55.365Z",
@@ -164,7 +186,7 @@
     {
       "parameters": {
         "content": "## Create Meeting",
-        "height": 276.7099520547855,
+        "height": 260.86258608646995,
         "width": 439.4644172187578
       },
       "id": "c7a716ec-f787-4d89-a66f-9290777b0a6e",
@@ -173,7 +195,7 @@
       "typeVersion": 1,
       "position": [
         1620,
-        340
+        354
       ]
     },
     {
@@ -188,7 +210,7 @@
       "typeVersion": 1,
       "position": [
         1620,
-        640
+        634
       ]
     },
     {
@@ -204,58 +226,6 @@
       "position": [
         200,
         1100
-      ]
-    },
-    {
-      "parameters": {
-        "content": "## Meeting Started",
-        "height": 237.9425225900299,
-        "width": 439.9277249827393
-      },
-      "id": "e48c30a3-78b4-4511-a119-f5a2e6be622d",
-      "name": "Sticky Note3",
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        1620,
-        914
-      ]
-    },
-    {
-      "parameters": {
-        "content": "## Meeting Ended",
-        "height": 263.73894854905154,
-        "width": 442.00996167088874
-      },
-      "id": "c9786906-003d-402f-8df3-b14332ab623a",
-      "name": "Sticky Note4",
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        1620,
-        1180
-      ]
-    },
-    {
-      "parameters": {},
-      "id": "b679a9b3-d495-4238-8d0f-fd18cb7f4a98",
-      "name": "Do Nothing",
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [
-        1680,
-        1000
-      ]
-    },
-    {
-      "parameters": {},
-      "id": "d35dd661-c41f-4a29-9443-9a91a4189ccc",
-      "name": "Do Nothing1",
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [
-        1680,
-        1280
       ]
     },
     {
@@ -426,7 +396,7 @@
       "typeVersion": 1,
       "position": [
         1680,
-        429
+        443
       ],
       "credentials": {
         "odooApi": {
@@ -457,7 +427,7 @@
       "typeVersion": 1,
       "position": [
         1680,
-        720
+        714
       ],
       "credentials": {
         "odooApi": {
@@ -507,7 +477,7 @@
       "typeVersion": 1,
       "position": [
         1880,
-        720
+        714
       ],
       "credentials": {
         "odooApi": {
@@ -683,6 +653,140 @@
           "name": "Cisco Webex (kdessinger)"
         }
       }
+    },
+    {
+      "parameters": {
+        "content": "## Meeting Started",
+        "height": 237.9425225900299,
+        "width": 439.9277249827393
+      },
+      "id": "e6983729-db08-4150-a861-625fb177384c",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1620,
+        894
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Meeting Ended",
+        "height": 263.73894854905154,
+        "width": 442.00996167088874
+      },
+      "id": "09226f38-0e6c-4ec5-95d8-d759232a5f87",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1620,
+        1160
+      ]
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "Title",
+              "stringValue": "A WebEX Meeting has Started"
+            },
+            {
+              "name": "Message",
+              "stringValue": "={{ $json[\"hostDisplayName\"] }} has started the WebEx meeting titled \"{{ $json[\"title\"] }}\".\nThis meeting is scheduled to end at {{ $json[\"MeetingEnd\"] }}."
+            },
+            {
+              "name": "ClickURL",
+              "stringValue": "={{ $json.webLink }}"
+            },
+            {
+              "name": "Emojis",
+              "type": "arrayValue",
+              "arrayValue": "['hourglass_flowing_sand', 'date']"
+            },
+            {
+              "name": "Priority",
+              "type": "numberValue",
+              "numberValue": "1"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "f5e01667-c3c6-4a20-8c7f-c27b47546c69",
+      "name": "Meeting Starting",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        1660,
+        980
+      ]
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "Title",
+              "stringValue": "A WebEX Meeting has Ended"
+            },
+            {
+              "name": "Message",
+              "stringValue": "={{ $json[\"hostDisplayName\"] }} has ended the WebEx meeting titled \"{{ $json[\"title\"] }}\"."
+            },
+            {
+              "name": "ClickURL",
+              "stringValue": "="
+            },
+            {
+              "name": "Emojis",
+              "type": "arrayValue",
+              "arrayValue": "['hourglass', 'date']"
+            },
+            {
+              "name": "Priority",
+              "type": "numberValue",
+              "numberValue": "1"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "2415ef04-3b08-4696-aa26-e5555b0d13cc",
+      "name": "Meeting Ending",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        1660,
+        1260
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": "RMGsRy908UOekKo3"
+      },
+      "id": "d8b19e73-7013-4b20-b7e0-f891b94caa60",
+      "name": "Log Activity (Starting)",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        1880,
+        980
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": "RMGsRy908UOekKo3"
+      },
+      "id": "26f441bf-ef62-4472-817b-01432358f6c5",
+      "name": "Log Activity (Ending)",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        1880,
+        1260
+      ]
     }
   ],
   "pinData": {},
@@ -707,7 +811,7 @@
     },
     "node:Webex (Kenn)": {
       "secret": "107c687ee654e759c75eb828439aabab",
-      "webhookId": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svYTc4MDlkN2QtZjlkYy00ZjgyLWJjNjktOGI2YzQ1YTM5Zjg4"
+      "webhookId": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svMzAyOWFlNTAtYWIxMC00YjAzLTk2MjAtODhlM2ZiMWYxY2Nh"
     }
   },
   "tags": [
@@ -719,6 +823,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-01-11T14:55:08.000Z",
-  "versionId": "643c5589-c2f9-41e1-8d0f-100aae2802b4"
+  "updatedAt": "2024-01-11T18:47:36.000Z",
+  "versionId": "fbeb97f1-fa8b-4a69-bfbe-626eb95fbaea"
 }
