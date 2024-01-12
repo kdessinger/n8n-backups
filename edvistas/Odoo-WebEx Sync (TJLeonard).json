@@ -119,14 +119,14 @@
         ],
         [
           {
-            "node": "Do Nothing",
+            "node": "Meeting Starting",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Do Nothing1",
+            "node": "Meeting Ending",
             "type": "main",
             "index": 0
           }
@@ -154,6 +154,28 @@
           }
         ]
       ]
+    },
+    "Meeting Starting": {
+      "main": [
+        [
+          {
+            "node": "Log Activity (Starting)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Meeting Ending": {
+      "main": [
+        [
+          {
+            "node": "Log Activity (Ending)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2024-01-09T22:19:48.889Z",
@@ -164,7 +186,7 @@
     {
       "parameters": {
         "content": "## Create Meeting",
-        "height": 276.7099520547855,
+        "height": 266.14504140924174,
         "width": 439.4644172187578
       },
       "id": "0df5330d-d0d2-4229-b479-b14a548d5059",
@@ -173,7 +195,7 @@
       "typeVersion": 1,
       "position": [
         1620,
-        340
+        360
       ]
     },
     {
@@ -204,58 +226,6 @@
       "position": [
         200,
         1100
-      ]
-    },
-    {
-      "parameters": {
-        "content": "## Meeting Started",
-        "height": 237.9425225900299,
-        "width": 439.9277249827393
-      },
-      "id": "6d2a1af1-bc67-4032-8c40-f850c5b33cdd",
-      "name": "Sticky Note3",
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        1620,
-        914
-      ]
-    },
-    {
-      "parameters": {
-        "content": "## Meeting Ended",
-        "height": 263.73894854905154,
-        "width": 442.00996167088874
-      },
-      "id": "94d632cf-8be7-46a0-806c-c14ae1b8e24e",
-      "name": "Sticky Note4",
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        1620,
-        1180
-      ]
-    },
-    {
-      "parameters": {},
-      "id": "6334baf1-7a05-4699-b085-7ff694f3f7ab",
-      "name": "Do Nothing",
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [
-        1680,
-        1000
-      ]
-    },
-    {
-      "parameters": {},
-      "id": "92fd9538-aa23-412d-b73d-92d5fc53611b",
-      "name": "Do Nothing1",
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [
-        1680,
-        1280
       ]
     },
     {
@@ -426,7 +396,7 @@
       "typeVersion": 1,
       "position": [
         1680,
-        429
+        449
       ],
       "credentials": {
         "odooApi": {
@@ -683,6 +653,140 @@
           "name": "Webex (TJ)"
         }
       }
+    },
+    {
+      "parameters": {
+        "content": "## Meeting Started",
+        "height": 237.9425225900299,
+        "width": 439.9277249827393
+      },
+      "id": "8b042e3c-731c-48e9-a04b-32b50c41fbf2",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1620,
+        900
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Meeting Ended",
+        "height": 263.73894854905154,
+        "width": 442.00996167088874
+      },
+      "id": "56307bbc-dcec-4f40-988e-ba9d3544d0d1",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1620,
+        1166
+      ]
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "Title",
+              "stringValue": "A WebEX Meeting has Started"
+            },
+            {
+              "name": "Message",
+              "stringValue": "={{ $json[\"hostDisplayName\"] }} has started the WebEx meeting titled \"{{ $json[\"title\"] }}\".\nThis meeting is scheduled to end at {{ $json[\"MeetingEnd\"] }}."
+            },
+            {
+              "name": "ClickURL",
+              "stringValue": "={{ $json.webLink }}"
+            },
+            {
+              "name": "Emojis",
+              "type": "arrayValue",
+              "arrayValue": "['hourglass_flowing_sand', 'date']"
+            },
+            {
+              "name": "Priority",
+              "type": "numberValue",
+              "numberValue": "1"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "d252487f-9150-4e95-99b1-fdc418cc17bb",
+      "name": "Meeting Starting",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        1660,
+        986
+      ]
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "Title",
+              "stringValue": "A WebEX Meeting has Ended"
+            },
+            {
+              "name": "Message",
+              "stringValue": "={{ $json[\"hostDisplayName\"] }} has ended the WebEx meeting titled \"{{ $json[\"title\"] }}\"."
+            },
+            {
+              "name": "ClickURL",
+              "stringValue": "="
+            },
+            {
+              "name": "Emojis",
+              "type": "arrayValue",
+              "arrayValue": "['hourglass', 'date']"
+            },
+            {
+              "name": "Priority",
+              "type": "numberValue",
+              "numberValue": "1"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "fc5dbf1a-7fec-4578-b849-042d1abb35c4",
+      "name": "Meeting Ending",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        1660,
+        1266
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": "RMGsRy908UOekKo3"
+      },
+      "id": "b7254f78-d20e-461b-96b4-092511e3bfd8",
+      "name": "Log Activity (Starting)",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        1880,
+        986
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": "RMGsRy908UOekKo3"
+      },
+      "id": "73f10158-54b2-46ae-8ec6-37ad1f67a931",
+      "name": "Log Activity (Ending)",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        1880,
+        1266
+      ]
     }
   ],
   "pinData": {},
@@ -707,7 +811,7 @@
     },
     "node:Webex (TJ)": {
       "secret": "ec71c59abdc230b3d6f3ba90f1626871",
-      "webhookId": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1dFQkhPT0svMWU1NmNlNTQtMTVjNi00MDljLWE5YWEtZjgxZDc1NzJmN2Qx"
+      "webhookId": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1dFQkhPT0svYzM4MDk3ZGQtMDI0NC00ZTYyLTkwNjUtMDkzOGE2YzcxNjA2"
     }
   },
   "tags": [
@@ -719,6 +823,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-01-11T14:54:23.000Z",
-  "versionId": "b7d4dfe5-2e44-4496-a4c1-087e7e47e1d4"
+  "updatedAt": "2024-01-11T18:48:04.000Z",
+  "versionId": "8eee7b8c-bdb4-4cce-ba3d-b427f74de40f"
 }
