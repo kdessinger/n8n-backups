@@ -135,6 +135,17 @@
         ]
       ]
     },
+    "Fix Dates & Duration": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "Choose Event": {
       "main": [
         [
@@ -153,25 +164,36 @@
         ],
         [
           {
-            "node": "Do Nothing",
+            "node": "Meeting Starting",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Do Nothing1",
+            "node": "Meeting Ending",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Fix Dates & Duration": {
+    "Meeting Starting": {
       "main": [
         [
           {
-            "node": "Merge",
+            "node": "Log Activity (Starting)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Meeting Ending": {
+      "main": [
+        [
+          {
+            "node": "Log Activity (Ending)",
             "type": "main",
             "index": 0
           }
@@ -187,7 +209,7 @@
     {
       "parameters": {
         "content": "## Create Meeting",
-        "height": 276.7099520547855,
+        "height": 262.4360508974174,
         "width": 439.4644172187578
       },
       "id": "ccbd06db-2e0e-4f85-bc59-181ff6c72e6b",
@@ -196,7 +218,7 @@
       "typeVersion": 1,
       "position": [
         1620,
-        340
+        360
       ]
     },
     {
@@ -231,58 +253,6 @@
     },
     {
       "parameters": {
-        "content": "## Meeting Started",
-        "height": 237.9425225900299,
-        "width": 439.9277249827393
-      },
-      "id": "86a851c3-871b-4b73-8f8f-2ff96ea14e5b",
-      "name": "Sticky Note3",
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        1620,
-        914
-      ]
-    },
-    {
-      "parameters": {
-        "content": "## Meeting Ended",
-        "height": 263.73894854905154,
-        "width": 442.00996167088874
-      },
-      "id": "d62f70ad-d008-4093-b917-1b9c3fd86973",
-      "name": "Sticky Note4",
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        1620,
-        1180
-      ]
-    },
-    {
-      "parameters": {},
-      "id": "d8a43ff3-7a89-432c-9076-c21758512772",
-      "name": "Do Nothing",
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [
-        1680,
-        1000
-      ]
-    },
-    {
-      "parameters": {},
-      "id": "20dbd915-56e3-4032-8984-83ec60815382",
-      "name": "Do Nothing1",
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [
-        1680,
-        1280
-      ]
-    },
-    {
-      "parameters": {
         "url": "https://webexapis.com/v1/meetingInvitees",
         "authentication": "predefinedCredentialType",
         "nodeCredentialType": "ciscoWebexOAuth2Api",
@@ -310,7 +280,8 @@
           "id": "kP6MOeMVfJK5YFcD",
           "name": "Webex (Admin)"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -388,7 +359,8 @@
       "position": [
         720,
         880
-      ]
+      ],
+      "disabled": true
     },
     {
       "parameters": {
@@ -449,7 +421,7 @@
       "typeVersion": 1,
       "position": [
         1680,
-        429
+        449
       ],
       "credentials": {
         "odooApi": {
@@ -485,8 +457,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        1020,
-        1180
+        1100,
+        1160
       ],
       "alwaysOutputData": true,
       "credentials": {
@@ -507,8 +479,8 @@
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        800,
-        1160
+        880,
+        1140
       ]
     },
     {
@@ -715,8 +687,21 @@
     },
     {
       "parameters": {
+        "jsCode": "// Calculate the meeting duration\nconst start = new Date(items[0].json.start);\nconst end = new Date(items[0].json.end);\nconst durationInHours = (end - start) / (1000 * 60 * 60);\n\n// Format date to 'yyyy-MM-dd HH:mm:ss'\nconst formatDate = (date) => {\n  const year = date.getUTCFullYear();\n  const month = String(date.getUTCMonth() + 1).padStart(2, '0');\n  const day = String(date.getUTCDate()).padStart(2, '0');\n  const hours = String(date.getUTCHours()).padStart(2, '0');\n  const minutes = String(date.getUTCMinutes()).padStart(2, '0');\n  const seconds = String(date.getUTCSeconds()).padStart(2, '0');\n  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;\n};\n\nreturn { json: \n    { \n      id: items[0].json.id, \n      meetingNumber: items[0].json.meetingNumber, \n      title: items[0].json.title,  \n      agenda: items[0].json.agenda,  \n      password: items[0].json.password,\n      start: items[0].json.start,\n      end: items[0].json.end,\n      MeetingStart: formatDate(start),\n      MeetingEnd: formatDate(end),\n      duration: durationInHours,\n      timezone: items[0].json.timezone,\n      reminderTime: items[0].json.reminderTime,\n      hostDisplayName: items[0].json.hostDisplayName,  \n      hostEmail: items[0].json.hostEmail,  \n      webLink: items[0].json.webLink\n    }\n};\n\n"
+      },
+      "id": "6e18b04d-23d0-4d46-acc4-afdfac3fcd5d",
+      "name": "Fix Dates & Duration",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        520,
+        700
+      ]
+    },
+    {
+      "parameters": {
         "dataType": "string",
-        "value1": "={{ $('Webex (Admin)').item.json.event }}",
+        "value1": "={{ $json.event }}",
         "rules": {
           "rules": [
             {
@@ -749,15 +734,136 @@
     },
     {
       "parameters": {
-        "jsCode": "// Calculate the meeting duration\nconst start = new Date(items[0].json.start);\nconst end = new Date(items[0].json.end);\nconst durationInHours = (end - start) / (1000 * 60 * 60);\n\n// Format date to 'yyyy-MM-dd HH:mm:ss'\nconst formatDate = (date) => {\n  const year = date.getUTCFullYear();\n  const month = String(date.getUTCMonth() + 1).padStart(2, '0');\n  const day = String(date.getUTCDate()).padStart(2, '0');\n  const hours = String(date.getUTCHours()).padStart(2, '0');\n  const minutes = String(date.getUTCMinutes()).padStart(2, '0');\n  const seconds = String(date.getUTCSeconds()).padStart(2, '0');\n  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;\n};\n\nreturn { json: \n    { \n      id: items[0].json.id, \n      meetingNumber: items[0].json.meetingNumber, \n      title: items[0].json.title,  \n      agenda: items[0].json.agenda,  \n      password: items[0].json.password,\n      start: items[0].json.start,\n      end: items[0].json.end,\n      MeetingStart: formatDate(start),\n      MeetingEnd: formatDate(end),\n      duration: durationInHours,\n      timezone: items[0].json.timezone,\n      reminderTime: items[0].json.reminderTime,\n      hostDisplayName: items[0].json.hostDisplayName,  \n      hostEmail: items[0].json.hostEmail,  \n      webLink: items[0].json.webLink\n    }\n};\n\n"
+        "content": "## Meeting Started",
+        "height": 237.9425225900299,
+        "width": 439.9277249827393
       },
-      "id": "6e18b04d-23d0-4d46-acc4-afdfac3fcd5d",
-      "name": "Fix Dates & Duration",
-      "type": "n8n-nodes-base.code",
+      "id": "2e5ba610-7017-406a-b1a5-e59a87e57375",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        520,
-        700
+        1620,
+        900
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Meeting Ended",
+        "height": 263.73894854905154,
+        "width": 442.00996167088874
+      },
+      "id": "7f781eac-7fb6-4d90-951e-7adbec58d947",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1620,
+        1160
+      ]
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "Title",
+              "stringValue": "A WebEX Meeting has Started"
+            },
+            {
+              "name": "Message",
+              "stringValue": "={{ $json[\"hostDisplayName\"] }} has started the WebEx meeting titled \"{{ $json[\"title\"] }}\".\nThis meeting is scheduled to end at {{ $json[\"MeetingEnd\"] }}."
+            },
+            {
+              "name": "ClickURL",
+              "stringValue": "={{ $json.webLink }}"
+            },
+            {
+              "name": "Emojis",
+              "type": "arrayValue",
+              "arrayValue": "['hourglass_flowing_sand', 'date']"
+            },
+            {
+              "name": "Priority",
+              "type": "numberValue",
+              "numberValue": "1"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "cebc12fb-d95c-4693-b4e5-17505e9b9586",
+      "name": "Meeting Starting",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        1660,
+        986
+      ]
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "Title",
+              "stringValue": "A WebEX Meeting has Ended"
+            },
+            {
+              "name": "Message",
+              "stringValue": "={{ $json[\"hostDisplayName\"] }} has ended the WebEx meeting titled \"{{ $json[\"title\"] }}\"."
+            },
+            {
+              "name": "ClickURL",
+              "stringValue": "="
+            },
+            {
+              "name": "Emojis",
+              "type": "arrayValue",
+              "arrayValue": "['hourglass', 'date']"
+            },
+            {
+              "name": "Priority",
+              "type": "numberValue",
+              "numberValue": "1"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "6b82a64c-97cf-4b59-bc25-8d6e009ce068",
+      "name": "Meeting Ending",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        1660,
+        1260
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": "RMGsRy908UOekKo3"
+      },
+      "id": "08282537-507f-4cf2-86ff-de6066ce4d50",
+      "name": "Log Activity (Starting)",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        1880,
+        986
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": "RMGsRy908UOekKo3"
+      },
+      "id": "7bc74034-25af-402e-80aa-216066f0c116",
+      "name": "Log Activity (Ending)",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        1880,
+        1260
       ]
     }
   ],
@@ -769,7 +875,7 @@
           "name": "n8n-webhook:https://n8n.edvistas.com/webhook/9287f27b-7888-4d9c-8b64-dd94507cf756/webhook",
           "targetUrl": "https://n8n.edvistas.com/webhook/9287f27b-7888-4d9c-8b64-dd94507cf756/webhook",
           "resource": "meetings",
-          "event": "updated",
+          "event": "started",
           "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8yZjEzODhiOS1jMDVmLTRmYzktYjQ0OC00YzI1YTlhZjViYzQ",
           "createdBy": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yOWI1ZjUxZi1lMjU5LTRiNDMtOGExOC1iODA5ZDA5ZjE5NDg",
           "appId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0NjZWQwZjlkNTA0Y2MwYmFkNDA4YjIyMDBmN2ZjYjc4YmY3YmVlMDEyZGYzZjVlMzY4MjI4MDhhZDI1ZTJmMzhh",
@@ -811,7 +917,7 @@
     },
     "node:Webex (Admin)": {
       "secret": "ec71c59abdc230b3d6f3ba90f1626871",
-      "webhookId": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1dFQkhPT0svMGE5MmU0YzEtM2FiOS00NmY4LWI2NmEtZTBiMDJmODAyNzIx"
+      "webhookId": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1dFQkhPT0svN2ZkNTA4YTUtN2NhOC00MDBiLWFkZWUtM2E4NmZiMDY2NWE0"
     }
   },
   "tags": [
@@ -823,6 +929,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-01-11T14:55:23.000Z",
-  "versionId": "9b252c28-fe88-434c-8ad3-239824f1046c"
+  "updatedAt": "2024-01-11T18:49:57.000Z",
+  "versionId": "5a737a6b-2da4-41c3-80d3-2da57037679d"
 }
