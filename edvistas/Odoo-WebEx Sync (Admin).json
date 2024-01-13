@@ -280,8 +280,7 @@
           "id": "kP6MOeMVfJK5YFcD",
           "name": "Webex (Admin)"
         }
-      },
-      "disabled": true
+      }
     },
     {
       "parameters": {
@@ -359,8 +358,7 @@
       "position": [
         720,
         880
-      ],
-      "disabled": true
+      ]
     },
     {
       "parameters": {
@@ -772,7 +770,7 @@
             },
             {
               "name": "Message",
-              "stringValue": "={{ $json[\"hostDisplayName\"] }} has started the WebEx meeting titled \"{{ $json[\"title\"] }}\".\nThis meeting is scheduled to end at {{ $json[\"MeetingEnd\"] }}."
+              "stringValue": "={{ $json[\"hostDisplayName\"] }} has started the WebEx meeting titled \"{{ $json[\"title\"] }}\"."
             },
             {
               "name": "ClickURL",
@@ -867,39 +865,7 @@
       ]
     }
   ],
-  "pinData": {
-    "Webex (Admin)": [
-      {
-        "json": {
-          "id": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1dFQkhPT0svNGE2NTgyNmYtYjRhYS00ZWZlLWIxZjYtMzZiOTE3MDI1MmQz",
-          "name": "n8n-webhook:https://n8n.edvistas.com/webhook/9287f27b-7888-4d9c-8b64-dd94507cf756/webhook",
-          "targetUrl": "https://n8n.edvistas.com/webhook/9287f27b-7888-4d9c-8b64-dd94507cf756/webhook",
-          "resource": "meetings",
-          "event": "started",
-          "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8yZjEzODhiOS1jMDVmLTRmYzktYjQ0OC00YzI1YTlhZjViYzQ",
-          "createdBy": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yOWI1ZjUxZi1lMjU5LTRiNDMtOGExOC1iODA5ZDA5ZjE5NDg",
-          "appId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0NjZWQwZjlkNTA0Y2MwYmFkNDA4YjIyMDBmN2ZjYjc4YmY3YmVlMDEyZGYzZjVlMzY4MjI4MDhhZDI1ZTJmMzhh",
-          "ownedBy": "creator",
-          "status": "active",
-          "created": "2024-01-09T17:26:10.798Z",
-          "data": {
-            "id": "3189ce8a35f942ffab93d328b087201a",
-            "meetingNumber": "26311250977",
-            "meetingType": "meetingSeries",
-            "timezone": "UTC",
-            "start": "2024-01-11T15:00:00Z",
-            "end": "2024-01-11T17:00:00Z",
-            "hostUserId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yOWI1ZjUxZi1lMjU5LTRiNDMtOGExOC1iODA5ZDA5ZjE5NDg",
-            "state": "active",
-            "hostEmail": "info@edvistas.com",
-            "siteUrl": "educationalvistasinc-535335.my.webex.com",
-            "orgId": "2f1388b9-c05f-4fc9-b448-4c25a9af5bc4",
-            "hostType": "1080080"
-          }
-        }
-      }
-    ]
-  },
+  "pinData": {},
   "settings": {
     "executionOrder": "v1",
     "saveManualExecutions": true,
@@ -917,7 +883,7 @@
     },
     "node:Webex (Admin)": {
       "secret": "ec71c59abdc230b3d6f3ba90f1626871",
-      "webhookId": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1dFQkhPT0svN2ZkNTA4YTUtN2NhOC00MDBiLWFkZWUtM2E4NmZiMDY2NWE0"
+      "webhookId": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1dFQkhPT0svYTA3YWU3ZGEtZDc5NC00ZTg0LThhNDctMDU2NDA2YTM2MzZj"
     }
   },
   "tags": [
@@ -929,6 +895,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-01-11T18:49:57.000Z",
-  "versionId": "5a737a6b-2da4-41c3-80d3-2da57037679d"
+  "updatedAt": "2024-01-12T21:06:01.000Z",
+  "versionId": "08a01744-3500-4e40-83ae-4ad2ff16a841"
 }
