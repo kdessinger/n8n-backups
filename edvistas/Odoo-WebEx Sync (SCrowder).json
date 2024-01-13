@@ -694,7 +694,7 @@
             },
             {
               "name": "Message",
-              "stringValue": "={{ $json[\"hostDisplayName\"] }} has started the WebEx meeting titled \"{{ $json[\"title\"] }}\".\nThis meeting is scheduled to end at {{ $json[\"MeetingEnd\"] }}."
+              "stringValue": "={{ $json[\"hostDisplayName\"] }} has started the WebEx meeting titled \"{{ $json[\"title\"] }}\"."
             },
             {
               "name": "ClickURL",
@@ -811,7 +811,7 @@
     },
     "node:Webex (Scott)": {
       "secret": "ec71c59abdc230b3d6f3ba90f1626871",
-      "webhookId": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1dFQkhPT0svNTY3NWU5YjgtZDEwZS00NmI0LTgxOGItNDQzM2RlYmQ2Yzc2"
+      "webhookId": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1dFQkhPT0svMmFjNjgwNjQtNjQ3OS00ZDE2LTg4NzItZWE3ODEwM2JiODE2"
     }
   },
   "tags": [
@@ -823,6 +823,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-01-11T18:48:37.000Z",
-  "versionId": "2547717f-cc08-4e54-8de5-e3cfa893161c"
+  "updatedAt": "2024-01-12T21:04:07.000Z",
+  "versionId": "f097636d-5d6e-433a-9f97-08a900c5ea61"
 }
