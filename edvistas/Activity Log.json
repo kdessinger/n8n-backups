@@ -227,7 +227,7 @@
             },
             {
               "name": "ClickURL",
-              "stringValue": "={{ $json.ClickURL || \"https://www.edvistas.com\" }}"
+              "stringValue": "={{ $json.ClickURL }}"
             },
             {
               "name": "Channel",
@@ -288,6 +288,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-11-27T16:56:49.000Z",
-  "versionId": "6145baee-5bfd-431d-b40f-1c63aacad9e9"
+  "updatedAt": "2024-01-16T20:26:00.000Z",
+  "versionId": "e79f4a3f-4532-48c9-8ff2-854a37ceb978"
 }
