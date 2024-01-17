@@ -793,30 +793,31 @@
     "Webex (Bill)": [
       {
         "json": {
-          "id": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1dFQkhPT0svNGE2NTgyNmYtYjRhYS00ZWZlLWIxZjYtMzZiOTE3MDI1MmQz",
-          "name": "n8n-webhook:https://n8n.edvistas.com/webhook/9287f27b-7888-4d9c-8b64-dd94507cf756/webhook",
-          "targetUrl": "https://n8n.edvistas.com/webhook/9287f27b-7888-4d9c-8b64-dd94507cf756/webhook",
+          "id": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svZThlNmMzYTctMWYzYS00YTg1LWEzMjItM2EwNzg1YjI0ZThl",
+          "name": "n8n-webhook:https://n8n.edvistas.com/webhook/2bcc660a-e6cf-4d65-8c32-56a664625d56/webhook",
+          "targetUrl": "https://n8n.edvistas.com/webhook/2bcc660a-e6cf-4d65-8c32-56a664625d56/webhook",
           "resource": "meetings",
-          "event": "updated",
-          "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8yZjEzODhiOS1jMDVmLTRmYzktYjQ0OC00YzI1YTlhZjViYzQ",
-          "createdBy": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yOWI1ZjUxZi1lMjU5LTRiNDMtOGExOC1iODA5ZDA5ZjE5NDg",
-          "appId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0NjZWQwZjlkNTA0Y2MwYmFkNDA4YjIyMDBmN2ZjYjc4YmY3YmVlMDEyZGYzZjVlMzY4MjI4MDhhZDI1ZTJmMzhh",
+          "event": "ended",
+          "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9hYjQ1NTg3Ni1jMWUxLTQ2MjUtOTAzNS0wNGRmMmNhNzA3YjU",
+          "createdBy": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9jNjBmY2Y4NC01MDYxLTQyZTgtYmRlYi01NDgxOGRhM2RiMjg",
+          "appId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0MwOTk4OTVjYjllY2I1MTNkZmI1YzdlYWQzM2IyMjgzMTdjMGE2ZTQxZTE4ZDdmODdjM2Y0ZDI5ZDQzZDAyNGRm",
           "ownedBy": "creator",
           "status": "active",
-          "created": "2024-01-09T17:26:10.798Z",
+          "created": "2024-01-12T21:03:48.319Z",
           "data": {
-            "id": "3189ce8a35f942ffab93d328b087201a",
-            "meetingNumber": "26311250977",
-            "meetingType": "meetingSeries",
+            "eventSource": "meeting-events",
+            "id": "ce166c49494042da9c449ed50ae20135_I_282815663361275429",
+            "state": "ended",
+            "siteUrl": "educationalvistasinc.my.webex.com",
+            "orgId": "ab455876-c1e1-4625-9035-04df2ca707b5",
+            "meetingNumber": "26340240792",
+            "meetingType": "meeting",
             "timezone": "UTC",
-            "start": "2024-01-11T15:00:00Z",
-            "end": "2024-01-11T17:00:00Z",
-            "hostUserId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yOWI1ZjUxZi1lMjU5LTRiNDMtOGExOC1iODA5ZDA5ZjE5NDg",
-            "state": "active",
-            "hostEmail": "info@edvistas.com",
-            "siteUrl": "educationalvistasinc-535335.my.webex.com",
-            "orgId": "2f1388b9-c05f-4fc9-b448-4c25a9af5bc4",
-            "hostType": "1080080"
+            "start": "2024-01-16T18:28:44Z",
+            "end": "2024-01-16T18:42:34Z",
+            "hostUserId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9jNjBmY2Y4NC01MDYxLTQyZTgtYmRlYi01NDgxOGRhM2RiMjg",
+            "hostEmail": "bbouchard@edvistas.com",
+            "eventCreateTime": 1705430554689
           }
         }
       }
@@ -843,7 +844,7 @@
     },
     "node:Webex (Bill)": {
       "secret": "40cf74ac48bbe0852cf23cd769d065b4",
-      "webhookId": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svZThlNmMzYTctMWYzYS00YTg1LWEzMjItM2EwNzg1YjI0ZThl"
+      "webhookId": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svM2JhMWE3NDYtNWJkMC00NjIwLWE4MDgtODY1NGRmOTFiOTU5"
     }
   },
   "tags": [
@@ -855,6 +856,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-01-12T21:03:48.000Z",
-  "versionId": "b83a137d-919a-49a7-860d-fcfd1c797dee"
+  "updatedAt": "2024-01-16T20:28:06.000Z",
+  "versionId": "b62fe7dd-9d25-4b3e-942b-52687ad2b466"
 }
