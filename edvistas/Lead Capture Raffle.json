@@ -159,7 +159,9 @@
   },
   "createdAt": "2023-11-13T18:57:16.424Z",
   "id": "2SqTrQPgAMH8gFIP",
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "Lead Capture Raffle",
   "nodes": [
     {
@@ -478,7 +480,7 @@
     },
     {
       "parameters": {
-        "jsCode": "var optedInTags = [];\n\nfor (const item of $('Data').all()) {\n  if (item.json.optin_aims === \"1\") optedInTags.push(14);\n  if (item.json.optin_cd === \"1\") optedInTags.push(15);\n  if (item.json.optin_datamate === \"1\") optedInTags.push(10);\n  if (item.json.optin_drp === \"1\") optedInTags.push(7);\n  if (item.json.optin_dmp === \"1\") optedInTags.push(48);\n  if (item.json.optin_eduview === \"1\") optedInTags.push(5);\n  if (item.json.optin_eduform === \"1\") optedInTags.push(9);\n  if (item.json.optin_portfolioplus === \"1\") optedInTags.push(26);\n  if (item.json.optin_safeschools === \"1\") optedInTags.push(19);\n  if (item.json.optin_scoring === \"1\") optedInTags.push(16);\n  if (item.json.optin_stafftrac === \"1\") optedInTags.push(17);\n  if (item.json.optin_survate === \"1\") optedInTags.push(47);\n  if (item.json.optin_transsync === \"1\") optedInTags.push(33);\n  item.json.tags = optedInTags;\n}\n\nreturn $('Data').all();"
+        "jsCode": "var optedInTags = [];\n\nfor (const item of $('Data').all()) {\n  if (item.json.optin_aims === \"1\") optedInTags.push(14);\n  if (item.json.optin_cd === \"1\") optedInTags.push(15);\n  if (item.json.optin_datamate === \"1\") optedInTags.push(10);\n  if (item.json.optin_drp === \"1\") optedInTags.push(7);\n  if (item.json.optin_dmp === \"1\") optedInTags.push(48);\n  if (item.json.optin_eduview === \"1\") optedInTags.push(5);\n  if (item.json.optin_eduform === \"1\") optedInTags.push(9);\n  if (item.json.optin_portfolioplus === \"1\") optedInTags.push(26);\n  if (item.json.optin_safeschools === \"1\") optedInTags.push(19);\n  if (item.json.optin_scoring === \"1\") optedInTags.push(16);\n  if (item.json.optin_stafftrac === \"1\") optedInTags.push(17);\n  if (item.json.optin_survate === \"1\") optedInTags.push(47);\n  if (item.json.optin_transsync === \"1\") optedInTags.push(33);\n  if (item.json.optin_mtss === \"1\") optedInTags.push(49);\n  item.json.tags = optedInTags;\n}\n\nreturn $('Data').all();"
       },
       "id": "91502344-abbc-4356-acce-15f521c7c76d",
       "name": "Assign Tags",
@@ -846,7 +848,7 @@
             "x-forwarded-proto": "https",
             "x-forwarded-for": "199.223.255.8",
             "x-real-ip": "199.223.255.8",
-            "content-length": "3774",
+            "content-length": "3863",
             "content-type": "application/xml;charset=utf-8"
           },
           "params": {},
@@ -857,7 +859,7 @@
               "password": "",
               "formid": "8992",
               "othersystemid": "",
-              "referid": "6fcfca1a-0f14-4058-bd38-b944d7b802f0",
+              "referid": "1222a149-a259-4291-848d-f1df8046633b",
               "field": [
                 {
                   "id": "306143",
@@ -871,7 +873,7 @@
                   "name": "Affiliation",
                   "type": "1",
                   "txttype": "7",
-                  "value": "Educational Vistas"
+                  "value": "Kenn Dessinger"
                 },
                 {
                   "id": "306145",
@@ -927,7 +929,7 @@
                   "name": "Position",
                   "type": "1",
                   "txttype": "7",
-                  "value": "IT Manager"
+                  "value": "TEST"
                 },
                 {
                   "id": "306154",
@@ -948,7 +950,7 @@
                   "name": "optin_aims",
                   "type": "3",
                   "txttype": "7",
-                  "value": "1"
+                  "value": ""
                 },
                 {
                   "id": "306247",
@@ -969,7 +971,7 @@
                   "name": "optin_drp",
                   "type": "3",
                   "txttype": "7",
-                  "value": "1"
+                  "value": ""
                 },
                 {
                   "id": "306250",
@@ -990,7 +992,7 @@
                   "name": "optin_portfolioplus",
                   "type": "3",
                   "txttype": "7",
-                  "value": "1"
+                  "value": ""
                 },
                 {
                   "id": "306253",
@@ -1046,7 +1048,7 @@
                   "name": "Campaign",
                   "type": "1",
                   "txttype": "7",
-                  "value": "NYSCATE-2023"
+                  "value": "FETC-2024"
                 },
                 {
                   "id": "306262",
@@ -1074,7 +1076,7 @@
                   "name": "Phone_p2",
                   "type": "1",
                   "txttype": "7",
-                  "value": "334"
+                  "value": "344"
                 },
                 {
                   "id": "307467",
@@ -1088,7 +1090,7 @@
                   "name": "Phone_p4",
                   "type": "1",
                   "txttype": "7",
-                  "value": ""
+                  "value": "1014"
                 },
                 {
                   "id": "307469",
@@ -1096,6 +1098,13 @@
                   "type": "6",
                   "txttype": "7",
                   "value": ""
+                },
+                {
+                  "id": "310323",
+                  "name": "optin_mtss",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": "1"
                 }
               ]
             }
@@ -1131,6 +1140,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2023-12-16T20:35:51.000Z",
-  "versionId": "a727bf4c-7e8a-437d-9d21-16ab15dc3cfa"
+  "updatedAt": "2024-01-18T20:59:57.000Z",
+  "versionId": "452d41e7-3231-432f-86f9-eb9614e4e368"
 }
