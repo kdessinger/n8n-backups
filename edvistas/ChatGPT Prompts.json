@@ -71,11 +71,29 @@
           }
         ]
       ]
+    },
+    "Education Terms": {
+      "main": [
+        [
+          {
+            "node": "Twitter Post",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Facebook Post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2023-02-24T06:02:40.431Z",
   "id": "27",
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "ChatGPT Prompts",
   "nodes": [
     {
@@ -499,6 +517,142 @@
         980,
         -40
       ]
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "prompt": {
+          "messages": [
+            {
+              "role": "assistant",
+              "content": "You are a social media expert who goes viral on Twitter regularly."
+            },
+            {
+              "content": "=Write a Twitter post about this topic: [{{ $json[\"text\"] }}].  Your response will use short sentences, it will address the audience directly and will use gender-neutral language. "
+            },
+            {
+              "role": "system",
+              "content": "Your response will include a unique fact and an actionable recommendation that  an expert in the topic would provide.  Your response will be more than 70 characters and less than 120 characters. It will also include three hashtags after the post to help with discoverability on Twitter, and these hashtags cannot be longer than 15 characters each."
+            }
+          ]
+        },
+        "options": {
+          "n": 1,
+          "temperature": 0.7
+        }
+      },
+      "id": "237303d9-1c15-4dcd-b1e6-dcf9bef755fb",
+      "name": "Twitter Post",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        1900,
+        -300
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "prompt": "Please generate a sub category of the education industry. Only output the answer, no quotation marks, punctuation, or other text.",
+        "options": {
+          "n": 3
+        }
+      },
+      "id": "2ea497c9-6a91-413c-a262-c66068513b05",
+      "name": "Education Terms",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1.1,
+      "position": [
+        1660,
+        -200
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "prompt": {
+          "messages": [
+            {
+              "role": "assistant",
+              "content": "You are a social media expert who goes viral on Facebook regularly."
+            },
+            {
+              "content": "=Write a post about this topic: [{{ $json[\"text\"] }}]."
+            },
+            {
+              "role": "system",
+              "content": "Your response will use short sentences, address the audience directly, and use gender-neutral language. \nYour response will include a unique fact and an actionable recommendation that an expert in the topic would provide.\nYour response will be around 500 characters. It will also include three hashtags after the post to help with discoverability on Facebook, which cannot be longer than 15 characters each.\nYour response will also include a suggestion for a relevant image that accompanies the text post you provide."
+            }
+          ]
+        },
+        "options": {
+          "n": 1,
+          "temperature": 0.7
+        }
+      },
+      "id": "f5ae019a-a726-46ec-9de3-1831a8663d75",
+      "name": "Facebook Post",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        1900,
+        -120
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "prompt": {
+          "messages": [
+            {
+              "role": "assistant",
+              "content": "You are a copywriter specialized in writing high converting emails, with a decade of experience and millions of dollars in revenue as a direct result of your email copy."
+            },
+            {
+              "content": "=I want you to write a compelling sales email about [Degrees or reading power] that enhances chances of driving conversions and generating revenue for my course called [DRP Trainin 101]. My course helps people [Fully understand the potential of using DRP]."
+            },
+            {
+              "role": "system",
+              "content": "This email will be sent to my target audience consisting of [Teachers, Principals, Superintendents]. For the tone, focus on urgency to purchase soon, however you need to be \nwitty and provide value to the reader. In the first paragraph discuss one pain point my customers are facing. In the second paragraph add a call to action to purchase my course and  how their life will be better when they do. In the 3rd paragraph include 3 bullets covering the benefits my course offers. Your sales email will demonstrate mastery over the most difficult aspects of email marketing: grabbing attention, maintaining relevance & personalization, striking the right tone, and overcoming spam filters. Your response should be a well crafted and convincing email that provides value to my potential customers who read it. Please also provide three subject lines for me to choose from."
+            }
+          ]
+        },
+        "options": {
+          "n": 1,
+          "temperature": 0.7
+        }
+      },
+      "id": "2cf18e1a-fc00-4421-b929-783f8075885a",
+      "name": "Email Generator",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        2100,
+        -220
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
     }
   ],
   "pinData": {
@@ -567,6 +721,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2024-01-10T18:00:50.000Z",
-  "versionId": "002f4e2a-9b47-40d7-a380-dbf92f183359"
+  "updatedAt": "2024-02-05T20:43:35.000Z",
+  "versionId": "b7b942d5-a67c-4b4f-9f30-e902dfb30267"
 }
