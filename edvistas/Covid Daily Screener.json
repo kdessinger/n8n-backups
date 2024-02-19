@@ -66,7 +66,9 @@
   },
   "createdAt": "2023-02-09T05:41:27.726Z",
   "id": "25",
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "Covid Daily Screener",
   "nodes": [
     {
@@ -313,7 +315,7 @@
     {
       "parameters": {
         "fromEmail": "noreply@edvistas.com",
-        "toEmail": "admin@edvistas.com",
+        "toEmail": "kdessinger@edvistas.com",
         "subject": "COVID Trace - Potential Exposure Alert",
         "text": "=Public Safety Alert Detected!\nDate: {{ $json.Date }}\nName: {{ $json[\"Staff_Name\"] }}\nEmail: {{ $json[\"Email\"] }}\n\nPlease note that a during a screening test a Guest or Staff member has reported a potential exposure risk to the Covid-19 Virus. Please check the submitted records in EduFrom: https://apps.edvistas.com/forms/formView.aspx?formId={{ $json[\"Formid\"] }}&referId={{ $json[\"referid\"] }}\n\n",
         "options": {
@@ -352,7 +354,8 @@
     },
     {
       "parameters": {
-        "workflowId": "RMGsRy908UOekKo3"
+        "workflowId": "RMGsRy908UOekKo3",
+        "options": {}
       },
       "id": "67d87060-e549-4cce-9a9a-58b4c4dddf52",
       "name": "Log Activity",
@@ -373,11 +376,11 @@
             },
             {
               "name": "Message",
-              "stringValue": "=Public Safety Alert Detected!\nDate: {{ $json.Date }}\nName: {{ $json[\"Staff_Name\"] }}\nEmail: {{ $json[\"Email\"] }}\n\nPlease note that a during a screening test a Guest or Staff member has reported a potential exposure risk to the Covid-19 Virus. Please check the submitted records in EduFrom."
+              "stringValue": "=Public Safety Alert Detected!<BR>\nDate: {{ $('EduForm Pivot').item.json[\"Date\"] }}<BR>\nName: {{ $('EduForm Pivot').item.json[\"Staff_Name\"] }}<BR>\nEmail: {{ $('EduForm Pivot').item.json.Email }}<BR>\n<BR>\nPlease note that a during a screening test a Guest or Staff member has reported a potential exposure risk to the Covid-19 Virus. Please check the submitted records in EduFrom."
             },
             {
               "name": "ClickURL",
-              "stringValue": "=https://apps.edvistas.com/forms/formView.aspx?formId={{ $json[\"Formid\"] }}&referId={{ $json[\"referid\"] }}"
+              "stringValue": "=https://apps.edvistas.com/forms/formView.aspx?formId={{ $('EduForm Pivot').item.json.Formid }}&referId={{ $('EduForm Pivot').item.json.referid }}"
             },
             {
               "name": "Emojis",
@@ -387,7 +390,7 @@
             {
               "name": "Priority",
               "type": "numberValue",
-              "numberValue": "3"
+              "numberValue": "4"
             }
           ]
         },
@@ -622,6 +625,204 @@
           "value": ""
         }
       }
+    ],
+    "Submit Form": [
+      {
+        "json": {
+          "headers": {
+            "connection": "Keep-Alive",
+            "host": "n8n.edvistas.com",
+            "x-forwarded-scheme": "https",
+            "x-forwarded-proto": "https",
+            "x-forwarded-for": "199.223.255.8",
+            "x-real-ip": "199.223.255.8",
+            "content-length": "2693",
+            "content-type": "application/xml;charset=utf-8"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "queryresult": {
+              "username": "",
+              "password": "",
+              "formid": "5264",
+              "othersystemid": "",
+              "referid": "c8db651e-c3b8-405c-a980-e5fed2afe904",
+              "field": [
+                {
+                  "id": "219738",
+                  "name": "txt_Name",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "219739",
+                  "name": "Staff_Name",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "Bill Bouchard"
+                },
+                {
+                  "id": "219740",
+                  "name": "txt_title",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "219742",
+                  "name": "Q1_No",
+                  "type": "2",
+                  "txttype": "7",
+                  "value": "qid219742"
+                },
+                {
+                  "id": "219743",
+                  "name": "Q1_Yes",
+                  "type": "2",
+                  "txttype": "7",
+                  "value": "qid219742"
+                },
+                {
+                  "id": "219747",
+                  "name": "Q2_Yes",
+                  "type": "2",
+                  "txttype": "7",
+                  "value": "qid219747"
+                },
+                {
+                  "id": "219748",
+                  "name": "Q2_No",
+                  "type": "2",
+                  "txttype": "7",
+                  "value": "qid219747"
+                },
+                {
+                  "id": "219749",
+                  "name": "Q3_Yes",
+                  "type": "2",
+                  "txttype": "7",
+                  "value": "qid219750"
+                },
+                {
+                  "id": "219750",
+                  "name": "Q3_No",
+                  "type": "2",
+                  "txttype": "7",
+                  "value": "qid219750"
+                },
+                {
+                  "id": "219751",
+                  "name": "Q4_Yes",
+                  "type": "2",
+                  "txttype": "7",
+                  "value": "qid219752"
+                },
+                {
+                  "id": "219752",
+                  "name": "Q4_No",
+                  "type": "2",
+                  "txttype": "7",
+                  "value": "qid219752"
+                },
+                {
+                  "id": "219753",
+                  "name": "Email",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "bbouchard@edvistas.com"
+                },
+                {
+                  "id": "219754",
+                  "name": "Search",
+                  "type": "9",
+                  "txttype": "7",
+                  "display": "",
+                  "value": ""
+                },
+                {
+                  "id": "219756",
+                  "name": "Good",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "219757",
+                  "name": "Certification",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": "1"
+                },
+                {
+                  "id": "219758",
+                  "name": "Bad",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "219759",
+                  "name": "Time",
+                  "type": "1",
+                  "txttype": "4",
+                  "value": "1/1/1901 7:36:00 AM"
+                },
+                {
+                  "id": "219760",
+                  "name": "txt_Date",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "219761",
+                  "name": "Date",
+                  "type": "1",
+                  "txttype": "3",
+                  "value": "2/19/2024"
+                },
+                {
+                  "id": "237099",
+                  "name": "CampusAccess",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "237100",
+                  "name": "txt_Q1",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "237101",
+                  "name": "txt_Q2",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "237102",
+                  "name": "txt_Q3",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "237103",
+                  "name": "txt_Q4",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        }
+      }
     ]
   },
   "settings": {
@@ -647,6 +848,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-01-11T19:13:24.000Z",
-  "versionId": "c2b7182a-03fd-4783-8a46-f9a0dfc8be71"
+  "updatedAt": "2024-02-19T16:51:19.000Z",
+  "versionId": "bd2752c0-e93d-4fd4-adb9-6fe0cd471ad2"
 }
