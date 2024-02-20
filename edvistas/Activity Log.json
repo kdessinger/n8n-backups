@@ -58,7 +58,9 @@
   },
   "createdAt": "2023-10-26T20:56:58.677Z",
   "id": "RMGsRy908UOekKo3",
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "Activity Log",
   "nodes": [
     {
@@ -75,7 +77,7 @@
     {
       "parameters": {
         "topic": "Alerts",
-        "message": "={{ $json.Message }}",
+        "message": "={{ $json.MessageClean }}",
         "title": "={{ $json.Title }}",
         "click": "={{ $json.ClickURL }}",
         "tags": "={{ $json.Emojis }}",
@@ -216,6 +218,10 @@
               "stringValue": "={{ $json.Message || 'Enter a Message' }}"
             },
             {
+              "name": "MessageClean",
+              "stringValue": "={{ $json.Message.replace(/<BR>/g, '') || 'Enter a Message' }}"
+            },
+            {
               "name": "Priority",
               "type": "numberValue",
               "numberValue": "={{ $json.Priority || 3 }}"
@@ -288,6 +294,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-01-18T21:01:59.000Z",
-  "versionId": "e79f4a3f-4532-48c9-8ff2-854a37ceb978"
+  "updatedAt": "2024-02-19T17:25:11.000Z",
+  "versionId": "f2b545df-0e8f-4efe-8686-e68cb3f5d8e4"
 }
