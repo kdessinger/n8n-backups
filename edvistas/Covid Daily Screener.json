@@ -317,7 +317,7 @@
         "fromEmail": "noreply@edvistas.com",
         "toEmail": "admin@edvistas.com",
         "subject": "COVID Trace - Potential Exposure Alert",
-        "text": "=Public Safety Alert Detected!\nDate: {{ $json.Date }}\nName: {{ $json[\"Staff_Name\"] }}\nEmail: {{ $json[\"Email\"] }}\n\nPlease note that a during a screening test a Guest or Staff member has reported a potential exposure risk to the Covid-19 Virus. Please check the submitted records in EduFrom: https://apps.edvistas.com/forms/formView.aspx?formId={{ $json[\"Formid\"] }}&referId={{ $json[\"referid\"] }}\n\n",
+        "text": "=Public Safety Alert Detected!\nDate: {{ $json.Date }}\nName: {{ $json[\"Staff_Name\"] }}\nEmail: {{ $json[\"Email\"] }}\n\nPlease note that during a screening test a Guest or Staff member has reported a potential exposure risk to the Covid-19 Virus. Please check the submitted records in EduFrom: https://apps.edvistas.com/forms/formView.aspx?formId={{ $json[\"Formid\"] }}&referId={{ $json[\"referid\"] }}\n\n",
         "options": {
           "allowUnauthorizedCerts": true
         }
@@ -376,7 +376,7 @@
             },
             {
               "name": "Message",
-              "stringValue": "=Public Safety Alert Detected!<BR>\nDate: {{ $('EduForm Pivot').item.json[\"Date\"] }}<BR>\nName: {{ $('EduForm Pivot').item.json[\"Staff_Name\"] }}<BR>\nEmail: {{ $('EduForm Pivot').item.json.Email }}<BR>\n<BR>\nPlease note that a during a screening test a Guest or Staff member has reported a potential exposure risk to the Covid-19 Virus. Please check the submitted records in EduFrom."
+              "stringValue": "=Public Safety Alert Detected!<BR>\nDate: {{ $('EduForm Pivot').item.json[\"Date\"] }}<BR>\nName: {{ $('EduForm Pivot').item.json[\"Staff_Name\"] }}<BR>\nEmail: {{ $('EduForm Pivot').item.json.Email }}<BR>\n<BR>\nPlease note that during a screening test a Guest or Staff member has reported a potential exposure risk to the Covid-19 Virus. Please check the submitted records in EduFrom."
             },
             {
               "name": "ClickURL",
@@ -848,6 +848,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-02-19T17:27:47.000Z",
-  "versionId": "39cb51c9-81e6-45a5-a0bf-88b0b361879c"
+  "updatedAt": "2024-02-20T15:34:05.000Z",
+  "versionId": "b812df26-c562-4afd-ba89-303c9a3fa3b6"
 }
