@@ -1,0 +1,2120 @@
+{
+  "active": false,
+  "connections": {
+    "EduForm": {
+      "main": [
+        [
+          {
+            "node": "EduForm Pivot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Post to Activity Log": {
+      "main": [
+        [
+          {
+            "node": "Exit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Data": {
+      "main": [
+        [
+          {
+            "node": "Post to Activity Log",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "EduForm Pivot": {
+      "main": [
+        [
+          {
+            "node": "Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-03-22T19:01:29.089Z",
+  "id": "UQ1nIdXXlucsbDc3",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "PEF Election Submissions",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Triggers\nData entering into this workflow!",
+        "height": 392.6593291597984,
+        "width": 357.5444808501312
+      },
+      "id": "520a90ef-1000-4c45-8a87-891529183af5",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        178.82144106422015,
+        77.40216988949214
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Processes\nTrigger data will be posted in to Odoo leads.\nOptional write to activity log.",
+        "height": 419.8989003924222,
+        "width": 441.519586091728
+      },
+      "id": "fd7b1053-b15b-4139-ae5b-0ad9ee0e72fd",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        860,
+        60
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "pef/2024/march/triennial",
+        "options": {
+          "responseData": "true"
+        }
+      },
+      "id": "c5cd3506-e8ae-4c1a-ac7f-87111467d199",
+      "name": "EduForm",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        218.82144106422015,
+        240
+      ],
+      "webhookId": "32a32c35-1ba0-4af5-86fc-e8096e5e5564"
+    },
+    {
+      "parameters": {
+        "workflowId": "RMGsRy908UOekKo3",
+        "options": {}
+      },
+      "id": "8132c6c5-f77a-4ca0-9f67-23a1b23e91ec",
+      "name": "Post to Activity Log",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        918.8214410642202,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "Title",
+              "stringValue": "PEF's 2024 Triennial election"
+            },
+            {
+              "name": "Message",
+              "stringValue": "=Batch#{{ $json.Seq_Num }} has been submitted to EduFrom. "
+            },
+            {
+              "name": "ClickURL",
+              "stringValue": "=https://apps.edvistas.com/forms/formView.aspx?formId={{ $json.Formid }}&referId={{ $json.referid }}"
+            },
+            {
+              "name": "Emojis",
+              "type": "arrayValue",
+              "arrayValue": "[ 'hugs', '+1' ]"
+            }
+          ]
+        },
+        "options": {
+          "ignoreConversionErrors": true
+        }
+      },
+      "id": "3a8a0577-4411-4f8f-858f-6c9bc9b80a2b",
+      "name": "Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.1,
+      "position": [
+        658.8214410642202,
+        240
+      ],
+      "alwaysOutputData": false,
+      "retryOnFail": false
+    },
+    {
+      "parameters": {},
+      "id": "531eb7c5-730e-42e4-a544-62a48d8aec33",
+      "name": "Exit",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1118.8214410642202,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Set Globals\n",
+        "height": 247.28608491288333,
+        "width": 166.79756002109545
+      },
+      "id": "dac50701-7075-4ce6-9ec3-5155c6130c9c",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        618.8214410642202,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "Formid",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"formid\"] }}"
+            },
+            {
+              "name": "referid",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"referid\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][0][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][0][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][0][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][1][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][1][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][1][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][2][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][2][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][2][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][3][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][3][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][3][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][4][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][4][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][4][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][5][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][5][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][5][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][6][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][6][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][6][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][7][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][7][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][7][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][8][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][8][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][8][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][9][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][9][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][9][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][10][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][10][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][10][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][11][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][11][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][11][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][12][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][12][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][12][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][13][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][13][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][13][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][14][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][14][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][14][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][15][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][15][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][15][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][16][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][16][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][16][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][17][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][17][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][17][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][18][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][18][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][18][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][19][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][19][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][19][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][20][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][20][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][20][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][21][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][21][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][21][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][22][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][22][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][22][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][23][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][23][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][23][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][24][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][24][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][24][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][25][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][25][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][25][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][26][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][26][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][26][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][27][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][27][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][27][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][28][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][28][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][28][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][29][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][29][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][29][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][30][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][30][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][30][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][31][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][31][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][31][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][32][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][32][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][32][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][33][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][33][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][33][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][34][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][34][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][34][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][35][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][35][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][35][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][36][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][36][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][36][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][37][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][37][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][37][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][38][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][38][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][38][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][39][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][39][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][39][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][40][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][40][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][40][\"value\"] }}"
+            },
+            {
+              "name": "host",
+              "value": "={{ $json.headers.host }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a597d510-4b33-4b49-8569-d06a14854f15",
+      "name": "EduForm Pivot",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        398.82144106422015,
+        240
+      ],
+      "alwaysOutputData": false
+    }
+  ],
+  "pinData": {
+    "EduForm": [
+      {
+        "json": {
+          "headers": {
+            "connection": "Keep-Alive",
+            "host": "n8n.edvistas.com",
+            "x-forwarded-scheme": "https",
+            "x-forwarded-proto": "https",
+            "x-forwarded-for": "199.223.255.8",
+            "x-real-ip": "199.223.255.8",
+            "content-length": "25221",
+            "content-type": "application/xml;charset=utf-8"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "queryresult": {
+              "username": "046348C2-F886-453A-B834-C51929E6990B",
+              "password": "F7A87DDD-1526-4DDF-8FBB-0D824DA459B9",
+              "formid": "9069",
+              "othersystemid": "",
+              "referid": "2cd31d52-9bb8-4743-9d3f-2fc32322415f",
+              "field": [
+                {
+                  "id": "316300",
+                  "name": "Nominee_F1",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "A"
+                },
+                {
+                  "id": "316301",
+                  "name": "Nominee_F2",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "N"
+                },
+                {
+                  "id": "316302",
+                  "name": "Nominee_F3",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "G"
+                },
+                {
+                  "id": "316303",
+                  "name": "Nominee_F4",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "E"
+                },
+                {
+                  "id": "316304",
+                  "name": "Nominee_L1",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "R"
+                },
+                {
+                  "id": "316305",
+                  "name": "Nominee_L2",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "E"
+                },
+                {
+                  "id": "316306",
+                  "name": "Nominee_L3",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "H"
+                },
+                {
+                  "id": "316307",
+                  "name": "Nominee_L4",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316308",
+                  "name": "Nominee_Z1",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": "1"
+                },
+                {
+                  "id": "316309",
+                  "name": "Nominee_Z2",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": "3"
+                },
+                {
+                  "id": "316310",
+                  "name": "Nominee_Z3",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": "9"
+                },
+                {
+                  "id": "316311",
+                  "name": "Nominee_Z4",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": "0"
+                },
+                {
+                  "id": "316312",
+                  "name": "Nominee_Z5",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": "1"
+                },
+                {
+                  "id": "316313",
+                  "name": "Nominee_Name",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "Angela Reh"
+                },
+                {
+                  "id": "316314",
+                  "name": "Signer1_Err",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316315",
+                  "name": "TS",
+                  "type": "1",
+                  "txttype": "5",
+                  "value": "3/22/2024 3:10:00 PM"
+                },
+                {
+                  "id": "316316",
+                  "name": "CC_Code",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "603290"
+                },
+                {
+                  "id": "316317",
+                  "name": "Seq_Num",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "2121"
+                },
+                {
+                  "id": "316318",
+                  "name": "Signer1_Full_Name",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316319",
+                  "name": "MIN",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": "6837498"
+                },
+                {
+                  "id": "316320",
+                  "name": "Type",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "PI"
+                },
+                {
+                  "id": "316321",
+                  "name": "Voided",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316322",
+                  "name": "txt_Candidate",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316323",
+                  "name": "Select_Nominee",
+                  "type": "8",
+                  "txttype": "7",
+                  "text": "Angela Reh | ANGEREH 13901 | 603290",
+                  "display": "Angela Reh | ANGEREH 13901 | 603290",
+                  "value": "6837498"
+                },
+                {
+                  "id": "316324",
+                  "name": "Signer1_F1",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316325",
+                  "name": "Signer1_L1",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316326",
+                  "name": "Signer1_Z1",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316327",
+                  "name": "Signer1_F2",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316328",
+                  "name": "Signer1_F3",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316329",
+                  "name": "Signer1_F4",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316330",
+                  "name": "Signer1_L2",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316331",
+                  "name": "Signer1_L3",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316332",
+                  "name": "Signer1_L4",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316333",
+                  "name": "Signer1_Z2",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316334",
+                  "name": "Signer1_Z3",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316335",
+                  "name": "Signer1_Z4",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316336",
+                  "name": "Signer1_Z5",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316337",
+                  "name": "Position_Coordinator",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316338",
+                  "name": "Position_Eboard",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316339",
+                  "name": "Nominee_Region",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316340",
+                  "name": "Nominee_Seat",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316341",
+                  "name": "Nominee_Agency",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316342",
+                  "name": "Signer2_Full_Name",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316343",
+                  "name": "Signer2_F1",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316344",
+                  "name": "Signer2_L1",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316345",
+                  "name": "Signer2_Z1",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316346",
+                  "name": "Signer2_F2",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316347",
+                  "name": "Signer2_F3",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316348",
+                  "name": "Signer2_F4",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316349",
+                  "name": "Signer2_L2",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316350",
+                  "name": "Signer2_L3",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316351",
+                  "name": "Signer2_L4",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316352",
+                  "name": "Signer2_Z2",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316353",
+                  "name": "Signer2_Z3",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316354",
+                  "name": "Signer2_Z4",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316355",
+                  "name": "Signer2_Z5",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316356",
+                  "name": "Signer2_Err",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316357",
+                  "name": "Signer3_Full_Name",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316358",
+                  "name": "Signer3_F1",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316359",
+                  "name": "Signer3_L1",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316360",
+                  "name": "Signer3_Z1",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316361",
+                  "name": "Signer3_F2",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316362",
+                  "name": "Signer3_F3",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316363",
+                  "name": "Signer3_F4",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316364",
+                  "name": "Signer3_L2",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316365",
+                  "name": "Signer3_L3",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316366",
+                  "name": "Signer3_L4",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316367",
+                  "name": "Signer3_Z2",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316368",
+                  "name": "Signer3_Z3",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316369",
+                  "name": "Signer3_Z4",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316370",
+                  "name": "Signer3_Z5",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316371",
+                  "name": "Signer3_Err",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316372",
+                  "name": "Signer4_Full_Name",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316373",
+                  "name": "Signer4_F1",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316374",
+                  "name": "Signer4_L1",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316375",
+                  "name": "Signer4_Z1",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316376",
+                  "name": "Signer4_F2",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316377",
+                  "name": "Signer4_F3",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316378",
+                  "name": "Signer4_F4",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316379",
+                  "name": "Signer4_L2",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316380",
+                  "name": "Signer4_L3",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316381",
+                  "name": "Signer4_L4",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316382",
+                  "name": "Signer4_Z2",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316383",
+                  "name": "Signer4_Z3",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316384",
+                  "name": "Signer4_Z4",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316385",
+                  "name": "Signer4_Z5",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316386",
+                  "name": "Signer4_Err",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316387",
+                  "name": "Signer5_Full_Name",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316388",
+                  "name": "Signer5_F1",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316389",
+                  "name": "Signer5_L1",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316390",
+                  "name": "Signer5_Z1",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316391",
+                  "name": "Signer5_F2",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316392",
+                  "name": "Signer5_F3",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316393",
+                  "name": "Signer5_F4",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316394",
+                  "name": "Signer5_L2",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316395",
+                  "name": "Signer5_L3",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316396",
+                  "name": "Signer5_L4",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316397",
+                  "name": "Signer5_Z2",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316398",
+                  "name": "Signer5_Z3",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316399",
+                  "name": "Signer5_Z4",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316400",
+                  "name": "Signer5_Z5",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316401",
+                  "name": "Signer5_Err",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316402",
+                  "name": "Signer6_Full_Name",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316403",
+                  "name": "Signer6_F1",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316404",
+                  "name": "Signer6_L1",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316405",
+                  "name": "Signer6_Z1",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316406",
+                  "name": "Signer6_F2",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316407",
+                  "name": "Signer6_F3",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316408",
+                  "name": "Signer6_F4",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316409",
+                  "name": "Signer6_L2",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316410",
+                  "name": "Signer6_L3",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316411",
+                  "name": "Signer6_L4",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316412",
+                  "name": "Signer6_Z2",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316413",
+                  "name": "Signer6_Z3",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316414",
+                  "name": "Signer6_Z4",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316415",
+                  "name": "Signer6_Z5",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316416",
+                  "name": "Signer6_Err",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316417",
+                  "name": "Signer7_Full_Name",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316418",
+                  "name": "Signer7_F1",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316419",
+                  "name": "Signer7_L1",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316420",
+                  "name": "Signer7_Z1",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316421",
+                  "name": "Signer7_F2",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316422",
+                  "name": "Signer7_F3",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316423",
+                  "name": "Signer7_F4",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316424",
+                  "name": "Signer7_L2",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316425",
+                  "name": "Signer7_L3",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316426",
+                  "name": "Signer7_L4",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316427",
+                  "name": "Signer7_Z2",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316428",
+                  "name": "Signer7_Z3",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316429",
+                  "name": "Signer7_Z4",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316430",
+                  "name": "Signer7_Z5",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316431",
+                  "name": "Signer7_Err",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316432",
+                  "name": "Signer8_Full_Name",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316433",
+                  "name": "Signer8_F1",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316434",
+                  "name": "Signer8_L1",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316435",
+                  "name": "Signer8_Z1",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316436",
+                  "name": "Signer8_F2",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316437",
+                  "name": "Signer8_F3",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316438",
+                  "name": "Signer8_F4",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316439",
+                  "name": "Signer8_L2",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316440",
+                  "name": "Signer8_L3",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316441",
+                  "name": "Signer8_L4",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316442",
+                  "name": "Signer8_Z2",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316443",
+                  "name": "Signer8_Z3",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316444",
+                  "name": "Signer8_Z4",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316445",
+                  "name": "Signer8_Z5",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316446",
+                  "name": "Signer8_Err",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316447",
+                  "name": "Signer9_Full_Name",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316448",
+                  "name": "Signer9_F1",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316449",
+                  "name": "Signer9_L1",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316450",
+                  "name": "Signer9_Z1",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316451",
+                  "name": "Signer9_F2",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316452",
+                  "name": "Signer9_F3",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316453",
+                  "name": "Signer9_F4",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316454",
+                  "name": "Signer9_L2",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316455",
+                  "name": "Signer9_L3",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316456",
+                  "name": "Signer9_L4",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316457",
+                  "name": "Signer9_Z2",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316458",
+                  "name": "Signer9_Z3",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316459",
+                  "name": "Signer9_Z4",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316460",
+                  "name": "Signer9_Z5",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316461",
+                  "name": "Signer9_Err",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316462",
+                  "name": "Signer10_Full_Name",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316463",
+                  "name": "Signer10_F1",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316464",
+                  "name": "Signer10_L1",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316465",
+                  "name": "Signer10_Z1",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316466",
+                  "name": "Signer10_F2",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316467",
+                  "name": "Signer10_F3",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316468",
+                  "name": "Signer10_F4",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316469",
+                  "name": "Signer10_L2",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316470",
+                  "name": "Signer10_L3",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316471",
+                  "name": "Signer10_L4",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316472",
+                  "name": "Signer10_Z2",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316473",
+                  "name": "Signer10_Z3",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316474",
+                  "name": "Signer10_Z4",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316475",
+                  "name": "Signer10_Z5",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316476",
+                  "name": "Signer10_Err",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316477",
+                  "name": "Signer11_Full_Name",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316478",
+                  "name": "Signer11_F1",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316479",
+                  "name": "Signer11_L1",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316480",
+                  "name": "Signer11_Z1",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316481",
+                  "name": "Signer11_F2",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316482",
+                  "name": "Signer11_F3",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316483",
+                  "name": "Signer11_F4",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316484",
+                  "name": "Signer11_L2",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316485",
+                  "name": "Signer11_L3",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316486",
+                  "name": "Signer11_L4",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316487",
+                  "name": "Signer11_Z2",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316488",
+                  "name": "Signer11_Z3",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316489",
+                  "name": "Signer11_Z4",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316490",
+                  "name": "Signer11_Z5",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316491",
+                  "name": "Signer11_Err",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316492",
+                  "name": "Signer12_Full_Name",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316493",
+                  "name": "Signer12_F1",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316494",
+                  "name": "Signer12_F2",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316495",
+                  "name": "Signer12_F3",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316496",
+                  "name": "Signer12_F4",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316497",
+                  "name": "Signer12_L1",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316498",
+                  "name": "Signer12_L2",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316499",
+                  "name": "Signer12_L3",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316500",
+                  "name": "Signer12_L4",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316501",
+                  "name": "Signer12_Z1",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316502",
+                  "name": "Signer12_Z2",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316503",
+                  "name": "Signer12_Z3",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316504",
+                  "name": "Signer12_Z4",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316505",
+                  "name": "Signer12_Z5",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316506",
+                  "name": "Signer12_Err",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316507",
+                  "name": "Circulator_Full_Name",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "beam me up scotty"
+                },
+                {
+                  "id": "316508",
+                  "name": "Circulator_Err",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316509",
+                  "name": "Circulator_L1",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316510",
+                  "name": "Circulator_Z1",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316511",
+                  "name": "Circulator_F2",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316512",
+                  "name": "Circulator_F3",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316513",
+                  "name": "Circulator_F4",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316514",
+                  "name": "Circulator_L2",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316515",
+                  "name": "Circulator_L3",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316516",
+                  "name": "Circulator_L4",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316517",
+                  "name": "Circulator_Z2",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316518",
+                  "name": "Circulator_Z3",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316519",
+                  "name": "Circulator_Z4",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316520",
+                  "name": "Circulator_Z5",
+                  "type": "1",
+                  "txttype": "1",
+                  "value": ""
+                },
+                {
+                  "id": "316521",
+                  "name": "Circulator_F1",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316522",
+                  "name": "Date",
+                  "type": "1",
+                  "txttype": "5",
+                  "value": "3/22/2021 4:00:00 PM"
+                },
+                {
+                  "id": "316523",
+                  "name": "Nominee_Position",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "Trustee"
+                },
+                {
+                  "id": "316524",
+                  "name": "Nominee_Affiliation",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "Slate 1"
+                },
+                {
+                  "id": "316525",
+                  "name": "Signatures_Needed",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "3"
+                },
+                {
+                  "id": "316526",
+                  "name": "txt_Title",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316527",
+                  "name": "txt_note4",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316528",
+                  "name": "txt_note1",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316529",
+                  "name": "txt_note3",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316530",
+                  "name": "txt_note2",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316531",
+                  "name": "Position_President",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316532",
+                  "name": "Position_VP",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316533",
+                  "name": "Position_Treasurer",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316534",
+                  "name": "Position_Trustee",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": "1"
+                },
+                {
+                  "id": "316535",
+                  "name": "Affiliation_1",
+                  "type": "2",
+                  "txttype": "7",
+                  "value": "Slate 1"
+                },
+                {
+                  "id": "316536",
+                  "name": "Affiliation_2",
+                  "type": "2",
+                  "txttype": "7",
+                  "value": "Slate 1"
+                },
+                {
+                  "id": "316537",
+                  "name": "Affiliation_3",
+                  "type": "2",
+                  "txttype": "7",
+                  "value": "Slate 1"
+                },
+                {
+                  "id": "316540",
+                  "name": "Red_Void_Image",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "316541",
+                  "name": "Red_Void_Image2",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": 60,
+    "errorWorkflow": "NtBd2hj1eiR2xufe"
+  },
+  "staticData": {
+    "node:JotForm": {
+      "webhookId": "0"
+    }
+  },
+  "tags": [
+    {
+      "createdAt": "2022-12-09T05:43:36.104Z",
+      "updatedAt": "2022-12-09T05:43:36.104Z",
+      "id": "12",
+      "name": "odoo"
+    },
+    {
+      "createdAt": "2023-02-13T23:28:21.763Z",
+      "updatedAt": "2023-02-13T23:28:21.763Z",
+      "id": "21",
+      "name": "EduForm"
+    }
+  ],
+  "triggerCount": 2,
+  "updatedAt": "2024-03-22T21:35:11.000Z",
+  "versionId": "6be3dc7c-259f-4629-a955-5bc8160f6b03"
+}
