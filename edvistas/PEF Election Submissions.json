@@ -125,7 +125,7 @@
             },
             {
               "name": "Message",
-              "stringValue": "=Batch#{{ $json.Seq_Num }} has been submitted to EduFrom. "
+              "stringValue": "=PEF Election Batch#{{ $json.Seq_Num }}, A {{ $json[\"Type\"] === \"PS\" ? \"Slate\" : ($json[\"Type\"] === \"PI\" ? \"Individual\" : \"Unknown\") }} from has been submitted to EduFrom."
             },
             {
               "name": "ClickURL",
@@ -147,7 +147,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.1,
       "position": [
-        658.8214410642202,
+        660,
         240
       ],
       "alwaysOutputData": false,
@@ -2040,6 +2040,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-03-25T16:35:50.000Z",
-  "versionId": "0f28515f-44f4-4214-beb2-de4d8a146a0d"
+  "updatedAt": "2024-03-26T18:37:50.000Z",
+  "versionId": "73958be9-2491-4567-b707-16ee0e7fcc31"
 }
