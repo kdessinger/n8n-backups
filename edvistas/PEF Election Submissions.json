@@ -125,7 +125,7 @@
             },
             {
               "name": "Message",
-              "stringValue": "=PEF Election Batch#{{ $json.Seq_Num }}, A {{ $json[\"Type\"] === \"PS\" ? \"SLATE\" : ($json[\"Type\"] === \"PI\" ? \"Individual\" : ($json[\"Type\"] === \"PE\" ? \"eBoard\" : \"Unknown\")) }} Batch#{{ $json.Seq_Num }} has been submitted to EduFrom.\n form has been submitted to EduFrom."
+              "stringValue": "=PEF Election Batch#{{ $json.Seq_Num }}, {{ $json[\"Type\"] === \"PS\" ? \"A SLATE\" : ($json[\"Type\"] === \"PI\" ? \"An Individual\" : ($json[\"Type\"] === \"PE\" ? \"An eBoard\" : \"Unknown\")) }} petition hab been submitted to EduFrom."
             },
             {
               "name": "ClickURL",
@@ -2040,6 +2040,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-03-27T14:09:04.000Z",
-  "versionId": "c58afc04-d6f8-4068-ae49-2c20bc593351"
+  "updatedAt": "2024-03-28T04:53:47.000Z",
+  "versionId": "4b7d5abe-3a4d-4f52-8960-450fc4c0c414"
 }
