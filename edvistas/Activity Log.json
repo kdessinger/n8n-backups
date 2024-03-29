@@ -54,6 +54,35 @@
           }
         ]
       ]
+    },
+    "Ntfy": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "PEF ntfy",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Exit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2023-10-26T20:56:58.677Z",
@@ -266,20 +295,127 @@
         -160,
         -40
       ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "954419b6-7708-4508-bd78-04576aa805fc",
+              "leftValue": "={{ $json.title }}",
+              "rightValue": "=PEF's",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {
+          "ignoreCase": true
+        }
+      },
+      "id": "7d0cae82-a89d-4d15-854a-180056fc37a3",
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        660,
+        100
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "686997b3-9139-449c-b1f1-b07c239d14e4",
+      "name": "Exit",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        840,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "topic": "PEF",
+        "message": "={{ $json.message }}",
+        "title": "={{ $json.title }}",
+        "click": "={{ $json.click }}",
+        "tags": "={{ $json.tags }}",
+        "additional_fields": {
+          "alternate_url": "https://ntfy.edvistas.com"
+        }
+      },
+      "id": "df1fa430-a389-4007-b2c5-1989a86d3099",
+      "name": "PEF ntfy",
+      "type": "n8n-nodes-ntfy.Ntfy",
+      "typeVersion": 1,
+      "position": [
+        840,
+        -40
+      ]
     }
   ],
   "pinData": {
     "Execute Workflow Trigger": [
       {
         "json": {
-          "Title": "A New Employee",
-          "Message": "A new employee, Carl Martin, has been added to the Sales Department!  Please take a moment to welcome Carl to The Educational Vistas Team!",
-          "ClickURL": "https://odoo.edvistas.com/web#id=46&menu_id=272&action=401&model=hr.employee&view_type=form",
+          "Formid": "9069",
+          "referid": "3d6245ee-679b-4d02-9d9f-8cdccdb90397",
+          "Nominee_F1": "J",
+          "Nominee_F2": "E",
+          "Nominee_F3": "A",
+          "Nominee_F4": "N",
+          "Nominee_L1": "T",
+          "Nominee_L2": "Y",
+          "Nominee_L3": "L",
+          "Nominee_L4": "E",
+          "Nominee_Z1": "1",
+          "Nominee_Z2": "3",
+          "Nominee_Z3": "0",
+          "Nominee_Z4": "2",
+          "Nominee_Z5": "7",
+          "Nominee_Name": "Jeanette Tyler",
+          "Signer1_Err": "",
+          "TS": "3/28/2024 3:26:41 PM",
+          "CC_Code": "601295",
+          "Seq_Num": "355",
+          "Signer1_Full_Name": "pierre cabrea",
+          "MIN": "5146478",
+          "Type": "PE",
+          "Voided": "",
+          "host": "n8n.edvistas.com",
+          "Select_Nominee": "5146478",
+          "Signer1_F1": "p",
+          "Signer1_L1": "c",
+          "Signer1_Z1": "1",
+          "Signer1_F2": "i",
+          "Signer1_F3": "e",
+          "Signer1_F4": "r",
+          "Signer1_L2": "a",
+          "Signer1_L3": "b",
+          "Signer1_L4": "r",
+          "Signer1_Z2": "3",
+          "Signer1_Z3": "0",
+          "Signer1_Z4": "6",
+          "Signer1_Z5": "6",
+          "Position_Coordinator": "",
+          "Position_Eboard": "1",
+          "Nominee_Region": "",
+          "Nominee_Seat": "295",
+          "Title": "PEF's 2024 Triennial election",
+          "Message": "PEF Election Batch#355, An eBoard petition hab been submitted to EduFrom.",
+          "ClickURL": "https://apps.edvistas.com/forms/formView.aspx?formId=9069&referId=3d6245ee-679b-4d02-9d9f-8cdccdb90397",
           "Emojis": [
-            "man",
-            "hugs"
-          ],
-          "Priority": 3
+            "hugs",
+            "+1"
+          ]
         }
       }
     ]
@@ -294,6 +430,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-02-19T17:25:11.000Z",
-  "versionId": "f2b545df-0e8f-4efe-8686-e68cb3f5d8e4"
+  "updatedAt": "2024-03-28T19:34:47.000Z",
+  "versionId": "2b93cdbd-1d5f-4141-8315-f02fab4422aa"
 }
