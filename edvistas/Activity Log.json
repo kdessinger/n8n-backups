@@ -346,7 +346,7 @@
         "topic": "PEF",
         "message": "={{ $json.message }}",
         "title": "={{ $json.title }}",
-        "click": "={{ $json.click }}",
+        "click": "={{ $json.click.replace('apps', 'pefny') }}\n",
         "tags": "={{ $json.tags }}",
         "additional_fields": {
           "alternate_url": "https://ntfy.edvistas.com"
@@ -430,6 +430,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-03-28T19:34:47.000Z",
-  "versionId": "2b93cdbd-1d5f-4141-8315-f02fab4422aa"
+  "updatedAt": "2024-03-29T13:59:12.000Z",
+  "versionId": "ee2a3151-7ac7-477a-a81d-86ebc9c533b8"
 }
