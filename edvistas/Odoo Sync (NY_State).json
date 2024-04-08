@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "Get Odoo Contacts": {
       "main": [
@@ -112,7 +112,9 @@
   },
   "createdAt": "2023-09-26T21:33:24.049Z",
   "id": "PYRy0yPMq9r48yYN",
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "Odoo Sync (NY_State)",
   "nodes": [
     {
@@ -172,7 +174,7 @@
     },
     {
       "parameters": {
-        "fileSelector": "/mnt/share/_reports/enrollment-public-district-2022-23-all-students.xlsx"
+        "fileSelector": "/mnt/share/_reports/enrollment-public-district-2023-24-all-students.xlsx"
       },
       "id": "0604657c-7622-4551-8589-0d78e21fc5bf",
       "name": "Load Excel File",
@@ -187,7 +189,7 @@
       "parameters": {
         "options": {
           "headerRow": true,
-          "sheetName": "District 2023 All Students"
+          "sheetName": "public-district-2023-24"
         }
       },
       "id": "cc215c43-9866-4980-bac1-8d8a19d715a7",
@@ -360,6 +362,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2023-09-29T20:02:58.000Z",
-  "versionId": "ffaca250-3cac-45f0-93cb-c260e1b1b0ae"
+  "updatedAt": "2024-04-08T15:21:35.000Z",
+  "versionId": "f32bb8b7-aee1-4f60-8c49-f3068bfd405a"
 }
