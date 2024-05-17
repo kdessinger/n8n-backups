@@ -1,17 +1,6 @@
 {
   "active": true,
   "connections": {
-    "EduForm": {
-      "main": [
-        [
-          {
-            "node": "EduForm Pivot",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "JotForm": {
       "main": [
         [
@@ -155,6 +144,17 @@
           }
         ]
       ]
+    },
+    "EduForm": {
+      "main": [
+        [
+          {
+            "node": "EduForm Pivot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2023-11-13T18:57:16.424Z",
@@ -196,24 +196,6 @@
     },
     {
       "parameters": {
-        "httpMethod": "POST",
-        "path": "leadcapture/giveaway",
-        "options": {
-          "responseData": "true"
-        }
-      },
-      "id": "4d34296c-a425-4f90-a9e6-48078583e77e",
-      "name": "EduForm",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 1,
-      "position": [
-        -260,
-        720
-      ],
-      "webhookId": "a52fbb66-5f46-4b6e-8703-c18724b19ef0"
-    },
-    {
-      "parameters": {
         "form": "232965239570161"
       },
       "id": "6db53a7b-a1cf-4b93-85bc-1cab94722a17",
@@ -234,7 +216,8 @@
     },
     {
       "parameters": {
-        "workflowId": "RMGsRy908UOekKo3"
+        "workflowId": "RMGsRy908UOekKo3",
+        "options": {}
       },
       "id": "e0073c00-94c7-4484-a781-0b804b9dbbc1",
       "name": "Post to Activity Log",
@@ -317,15 +300,15 @@
             },
             {
               "name": "Medium",
-              "stringValue": "=Raffle"
+              "stringValue": "={{ $json[\"medium\"] === undefined ? 'Raffle' : $json[\"Medium\"] }}"
             },
             {
               "name": "Campaign",
-              "stringValue": "={{ $json[\"Campaign\"] === undefined ? 'Unknown' : $json[\"Campaign\"] }}"
+              "stringValue": "={{ $json[\"Campaign\"] === undefined ? 'Unknown' : $json[\"Campaign\"] === '' ? 'Unknown' : $json[\"Campaign\"] }}\n\n\n"
             },
             {
               "name": "Message",
-              "stringValue": "=A new lead ({{ $json[\"Full Name\"] === undefined ? $json[\"First Name\"].toLowerCase().toTitleCase().trim() : $json['Full Name'].first.toLowerCase().toTitleCase().trim() }} {{ $json[\"Full Name\"] === undefined ? $json[\"Last Name\"].toLowerCase().toTitleCase().trim() : $json['Full Name'].last.toLowerCase().toTitleCase().trim() }}) has been entered in the {{ $json[\"Campaign\"] }} raffle to win a drone. Best of luck to {{ $json[\"Full Name\"] === undefined ? $json[\"First Name\"].toLowerCase().toTitleCase().trim() : $json['Full Name'].first.toLowerCase().toTitleCase().trim() }}!"
+              "stringValue": "=A new lead ({{ $json[\"Full Name\"] === undefined ? $json[\"First Name\"].toLowerCase().toTitleCase().trim() : $json['Full Name'].first.toLowerCase().toTitleCase().trim() }} {{ $json[\"Full Name\"] === undefined ? $json[\"Last Name\"].toLowerCase().toTitleCase().trim() : $json['Full Name'].last.toLowerCase().toTitleCase().trim() }}) has been entered in the {{ $json[\"Campaign\"] }} raffle to win a drone. Best of luck to {{ $json[\"Full Name\"] === undefined ? $json[\"First Name\"].toLowerCase().toTitleCase().trim() : $json['Full Name'].first.toLowerCase().toTitleCase().trim() }}! {{ $json.Medium }}"
             },
             {
               "name": "ClickURL",
@@ -835,6 +818,24 @@
         }
       },
       "disabled": true
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "leadcapture/giveaway",
+        "options": {
+          "responseData": "true"
+        }
+      },
+      "id": "4d34296c-a425-4f90-a9e6-48078583e77e",
+      "name": "EduForm",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -260,
+        720
+      ],
+      "webhookId": "a52fbb66-5f46-4b6e-8703-c18724b19ef0"
     }
   ],
   "pinData": {
@@ -842,12 +843,13 @@
       {
         "json": {
           "headers": {
+            "connection": "Keep-Alive",
             "host": "n8n.edvistas.com",
             "x-forwarded-scheme": "https",
             "x-forwarded-proto": "https",
             "x-forwarded-for": "199.223.255.8",
             "x-real-ip": "199.223.255.8",
-            "content-length": "3857",
+            "content-length": "3866",
             "content-type": "application/xml;charset=utf-8"
           },
           "params": {},
@@ -858,7 +860,7 @@
               "password": "",
               "formid": "8992",
               "othersystemid": "",
-              "referid": "5d5f6987-9c76-45b0-974d-636086bbca46",
+              "referid": "5cf497fb-b322-40b4-96f4-7d074dc24297",
               "field": [
                 {
                   "id": "306143",
@@ -872,14 +874,14 @@
                   "name": "Affiliation",
                   "type": "1",
                   "txttype": "7",
-                  "value": "Arbor school"
+                  "value": "Mount Pleasant CSD"
                 },
                 {
                   "id": "306145",
                   "name": "First Name",
                   "type": "1",
                   "txttype": "7",
-                  "value": "Andrew"
+                  "value": "Jessica"
                 },
                 {
                   "id": "306147",
@@ -914,21 +916,21 @@
                   "name": "E-mail",
                   "type": "1",
                   "txttype": "7",
-                  "value": "Tatro.andrew@gmail.com"
+                  "value": "Jlynch@mtplcsd.org"
                 },
                 {
                   "id": "306152",
                   "name": "Last Name",
                   "type": "1",
                   "txttype": "7",
-                  "value": "Tatro"
+                  "value": "Lynch"
                 },
                 {
                   "id": "306153",
                   "name": "Position",
                   "type": "1",
                   "txttype": "7",
-                  "value": "Dean"
+                  "value": "Database Specialist"
                 },
                 {
                   "id": "306154",
@@ -1019,7 +1021,7 @@
                   "name": "optin_stafftrac",
                   "type": "3",
                   "txttype": "7",
-                  "value": "1"
+                  "value": ""
                 },
                 {
                   "id": "306257",
@@ -1047,7 +1049,7 @@
                   "name": "Campaign",
                   "type": "1",
                   "txttype": "7",
-                  "value": "FETC-2024"
+                  "value": ""
                 },
                 {
                   "id": "306262",
@@ -1068,28 +1070,28 @@
                   "name": "Phone_p1",
                   "type": "1",
                   "txttype": "7",
-                  "value": "321"
+                  "value": "914"
                 },
                 {
                   "id": "307466",
                   "name": "Phone_p2",
                   "type": "1",
                   "txttype": "7",
-                  "value": "947"
+                  "value": "769"
                 },
                 {
                   "id": "307467",
                   "name": "Phone_p3",
                   "type": "1",
                   "txttype": "7",
-                  "value": "4945"
+                  "value": "5500"
                 },
                 {
                   "id": "307468",
                   "name": "Phone_p4",
                   "type": "1",
                   "txttype": "7",
-                  "value": ""
+                  "value": "1952"
                 },
                 {
                   "id": "307469",
@@ -1107,7 +1109,9 @@
                 }
               ]
             }
-          }
+          },
+          "webhookUrl": "https://n8n.edvistas.com/webhook/leadcapture/giveaway",
+          "executionMode": "production"
         }
       }
     ]
@@ -1139,6 +1143,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2024-01-24T20:01:35.000Z",
-  "versionId": "94d1dc30-cbb5-4274-b30e-52ed11b265eb"
+  "updatedAt": "2024-05-17T14:32:38.000Z",
+  "versionId": "efc7a507-0274-4267-8fcb-e19468f14f62"
 }
