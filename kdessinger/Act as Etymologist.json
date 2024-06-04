@@ -48,7 +48,9 @@
   },
   "createdAt": "2023-10-08T00:36:27.944Z",
   "id": "Mf9buct2tg5IwybR",
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "Act as Etymologist",
   "nodes": [
     {
@@ -197,7 +199,7 @@
           "values": [
             {
               "name": "data",
-              "stringValue": "spell"
+              "stringValue": "Babbel"
             }
           ]
         },
@@ -219,7 +221,7 @@
         "prompt": {
           "messages": [
             {
-              "role": "assistant",
+              "role": "system",
               "content": "=I want you to act as an HTML Generating machine. I will provide you with the inputs [Subject] and [Body] as the content and you will generate an elogent looking one page website. Make sure to use eye catching colors, bolds, underlines, italics, and format the heading correctly. You should use your knowledge of UX/UI design principles, coding languages, website development tools etc. Output your resluts as html. "
             },
             {
@@ -262,18 +264,7 @@
       ]
     }
   ],
-  "pinData": {
-    "HTML1": [
-      {
-        "json": {
-          "html": "<html>\n<head>\n<style>\nbody {\n  font-family: Arial, sans-serif;\n  background-color: #f2f2f2;\n  margin: 0;\n  padding: 0;\n}\n\n.container {\n  max-width: 800px;\n  margin: 0 auto;\n  padding: 20px;\n}\n\nh1 {\n  color: #333;\n  font-size: 32px;\n  font-weight: bold;\n  margin-bottom: 10px;\n}\n\np {\n  color: #666;\n  font-size: 18px;\n  line-height: 1.5;\n  margin-bottom: 20px;\n}\n\n</style>\n</head>\n<body>\n<div class=\"container\">\n<h1>The Etymology of the word spell</h1>\n<p>The word \"<strong>spell</strong>\" has a fascinating etymology that can be traced back to its ancient roots.</p>\n\n<p>The English word \"<strong>spell</strong>\" originated from the Old English word \"<strong>spellian</strong>,\" which meant \"<em>to tell, speak, or relate</em>.\" This Old English term can be traced back to the Proto-Germanic word \"<strong>spellōną</strong>,\" meaning \"<em>to talk, relate, or speak</em>.\"</p>\n\n<p>The Proto-Germanic word \"<strong>spellōną</strong>\" is believed to have its roots in the Proto-Indo-European (PIE) root \"<strong>*spel-</strong>,\" which had the general meaning of \"<em>to say, tell, or speak</em>.\" This PIE root is also the source of other related words in various Indo-European languages, such as the Old High German \"<strong>spellōn</strong>\" (to speak), the Old Norse \"<strong>spjalla</strong>\" (to talk), and the Latin \"<strong>spello</strong>\" (to declare).</p>\n\n<p>Over time, the meaning of the word \"<strong>spell</strong>\" has evolved and expanded. In Old English, \"<strong>spellian</strong>\" referred to the act of speaking or telling a story, but it also came to mean \"<em>to enchant or charm</em>\" in certain contexts. This sense of enchantment or magic is still present in some modern uses of the word \"<strong>spell</strong>,\" such as in the context of casting a spell in witchcraft or sorcery.</p>\n\n<p>In addition to its magical connotations, the word \"<strong>spell</strong>\" also came to be associated with the idea of a sequence of words or letters that had a specific power or effect. This is evident in the usage of \"<strong>spell</strong>\" to refer to a written or spoken word or phrase believed to have magical or supernatural powers, such as a spell in a spellbook or a spell used to ward off evil.</p>\n\n<p>In modern English, the word \"<strong>spell</strong>\" has taken on various meanings. It can refer to a period of time during which a person is under the influence of a particular condition, such as being under a spell of illness or fatigue. It can also refer to the act of correctly arranging the letters of a word, as in spelling a word correctly.</p>\n</div>\n</body>\n</html>"
-        },
-        "pairedItem": {
-          "item": 0
-        }
-      }
-    ]
-  },
+  "pinData": {},
   "settings": {
     "saveManualExecutions": true,
     "callerPolicy": "workflowsFromSameOwner",
@@ -291,6 +282,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-11-15T05:45:44.000Z",
-  "versionId": "92f67d08-0224-42b6-8e36-2c1dc9ff520a"
+  "updatedAt": "2024-06-04T01:08:27.000Z",
+  "versionId": "38dca2b9-66bf-4b00-b8bd-0779d2107f41"
 }
