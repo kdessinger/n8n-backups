@@ -1,66 +1,11 @@
 {
   "active": true,
   "connections": {
-    "Merge": {
+    "When clicking \"Test workflow\"": {
       "main": [
         [
           {
-            "node": "Final-json",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Merge1": {
-      "main": [
-        [
-          {
-            "node": "Final-json",
-            "type": "main",
-            "index": 1
-          }
-        ]
-      ]
-    },
-    "Sort-tags": {
-      "main": [
-        [
-          {
-            "node": "Aggregate-tags",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Sort-nodes": {
-      "main": [
-        [
-          {
-            "node": "Aggregate-nodes",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Create HTML": {
-      "main": [
-        [
-          {
-            "node": "Move Binary Data",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "tags-section": {
-      "main": [
-        [
-          {
-            "node": "Sort-tags",
+            "node": "n8n-get-workflows",
             "type": "main",
             "index": 0
           }
@@ -72,105 +17,6 @@
         [
           {
             "node": "Sort-nodes",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Aggregate-tags": {
-      "main": [
-        [
-          {
-            "node": "Merge1",
-            "type": "main",
-            "index": 1
-          }
-        ]
-      ]
-    },
-    "Convert to XML": {
-      "main": [
-        [
-          {
-            "node": "Create HTML",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Final template": {
-      "main": [
-        [
-          {
-            "node": "Respond to Webhook2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Sort-workflows": {
-      "main": [
-        [
-          {
-            "node": "Aggregate-workflows",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Aggregate-nodes": {
-      "main": [
-        [
-          {
-            "node": "Merge1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "globals-section": {
-      "main": [
-        [
-          {
-            "node": "Merge",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Move Binary Data": {
-      "main": [
-        [
-          {
-            "node": "Respond to Webhook",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Template elements": {
-      "main": [
-        [
-          {
-            "node": "Final template",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "n8n-get-workflows": {
-      "main": [
-        [
-          {
-            "node": "get-nodes-via-jmespath",
             "type": "main",
             "index": 0
           }
@@ -203,6 +49,149 @@
         ]
       ]
     },
+    "tags-section": {
+      "main": [
+        [
+          {
+            "node": "Sort-tags",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "globals-section": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Final-json",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge1": {
+      "main": [
+        [
+          {
+            "node": "Final-json",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "n8n-get-workflows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to XML": {
+      "main": [
+        [
+          {
+            "node": "Create HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create HTML": {
+      "main": [
+        [
+          {
+            "node": "Move Binary Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Move Binary Data": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Final template": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Template elements": {
+      "main": [
+        [
+          {
+            "node": "Final template",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sort-workflows": {
+      "main": [
+        [
+          {
+            "node": "Aggregate-workflows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sort-nodes": {
+      "main": [
+        [
+          {
+            "node": "Aggregate-nodes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sort-tags": {
+      "main": [
+        [
+          {
+            "node": "Aggregate-tags",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "Aggregate-workflows": {
       "main": [
         [
@@ -210,6 +199,39 @@
             "node": "Merge",
             "type": "main",
             "index": 1
+          }
+        ]
+      ]
+    },
+    "Aggregate-nodes": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate-tags": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "n8n-get-workflows": {
+      "main": [
+        [
+          {
+            "node": "get-nodes-via-jmespath",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -230,28 +252,6 @@
         [
           {
             "node": "workflows-section",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Execute Workflow Trigger": {
-      "main": [
-        [
-          {
-            "node": "n8n-get-workflows",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "When clicking \"Test workflow\"": {
-      "main": [
-        [
-          {
-            "node": "n8n-get-workflows",
             "type": "main",
             "index": 0
           }
@@ -291,12 +291,12 @@
   "nodes": [
     {
       "parameters": {},
-      "id": "b1a73981-db6a-4fd2-9cad-d02bfecc7d3d",
+      "id": "4df1d8b0-6af3-488d-bd0e-1d680f40b624",
       "name": "When clicking \"Test workflow\"",
       "type": "n8n-nodes-base.manualTrigger",
       "position": [
-        380,
-        440
+        1400,
+        1320
       ],
       "typeVersion": 1
     },
@@ -304,12 +304,12 @@
       "parameters": {
         "jsCode": "// Initialize an empty object to hold the mapping between nodes and workflows\nconst nodeToWorkflowsMap = {};\n\n// Iterate over each workflow in the input\n$input.all().forEach(item => {\n  const { wf_stats } = item.json;\n  const { nodes_unique, wf_name, wf_url, wf_id } = wf_stats;\n\n  // For each unique node in the workflow, update the mapping\n  nodes_unique.forEach(node => {\n    if (!nodeToWorkflowsMap[node]) {\n      // If the node has not been added to the map, initialize it with the current workflow\n      nodeToWorkflowsMap[node] = [{ wf_name, wf_url, wf_id }];\n    } else {\n      // If the node is already in the map, append the current workflow to its list\n      nodeToWorkflowsMap[node].push({ wf_name, wf_url, wf_id });\n    }\n  });\n});\n\n// Convert the map into an array format suitable for n8n's output\nconst result = Object.keys(nodeToWorkflowsMap).map(node => ({\n  json: {\n    node,\n    count: nodeToWorkflowsMap[node].length,\n    workflows: nodeToWorkflowsMap[node]\n  }\n}));\n\nreturn result;"
       },
-      "id": "cbe2d1a8-51e9-4f3d-8ca5-321f3edf9a92",
+      "id": "ff38224f-281e-44be-9ed4-5736269650a4",
       "name": "nodes-section",
       "type": "n8n-nodes-base.code",
       "position": [
-        1220,
-        500
+        2340,
+        1310.1630350920236
       ],
       "typeVersion": 2
     },
@@ -327,27 +327,27 @@
         },
         "options": {}
       },
-      "id": "49a10bf3-f2e6-4fe9-8390-2a266f1b52a9",
+      "id": "1d828d60-8033-4c7d-ad49-cfa67a156af0",
       "name": "workflows-section",
       "type": "n8n-nodes-base.set",
       "position": [
-        1000,
-        340
+        2120,
+        1160
       ],
       "typeVersion": 3.3
     },
     {
       "parameters": {
         "content": "## Create the main JSON object with the workflow statistics\n* `globals` - general information (# of workflows, active workflows, total trigger count)\n* `wf_stats` - summary per workflow (number or nodes, unique nodes, list of nodes and tags)\n* `nodes-section` - summary per node (number of workflows that use a node and their URLs)\n* `tags-section` - summary per tag (number of workflows that use a node and their URLs)\n\n### You can use this JSON in BI tools to create a custom dashboard\n\n## Learn JS tips & tricks\n### Instead of just using one Code node, the workflow contains several nodes with useful advanced tricks.\n\n### JMESPath\n* Make a simple array of strings out of a complex array: `$jmespath($json,'nodes[*].type')`\n* Extract values based on condition: `$jmespath($input.all(),'[?json.wf_stats.wf_active == `true`]')`\n\n### Map and arrow functions\n* Perform operation on each array element: `.map(item => (item.split('.').pop().toUpperCase() ))`\n* Calculate sum of values from an array: `.reduce((accumulator, currentValue) => accumulator + currentValue, 0)`\n\n### Create an array with only unique values\n* `[...new Set($json.nodes_array)]`\n\n### Date-time conversions with the Luxon library:\n* `DateTime.fromISO($json.createdAt).toFormat('yyyy-MM-dd HH:mm:ss')`\n\n### Template literals (Template strings) for creating strings in JS\n* `wf-${$json.id}`",
-        "height": 1194.6716567919582,
-        "width": 1669.556429251995
+        "height": 1207.429996743828,
+        "width": 1698.2626941437022
       },
-      "id": "afbbc6a0-dcb8-48e7-b2d1-ef00c769d3b7",
+      "id": "1cb2f0ea-1401-4dc0-8da1-11a9eaec666e",
       "name": "Sticky Note",
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        560,
-        -390.1630350920236
+        1665.6468675541464,
+        420
       ],
       "typeVersion": 1
     },
@@ -355,12 +355,12 @@
       "parameters": {
         "jsCode": "// Initialize an empty object to hold the mapping between nodes and workflows\nconst tagToWorkflowsMap = {};\n\n// Iterate over each workflow in the input\n$input.all().forEach(item => {\n  const { wf_stats } = item.json;\n  const { wf_tags, wf_name, wf_id } = wf_stats;\n\n  // Check if the workflow has tags\n  if (wf_tags.length > 0) {\n    // For each tag in the workflow, update the mapping\n    wf_tags.forEach(tag => {\n      if (!tagToWorkflowsMap[tag]) {\n        // If the tag has not been added to the map, initialize it with the current workflow\n        tagToWorkflowsMap[tag] = [{ wf_name, wf_id }];\n      } else {\n        // If the tag is already in the map, append the current workflow to its list\n        tagToWorkflowsMap[tag].push({ wf_name, wf_id });\n      }\n    });\n  } else {\n    // Handle workflows with no tags, categorizing them under a 'No Tags' category\n    const noTagKey = 'No Tags'; // or any other placeholder you prefer\n    if (!tagToWorkflowsMap[noTagKey]) {\n      tagToWorkflowsMap[noTagKey] = [{ wf_name, wf_id }];\n    } else {\n      tagToWorkflowsMap[noTagKey].push({ wf_name, wf_id });\n    }\n  }\n});\n\n// Convert the map into an array format suitable for n8n's output\nconst result = Object.keys(tagToWorkflowsMap).map(tag => ({\n  json: {\n    tag,\n    count    : tagToWorkflowsMap[tag].length,   \n    workflows: tagToWorkflowsMap[tag]\n  }\n}));\n\nreturn result;"
       },
-      "id": "9dcb369b-fe22-45e1-906d-848a85b0c1e4",
+      "id": "1821c162-fc73-4a48-8a80-c9a4786a621a",
       "name": "tags-section",
       "type": "n8n-nodes-base.code",
       "position": [
-        1220,
-        660
+        2340,
+        1470.1630350920236
       ],
       "typeVersion": 2
     },
@@ -378,12 +378,12 @@
         },
         "options": {}
       },
-      "id": "7509c96c-0907-4cf1-94cf-f9dfbc0d3f9d",
+      "id": "2d3b9d74-217d-4f93-8109-7ddf2bf7a579",
       "name": "globals-section",
       "type": "n8n-nodes-base.set",
       "position": [
-        1220,
-        220
+        2340,
+        1030.1630350920236
       ],
       "executeOnce": true,
       "typeVersion": 3.3
@@ -394,12 +394,12 @@
         "combinationMode": "mergeByPosition",
         "options": {}
       },
-      "id": "594e7b18-2244-48a9-9722-836b1ac47137",
+      "id": "edec36a9-880e-4e8f-90ff-38bd60956d50",
       "name": "Merge",
       "type": "n8n-nodes-base.merge",
       "position": [
-        1840,
-        320
+        2960,
+        1140
       ],
       "typeVersion": 2.1
     },
@@ -409,23 +409,23 @@
         "combinationMode": "mergeByPosition",
         "options": {}
       },
-      "id": "ef599477-a00c-403d-8a24-7431b09913e3",
+      "id": "d3d9d157-5ddf-40b0-b962-1aebda99b0d5",
       "name": "Merge1",
       "type": "n8n-nodes-base.merge",
       "position": [
-        1840,
-        520
+        2960,
+        1330.1630350920236
       ],
       "typeVersion": 2.1
     },
     {
       "parameters": {},
-      "id": "2c0bc2dd-63d9-4b65-9e4e-2920892efaf7",
+      "id": "8bbc5d16-74f5-4bcc-8710-ad26756224a9",
       "name": "Execute Workflow Trigger",
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "position": [
-        380,
-        240
+        1400,
+        980
       ],
       "typeVersion": 1
     },
@@ -436,25 +436,25 @@
           "headless": true
         }
       },
-      "id": "8bceb3e9-e1d9-4ca0-af91-5377d4300346",
+      "id": "a276cdc5-e346-40bf-b5a3-00bb98c4710a",
       "name": "Convert to XML",
       "type": "n8n-nodes-base.xml",
       "position": [
-        800,
-        1180
+        2400,
+        2000
       ],
       "typeVersion": 1
     },
     {
       "parameters": {
-        "html": "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n<?xml-stylesheet type=\"text/xsl\" href=\"{{ $env.WEBHOOK_URL }}webhook/73a91e4d-143d-4168-9efb-6c56f2258aec/dashboard.xsl\"?>\n\n{{ $json.data }}"
+        "html": "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n<?xml-stylesheet type=\"text/xsl\" href=\"{{ $env.WEBHOOK_URL }}/webhook/73a91e4d-143d-4168-9efb-6c56f2258aec/dashboard.xsl\"?>\n\n{{ $json.data }}"
       },
-      "id": "6151d4b8-f592-418d-b099-17c71b1de0e4",
+      "id": "4bfc831c-6988-4c6e-b1f0-ffdba0abb28e",
       "name": "Create HTML",
       "type": "n8n-nodes-base.html",
       "position": [
-        1000,
-        1180
+        2600,
+        2000
       ],
       "typeVersion": 1
     },
@@ -469,12 +469,12 @@
           "useRawData": true
         }
       },
-      "id": "e5ebc5c1-0fcc-4f9d-b8eb-df3a367cc097",
+      "id": "7ed4095e-fdf0-44ca-90a2-5e259a6cbe00",
       "name": "Move Binary Data",
       "type": "n8n-nodes-base.moveBinaryData",
       "position": [
-        1200,
-        1180
+        2800,
+        2000
       ],
       "typeVersion": 1
     },
@@ -497,12 +497,12 @@
           }
         }
       },
-      "id": "5fdb74f7-6b2a-4042-91a2-c2088e8ea712",
+      "id": "06db9b9f-34d1-456f-88b8-2dafc022033f",
       "name": "Respond to Webhook",
       "type": "n8n-nodes-base.respondToWebhook",
       "position": [
-        1400,
-        1180
+        3000,
+        2000
       ],
       "typeVersion": 1
     },
@@ -512,12 +512,12 @@
         "height": 425.91038036809823,
         "width": 809.0870333783894
       },
-      "id": "ed113e7c-c49f-4854-8fbf-5f7bf3591ede",
+      "id": "bfa64629-1b37-4e7a-9db0-d0d719af4aa8",
       "name": "Sticky Note1",
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        320,
-        1389
+        1920,
+        2199
       ],
       "typeVersion": 1
     },
@@ -537,12 +537,12 @@
           }
         }
       },
-      "id": "b6674f77-7797-4090-a4f9-56a9ddc0d4e0",
+      "id": "f878e5f7-477e-4970-950a-98aeeeead326",
       "name": "Respond to Webhook2",
       "type": "n8n-nodes-base.respondToWebhook",
       "position": [
-        980,
-        1660
+        2580,
+        2470
       ],
       "typeVersion": 1
     },
@@ -560,12 +560,12 @@
         },
         "options": {}
       },
-      "id": "c8c906da-0b61-46b0-be96-11da3c203e3f",
+      "id": "6ec32cec-8cfe-4cea-bfcf-6ad57af6ab3c",
       "name": "Final template",
       "type": "n8n-nodes-base.set",
       "position": [
-        780,
-        1660
+        2380,
+        2470
       ],
       "typeVersion": 3.3
     },
@@ -613,12 +613,12 @@
         },
         "options": {}
       },
-      "id": "173493c0-1f96-4416-a545-6d8c6034ac76",
+      "id": "fe69ed60-fc4a-4d57-ae0f-7f82cb3c73e5",
       "name": "Template elements",
       "type": "n8n-nodes-base.set",
       "position": [
-        580,
-        1660
+        2180,
+        2470
       ],
       "typeVersion": 3.3
     },
@@ -637,12 +637,12 @@
         },
         "options": {}
       },
-      "id": "3555218e-8df2-4ae8-9482-2c8ec99798c0",
+      "id": "fe2ad461-050e-43a6-b7a9-7a4014b935a1",
       "name": "Sort-workflows",
       "type": "n8n-nodes-base.sort",
       "position": [
-        1400,
-        340
+        2520,
+        1160
       ],
       "typeVersion": 1
     },
@@ -661,12 +661,12 @@
         },
         "options": {}
       },
-      "id": "2d893970-825e-4842-811f-7e7a24dd3bac",
+      "id": "f7927fdc-9698-42a3-bfc5-a81d07f315d4",
       "name": "Sort-nodes",
       "type": "n8n-nodes-base.sort",
       "position": [
-        1400,
-        500
+        2520,
+        1310.1630350920236
       ],
       "typeVersion": 1
     },
@@ -685,12 +685,12 @@
         },
         "options": {}
       },
-      "id": "c197f00e-d147-45af-b121-a70d28912a7f",
+      "id": "db819c93-e135-4575-be53-7673715435e4",
       "name": "Sort-tags",
       "type": "n8n-nodes-base.sort",
       "position": [
-        1400,
-        660
+        2520,
+        1470.1630350920236
       ],
       "typeVersion": 1
     },
@@ -705,12 +705,12 @@
         },
         "options": {}
       },
-      "id": "4f28a9f6-b67e-42d8-8843-480803932c27",
+      "id": "2866618b-546d-48eb-855a-2d29a852efc8",
       "name": "Aggregate-workflows",
       "type": "n8n-nodes-base.aggregate",
       "position": [
-        1580,
-        340
+        2700,
+        1160
       ],
       "typeVersion": 1
     },
@@ -720,12 +720,12 @@
         "destinationFieldName": "nodes-section",
         "options": {}
       },
-      "id": "f4521a5c-8cc3-4831-90e2-1a1fda06fdac",
+      "id": "05444a5b-a8d0-4925-8721-920074679bd6",
       "name": "Aggregate-nodes",
       "type": "n8n-nodes-base.aggregate",
       "position": [
-        1580,
-        500
+        2700,
+        1310.1630350920236
       ],
       "typeVersion": 1
     },
@@ -735,12 +735,12 @@
         "destinationFieldName": "tags-section",
         "options": {}
       },
-      "id": "ae5040f7-4ae3-41e7-9afc-ebb625d303e7",
+      "id": "03a75b29-e770-4161-bf8b-f3030c652edf",
       "name": "Aggregate-tags",
       "type": "n8n-nodes-base.aggregate",
       "position": [
-        1580,
-        660
+        2700,
+        1470.1630350920236
       ],
       "typeVersion": 1
     },
@@ -750,12 +750,12 @@
         "combinationMode": "mergeByPosition",
         "options": {}
       },
-      "id": "138d2a7a-8628-474c-9307-508bc5ddc629",
+      "id": "a5fe9dbd-4914-4e2b-89f4-6f46634c142b",
       "name": "Final-json",
       "type": "n8n-nodes-base.merge",
       "position": [
-        2060,
-        420
+        3180,
+        1230.1630350920236
       ],
       "typeVersion": 2.1
     },
@@ -763,12 +763,12 @@
       "parameters": {
         "filters": {}
       },
-      "id": "69a22d56-3b4e-4d5d-b351-3c787f23e9c9",
+      "id": "a8689fce-d017-4eab-a572-278fba91b6a6",
       "name": "n8n-get-workflows",
       "type": "n8n-nodes-base.n8n",
       "position": [
-        580,
-        340
+        1700,
+        1160
       ],
       "typeVersion": 1,
       "credentials": {
@@ -783,12 +783,12 @@
         "workflowId": "={{ $workflow.id }}",
         "options": {}
       },
-      "id": "35564537-0053-4cdb-a05d-153ad4825393",
+      "id": "d985d784-1c10-4433-90b1-3ca6f2de6865",
       "name": "Prepare JSON object",
       "type": "n8n-nodes-base.executeWorkflow",
       "position": [
-        580,
-        1180
+        2180,
+        2000
       ],
       "typeVersion": 1
     },
@@ -819,12 +819,12 @@
         "includeOtherFields": true,
         "options": {}
       },
-      "id": "9fd045f1-7126-4611-b26d-c45139429c6b",
+      "id": "892c00a5-6a55-46d6-8e11-3eed60f86edb",
       "name": "get-nodes-via-jmespath",
       "type": "n8n-nodes-base.set",
       "position": [
-        780,
-        340
+        1900,
+        1160
       ],
       "typeVersion": 3.3
     },
@@ -835,43 +835,27 @@
         "width": 1301.92628220859,
         "color": 6
       },
-      "id": "45723a66-03be-4be7-ae4a-978adb5b7e7b",
+      "id": "cf1fb7cc-1406-4d08-aae9-81698edad769",
       "name": "Sticky Note2",
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        280,
-        855.3819018404909
+        1880,
+        1680
       ],
       "typeVersion": 1
     },
     {
       "parameters": {
-        "content": "## IMPORTANT NOTE FOR CLOUD USERS\n### Since the cloud version doesn't support environmental variables, please make the following changes:\n\n1. **get-nodes-via-jmespath** node. Update the `instance_url` variable: enter your n8n URL instead of `{{$env[\"N8N_PROTOCOL\"]}}://{{$env[\"N8N_HOST\"]}}`\n2. **Create HTML** node. Please provide the n8n instance URL instead of `{{ $env.WEBHOOK_URL }}`",
-        "height": 251.8866653838499,
-        "width": 663.915516288839,
-        "color": 3
-      },
-      "id": "70fd1bbb-24e2-4fde-b054-6319120a7ac4",
-      "name": "Sticky Note3",
-      "type": "n8n-nodes-base.stickyNote",
-      "position": [
-        200,
-        600
-      ],
-      "typeVersion": 1
-    },
-    {
-      "parameters": {
-        "path": "fb550a01-12f2-4709-ba2d-f71197b68340",
+        "path": "dashboard",
         "responseMode": "responseNode",
         "options": {}
       },
-      "id": "b17fbec5-03e2-4836-8704-6b31cdf92a5b",
+      "id": "7d69ec7d-e4ab-496a-918e-296690bf1dc9",
       "name": "Request HTML dashboard",
       "type": "n8n-nodes-base.webhook",
       "position": [
-        380,
-        1180
+        1980,
+        2000
       ],
       "webhookId": "fb550a01-12f2-4709-ba2d-f71197b68340",
       "typeVersion": 2
@@ -882,22 +866,28 @@
         "responseMode": "responseNode",
         "options": {}
       },
-      "id": "36288776-5f67-40fd-872f-0eeac0dd03b0",
+      "id": "ca740510-5b70-432e-b6e7-6e91ffda09de",
       "name": "Request xsl template",
       "type": "n8n-nodes-base.webhook",
       "position": [
-        380,
-        1660
+        1980,
+        2470
       ],
       "webhookId": "73a91e4d-143d-4168-9efb-6c56f2258aec",
       "typeVersion": 2
     }
   ],
   "pinData": {},
-  "settings": {},
+  "settings": {
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": 300,
+    "executionOrder": "v1",
+    "errorWorkflow": "NtBd2hj1eiR2xufe"
+  },
   "staticData": null,
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2024-06-04T03:52:48.000Z",
-  "versionId": "0d1e71b4-b7d6-4765-9c42-33785f82ebd0"
+  "updatedAt": "2024-06-04T05:09:05.000Z",
+  "versionId": "275f050b-986d-4ec7-9592-b51c49948d8a"
 }
