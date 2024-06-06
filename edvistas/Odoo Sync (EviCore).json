@@ -16,7 +16,7 @@
       "main": [
         [
           {
-            "node": "Merge2",
+            "node": "Merge",
             "type": "main",
             "index": 0
           }
@@ -60,7 +60,7 @@
       "main": [
         [
           {
-            "node": "Merge2",
+            "node": "Merge",
             "type": "main",
             "index": 1
           }
@@ -72,17 +72,6 @@
         [
           {
             "node": "FixDate LastLogin",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Webhook": {
-      "main": [
-        [
-          {
-            "node": "Globals",
             "type": "main",
             "index": 0
           }
@@ -111,17 +100,6 @@
         ]
       ]
     },
-    "Merge2": {
-      "main": [
-        [
-          {
-            "node": "Matching",
-            "type": "main",
-            "index": 1
-          }
-        ]
-      ]
-    },
     "Globals": {
       "main": [
         [
@@ -142,11 +120,35 @@
           }
         ]
       ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Globals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Matching",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2023-09-29T21:33:33.630Z",
   "id": "HQyMcbgVeKG9G1FI",
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "Odoo Sync (EviCore)",
   "nodes": [
     {
@@ -259,21 +261,6 @@
         660,
         280
       ]
-    },
-    {
-      "parameters": {
-        "path": "odoo/sync/evicore",
-        "options": {}
-      },
-      "id": "9382972c-ea7c-443e-b651-05b5eb176d91",
-      "name": "Webhook",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 1,
-      "position": [
-        200,
-        560
-      ],
-      "webhookId": "2ea717ea-44c6-4a8a-a8be-83a8396f0130"
     },
     {
       "parameters": {},
@@ -459,30 +446,6 @@
     },
     {
       "parameters": {
-        "mode": "combine",
-        "mergeByFields": {
-          "values": [
-            {
-              "field1": "districtID",
-              "field2": "distId"
-            }
-          ]
-        },
-        "options": {
-          "fuzzyCompare": true
-        }
-      },
-      "id": "5846e494-0c76-4d8d-94bf-d41bf9aff6d0",
-      "name": "Merge2",
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 2.1,
-      "position": [
-        1440,
-        740
-      ]
-    },
-    {
-      "parameters": {
         "fields": {
           "values": [
             {
@@ -538,6 +501,45 @@
           "name": "Odoo (Administrator)"
         }
       }
+    },
+    {
+      "parameters": {
+        "path": "odoo/sync/evicore",
+        "options": {}
+      },
+      "id": "9382972c-ea7c-443e-b651-05b5eb176d91",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        200,
+        560
+      ],
+      "webhookId": "2ea717ea-44c6-4a8a-a8be-83a8396f0130"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "districtID",
+              "field2": "distId"
+            }
+          ]
+        },
+        "options": {
+          "fuzzyCompare": true
+        }
+      },
+      "id": "5846e494-0c76-4d8d-94bf-d41bf9aff6d0",
+      "name": "Merge",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        1440,
+        740
+      ]
     }
   ],
   "pinData": {
@@ -812,6 +814,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2024-05-01T16:14:17.000Z",
-  "versionId": "c0951a2f-c356-4806-86e7-c38d8de643fc"
+  "updatedAt": "2024-06-06T03:18:02.000Z",
+  "versionId": "59ff864b-36b7-4819-b645-7a261086e1aa"
 }
