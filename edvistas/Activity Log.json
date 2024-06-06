@@ -428,8 +428,21 @@
     "errorWorkflow": "NtBd2hj1eiR2xufe"
   },
   "staticData": null,
-  "tags": [],
+  "tags": [
+    {
+      "createdAt": "2022-12-09T05:43:36.104Z",
+      "updatedAt": "2022-12-09T05:43:36.104Z",
+      "id": "12",
+      "name": "odoo"
+    },
+    {
+      "createdAt": "2024-06-06T03:12:53.751Z",
+      "updatedAt": "2024-06-06T03:12:53.751Z",
+      "id": "KanoZXpWteddxbSZ",
+      "name": "ntfy"
+    }
+  ],
   "triggerCount": 0,
-  "updatedAt": "2024-03-29T13:59:12.000Z",
-  "versionId": "ee2a3151-7ac7-477a-a81d-86ebc9c533b8"
+  "updatedAt": "2024-06-06T03:41:56.000Z",
+  "versionId": "6133a6d4-f8e5-4660-87c7-a321c739b3aa"
 }
