@@ -15,7 +15,9 @@
   },
   "createdAt": "2023-11-16T22:00:58.726Z",
   "id": "NtBd2hj1eiR2xufe",
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "Error Handler",
   "nodes": [
     {
@@ -151,8 +153,15 @@
     "executionOrder": "v1"
   },
   "staticData": null,
-  "tags": [],
+  "tags": [
+    {
+      "createdAt": "2024-06-06T03:12:53.751Z",
+      "updatedAt": "2024-06-06T03:12:53.751Z",
+      "id": "KanoZXpWteddxbSZ",
+      "name": "ntfy"
+    }
+  ],
   "triggerCount": 0,
-  "updatedAt": "2023-11-22T19:13:00.000Z",
-  "versionId": "10f2048c-8a77-44a4-aaaa-69e19f9da526"
+  "updatedAt": "2024-06-06T03:42:32.000Z",
+  "versionId": "b96c4041-68d7-4b28-918e-fa45da964121"
 }
