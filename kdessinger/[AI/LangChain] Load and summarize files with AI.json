@@ -77,27 +77,13 @@
           }
         ]
       ]
-    },
-    "Markdown": {
-      "main": [
-        []
-      ]
-    },
-    "Nextcloud PDF": {
-      "main": [
-        [
-          {
-            "node": "Read PDF",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
     }
   },
   "createdAt": "2023-10-09T04:53:45.548Z",
   "id": "G93qd7ckZD0Wv07Y",
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "[AI/LangChain] Load and summarize files with AI",
   "nodes": [
     {
@@ -127,8 +113,14 @@
     },
     {
       "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "gpt-4o"
+        },
         "options": {
-          "temperature": 0
+          "temperature": 0.3
         }
       },
       "id": "e19d5a5d-da7e-46b5-86fa-51c4d88517e0",
@@ -189,47 +181,6 @@
     {
       "parameters": {
         "operation": "download",
-        "path": "/Documents/Nextcloud flyer.pdf"
-      },
-      "id": "502e0b2b-b0e0-4887-a829-05e7f81f6446",
-      "name": "Nextcloud PDF",
-      "type": "n8n-nodes-base.nextCloud",
-      "typeVersion": 1,
-      "position": [
-        360,
-        680
-      ],
-      "credentials": {
-        "nextCloudApi": {
-          "id": "3",
-          "name": "NextCloud (EdVistas)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "resource": "folder",
-        "operation": "list",
-        "path": "/!Departments/Information Technology/Guides/New_User_Onboarding.txt"
-      },
-      "id": "00898592-0e5f-4290-abc1-40b7ac5d2202",
-      "name": "Folder Explorer",
-      "type": "n8n-nodes-base.nextCloud",
-      "typeVersion": 1,
-      "position": [
-        360,
-        460
-      ],
-      "credentials": {
-        "nextCloudApi": {
-          "id": "3",
-          "name": "NextCloud (EdVistas)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "download",
         "path": "/!Departments/Information Technology/Guides/New_User_Onboarding.txt"
       },
       "id": "a37ac615-f3dd-4f9d-8371-c077f47e30cc",
@@ -260,19 +211,6 @@
         1420,
         240
       ]
-    },
-    {
-      "parameters": {
-        "encrypted": true
-      },
-      "id": "f1ad9ddd-7353-46be-ba44-cfb4bb720ef3",
-      "name": "Read PDF",
-      "type": "n8n-nodes-base.readPDF",
-      "typeVersion": 1,
-      "position": [
-        600,
-        680
-      ]
     }
   ],
   "pinData": {},
@@ -285,6 +223,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-11-14T05:22:33.000Z",
-  "versionId": "39701168-5bd7-4d34-be34-becd650bb8f5"
+  "updatedAt": "2024-06-07T01:52:55.000Z",
+  "versionId": "3facca71-4d79-44f0-b54f-e8113efe90e0"
 }
