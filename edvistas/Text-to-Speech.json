@@ -40,6 +40,17 @@
           }
         ]
       ]
+    },
+    "Error": {
+      "main": [
+        [
+          {
+            "node": "Stop and Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2024-06-06T04:05:18.440Z",
@@ -187,6 +198,17 @@
       ],
       "webhookId": "5acc6769-6c0f-42a8-a69c-b05e437e18a9",
       "typeVersion": 2
+    },
+    {
+      "parameters": {},
+      "id": "671b6587-14d8-4865-b7af-8d64d8fe886c",
+      "name": "Stop and Error",
+      "type": "n8n-nodes-base.stopAndError",
+      "typeVersion": 1,
+      "position": [
+        1060,
+        960
+      ]
     }
   ],
   "pinData": {},
@@ -200,6 +222,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2024-06-06T05:32:54.000Z",
-  "versionId": "5f3db040-a899-4968-a105-fa0895476df5"
+  "updatedAt": "2024-06-07T14:18:19.000Z",
+  "versionId": "a7515a16-614a-4bb0-b1ef-3473ca875236"
 }
