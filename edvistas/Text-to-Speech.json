@@ -163,8 +163,8 @@
       "name": "Sticky Note",
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        20,
-        280
+        0,
+        260
       ],
       "typeVersion": 1
     },
@@ -200,7 +200,9 @@
       "typeVersion": 2
     },
     {
-      "parameters": {},
+      "parameters": {
+        "errorMessage": "User inputs undefined"
+      },
       "id": "671b6587-14d8-4865-b7af-8d64d8fe886c",
       "name": "Stop and Error",
       "type": "n8n-nodes-base.stopAndError",
@@ -222,6 +224,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2024-06-07T14:18:19.000Z",
-  "versionId": "a7515a16-614a-4bb0-b1ef-3473ca875236"
+  "updatedAt": "2024-06-07T21:57:11.000Z",
+  "versionId": "3610d7c5-a84b-428c-b143-a5ab44b86c06"
 }
