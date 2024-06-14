@@ -1,66 +1,11 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
-    "Merge": {
+    "When clicking \"Test workflow\"": {
       "main": [
         [
           {
-            "node": "Final-json",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Merge1": {
-      "main": [
-        [
-          {
-            "node": "Final-json",
-            "type": "main",
-            "index": 1
-          }
-        ]
-      ]
-    },
-    "Sort-tags": {
-      "main": [
-        [
-          {
-            "node": "Aggregate-tags",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Sort-nodes": {
-      "main": [
-        [
-          {
-            "node": "Aggregate-nodes",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Create HTML": {
-      "main": [
-        [
-          {
-            "node": "Move Binary Data",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "tags-section": {
-      "main": [
-        [
-          {
-            "node": "Sort-tags",
+            "node": "n8n-get-workflows",
             "type": "main",
             "index": 0
           }
@@ -72,105 +17,6 @@
         [
           {
             "node": "Sort-nodes",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Aggregate-tags": {
-      "main": [
-        [
-          {
-            "node": "Merge1",
-            "type": "main",
-            "index": 1
-          }
-        ]
-      ]
-    },
-    "Convert to XML": {
-      "main": [
-        [
-          {
-            "node": "Create HTML",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Final template": {
-      "main": [
-        [
-          {
-            "node": "Respond to Webhook2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Sort-workflows": {
-      "main": [
-        [
-          {
-            "node": "Aggregate-workflows",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Aggregate-nodes": {
-      "main": [
-        [
-          {
-            "node": "Merge1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "globals-section": {
-      "main": [
-        [
-          {
-            "node": "Merge",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Move Binary Data": {
-      "main": [
-        [
-          {
-            "node": "Respond to Webhook",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Template elements": {
-      "main": [
-        [
-          {
-            "node": "Final template",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "n8n-get-workflows": {
-      "main": [
-        [
-          {
-            "node": "get-nodes-via-jmespath",
             "type": "main",
             "index": 0
           }
@@ -203,6 +49,149 @@
         ]
       ]
     },
+    "tags-section": {
+      "main": [
+        [
+          {
+            "node": "Sort-tags",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "globals-section": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Final-json",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge1": {
+      "main": [
+        [
+          {
+            "node": "Final-json",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "n8n-get-workflows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to XML": {
+      "main": [
+        [
+          {
+            "node": "Create HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create HTML": {
+      "main": [
+        [
+          {
+            "node": "Move Binary Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Move Binary Data": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Final template": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Template elements": {
+      "main": [
+        [
+          {
+            "node": "Final template",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sort-workflows": {
+      "main": [
+        [
+          {
+            "node": "Aggregate-workflows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sort-nodes": {
+      "main": [
+        [
+          {
+            "node": "Aggregate-nodes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sort-tags": {
+      "main": [
+        [
+          {
+            "node": "Aggregate-tags",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "Aggregate-workflows": {
       "main": [
         [
@@ -214,11 +203,55 @@
         ]
       ]
     },
+    "Aggregate-nodes": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate-tags": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "n8n-get-workflows": {
+      "main": [
+        [
+          {
+            "node": "get-nodes-via-jmespath",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "Prepare JSON object": {
       "main": [
         [
           {
             "node": "Convert to XML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get-nodes-via-jmespath": {
+      "main": [
+        [
+          {
+            "node": "workflows-section",
             "type": "main",
             "index": 0
           }
@@ -246,82 +279,42 @@
           }
         ]
       ]
-    },
-    "get-nodes-via-jmespath": {
-      "main": [
-        [
-          {
-            "node": "workflows-section",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Execute Workflow Trigger": {
-      "main": [
-        [
-          {
-            "node": "n8n-get-workflows",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "When clicking \"Test workflow\"": {
-      "main": [
-        [
-          {
-            "node": "n8n-get-workflows",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
     }
   },
   "createdAt": "2024-06-04T01:22:50.394Z",
   "id": "z5uSN22LpAJzRuaC",
   "meta": {
-    "templateId": "2269"
+    "templateId": "2269",
+    "templateCredsSetupCompleted": true
   },
   "name": "🦅 Get a bird's-eye view of your n8n instance with the Workflow Dashboard!",
   "nodes": [
     {
-      "id": "b1a73981-db6a-4fd2-9cad-d02bfecc7d3d",
+      "parameters": {},
+      "id": "65fd6fd9-1e2f-441f-a5de-2c6148281fc4",
       "name": "When clicking \"Test workflow\"",
       "type": "n8n-nodes-base.manualTrigger",
       "position": [
-        380,
-        440
+        194.3531324458536,
+        1360
       ],
-      "parameters": {},
       "typeVersion": 1
     },
     {
-      "id": "cbe2d1a8-51e9-4f3d-8ca5-321f3edf9a92",
-      "name": "nodes-section",
-      "type": "n8n-nodes-base.code",
-      "position": [
-        1220,
-        500
-      ],
       "parameters": {
         "jsCode": "// Initialize an empty object to hold the mapping between nodes and workflows\nconst nodeToWorkflowsMap = {};\n\n// Iterate over each workflow in the input\n$input.all().forEach(item => {\n  const { wf_stats } = item.json;\n  const { nodes_unique, wf_name, wf_url, wf_id } = wf_stats;\n\n  // For each unique node in the workflow, update the mapping\n  nodes_unique.forEach(node => {\n    if (!nodeToWorkflowsMap[node]) {\n      // If the node has not been added to the map, initialize it with the current workflow\n      nodeToWorkflowsMap[node] = [{ wf_name, wf_url, wf_id }];\n    } else {\n      // If the node is already in the map, append the current workflow to its list\n      nodeToWorkflowsMap[node].push({ wf_name, wf_url, wf_id });\n    }\n  });\n});\n\n// Convert the map into an array format suitable for n8n's output\nconst result = Object.keys(nodeToWorkflowsMap).map(node => ({\n  json: {\n    node,\n    count: nodeToWorkflowsMap[node].length,\n    workflows: nodeToWorkflowsMap[node]\n  }\n}));\n\nreturn result;"
       },
+      "id": "d61facb2-4c5e-45f9-9626-8dde1db6594f",
+      "name": "nodes-section",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        1134.3531324458536,
+        1350.1630350920236
+      ],
       "typeVersion": 2
     },
     {
-      "id": "49a10bf3-f2e6-4fe9-8390-2a266f1b52a9",
-      "name": "workflows-section",
-      "type": "n8n-nodes-base.set",
-      "position": [
-        1000,
-        340
-      ],
       "parameters": {
-        "options": {},
         "assignments": {
           "assignments": [
             {
@@ -331,48 +324,48 @@
               "value": "={{ { nodes_unique     :[...new Set($json.nodes_array)],\n     nodes_count_total:$json.nodes_array.length,\n     nodes_count_uniq :[...new Set($json.nodes_array)].length,\n     wf_created       :DateTime.fromISO($json.createdAt).toFormat('yyyy-MM-dd HH:mm:ss'),\n     wf_updated       :DateTime.fromISO($json.updatedAt).toFormat('yyyy-MM-dd HH:mm:ss'),\n     wf_name          :$json.name,\n     wf_id            :`wf-${$json.id}`,\n     wf_url           :`${$json.instance_url}/workflow/${$json.id}` || \"\",\n     wf_active        :$json.active,\n     wf_trigcount     :$json.triggerCount,\n     wf_tags          :$json.tags_array\n} }}"
             }
           ]
-        }
+        },
+        "options": {}
       },
+      "id": "f62aa564-716e-419b-8686-3816fe04bbbf",
+      "name": "workflows-section",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        914.3531324458536,
+        1200
+      ],
       "typeVersion": 3.3
     },
     {
-      "id": "afbbc6a0-dcb8-48e7-b2d1-ef00c769d3b7",
+      "parameters": {
+        "content": "## Create the main JSON object with the workflow statistics\n* `globals` - general information (# of workflows, active workflows, total trigger count)\n* `wf_stats` - summary per workflow (number or nodes, unique nodes, list of nodes and tags)\n* `nodes-section` - summary per node (number of workflows that use a node and their URLs)\n* `tags-section` - summary per tag (number of workflows that use a node and their URLs)\n\n### You can use this JSON in BI tools to create a custom dashboard\n\n## Learn JS tips & tricks\n### Instead of just using one Code node, the workflow contains several nodes with useful advanced tricks.\n\n### JMESPath\n* Make a simple array of strings out of a complex array: `$jmespath($json,'nodes[*].type')`\n* Extract values based on condition: `$jmespath($input.all(),'[?json.wf_stats.wf_active == `true`]')`\n\n### Map and arrow functions\n* Perform operation on each array element: `.map(item => (item.split('.').pop().toUpperCase() ))`\n* Calculate sum of values from an array: `.reduce((accumulator, currentValue) => accumulator + currentValue, 0)`\n\n### Create an array with only unique values\n* `[...new Set($json.nodes_array)]`\n\n### Date-time conversions with the Luxon library:\n* `DateTime.fromISO($json.createdAt).toFormat('yyyy-MM-dd HH:mm:ss')`\n\n### Template literals (Template strings) for creating strings in JS\n* `wf-${$json.id}`",
+        "height": 1207.429996743828,
+        "width": 1698.2626941437022
+      },
+      "id": "af05d6b5-b840-41c0-8a98-d662266b7420",
       "name": "Sticky Note",
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        560,
-        -390.1630350920236
+        460,
+        460
       ],
-      "parameters": {
-        "width": 1669.556429251995,
-        "height": 1194.6716567919582,
-        "content": "## Create the main JSON object with the workflow statistics\n* `globals` - general information (# of workflows, active workflows, total trigger count)\n* `wf_stats` - summary per workflow (number or nodes, unique nodes, list of nodes and tags)\n* `nodes-section` - summary per node (number of workflows that use a node and their URLs)\n* `tags-section` - summary per tag (number of workflows that use a node and their URLs)\n\n### You can use this JSON in BI tools to create a custom dashboard\n\n## Learn JS tips & tricks\n### Instead of just using one Code node, the workflow contains several nodes with useful advanced tricks.\n\n### JMESPath\n* Make a simple array of strings out of a complex array: `$jmespath($json,'nodes[*].type')`\n* Extract values based on condition: `$jmespath($input.all(),'[?json.wf_stats.wf_active == `true`]')`\n\n### Map and arrow functions\n* Perform operation on each array element: `.map(item => (item.split('.').pop().toUpperCase() ))`\n* Calculate sum of values from an array: `.reduce((accumulator, currentValue) => accumulator + currentValue, 0)`\n\n### Create an array with only unique values\n* `[...new Set($json.nodes_array)]`\n\n### Date-time conversions with the Luxon library:\n* `DateTime.fromISO($json.createdAt).toFormat('yyyy-MM-dd HH:mm:ss')`\n\n### Template literals (Template strings) for creating strings in JS\n* `wf-${$json.id}`"
-      },
       "typeVersion": 1
     },
     {
-      "id": "9dcb369b-fe22-45e1-906d-848a85b0c1e4",
-      "name": "tags-section",
-      "type": "n8n-nodes-base.code",
-      "position": [
-        1220,
-        660
-      ],
       "parameters": {
         "jsCode": "// Initialize an empty object to hold the mapping between nodes and workflows\nconst tagToWorkflowsMap = {};\n\n// Iterate over each workflow in the input\n$input.all().forEach(item => {\n  const { wf_stats } = item.json;\n  const { wf_tags, wf_name, wf_id } = wf_stats;\n\n  // Check if the workflow has tags\n  if (wf_tags.length > 0) {\n    // For each tag in the workflow, update the mapping\n    wf_tags.forEach(tag => {\n      if (!tagToWorkflowsMap[tag]) {\n        // If the tag has not been added to the map, initialize it with the current workflow\n        tagToWorkflowsMap[tag] = [{ wf_name, wf_id }];\n      } else {\n        // If the tag is already in the map, append the current workflow to its list\n        tagToWorkflowsMap[tag].push({ wf_name, wf_id });\n      }\n    });\n  } else {\n    // Handle workflows with no tags, categorizing them under a 'No Tags' category\n    const noTagKey = 'No Tags'; // or any other placeholder you prefer\n    if (!tagToWorkflowsMap[noTagKey]) {\n      tagToWorkflowsMap[noTagKey] = [{ wf_name, wf_id }];\n    } else {\n      tagToWorkflowsMap[noTagKey].push({ wf_name, wf_id });\n    }\n  }\n});\n\n// Convert the map into an array format suitable for n8n's output\nconst result = Object.keys(tagToWorkflowsMap).map(tag => ({\n  json: {\n    tag,\n    count    : tagToWorkflowsMap[tag].length,   \n    workflows: tagToWorkflowsMap[tag]\n  }\n}));\n\nreturn result;"
       },
+      "id": "e721bdf5-34f4-4acd-aec3-04e309d65662",
+      "name": "tags-section",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        1134.3531324458536,
+        1510.1630350920236
+      ],
       "typeVersion": 2
     },
     {
-      "id": "7509c96c-0907-4cf1-94cf-f9dfbc0d3f9d",
-      "name": "globals-section",
-      "type": "n8n-nodes-base.set",
-      "position": [
-        1220,
-        220
-      ],
       "parameters": {
-        "options": {},
         "assignments": {
           "assignments": [
             {
@@ -382,110 +375,112 @@
               "value": "={{ { global_total : $input.all().length,\n     global_active : $jmespath($input.all(),'[?json.wf_stats.wf_active == `true`]').length,\n     global_trigger: $jmespath($input.all(),'[].json.wf_stats.wf_trigcount').reduce((accumulator, currentValue) => accumulator + currentValue, 0) }  }}"
             }
           ]
-        }
+        },
+        "options": {}
       },
+      "id": "7f954bdf-afa2-4dcc-a4c4-bc10a7df8448",
+      "name": "globals-section",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1134.3531324458536,
+        1070.1630350920236
+      ],
       "executeOnce": true,
       "typeVersion": 3.3
     },
     {
-      "id": "594e7b18-2244-48a9-9722-836b1ac47137",
+      "parameters": {
+        "mode": "combine",
+        "combinationMode": "mergeByPosition",
+        "options": {}
+      },
+      "id": "e037d2f6-ea8b-495f-8d74-3ac2221c9efc",
       "name": "Merge",
       "type": "n8n-nodes-base.merge",
       "position": [
-        1840,
-        320
+        1754.3531324458536,
+        1180
       ],
-      "parameters": {
-        "mode": "combine",
-        "options": {},
-        "combinationMode": "mergeByPosition"
-      },
       "typeVersion": 2.1
     },
     {
-      "id": "ef599477-a00c-403d-8a24-7431b09913e3",
+      "parameters": {
+        "mode": "combine",
+        "combinationMode": "mergeByPosition",
+        "options": {}
+      },
+      "id": "496370d3-46ea-461f-afb4-2694e9163309",
       "name": "Merge1",
       "type": "n8n-nodes-base.merge",
       "position": [
-        1840,
-        520
+        1754.3531324458536,
+        1370.1630350920236
       ],
-      "parameters": {
-        "mode": "combine",
-        "options": {},
-        "combinationMode": "mergeByPosition"
-      },
       "typeVersion": 2.1
     },
     {
-      "id": "2c0bc2dd-63d9-4b65-9e4e-2920892efaf7",
+      "parameters": {},
+      "id": "658b4804-fb7e-4902-9793-521e40d000a0",
       "name": "Execute Workflow Trigger",
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "position": [
-        380,
-        240
+        194.3531324458536,
+        1020
       ],
-      "parameters": {},
       "typeVersion": 1
     },
     {
-      "id": "8bceb3e9-e1d9-4ca0-af91-5377d4300346",
-      "name": "Convert to XML",
-      "type": "n8n-nodes-base.xml",
-      "position": [
-        800,
-        1180
-      ],
       "parameters": {
         "mode": "jsonToxml",
         "options": {
           "headless": true
         }
       },
+      "id": "7bc6ec48-172f-43c1-a337-b0d4bf8788aa",
+      "name": "Convert to XML",
+      "type": "n8n-nodes-base.xml",
+      "position": [
+        1194.3531324458536,
+        2040
+      ],
       "typeVersion": 1
     },
     {
-      "id": "6151d4b8-f592-418d-b099-17c71b1de0e4",
+      "parameters": {
+        "html": "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n<?xml-stylesheet type=\"text/xsl\" href=\"{{ $env.WEBHOOK_URL }}/webhook/73a91e4d-143d-4168-9efb-6c56f2258aec/dashboard.xsl\"?>\n\n{{ $json.data }}"
+      },
+      "id": "861f49cb-9697-475c-a451-acaf96ca602f",
       "name": "Create HTML",
       "type": "n8n-nodes-base.html",
       "position": [
-        1000,
-        1180
+        1394.3531324458536,
+        2040
       ],
-      "parameters": {
-        "html": "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n<?xml-stylesheet type=\"text/xsl\" href=\"{{ $env.WEBHOOK_URL }}webhook/73a91e4d-143d-4168-9efb-6c56f2258aec/dashboard.xsl\"?>\n\n{{ $json.data }}"
-      },
       "typeVersion": 1
     },
     {
-      "id": "e5ebc5c1-0fcc-4f9d-b8eb-df3a367cc097",
+      "parameters": {
+        "mode": "jsonToBinary",
+        "convertAllData": false,
+        "sourceKey": "html",
+        "options": {
+          "keepSource": false,
+          "mimeType": "text/xml",
+          "useRawData": true
+        }
+      },
+      "id": "3dea2ae3-b560-4532-8566-f64d352a1ca3",
       "name": "Move Binary Data",
       "type": "n8n-nodes-base.moveBinaryData",
       "position": [
-        1200,
-        1180
+        1594.3531324458536,
+        2040
       ],
-      "parameters": {
-        "mode": "jsonToBinary",
-        "options": {
-          "mimeType": "text/xml",
-          "keepSource": false,
-          "useRawData": true
-        },
-        "sourceKey": "html",
-        "convertAllData": false
-      },
       "typeVersion": 1
     },
     {
-      "id": "5fdb74f7-6b2a-4042-91a2-c2088e8ea712",
-      "name": "Respond to Webhook",
-      "type": "n8n-nodes-base.respondToWebhook",
-      "position": [
-        1400,
-        1180
-      ],
       "parameters": {
+        "respondWith": "binary",
         "options": {
           "responseCode": 200,
           "responseHeaders": {
@@ -500,35 +495,36 @@
               }
             ]
           }
-        },
-        "respondWith": "binary"
+        }
       },
+      "id": "19c28e49-e4e8-45a8-9e98-f0826fc1fcd4",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "position": [
+        1794.3531324458536,
+        2040
+      ],
       "typeVersion": 1
     },
     {
-      "id": "ed113e7c-c49f-4854-8fbf-5f7bf3591ede",
+      "parameters": {
+        "content": "## This webhook is needed to comply with the CORS policy of modern browsers.\n### It generates XML template and serves it using your n8n URL\n\nXSLT template is created with 2 Set nodes:\n1. `Template elements` node defines each section of the Dashboard\n2. `Final template` node puts everything together\n3. Bootstrap 5.3 styling is added. You can save the .css and .js files on your server. Right now a CDN version of the librarly is used.",
+        "height": 425.91038036809823,
+        "width": 809.0870333783894
+      },
+      "id": "67847a83-1ecd-4142-bf92-a0b7c2973411",
       "name": "Sticky Note1",
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        320,
-        1389
+        714.3531324458536,
+        2239
       ],
-      "parameters": {
-        "width": 809.0870333783894,
-        "height": 425.91038036809823,
-        "content": "## This webhook is needed to comply with the CORS policy of modern browsers.\n### It generates XML template and serves it using your n8n URL\n\nXSLT template is created with 2 Set nodes:\n1. `Template elements` node defines each section of the Dashboard\n2. `Final template` node puts everything together\n3. Bootstrap 5.3 styling is added. You can save the .css and .js files on your server. Right now a CDN version of the librarly is used."
-      },
       "typeVersion": 1
     },
     {
-      "id": "b6674f77-7797-4090-a4f9-56a9ddc0d4e0",
-      "name": "Respond to Webhook2",
-      "type": "n8n-nodes-base.respondToWebhook",
-      "position": [
-        980,
-        1660
-      ],
       "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.xsl_template }}",
         "options": {
           "responseCode": 200,
           "responseHeaders": {
@@ -539,45 +535,42 @@
               }
             ]
           }
-        },
-        "respondWith": "text",
-        "responseBody": "={{ $json.xsl_template }}"
+        }
       },
+      "id": "a6bde2ee-d798-4d80-ae1e-2b42251d05cb",
+      "name": "Respond to Webhook2",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "position": [
+        1374.3531324458536,
+        2510
+      ],
       "typeVersion": 1
     },
     {
-      "id": "c8c906da-0b61-46b0-be96-11da3c203e3f",
-      "name": "Final template",
-      "type": "n8n-nodes-base.set",
-      "position": [
-        780,
-        1660
-      ],
       "parameters": {
-        "options": {},
         "assignments": {
           "assignments": [
             {
               "id": "2a42cfed-0451-41c2-9634-865cac2ea68d",
               "name": "xsl_template",
               "type": "string",
-              "value": "=<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\n  <xsl:template match=\"/\">\n    <html>\n      <head>\n        <title>n8n Workflows Dashboard</title>\n        <link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH\" crossorigin=\"anonymous\" />\n        <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js\" integrity=\"sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz\" crossorigin=\"anonymous\"></script>\n        <style>\n          body {\n            position: relative;\n          }\n          \n          section {\n            scroll-margin-top: 20px;\n          }\n\n          .form-check-overlay {\n            position: absolute;\n            top: 0;\n            left: 0;\n            width: 100%;\n            height: 100%;\n            cursor: default;\n            z-index: 1;\n          }\n\n          .badge-link {\n            scroll-margin-top: 80px;\n          }\n\n          .sidebar {\n            position: fixed;\n            top: 0;\n            bottom: 0;\n            left: 0;\n            z-index: 100;\n            padding: 20px 0 0;\n            box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);\n            overflow-y: auto;\n          }\n\n          .sidebar-sticky {\n            position: relative;\n            top: 0;\n            height: calc(100vh - 20px);\n            overflow-x: hidden;\n            overflow-y: auto;\n            padding-left: .25rem;\n          }\n\n          .nooverflow {\n            overflow-x: hidden;\n          }\n\n          .sidebar .nav-link {\n            font-weight: 500;\n            color: var(--bs-gray-800);\n            white-space: nowrap;\n            overflow: hidden;\n            text-overflow: ellipsis;\n          }\n\n          .sidebar .nav-link.active {\n            color: var(--bs-primary);\n          }\n\n          .sidebar .btn {\n            padding: .25rem .5rem;\n            font-weight: 600;\n            color: var(--bs-gray-800);\n          }\n\n          .sidebar-a {\n            padding: .25rem .5rem;\n            margin-left: 1.25rem;\n            color: var(--bs-gray-800);\n            background-color: transparent;\n          }\n\n          .sidebar-bottom {\n            padding: .25rem .5rem;\n            margin-left: 1.25rem;\n          }\n\n          .btn-toggle::before {\n            width: 1.25em;\n            line-height: 0;\n            content: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e\");\n            transition: transform .35s ease;\n            transform-origin: .5em 50%;\n          }\n\n          .btn-toggle[aria-expanded=\"true\"] {\n            color: var(--bs-gray-800);\n          }\n\n          .btn-toggle[aria-expanded=\"true\"]::before {\n            transform: rotate(90deg);\n          }\n\n          .btn-toggle-nav a {\n            padding: .1rem .5rem;\n            margin-top: .125rem;\n          }\n\n          .sidebar-a:hover,\n          .sidebar-a:focus,\n\t\t  .btn-toggle:hover,\n          .btn-toggle:focus {\n            background-color: var(--bs-primary-bg-subtle);\n          }\n\n          .content {\n            margin-left: 16.66%;\n            padding: 20px;\n          }\n\n          .card-img-container {\n            max-height: 150px;\n            overflow: hidden;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n          }\n          \n          .card-img-top {\n            object-fit: cover;\n            object-position: top;\n            height: 100%;\n            width: 100%;\n          }\n\n        </style>\n      </head>\n      <body data-bs-spy=\"scroll\" data-bs-target=\"#sidebar\" data-bs-offset=\"10\">\n        <div class=\"container-fluid\">\n          <div class=\"row\">\n{{ $json.sidebar }}\n\n            <main class=\"col-10 content\">\n\n<!-- Overview section -->\n{{ $json.overview }}\n<!-- Workflows section -->\n{{ $json.workflows }}\n<!-- Nodes section -->\n{{ $json.nodes }}\n<!-- Tags section -->\n{{ $json.tags }}\n<!-- About section -->\n{{ $json.about }}\n\n            </main>\n          </div>\n        </div>\n      </body>\n    </html>\n  </xsl:template>\n</xsl:stylesheet>"
+              "value": "=<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\n  <xsl:template match=\"/\">\n    <html>\n      <head>\n        <title>Workflows Dashboard</title>\n        <link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH\" crossorigin=\"anonymous\" />\n        <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js\" integrity=\"sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz\" crossorigin=\"anonymous\"></script>\n        <style>\n          body {\n            position: relative;\n          }\n          \n          section {\n            scroll-margin-top: 20px;\n          }\n\n          .form-check-overlay {\n            position: absolute;\n            top: 0;\n            left: 0;\n            width: 100%;\n            height: 100%;\n            cursor: default;\n            z-index: 1;\n          }\n\n          .badge-link {\n            scroll-margin-top: 80px;\n          }\n\n          .sidebar {\n            position: fixed;\n            top: 0;\n            bottom: 0;\n            left: 0;\n            z-index: 100;\n            padding: 20px 0 0;\n            box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);\n            overflow-y: auto;\n          }\n\n          .sidebar-sticky {\n            position: relative;\n            top: 0;\n            height: calc(100vh - 20px);\n            overflow-x: hidden;\n            overflow-y: auto;\n            padding-left: .25rem;\n          }\n\n          .nooverflow {\n            overflow-x: hidden;\n          }\n\n          .sidebar .nav-link {\n            font-weight: 500;\n            color: var(--bs-gray-800);\n            white-space: nowrap;\n            overflow: hidden;\n            text-overflow: ellipsis;\n          }\n\n          .sidebar .nav-link.active {\n            color: var(--bs-primary);\n          }\n\n          .sidebar .btn {\n            padding: .25rem .5rem;\n            font-weight: 600;\n            color: var(--bs-gray-800);\n          }\n\n          .sidebar-a {\n            padding: .25rem .5rem;\n            margin-left: 1.25rem;\n            color: var(--bs-gray-800);\n            background-color: transparent;\n          }\n\n          .sidebar-bottom {\n            padding: .25rem .5rem;\n            margin-left: 1.25rem;\n          }\n\n          .btn-toggle::before {\n            width: 1.25em;\n            line-height: 0;\n            content: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e\");\n            transition: transform .35s ease;\n            transform-origin: .5em 50%;\n          }\n\n          .btn-toggle[aria-expanded=\"true\"] {\n            color: var(--bs-gray-800);\n          }\n\n          .btn-toggle[aria-expanded=\"true\"]::before {\n            transform: rotate(90deg);\n          }\n\n          .btn-toggle-nav a {\n            padding: .1rem .5rem;\n            margin-top: .125rem;\n          }\n\n          .sidebar-a:hover,\n          .sidebar-a:focus,\n\t\t  .btn-toggle:hover,\n          .btn-toggle:focus {\n            background-color: var(--bs-primary-bg-subtle);\n          }\n\n          .content {\n            margin-left: 16.66%;\n            padding: 20px;\n          }\n\n          .card-img-container {\n            max-height: 150px;\n            overflow: hidden;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n          }\n          \n          .card-img-top {\n            object-fit: cover;\n            object-position: top;\n            height: 100%;\n            width: 100%;\n          }\n\n        </style>\n      </head>\n      <body data-bs-spy=\"scroll\" data-bs-target=\"#sidebar\" data-bs-offset=\"10\">\n        <div class=\"container-fluid\">\n          <div class=\"row\">\n{{ $json.sidebar }}\n\n            <main class=\"col-10 content\">\n\n<!-- Overview section -->\n{{ $json.overview }}\n<!-- Workflows section -->\n{{ $json.workflows }}\n<!-- Nodes section -->\n{{ $json.nodes }}\n<!-- Tags section -->\n{{ $json.tags }}\n<!-- About section -->\n{{ $json.about }}\n\n            </main>\n          </div>\n        </div>\n      </body>\n    </html>\n  </xsl:template>\n</xsl:stylesheet>"
             }
           ]
-        }
+        },
+        "options": {}
       },
+      "id": "cb3c0317-6981-43b0-a481-dffdaad3956a",
+      "name": "Final template",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1174.3531324458536,
+        2510
+      ],
       "typeVersion": 3.3
     },
     {
-      "id": "173493c0-1f96-4416-a545-6d8c6034ac76",
-      "name": "Template elements",
-      "type": "n8n-nodes-base.set",
-      "position": [
-        580,
-        1660
-      ],
       "parameters": {
-        "options": {},
         "assignments": {
           "assignments": [
             {
@@ -617,190 +610,190 @@
               "value": "=<hr class=\"featurette-divider border-dark\" />\n<section id=\"about\" class=\"container mt-3\">\n  <h2 class=\"text-center mb-5\">About</h2>\n  <div class=\"row\">\n\n    <div class=\"col-lg-3 text-center\">\n      <img src=\"https://gravatar.com/avatar/a551e67c6fe7affd5f882a527dee154bb6c3ac90cf878326accb3fb3ec77c8a6?r=pg&amp;d=retro&amp;size=200\" alt=\"Eduard\" class=\"rounded-circle mb-3\" width=\"140\" height=\"140\" />\n      <h3 class=\"fw-normal\">Eduard</h3>\n      <p><a class=\"btn btn-warning\" href=\"https://n8n.io/creators/eduard/\" target=\"_blank\">More templates</a></p>\n      <p><a class=\"btn btn-outline-primary\" href=\"https://www.linkedin.com/in/parsadanyan/\" target=\"_blank\">LinkedIn</a></p>\n    </div>\n\n    <div class=\"col-lg-3 text-center\">\n      <img src=\"https://gravatar.com/avatar/d29a8262aa8835d430919f8002957a77169f8da987dee0740aa494ae67a061b7?r=pg&amp;d=retro&amp;size=200\" alt=\"Yulia\" class=\"rounded-circle mb-3\" width=\"140\" height=\"140\" />\n      <h3 class=\"fw-normal\">Yulia</h3>\n      <p><a class=\"btn btn-warning\" href=\"https://n8n.io/creators/yulia/\" target=\"_blank\">More templates</a></p>\n      <p><a class=\"btn btn-outline-primary\" href=\"https://www.linkedin.com/in/yulia-dmitrievna-1112361b5/\" target=\"_blank\">LinkedIn</a></p>\n    </div>\n\n<div class=\"col-lg-6 text-center\">\n  <div class=\"card shadow-sm mb-3\">\n    <div class=\"card-img-container\">\n      <img src=\"https://blog.n8n.io/content/images/size/w800/2023/09/gg.png\" class=\"card-img-top\" alt=\"How to work with XML and SQL using n8n\" />\n    </div>\n    <div class=\"card-body\">\n      <h5 class=\"card-title\">Read the article to find out more!</h5>\n      <p class=\"card-text\">This dashboard was created using XML template language (XSLT) in n8n.</p>\n      <a href=\"https://blog.n8n.io/sql-xml/#how-to-deliver-the-xml-file\" class=\"btn btn-primary\" target=\"_blank\">Read Article</a>\n    </div>\n  </div>\n</div>\n\n  </div>\n</section>"
             }
           ]
-        }
+        },
+        "options": {}
       },
+      "id": "60d2c0e0-7cfc-4a21-a394-c20f5ebec1d0",
+      "name": "Template elements",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        974.3531324458536,
+        2510
+      ],
       "typeVersion": 3.3
     },
     {
-      "id": "3555218e-8df2-4ae8-9482-2c8ec99798c0",
-      "name": "Sort-workflows",
-      "type": "n8n-nodes-base.sort",
-      "position": [
-        1400,
-        340
-      ],
       "parameters": {
-        "options": {},
         "sortFieldsUi": {
           "sortField": [
             {
-              "order": "descending",
-              "fieldName": "wf_stats.wf_updated"
+              "fieldName": "wf_stats.wf_updated",
+              "order": "descending"
             },
             {
               "fieldName": "wf_stats.wf_name"
             }
           ]
-        }
+        },
+        "options": {}
       },
+      "id": "ee1ff947-c881-4842-8fd8-ad13cd4e7532",
+      "name": "Sort-workflows",
+      "type": "n8n-nodes-base.sort",
+      "position": [
+        1314.3531324458536,
+        1200
+      ],
       "typeVersion": 1
     },
     {
-      "id": "2d893970-825e-4842-811f-7e7a24dd3bac",
-      "name": "Sort-nodes",
-      "type": "n8n-nodes-base.sort",
-      "position": [
-        1400,
-        500
-      ],
       "parameters": {
-        "options": {},
         "sortFieldsUi": {
           "sortField": [
             {
-              "order": "descending",
-              "fieldName": "count"
+              "fieldName": "count",
+              "order": "descending"
             },
             {
               "fieldName": "node"
             }
           ]
-        }
+        },
+        "options": {}
       },
+      "id": "ed65ecb9-4c65-4be1-8bdd-3228af2cc603",
+      "name": "Sort-nodes",
+      "type": "n8n-nodes-base.sort",
+      "position": [
+        1314.3531324458536,
+        1350.1630350920236
+      ],
       "typeVersion": 1
     },
     {
-      "id": "c197f00e-d147-45af-b121-a70d28912a7f",
-      "name": "Sort-tags",
-      "type": "n8n-nodes-base.sort",
-      "position": [
-        1400,
-        660
-      ],
       "parameters": {
-        "options": {},
         "sortFieldsUi": {
           "sortField": [
             {
-              "order": "descending",
-              "fieldName": "count"
+              "fieldName": "count",
+              "order": "descending"
             },
             {
               "fieldName": "tag"
             }
           ]
-        }
+        },
+        "options": {}
       },
+      "id": "c34d7899-fdf0-4b8b-a3ff-da14ac2d4725",
+      "name": "Sort-tags",
+      "type": "n8n-nodes-base.sort",
+      "position": [
+        1314.3531324458536,
+        1510.1630350920236
+      ],
       "typeVersion": 1
     },
     {
-      "id": "4f28a9f6-b67e-42d8-8843-480803932c27",
-      "name": "Aggregate-workflows",
-      "type": "n8n-nodes-base.aggregate",
-      "position": [
-        1580,
-        340
-      ],
       "parameters": {
-        "options": {},
         "fieldsToAggregate": {
           "fieldToAggregate": [
             {
               "fieldToAggregate": "wf_stats"
             }
           ]
-        }
+        },
+        "options": {}
       },
+      "id": "0ccad907-0512-41fb-9fd2-de2253a8ee54",
+      "name": "Aggregate-workflows",
+      "type": "n8n-nodes-base.aggregate",
+      "position": [
+        1494.3531324458536,
+        1200
+      ],
       "typeVersion": 1
     },
     {
-      "id": "f4521a5c-8cc3-4831-90e2-1a1fda06fdac",
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "nodes-section",
+        "options": {}
+      },
+      "id": "56560656-0938-47aa-8da8-5e38d3779f05",
       "name": "Aggregate-nodes",
       "type": "n8n-nodes-base.aggregate",
       "position": [
-        1580,
-        500
+        1494.3531324458536,
+        1350.1630350920236
       ],
-      "parameters": {
-        "options": {},
-        "aggregate": "aggregateAllItemData",
-        "destinationFieldName": "nodes-section"
-      },
       "typeVersion": 1
     },
     {
-      "id": "ae5040f7-4ae3-41e7-9afc-ebb625d303e7",
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "tags-section",
+        "options": {}
+      },
+      "id": "814f8a19-1db6-4369-bd7c-054cc8c37cd7",
       "name": "Aggregate-tags",
       "type": "n8n-nodes-base.aggregate",
       "position": [
-        1580,
-        660
+        1494.3531324458536,
+        1510.1630350920236
       ],
-      "parameters": {
-        "options": {},
-        "aggregate": "aggregateAllItemData",
-        "destinationFieldName": "tags-section"
-      },
       "typeVersion": 1
     },
     {
-      "id": "138d2a7a-8628-474c-9307-508bc5ddc629",
+      "parameters": {
+        "mode": "combine",
+        "combinationMode": "mergeByPosition",
+        "options": {}
+      },
+      "id": "0e63155b-3d06-4dde-b3d0-923e93081edf",
       "name": "Final-json",
       "type": "n8n-nodes-base.merge",
       "position": [
-        2060,
-        420
+        1974.3531324458536,
+        1270.1630350920236
       ],
-      "parameters": {
-        "mode": "combine",
-        "options": {},
-        "combinationMode": "mergeByPosition"
-      },
       "typeVersion": 2.1
     },
     {
-      "id": "69a22d56-3b4e-4d5d-b351-3c787f23e9c9",
-      "name": "n8n-get-workflows",
-      "type": "n8n-nodes-base.n8n",
-      "position": [
-        580,
-        340
-      ],
       "parameters": {
         "filters": {}
       },
+      "id": "913a5cd5-4516-46e3-a8d8-935a90f1050d",
+      "name": "n8n-get-workflows",
+      "type": "n8n-nodes-base.n8n",
+      "position": [
+        494.3531324458536,
+        1200
+      ],
+      "typeVersion": 1,
       "credentials": {
         "n8nApi": {
           "id": "19",
           "name": "n8n account"
         }
-      },
-      "typeVersion": 1
+      }
     },
     {
-      "id": "35564537-0053-4cdb-a05d-153ad4825393",
+      "parameters": {
+        "workflowId": "={{ $workflow.id }}",
+        "options": {}
+      },
+      "id": "3604809f-0737-42f8-b3a3-a8ebf2527105",
       "name": "Prepare JSON object",
       "type": "n8n-nodes-base.executeWorkflow",
       "position": [
-        580,
-        1180
+        974.3531324458536,
+        2040
       ],
-      "parameters": {
-        "options": {},
-        "workflowId": "={{ $workflow.id }}"
-      },
       "typeVersion": 1
     },
     {
-      "id": "9fd045f1-7126-4611-b26d-c45139429c6b",
-      "name": "get-nodes-via-jmespath",
-      "type": "n8n-nodes-base.set",
-      "position": [
-        780,
-        340
-      ],
       "parameters": {
-        "options": {},
         "assignments": {
           "assignments": [
             {
@@ -823,80 +816,72 @@
             }
           ]
         },
-        "includeOtherFields": true
+        "includeOtherFields": true,
+        "options": {}
       },
+      "id": "ccf8f954-c832-439a-9fee-6f61c2097a17",
+      "name": "get-nodes-via-jmespath",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        694.3531324458536,
+        1200
+      ],
       "typeVersion": 3.3
     },
     {
-      "id": "45723a66-03be-4be7-ae4a-978adb5b7e7b",
+      "parameters": {
+        "content": "## Additional section to create a standalone dashboard via XLM templates\n### This section is not required if you only need a JSON\n\n### *IMPORTANT!*\n### This webhook is not protected. Everyone who knows the URL endpoint can get access to the Dashboard. Please consider adding authentication.\n\n1. `Request HTML dashboard` node runs that main section of the workflow\n2. It converts the JSON into an XML structure\n3. A final HTML page is created with the link to an XML stylesheet (this stylesheet controls the look of the dashboard)\n4. The resulting page is returned via `Respond to Webhook` node",
+        "height": 1000.0640426993867,
+        "width": 1301.92628220859,
+        "color": 6
+      },
+      "id": "5db47f69-83fa-408a-b792-1324c16a2cad",
       "name": "Sticky Note2",
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        280,
-        855.3819018404909
+        674.3531324458536,
+        1720
       ],
-      "parameters": {
-        "color": 6,
-        "width": 1301.92628220859,
-        "height": 1000.0640426993867,
-        "content": "## Additional section to create a standalone dashboard via XLM templates\n### This section is not required if you only need a JSON\n\n### *IMPORTANT!*\n### This webhook is not protected. Everyone who knows the URL endpoint can get access to the Dashboard. Please consider adding authentication.\n\n1. `Request HTML dashboard` node runs that main section of the workflow\n2. It converts the JSON into an XML structure\n3. A final HTML page is created with the link to an XML stylesheet (this stylesheet controls the look of the dashboard)\n4. The resulting page is returned via `Respond to Webhook` node"
-      },
       "typeVersion": 1
     },
     {
-      "id": "b17fbec5-03e2-4836-8704-6b31cdf92a5b",
-      "name": "Request HTML dashboard",
-      "type": "n8n-nodes-base.webhook",
-      "position": [
-        380,
-        1180
-      ],
-      "webhookId": "fb550a01-12f2-4709-ba2d-f71197b68340",
       "parameters": {
-        "path": "fb550a01-12f2-4709-ba2d-f71197b68340",
-        "options": {},
-        "responseMode": "responseNode"
+        "path": "73a91e4d-143d-4168-9efb-6c56f2258aec/dashboard.xsl",
+        "responseMode": "responseNode",
+        "options": {}
       },
-      "typeVersion": 2
-    },
-    {
-      "id": "70fd1bbb-24e2-4fde-b054-6319120a7ac4",
-      "name": "Sticky Note3",
-      "type": "n8n-nodes-base.stickyNote",
-      "position": [
-        200,
-        600
-      ],
-      "parameters": {
-        "color": 3,
-        "width": 663.915516288839,
-        "height": 251.8866653838499,
-        "content": "## IMPORTANT NOTE FOR CLOUD USERS\n### Since the cloud version doesn't support environmental variables, please make the following changes:\n\n1. **get-nodes-via-jmespath** node. Update the `instance_url` variable: enter your n8n URL instead of `{{$env[\"N8N_PROTOCOL\"]}}://{{$env[\"N8N_HOST\"]}}`\n2. **Create HTML** node. Please provide the n8n instance URL instead of `{{ $env.WEBHOOK_URL }}`"
-      },
-      "typeVersion": 1
-    },
-    {
-      "id": "36288776-5f67-40fd-872f-0eeac0dd03b0",
+      "id": "1047b255-3b0f-40a0-9353-cfca4fd9c724",
       "name": "Request xsl template",
       "type": "n8n-nodes-base.webhook",
       "position": [
-        380,
-        1660
+        774.3531324458536,
+        2510
       ],
       "webhookId": "73a91e4d-143d-4168-9efb-6c56f2258aec",
+      "typeVersion": 2
+    },
+    {
       "parameters": {
-        "path": "73a91e4d-143d-4168-9efb-6c56f2258aec/dashboard.xsl",
-        "options": {},
-        "responseMode": "responseNode"
+        "path": "dashboard",
+        "responseMode": "responseNode",
+        "options": {}
       },
+      "id": "75c66f19-7beb-414d-a981-22d72887a04d",
+      "name": "Request HTML dashboard",
+      "type": "n8n-nodes-base.webhook",
+      "position": [
+        774.3531324458536,
+        2040
+      ],
+      "webhookId": "fb550a01-12f2-4709-ba2d-f71197b68340",
       "typeVersion": 2
     }
   ],
-  "pinData": null,
-  "settings": null,
+  "pinData": {},
+  "settings": {},
   "staticData": null,
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2024-06-04T01:22:50.394Z",
-  "versionId": "01b60b13-494f-4bec-8021-ce6dde14fa1a"
+  "triggerCount": 2,
+  "updatedAt": "2024-06-14T02:52:36.000Z",
+  "versionId": "3a352dfe-d040-4109-97d9-0c8cedb3e29c"
 }
