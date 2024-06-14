@@ -97,9 +97,7 @@
           ]
         },
         "simple": false,
-        "filters": {
-          "q": "-from:me"
-        },
+        "filters": {},
         "options": {}
       },
       "id": "2a9ff08f-919a-41a8-980b-8c2bca3059e4",
@@ -344,7 +342,7 @@
   },
   "staticData": {
     "node:Gmail Trigger": {
-      "lastTimeChecked": 1718292717,
+      "lastTimeChecked": 1718307415,
       "possibleDuplicates": [
         "18fe90ba9f2a88dc"
       ]
@@ -365,6 +363,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-06-13T15:31:57.000Z",
-  "versionId": "b69110c4-7e42-4d1a-8c95-2fc1d8799305"
+  "updatedAt": "2024-06-13T19:36:55.000Z",
+  "versionId": "132623f1-8f12-41d4-a5af-8d339e4226c7"
 }
