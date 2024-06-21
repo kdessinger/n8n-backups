@@ -1,0 +1,313 @@
+{
+  "active": true,
+  "connections": {
+    "Extract zip file": {
+      "main": [
+        [
+          {
+            "node": "Save chinook.db locally",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Load local chinook.db": {
+      "main": [
+        [
+          {
+            "node": "Combine chat input with the binary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get chinook.zip example": {
+      "main": [
+        [
+          {
+            "node": "Extract zip file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Combine chat input with the binary": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get chinook.zip example",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chat Trigger": {
+      "main": [
+        [
+          {
+            "node": "Load local chinook.db",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-06-21T02:37:11.058Z",
+  "id": "Csx1MzWgg2ZrtLiw",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Talk to SQLite Database",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "b87152e9-9a4c-4133-a179-5bc86102fa1e",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "position": [
+        500,
+        660
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 10
+      },
+      "id": "f88faf92-2f00-48b8-a071-fb20c8c8a926",
+      "name": "Window Buffer Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "position": [
+        1220,
+        1260
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "model": "gpt-4-turbo",
+        "options": {
+          "temperature": 0.3
+        }
+      },
+      "id": "d7100ee4-1fa5-4c83-abeb-64fdab7e4ebe",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "position": [
+        1060,
+        1260
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "openAiApi": {
+          "id": "24",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://www.sqlitetutorial.net/wp-content/uploads/2018/03/chinook.zip",
+        "options": {}
+      },
+      "id": "8c172ca9-88c1-439c-ae23-5182c750f1c5",
+      "name": "Get chinook.zip example",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        720,
+        660.9454545454546
+      ],
+      "typeVersion": 4.2
+    },
+    {
+      "parameters": {},
+      "id": "87053710-0d4f-44ff-8a2b-6030fd96c0e4",
+      "name": "Extract zip file",
+      "type": "n8n-nodes-base.compression",
+      "position": [
+        920,
+        660.9454545454546
+      ],
+      "typeVersion": 1.1
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "./chinook.db",
+        "dataPropertyName": "file_0",
+        "options": {}
+      },
+      "id": "6a41afcc-0361-4f9c-87d3-a455992610cd",
+      "name": "Save chinook.db locally",
+      "type": "n8n-nodes-base.readWriteFile",
+      "position": [
+        1120,
+        660.9454545454546
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "fileSelector": "./chinook.db",
+        "options": {}
+      },
+      "id": "1111c608-0ffe-44bd-bc55-52bc5bc86f23",
+      "name": "Load local chinook.db",
+      "type": "n8n-nodes-base.readWriteFile",
+      "position": [
+        640,
+        1100.9454545454546
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Run this part only once\nThis section:\n* downloads the example zip file from https://www.sqlitetutorial.net/sqlite-sample-database/\n* extracts the archive (it contains only a single file)\n* saves the extracted `chinook.db` SQLite database locally\n\nNow you can use chat to \"talk\" to your data!",
+        "height": 372.9454545454546,
+        "width": 852.7644418417906
+      },
+      "id": "a1a8b546-46fa-42df-9933-759ebd66f6a4",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        441.5628308854825,
+        460
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## On every chat message:\n* the local SQLite database is loaded\n* JSON from Chat Trigger is combined with SQLite binary data",
+        "height": 297.89090909090913,
+        "width": 558.5454545454544
+      },
+      "id": "cc74b605-2043-458f-a0ed-4343fed80ea7",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        420,
+        980.9454545454546
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{ $('Chat Trigger').item.json }}\n",
+        "options": {
+          "includeBinary": true
+        }
+      },
+      "id": "cbe75ed3-2c66-4e86-91e3-8fe65c773193",
+      "name": "Combine chat input with the binary",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        840,
+        1100.9454545454546
+      ],
+      "typeVersion": 3.3
+    },
+    {
+      "parameters": {
+        "content": "### LangChain SQL Agent can make several queries before producing the final answer.\nTry these examples:\n1. \"Please describe the database\". This input usually requires just 1 query + an extra observation to produce a final answer.\n2. \"What are the revenues by genre?\". This input will launch a series of Agent actions, because it needs to make several queries.\n\nThe final answer is stored in the memory and will be recalled on the next input from the user.",
+        "height": 607.9615519555953,
+        "width": 471.99692219161466
+      },
+      "id": "4e71ba93-966a-40f6-b53a-7ced7dddc233",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1000,
+        860.9454545454546
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "agent": "sqlAgent",
+        "dataSource": "sqlite",
+        "options": {}
+      },
+      "id": "b06f05f8-e053-4958-85a1-856aacdeaee4",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "position": [
+        1040,
+        1100
+      ],
+      "typeVersion": 1.6
+    },
+    {
+      "parameters": {
+        "public": true,
+        "authentication": "basicAuth",
+        "initialMessages": "Hi there! 👋\nThank you for visiting our website. My name is Nathan and i'm your AI assist ready to help you today. Please give me a brief description of what you are looking for. ",
+        "options": {
+          "subtitle": "Start a chat. We're here to help you M-F 8am-5pm."
+        }
+      },
+      "id": "b9ddd99e-d17e-40e8-a629-32e90d8085cc",
+      "name": "Chat Trigger",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "position": [
+        440,
+        1100
+      ],
+      "webhookId": "fb565f08-a459-4ff9-8249-1ede58599660",
+      "typeVersion": 1,
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "2DilsoCE2gw7sEA8",
+          "name": "John Doe"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 2,
+  "updatedAt": "2024-06-21T03:02:31.000Z",
+  "versionId": "c1463777-8afa-457d-9439-fd684075eb28"
+}
