@@ -262,21 +262,6 @@
     },
     {
       "parameters": {
-        "agent": "sqlAgent",
-        "dataSource": "sqlite",
-        "options": {}
-      },
-      "id": "b06f05f8-e053-4958-85a1-856aacdeaee4",
-      "name": "AI Agent",
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "position": [
-        1040,
-        1100
-      ],
-      "typeVersion": 1.6
-    },
-    {
-      "parameters": {
         "public": true,
         "authentication": "basicAuth",
         "initialMessages": "Hi there! 👋\nThank you for visiting our website. My name is Nathan and i'm your AI assist ready to help you today. Please give me a brief description of what you are looking for. ",
@@ -299,6 +284,24 @@
           "name": "John Doe"
         }
       }
+    },
+    {
+      "parameters": {
+        "agent": "sqlAgent",
+        "dataSource": "sqlite",
+        "options": {
+          "prefixPrompt": "You are an SQL agent. Generate a syntactically correct {dialect} query based on the user's question. Run the query and return the results.\n\n### Guidelines:\n1. **Query**:\n    - Generate a correct SQL query.\n    - Use LIMIT to restrict results to {top_k}, unless specified.\n    - Order results by a relevant column.\n    - Select only relevant columns.\n\n2. **Execution**:\n    - Double-check the query before running.\n    - Rewrite and retry if there is an error.\n\n3. **Restrictions**:\n    - No DML statements (INSERT, UPDATE, DELETE, DROP).\n    - Use only provided tools and their information.\n\n4. **Response**:\n    - If the question is unrelated to the database, reply with \"I don't know.\"\n\n### Example:\n- **Input**: \"Show the top 5 employees with the highest salaries.\"\n- **Query**: \n    ```sql\n    SELECT employee_name, salary\n    FROM employees\n    ORDER BY salary DESC\n    LIMIT 5;\n    ```\n\n- Ensure the query matches the {dialect}.\n- Replace {top_k} with the appropriate number.\n",
+          "suffixPrompt": "Begin!\nChat History:\n{chatHistory}\n\nQuestion: {input}\nThought: I should look at the tables in the database to see what I can query.\n{agent_scratchpad}"
+        }
+      },
+      "id": "b06f05f8-e053-4958-85a1-856aacdeaee4",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "position": [
+        1040,
+        1100
+      ],
+      "typeVersion": 1.6
     }
   ],
   "pinData": {},
@@ -308,6 +311,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2024-06-21T03:02:31.000Z",
-  "versionId": "c1463777-8afa-457d-9439-fd684075eb28"
+  "updatedAt": "2024-06-23T22:14:41.000Z",
+  "versionId": "9265c672-af40-4739-9b9f-74509f6289a2"
 }
