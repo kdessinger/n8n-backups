@@ -1,0 +1,67 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Odoo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-06-24T16:47:52.775Z",
+  "id": "RGNKmGcbagVmPXCy",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Test",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "9047b721-b825-41b9-8ecb-98cdc5084622",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        600,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "options": {}
+      },
+      "id": "534c5aea-2dff-4f39-ad51-dc1dc2db4ee9",
+      "name": "Odoo",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        820,
+        300
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "sNMLucgQTymvtcCB",
+          "name": "Odoo account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": 300
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-06-24T16:51:23.000Z",
+  "versionId": "da356f03-5573-4241-8dbb-7775e062ff8d"
+}
