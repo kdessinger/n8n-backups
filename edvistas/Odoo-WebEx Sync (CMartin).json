@@ -180,7 +180,9 @@
   },
   "createdAt": "2024-01-09T21:28:55.371Z",
   "id": "iGQz0XCYM5yBmAxp",
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "Odoo-WebEx Sync (CMartin)",
   "nodes": [
     {
@@ -639,7 +641,7 @@
       "type": "n8n-nodes-base.ciscoWebexTrigger",
       "typeVersion": 1,
       "position": [
-        -220,
+        -240,
         980
       ],
       "webhookId": "1e8361c2-b80a-4687-bd4d-afd10983aea2",
@@ -764,7 +766,8 @@
     },
     {
       "parameters": {
-        "workflowId": "RMGsRy908UOekKo3"
+        "workflowId": "RMGsRy908UOekKo3",
+        "options": {}
       },
       "id": "6d57a6a5-e9ed-4a04-be58-ab2c77786bfd",
       "name": "Log Activity (Starting)",
@@ -777,7 +780,8 @@
     },
     {
       "parameters": {
-        "workflowId": "RMGsRy908UOekKo3"
+        "workflowId": "RMGsRy908UOekKo3",
+        "options": {}
       },
       "id": "dd044452-8341-4ffc-bba5-a9791743fe2b",
       "name": "Log Activity (Ending)",
@@ -842,8 +846,8 @@
       "webhookId": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1dFQkhPT0svMzBiZGFlYzMtMTEwNi00ZmM2LThiMzQtMDdjNzJjMzBlNThm"
     },
     "node:Webex (Carl)": {
-      "secret": "ec71c59abdc230b3d6f3ba90f1626871",
-      "webhookId": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1dFQkhPT0svMjYwMmI4ZmEtZDgwNi00MzZmLTk2ZjItNWQ0NGE1YWJiYWJh"
+      "secret": "551addea6d10adc021c2553106f7825d",
+      "webhookId": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1dFQkhPT0svNjEzZDRjODEtNTAyMy00OGZmLWEyY2MtNzM3OGU1YTM3Nzlh"
     }
   },
   "tags": [
@@ -855,6 +859,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-01-12T21:04:52.000Z",
-  "versionId": "b3caa203-80e7-420b-88ee-41e5ddb699a1"
+  "updatedAt": "2024-06-28T20:54:34.000Z",
+  "versionId": "8f44c7cb-0288-40dd-9bb5-5b2114e6a080"
 }
