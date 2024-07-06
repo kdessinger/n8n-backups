@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "JSON Parser": {
       "ai_outputParser": [
@@ -485,7 +485,7 @@
   },
   "staticData": {
     "node:Gmail trigger": {
-      "lastTimeChecked": 1720034850,
+      "lastTimeChecked": 1720205783,
       "possibleDuplicates": [
         "19024602b93da2a9"
       ]
@@ -506,6 +506,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-06-17T04:07:08.000Z",
+  "updatedAt": "2024-07-05T18:57:51.000Z",
   "versionId": "48343acb-7cbe-4aba-97c9-50c10f5693c4"
 }
