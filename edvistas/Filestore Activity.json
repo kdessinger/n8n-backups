@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "Email Trigger (IMAP)": {
       "main": [
@@ -16,14 +16,14 @@
       "main": [
         [
           {
-            "node": "From Datamate?",
+            "node": "Filestore Activity?",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "From Datamate?": {
+    "Filestore Activity?": {
       "main": [
         [
           {
@@ -39,11 +39,6 @@
             "index": 0
           }
         ]
-      ]
-    },
-    "Do Nothing": {
-      "main": [
-        []
       ]
     }
   },
@@ -172,14 +167,24 @@
                 "operation": "equals",
                 "name": "filter.operator.equals"
               }
+            },
+            {
+              "id": "971e4a95-7963-42fb-806d-db801815a497",
+              "leftValue": "={{ $json.Title }}",
+              "rightValue": "Filestore Activity",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
             }
           ],
-          "combinator": "or"
+          "combinator": "and"
         },
         "options": {}
       },
       "id": "36d5a2c9-36b1-4be1-9564-5afc8d639b6d",
-      "name": "From Datamate?",
+      "name": "Filestore Activity?",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
@@ -236,6 +241,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-06-06T03:11:33.000Z",
-  "versionId": "691347ee-8720-40da-9c7f-95fb09484032"
+  "updatedAt": "2024-07-05T18:57:09.000Z",
+  "versionId": "6e595638-cee4-488e-9fc8-58bdece80e2d"
 }
