@@ -304,7 +304,7 @@
             },
             {
               "name": "Campaign",
-              "stringValue": "={{ $json[\"Campaign\"] === undefined ? 'Unknown' : $json[\"Campaign\"] === '' ? 'Unknown' : $json[\"Campaign\"] }}\n\n\n"
+              "stringValue": "={{ $json[\"Campaign\"] === undefined ? 'Unknown' : $json[\"Campaign\"] === '' ? 'Unknown' : $json[\"Campaign\"] }}"
             },
             {
               "name": "Message",
@@ -1143,6 +1143,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2024-05-17T14:32:38.000Z",
-  "versionId": "efc7a507-0274-4267-8fcb-e19468f14f62"
+  "updatedAt": "2024-07-16T13:52:01.000Z",
+  "versionId": "b46fc2eb-cc60-42e5-8de8-ea7fb1f744ff"
 }
