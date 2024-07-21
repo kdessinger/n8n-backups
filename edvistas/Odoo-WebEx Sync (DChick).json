@@ -61,45 +61,11 @@
         ]
       ]
     },
-    "Odoo Lookup": {
-      "main": [
-        [
-          {
-            "node": "Loop Over Items",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Loop Over Items": {
-      "main": [
-        [],
-        [
-          {
-            "node": "Odoo Lookup",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Get ID": {
       "main": [
         [
           {
             "node": "Update Meeting",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Webex (Admin)": {
-      "main": [
-        [
-          {
-            "node": "Delete Meeting?",
             "type": "main",
             "index": 0
           }
@@ -194,6 +160,17 @@
         [
           {
             "node": "Meeting Ending",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webex (David)": {
+      "main": [
+        [
+          {
+            "node": "Delete Meeting?",
             "type": "main",
             "index": 0
           }
@@ -433,59 +410,6 @@
     {
       "parameters": {
         "resource": "custom",
-        "customResource": "res.partner",
-        "operation": "getAll",
-        "limit": 1,
-        "options": {
-          "fieldsList": [
-            "name",
-            "phone_sanitized",
-            "email_normalized"
-          ]
-        },
-        "filterRequest": {
-          "filter": [
-            {
-              "fieldName": "email",
-              "value": "={{ $json.Attendees.context[\"currentRunIndex\"]; }}"
-            }
-          ]
-        }
-      },
-      "id": "bc98de6d-bb8a-4b7d-bcc1-dacd3dd4de0f",
-      "name": "Odoo Lookup",
-      "type": "n8n-nodes-base.odoo",
-      "typeVersion": 1,
-      "position": [
-        1100,
-        1160
-      ],
-      "alwaysOutputData": true,
-      "credentials": {
-        "odooApi": {
-          "id": "12",
-          "name": "Odoo (Administrator)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "options": {
-          "reset": false
-        }
-      },
-      "id": "0bdb5f4a-310d-409c-8c53-6332264e7024",
-      "name": "Loop Over Items",
-      "type": "n8n-nodes-base.splitInBatches",
-      "typeVersion": 3,
-      "position": [
-        880,
-        1140
-      ]
-    },
-    {
-      "parameters": {
-        "resource": "custom",
         "customResource": "calendar.event",
         "operation": "getAll",
         "returnAll": true,
@@ -561,27 +485,6 @@
         "odooApi": {
           "id": "12",
           "name": "Odoo (Administrator)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "event": "all",
-        "filters": {}
-      },
-      "id": "3295d9e4-6000-41a1-acfe-6e2dc07754ef",
-      "name": "Webex (Admin)",
-      "type": "n8n-nodes-base.ciscoWebexTrigger",
-      "typeVersion": 1,
-      "position": [
-        -220,
-        980
-      ],
-      "webhookId": "c2e37583-ff6e-425e-996a-16bc864b048d",
-      "credentials": {
-        "ciscoWebexOAuth2Api": {
-          "id": "zW4NXzLD7ejSGIvy",
-          "name": "Webex (dchick)"
         }
       }
     },
@@ -837,7 +740,7 @@
     {
       "parameters": {
         "dataType": "string",
-        "value1": "={{ $('Webex (Admin)').item.json[\"event\"] }}",
+        "value1": "={{ $('Webex (David)').item.json[\"event\"] }}",
         "rules": {
           "rules": [
             {
@@ -867,10 +770,31 @@
         1320,
         720
       ]
+    },
+    {
+      "parameters": {
+        "event": "all",
+        "filters": {}
+      },
+      "id": "3295d9e4-6000-41a1-acfe-6e2dc07754ef",
+      "name": "Webex (David)",
+      "type": "n8n-nodes-base.ciscoWebexTrigger",
+      "typeVersion": 1,
+      "position": [
+        -220,
+        980
+      ],
+      "webhookId": "c2e37583-ff6e-425e-996a-16bc864b048d",
+      "credentials": {
+        "ciscoWebexOAuth2Api": {
+          "id": "zW4NXzLD7ejSGIvy",
+          "name": "Webex (dchick)"
+        }
+      }
     }
   ],
   "pinData": {
-    "Webex (Admin)": [
+    "Webex (David)": [
       {
         "json": {
           "id": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1dFQkhPT0svYTA3YWU3ZGEtZDc5NC00ZTg0LThhNDctMDU2NDA2YTM2MzZj",
@@ -918,8 +842,14 @@
       "secret": "ec71c59abdc230b3d6f3ba90f1626871"
     },
     "node:Webex (Admin)": {
-      "secret": "bf809a9cb0262b35983f92cd1eb13c33",
-      "webhookId": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1dFQkhPT0svMjY2OTI3OWItY2MxZS00YmM5LTgwNmItODdkODU1ZDgxZTZl"
+      "secret": "bf809a9cb0262b35983f92cd1eb13c33"
+    },
+    "node:Webex (dchick)": {
+      "secret": "bf809a9cb0262b35983f92cd1eb13c33"
+    },
+    "node:Webex (David)": {
+      "webhookId": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1dFQkhPT0svYjFiZmUwYjAtNTFkZi00YTI5LTkyZWQtZWQ4MzRjMGQ1ZGY1",
+      "secret": "bf809a9cb0262b35983f92cd1eb13c33"
     }
   },
   "tags": [
@@ -931,6 +861,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-07-03T14:40:38.000Z",
-  "versionId": "cbfdb6c8-9a21-4d81-9f4f-d49a5f74441f"
+  "updatedAt": "2024-07-21T04:20:58.000Z",
+  "versionId": "552c2b0b-96e1-4dc8-a784-b33f79f31a10"
 }
