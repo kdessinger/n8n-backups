@@ -132,7 +132,8 @@
       "recurrencyRules": []
     },
     "node:Schedule Trigger (Workdays@5PM)": {
-      "recurrencyRules": []
+      "recurrencyRules": [],
+      "recurrenceRules": []
     }
   },
   "tags": [
