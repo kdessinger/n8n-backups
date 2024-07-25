@@ -790,7 +790,8 @@
   },
   "staticData": {
     "node:Schedule": {
-      "recurrencyRules": []
+      "recurrencyRules": [],
+      "recurrenceRules": []
     }
   },
   "tags": [
