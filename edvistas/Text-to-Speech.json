@@ -30,6 +30,17 @@
         ]
       ]
     },
+    "Error": {
+      "main": [
+        [
+          {
+            "node": "Stop and Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "Webhook": {
       "main": [
         [
@@ -41,15 +52,14 @@
         ]
       ]
     },
-    "Error": {
+    "ElevenLabs": {
       "main": [
-        [
-          {
-            "node": "Stop and Error",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
+      ]
+    },
+    "ElevenLabs1": {
+      "main": [
+        []
       ]
     }
   },
@@ -185,6 +195,19 @@
     },
     {
       "parameters": {
+        "errorMessage": "User inputs undefined"
+      },
+      "id": "671b6587-14d8-4865-b7af-8d64d8fe886c",
+      "name": "Stop and Error",
+      "type": "n8n-nodes-base.stopAndError",
+      "typeVersion": 1,
+      "position": [
+        1060,
+        960
+      ]
+    },
+    {
+      "parameters": {
         "path": "generate-voice",
         "responseMode": "responseNode",
         "options": {}
@@ -201,16 +224,73 @@
     },
     {
       "parameters": {
-        "errorMessage": "User inputs undefined"
+        "resource": "voice",
+        "includePremade": true,
+        "requestOptions": {}
       },
-      "id": "671b6587-14d8-4865-b7af-8d64d8fe886c",
-      "name": "Stop and Error",
-      "type": "n8n-nodes-base.stopAndError",
+      "id": "1ceffba7-88c8-4ef2-a312-1d5e41dc330c",
+      "name": "ElevenLabs",
+      "type": "n8n-nodes-elevenlabs.elevenLabs",
       "typeVersion": 1,
       "position": [
-        1060,
-        960
-      ]
+        -240,
+        280
+      ],
+      "credentials": {
+        "elevenLabsApi": {
+          "id": "jsfzXzi3Nzv6Kx7D",
+          "name": "ElevenLabs (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "voice",
+        "operation": "get-voice-details",
+        "generated_voice_id": "pNInz6obpgDQGcFmaJgB",
+        "requestOptions": {}
+      },
+      "id": "874cbea8-2976-4292-8ba8-bc8cb05df122",
+      "name": "ElevenLabs1",
+      "type": "n8n-nodes-elevenlabs.elevenLabs",
+      "typeVersion": 1,
+      "position": [
+        -240,
+        440
+      ],
+      "credentials": {
+        "elevenLabsApi": {
+          "id": "jsfzXzi3Nzv6Kx7D",
+          "name": "ElevenLabs (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "text": "Presenting... Mini Cow! A cute mini sized cow that is no bigger then a dog.",
+        "voice_id": {
+          "__rl": true,
+          "value": "GJp2opTMhLNhYZTaaUDa",
+          "mode": "list",
+          "cachedResultName": "Wayne - cool, calm, deep"
+        },
+        "additionalFields": {},
+        "requestOptions": {}
+      },
+      "id": "873a26dd-6263-4735-bfae-057f8e39cd3b",
+      "name": "ElevenLabs2",
+      "type": "n8n-nodes-elevenlabs.elevenLabs",
+      "typeVersion": 1,
+      "position": [
+        -240,
+        600
+      ],
+      "credentials": {
+        "elevenLabsApi": {
+          "id": "jsfzXzi3Nzv6Kx7D",
+          "name": "ElevenLabs (kdessinger)"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -224,6 +304,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2024-06-07T21:57:11.000Z",
-  "versionId": "3610d7c5-a84b-428c-b143-a5ab44b86c06"
+  "updatedAt": "2024-08-02T22:13:33.000Z",
+  "versionId": "2813606a-49b0-4a38-ab65-99340abfe715"
 }
