@@ -52,14 +52,15 @@
         ]
       ]
     },
-    "ElevenLabs": {
+    "Execute Workflow Trigger": {
       "main": [
-        []
-      ]
-    },
-    "ElevenLabs1": {
-      "main": [
-        []
+        [
+          {
+            "node": "If params correct",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
@@ -109,8 +110,8 @@
       "name": "If params correct",
       "type": "n8n-nodes-base.if",
       "position": [
-        600,
-        800
+        580,
+        880
       ],
       "typeVersion": 2
     },
@@ -123,7 +124,7 @@
       "name": "Respond to Webhook",
       "type": "n8n-nodes-base.respondToWebhook",
       "position": [
-        1060,
+        1020,
         780
       ],
       "typeVersion": 1.1
@@ -152,7 +153,7 @@
       "name": "Generate voice",
       "type": "n8n-nodes-base.httpRequest",
       "position": [
-        840,
+        820,
         780
       ],
       "typeVersion": 4.2,
@@ -166,7 +167,7 @@
     {
       "parameters": {
         "content": "## Generate Text-to-Speech Using Elevenlabs via API\nThis workflow provides an API endpoint to generate speech from text using [Elevenlabs.io](https://elevenlabs.io/), a popular text-to-speech service.\n\n### Step 1: Configure Custom Credentials in n8n\nTo set up your credentials in n8n, create a new custom authentication entry with the following JSON structure:\n```json\n{\n  \"headers\": {\n    \"xi-api-key\": \"your-elevenlabs-api-key\"\n  }\n}\n```\nReplace `\"your-elevenlabs-api-key\"` with your actual Elevenlabs API key.\n\n### Step 2: Send a POST Request to the Webhook\nSend a POST request to the workflow's webhook endpoint with these two parameters:\n- `voice_id`: The ID of the voice from Elevenlabs that you want to use.\n- `text`: The text you want to convert to speech.\n\nThis workflow has been a significant time-saver in my video production tasks. I hope it proves just as useful to you!\n\nVoices: \nAdam = pNInz6obpgDQGcFmaJgB\nAntoni = ErXwobaYiN019PkySvjV\nAmanda = 2oNhRSlRW5WoSJSEniS6\nWayne = GJp2opTMhLNhYZTaaUDa\n\n\n",
-        "height": 882.8562040599353,
+        "height": 1057.1083348221746,
         "width": 1243.1309953979382
       },
       "id": "e862955e-76d9-4a24-9501-0d5eb8fbe778",
@@ -174,7 +175,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "position": [
         0,
-        260
+        220
       ],
       "typeVersion": 1
     },
@@ -188,7 +189,7 @@
       "name": "Error",
       "type": "n8n-nodes-base.respondToWebhook",
       "position": [
-        840,
+        820,
         960
       ],
       "typeVersion": 1.1
@@ -202,7 +203,7 @@
       "type": "n8n-nodes-base.stopAndError",
       "typeVersion": 1,
       "position": [
-        1060,
+        1020,
         960
       ]
     },
@@ -216,7 +217,7 @@
       "name": "Webhook",
       "type": "n8n-nodes-base.webhook",
       "position": [
-        400,
+        360,
         800
       ],
       "webhookId": "5acc6769-6c0f-42a8-a69c-b05e437e18a9",
@@ -233,8 +234,8 @@
       "type": "n8n-nodes-elevenlabs.elevenLabs",
       "typeVersion": 1,
       "position": [
-        -240,
-        280
+        -260,
+        760
       ],
       "credentials": {
         "elevenLabsApi": {
@@ -255,8 +256,8 @@
       "type": "n8n-nodes-elevenlabs.elevenLabs",
       "typeVersion": 1,
       "position": [
-        -240,
-        440
+        -260,
+        920
       ],
       "credentials": {
         "elevenLabsApi": {
@@ -267,12 +268,11 @@
     },
     {
       "parameters": {
-        "text": "Presenting... Mini Cow! A cute mini sized cow that is no bigger then a dog.",
+        "text": "Welcome to the jungle baby! Were gonna try!",
         "voice_id": {
           "__rl": true,
-          "value": "GJp2opTMhLNhYZTaaUDa",
-          "mode": "list",
-          "cachedResultName": "Wayne - cool, calm, deep"
+          "value": "pNInz6obpgDQGcFmaJgB",
+          "mode": "id"
         },
         "additionalFields": {},
         "requestOptions": {}
@@ -282,8 +282,8 @@
       "type": "n8n-nodes-elevenlabs.elevenLabs",
       "typeVersion": 1,
       "position": [
-        -240,
-        600
+        -260,
+        1080
       ],
       "credentials": {
         "elevenLabsApi": {
@@ -291,6 +291,17 @@
           "name": "ElevenLabs (kdessinger)"
         }
       }
+    },
+    {
+      "parameters": {},
+      "id": "fd3e6dc8-3ec4-43a1-af93-5bd82d7f90dd",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        360,
+        960
+      ]
     }
   ],
   "pinData": {},
@@ -304,6 +315,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2024-08-02T22:13:33.000Z",
-  "versionId": "2813606a-49b0-4a38-ab65-99340abfe715"
+  "updatedAt": "2024-08-06T23:56:16.000Z",
+  "versionId": "e3b5cc6c-10c6-4ba6-b8ea-46eb8b43fd68"
 }
