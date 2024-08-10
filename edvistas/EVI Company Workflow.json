@@ -1,11 +1,157 @@
 {
   "active": false,
-  "connections": {},
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Sales is made?  How?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email": {
+      "main": [
+        [
+          {
+            "node": "Setup Meeting",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Eduform Recieved": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sales is made?  How?": {
+      "main": [
+        [
+          {
+            "node": "Invoice Gets Confirmed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Invoice Gets Confirmed": {
+      "main": [
+        [
+          {
+            "node": "Eduform Recieved",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
   "createdAt": "2024-07-29T19:03:00.130Z",
   "id": "2EinH4mWtlNvWAct",
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "EVI Company Workflow",
-  "nodes": [],
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "f2ebe455-5e15-494e-b915-14c24466f130",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "operation": "get",
+        "options": {}
+      },
+      "id": "c2fe6f3d-ff86-4535-8d8a-a160e4922c57",
+      "name": "Sales is made?  How?",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        140,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "5f3fe83e-990d-483e-8fd4-5455f9af04fd",
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        780,
+        320
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "27",
+          "name": "SMTP (mx.gowls.com)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "e9dd0c30-ce10-4cdf-9ed4-aefb8aaa78a9",
+      "name": "Eduform Recieved",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        580,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "meeting",
+        "additionalFields": {}
+      },
+      "id": "175404e2-9f9b-445e-b51b-6ca619793159",
+      "name": "Setup Meeting",
+      "type": "n8n-nodes-base.ciscoWebex",
+      "typeVersion": 1,
+      "position": [
+        1000,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "operation": "get",
+        "options": {}
+      },
+      "id": "a293e9ac-2a99-4853-8eaa-d5511929c003",
+      "name": "Invoice Gets Confirmed",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        360,
+        360
+      ]
+    }
+  ],
   "pinData": {},
   "settings": {
     "executionOrder": "v1"
@@ -26,6 +172,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2024-07-29T19:03:22.000Z",
-  "versionId": "24e85057-08cf-4a79-a064-2a30199bc619"
+  "updatedAt": "2024-08-09T19:11:55.000Z",
+  "versionId": "5db55d93-e5cb-4fde-8c6f-b2bb375431ae"
 }
