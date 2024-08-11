@@ -270,7 +270,9 @@
             }
           ]
         },
-        "options": {}
+        "options": {
+          "ignoreConversionErrors": true
+        }
       },
       "id": "de4e03b3-cbdd-49ee-9743-c35298ca0674",
       "name": "Set Defaults",
@@ -366,56 +368,111 @@
     "Execute Workflow Trigger": [
       {
         "json": {
-          "Formid": "9069",
-          "referid": "3d6245ee-679b-4d02-9d9f-8cdccdb90397",
-          "Nominee_F1": "J",
-          "Nominee_F2": "E",
-          "Nominee_F3": "A",
-          "Nominee_F4": "N",
-          "Nominee_L1": "T",
-          "Nominee_L2": "Y",
-          "Nominee_L3": "L",
-          "Nominee_L4": "E",
-          "Nominee_Z1": "1",
-          "Nominee_Z2": "3",
-          "Nominee_Z3": "0",
-          "Nominee_Z4": "2",
-          "Nominee_Z5": "7",
-          "Nominee_Name": "Jeanette Tyler",
-          "Signer1_Err": "",
-          "TS": "3/28/2024 3:26:41 PM",
-          "CC_Code": "601295",
-          "Seq_Num": "355",
-          "Signer1_Full_Name": "pierre cabrea",
-          "MIN": "5146478",
-          "Type": "PE",
-          "Voided": "",
-          "host": "n8n.edvistas.com",
-          "Select_Nominee": "5146478",
-          "Signer1_F1": "p",
-          "Signer1_L1": "c",
-          "Signer1_Z1": "1",
-          "Signer1_F2": "i",
-          "Signer1_F3": "e",
-          "Signer1_F4": "r",
-          "Signer1_L2": "a",
-          "Signer1_L3": "b",
-          "Signer1_L4": "r",
-          "Signer1_Z2": "3",
-          "Signer1_Z3": "0",
-          "Signer1_Z4": "6",
-          "Signer1_Z5": "6",
-          "Position_Coordinator": "",
-          "Position_Eboard": "1",
-          "Nominee_Region": "",
-          "Nominee_Seat": "295",
-          "Title": "PEF's 2024 Triennial election",
-          "Message": "PEF Election Batch#355, An eBoard petition hab been submitted to EduFrom.",
-          "ClickURL": "https://apps.edvistas.com/forms/formView.aspx?formId=9069&referId=3d6245ee-679b-4d02-9d9f-8cdccdb90397",
-          "Emojis": [
-            "hugs",
-            "+1"
-          ]
+          "headers": {
+            "connection": "close",
+            "host": "n8n.edvistas.com",
+            "x-forwarded-scheme": "https",
+            "x-forwarded-proto": "https",
+            "x-forwarded-for": "192.168.148.1",
+            "x-real-ip": "192.168.148.1",
+            "content-length": "1601",
+            "accept": "application/json, text/plain, */*",
+            "content-type": "application/json",
+            "user-agent": "axios/0.28.1"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "heartbeat": {
+              "monitorID": 18,
+              "status": 1,
+              "time": "2024-08-11 00:30:29.393",
+              "msg": "200 - OK",
+              "ping": 193,
+              "important": true,
+              "duration": 8,
+              "timezone": "America/New_York",
+              "timezoneOffset": "-04:00",
+              "localDateTime": "2024-08-10 20:30:29"
+            },
+            "monitor": {
+              "id": 18,
+              "name": "Odoo-Staging",
+              "description": null,
+              "pathName": "Odoo-Staging",
+              "parent": null,
+              "childrenIDs": [],
+              "url": "https://odoo-stage.edvistas.com",
+              "method": "GET",
+              "hostname": null,
+              "port": null,
+              "maxretries": 0,
+              "weight": 2000,
+              "active": true,
+              "forceInactive": false,
+              "type": "http",
+              "timeout": 48,
+              "interval": 60,
+              "retryInterval": 27,
+              "resendInterval": 0,
+              "keyword": null,
+              "invertKeyword": false,
+              "expiryNotification": true,
+              "ignoreTls": false,
+              "upsideDown": false,
+              "packetSize": 56,
+              "maxredirects": 10,
+              "accepted_statuscodes": [
+                "200-299"
+              ],
+              "dns_resolve_type": "A",
+              "dns_resolve_server": "1.1.1.1",
+              "dns_last_result": null,
+              "docker_container": null,
+              "docker_host": null,
+              "proxyId": null,
+              "notificationIDList": {
+                "2": true
+              },
+              "tags": [
+                {
+                  "id": 18,
+                  "monitor_id": 18,
+                  "tag_id": 2,
+                  "value": "",
+                  "name": "Internal",
+                  "color": "#2563EB"
+                }
+              ],
+              "maintenance": false,
+              "mqttTopic": null,
+              "mqttSuccessMessage": null,
+              "databaseQuery": null,
+              "authMethod": null,
+              "grpcUrl": null,
+              "grpcProtobuf": null,
+              "grpcMethod": null,
+              "grpcServiceName": null,
+              "grpcEnableTls": false,
+              "radiusCalledStationId": null,
+              "radiusCallingStationId": null,
+              "game": null,
+              "gamedigGivenPortOnly": true,
+              "httpBodyEncoding": "json",
+              "jsonPath": null,
+              "expectedValue": null,
+              "kafkaProducerTopic": null,
+              "kafkaProducerBrokers": null,
+              "kafkaProducerSsl": false,
+              "kafkaProducerAllowAutoTopicCreation": false,
+              "kafkaProducerMessage": null,
+              "screenshot": null,
+              "includeSensitiveData": false
+            },
+            "msg": "[Odoo-Staging] [✅ Up] 200 - OK"
+          },
+          "webhookUrl": "https://n8n.edvistas.com/webhook/uptimekuma/alert",
+          "executionMode": "production"
         }
       }
     ]
@@ -443,6 +500,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2024-06-06T03:41:56.000Z",
-  "versionId": "6133a6d4-f8e5-4660-87c7-a321c739b3aa"
+  "updatedAt": "2024-08-11T00:47:00.000Z",
+  "versionId": "97a91f33-8b0e-4ebe-9b7d-fd7c762385b7"
 }
