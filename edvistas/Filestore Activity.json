@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "Email Trigger (IMAP)": {
       "main": [
@@ -127,6 +127,7 @@
     {
       "parameters": {
         "workflowId": "RMGsRy908UOekKo3",
+        "mode": "each",
         "options": {}
       },
       "id": "8fba8c54-9d24-44dc-b412-df05630c97d5",
@@ -193,45 +194,18 @@
       ]
     }
   ],
-  "pinData": {
-    "Email Trigger (IMAP)": [
-      {
-        "json": {
-          "textHtml": "<html><head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=us-ascii\">\r\n</head>\r\n<body>\r\nMountainside CSD has uploaded a file to the file store. <br>\r\n<br>\r\n<strong>Confidentiality Notice:</strong> The information contained in this email and any attachments may be confidential. If you are not an intended recipient, you are hereby notified that any dissemination, distribution, or copying of this email is strictly\r\n prohibited. If you received this email in error, please notify the sender and permanently delete the email and any attachments immediately. You should not retain, copy, or use this email or any attachment for any purpose, nor disclose all or any part of the\r\n contents to any other person. Thank you. To reply to our email administrator directly, please send an email to\r\n<a href=\"mailto:admin@edvistas.com\">admin@edvistas.com</a>\r\n</body>\r\n</html>\r\n",
-          "textPlain": "",
-          "metadata": {
-            "mime-version": "1.0",
-            "received": "from WLSMAIL13-2.wls.poo (192.168.188.114) by WLSMAIL13-2.wls.poo (192.168.188.114) with Microsoft SMTP Server (TLS) id 15.0.1497.48 via Mailbox Transport; Wed, 5 Jun 2024 08:17:16 -0400",
-            "content-type": "text/html; charset=\"us-ascii\"",
-            "content-transfer-encoding": "quoted-printable",
-            "dkim-signature": "v=1; a=rsa-sha256; d=edvistas.com; s=key1; c=relaxed/relaxed;\tt=1717589831; h=from:subject:to:date:message-id;\tbh=9LcMsMVnxqvHzArbydF05OmL7ynrTLnYCFXJnaUqInw=;\tb=ezgIvmXF+L+RmdpJdH936g+RmzmgnhKJwjXa3AZ1ybxPeoULNyXGWLZVP0uqGh2wnxSlkSSoGn4\t9ccoFRMP0bkcfz416UiYQ6QlQkpqKVkilxdzjYBoM+SS48pNcHeQGGxo3EMMGL+juiTtTWCGx+1SO\tu/DkqCeLMKkFnVpmg6j0S4GdOnV5DZLEzLaRzQiwSdm6BbEFmK6MzTlLPxDuI8c6xhMGS7oKQtAuh\tT3MAxvKMJZrNTeqPuDhf7/xoZHeP7tp1r0x1rYcSdszXyjokIeinOKGRSLIyEZkM+H6xcHbGFM7/9\t1GQXl52ZzTOIlTnj/2QDMwMPQgcGLlMKUoVA==",
-            "message-id": "<c552a7a0-3ef5-4932-83fc-41e67fe702fe@APP2.wls.local>",
-            "ndr-processing-guid": "c552a7a0-3ef5-4932-83fc-41e67fe702fe",
-            "ndr-processing-to-address": "odoo@edvistas.com",
-            "ndr-processing-from-address": "datamate@edvistas.com",
-            "return-path": "datamate@edvistas.com",
-            "x-ms-exchange-organization-network-message-id": "17252675-8eba-4342-171e-08dc85596d1e",
-            "x-ms-exchange-organization-avstamp-enterprise": "1.0",
-            "x-ms-exchange-organization-scl": "-1",
-            "x-ms-exchange-organization-authsource": "wlsmailfe13-1.wls.poo",
-            "x-ms-exchange-organization-authas": "Anonymous"
-          },
-          "from": "<datamate@edvistas.com>",
-          "to": "<odoo@edvistas.com>",
-          "date": "Wed, 5 Jun 2024 08:17:11 -0400",
-          "subject": "Mountainside CSD has uploaded a file to the file store."
-        }
-      }
-    ]
-  },
+  "pinData": {},
   "settings": {
     "executionOrder": "v1",
     "saveManualExecutions": true,
     "callerPolicy": "workflowsFromSameOwner",
-    "executionTimeout": 300,
-    "errorWorkflow": "NtBd2hj1eiR2xufe"
+    "executionTimeout": 300
   },
-  "staticData": null,
+  "staticData": {
+    "node:Email Trigger (IMAP)": {
+      "lastMessageUid": 2692
+    }
+  },
   "tags": [
     {
       "createdAt": "2024-06-05T04:18:06.552Z",
@@ -241,6 +215,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-07-05T18:57:09.000Z",
-  "versionId": "6e595638-cee4-488e-9fc8-58bdece80e2d"
+  "updatedAt": "2024-08-28T20:10:02.000Z",
+  "versionId": "8b3356ba-8031-4efe-8e93-e6cf3b0bbfc6"
 }
