@@ -180,7 +180,9 @@
   },
   "createdAt": "2024-01-09T22:24:44.745Z",
   "id": "MuVP7INIKSJiYtSx",
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "Odoo-WebEx Sync (BBouchard)",
   "nodes": [
     {
@@ -764,7 +766,8 @@
     },
     {
       "parameters": {
-        "workflowId": "RMGsRy908UOekKo3"
+        "workflowId": "RMGsRy908UOekKo3",
+        "options": {}
       },
       "id": "6e84fb52-a56c-433f-b5fe-4d7351e364d7",
       "name": "Log Activity (Starting)",
@@ -777,7 +780,8 @@
     },
     {
       "parameters": {
-        "workflowId": "RMGsRy908UOekKo3"
+        "workflowId": "RMGsRy908UOekKo3",
+        "options": {}
       },
       "id": "a20a0b58-9471-4c7a-a7bb-0725ea4d54bf",
       "name": "Log Activity (Ending)",
@@ -793,31 +797,31 @@
     "Webex (Bill)": [
       {
         "json": {
-          "id": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svZThlNmMzYTctMWYzYS00YTg1LWEzMjItM2EwNzg1YjI0ZThl",
+          "id": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svM2JhMWE3NDYtNWJkMC00NjIwLWE4MDgtODY1NGRmOTFiOTU5",
           "name": "n8n-webhook:https://n8n.edvistas.com/webhook/2bcc660a-e6cf-4d65-8c32-56a664625d56/webhook",
           "targetUrl": "https://n8n.edvistas.com/webhook/2bcc660a-e6cf-4d65-8c32-56a664625d56/webhook",
           "resource": "meetings",
-          "event": "ended",
+          "event": "started",
           "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9hYjQ1NTg3Ni1jMWUxLTQ2MjUtOTAzNS0wNGRmMmNhNzA3YjU",
           "createdBy": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9jNjBmY2Y4NC01MDYxLTQyZTgtYmRlYi01NDgxOGRhM2RiMjg",
           "appId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0MwOTk4OTVjYjllY2I1MTNkZmI1YzdlYWQzM2IyMjgzMTdjMGE2ZTQxZTE4ZDdmODdjM2Y0ZDI5ZDQzZDAyNGRm",
           "ownedBy": "creator",
           "status": "active",
-          "created": "2024-01-12T21:03:48.319Z",
+          "created": "2024-01-16T20:28:06.189Z",
           "data": {
             "eventSource": "meeting-events",
-            "id": "ce166c49494042da9c449ed50ae20135_I_282815663361275429",
-            "state": "ended",
+            "scheduleSource": "",
+            "id": "f0e0d69b8eb0c2be8d78e213796085a4_I_607648138777422525",
+            "state": "inProgress",
             "siteUrl": "educationalvistasinc.my.webex.com",
             "orgId": "ab455876-c1e1-4625-9035-04df2ca707b5",
-            "meetingNumber": "26340240792",
+            "meetingNumber": "1322593819",
             "meetingType": "meeting",
             "timezone": "UTC",
-            "start": "2024-01-16T18:28:44Z",
-            "end": "2024-01-16T18:42:34Z",
+            "start": "2024-09-04T19:37:16Z",
             "hostUserId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9jNjBmY2Y4NC01MDYxLTQyZTgtYmRlYi01NDgxOGRhM2RiMjg",
             "hostEmail": "bbouchard@edvistas.com",
-            "eventCreateTime": 1705430554689
+            "eventCreateTime": 1725478636741
           }
         }
       }
@@ -844,7 +848,7 @@
     },
     "node:Webex (Bill)": {
       "secret": "40cf74ac48bbe0852cf23cd769d065b4",
-      "webhookId": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svM2JhMWE3NDYtNWJkMC00NjIwLWE4MDgtODY1NGRmOTFiOTU5"
+      "webhookId": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svNDU5ZGRjOGUtNTk5Yy00NjE3LWI3NTEtMGFmMTI2MjlhNzlm"
     }
   },
   "tags": [
@@ -856,6 +860,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-01-16T20:28:06.000Z",
-  "versionId": "b62fe7dd-9d25-4b3e-942b-52687ad2b466"
+  "updatedAt": "2024-09-04T19:51:48.000Z",
+  "versionId": "43f964a3-31ee-40e5-814a-2e4cd3d71e4d"
 }
