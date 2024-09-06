@@ -1,0 +1,155 @@
+{
+  "active": false,
+  "connections": {
+    "LDAP": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "LDAP",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Odoo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2024-09-05T17:56:03.335Z",
+  "id": "1rohanxc5wagJ0vn",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Employee List",
+  "nodes": [
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "0ec6ca42-077f-4360-921f-c8068c0faa4d",
+              "leftValue": "={{ $json.userAccountControl }}",
+              "rightValue": "514",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              }
+            },
+            {
+              "id": "a38fa67a-f5fa-4c37-96e7-3abbe7696120",
+              "leftValue": "={{ $json.objectCategory }}",
+              "rightValue": "Person",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "f342af4e-a0cc-471e-b580-b5bd6fd447e4",
+      "name": "Filter",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.1,
+      "position": [
+        1320,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "baseDN": "CN=Users,DC=edvistas,DC=local",
+        "searchFor": "custom",
+        "returnAll": true,
+        "options": {}
+      },
+      "id": "cd3d5322-fb16-4cef-b523-b189a02c68c8",
+      "name": "LDAP",
+      "type": "n8n-nodes-base.ldap",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        320
+      ],
+      "credentials": {
+        "ldap": {
+          "id": "kMvso3rxAwRE3ZaH",
+          "name": "LDAP account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "7d4161b7-ac60-483d-83bd-80bd575fc6ce",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        760,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "hr.employee",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {
+          "fieldsList": [
+            "id"
+          ]
+        }
+      },
+      "id": "0b254267-eca6-4d2b-a405-d8decc1429bc",
+      "name": "Odoo",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        520
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "12",
+          "name": "Odoo (Administrator)"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-09-05T20:17:40.000Z",
+  "versionId": "b0931610-63e3-4602-ab5f-e73c5cbf4217"
+}
