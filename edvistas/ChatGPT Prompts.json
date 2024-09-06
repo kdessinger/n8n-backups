@@ -767,6 +767,30 @@
           "name": "OpenAi (kdessinger)"
         }
       }
+    },
+    {
+      "parameters": {
+        "baseDN": "CN=Users,DC=edvistas,DC=local",
+        "searchFor": "(objectclass=person)",
+        "attribute": "userAccountControl",
+        "searchText": "514",
+        "returnAll": true,
+        "options": {}
+      },
+      "id": "7ef4f49c-8084-4d84-93ee-b3c22f19632a",
+      "name": "LDAP (Disabled)",
+      "type": "n8n-nodes-base.ldap",
+      "typeVersion": 1,
+      "position": [
+        -1080,
+        360
+      ],
+      "credentials": {
+        "ldap": {
+          "id": "kMvso3rxAwRE3ZaH",
+          "name": "LDAP account"
+        }
+      }
     }
   ],
   "pinData": {
@@ -835,6 +859,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2024-08-02T21:50:48.000Z",
-  "versionId": "6aad8540-d222-4a96-8444-a5d522714799"
+  "updatedAt": "2024-09-05T17:42:12.000Z",
+  "versionId": "c8e9cca5-97f1-4f8e-930c-96f2212c02b0"
 }
