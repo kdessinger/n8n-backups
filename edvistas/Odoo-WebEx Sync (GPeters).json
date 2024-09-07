@@ -72,17 +72,6 @@
         ]
       ]
     },
-    "Webex (Admin)": {
-      "main": [
-        [
-          {
-            "node": "Delete Meeting?",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Get Odoo ID": {
       "main": [
         [
@@ -171,6 +160,17 @@
         [
           {
             "node": "Meeting Ending",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webex (Greg)": {
+      "main": [
+        [
+          {
+            "node": "Delete Meeting?",
             "type": "main",
             "index": 0
           }
@@ -318,8 +318,8 @@
       ],
       "credentials": {
         "ciscoWebexOAuth2Api": {
-          "id": "kP6MOeMVfJK5YFcD",
-          "name": "Webex (Admin)"
+          "id": "0NXfzS7zYPPme5Vg",
+          "name": "Webex (gpeters)"
         }
       }
     },
@@ -402,8 +402,8 @@
       ],
       "credentials": {
         "odooApi": {
-          "id": "20",
-          "name": "Odoo-Stage (OdooBot)"
+          "id": "0lo4m3DCAlJd9Lqg",
+          "name": "Odoo (GPeters)"
         }
       }
     },
@@ -433,8 +433,8 @@
       ],
       "credentials": {
         "odooApi": {
-          "id": "12",
-          "name": "Odoo (Administrator)"
+          "id": "0lo4m3DCAlJd9Lqg",
+          "name": "Odoo (GPeters)"
         }
       }
     },
@@ -483,29 +483,8 @@
       ],
       "credentials": {
         "odooApi": {
-          "id": "12",
-          "name": "Odoo (Administrator)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "event": "all",
-        "filters": {}
-      },
-      "id": "f3d1a4d1-a91c-4be7-b832-62fa92b2dd77",
-      "name": "Webex (Admin)",
-      "type": "n8n-nodes-base.ciscoWebexTrigger",
-      "typeVersion": 1,
-      "position": [
-        -220,
-        980
-      ],
-      "webhookId": "0a2ffcfd-022f-4270-9df3-13bc78179250",
-      "credentials": {
-        "ciscoWebexOAuth2Api": {
-          "id": "0NXfzS7zYPPme5Vg",
-          "name": "Webex (gpeters)"
+          "id": "0lo4m3DCAlJd9Lqg",
+          "name": "Odoo (GPeters)"
         }
       }
     },
@@ -535,8 +514,8 @@
       ],
       "credentials": {
         "odooApi": {
-          "id": "12",
-          "name": "Odoo (Administrator)"
+          "id": "0lo4m3DCAlJd9Lqg",
+          "name": "Odoo (GPeters)"
         }
       }
     },
@@ -557,8 +536,8 @@
       ],
       "credentials": {
         "odooApi": {
-          "id": "12",
-          "name": "Odoo (Administrator)"
+          "id": "0lo4m3DCAlJd9Lqg",
+          "name": "Odoo (GPeters)"
         }
       }
     },
@@ -761,7 +740,7 @@
     {
       "parameters": {
         "dataType": "string",
-        "value1": "={{ $('Webex (Admin)').item.json[\"event\"] }}",
+        "value1": "={{ $('Webex (Greg)').item.json[\"event\"] }}",
         "rules": {
           "rules": [
             {
@@ -791,10 +770,31 @@
         1320,
         720
       ]
+    },
+    {
+      "parameters": {
+        "event": "all",
+        "filters": {}
+      },
+      "id": "f3d1a4d1-a91c-4be7-b832-62fa92b2dd77",
+      "name": "Webex (Greg)",
+      "type": "n8n-nodes-base.ciscoWebexTrigger",
+      "typeVersion": 1,
+      "position": [
+        -220,
+        980
+      ],
+      "webhookId": "0a2ffcfd-022f-4270-9df3-13bc78179250",
+      "credentials": {
+        "ciscoWebexOAuth2Api": {
+          "id": "0NXfzS7zYPPme5Vg",
+          "name": "Webex (gpeters)"
+        }
+      }
     }
   ],
   "pinData": {
-    "Webex (Admin)": [
+    "Webex (Greg)": [
       {
         "json": {
           "id": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1dFQkhPT0svYTA3YWU3ZGEtZDc5NC00ZTg0LThhNDctMDU2NDA2YTM2MzZj",
@@ -855,6 +855,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-06-28T20:58:04.000Z",
-  "versionId": "ce0c3077-b7ad-4b04-a8b4-877dc8766119"
+  "updatedAt": "2024-09-06T21:38:52.000Z",
+  "versionId": "6bc68fdd-9b64-4b22-956e-2fe55bce7708"
 }
