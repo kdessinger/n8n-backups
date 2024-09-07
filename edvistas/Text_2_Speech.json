@@ -78,19 +78,15 @@
         ]
       ]
     },
-    "OpenAI": {
+    "Get FileType": {
       "main": [
         [
           {
-            "node": "Read/Write Files from Disk",
+            "node": "Ignore Audio Files",
             "type": "main",
             "index": 0
           }
-        ]
-      ]
-    },
-    "Get FileType": {
-      "main": [
+        ],
         [
           {
             "node": "Extract from PDF",
@@ -111,10 +107,14 @@
             "type": "main",
             "index": 0
           }
-        ],
+        ]
+      ]
+    },
+    "OpenAI": {
+      "main": [
         [
           {
-            "node": "No Operation, do nothing",
+            "node": "Read/Write Files from Disk",
             "type": "main",
             "index": 0
           }
@@ -170,8 +170,8 @@
       "name": "Prep Incoming Doc",
       "type": "n8n-nodes-base.set",
       "position": [
-        1200,
-        340
+        1260,
+        540
       ],
       "typeVersion": 3.3
     },
@@ -200,7 +200,13 @@
             {
               "id": "26926e89-df8e-412d-aba3-bb425446d01d",
               "name": "voice",
-              "value": "={{ $json.path.split('Text_2_Speech/')[1] && $json.path.split('Text_2_Speech/')[1].split('/').length > 1 ? $json.path.split('Text_2_Speech/')[1].split('/')[0].trim() : 'Fable' }}\n",
+              "value": "={{ $json.path.split('Text_2_Speech/')[1].trim() && $json.path.split('Text_2_Speech/')[1].split('/').length > 1 ? $json.path.split('Text_2_Speech/')[1].split('/')[0].trim() : 'Fable' }}\n",
+              "type": "string"
+            },
+            {
+              "id": "8bec5748-9a76-488a-957d-165a616393b5",
+              "name": "output",
+              "value": "={{ $json[\"path\"].substring(0, $json[\"path\"].lastIndexOf('.')) + '.mp3' }}\n",
               "type": "string"
             }
           ]
@@ -219,9 +225,7 @@
     {
       "parameters": {
         "fileSelector": "={{ $json.path }}",
-        "options": {
-          "fileExtension": ""
-        }
+        "options": {}
       },
       "id": "386f7aac-f3b9-4565-907f-687d48b00c52",
       "name": "Import File",
@@ -241,8 +245,8 @@
       "name": "Extract from PDF",
       "type": "n8n-nodes-base.extractFromFile",
       "position": [
-        940,
-        140
+        1000,
+        340
       ],
       "typeVersion": 1
     },
@@ -255,8 +259,8 @@
       "name": "Extract from DOCX",
       "type": "n8n-nodes-base.extractFromFile",
       "position": [
-        940,
-        340
+        1000,
+        540
       ],
       "typeVersion": 1
     },
@@ -269,8 +273,8 @@
       "name": "Extract from TEXT",
       "type": "n8n-nodes-base.extractFromFile",
       "position": [
-        940,
-        520
+        1000,
+        720
       ],
       "typeVersion": 1
     },
@@ -292,7 +296,7 @@
     {
       "parameters": {
         "operation": "write",
-        "fileName": "={{ $('Import File').item.json.directory }}/{{ $('Import File').item.json.fileName }}.{{ $json.fileExtension }}",
+        "fileName": "={{ $('Settings').item.json.output.trim() }}",
         "options": {}
       },
       "id": "f0160436-5d4e-4da1-bb40-9154267b6e41",
@@ -300,80 +304,38 @@
       "type": "n8n-nodes-base.readWriteFile",
       "typeVersion": 1,
       "position": [
-        1580,
-        340
-      ]
-    },
-    {
-      "parameters": {
-        "resource": "audio",
-        "input": "={{ $json.data }}",
-        "voice": "={{ $('Settings').item.json.voice.trim().toLowerCase() }}",
-        "options": {}
-      },
-      "id": "6b45ba0d-afd6-4168-96ea-0010e7e89b93",
-      "name": "OpenAI",
-      "type": "@n8n/n8n-nodes-langchain.openAi",
-      "position": [
-        1400,
-        340
-      ],
-      "typeVersion": 1.3,
-      "credentials": {
-        "openAiApi": {
-          "id": "28",
-          "name": "OpenAi (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "loose"
-          },
-          "conditions": [
-            {
-              "id": "cf2286d9-125d-49f3-90c7-332ba2861769",
-              "leftValue": "={{ $json[\"filename\"].endsWith(\".mp3\") }}\n",
-              "rightValue": "true",
-              "operator": {
-                "type": "string",
-                "operation": "equals"
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "looseTypeValidation": true,
-        "options": {}
-      },
-      "id": "559d82eb-61ff-44e6-93f1-6f39a0cc4341",
-      "name": "Is it an MP3 File?",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.1,
-      "position": [
-        400,
-        680
-      ]
-    },
-    {
-      "parameters": {},
-      "id": "d97f3bde-01c9-49dc-9de5-92f2fea60500",
-      "name": "No Operation, do nothing",
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [
-        940,
-        700
+        1640,
+        540
       ]
     },
     {
       "parameters": {
         "rules": {
           "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "id": "90420d38-7208-4a1e-b2ce-638ffa99d02a",
+                    "leftValue": "={{ $json.fileType }}",
+                    "rightValue": "audio",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "audio"
+            },
             {
               "conditions": {
                 "options": {
@@ -419,58 +381,12 @@
               },
               "renameOutput": true,
               "outputKey": "docx"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "leftValue": "",
-                  "caseSensitive": true,
-                  "typeValidation": "strict"
-                },
-                "combinator": "and",
-                "conditions": [
-                  {
-                    "id": "75188d2f-4bea-44ea-a579-9b9a1bd1ea93",
-                    "operator": {
-                      "type": "object",
-                      "operation": "exists",
-                      "singleValue": true
-                    },
-                    "leftValue": "={{ $json }}",
-                    "rightValue": ""
-                  }
-                ]
-              },
-              "renameOutput": true,
-              "outputKey": "everything else"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict"
-                },
-                "conditions": [
-                  {
-                    "id": "90420d38-7208-4a1e-b2ce-638ffa99d02a",
-                    "leftValue": "{{ $json.fileType }}",
-                    "rightValue": "audio",
-                    "operator": {
-                      "type": "string",
-                      "operation": "equals",
-                      "name": "filter.operator.equals"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "audio"
             }
           ]
         },
-        "options": {}
+        "options": {
+          "fallbackOutput": "extra"
+        }
       },
       "id": "8490664e-0ca5-4839-ad03-d3f9706c99a3",
       "name": "Get FileType",
@@ -480,6 +396,39 @@
         480
       ],
       "typeVersion": 3
+    },
+    {
+      "parameters": {},
+      "id": "d97f3bde-01c9-49dc-9de5-92f2fea60500",
+      "name": "Ignore Audio Files",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1000,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "input": "={{ $json.data }}",
+        "voice": "={{ $('Settings').item.json.voice.trim().toLowerCase() }}",
+        "options": {}
+      },
+      "id": "6b45ba0d-afd6-4168-96ea-0010e7e89b93",
+      "name": "OpenAI",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "position": [
+        1460,
+        540
+      ],
+      "typeVersion": 1.3,
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
     }
   ],
   "pinData": {
@@ -487,13 +436,17 @@
       {
         "json": {
           "event": "add",
-          "path": "/mnt/share/_convert/Text_2_Speech/Onyx/Sample.txt.mp3"
+          "path": "/mnt/share/_convert/Text_2_Speech/Sample.txt"
         }
       }
     ]
   },
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": 300,
+    "errorWorkflow": "NtBd2hj1eiR2xufe"
   },
   "staticData": null,
   "tags": [
@@ -511,6 +464,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-09-06T15:43:12.000Z",
-  "versionId": "51a92bef-07a5-434b-84af-ab426e6945d6"
+  "updatedAt": "2024-09-06T16:54:42.000Z",
+  "versionId": "36e59ab9-e919-4945-a568-d8e4367aed78"
 }
