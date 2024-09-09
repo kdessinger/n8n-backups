@@ -27,11 +27,6 @@
           }
         ]
       ]
-    },
-    "Filter": {
-      "main": [
-        []
-      ]
     }
   },
   "createdAt": "2024-09-05T17:56:03.335Z",
@@ -56,7 +51,7 @@
               "rightValue": "514",
               "operator": {
                 "type": "string",
-                "operation": "notContains"
+                "operation": "notEquals"
               }
             },
             {
@@ -78,8 +73,8 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.1,
       "position": [
-        1320,
-        360
+        1280,
+        320
       ]
     },
     {
@@ -100,7 +95,7 @@
       "credentials": {
         "ldap": {
           "id": "kMvso3rxAwRE3ZaH",
-          "name": "LDAP account"
+          "name": "LDAP (edvistas.local)"
         }
       }
     },
@@ -123,7 +118,9 @@
         "returnAll": true,
         "options": {
           "fieldsList": [
-            "id"
+            "id",
+            "name",
+            "job_title"
           ]
         }
       },
@@ -150,6 +147,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-09-05T20:17:40.000Z",
-  "versionId": "b0931610-63e3-4602-ab5f-e73c5cbf4217"
+  "updatedAt": "2024-09-09T15:33:02.000Z",
+  "versionId": "a108bc00-7eb9-416a-b0dc-a5573b3f3cce"
 }
