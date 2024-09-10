@@ -5,7 +5,7 @@
       "main": [
         [
           {
-            "node": "Filter",
+            "node": "Remove Images",
             "type": "main",
             "index": 0
           }
@@ -27,6 +27,50 @@
           }
         ]
       ]
+    },
+    "Remove Images": {
+      "main": [
+        [
+          {
+            "node": "Filter out inactive users",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Odoo": {
+      "main": [
+        [
+          {
+            "node": "Compare Datasets",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Filter out inactive users": {
+      "main": [
+        [
+          {
+            "node": "Sort by Name",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sort by Name": {
+      "main": [
+        [
+          {
+            "node": "Compare Datasets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2024-09-05T17:56:03.335Z",
@@ -36,47 +80,6 @@
   },
   "name": "Employee List",
   "nodes": [
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict"
-          },
-          "conditions": [
-            {
-              "id": "0ec6ca42-077f-4360-921f-c8068c0faa4d",
-              "leftValue": "={{ $json.userAccountControl }}",
-              "rightValue": "514",
-              "operator": {
-                "type": "string",
-                "operation": "notEquals"
-              }
-            },
-            {
-              "id": "a38fa67a-f5fa-4c37-96e7-3abbe7696120",
-              "leftValue": "={{ $json.objectCategory }}",
-              "rightValue": "Person",
-              "operator": {
-                "type": "string",
-                "operation": "contains"
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "id": "f342af4e-a0cc-471e-b580-b5bd6fd447e4",
-      "name": "Filter",
-      "type": "n8n-nodes-base.filter",
-      "typeVersion": 2.1,
-      "position": [
-        1280,
-        320
-      ]
-    },
     {
       "parameters": {
         "baseDN": "CN=Users,DC=edvistas,DC=local",
@@ -138,6 +141,124 @@
           "name": "Odoo (Administrator)"
         }
       }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": []
+        },
+        "includeOtherFields": true,
+        "include": "except",
+        "excludeFields": "jpegPhoto, thumbnailPhoto",
+        "options": {}
+      },
+      "id": "9708f446-3c8c-435b-b39c-fc80b0d5e080",
+      "name": "Remove Images",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1240,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "cn",
+              "field2": "name"
+            }
+          ]
+        },
+        "resolve": "preferInput2",
+        "options": {
+          "multipleMatches": "all"
+        }
+      },
+      "id": "04b6028d-722f-441a-a258-b1e70aab3e83",
+      "name": "Compare Datasets",
+      "type": "n8n-nodes-base.compareDatasets",
+      "typeVersion": 2.3,
+      "position": [
+        1840,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "0ec6ca42-077f-4360-921f-c8068c0faa4d",
+              "leftValue": "={{ $json.userAccountControl }}",
+              "rightValue": "514",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            },
+            {
+              "id": "a38fa67a-f5fa-4c37-96e7-3abbe7696120",
+              "leftValue": "={{ $json.objectCategory }}",
+              "rightValue": "Person",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "f342af4e-a0cc-471e-b580-b5bd6fd447e4",
+      "name": "Filter out inactive users",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.1,
+      "position": [
+        1440,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "sortFieldsUi": {
+          "sortField": [
+            {
+              "fieldName": "dn"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "188a5842-957d-404a-8166-41df3477aecc",
+      "name": "Sort by Name",
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        1640,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Automated Employee Onboarding\n**Double click** to edit me. [Guide](https://docs.n8n.io/workflows/sticky-notes/)\n\nThis Will Query Odoo and run it against LDAP to see if there are any new employees entered.  The Compare Datasets will show all records in Odoo that are not in LDAP, Choose B only for the new employee list.",
+        "width": 515
+      },
+      "id": "05534894-d06b-4715-b44c-4e8a3f7cd2ba",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        520,
+        140
+      ]
     }
   ],
   "pinData": {},
@@ -147,6 +268,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-09-09T15:33:02.000Z",
-  "versionId": "a108bc00-7eb9-416a-b0dc-a5573b3f3cce"
+  "updatedAt": "2024-09-09T22:14:03.000Z",
+  "versionId": "f4134077-e7b4-494b-b1e8-3f21b13a9f2a"
 }
