@@ -1,0 +1,396 @@
+{
+  "active": true,
+  "connections": {
+    "Settings": {
+      "main": [
+        [
+          {
+            "node": "Import File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Import File": {
+      "main": [
+        [
+          {
+            "node": "Get FileType",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Local File Trigger": {
+      "main": [
+        [
+          {
+            "node": "Settings",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Write Result File to Disk": {
+      "main": [
+        [
+          {
+            "node": "Exit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert Office Document": {
+      "main": [
+        [
+          {
+            "node": "Write Result File to Disk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get FileType": {
+      "main": [
+        [
+          {
+            "node": "Convert Office Document",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Convert Office Document",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Convert Office Document",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Unsupported Filetype",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Unsupported Filetype": {
+      "main": [
+        [
+          {
+            "node": "Exit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-09-10T20:38:38.830Z",
+  "id": "6fdfAJ4Hoe7qk0jj",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "templateId": "2294"
+  },
+  "name": "Office_2_PDF",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "={{ $('Settings').item.json.destination.trim() }}",
+        "dataPropertyName": "=data",
+        "options": {}
+      },
+      "id": "531d78cd-9f44-468a-9f88-30816922eb1b",
+      "name": "Write Result File to Disk",
+      "type": "n8n-nodes-base.readWriteFile",
+      "position": [
+        1640,
+        460
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "df327b01-961c-4a49-8455-58c3fbff111a",
+              "name": "project",
+              "type": "string",
+              "value": "={{ $json.path.split('/').slice(0, 5)[4] }}"
+            },
+            {
+              "id": "6b7d26f9-3a38-417e-85d0-4e9d42476465",
+              "name": "source",
+              "type": "string",
+              "value": "={{ $json.path }}"
+            },
+            {
+              "id": "bb4471c7-d894-4739-99a6-4be247794ffa",
+              "name": "filename",
+              "type": "string",
+              "value": "={{ $json.path.split('/').last() }}"
+            },
+            {
+              "id": "8bec5748-9a76-488a-957d-165a616393b5",
+              "name": "destination",
+              "value": "={{ $json[\"path\"].substring(0, $json[\"path\"].lastIndexOf('.')).trim() + '.pdf' }}\n\n",
+              "type": "string"
+            },
+            {
+              "id": "700fdf16-2c72-4817-91d3-30536585d977",
+              "name": "ext",
+              "value": "={{ $json.path.split('.').last() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "d42a73b8-9a04-42ae-b34b-39d7d430b097",
+      "name": "Settings",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        740,
+        540
+      ],
+      "typeVersion": 3.3
+    },
+    {
+      "parameters": {
+        "fileSelector": "={{ $json.source }}",
+        "options": {}
+      },
+      "id": "109ae0b5-e2a4-481d-bde7-a5b811c733bd",
+      "name": "Import File",
+      "type": "n8n-nodes-base.readWriteFile",
+      "position": [
+        940,
+        540
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "triggerOn": "folder",
+        "path": "/mnt/share/_convert/Office_2_PDF",
+        "events": [
+          "add"
+        ],
+        "options": {
+          "followSymlinks": true,
+          "usePolling": true
+        }
+      },
+      "id": "e0391cae-b7c9-411e-a015-05e3dbe41c2f",
+      "name": "Local File Trigger",
+      "type": "n8n-nodes-base.localFileTrigger",
+      "typeVersion": 1,
+      "position": [
+        520,
+        540
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "9a5e0688-5af5-402f-8c49-5883edae14ef",
+      "name": "Exit",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1860,
+        680
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "5d6a5839-8a82-46c0-b538-c2bff6a22d26",
+      "name": "Unsupported Filetype",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1420,
+        680
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.cloudmersive.com/convert/{{ $json.fileExtension }}/to/pdf",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpCustomAuth",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "={{ $json.fileName }}",
+              "inputDataFieldName": "data"
+            }
+          ]
+        },
+        "options": {
+          "redirect": {
+            "redirect": {}
+          }
+        }
+      },
+      "id": "acb6626c-6642-49da-8403-94a8d5ec6554",
+      "name": "Convert Office Document",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1420,
+        460
+      ],
+      "credentials": {
+        "httpCustomAuth": {
+          "id": "TO2Bhp6WsPDuJuk2",
+          "name": "Cloudmersive"
+        },
+        "httpHeaderAuth": {
+          "id": "39",
+          "name": "8x8 (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "id": "90420d38-7208-4a1e-b2ce-638ffa99d02a",
+                    "leftValue": "={{ $json.fileExtension }}",
+                    "rightValue": "doc",
+                    "operator": {
+                      "type": "string",
+                      "operation": "startsWith"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Word"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "leftValue": "",
+                  "caseSensitive": true,
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "operator": {
+                      "type": "string",
+                      "operation": "startsWith"
+                    },
+                    "leftValue": "={{ $json.fileExtension }}",
+                    "rightValue": "xls"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Excel"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "leftValue": "",
+                  "caseSensitive": true,
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "id": "3a5f509d-46fe-490c-95f0-35124873c63e",
+                    "operator": {
+                      "type": "string",
+                      "operation": "startsWith"
+                    },
+                    "leftValue": "={{ $json.fileExtension }}",
+                    "rightValue": "ppt"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "PowerPoint"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "id": "c101e55a-3129-44a8-8901-d6fc957708f4",
+      "name": "Get FileType",
+      "type": "n8n-nodes-base.switch",
+      "position": [
+        1140,
+        540
+      ],
+      "typeVersion": 3
+    },
+    {
+      "parameters": {
+        "content": "## Try It Out! \n\n### This workflow automates converting office documents to a PDF.  \n* It watches a target folder to pick up new files.\n* When a new file is detected, it is sent to a specified API Service to convert the office document to a PDF.  \n\n## Current Working Conversions\n* doc or docx to PDF\n* xls or xlsx to PDF\n* ppt or pptx to PDF\n\n### Need Help?\nJoin the [Slack] discussion (https://join.slack.com/t/educationalvistas/signup)",
+        "height": 369.11111213356367,
+        "width": 612.3162249429614
+      },
+      "id": "acd4564f-e580-4a51-b812-8de22e00707a",
+      "name": "Sticky Note5",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        560,
+        140
+      ],
+      "typeVersion": 1
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": 300,
+    "errorWorkflow": "NtBd2hj1eiR2xufe"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2023-07-28T19:16:19.587Z",
+      "updatedAt": "2023-07-28T19:16:19.587Z",
+      "id": "kqf2NqvduRmuLzdN",
+      "name": "API"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-09-10T22:34:24.000Z",
+  "versionId": "937fea20-a5b3-4f93-9a84-afd4465358d7"
+}
