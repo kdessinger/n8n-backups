@@ -359,7 +359,7 @@
     },
     {
       "parameters": {
-        "content": "## Try It Out! \n\n### This workflow automates converting office documents to a PDF.  \n* It watches a target folder to pick up new files.\n* When a new file is detected, it is sent to a specified API Service to convert the office document to a PDF.  \n\n## Current Working Conversions\n* doc or docx to PDF\n* xls or xlsx to PDF\n* ppt or pptx to PDF\n\n### Need Help?\nJoin the [Slack] discussion (https://join.slack.com/t/educationalvistas/signup)",
+        "content": "## Convert your office documents into PDF's\n\n### This workflow automates converting office documents to a PDF.  \n* It watches a target folder to pick up new files.\n* When a new file is detected, it is sent to a specified API Service to convert the office document to a PDF.  \n\n### Current Working Conversions\n* (doc or docx) to PDF\n* (xls or xlsx) to PDF\n* (ppt or pptx) to PDF\n\n### Need Help?\nJoin the [Slack] discussion (https://join.slack.com/t/educationalvistas/signup)",
         "height": 369.11111213356367,
         "width": 612.3162249429614
       },
@@ -391,6 +391,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-09-10T22:34:24.000Z",
-  "versionId": "937fea20-a5b3-4f93-9a84-afd4465358d7"
+  "updatedAt": "2024-09-12T15:35:54.000Z",
+  "versionId": "a1485d56-8fdb-4154-9036-4cfc590eda80"
 }
