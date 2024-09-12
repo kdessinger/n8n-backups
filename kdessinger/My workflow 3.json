@@ -1,45 +1,65 @@
 {
   "active": false,
-  "connections": {},
-  "createdAt": "2022-06-01T05:56:45.051Z",
-  "id": 6,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Reddit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-09-12T02:57:13.223Z",
+  "id": "NHtiUbgAXWkA0r40",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "My workflow 3",
   "nodes": [
     {
       "parameters": {},
-      "name": "Start",
-      "type": "n8n-nodes-base.start",
-      "typeVersion": 1,
+      "id": "5b1e21c7-029f-4ebe-a9f3-e916c7f0e962",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
       "position": [
-        240,
-        300
+        620,
+        240
       ],
-      "id": "2f356231-69f2-4abc-ba7d-3c738f18768f"
+      "typeVersion": 1
     },
     {
       "parameters": {
-        "form": "203155680254149"
+        "operation": "getAll",
+        "limit": 25,
+        "filters": {}
       },
-      "name": "JotForm Trigger",
-      "type": "n8n-nodes-base.jotFormTrigger",
+      "id": "79ff6015-e9f9-4e3c-a188-8f408eb98cc7",
+      "name": "Reddit",
+      "type": "n8n-nodes-base.reddit",
       "typeVersion": 1,
       "position": [
-        460,
-        300
+        840,
+        240
       ],
-      "webhookId": "b2042882-0eb7-420b-9711-e13a9e8652d6",
       "credentials": {
-        "jotFormApi": {
-          "id": "1",
-          "name": "JotForm account"
+        "redditOAuth2Api": {
+          "id": "gA5Rq3SoA4VYNsm6",
+          "name": "Reddit (kdessinger)"
         }
-      },
-      "id": "c1f652b4-80d2-4465-8f7b-83b6abeae9ea"
+      }
     }
   ],
-  "pinData": null,
-  "settings": {},
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
   "staticData": null,
   "tags": [],
-  "updatedAt": "2022-06-22T03:42:22.028Z"
+  "triggerCount": 0,
+  "updatedAt": "2024-09-12T02:57:13.223Z",
+  "versionId": "d58e7ebc-3614-4f1c-8eba-6b2e98e2c268"
 }
