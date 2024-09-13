@@ -1,33 +1,33 @@
 {
   "active": false,
   "connections": {
-    "OpenAI Chat Model": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "LangChain Code",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Set YouTube video ID": {
+    "When clicking ‘Test workflow’": {
       "main": [
         [
           {
-            "node": "LangChain Code",
+            "node": "Read File",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "When clicking \"Execute Workflow\"": {
+    "Read File": {
       "main": [
         [
           {
-            "node": "Set YouTube video ID",
+            "node": "Convert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert": {
+      "main": [
+        [
+          {
+            "node": "Write File",
             "type": "main",
             "index": 0
           }
@@ -35,134 +35,100 @@
       ]
     }
   },
-  "createdAt": "2024-02-08T19:59:40.881Z",
-  "id": "8oQ5NnaQDpoM2KNP",
+  "createdAt": "2024-09-12T19:02:04.974Z",
+  "id": "jSblG0NbtVQYmJJT",
   "meta": {
     "templateCredsSetupCompleted": true
   },
   "name": "My workflow",
   "nodes": [
     {
-      "parameters": {
-        "content": "Before executing, replace `YOUR_API_KEY` with an API key for searchapi.io",
-        "height": 211.30313955500145,
-        "width": 328.41313484548044
-      },
-      "id": "f482aeba-bb04-421d-b795-8fea85a3a565",
-      "name": "Sticky Note7",
-      "type": "n8n-nodes-base.stickyNote",
-      "position": [
-        1340,
-        200
-      ],
-      "typeVersion": 1
-    },
-    {
       "parameters": {},
-      "id": "aaade62f-0723-41de-9ef2-65ae9e60e764",
-      "name": "When clicking \"Execute Workflow\"",
+      "id": "8a982b2b-2334-4392-9203-55a2f2853d15",
+      "name": "When clicking ‘Test workflow’",
       "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
       "position": [
-        934,
-        270
-      ],
-      "typeVersion": 1
+        800,
+        360
+      ]
     },
     {
       "parameters": {
-        "fields": {
-          "values": [
-            {
-              "name": "videoId",
-              "stringValue": "BWfMCRR758k"
-            }
-          ]
-        },
+        "fileSelector": "/mnt/share/_convert/tmp/TPC_A_Cover_04.21.2023.docx",
         "options": {}
       },
-      "id": "6fd885d8-0b39-4089-acae-dc2fa1fa95dc",
-      "name": "Set YouTube video ID",
-      "type": "n8n-nodes-base.set",
-      "position": [
-        1154,
-        270
-      ],
-      "typeVersion": 3.2
-    },
-    {
-      "parameters": {
-        "model": "gpt-3.5-turbo-16k",
-        "options": {
-          "temperature": 0.3
-        }
-      },
-      "id": "0a625881-e0bb-47d6-a702-ebceead1594f",
-      "name": "OpenAI Chat Model",
-      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
-      "position": [
-        1394,
-        450
-      ],
+      "id": "8293b985-9a13-436b-9fe4-756c5e024525",
+      "name": "Read File",
+      "type": "n8n-nodes-base.readWriteFile",
       "typeVersion": 1,
-      "credentials": {
-        "openAiApi": {
-          "id": "28",
-          "name": "OpenAi (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "content": "## About\nThis workflow shows how you can write LangChain code in n8n (and import its modules if required).\n\nThe workflow fetches a video from YouTube and produces a textual summary of it.",
-        "height": 220.82906011310624,
-        "color": 7
-      },
-      "id": "a2cc9137-d0eb-4f22-9e8e-74c9b05722aa",
-      "name": "Sticky Note",
-      "type": "n8n-nodes-base.stickyNote",
       "position": [
-        614,
-        210
-      ],
-      "typeVersion": 1
+        1020,
+        360
+      ]
     },
     {
       "parameters": {
-        "code": {
-          "execute": {
-            "code": "\n\n// IMPORTANT: add in your API key for searchapi.io below\nconst searchApiKey = \"pron7bnVo4TurtHZ74Edecd5\"\n\n\n\n\n\nconst { loadSummarizationChain } = require(\"langchain/chains\");\nconst { SearchApiLoader } = require(\"langchain/document_loaders/web/searchapi\");\nconst { PromptTemplate } = require(\"langchain/prompts\");\nconst { TokenTextSplitter } = require(\"langchain/text_splitter\");\nconst loader = new SearchApiLoader({\n  engine: \"youtube_transcripts\",\n  video_id: $input.item.json.videoId,\n  apiKey: \"gNspggsxvRYaykZSvs9QWcJb\",\n});\n\nif (searchApiKey == \"<YOUR API KEY>\") {\n  throw new Error(\"Please add your API key for searchapi.io to this node\")\n}\n\nconst docs = await loader.load();\n\nconst splitter = new TokenTextSplitter({\n  chunkSize: 10000,\n  chunkOverlap: 250,\n});\n\nconst docsSummary = await splitter.splitDocuments(docs);\n\nconst llmSummary = await this.getInputConnectionData('ai_languageModel', 0);\n\nconst summaryTemplate = `\nYou are an expert in summarizing YouTube videos.\nYour goal is to create a summary of a podcast.\nBelow you find the transcript of a podcast:\n--------\n{text}\n--------\n\nThe transcript of the podcast will also be used as the basis for a question and answer bot.\nProvide some examples questions and answers that could be asked about the podcast. Make these questions very specific.\n\nTotal output will be a summary of the video and a list of example questions the user could ask of the video.\n\nSUMMARY AND QUESTIONS:\n`;\n\nconst SUMMARY_PROMPT = PromptTemplate.fromTemplate(summaryTemplate);\n\nconst summaryRefineTemplate = `\nYou are an expert in summarizing YouTube videos.\nYour goal is to create a summary of a podcast.\nWe have provided an existing summary up to a certain point: {existing_answer}\n\nBelow you find the transcript of a podcast:\n--------\n{text}\n--------\n\nGiven the new context, refine the summary and example questions.\nThe transcript of the podcast will also be used as the basis for a question and answer bot.\nProvide some examples questions and answers that could be asked about the podcast. Make\nthese questions very specific.\nIf the context isn't useful, return the original summary and questions.\nTotal output will be a summary of the video and a list of example questions the user could ask of the video.\n\nSUMMARY AND QUESTIONS:\n`;\n\nconst SUMMARY_REFINE_PROMPT = PromptTemplate.fromTemplate(\n  summaryRefineTemplate\n);\n\nconst summarizeChain = loadSummarizationChain(llmSummary, {\n  type: \"refine\",\n  verbose: true,\n  questionPrompt: SUMMARY_PROMPT,\n  refinePrompt: SUMMARY_REFINE_PROMPT,\n});\n\nconst summary = await summarizeChain.run(docsSummary);\n\nreturn [{json: { summary } } ];"
-          }
-        },
-        "inputs": {
-          "input": [
+        "operation": "write",
+        "fileName": "/mnt/share/_convert/tmp/TPC_A_Cover_04.21.2023.pdf",
+        "options": {}
+      },
+      "id": "4c0c0a5d-4082-4774-9bf1-7a900c470771",
+      "name": "Write File",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        1460,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://192.168.148.48:8100/forms/libreoffice/convert",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
             {
-              "type": "main",
-              "maxConnections": 1,
-              "required": true
+              "name": "={{ $json.fileName }}",
+              "value": "data"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "{{ $json.fileName }}",
+              "inputDataFieldName": "data"
             },
             {
-              "type": "ai_languageModel",
-              "maxConnections": 1,
-              "required": true
-            }
+              "name": "singlePageSheets",
+              "value": "true"
+            },
+            {}
           ]
         },
-        "outputs": {
-          "output": [
-            {
-              "type": "main"
-            }
-          ]
+        "options": {
+          "allowUnauthorizedCerts": true,
+          "redirect": {
+            "redirect": {}
+          },
+          "response": {
+            "response": {}
+          }
         }
       },
-      "id": "9245848b-2239-4ea3-9319-4b439e901ef4",
-      "name": "LangChain Code",
-      "type": "@n8n/n8n-nodes-langchain.code",
+      "id": "4569868b-1066-4155-90d6-30d30b32b81c",
+      "name": "Convert",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
       "position": [
-        1374,
-        270
-      ],
-      "typeVersion": 1
+        1240,
+        360
+      ]
     }
   ],
   "pinData": {},
@@ -172,6 +138,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-02-08T19:59:40.881Z",
-  "versionId": "769697e3-cdc7-42e5-a307-8b20a97b2a07"
+  "updatedAt": "2024-09-12T19:37:57.000Z",
+  "versionId": "09968790-35e1-432a-916e-831fa65a51ef"
 }
