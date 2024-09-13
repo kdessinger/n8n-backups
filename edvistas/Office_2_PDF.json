@@ -98,6 +98,22 @@
           }
         ]
       ]
+    },
+    "HTTP Request": {
+      "main": [
+        []
+      ]
+    },
+    "Read/Write Files from Disk": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2024-09-10T20:38:38.830Z",
@@ -371,6 +387,63 @@
         140
       ],
       "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://192.168.148.48:8100/forms/libreoffice/convert",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "={{ $json.fileName }}",
+              "value": "data"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "{{ $json.fileName }}",
+              "inputDataFieldName": "data"
+            }
+          ]
+        },
+        "options": {
+          "allowUnauthorizedCerts": true,
+          "redirect": {
+            "redirect": {}
+          },
+          "response": {
+            "response": {}
+          }
+        }
+      },
+      "id": "7eaaac11-35e5-41c3-9b76-2bad020de476",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1620,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "fileSelector": "/mnt/clients/Dr. Mac/Shared/Turning Points/TPC_Portal 11C_Pictorial Citations pp. 571-616_11.22.2022.docx",
+        "options": {}
+      },
+      "id": "5d51bfa6-fcfd-4bd8-9a38-02e80008fd86",
+      "name": "Read/Write Files from Disk",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        1400,
+        200
+      ]
     }
   ],
   "pinData": {},
@@ -391,6 +464,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-09-12T15:35:54.000Z",
-  "versionId": "a1485d56-8fdb-4154-9036-4cfc590eda80"
+  "updatedAt": "2024-09-12T19:00:13.000Z",
+  "versionId": "2cf0b32f-754a-4830-8d02-a23a0ee7a5ee"
 }
