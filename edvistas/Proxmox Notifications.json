@@ -1,0 +1,47 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2024-09-13T01:46:25.376Z",
+  "id": "IXkj3KF1jhqLI2cq",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Proxmox Notifications",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "proxmox",
+        "authentication": "headerAuth",
+        "options": {
+          "rawBody": true,
+          "responseData": "success"
+        }
+      },
+      "id": "2264d5dc-a695-4673-9e29-8de6297df842",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        640,
+        300
+      ],
+      "webhookId": "541bd973-a2fb-4303-96aa-5af1ca2cf24b",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "KjL0R2w4Fo3DF30g",
+          "name": "Tokenized"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-09-13T02:51:13.000Z",
+  "versionId": "aa8f7b8a-9820-43e8-9f33-1f7a93c11756"
+}
