@@ -240,11 +240,11 @@
           "values": [
             {
               "name": "Title",
-              "stringValue": "={{ $json.Title || 'Enter a Title' }}"
+              "stringValue": "={{ $json.Title || 'No Title Detected' }}"
             },
             {
               "name": "Message",
-              "stringValue": "={{ $json.Message || 'Enter a Message' }}"
+              "stringValue": "={{ $json.Message || 'No Message Detected' }}"
             },
             {
               "name": "MessageClean",
@@ -285,8 +285,8 @@
     },
     {
       "parameters": {
-        "content": "# Alerts & Notifications\n#### This node will send alerts to various information systems. We are currently using NTFY & Odoo.  \nTo see a list of emoji's click here --> [Emoji List Here](https://ntfy.edvistas.com/docs/emojis/)",
-        "height": 171,
+        "content": "# Alerts & Notifications\n#### This node will send alerts to various information systems. We are currently using NTFY & Odoo.  \nTo see a list of emoji's click here --> [Emoji List Here](https://ntfy.edvistas.com/docs/emojis/)\n\nField List:\n- Title\n- Message\n- Priority\n- Emojis (array)\n- ClickURL\n- Channel",
+        "height": 317.1219195849546,
         "width": 481
       },
       "id": "16f8d2c5-0471-4a75-8b66-62e5edc1df7b",
@@ -294,8 +294,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -160,
-        -40
+        -260,
+        -200
       ]
     },
     {
@@ -500,6 +500,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2024-08-11T00:47:00.000Z",
-  "versionId": "97a91f33-8b0e-4ebe-9b7d-fd7c762385b7"
+  "updatedAt": "2024-09-13T22:01:54.000Z",
+  "versionId": "28352a2c-e8da-48e5-ab7d-3260b75c1690"
 }
