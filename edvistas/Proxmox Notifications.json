@@ -1,6 +1,29 @@
 {
-  "active": false,
-  "connections": {},
+  "active": true,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Set Globals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Globals": {
+      "main": [
+        [
+          {
+            "node": "Execute Workflow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
   "createdAt": "2024-09-13T01:46:25.376Z",
   "id": "IXkj3KF1jhqLI2cq",
   "meta": {
@@ -11,37 +34,150 @@
     {
       "parameters": {
         "httpMethod": "POST",
-        "path": "proxmox",
+        "path": "proxmox/pbs/message",
         "authentication": "headerAuth",
         "options": {
-          "rawBody": true,
           "responseData": "success"
         }
       },
-      "id": "2264d5dc-a695-4673-9e29-8de6297df842",
+      "id": "c513f7ad-32fe-4f40-956c-193fea2fd575",
       "name": "Webhook",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
-        640,
+        320,
         300
       ],
-      "webhookId": "541bd973-a2fb-4303-96aa-5af1ca2cf24b",
+      "webhookId": "bf3a6c79-d376-46a1-acb0-f591891019ee",
       "credentials": {
         "httpHeaderAuth": {
           "id": "KjL0R2w4Fo3DF30g",
-          "name": "Tokenized"
+          "name": "Proxmox Backup Server"
         }
       }
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "RMGsRy908UOekKo3",
+          "mode": "list",
+          "cachedResultName": "Activity Log"
+        },
+        "options": {}
+      },
+      "id": "518169c7-2ba0-4ff0-b226-771c27a97c84",
+      "name": "Execute Workflow",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.1,
+      "position": [
+        780,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2f483b2f-f663-493d-b0d5-4735f9f9b4e3",
+              "name": "Title",
+              "value": "={{ $json.body.title }}",
+              "type": "string"
+            },
+            {
+              "id": "26b298f5-6e2f-4f05-9fd2-3c6a3bb84edc",
+              "name": "Message",
+              "value": "={{ $json.body.message }}",
+              "type": "string"
+            },
+            {
+              "id": "341f9c63-c78b-474f-89d0-92bcad634817",
+              "name": "Priority",
+              "value": "={{ $json.body.priority }}",
+              "type": "number"
+            },
+            {
+              "id": "932c17ed-2498-4fdb-8731-4cc2153dd2d5",
+              "name": "Emojis",
+              "value": " [\"beginner\", \"dart\"]",
+              "type": "array"
+            },
+            {
+              "id": "ea6cb544-19b4-41e8-80c4-7efbbadec1f3",
+              "name": "ClickURL",
+              "value": "https://pbs.edvistas.local:8007/#pbsNotificationConfigView",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "59883b49-94f9-4542-8e2d-6ba06b4b8064",
+      "name": "Set Globals",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        560,
+        300
+      ]
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.edvistas.com",
+            "x-forwarded-scheme": "https",
+            "x-forwarded-proto": "https",
+            "x-forwarded-for": "192.168.148.1",
+            "x-real-ip": "192.168.148.1",
+            "content-length": "177",
+            "user-agent": "proxmox-sync-http-client/0.9.1",
+            "accept": "*/*",
+            "content-type": "application/json",
+            "x-gotify-key": "cGaiDm6pep2DZBY2EPTFQ0wIc73E4vyLMbx94efugAd94kDvesEFX2E5BnPYbTQ8",
+            "authorization": "Bearer cGaiDm6pep2DZBY2EPTFQ0wIc73E4vyLMbx94efugAd94kDvesEFX2E5BnPYbTQ8",
+            "accept-encoding": "gzip"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "extras": {
+              "client::display": {
+                "contentType": "text/markdown"
+              }
+            },
+            "message": "```\nThis is a test of the notification target 'N8N'.\n\n```",
+            "priority": 1,
+            "title": "Test notification "
+          },
+          "webhookUrl": "https://n8n.edvistas.com/webhook/proxmox/pbs/message",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1"
   },
   "staticData": null,
-  "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2024-09-13T02:51:13.000Z",
-  "versionId": "aa8f7b8a-9820-43e8-9f33-1f7a93c11756"
+  "tags": [
+    {
+      "createdAt": "2024-06-06T03:12:53.751Z",
+      "updatedAt": "2024-06-06T03:12:53.751Z",
+      "id": "KanoZXpWteddxbSZ",
+      "name": "ntfy"
+    },
+    {
+      "createdAt": "2024-09-13T21:29:09.826Z",
+      "updatedAt": "2024-09-13T21:29:09.826Z",
+      "id": "zj7mx3E9Iuw0B3Or",
+      "name": "Proxmox"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-09-13T22:01:46.000Z",
+  "versionId": "01130b6c-6755-47f3-a31e-f024b7f02924"
 }
