@@ -266,7 +266,7 @@
             },
             {
               "name": "Channel",
-              "stringValue": "Activity Log"
+              "stringValue": "{{ $json.Channel || 'Activity Log' }}"
             }
           ]
         },
@@ -500,6 +500,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2024-09-13T22:01:54.000Z",
-  "versionId": "28352a2c-e8da-48e5-ab7d-3260b75c1690"
+  "updatedAt": "2024-09-16T16:38:26.000Z",
+  "versionId": "655e9748-e3e7-4490-8437-4f641cc7e47e"
 }
