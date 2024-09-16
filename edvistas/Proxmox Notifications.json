@@ -165,6 +165,12 @@
   "staticData": null,
   "tags": [
     {
+      "createdAt": "2022-12-09T05:43:36.104Z",
+      "updatedAt": "2022-12-09T05:43:36.104Z",
+      "id": "12",
+      "name": "odoo"
+    },
+    {
       "createdAt": "2024-06-06T03:12:53.751Z",
       "updatedAt": "2024-06-06T03:12:53.751Z",
       "id": "KanoZXpWteddxbSZ",
@@ -178,6 +184,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-09-16T15:59:48.000Z",
-  "versionId": "54512bd5-16c0-4c11-a88b-7f49dfae5f13"
+  "updatedAt": "2024-09-16T16:31:18.000Z",
+  "versionId": "bc20e0a5-cabb-4eb8-bf62-eccb002494c2"
 }
