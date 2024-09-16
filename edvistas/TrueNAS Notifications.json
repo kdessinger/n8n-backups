@@ -1,0 +1,209 @@
+{
+  "active": true,
+  "connections": {
+    "Set Globals": {
+      "main": [
+        [
+          {
+            "node": "Execute Workflow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pass Identity Check?": {
+      "main": [
+        [
+          {
+            "node": "Set Globals",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Exit - Unknown User",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Pass Identity Check?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-09-16T16:00:15.621Z",
+  "id": "egP3UfPUekPolMys",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "TrueNAS Notifications",
+  "nodes": [
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "RMGsRy908UOekKo3",
+          "mode": "list",
+          "cachedResultName": "Activity Log"
+        },
+        "options": {}
+      },
+      "id": "85fc4100-1084-40eb-944b-145d96a97164",
+      "name": "Execute Workflow",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.1,
+      "position": [
+        880,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2f483b2f-f663-493d-b0d5-4735f9f9b4e3",
+              "name": "Title",
+              "value": "TrueNAS Notification",
+              "type": "string"
+            },
+            {
+              "id": "26b298f5-6e2f-4f05-9fd2-3c6a3bb84edc",
+              "name": "Message",
+              "value": "={{ $json.body.text }}",
+              "type": "string"
+            },
+            {
+              "id": "341f9c63-c78b-474f-89d0-92bcad634817",
+              "name": "Priority",
+              "value": 5,
+              "type": "number"
+            },
+            {
+              "id": "932c17ed-2498-4fdb-8731-4cc2153dd2d5",
+              "name": "Emojis",
+              "value": " [\"beginner\", \"dart\"]",
+              "type": "array"
+            },
+            {
+              "id": "ea6cb544-19b4-41e8-80c4-7efbbadec1f3",
+              "name": "ClickURL",
+              "value": "http://nas02.edvistas.local/",
+              "type": "string"
+            },
+            {
+              "id": "256615c3-694d-4269-88f0-25588d1ba0a5",
+              "name": "Channel",
+              "value": "={{ $json.body.channel }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "02f3fcf5-a2db-42f1-b515-f78841b3cb00",
+      "name": "Set Globals",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        620,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "f77bfd06-3bcd-4dfc-b2ef-7edfc3d6c226",
+              "leftValue": "={{ $json.body.username }}",
+              "rightValue": "MNfNbfkSpK3ZeDnl3AE3pmw03YD9rkzDjD6xrlinFlqVa27HVKtHbiuN1KfcHoP8",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "3f5e1f21-634e-4cfb-9b7c-3a54f73e709f",
+      "name": "Pass Identity Check?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.1,
+      "position": [
+        380,
+        300
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "f43c763a-4868-48fb-8d33-3a90eee42668",
+      "name": "Exit - Unknown User",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        620,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "truenas",
+        "options": {
+          "responseData": "success"
+        }
+      },
+      "id": "31b23f9f-458c-4661-a06d-b6957d4be896",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        140,
+        300
+      ],
+      "webhookId": "6928a2d2-18fc-4fe3-9ce6-9fff88d04995"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-06-06T03:12:53.751Z",
+      "updatedAt": "2024-06-06T03:12:53.751Z",
+      "id": "KanoZXpWteddxbSZ",
+      "name": "ntfy"
+    },
+    {
+      "createdAt": "2024-09-16T16:00:14.396Z",
+      "updatedAt": "2024-09-16T16:00:14.396Z",
+      "id": "uO3T964rNFdRRNnL",
+      "name": "TrueNAS"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-09-16T16:30:49.000Z",
+  "versionId": "1acb816a-d0f9-422a-9c05-261bd12af69c"
+}
