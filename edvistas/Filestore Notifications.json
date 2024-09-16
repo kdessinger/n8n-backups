@@ -1,0 +1,232 @@
+{
+  "active": true,
+  "connections": {
+    "Email Trigger (IMAP)": {
+      "main": [
+        [
+          {
+            "node": "Prrocess Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prrocess Email": {
+      "main": [
+        [
+          {
+            "node": "Filestore Activity?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filestore Activity?": {
+      "main": [
+        [
+          {
+            "node": "Post Notification",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Do Nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-06-05T04:17:13.128Z",
+  "id": "2V6QIFlv3HEqduGJ",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Filestore Notifications",
+  "nodes": [
+    {
+      "parameters": {
+        "mailbox": "Filestore",
+        "options": {}
+      },
+      "id": "2d0c2af1-80cf-4746-8791-436155c25823",
+      "name": "Email Trigger (IMAP)",
+      "type": "n8n-nodes-base.emailReadImap",
+      "typeVersion": 2,
+      "position": [
+        760,
+        460
+      ],
+      "credentials": {
+        "imap": {
+          "id": "10",
+          "name": "Email (odoo@edvistas.com)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "Title",
+              "stringValue": "=Filestore Activity"
+            },
+            {
+              "name": "Message",
+              "stringValue": "={{ $json.subject }}"
+            },
+            {
+              "name": "Priority",
+              "type": "numberValue",
+              "numberValue": "=3"
+            },
+            {
+              "name": "Emojis",
+              "type": "arrayValue",
+              "arrayValue": "=['file_folder', 'arrow_heading_up']"
+            },
+            {
+              "name": "ClickURL",
+              "stringValue": "="
+            },
+            {
+              "name": "Channel",
+              "stringValue": "Activity Log"
+            },
+            {
+              "name": "emailSubject",
+              "stringValue": "={{ $json.subject }}"
+            },
+            {
+              "name": "emailMessage",
+              "stringValue": "={{ $json[\"textHtml\" ]}}"
+            },
+            {
+              "name": "emailFrom",
+              "stringValue": "={{ $json.from }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "16489b01-6372-4a6e-b844-d0520b9c6b42",
+      "name": "Prrocess Email",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.1,
+      "position": [
+        1020,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": "RMGsRy908UOekKo3",
+        "mode": "each",
+        "options": {}
+      },
+      "id": "8fba8c54-9d24-44dc-b412-df05630c97d5",
+      "name": "Post Notification",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        1520,
+        340
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "2c18a63f-55e0-43c8-93b9-7291d3b75992",
+      "name": "Do Nothing",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1520,
+        580
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "2867c7e5-3386-4b2d-a226-3648d27cfee9",
+              "leftValue": "={{ $json.from }}",
+              "rightValue": "<datamate@edvistas.com>",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "971e4a95-7963-42fb-806d-db801815a497",
+              "leftValue": "={{ $json.Title }}",
+              "rightValue": "Filestore Activity",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "36d5a2c9-36b1-4be1-9564-5afc8d639b6d",
+      "name": "Filestore Activity?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1260,
+        460
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": 300
+  },
+  "staticData": {
+    "node:Email Trigger (IMAP)": {
+      "lastMessageUid": 2800
+    }
+  },
+  "tags": [
+    {
+      "createdAt": "2022-12-09T05:43:36.104Z",
+      "updatedAt": "2022-12-09T05:43:36.104Z",
+      "id": "12",
+      "name": "odoo"
+    },
+    {
+      "createdAt": "2024-06-06T03:12:53.751Z",
+      "updatedAt": "2024-06-06T03:12:53.751Z",
+      "id": "KanoZXpWteddxbSZ",
+      "name": "ntfy"
+    },
+    {
+      "createdAt": "2024-06-05T04:18:06.552Z",
+      "updatedAt": "2024-06-05T04:18:06.552Z",
+      "id": "odoejhirclfkPRsi",
+      "name": "Datamate"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-09-16T16:36:15.000Z",
+  "versionId": "eace8453-3c9d-4089-a58a-b31bd4514f52"
+}
