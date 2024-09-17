@@ -83,6 +83,28 @@
           }
         ]
       ]
+    },
+    "Post Message": {
+      "main": [
+        [
+          {
+            "node": "Exit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PEF ntfy": {
+      "main": [
+        [
+          {
+            "node": "Exit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2023-10-26T20:56:58.677Z",
@@ -266,7 +288,7 @@
             },
             {
               "name": "Channel",
-              "stringValue": "{{ $json.Channel || 'Activity Log' }}"
+              "stringValue": "={{ $json.Channel || 'Activity Log' }}"
             }
           ]
         },
@@ -339,8 +361,8 @@
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        840,
-        220
+        1040,
+        120
       ]
     },
     {
@@ -500,6 +522,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2024-09-16T16:38:26.000Z",
-  "versionId": "655e9748-e3e7-4490-8437-4f641cc7e47e"
+  "updatedAt": "2024-09-16T16:52:06.000Z",
+  "versionId": "2f487878-129e-4861-bec7-007a9d9f33cf"
 }
