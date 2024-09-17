@@ -1,0 +1,368 @@
+{
+  "active": true,
+  "connections": {
+    "OpenAI Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Information Extractor",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Globals": {
+      "main": [
+        [
+          {
+            "node": "Post to Activity Log",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Did we get a review?": {
+      "main": [
+        [
+          {
+            "node": "Information Extractor",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Exit - No Review",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Receive Emails": {
+      "main": [
+        [
+          {
+            "node": "Did we get a review?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Post to Activity Log": {
+      "main": [
+        [
+          {
+            "node": "Mark as Read",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Information Extractor": {
+      "main": [
+        [
+          {
+            "node": "Set Globals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mark as Read": {
+      "main": [
+        [
+          {
+            "node": "Exit - No Review",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-09-16T19:46:03.163Z",
+  "id": "HOkzl7iuO22wm9gZ",
+  "meta": {
+    "templateId": "2336",
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Monitor Gmail for Website Ratings",
+  "nodes": [
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "id": "a57e0e51-50d3-49de-8dc6-6fe592604765",
+      "name": "OpenAI Model",
+      "type": "@n8n/n8n-nodes-langchain.lmOpenAi",
+      "position": [
+        880,
+        480
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2f483b2f-f663-493d-b0d5-4735f9f9b4e3",
+              "name": "Title",
+              "value": "A user has left a rating!",
+              "type": "string"
+            },
+            {
+              "id": "26b298f5-6e2f-4f05-9fd2-3c6a3bb84edc",
+              "name": "Message",
+              "value": "=Great job, you got a new {{ $('Information Extractor').item.json.output.reviewer_rating }} review!\nReviewer: {{ $('Information Extractor').item.json.output.reviewer_name }}\nTitle: {{ $('Information Extractor').item.json.output.reviewer_title }}\nRating: {{ $('Information Extractor').item.json.output.reviewer_rating }}\nReview: {{ $('Information Extractor').item.json.output.reviewer_content }}",
+              "type": "string"
+            },
+            {
+              "id": "341f9c63-c78b-474f-89d0-92bcad634817",
+              "name": "Priority",
+              "value": 5,
+              "type": "number"
+            },
+            {
+              "id": "932c17ed-2498-4fdb-8731-4cc2153dd2d5",
+              "name": "Emojis",
+              "value": "=[[\"+1\",\"star\"]]",
+              "type": "array"
+            },
+            {
+              "id": "ea6cb544-19b4-41e8-80c4-7efbbadec1f3",
+              "name": "ClickURL",
+              "value": "={{ $json.output.ClickURL }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "73704f6b-3d9c-4828-ad71-c6fe401ac96f",
+      "name": "Set Globals",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1040,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "549a4639-f12e-4199-99cc-f2eefc8a8ff1",
+              "leftValue": "={{ $json.from.value[0].address }}",
+              "rightValue": "businessprofile-noreply@google.com",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "b6a7e85e-42f6-4c3e-ac14-bb929b9a19da",
+              "leftValue": "={{ $json.subject }}",
+              "rightValue": "left a review",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "bddacbd5-02a3-413d-9b22-2fdccf5ff075",
+      "name": "Did we get a review?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.1,
+      "position": [
+        520,
+        560
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "3757fb7a-cd7d-40be-b7a8-65086b5ebd23",
+      "name": "Exit - No Review",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1620,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "text": "=You will analyze emails from Google Business Profile (businessprofile-noreply@google.com). Your task is to extract the following structured information:\n\n- Reviewer's full name\n- Reviewer's title or role (if available)\n- Star rating (e.g., 5-star, 4-star)\n- Review content (if provided, otherwise say \"Only rating given\")\n- A link to reply to the review (remove the tracking info everything after '?fid=')\n\nEmail content: \"{{ $json.text }}\"",
+        "attributes": {
+          "attributes": [
+            {
+              "name": "reviewer_name",
+              "description": "Name of the reviewer"
+            },
+            {
+              "name": "reviewer_title",
+              "description": "Title of the reviewer"
+            },
+            {
+              "name": "reviewer_rating",
+              "description": "Star rating (e.g., 5-star, 4-star)"
+            },
+            {
+              "name": "reviewer_content",
+              "description": "Review content (if provided, otherwise say \"Only rating given\")"
+            },
+            {
+              "name": "ClickURL",
+              "description": " A link to reply to the review"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "624c406a-240a-4db0-a256-564d484e794f",
+      "name": "Information Extractor",
+      "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "typeVersion": 1,
+      "position": [
+        700,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "hour": 8
+            },
+            {
+              "hour": 13
+            }
+          ]
+        },
+        "simple": false,
+        "filters": {
+          "labelIds": [
+            "INBOX"
+          ],
+          "readStatus": "unread",
+          "sender": "businessprofile-noreply@google.com"
+        },
+        "options": {}
+      },
+      "id": "64b02b70-e7f2-4df0-852f-b6959af8d8c5",
+      "name": "Receive Emails",
+      "type": "n8n-nodes-base.gmailTrigger",
+      "position": [
+        320,
+        560
+      ],
+      "typeVersion": 1.1,
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "cRBJFJPxOYiwcDx0",
+          "name": "Gmail (infoedvistas@gmail.com)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "markAsRead",
+        "messageId": "={{ $('Receive Emails').item.json.id }}"
+      },
+      "id": "49998cf4-108e-4387-b9fb-f04d58ff2794",
+      "name": "Mark as Read",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1440,
+        320
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "cRBJFJPxOYiwcDx0",
+          "name": "Gmail (infoedvistas@gmail.com)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "RMGsRy908UOekKo3",
+          "mode": "list",
+          "cachedResultName": "Activity Log"
+        },
+        "options": {}
+      },
+      "id": "9b219989-edd6-4a0f-8473-84feb7f22df5",
+      "name": "Post to Activity Log",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.1,
+      "position": [
+        1240,
+        320
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": {
+    "node:Received Emails with Sales Label": {
+      "Received Emails with Sales Label": {
+        "lastTimeChecked": 1726522263
+      }
+    },
+    "node:Receive Emails": {
+      "Receive Emails": {
+        "lastTimeChecked": 1726527608
+      }
+    }
+  },
+  "tags": [
+    {
+      "createdAt": "2023-02-14T20:17:22.566Z",
+      "updatedAt": "2023-02-14T20:17:22.566Z",
+      "id": "22",
+      "name": "ChatGPT"
+    },
+    {
+      "createdAt": "2024-09-16T21:28:11.186Z",
+      "updatedAt": "2024-09-16T21:28:11.186Z",
+      "id": "02euaa8aejHXkGAz",
+      "name": "Gmail"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-09-16T23:00:08.000Z",
+  "versionId": "9aa489e6-0e4d-42b2-937f-7367e42ba6c5"
+}
