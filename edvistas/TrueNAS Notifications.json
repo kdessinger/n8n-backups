@@ -93,7 +93,7 @@
             {
               "id": "932c17ed-2498-4fdb-8731-4cc2153dd2d5",
               "name": "Emojis",
-              "value": " [\"beginner\", \"dart\"]",
+              "value": "={{ $json.body.icon_url }}",
               "type": "array"
             },
             {
@@ -186,7 +186,11 @@
   ],
   "pinData": {},
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": 300,
+    "errorWorkflow": "NtBd2hj1eiR2xufe"
   },
   "staticData": null,
   "tags": [
@@ -210,6 +214,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-09-16T16:31:28.000Z",
-  "versionId": "52ea3464-576f-454e-a08d-cb8bb4d8f150"
+  "updatedAt": "2024-09-16T16:48:39.000Z",
+  "versionId": "528ec5b9-63dc-4314-b67f-1f58471f2f6e"
 }
