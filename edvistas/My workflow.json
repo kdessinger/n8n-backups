@@ -5,29 +5,7 @@
       "main": [
         [
           {
-            "node": "Read File",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Read File": {
-      "main": [
-        [
-          {
-            "node": "Convert",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Convert": {
-      "main": [
-        [
-          {
-            "node": "Write File",
+            "node": "YouTube",
             "type": "main",
             "index": 0
           }
@@ -35,8 +13,8 @@
       ]
     }
   },
-  "createdAt": "2024-09-12T19:02:04.974Z",
-  "id": "jSblG0NbtVQYmJJT",
+  "createdAt": "2024-09-18T15:40:08.908Z",
+  "id": "HhGBK9AWhDZAz0Xx",
   "meta": {
     "templateCredsSetupCompleted": true
   },
@@ -44,91 +22,36 @@
   "nodes": [
     {
       "parameters": {},
-      "id": "8a982b2b-2334-4392-9203-55a2f2853d15",
+      "id": "050e571b-1020-4247-a9b8-d98db8583204",
       "name": "When clicking ‘Test workflow’",
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        800,
-        360
+        740,
+        320
       ]
     },
     {
       "parameters": {
-        "fileSelector": "/mnt/share/_convert/tmp/TPC_A_Cover_04.21.2023.docx",
+        "resource": "video",
+        "operation": "get",
+        "videoId": "BWfMCRR758k",
         "options": {}
       },
-      "id": "8293b985-9a13-436b-9fe4-756c5e024525",
-      "name": "Read File",
-      "type": "n8n-nodes-base.readWriteFile",
+      "id": "3a933aab-4f3a-4ffc-8257-15761a11ad63",
+      "name": "YouTube",
+      "type": "n8n-nodes-base.youTube",
       "typeVersion": 1,
       "position": [
-        1020,
-        360
-      ]
-    },
-    {
-      "parameters": {
-        "operation": "write",
-        "fileName": "/mnt/share/_convert/tmp/TPC_A_Cover_04.21.2023.pdf",
-        "options": {}
-      },
-      "id": "4c0c0a5d-4082-4774-9bf1-7a900c470771",
-      "name": "Write File",
-      "type": "n8n-nodes-base.readWriteFile",
-      "typeVersion": 1,
-      "position": [
-        1460,
-        360
-      ]
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "http://192.168.148.48:8100/forms/libreoffice/convert",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            {
-              "name": "={{ $json.fileName }}",
-              "value": "data"
-            }
-          ]
-        },
-        "sendBody": true,
-        "contentType": "multipart-form-data",
-        "bodyParameters": {
-          "parameters": [
-            {
-              "parameterType": "formBinaryData",
-              "name": "{{ $json.fileName }}",
-              "inputDataFieldName": "data"
-            },
-            {
-              "name": "singlePageSheets",
-              "value": "true"
-            },
-            {}
-          ]
-        },
-        "options": {
-          "allowUnauthorizedCerts": true,
-          "redirect": {
-            "redirect": {}
-          },
-          "response": {
-            "response": {}
-          }
+        960,
+        320
+      ],
+      "credentials": {
+        "youTubeOAuth2Api": {
+          "id": "g0flmN9VRt9tuS2u",
+          "name": "YouTube (info@edvistas.com)"
         }
-      },
-      "id": "4569868b-1066-4155-90d6-30d30b32b81c",
-      "name": "Convert",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        1240,
-        360
-      ]
+      }
     }
   ],
   "pinData": {},
@@ -138,6 +61,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-09-12T19:37:57.000Z",
-  "versionId": "09968790-35e1-432a-916e-831fa65a51ef"
+  "updatedAt": "2024-09-18T15:40:08.908Z",
+  "versionId": "c4efd120-46a9-4ddf-990d-3efd58f7b712"
 }
