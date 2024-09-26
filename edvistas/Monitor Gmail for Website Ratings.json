@@ -344,7 +344,7 @@
     },
     "node:Receive Emails": {
       "Receive Emails": {
-        "lastTimeChecked": 1727272480
+        "lastTimeChecked": 1727300033
       }
     }
   },
@@ -363,6 +363,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-09-18T15:25:40.000Z",
+  "updatedAt": "2024-09-25T21:33:53.000Z",
   "versionId": "cd2090d5-1c1f-4559-af0e-b1fd06e436dd"
 }
