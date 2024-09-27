@@ -1,0 +1,283 @@
+{
+  "active": true,
+  "connections": {
+    "Email Trigger (IMAP)": {
+      "main": [
+        [
+          {
+            "node": "From the SyncTool?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "From the SyncTool?": {
+      "main": [
+        [
+          {
+            "node": "Extract Data from Email",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Exit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get District Info": {
+      "main": [
+        [
+          {
+            "node": "Set Globals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Globals": {
+      "main": [
+        [
+          {
+            "node": "Execute Workflow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Data from Email": {
+      "main": [
+        [
+          {
+            "node": "Get District Info",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-09-26T14:03:55.209Z",
+  "id": "tn31n7QyRQNsLrpl",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "DataSync Notifications",
+  "nodes": [
+    {
+      "parameters": {
+        "mailbox": "Inbox/Sync Errors",
+        "options": {}
+      },
+      "id": "21433e77-56c7-48be-9bdf-b4111463150d",
+      "name": "Email Trigger (IMAP)",
+      "type": "n8n-nodes-base.emailReadImap",
+      "typeVersion": 2,
+      "position": [
+        160,
+        260
+      ],
+      "credentials": {
+        "imap": {
+          "id": "7",
+          "name": "Email (kdessinger@edvistas.com)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "09621611-f636-48dd-9f72-a32f755efe74",
+              "leftValue": "={{ $json.from }}",
+              "rightValue": "\"sync@edvistas.com\" <sync@edvistas.com>",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "ce80e2d7-7dfc-45a8-87a0-ea656b779819",
+              "leftValue": "={{ $json.subject }}",
+              "rightValue": "EVI Universal Data Sync info",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "2657bc54-8c1a-42e3-b889-6e81d4f147fc",
+      "name": "From the SyncTool?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        380,
+        260
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "ba83bc6f-7a8b-41c9-9819-a8f0f2d19109",
+      "name": "Exit",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        640,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT        d.id AS districtID, d.name AS DistrictName, u.adminaccount, u.active, d.techcontact, d.techphone, d.techemail, d.sistype, u.userid, u.firstname, u.lastname, d.lastDataSync LastSync, DATEDIFF(day, d.lastDataSync, GETDATE()) as Duration\nFROM            evitesting.dbo.ecDistricts AS d LEFT OUTER JOIN\n                         evitesting.dbo.ecUsers AS u ON d.id = u.districtid\nWHERE        (u.userid = '{{ $json.message.content.Login.Login }}')"
+      },
+      "id": "e01d986f-7ed0-4a68-aee9-c6e8aaa7ecee",
+      "name": "Get District Info",
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1.1,
+      "position": [
+        1020,
+        240
+      ],
+      "credentials": {
+        "microsoftSql": {
+          "id": "8",
+          "name": "DB1.DS1.GOWLS.COM (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "RMGsRy908UOekKo3",
+          "cachedResultName": "Activity Log"
+        },
+        "options": {}
+      },
+      "id": "cf5e8bb3-acad-4033-94fb-31f01ca47d11",
+      "name": "Execute Workflow",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.1,
+      "position": [
+        1420,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2f483b2f-f663-493d-b0d5-4735f9f9b4e3",
+              "name": "Title",
+              "value": "=EVI DataSync Error for {{ $json.DistrictName }}\n",
+              "type": "string"
+            },
+            {
+              "id": "26b298f5-6e2f-4f05-9fd2-3c6a3bb84edc",
+              "name": "Message",
+              "value": "={{\n  \"🛑♻️ A DataSync error has occurred with \" + $json.DistrictName + \" (\" + $json.districtID + \").\" +\n  ($json.sistype ? \" This district uses the \" + $json.sistype + \" SIS\" : \"\") +\n  \" and was last synced \" + $json.Duration + \" day(s) ago on \" + new Date($json.LastSync).toLocaleDateString(\"en-US\", { month: 'long', day: 'numeric' }) + \" @ \" + new Date($json.LastSync).toLocaleTimeString(\"en-US\", { hour: 'numeric', minute: 'numeric', hour12: true }).toLowerCase() + \".\" +\n  (\n    $('Extract Data from Email').item.json.message.content.Errors && $('Extract Data from Email').item.json.message.content.Errors.length > 0\n    ? \" The following errors were encountered: \" + $('Extract Data from Email').item.json.message.content.Errors.map(e => \"[\" + e.ErrorMessage + \" (Count: \" + e.ErrorCount + \")]\").join(\", \")\n    : \"\"\n  ) +\n  (\n    $('Extract Data from Email').item.json.message.content.MultipleEmailsPerUser && $('Extract Data from Email').item.json.message.content.MultipleEmailsPerUser.length > 0\n    ? \" [Identifiers were found with multiple email addresses].\"\n    : \"\"\n  ) +\n  (\n    $json.techcontact \n    ? \" Please contact \" + $json.techcontact + \" <\" + $json.techemail + \"> at \" + $json.techphone + \".\"\n    : \"\"\n  )\n}}\n",
+              "type": "string"
+            },
+            {
+              "id": "341f9c63-c78b-474f-89d0-92bcad634817",
+              "name": "Priority",
+              "value": 5,
+              "type": "number"
+            },
+            {
+              "id": "932c17ed-2498-4fdb-8731-4cc2153dd2d5",
+              "name": "Emojis",
+              "value": "[\"stop_sign\",\"recycle\"]",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "ccd8a231-be20-4fda-8987-1c796ba42e71",
+      "name": "Set Globals",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1220,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4-turbo",
+          "mode": "list",
+          "cachedResultName": "GPT-4-TURBO"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "You are an AI agent that processes automated emails from a Windows Scheduler alerting system and extracts relevant information. The email format is consistent and contains the following sections:\n\n\"Login\" field: This appears right after the keyword \"Login:\" and before the word \"Error\".\n\"Error\" field: A string or an array of values. Write a summary for the errors encountered. Include counts if the error contains multiple values.\nIgnore the rest of the email, including any confidentiality notices.\nYour task is to extract the following:\n\nThe login identifier (appears after \"Login:\").\nThe error messages (appears after \"Error:\").\nReturn the extracted data in JSON format, with the following structure:\n\n{\n  \"Login\": {\"Login\": \"login_value\"},\n  \"Errors\": [\n    {\"ErrorMessage\": \"error_message\", \"ErrorCount\": error_count_value},\n    {\"Email\": \"email_value\", \"ID\": \"id_value\"}\n  ],\n  \"MultipleEmailsPerUser\": [\n    {\"ID\": \"user_id_value\", \"Email\": \"email_value\"},\n    {\"ID\": \"user_id_value\", \"Email\": \"email_value\"}\n  ]\n}\n\n\nExample: Email:\nLogin: sachemadmin - Error: Failed to update EVI - The following email addresses had multiple unique IDs - they have been excluded: rchirichella@sachem.edu: 1686705 & 9999999 The following user identifiers had multiple email addresses - they have been excluded: 1026779: i_lcroce@sachem.edu & lcroce@sachem.edu\n\nResponse:\n\n{\n  \"Login\": {\"Login\": \"sachemadmin\"},\n  \"Errors\": [\n    {\"ErrorMessage\": \"The following email addresses had multiple unique IDs\", \"ErrorCount\": 2},\n    {\"ErrorMessage\": \"The following user identifiers had multiple email addresses\", \"ErrorCount\": 2}\n  ],\n  \"MultipleEmailsPerUser\": [\n    {\"ID\": \"1026779\", \"Email\": \"i_lcroce@sachem.edu\"},\n    {\"ID\": \"1026779\", \"Email\": \"lcroce@sachem.edu\"}\n  ]\n}\n",
+              "role": "system"
+            },
+            {
+              "content": "={{ $json.textHtml }}"
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {}
+      },
+      "id": "ad395755-bbe4-4761-933c-1e7488ca5dfc",
+      "name": "Extract Data from Email",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.5,
+      "position": [
+        640,
+        240
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": 300
+  },
+  "staticData": {
+    "node:Email Trigger (IMAP)": {
+      "lastMessageUid": 9
+    }
+  },
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2024-09-26T21:29:41.000Z",
+  "versionId": "1ed1fead-e057-4f69-a8a7-40fd3a5b7083"
+}
