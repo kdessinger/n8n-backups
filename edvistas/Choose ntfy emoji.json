@@ -1,0 +1,195 @@
+{
+  "active": false,
+  "connections": {
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Message": {
+      "main": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Exit1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Check Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "Set Selected Emojis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-09-27T21:47:03.534Z",
+  "id": "ojHgeB2i8n7tzExd",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Choose ntfy emoji",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        20,
+        1360
+      ],
+      "id": "2d1a585e-b69f-493f-b3e2-e70371b51ded"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json[\"Message\"]}}",
+              "operation": "isNotEmpty"
+            }
+          ]
+        }
+      },
+      "name": "Check Message",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        480,
+        1360
+      ],
+      "id": "533426cd-0d57-476f-8dc3-610ff09c84af"
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "Selected Emojis",
+              "value": "={{ $json.message.content }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Set Selected Emojis",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        1060,
+        1240
+      ],
+      "id": "c80e0778-b889-4d79-8941-11560b1e98a1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b28b51ef-14ae-48bd-a752-a0aa7022570c",
+              "name": "Message",
+              "value": "A WebEX Meeting has Ended!\nPete Cooper has ended the WebEx meeting titled \"Educational Vistas: Uniondale Report+\".",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "415ee074-7add-47fd-8844-aff916f0cf5d",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        1360
+      ]
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4-turbo",
+          "mode": "list",
+          "cachedResultName": "GPT-4-TURBO"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "You are a system that analyzes input messages and returns a list of relevant emoji names based on the context of the message. The emoji names must be selected from the following emoji list: https://docs.ntfy.sh/emojis.\n\nFor each message, generate a JSON array with the appropriate emoji names. Do not include any text other than the array of emoji names.\n\n**Examples:**\n\nInput message: \"Alert! File Store Activity! A new file has been uploaded to the NextCloud file store.\"\nResponse: [\"rotating_light\", \"file_folder\"]\n\nInput message: \"Backup successful! All data has been safely backed up to the remote server.\"\nResponse: [\"white_check_mark\", \"floppy_disk\"]\n\nInput message: \"Error: Unauthorized access detected on the admin panel.\"\nResponse: [\"rotating_light\", \"no_entry\", \"key\"]\n\n**Now, analyze the following message and provide the JSON array with relevant emoji names only:**\n",
+              "role": "system"
+            },
+            {
+              "content": "={{ $json.Message }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "3ac23192-2a45-4d56-ac60-277d4719f20c",
+      "name": "OpenAI",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.5,
+      "position": [
+        720,
+        1240
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "157585e7-2586-4bda-b4f7-bd8497f2493a",
+      "name": "Exit1",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        720,
+        1440
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-09-27T21:59:02.000Z",
+  "versionId": "f798ad9b-557a-4c15-b461-789717d65059"
+}
