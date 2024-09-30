@@ -101,12 +101,6 @@
               "name": "ClickURL",
               "value": "http://nas02.edvistas.local/",
               "type": "string"
-            },
-            {
-              "id": "256615c3-694d-4269-88f0-25588d1ba0a5",
-              "name": "Channel",
-              "value": "={{ $json.body.channel }}",
-              "type": "string"
             }
           ]
         },
@@ -127,7 +121,8 @@
           "options": {
             "caseSensitive": true,
             "leftValue": "",
-            "typeValidation": "strict"
+            "typeValidation": "strict",
+            "version": 1
           },
           "conditions": [
             {
@@ -214,6 +209,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-09-16T16:48:39.000Z",
-  "versionId": "528ec5b9-63dc-4314-b67f-1f58471f2f6e"
+  "updatedAt": "2024-09-30T14:50:34.000Z",
+  "versionId": "037898bf-2af8-4c5e-8a80-712b1007334a"
 }
