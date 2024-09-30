@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "Get Channel ID": {
       "main": [
@@ -27,12 +27,17 @@
       "main": [
         [
           {
-            "node": "Ntfy",
+            "node": "Send to Ntfy",
             "type": "main",
             "index": 0
           },
           {
-            "node": "Post Message",
+            "node": "Send to Odoo",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send to Slack",
             "type": "main",
             "index": 0
           }
@@ -55,51 +60,44 @@
         ]
       ]
     },
-    "Ntfy": {
+    "Webhook": {
       "main": [
         [
           {
-            "node": "If",
+            "node": "Set Defaults",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "If": {
+    "Send to Odoo": {
       "main": [
         [
           {
-            "node": "PEF ntfy",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Exit",
+            "node": "Respond to Webhook",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Post Message": {
+    "Send to Ntfy": {
       "main": [
         [
           {
-            "node": "Exit",
+            "node": "Respond to Webhook",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "PEF ntfy": {
+    "Send to Slack": {
       "main": [
         [
           {
-            "node": "Exit",
+            "node": "Respond to Webhook",
             "type": "main",
             "index": 0
           }
@@ -121,78 +119,9 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1,
       "position": [
-        -320,
-        180
+        -360,
+        80
       ]
-    },
-    {
-      "parameters": {
-        "topic": "Alerts",
-        "message": "={{ $json.MessageClean }}",
-        "title": "={{ $json.Title }}",
-        "click": "={{ $json.ClickURL }}",
-        "tags": "={{ $json.Emojis }}",
-        "additional_fields": {
-          "alternate_url": "https://ntfy.edvistas.com"
-        }
-      },
-      "id": "9377267e-7401-4071-aad0-2d6b0c817116",
-      "name": "Ntfy",
-      "type": "n8n-nodes-ntfy.Ntfy",
-      "typeVersion": 1,
-      "position": [
-        460,
-        100
-      ]
-    },
-    {
-      "parameters": {
-        "resource": "custom",
-        "customResource": "=mail.message",
-        "fieldsToCreateOrUpdate": {
-          "fields": [
-            {
-              "fieldName": "email_from",
-              "fieldValue": "odoobot@edvistas.com"
-            },
-            {
-              "fieldName": "message_type",
-              "fieldValue": "comment"
-            },
-            {
-              "fieldName": "model",
-              "fieldValue": "mail.channel"
-            },
-            {
-              "fieldName": "record_name",
-              "fieldValue": "=ntfy: {{ $json.Title }}"
-            },
-            {
-              "fieldName": "body",
-              "fieldValue": "={{ $json.Message }}<BR>\n{{ $json.ClickURL }}"
-            },
-            {
-              "fieldName": "res_id",
-              "fieldValue": "={{ $json[\"id\"] }}"
-            }
-          ]
-        }
-      },
-      "id": "ad4b52ae-44ff-4a02-92de-af765b0b6880",
-      "name": "Post Message",
-      "type": "n8n-nodes-base.odoo",
-      "typeVersion": 1,
-      "position": [
-        460,
-        300
-      ],
-      "alwaysOutputData": true,
-      "credentials": {
-        "odooApi": {
-          "id": "22",
-          "name": "Odoo (OdooBot)"
-        }
-      }
     },
     {
       "parameters": {
@@ -262,33 +191,33 @@
           "values": [
             {
               "name": "Title",
-              "stringValue": "={{ $json.Title || 'No Title Detected' }}"
+              "stringValue": "={{$json.body?.Title || $json.Title || 'No Title Detected'}}"
             },
             {
               "name": "Message",
-              "stringValue": "={{ $json.Message || 'No Message Detected' }}"
+              "stringValue": "={{$json.body?.Message || $json.Message || 'No Message Detected'}}"
             },
             {
               "name": "MessageClean",
-              "stringValue": "={{ $json.Message.replace(/<BR>/g, '') || 'Enter a Message' }}"
+              "stringValue": "={{$json.body?.Message ? $json.body.Message.replace(/<[^>]+>/g, '') : ($json.Message ? $json.Message.replace(/<[^>]+>/g, '') : 'No Message Detected')}}"
+            },
+            {
+              "name": "Emojis",
+              "type": "arrayValue",
+              "arrayValue": "={{$json.body?.Emojis || $json.Emojis || ['hugs', '+1']}}"
             },
             {
               "name": "Priority",
               "type": "numberValue",
-              "numberValue": "={{ $json.Priority || 3 }}"
-            },
-            {
-              "name": "Tags",
-              "type": "arrayValue",
-              "arrayValue": "={{ $json.Emojis || [ 'hugs', '+1' ] }}"
+              "numberValue": "={{$json.body?.Priority || $json.Priority || 5}}"
             },
             {
               "name": "ClickURL",
-              "stringValue": "={{ $json.ClickURL }}"
+              "stringValue": "={{$json.body?.ClickURL || $json.ClickURL || '' }}"
             },
             {
               "name": "Channel",
-              "stringValue": "={{ $json.Channel || 'Activity Log' }}"
+              "stringValue": "={{$json.body?.Channel || $json.Channel || 'Activity Log'}}"
             }
           ]
         },
@@ -301,13 +230,13 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.1,
       "position": [
-        -100,
+        -80,
         180
       ]
     },
     {
       "parameters": {
-        "content": "# Alerts & Notifications\n#### This node will send alerts to various information systems. We are currently using NTFY & Odoo.  \nTo see a list of emoji's click here --> [Emoji List Here](https://ntfy.edvistas.com/docs/emojis/)\n\nField List:\n- Title\n- Message\n- Priority\n- Emojis (array)\n- ClickURL\n- Channel",
+        "content": "# Alerts & Notifications\n#### This node will send alerts to multiple alerting systems. We are currently using NTFY & Odoo.  \nTo see a list of emoji's click here --> [Emoji List Here](https://ntfy.edvistas.com/docs/emojis/)\n\nField List:\n- Title\n- Message\n- Priority\n- Emojis (array)\n- ClickURL\n- Channel",
         "height": 317.1219195849546,
         "width": 481
       },
@@ -316,189 +245,144 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -260,
-        -200
+        -120,
+        -180
       ]
     },
     {
       "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": false,
-            "leftValue": "",
-            "typeValidation": "strict"
-          },
-          "conditions": [
-            {
-              "id": "954419b6-7708-4508-bd78-04576aa805fc",
-              "leftValue": "={{ $json.title }}",
-              "rightValue": "=PEF's",
-              "operator": {
-                "type": "string",
-                "operation": "contains"
-              }
-            }
-          ],
-          "combinator": "and"
-        },
+        "respondWith": "text",
+        "responseBody": "Notification Sent",
+        "options": {}
+      },
+      "id": "abc47798-8caa-4ab0-ad75-b13a27465764",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        800,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "notification",
+        "authentication": "headerAuth",
+        "responseMode": "responseNode",
         "options": {
-          "ignoreCase": true
+          "ignoreBots": true
         }
       },
-      "id": "7d0cae82-a89d-4d15-854a-180056fc37a3",
-      "name": "If",
-      "type": "n8n-nodes-base.if",
+      "id": "b97e4761-0852-4fdd-b822-0f526a2b5ceb",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
-        660,
-        100
-      ]
-    },
-    {
-      "parameters": {},
-      "id": "686997b3-9139-449c-b1f1-b07c239d14e4",
-      "name": "Exit",
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [
-        1040,
-        120
-      ]
+        -360,
+        280
+      ],
+      "webhookId": "d7b50e12-768e-4f43-ac4d-9a3891afdfab",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "os5m1l0SgTiVl18p",
+          "name": "N8N Bearer Token"
+        }
+      }
     },
     {
       "parameters": {
-        "topic": "PEF",
-        "message": "={{ $json.message }}",
-        "title": "={{ $json.title }}",
-        "click": "={{ $json.click.replace('apps', 'pefny') }}\n",
-        "tags": "={{ $json.tags }}",
+        "channel": "={{ $json.Channel }}",
+        "text": "=Notification: *{{$json.Title}}*\nMessage: {{$json.MessageClean}}\nClick here: {{$json.ClickURL}}",
+        "otherOptions": {},
+        "attachments": []
+      },
+      "id": "9d275aa5-b169-4109-8aff-afd3fdf4c288",
+      "name": "Send to Slack",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 1,
+      "position": [
+        500,
+        420
+      ],
+      "credentials": {
+        "slackApi": {
+          "id": "XJ1ekB0jcVrmn6qm",
+          "name": "Slack (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "=mail.message",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "email_from",
+              "fieldValue": "odoobot@edvistas.com"
+            },
+            {
+              "fieldName": "message_type",
+              "fieldValue": "comment"
+            },
+            {
+              "fieldName": "model",
+              "fieldValue": "mail.channel"
+            },
+            {
+              "fieldName": "record_name",
+              "fieldValue": "=ntfy: {{ $json.Title }}"
+            },
+            {
+              "fieldName": "body",
+              "fieldValue": "={{ $json.Message }}<BR>\n{{ $json.ClickURL }}"
+            },
+            {
+              "fieldName": "res_id",
+              "fieldValue": "={{ $json[\"id\"] }}"
+            }
+          ]
+        }
+      },
+      "id": "ad4b52ae-44ff-4a02-92de-af765b0b6880",
+      "name": "Send to Odoo",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        500,
+        200
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "topic": "={{$json.Channel.replace(/\\s+/g, '-') || 'Activity-Log'}}",
+        "message": "={{ $json.MessageClean }}",
+        "title": "={{ $json.Title }}",
+        "click": "={{ $json.ClickURL }}",
+        "tags": "={{ $json.Emojis }}",
         "additional_fields": {
           "alternate_url": "https://ntfy.edvistas.com"
         }
       },
-      "id": "df1fa430-a389-4007-b2c5-1989a86d3099",
-      "name": "PEF ntfy",
+      "id": "9377267e-7401-4071-aad0-2d6b0c817116",
+      "name": "Send to Ntfy",
       "type": "n8n-nodes-ntfy.Ntfy",
       "typeVersion": 1,
       "position": [
-        840,
-        -40
+        500,
+        0
       ]
     }
   ],
-  "pinData": {
-    "Execute Workflow Trigger": [
-      {
-        "json": {
-          "headers": {
-            "connection": "close",
-            "host": "n8n.edvistas.com",
-            "x-forwarded-scheme": "https",
-            "x-forwarded-proto": "https",
-            "x-forwarded-for": "192.168.148.1",
-            "x-real-ip": "192.168.148.1",
-            "content-length": "1601",
-            "accept": "application/json, text/plain, */*",
-            "content-type": "application/json",
-            "user-agent": "axios/0.28.1"
-          },
-          "params": {},
-          "query": {},
-          "body": {
-            "heartbeat": {
-              "monitorID": 18,
-              "status": 1,
-              "time": "2024-08-11 00:30:29.393",
-              "msg": "200 - OK",
-              "ping": 193,
-              "important": true,
-              "duration": 8,
-              "timezone": "America/New_York",
-              "timezoneOffset": "-04:00",
-              "localDateTime": "2024-08-10 20:30:29"
-            },
-            "monitor": {
-              "id": 18,
-              "name": "Odoo-Staging",
-              "description": null,
-              "pathName": "Odoo-Staging",
-              "parent": null,
-              "childrenIDs": [],
-              "url": "https://odoo-stage.edvistas.com",
-              "method": "GET",
-              "hostname": null,
-              "port": null,
-              "maxretries": 0,
-              "weight": 2000,
-              "active": true,
-              "forceInactive": false,
-              "type": "http",
-              "timeout": 48,
-              "interval": 60,
-              "retryInterval": 27,
-              "resendInterval": 0,
-              "keyword": null,
-              "invertKeyword": false,
-              "expiryNotification": true,
-              "ignoreTls": false,
-              "upsideDown": false,
-              "packetSize": 56,
-              "maxredirects": 10,
-              "accepted_statuscodes": [
-                "200-299"
-              ],
-              "dns_resolve_type": "A",
-              "dns_resolve_server": "1.1.1.1",
-              "dns_last_result": null,
-              "docker_container": null,
-              "docker_host": null,
-              "proxyId": null,
-              "notificationIDList": {
-                "2": true
-              },
-              "tags": [
-                {
-                  "id": 18,
-                  "monitor_id": 18,
-                  "tag_id": 2,
-                  "value": "",
-                  "name": "Internal",
-                  "color": "#2563EB"
-                }
-              ],
-              "maintenance": false,
-              "mqttTopic": null,
-              "mqttSuccessMessage": null,
-              "databaseQuery": null,
-              "authMethod": null,
-              "grpcUrl": null,
-              "grpcProtobuf": null,
-              "grpcMethod": null,
-              "grpcServiceName": null,
-              "grpcEnableTls": false,
-              "radiusCalledStationId": null,
-              "radiusCallingStationId": null,
-              "game": null,
-              "gamedigGivenPortOnly": true,
-              "httpBodyEncoding": "json",
-              "jsonPath": null,
-              "expectedValue": null,
-              "kafkaProducerTopic": null,
-              "kafkaProducerBrokers": null,
-              "kafkaProducerSsl": false,
-              "kafkaProducerAllowAutoTopicCreation": false,
-              "kafkaProducerMessage": null,
-              "screenshot": null,
-              "includeSensitiveData": false
-            },
-            "msg": "[Odoo-Staging] [✅ Up] 200 - OK"
-          },
-          "webhookUrl": "https://n8n.edvistas.com/webhook/uptimekuma/alert",
-          "executionMode": "production"
-        }
-      }
-    ]
-  },
+  "pinData": {},
   "settings": {
     "executionOrder": "v1",
     "saveManualExecutions": true,
@@ -521,7 +405,7 @@
       "name": "ntfy"
     }
   ],
-  "triggerCount": 0,
-  "updatedAt": "2024-09-16T16:52:06.000Z",
-  "versionId": "2f487878-129e-4861-bec7-007a9d9f33cf"
+  "triggerCount": 1,
+  "updatedAt": "2024-09-30T16:20:18.000Z",
+  "versionId": "dacc5600-e051-4814-b3fe-57df7092b19b"
 }
