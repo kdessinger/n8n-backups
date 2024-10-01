@@ -60,17 +60,6 @@
         ]
       ]
     },
-    "Webhook": {
-      "main": [
-        [
-          {
-            "node": "Set Defaults",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Send to Odoo": {
       "main": [
         [
@@ -87,6 +76,17 @@
         [
           {
             "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Set Defaults",
             "type": "main",
             "index": 0
           }
@@ -266,54 +266,6 @@
     },
     {
       "parameters": {
-        "httpMethod": "POST",
-        "path": "notification",
-        "authentication": "headerAuth",
-        "responseMode": "responseNode",
-        "options": {
-          "ignoreBots": true
-        }
-      },
-      "id": "b97e4761-0852-4fdd-b822-0f526a2b5ceb",
-      "name": "Webhook",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2,
-      "position": [
-        -360,
-        280
-      ],
-      "webhookId": "d7b50e12-768e-4f43-ac4d-9a3891afdfab",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "os5m1l0SgTiVl18p",
-          "name": "N8N Bearer Token"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "channel": "={{ $json.Channel }}",
-        "text": "=Notification: *{{$json.Title}}*\nMessage: {{$json.MessageClean}}\nClick here: {{$json.ClickURL}}",
-        "otherOptions": {},
-        "attachments": []
-      },
-      "id": "9d275aa5-b169-4109-8aff-afd3fdf4c288",
-      "name": "Send to Slack",
-      "type": "n8n-nodes-base.slack",
-      "typeVersion": 1,
-      "position": [
-        500,
-        420
-      ],
-      "credentials": {
-        "slackApi": {
-          "id": "XJ1ekB0jcVrmn6qm",
-          "name": "Slack (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {
         "resource": "custom",
         "customResource": "=mail.message",
         "fieldsToCreateOrUpdate": {
@@ -380,9 +332,96 @@
         500,
         0
       ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "notification",
+        "authentication": "headerAuth",
+        "responseMode": "responseNode",
+        "options": {
+          "ignoreBots": true
+        }
+      },
+      "id": "b97e4761-0852-4fdd-b822-0f526a2b5ceb",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -360,
+        280
+      ],
+      "webhookId": "d7b50e12-768e-4f43-ac4d-9a3891afdfab",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "os5m1l0SgTiVl18p",
+          "name": "N8N Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://hooks.slack.com/services/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",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "text",
+              "value": "={{ $json.MessageClean }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "7ecabe7d-f091-4fee-90df-6f5c45529960",
+      "name": "Send to Slack",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        500,
+        420
+      ]
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Execute Workflow Trigger": [
+      {
+        "json": {
+          "id": "ed4da36961aa4d6fbb230bdff4c74708_I_611129246206748804",
+          "meetingNumber": "26331300969",
+          "title": "Weekly Sales Meeting",
+          "agenda": "Gents,\n\nHere is a weekly sales meeting invite, for Monday and Fridays. I'd like to talk through the agenda for the week in terms of activity planned on Mondays. Then on Fridays, we will talk about the activity (what went well, what didn't, what happened, sales made, etc.). \n\nThis will be a great opportunity to bounce ideas off each other, and strategize as a team. I'm scheduling for an hour to make sure we have plenty of time together, but may revise day/time depending on activity in the field.\n\nThank you,\nPete",
+          "password": "spVxTqv33C2",
+          "start": "2024-09-30T17:57:48Z",
+          "MeetingStart": "2024-09-30 17:57:48",
+          "MeetingEnd": "NaN-NaN-NaN NaN:NaN:NaN",
+          "duration": null,
+          "timezone": "UTC",
+          "reminderTime": 15,
+          "hostDisplayName": "Pete Cooper",
+          "hostEmail": "pcooper@edvistas.com",
+          "webLink": "https://educationalvistasinc.my.webex.com/educationalvistasinc.my/j.php?MTID=m478a61d7eec12a1a733175ddc36d6982",
+          "Attendees": [
+            "cmartin@edvistas.com",
+            "tjleonard@edvistas.com"
+          ],
+          "displayName": [
+            "cmartin@edvistas.com",
+            "tjleonard@edvistas.com"
+          ],
+          "Title": "A WebEX Meeting has Started",
+          "Message": "Pete Cooper has started the WebEx meeting titled \"Weekly Sales Meeting\".",
+          "ClickURL": "https://educationalvistasinc.my.webex.com/educationalvistasinc.my/j.php?MTID=m478a61d7eec12a1a733175ddc36d6982",
+          "Emojis": [
+            "hourglass_flowing_sand",
+            "date"
+          ],
+          "Priority": 1
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1",
     "saveManualExecutions": true,
@@ -406,6 +445,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-09-30T16:20:18.000Z",
-  "versionId": "dacc5600-e051-4814-b3fe-57df7092b19b"
+  "updatedAt": "2024-09-30T18:27:19.000Z",
+  "versionId": "a0b277dc-986d-4061-963c-64905adc9087"
 }
