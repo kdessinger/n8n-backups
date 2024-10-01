@@ -82,22 +82,22 @@
         ]
       ]
     },
-    "Webhook": {
+    "Send to Slack": {
       "main": [
         [
           {
-            "node": "Set Defaults",
+            "node": "Respond to Webhook",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Send to Slack": {
+    "Webhook": {
       "main": [
         [
           {
-            "node": "Respond to Webhook",
+            "node": "Set Defaults",
             "type": "main",
             "index": 0
           }
@@ -245,8 +245,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -120,
-        -180
+        -140,
+        -200
       ]
     },
     {
@@ -335,13 +335,35 @@
     },
     {
       "parameters": {
+        "method": "POST",
+        "url": "https://hooks.slack.com/services/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",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "text",
+              "value": "={{ $json.MessageClean }}\n{{ $json.ClickURL }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "7ecabe7d-f091-4fee-90df-6f5c45529960",
+      "name": "Send to Slack",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        500,
+        420
+      ]
+    },
+    {
+      "parameters": {
         "httpMethod": "POST",
         "path": "notification",
         "authentication": "headerAuth",
         "responseMode": "responseNode",
-        "options": {
-          "ignoreBots": true
-        }
+        "options": {}
       },
       "id": "b97e4761-0852-4fdd-b822-0f526a2b5ceb",
       "name": "Webhook",
@@ -358,30 +380,6 @@
           "name": "N8N Bearer Token"
         }
       }
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://hooks.slack.com/services/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",
-        "sendBody": true,
-        "bodyParameters": {
-          "parameters": [
-            {
-              "name": "text",
-              "value": "={{ $json.MessageClean }}"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "7ecabe7d-f091-4fee-90df-6f5c45529960",
-      "name": "Send to Slack",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        500,
-        420
-      ]
     }
   ],
   "pinData": {
@@ -445,6 +443,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-09-30T18:27:19.000Z",
-  "versionId": "a0b277dc-986d-4061-963c-64905adc9087"
+  "updatedAt": "2024-10-01T15:36:12.000Z",
+  "versionId": "05b7650f-8139-4a89-a5e2-d6dca3deb7e3"
 }
