@@ -342,7 +342,7 @@
           "parameters": [
             {
               "name": "text",
-              "value": "={{ $json.MessageClean }}\n{{ $json.ClickURL }}"
+              "value": "={{ $json.MessageClean.trim }}\n{{ $json.ClickURL }}"
             }
           ]
         },
@@ -443,6 +443,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-10-01T18:18:42.000Z",
-  "versionId": "61dffda6-b508-433e-8577-47555cc7352e"
+  "updatedAt": "2024-10-02T14:20:28.000Z",
+  "versionId": "bffdb690-6ddc-476e-b7e6-6de266c86f5d"
 }
