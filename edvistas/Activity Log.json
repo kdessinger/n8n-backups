@@ -119,7 +119,7 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1,
       "position": [
-        -360,
+        -340,
         80
       ]
     },
@@ -199,7 +199,7 @@
             },
             {
               "name": "MessageClean",
-              "stringValue": "={{$json.body?.Message ? $json.body.Message.replace(/<[^>]+>/g, '') : ($json.Message ? $json.Message.replace(/<[^>]+>/g, '') : 'No Message Detected')}}"
+              "stringValue": "={{$json.body?.Message ? $json.body.Message.replace(/<[^>]+>/g, '') : ($json.Message ? $json.Message.replace(/<[^>]+>/g, '') : 'No Message Detected')}}\n\n"
             },
             {
               "name": "Emojis",
@@ -245,8 +245,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -140,
-        -200
+        -100,
+        -180
       ]
     },
     {
@@ -370,7 +370,7 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
-        -360,
+        -340,
         280
       ],
       "webhookId": "d7b50e12-768e-4f43-ac4d-9a3891afdfab",
@@ -412,7 +412,7 @@
           "Message": "Pete Cooper has started the WebEx meeting titled \"Weekly Sales Meeting\".",
           "ClickURL": "https://educationalvistasinc.my.webex.com/educationalvistasinc.my/j.php?MTID=m478a61d7eec12a1a733175ddc36d6982",
           "Emojis": [
-            "hourglass_flowing_sand",
+            "+1",
             "date"
           ],
           "Priority": 1
@@ -443,6 +443,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-10-01T15:36:12.000Z",
-  "versionId": "05b7650f-8139-4a89-a5e2-d6dca3deb7e3"
+  "updatedAt": "2024-10-01T18:18:42.000Z",
+  "versionId": "61dffda6-b508-433e-8577-47555cc7352e"
 }
