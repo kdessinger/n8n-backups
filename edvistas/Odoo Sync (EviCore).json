@@ -365,8 +365,8 @@
       ],
       "credentials": {
         "microsoftSql": {
-          "id": "8",
-          "name": "DB1.DS1.GOWLS.COM (kdessinger)"
+          "id": "lFidBVCvt5Wn1IsH",
+          "name": "DB2.DS1.GOWLS.COM (kdessinger)"
         }
       }
     },
@@ -439,8 +439,8 @@
       "id": "b6c825be-c310-4d85-8674-0a3f4ef7100b",
       "credentials": {
         "microsoftSql": {
-          "id": "8",
-          "name": "DB1.DS1.GOWLS.COM (kdessinger)"
+          "id": "lFidBVCvt5Wn1IsH",
+          "name": "DB2.DS1.GOWLS.COM (kdessinger)"
         }
       }
     },
@@ -815,6 +815,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2024-06-06T03:18:02.000Z",
-  "versionId": "59ff864b-36b7-4819-b645-7a261086e1aa"
+  "updatedAt": "2024-10-02T16:59:56.000Z",
+  "versionId": "35eb8ce3-8198-4859-968f-65a7cb869b6a"
 }
