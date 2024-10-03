@@ -71,6 +71,20 @@
           }
         ]
       ]
+    },
+    "Compare Datasets": {
+      "main": [
+        [],
+        [],
+        [],
+        [
+          {
+            "node": "New Employees Found",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2024-09-05T17:56:03.335Z",
@@ -259,6 +273,41 @@
         520,
         140
       ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "80f4ae96-41a6-484c-8262-ef97a40be57b",
+              "name": "id",
+              "value": "={{ $json.id }}",
+              "type": "number"
+            },
+            {
+              "id": "508c4f01-ce85-4924-b91a-c8a9ad6aeca0",
+              "name": "name",
+              "value": "={{ $json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "8b467c90-a45d-4264-9d00-8fcfa1e5985c",
+              "name": "job_title",
+              "value": "={{ $json.job_title }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "fac4c6f2-26d3-46ba-9e4b-8739dd64dffe",
+      "name": "New Employees Found",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2140,
+        580
+      ]
     }
   ],
   "pinData": {},
@@ -268,6 +317,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-09-09T22:14:03.000Z",
-  "versionId": "f4134077-e7b4-494b-b1e8-3f21b13a9f2a"
+  "updatedAt": "2024-10-03T15:47:55.000Z",
+  "versionId": "3f4905e6-f652-4476-9153-459e9f6acab2"
 }
