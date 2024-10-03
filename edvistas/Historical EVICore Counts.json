@@ -37,7 +37,9 @@
   },
   "createdAt": "2023-09-27T20:22:55.258Z",
   "id": "VE30hvBsBs48MFvt",
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "Historical EVICore Counts",
   "nodes": [
     {
@@ -66,8 +68,8 @@
       ],
       "credentials": {
         "microsoftSql": {
-          "id": "8",
-          "name": "DB1.DS1.GOWLS.COM (kdessinger)"
+          "id": "lFidBVCvt5Wn1IsH",
+          "name": "DB2.DS1.GOWLS.COM (kdessinger)"
         }
       }
     },
@@ -151,6 +153,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-11-17T14:20:57.000Z",
-  "versionId": "9dcc024c-c77f-4caf-8c82-ed9d83a99595"
+  "updatedAt": "2024-10-02T21:01:45.000Z",
+  "versionId": "968d4b8a-406b-4d66-bf7a-304fc1f6c4bd"
 }
