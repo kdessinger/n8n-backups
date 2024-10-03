@@ -722,7 +722,7 @@
       "typeVersion": 3.2,
       "position": [
         1660,
-        986
+        980
       ]
     },
     {
@@ -739,7 +739,7 @@
             },
             {
               "name": "ClickURL",
-              "stringValue": "="
+              "stringValue": "={{ $json.webLink }}"
             },
             {
               "name": "Emojis",
@@ -848,7 +848,7 @@
     },
     "node:Webex (Bill)": {
       "secret": "40cf74ac48bbe0852cf23cd769d065b4",
-      "webhookId": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svNWQ4MWJlZmUtZTZmNy00MGE1LWFjZTktODI3MzE3MTA1YTli"
+      "webhookId": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svOWMwN2E4ZDctZjBlOC00MTJlLTgyNTctOTkxNWU1ZmE4Nzc1"
     }
   },
   "tags": [
@@ -860,6 +860,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-09-04T19:51:48.000Z",
-  "versionId": "43f964a3-31ee-40e5-814a-2e4cd3d71e4d"
+  "updatedAt": "2024-10-02T17:04:30.000Z",
+  "versionId": "6ebfc5a6-ead3-4b16-a81f-bc4e0d33c275"
 }
