@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "Get Participants": {
       "main": [
@@ -667,7 +667,7 @@
       "typeVersion": 3.2,
       "position": [
         1660,
-        986
+        980
       ]
     },
     {
@@ -684,7 +684,7 @@
             },
             {
               "name": "ClickURL",
-              "stringValue": "="
+              "stringValue": "={{ $json.webLink }}"
             },
             {
               "name": "Emojis",
@@ -844,6 +844,10 @@
     "node:Webex (Admin)": {
       "secret": "ec71c59abdc230b3d6f3ba90f1626871",
       "webhookId": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1dFQkhPT0svMDQ4ZjIyZGQtMjNkMC00NjQzLTk5MzktOTBiNDY0ZjFjYTBh"
+    },
+    "node:Webex (Greg)": {
+      "secret": "1de59f427b3caa72ad3c65124618540a",
+      "webhookId": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1dFQkhPT0svYzJhMDliYTktOWU4Zi00Nzc0LTgzM2QtYzkwNGNiOTFhYTE4"
     }
   },
   "tags": [
@@ -855,6 +859,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-09-06T21:38:52.000Z",
-  "versionId": "6bc68fdd-9b64-4b22-956e-2fe55bce7708"
+  "updatedAt": "2024-10-02T18:06:02.000Z",
+  "versionId": "30e4e70a-470b-4e61-8892-3a81bad2e236"
 }
