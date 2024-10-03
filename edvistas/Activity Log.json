@@ -237,7 +237,7 @@
     {
       "parameters": {
         "content": "# Alerts & Notifications\n#### This node will send alerts to multiple alerting systems. We are currently using NTFY & Odoo.  \nTo see a list of emoji's click here --> [Emoji List Here](https://ntfy.edvistas.com/docs/emojis/)\n\nField List:\n- Title\n- Message\n- Priority\n- Emojis (array)\n- ClickURL\n- Channel",
-        "height": 317.1219195849546,
+        "height": 322.2741444093105,
         "width": 481
       },
       "id": "16f8d2c5-0471-4a75-8b66-62e5edc1df7b",
@@ -245,8 +245,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -100,
-        -180
+        -120,
+        -200
       ]
     },
     {
@@ -342,7 +342,7 @@
           "parameters": [
             {
               "name": "text",
-              "value": "={{ $json.MessageClean.trim }}\n{{ $json.ClickURL }}"
+              "value": "={{ $json.MessageClean }}\n{{ $json.ClickURL }}"
             }
           ]
         },
@@ -443,6 +443,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-10-02T14:20:28.000Z",
-  "versionId": "bffdb690-6ddc-476e-b7e6-6de266c86f5d"
+  "updatedAt": "2024-10-02T17:17:40.000Z",
+  "versionId": "1660f7b2-64f1-4760-8e2c-9bda48fa053f"
 }
