@@ -27,7 +27,7 @@
       "main": [
         [
           {
-            "node": "HTML1",
+            "node": "HTML",
             "type": "main",
             "index": 0
           }
@@ -112,22 +112,22 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -340,
+        -300,
         100
       ]
     },
     {
       "parameters": {
         "content": "## Post Results",
-        "height": 472.82051282051225
+        "height": 387.67516398330304
       },
       "id": "0dbcf629-a549-477a-b479-3b4934ac54a6",
       "name": "Sticky Note1",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1040,
-        60
+        1020,
+        105.14534883720921
       ]
     },
     {
@@ -163,7 +163,8 @@
           "presence_penalty": 0,
           "temperature": 0.4,
           "topP": 1
-        }
+        },
+        "requestOptions": {}
       },
       "id": "42ac509b-30a6-4997-9628-91a21b373a13",
       "name": "Act as Etymologist",
@@ -182,24 +183,11 @@
     },
     {
       "parameters": {
-        "html": "{{ $json.message.content }}"
-      },
-      "id": "e39ccbe3-b124-4655-a399-50047324f422",
-      "name": "HTML1",
-      "type": "n8n-nodes-base.html",
-      "typeVersion": 1,
-      "position": [
-        680,
-        240
-      ]
-    },
-    {
-      "parameters": {
         "fields": {
           "values": [
             {
               "name": "data",
-              "stringValue": "Babbel"
+              "stringValue": "Wizard"
             }
           ]
         },
@@ -217,12 +205,12 @@
     {
       "parameters": {
         "resource": "chat",
-        "model": "gpt-3.5-turbo-16k",
+        "model": "gpt-4o-mini",
         "prompt": {
           "messages": [
             {
               "role": "system",
-              "content": "=I want you to act as an HTML Generating machine. I will provide you with the inputs [Subject] and [Body] as the content and you will generate an elogent looking one page website. Make sure to use eye catching colors, bolds, underlines, italics, and format the heading correctly. You should use your knowledge of UX/UI design principles, coding languages, website development tools etc. Output your resluts as html. "
+              "content": "=I want you to act as an HTML Generating machine. I will provide you with the inputs [Subject] and [Body] as the content and you will generate an elogent looking one page website. Make sure to use eye catching colors, bolds, underlines, italics, and format the heading correctly. You should use your knowledge of UX/UI design principles, coding languages, website development tools etc. Output only html, do not make any comments. "
             },
             {
               "content": "=Subject=The Etymology of the word {{ $('Word').item.json.data }}\nBody= {{ $json.message.content }} "
@@ -235,7 +223,8 @@
           "presence_penalty": 0,
           "temperature": 0.7,
           "topP": 1
-        }
+        },
+        "requestOptions": {}
       },
       "id": "7fd40d31-923c-4267-9b79-b843abe38be7",
       "name": "HTML Generator",
@@ -259,12 +248,182 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1,
       "position": [
-        -260,
+        -220,
         240
+      ]
+    },
+    {
+      "parameters": {
+        "html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>The Etymology word of the day</title>\n  <style>\n    body {\n      font-family: Arial, sans-serif;\n      background-color: #f2f2f2;\n      color: #777;\n      margin: 0;\n      padding: 20px;\n    }\n\n    h1 {\n      font-size: 32px;\n      font-weight: bold;\n      margin: 0 0 20px;\n    }\n\n    p {\n      font-size: 18px;\n      line-height: 1.5;\n      margin: 0 0 10px;\n    }\n\n    ul {\n      margin: 0;\n      padding: 0 0 0 20px;\n    }\n\n    li {\n      margin: 0 0 5px;\n    }\n  </style>\n</head>\n<body>\n  <h1>The Etymology word of the day</h1>\n  <p>{{ $json.message.content }}</p>\n</body>\n</html>"
+      },
+      "id": "2217d762-58ae-47da-a73d-9b821b43058d",
+      "name": "Template 1",
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1,
+      "position": [
+        -240,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "html": "{{ $json.message.content }}"
+      },
+      "id": "7f60cbf7-7298-44a3-938a-f120966d021c",
+      "name": "Template 2",
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "html": "{{ $json.message.content }}"
+      },
+      "id": "d46b5128-95f8-41ce-9902-2dcba29f1932",
+      "name": "Template 3",
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1,
+      "position": [
+        120,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "html": "{{ $json.message.content }}"
+      },
+      "id": "e39ccbe3-b124-4655-a399-50047324f422",
+      "name": "HTML",
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1,
+      "position": [
+        680,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "html": "{{ $json.message.content }}"
+      },
+      "id": "6b1ddf30-b173-4b73-9f00-930a39d3d9f6",
+      "name": "Template 4",
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1,
+      "position": [
+        300,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "html": "{{ $json.message.content }}"
+      },
+      "id": "2118ab2f-3603-4230-95f5-b98c90710e58",
+      "name": "Template 5",
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1,
+      "position": [
+        480,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Templates",
+        "height": 333.81395348837214,
+        "width": 1557.6976744186038,
+        "color": 4
+      },
+      "id": "ce9f4277-5dd3-499c-8a00-00a925ef0246",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -295.476744186047,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "html": "{{ $json.message.content }}"
+      },
+      "id": "e2a94744-1369-4624-9f96-89a9c8df7afe",
+      "name": "Template 6",
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1,
+      "position": [
+        680,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "html": "{{ $json.message.content }}"
+      },
+      "id": "34016c9c-3b6f-46c6-9d5b-f130f6377310",
+      "name": "Template 7",
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1,
+      "position": [
+        880,
+        620
       ]
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Template 1": [
+      {
+        "json": {
+          "html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>The Etymology word of the day</title>\n  <style>\n    body {\n      font-family: Arial, sans-serif;\n      background-color: #f2f2f2;\n      color: #777;\n      margin: 0;\n      padding: 20px;\n    }\n\n    h1 {\n      font-size: 32px;\n      font-weight: bold;\n      margin: 0 0 20px;\n    }\n\n    p {\n      font-size: 18px;\n      line-height: 1.5;\n      margin: 0 0 10px;\n    }\n\n    ul {\n      margin: 0;\n      padding: 0 0 0 20px;\n    }\n\n    li {\n      margin: 0 0 5px;\n    }\n  </style>\n</head>\n<body>\n  <h1>The Etymology word of the day</h1>\n  <p>The word \"ascend\" has its origins in Latin. It comes from the Latin word \"ascendere,\" which is a combination of \"ad\" (meaning \"to\") and \"scandere\" (meaning \"to climb\"). \n\nIn Latin, \"ascendere\" was used to describe the physical act of climbing or going up, such as ascending a mountain or a staircase. The word was also used metaphorically to describe the act of rising to a higher position or status.\n\nOver time, the word \"ascend\" made its way into English, retaining its original meaning of moving upward. In English, it can refer to physically climbing or going up, as well as metaphorically rising in status, power, or importance.\n\nThe meaning of \"ascend\" has slightly evolved in modern usage. While it still refers to the act of moving upward, it is now commonly used in a more abstract sense. For example, one can \"ascend\" to a higher level of knowledge, spirituality, or understanding.\n\nOverall, the word \"ascend\" has retained its core meaning of moving upward, both literally and metaphorically, from its Latin origins to its usage in modern English.</p>\n</body>\n</html>"
+        }
+      }
+    ],
+    "Template 2": [
+      {
+        "json": {
+          "html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>The Etymology of the word Ascend</title>\n    <style>\n        body {\n            font-family: Arial, sans-serif;\n            margin: 40px;\n            background-color: #f4f4f9;\n            color: #333;\n        }\n        header {\n            background-color: #8c52ff;\n            color: white;\n            padding: 20px 40px;\n            text-align: center;\n            border-radius: 8px;\n            box-shadow: 0 4px 6px rgba(0,0,0,0.1);\n        }\n        h1 {\n            font-size: 24px;\n            margin: 0;\n        }\n        article {\n            margin-top: 20px;\n            padding: 20px;\n            background-color: white;\n            border-radius: 8px;\n            box-shadow: 0 2px 4px rgba(0,0,0,0.05);\n        }\n        p {\n            line-height: 1.6;\n        }\n        .highlight {\n            color: #5c2a9d;\n            font-weight: bold;\n        }\n        .meaning {\n            text-decoration: underline;\n            font-style: italic;\n        }\n    </style>\n</head>\n<body>\n    <header>\n        <h1>The Etymology of the word <span class=\"highlight\">Ascend</span></h1>\n    </header>\n    <article>\n        <p>The word \"<span class=\"highlight\">ascend</span>\" has its origins in Latin. It comes from the Latin word \"<span class=\"highlight\">ascendere</span>,\" which is a combination of \"<span class=\"meaning\">ad</span>\" (meaning \"to\") and \"<span class=\"meaning\">scandere</span>\" (meaning \"to climb\").</p>\n        \n        <p>In Latin, \"<span class=\"highlight\">ascendere</span>\" was used to describe the physical act of climbing or going up, such as ascending a mountain or a staircase. The word was also used metaphorically to describe the act of rising to a higher position or status.</p>\n        \n        <p>Over time, the word \"<span class=\"highlight\">ascend</span>\" made its way into English, retaining its original meaning of moving upward. In English, it can refer to physically climbing or going up, as well as metaphorically rising in status, power, or importance.</p>\n        \n        <p>The meaning of \"<span class=\"highlight\">ascend</span>\" has slightly evolved in modern usage. While it still refers to the act of moving upward, it is now commonly used in a more abstract sense. For example, one can \"<span class=\"highlight\">ascend</span>\" to a higher level of knowledge, spirituality, or understanding.</p>\n        \n        <p>Overall, the word \"<span class=\"highlight\">ascend</span>\" has retained its core meaning of moving upward, both literally and metaphorically, from its Latin origins to its usage in modern English.</p>\n    </article>\n</body>\n</html>"
+        }
+      }
+    ],
+    "Template 3": [
+      {
+        "json": {
+          "html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<title>The Etymology of the word ascend</title>\n<style>\n    body {\n        font-family: Arial, sans-serif;\n        margin: 0;\n        padding: 0;\n        background-color: #f4f4f9;\n        color: #333;\n    }\n    header {\n        background-color: #6a5acd;\n        color: #ffffff;\n        padding: 10px 20px;\n        text-align: center;\n    }\n    main {\n        padding: 20px;\n        line-height: 1.6;\n    }\n    h1 {\n        font-size: 24px;\n    }\n    p {\n        margin: 20px 0;\n    }\n    .highlight {\n        color: #6a5acd;\n        font-weight: bold;\n    }\n    .italic {\n        font-style: italic;\n    }\n</style>\n</head>\n<body>\n<header>\n    <h1>The Etymology of the word ascend</h1>\n</header>\n<main>\n    <p>The word <span class=\"highlight\">\"ascend\"</span> originated from the Latin word <span class=\"highlight italic\">\"ascendere,\"</span> which can be broken down into two parts: <span class=\"highlight\">\"ad,\"</span> meaning <span class=\"italic\">\"to\"</span> or <span class=\"italic\">\"towards,\"</span> and <span class=\"highlight\">\"scandere,\"</span> meaning <span class=\"italic\">\"to climb\"</span> or <span class=\"italic\">\"to go.\"</span></p>\n    \n    <p>In its earliest usage, <span class=\"highlight\">\"ascend\"</span> referred to physically climbing or going upwards, often used to describe the act of climbing a mountain, hill, or staircase. Over time, the word evolved to encompass not only physical ascent but also metaphorical or symbolic ascent.</p>\n    \n    <p>In religious or spiritual contexts, <span class=\"highlight\">\"ascend\"</span> came to represent the act of rising to a higher level of existence, such as ascending to heaven or achieving enlightenment. This metaphorical usage expanded to include the idea of progressing or improving oneself, reaching higher levels of knowledge, or attaining a higher social status.</p>\n    \n    <p>The word <span class=\"highlight\">\"ascend\"</span> has retained its core meaning throughout history, but its usage has also expanded to include more abstract concepts. Today, it can be used to describe the process of advancing in a career, moving up in social or economic status, or even the act of achieving a higher level of understanding or consciousness.</p>\n</main>\n</body>\n</html>"
+        }
+      }
+    ],
+    "Template 4": [
+      {
+        "json": {
+          "html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>The Etymology of the Word \"Ascend\"</title>\n    <style>\n        body {\n            font-family: Arial, sans-serif;\n            background-color: #f0f8ff;\n            color: #333;\n            margin: 0;\n            padding: 0;\n            line-height: 1.6;\n        }\n        header {\n            background-color: #4A90E2;\n            color: white;\n            padding: 20px 0;\n            text-align: center;\n        }\n        h1 {\n            margin: 0;\n            font-size: 2.5em;\n            text-shadow: 2px 2px #0056b3;\n        }\n        h2 {\n            color: #D16D6D;\n            font-size: 1.8em;\n            margin-top: 20px;\n        }\n        p {\n            margin: 20px;\n            text-align: justify;\n        }\n        strong {\n            color: #D16D6D;\n        }\n        em {\n            font-style: italic;\n            color: #4A90E2;\n        }\n        footer {\n            text-align: center;\n            padding: 10px 0;\n            background-color: #4A90E2;\n            color: white;\n            position: relative;\n            bottom: 0;\n            width: 100%;\n        }\n    </style>\n</head>\n<body>\n\n<header>\n    <h1>The Etymology of the Word <strong>\"Ascend\"</strong></h1>\n</header>\n\n<main>\n    <h2>Origins and Meanings</h2>\n    <p>\n        The word <strong>\"ascend\"</strong> originates from the Latin word <em>\"ascendere,\"</em> which is derived from the combination of the prefix <strong>\"ad-\"</strong> meaning <em>\"to\"</em> or <em>\"towards,\"</em> and the verb <strong>\"scandere\"</strong> meaning <em>\"to climb\"</em> or <em>\"to go up.\"</em> The Latin word <em>\"scandere\"</em> itself comes from the Proto-Indo-European root <strong>*skand-</strong>, meaning <em>\"to leap\"</em> or <em>\"to jump.\"</em>\n    </p>\n    \n    <p>\n        In its earliest usage, <strong>\"ascend\"</strong> primarily referred to physically climbing or going up, often in a literal sense. Over time, however, the word began to take on metaphorical and abstract meanings as well. In the realm of spirituality or religion, <strong>\"ascend\"</strong> came to be associated with the idea of moving upward or progressing to a higher level, such as ascending to heaven or achieving a higher state of consciousness.\n    </p>\n    \n    <p>\n        The word <strong>\"ascend\"</strong> has also been used in the context of social hierarchy. For example, in feudal societies, individuals could <strong>ascend</strong> in rank or status by being granted higher positions or titles. In this sense, <strong>\"ascend\"</strong> took on the meaning of moving up the social ladder.\n    </p>\n    \n    <p>\n        In modern usage, <strong>\"ascend\"</strong> continues to encompass both literal and metaphorical meanings. It can describe physical movement upwards, such as ascending a staircase or a mountain. Metaphorically, it can refer to progressing or rising in various domains, including career, knowledge, or personal development.\n    </p>\n    \n    <p>\n        Throughout its history, <strong>\"ascend\"</strong> has retained its core meaning of moving upwards, but its metaphorical applications have expanded, reflecting the evolving concepts and contexts in which the word is used.\n    </p>\n</main>\n\n<footer>\n    <p>&copy; 2023 Etymology Insights</p>\n</footer>\n\n</body>\n</html>"
+        }
+      }
+    ],
+    "Template 5": [
+      {
+        "json": {
+          "html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>The Etymology of the word ascend</title>\n    <style>\n        body {\n            font-family: Arial, sans-serif;\n            margin: 40px;\n            background-color: #f4f4f9;\n            color: #333;\n        }\n        h1 {\n            color: #0056b3;\n            text-align: center;\n        }\n        p {\n            font-size: 18px;\n            line-height: 1.6;\n            max-width: 800px;\n            margin: auto;\n            text-align: justify;\n        }\n        strong {\n            color: #4a90e2;\n        }\n        em {\n            font-style: italic;\n        }\n        .content {\n            background-color: #ffffff;\n            padding: 20px;\n            border-radius: 8px;\n            box-shadow: 0 4px 8px rgba(0,0,0,0.1);\n        }\n        .footer {\n            text-align: center;\n            margin-top: 40px;\n            font-size: 16px;\n            color: #666;\n        }\n    </style>\n</head>\n<body>\n    <div class=\"content\">\n        <h1><u>The Etymology of the Word \"Ascend\"</u></h1>\n        <p>\n            The word \"<strong>ascend</strong>\" originates from the Latin word \"<em>ascendere</em>,\" which is derived from the combination of the prefix \"<em>ad-</em>\" meaning \"<em>to</em>\" or \"<em>towards</em>,\" and the verb \"<em>scandere</em>\" meaning \"<em>to climb</em>\" or \"<em>to go up</em>.\" The Latin word \"<em>scandere</em>\" itself comes from the Proto-Indo-European root \"<em>*skand-</em>,\" meaning \"<em>to leap</em>\" or \"<em>to jump</em>.\"\n        </p>\n        <p>\n            In its earliest usage, \"<strong>ascend</strong>\" primarily referred to physically climbing or going up, often in a literal sense. Over time, however, the word began to take on metaphorical and abstract meanings as well. In the realm of spirituality or religion, \"<strong>ascend</strong>\" came to be associated with the idea of moving upward or progressing to a higher level, such as ascending to heaven or achieving a higher state of consciousness.\n        </p>\n        <p>\n            The word \"<strong>ascend</strong>\" has also been used in the context of social hierarchy. For example, in feudal societies, individuals could ascend in rank or status by being granted higher positions or titles. In this sense, \"<strong>ascend</strong>\" took on the meaning of moving up the social ladder.\n        </p>\n        <p>\n            In modern usage, \"<strong>ascend</strong>\" continues to encompass both literal and metaphorical meanings. It can describe physical movement upwards, such as ascending a staircase or a mountain. Metaphorically, it can refer to progressing or rising in various domains, including career, knowledge, or personal development.\n        </p>\n        <p>\n            Throughout its history, \"<strong>ascend</strong>\" has retained its core meaning of moving upwards, but its metaphorical applications have expanded, reflecting the evolving concepts and contexts in which the word is used.\n        </p>\n    </div>\n    <div class=\"footer\">\n        © 2023 The Etymology of \"Ascend\". All rights reserved.\n    </div>\n</body>\n</html>"
+        }
+      }
+    ],
+    "Template 6": [
+      {
+        "json": {
+          "html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>The Etymology of the Word \"Ascend\"</title>\n    <style>\n        body {\n            font-family: Arial, sans-serif;\n            background-color: #f0f8ff;\n            color: #333;\n            margin: 0;\n            padding: 20px;\n        }\n        header {\n            background-color: #4a90e2;\n            color: white;\n            padding: 20px;\n            text-align: center;\n        }\n        h1 {\n            font-size: 2.5em;\n            text-shadow: 1px 1px 2px #333;\n        }\n        h2 {\n            color: #d35400;\n            margin-top: 20px;\n        }\n        p {\n            font-size: 1.2em;\n            line-height: 1.6;\n            margin: 10px 0;\n        }\n        .highlight {\n            background-color: #ffeaa7;\n            font-weight: bold;\n        }\n        footer {\n            margin-top: 30px;\n            text-align: center;\n            font-size: 0.9em;\n            color: #777;\n        }\n    </style>\n</head>\n<body>\n    <header>\n        <h1>The Etymology of the Word <span class=\"highlight\">\"Ascend\"</span></h1>\n    </header>\n    <main>\n        <h2>Origin and Meaning</h2>\n        <p>The word <span class=\"highlight\">\"ascend\"</span> originates from the Latin word <span class=\"highlight\">\"ascendere,\"</span> which is derived from the combination of the prefix <span class=\"highlight\">\"ad-\"</span> meaning <i>\"to\"</i> or <i>\"towards,\"</i> and the verb <span class=\"highlight\">\"scandere\"</span> meaning <i>\"to climb\"</i> or <i>\"to go up.\"</i> The Latin word <span class=\"highlight\">\"scandere\"</span> itself comes from the Proto-Indo-European root <span class=\"highlight\">*</span>skand-<span class=\"highlight\">*</span>, meaning <i>\"to leap\"</i> or <i>\"to jump.\"</i></p>\n\n        <h2>Historical Usage</h2>\n        <p>In its earliest usage, <span class=\"highlight\">\"ascend\"</span> primarily referred to physically climbing or going up, often in a literal sense. Over time, however, the word began to take on metaphorical and abstract meanings as well. In the realm of spirituality or religion, <span class=\"highlight\">\"ascend\"</span> came to be associated with the idea of moving upward or progressing to a higher level, such as ascending to heaven or achieving a higher state of consciousness.</p>\n\n        <h2>Social Context</h2>\n        <p>The word <span class=\"highlight\">\"ascend\"</span> has also been used in the context of social hierarchy. For example, in feudal societies, individuals could ascend in rank or status by being granted higher positions or titles. In this sense, <span class=\"highlight\">\"ascend\"</span> took on the meaning of moving up the social ladder.</p>\n\n        <h2>Modern Usage</h2>\n        <p>In modern usage, <span class=\"highlight\">\"ascend\"</span> continues to encompass both literal and metaphorical meanings. It can describe physical movement upwards, such as ascending a staircase or a mountain. Metaphorically, it can refer to progressing or rising in various domains, including career, knowledge, or personal development.</p>\n\n        <h2>Conclusion</h2>\n        <p>Throughout its history, <span class=\"highlight\">\"ascend\"</span> has retained its core meaning of moving upwards, but its metaphorical applications have expanded, reflecting the evolving concepts and contexts in which the word is used.</p>\n    </main>\n    <footer>\n        &copy; 2023 Etymology Insights\n    </footer>\n</body>\n</html>"
+        }
+      }
+    ],
+    "Template 7": [
+      {
+        "json": {
+          "html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>The Etymology of the Word Job</title>\n    <style>\n        body {\n            font-family: Arial, sans-serif;\n            line-height: 1.6;\n            margin: 0;\n            padding: 0;\n            background-color: #f4f4f4;\n            color: #333;\n        }\n        header {\n            background: #007BFF;\n            color: white;\n            padding: 10px 0;\n            text-align: center;\n        }\n        h1 {\n            margin: 0;\n            font-size: 2.5em;\n        }\n        h2 {\n            color: #FF6F61;\n            margin-top: 20px;\n            text-decoration: underline;\n        }\n        .container {\n            padding: 20px;\n            max-width: 800px;\n            margin: auto;\n            background: white;\n            box-shadow: 0 2px 10px rgba(0,0,0,0.1);\n            border-radius: 8px;\n        }\n        p {\n            margin: 15px 0;\n        }\n        .highlight {\n            background-color: #e7f1ff;\n            padding: 5px;\n            border-radius: 4px;\n        }\n        footer {\n            text-align: center;\n            padding: 20px;\n            background: #007BFF;\n            color: white;\n            position: relative;\n            bottom: 0;\n            width: 100%;\n        }\n    </style>\n</head>\n<body>\n    <header>\n        <h1>The Etymology of the Word Job</h1>\n    </header>\n    <div class=\"container\">\n        <h2>Introduction</h2>\n        <p>The word <span class=\"highlight\">\"job\"</span> has an interesting etymology that can be traced back to ancient times.</p>\n\n        <h2>Historical Roots</h2>\n        <p>The modern English word <span class=\"highlight\">\"job\"</span> originated from Middle English <span class=\"highlight\">\"jobbe\"</span> or <span class=\"highlight\">\"jobben,\"</span> which referred to a piece of work or a task. This Middle English term likely evolved from the earlier Old English word <span class=\"highlight\">\"gobbe,\"</span> meaning a lump or piece.</p>\n\n        <h2>French and Latin Influences</h2>\n        <p>The origins of <span class=\"highlight\">\"job\"</span> can be further traced back to the Old French word <span class=\"highlight\">\"gobe,\"</span> which also meant a lump or mouthful. This Old French term ultimately derived from the Late Latin word <span class=\"highlight\">\"gobba,\"</span> meaning a lump or a hump.</p>\n\n        <h2>Meaning Evolution</h2>\n        <p>The transition from the meaning of a lump or mouthful to work or task is not entirely clear. Some theories suggest that it may have been influenced by the idea of a lump or piece of work being a task to be completed. Another theory suggests that it may have been influenced by the concept of a mouthful of work, similar to the idea of a mouthful of food.</p>\n\n        <h2>Modern Usage</h2>\n        <p>Over time, the meaning of <span class=\"highlight\">\"job\"</span> expanded to encompass a specific piece of work done for payment. By the 17th century, it had also come to refer to a regular occupation or profession. Today, <span class=\"highlight\">\"job\"</span> is commonly used to describe a paid position of employment or a task or duty to be performed.</p>\n    </div>\n    <footer>\n        <p>&copy; 2023 Etymology Studies</p>\n    </footer>\n</body>\n</html>"
+        }
+      }
+    ]
+  },
   "settings": {
     "saveManualExecutions": true,
     "callerPolicy": "workflowsFromSameOwner",
@@ -282,6 +441,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2024-06-04T01:08:27.000Z",
-  "versionId": "38dca2b9-66bf-4b00-b8bd-0779d2107f41"
+  "updatedAt": "2024-10-05T21:40:05.000Z",
+  "versionId": "5d4b1a12-c91d-4536-baf4-ff3df7ab8518"
 }
