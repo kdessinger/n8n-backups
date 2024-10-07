@@ -23,11 +23,29 @@
         ]
       ]
     },
+    "Read from EVICore (DB2)": {
+      "main": [
+        [
+          {
+            "node": "Write to SQL01 database",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "Read from EVICore": {
       "main": [
         [
           {
             "node": "Write to SQL01 database",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Read from EVICore (DB2)",
             "type": "main",
             "index": 0
           }
@@ -52,26 +70,6 @@
         800,
         600
       ]
-    },
-    {
-      "parameters": {
-        "table": "datacounts",
-        "columns": "=TimeStamp, AIMS, Courses, Datamate Elite, Datamate Live, Datamate Basic, Districts, Forms, Guardians, SafeSchools, Schools, SMS, Staff, StaffTrac, Students, Surveys, Users, ItemBank"
-      },
-      "id": "f6d19dda-5dd5-487e-95c5-a383a2c3fa21",
-      "name": "Write to SQL01 database",
-      "type": "n8n-nodes-base.microsoftSql",
-      "typeVersion": 1,
-      "position": [
-        1300,
-        480
-      ],
-      "credentials": {
-        "microsoftSql": {
-          "id": "9",
-          "name": "SQL01.edvistas.local (kdessinger)"
-        }
-      }
     },
     {
       "parameters": {
@@ -105,16 +103,39 @@
         "operation": "executeQuery",
         "query": "DECLARE @NoDist table (ID SmallInt) Insert into @NoDist values (-1), (21), (804), (805), (806), (815)\nDECLARE @tdate smalldatetime set @tdate = GetDate()\n\nSelect * from (\nSelect 'AIMS' as Name, Count(*) as Count, @tdate TimeStamp FROM aims..districts a Where a.enabled=1 and a.id not in(Select ID from @NoDist)\nunion select 'Courses' Name, Count(*) Count, @tdate TimeStamp FROM rbemcd..courses r Where r.districtid >0 and r.districtid not in(Select ID from @NoDist)\nunion select 'Datamate Elite' Name, Count(*) Count, @tdate TimeStamp from evitesting..districts e WHERE e.enabled=1 and e.id not in(Select ID from @NoDist) and e.datamateElite = 1\nunion select 'Datamate Live' Name, Count(*) Count, @tdate TimeStamp FROM evitesting..districts e WHERE e.enabled=1 and e.id not in(Select ID from @NoDist) and e.dmversion = 'Live'\nunion select 'Datamate Basic' Name, Count(*) Count, @tdate TimeStamp FROM evitesting..districts e WHERE e.enabled=1 and e.id not in(Select ID from @NoDist) and e.dmversion = 'Basic'\nunion select 'Districts' as Name, Count(*) Count, @tdate TimeStamp from eviForms..ecDistricts d Where d.id not in(Select ID from @NoDist)\nunion select 'Forms' as Name, Count(*) Count, @tdate TimeStamp  from eviForms..forms Where complete=0\nunion select 'Guardians' as Name, Count(*) Count, @tdate TimeStamp from eviForms..ecGuardians\nunion select 'SafeSchools' as Name, Count(*) Count, @tdate TimeStamp from safeschools..district ss Where ss.enabled=1 and (ss.trial = 0 or ss.trial is null) and ss.id not in(Select ID from @NoDist)\nunion select 'Schools' as Name, Count(*) Count, @tdate TimeStamp  from eviForms..ecschools \nunion select 'SMS' as Name, Sum(segments) Count, @tdate TimeStamp From eviForms..smsLog \nunion select 'Staff' as Name, Count(*) Count, @tdate TimeStamp  from eviForms..ecStaff sf where disabled=0 and sf.districtId not in (Select ID from @NoDist)\nunion select 'StaffTrac' as Name, Count(*) Count, @tdate TimeStamp FROM stafftrac..districts st Where st.enabled=1 and st.id not in (Select ID from @NoDist)\nunion select 'Students' as Name, Count(*) Count, @tdate TimeStamp  from eviForms..ecStudents s where active=1 and s.districtid not in (Select ID from @NoDist)\nunion select 'Surveys' as Name, Count(*) Count, @tdate TimeStamp FROM eviSurvate..surveys sv Where sv.disable=0 and sv.districtid not in (Select ID from @NoDist)\nunion select 'Users' as Name, Count(*) Count, @tdate TimeStamp  from eviForms..ecUsers u where u.active=1 and u.districtid not in (Select ID from @NoDist)\nunion select 'ItemBank' as Name, Count(*) Count, @tdate TimeStamp FROM evitesting..questionBank q\n ) l\n Pivot (\n\tSum(l.count) For l.name\n\tIn ([AIMS],[Courses],[Datamate Elite],[Datamate Live],[Datamate Basic],[Districts],[Forms],[Guardians],[SafeSchools],[Schools],[SMS],[Staff],[StaffTrac],[Students],[Surveys],[Users],[ItemBank])\n ) as pivotTable"
       },
-      "id": "80272609-9f0e-4951-92d9-cabca17b15b2",
-      "name": "Read from EVICore",
+      "id": "394e2168-59e7-4a3f-971b-1cd2ae0dcb36",
+      "name": "Read from EVICore (DB2)",
       "type": "n8n-nodes-base.microsoftSql",
-      "typeVersion": 1,
+      "typeVersion": 1.1,
       "position": [
-        1080,
-        480
+        1320,
+        620
       ],
+      "notesInFlow": true,
       "retryOnFail": true,
       "maxTries": 2,
+      "waitBetweenTries": 3000,
+      "credentials": {
+        "microsoftSql": {
+          "id": "8",
+          "name": "DB1.DS1.GOWLS.COM (kdessinger)"
+        }
+      },
+      "notes": "The DB1 connection failed, trying backup connection DB2."
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "DECLARE @NoDist table (ID SmallInt) Insert into @NoDist values (-1), (21), (804), (805), (806), (815)\nDECLARE @tdate smalldatetime set @tdate = GetDate()\n\nSelect * from (\nSelect 'AIMS' as Name, Count(*) as Count, @tdate TimeStamp FROM aims..districts a Where a.enabled=1 and a.id not in(Select ID from @NoDist)\nunion select 'Courses' Name, Count(*) Count, @tdate TimeStamp FROM rbemcd..courses r Where r.districtid >0 and r.districtid not in(Select ID from @NoDist)\nunion select 'Datamate Elite' Name, Count(*) Count, @tdate TimeStamp from evitesting..districts e WHERE e.enabled=1 and e.id not in(Select ID from @NoDist) and e.datamateElite = 1\nunion select 'Datamate Live' Name, Count(*) Count, @tdate TimeStamp FROM evitesting..districts e WHERE e.enabled=1 and e.id not in(Select ID from @NoDist) and e.dmversion = 'Live'\nunion select 'Datamate Basic' Name, Count(*) Count, @tdate TimeStamp FROM evitesting..districts e WHERE e.enabled=1 and e.id not in(Select ID from @NoDist) and e.dmversion = 'Basic'\nunion select 'Districts' as Name, Count(*) Count, @tdate TimeStamp from eviForms..ecDistricts d Where d.id not in(Select ID from @NoDist)\nunion select 'Forms' as Name, Count(*) Count, @tdate TimeStamp  from eviForms..forms Where complete=0\nunion select 'Guardians' as Name, Count(*) Count, @tdate TimeStamp from eviForms..ecGuardians\nunion select 'SafeSchools' as Name, Count(*) Count, @tdate TimeStamp from safeschools..district ss Where ss.enabled=1 and (ss.trial = 0 or ss.trial is null) and ss.id not in(Select ID from @NoDist)\nunion select 'Schools' as Name, Count(*) Count, @tdate TimeStamp  from eviForms..ecschools \nunion select 'SMS' as Name, Sum(segments) Count, @tdate TimeStamp From eviForms..smsLog \nunion select 'Staff' as Name, Count(*) Count, @tdate TimeStamp  from eviForms..ecStaff sf where disabled=0 and sf.districtId not in (Select ID from @NoDist)\nunion select 'StaffTrac' as Name, Count(*) Count, @tdate TimeStamp FROM stafftrac..districts st Where st.enabled=1 and st.id not in (Select ID from @NoDist)\nunion select 'Students' as Name, Count(*) Count, @tdate TimeStamp  from eviForms..ecStudents s where active=1 and s.districtid not in (Select ID from @NoDist)\nunion select 'Surveys' as Name, Count(*) Count, @tdate TimeStamp FROM eviSurvate..surveys sv Where sv.disable=0 and sv.districtid not in (Select ID from @NoDist)\nunion select 'Users' as Name, Count(*) Count, @tdate TimeStamp  from eviForms..ecUsers u where u.active=1 and u.districtid not in (Select ID from @NoDist)\nunion select 'ItemBank' as Name, Count(*) Count, @tdate TimeStamp FROM evitesting..questionBank q\n ) l\n Pivot (\n\tSum(l.count) For l.name\n\tIn ([AIMS],[Courses],[Datamate Elite],[Datamate Live],[Datamate Basic],[Districts],[Forms],[Guardians],[SafeSchools],[Schools],[SMS],[Staff],[StaffTrac],[Students],[Surveys],[Users],[ItemBank])\n ) as pivotTable"
+      },
+      "id": "2b762f03-96aa-40ca-a3d4-fd73dc12d069",
+      "name": "Read from EVICore",
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1.1,
+      "position": [
+        1080,
+        500
+      ],
       "notesInFlow": true,
       "credentials": {
         "microsoftSql": {
@@ -122,8 +143,28 @@
           "name": "DB1.DS1.GOWLS.COM (kdessinger)"
         }
       },
-      "onError": "continueRegularOutput",
-      "notes": "If we fail to login to DB1 then failover and use DB2"
+      "onError": "continueErrorOutput",
+      "notes": "If we fail to login to DB1 then failover to DB2"
+    },
+    {
+      "parameters": {
+        "table": "datacounts",
+        "columns": "=TimeStamp, AIMS, Courses, Datamate Elite, Datamate Live, Datamate Basic, Districts, Forms, Guardians, SafeSchools, Schools, SMS, Staff, StaffTrac, Students, Surveys, Users, ItemBank"
+      },
+      "id": "f6d19dda-5dd5-487e-95c5-a383a2c3fa21",
+      "name": "Write to SQL01 database",
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1,
+      "position": [
+        1540,
+        480
+      ],
+      "credentials": {
+        "microsoftSql": {
+          "id": "9",
+          "name": "SQL01.edvistas.local (kdessinger)"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -158,6 +199,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-10-04T14:45:20.000Z",
-  "versionId": "1c13381b-c444-4f01-a341-a6509e541bc0"
+  "updatedAt": "2024-10-07T14:50:41.000Z",
+  "versionId": "83849bc5-f7b7-45f6-96ae-94f5ff7e6ef1"
 }
