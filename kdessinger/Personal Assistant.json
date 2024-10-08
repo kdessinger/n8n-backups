@@ -12,17 +12,6 @@
         ]
       ]
     },
-    "When chat message received": {
-      "main": [
-        [
-          {
-            "node": "Master Agent",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Command?": {
       "main": [
         [
@@ -85,17 +74,6 @@
         ]
       ]
     },
-    "Structured Output Parser1": {
-      "ai_outputParser": [
-        [
-          {
-            "node": "Master Agent",
-            "type": "ai_outputParser",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Switchboard": {
       "main": [
         [
@@ -142,6 +120,28 @@
         ]
       ]
     },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Master Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Master Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "Master Agent": {
       "main": [
         [
@@ -163,6 +163,7 @@
   "nodes": [
     {
       "parameters": {
+        "model": "gpt-4o-mini",
         "options": {
           "responseFormat": "json_object"
         }
@@ -181,33 +182,6 @@
           "name": "OpenAi (kdessinger)"
         }
       }
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
-      "id": "9bbb9d16-e427-48fc-87b7-11f079867972",
-      "name": "When chat message received",
-      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
-      "typeVersion": 1.1,
-      "position": [
-        260,
-        440
-      ],
-      "webhookId": "430ffec6-2dfc-4c18-8c50-8b5cb22f11e0"
-    },
-    {
-      "parameters": {
-        "jsonSchemaExample": "{\n\t\"Type\": \"Command\",\n\t\"Category\": \"Email\"\n}"
-      },
-      "id": "eba2d5cf-c4e9-4708-9fcf-46160db54316",
-      "name": "Structured Output Parser1",
-      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
-      "typeVersion": 1.2,
-      "position": [
-        680,
-        660
-      ]
     },
     {
       "parameters": {
@@ -274,7 +248,7 @@
       "type": "@n8n/n8n-nodes-langchain.toolCalculator",
       "typeVersion": 1,
       "position": [
-        1420,
+        1340,
         780
       ]
     },
@@ -285,7 +259,7 @@
       "type": "@n8n/n8n-nodes-langchain.toolWikipedia",
       "typeVersion": 1,
       "position": [
-        1520,
+        1440,
         780
       ]
     },
@@ -298,7 +272,7 @@
       "type": "@n8n/n8n-nodes-langchain.toolSerpApi",
       "typeVersion": 1,
       "position": [
-        1620,
+        1540,
         780
       ],
       "credentials": {
@@ -307,22 +281,6 @@
           "name": "SerpAPI (kdessinger)"
         }
       }
-    },
-    {
-      "parameters": {
-        "agent": "conversationalAgent",
-        "promptType": "define",
-        "text": "={{ $('When chat message received').item.json.chatInput }}",
-        "options": {}
-      },
-      "id": "6bef58a7-3e9f-4ad0-9590-a487ff76f0ad",
-      "name": "General Chat",
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 1.6,
-      "position": [
-        1120,
-        560
-      ]
     },
     {
       "parameters": {
@@ -619,6 +577,33 @@
     },
     {
       "parameters": {
+        "options": {}
+      },
+      "id": "9bbb9d16-e427-48fc-87b7-11f079867972",
+      "name": "When chat message received",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        220,
+        440
+      ],
+      "webhookId": "430ffec6-2dfc-4c18-8c50-8b5cb22f11e0"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n\t\"Type\": \"Command\",\n\t\"Category\": \"Email\"\n}"
+      },
+      "id": "eba2d5cf-c4e9-4708-9fcf-46160db54316",
+      "name": "Structured Output Parser",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        680,
+        660
+      ]
+    },
+    {
+      "parameters": {
         "hasOutputParser": true,
         "options": {
           "systemMessage": "You are a home automation assistant that classifies user input as either casual conversation or a command request. You provide your output in a structured JSON format with two keys: \"Type\" and \"Category\".\n\n- If the user input is a casual conversation (e.g., \"How's the weather today?\", \"Tell me a joke.\"), you should set \"Type\" to \"Chat\" and leave \"Category\" as \"None\".\n- If the user input is a command (e.g., \"How many emails do I have?\", \"Add a meeting to my calendar.\"), you should set \"Type\" to \"Command\" and the \"Category\" should be one of the following: \"email\", \"calendar\", \"webex\", \"contacts\", \"projects\", or \"phone\".\n\n**Output Format:**\njson\n{\n  \"Type\": \"command\" or \"chat\",\n  \"Category\": \"email\" | \"calendar\" | \"webex\" | \"contacts\" | \"project\" | \"phone\" | \"none\"\n}\n"
@@ -632,6 +617,22 @@
         520,
         440
       ]
+    },
+    {
+      "parameters": {
+        "agent": "conversationalAgent",
+        "promptType": "define",
+        "text": "={{ $('When chat message received').item.json.chatInput }}",
+        "options": {}
+      },
+      "id": "6bef58a7-3e9f-4ad0-9590-a487ff76f0ad",
+      "name": "General Chat",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.6,
+      "position": [
+        1120,
+        560
+      ]
     }
   ],
   "pinData": {},
@@ -641,6 +642,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-10-08T04:12:05.000Z",
-  "versionId": "277a3372-ab75-4fee-bd9d-81aea4a829cb"
+  "updatedAt": "2024-10-08T04:40:30.000Z",
+  "versionId": "dea0899d-8b48-453b-9f7f-2853591b22fb"
 }
