@@ -1,0 +1,646 @@
+{
+  "active": false,
+  "connections": {
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Master Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Master Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Command?": {
+      "main": [
+        [
+          {
+            "node": "Switchboard",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "General Chat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "General Chat",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculator": {
+      "ai_tool": [
+        [
+          {
+            "node": "General Chat",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wikipedia": {
+      "ai_tool": [
+        [
+          {
+            "node": "General Chat",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SerpAPI": {
+      "ai_tool": [
+        [
+          {
+            "node": "General Chat",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser1": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Master Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switchboard": {
+      "main": [
+        [
+          {
+            "node": "Emails",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "calendar",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "WebEX",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "contacts",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "projects",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "phone",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Master Agent": {
+      "main": [
+        [
+          {
+            "node": "Command?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-10-08T02:19:03.016Z",
+  "id": "BiRKHP7fjOLntIOy",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Personal Assistant",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {
+          "responseFormat": "json_object"
+        }
+      },
+      "id": "d8ecf609-1a6d-4e34-a16f-67469d37d3e4",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        540,
+        660
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "24",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "9bbb9d16-e427-48fc-87b7-11f079867972",
+      "name": "When chat message received",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        260,
+        440
+      ],
+      "webhookId": "430ffec6-2dfc-4c18-8c50-8b5cb22f11e0"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n\t\"Type\": \"Command\",\n\t\"Category\": \"Email\"\n}"
+      },
+      "id": "eba2d5cf-c4e9-4708-9fcf-46160db54316",
+      "name": "Structured Output Parser1",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        680,
+        660
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "412bc11a-1627-4d66-bdfd-174029c1a4d9",
+              "leftValue": "={{ $json.output.Type }}",
+              "rightValue": "command",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {
+          "ignoreCase": true
+        }
+      },
+      "id": "2f951969-4be6-47b0-8db4-d9142bfab295",
+      "name": "Command?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        900,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o-mini",
+        "options": {
+          "responseFormat": "text"
+        }
+      },
+      "id": "2d68d41c-8186-4355-8526-afc912f2caa8",
+      "name": "OpenAI Chat Model1",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        1140,
+        780
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "24",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "67cd3911-df46-4fc6-8cfc-0feee5a87088",
+      "name": "Calculator",
+      "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+      "typeVersion": 1,
+      "position": [
+        1420,
+        780
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "2abff9da-404a-4da4-8a1e-5239481c1c2b",
+      "name": "Wikipedia",
+      "type": "@n8n/n8n-nodes-langchain.toolWikipedia",
+      "typeVersion": 1,
+      "position": [
+        1520,
+        780
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "7211e610-7fca-4a28-8c7a-df8643285263",
+      "name": "SerpAPI",
+      "type": "@n8n/n8n-nodes-langchain.toolSerpApi",
+      "typeVersion": 1,
+      "position": [
+        1620,
+        780
+      ],
+      "credentials": {
+        "serpApi": {
+          "id": "Ij7nio1lbgGnxaYT",
+          "name": "SerpAPI (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "agent": "conversationalAgent",
+        "promptType": "define",
+        "text": "={{ $('When chat message received').item.json.chatInput }}",
+        "options": {}
+      },
+      "id": "6bef58a7-3e9f-4ad0-9590-a487ff76f0ad",
+      "name": "General Chat",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.6,
+      "position": [
+        1120,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "320fe226-1467-4f54-aff0-48a57db8321f",
+              "name": "data",
+              "value": "Email",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a2ca3b3b-70f1-4d30-8f81-5050d0eb39d6",
+      "name": "Emails",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1320,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "320fe226-1467-4f54-aff0-48a57db8321f",
+              "name": "data",
+              "value": "Calendar",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c1b3aa01-aa53-4e29-9210-0f93274bbaff",
+      "name": "calendar",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1440,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "320fe226-1467-4f54-aff0-48a57db8321f",
+              "name": "data",
+              "value": "WeEX",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "1fa39bdc-ec0e-4711-b137-87714bde2490",
+      "name": "WebEX",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1560,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "320fe226-1467-4f54-aff0-48a57db8321f",
+              "name": "data",
+              "value": "Contacts",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a0ca3835-bc85-4eb4-b1f1-8f911a08a05c",
+      "name": "contacts",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1660,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "320fe226-1467-4f54-aff0-48a57db8321f",
+              "name": "data",
+              "value": "Projects",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "8c385149-9ba2-49ad-8f73-710c7708d93f",
+      "name": "projects",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1780,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "320fe226-1467-4f54-aff0-48a57db8321f",
+              "name": "data",
+              "value": "Phone",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "33e3c23b-cb54-42d7-baf2-b66d7237ff38",
+      "name": "phone",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1900,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.output.Category }}",
+                    "rightValue": "email",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "id": "dc962079-9c70-4345-a764-fa965d24eae0",
+                    "leftValue": "={{ $json.output.Category }}",
+                    "rightValue": "calendar",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "id": "31a5820e-a952-4140-b4ae-f7929b416fbd",
+                    "leftValue": "={{ $json.output.Category }}",
+                    "rightValue": "webex",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "id": "f9627ff7-cbf5-4039-b155-c62774660961",
+                    "leftValue": "={{ $json.output.Category }}",
+                    "rightValue": "contacts",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "id": "2642c309-9cbe-41ae-a285-7b6ffa819818",
+                    "leftValue": "={{ $json.output.Category }}",
+                    "rightValue": "projects",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "id": "6d143686-0065-4122-b6a4-bcb175c53e81",
+                    "leftValue": "={{ $json.output.Category }}",
+                    "rightValue": "phone",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "none"
+        }
+      },
+      "id": "fd88504d-40d1-446f-932d-0ccfbe02552c",
+      "name": "Switchboard",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [
+        1140,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are a home automation assistant that classifies user input as either casual conversation or a command request. You provide your output in a structured JSON format with two keys: \"Type\" and \"Category\".\n\n- If the user input is a casual conversation (e.g., \"How's the weather today?\", \"Tell me a joke.\"), you should set \"Type\" to \"Chat\" and leave \"Category\" as \"None\".\n- If the user input is a command (e.g., \"How many emails do I have?\", \"Add a meeting to my calendar.\"), you should set \"Type\" to \"Command\" and the \"Category\" should be one of the following: \"email\", \"calendar\", \"webex\", \"contacts\", \"projects\", or \"phone\".\n\n**Output Format:**\njson\n{\n  \"Type\": \"command\" or \"chat\",\n  \"Category\": \"email\" | \"calendar\" | \"webex\" | \"contacts\" | \"project\" | \"phone\" | \"none\"\n}\n"
+        }
+      },
+      "id": "b927915c-c51d-416a-99f1-3de95680867a",
+      "name": "Master Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.6,
+      "position": [
+        520,
+        440
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-10-08T04:12:05.000Z",
+  "versionId": "277a3372-ab75-4fee-bd9d-81aea4a829cb"
+}
