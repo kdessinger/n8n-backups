@@ -1,0 +1,92 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Reddit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reddit": {
+      "main": [
+        [
+          {
+            "node": "Remove Duplicates",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-09-12T02:57:13.223Z",
+  "id": "NHtiUbgAXWkA0r40",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Playing with Reddit",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "5b1e21c7-029f-4ebe-a9f3-e916c7f0e962",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "position": [
+        640,
+        240
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "subreddit": "viral",
+        "returnAll": true,
+        "filters": {}
+      },
+      "id": "79ff6015-e9f9-4e3c-a188-8f408eb98cc7",
+      "name": "Reddit",
+      "type": "n8n-nodes-base.reddit",
+      "typeVersion": 1,
+      "position": [
+        840,
+        240
+      ],
+      "credentials": {
+        "redditOAuth2Api": {
+          "id": "gA5Rq3SoA4VYNsm6",
+          "name": "Reddit (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "compare": "selectedFields",
+        "fieldsToCompare": "title",
+        "options": {}
+      },
+      "id": "d95e4d8e-3c49-40a8-b1c8-a5aab76248c8",
+      "name": "Remove Duplicates",
+      "type": "n8n-nodes-base.removeDuplicates",
+      "typeVersion": 1.1,
+      "position": [
+        1060,
+        240
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-10-08T02:10:47.000Z",
+  "versionId": "2d7af8ec-9d79-4d52-89af-cf4ab4611609"
+}
