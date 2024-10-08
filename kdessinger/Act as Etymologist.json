@@ -261,7 +261,7 @@
       "type": "n8n-nodes-base.html",
       "typeVersion": 1,
       "position": [
-        -240,
+        -320,
         620
       ]
     },
@@ -274,7 +274,7 @@
       "type": "n8n-nodes-base.html",
       "typeVersion": 1,
       "position": [
-        -60,
+        -140,
         620
       ]
     },
@@ -287,7 +287,7 @@
       "type": "n8n-nodes-base.html",
       "typeVersion": 1,
       "position": [
-        120,
+        40,
         620
       ]
     },
@@ -313,7 +313,7 @@
       "type": "n8n-nodes-base.html",
       "typeVersion": 1,
       "position": [
-        300,
+        220,
         620
       ]
     },
@@ -326,7 +326,7 @@
       "type": "n8n-nodes-base.html",
       "typeVersion": 1,
       "position": [
-        480,
+        400,
         620
       ]
     },
@@ -334,7 +334,7 @@
       "parameters": {
         "content": "## Templates",
         "height": 333.81395348837214,
-        "width": 1557.6976744186038,
+        "width": 1898.167365611896,
         "color": 4
       },
       "id": "ce9f4277-5dd3-499c-8a00-00a925ef0246",
@@ -342,7 +342,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -295.476744186047,
+        -400,
         520
       ]
     },
@@ -355,7 +355,7 @@
       "type": "n8n-nodes-base.html",
       "typeVersion": 1,
       "position": [
-        680,
+        600,
         620
       ]
     },
@@ -368,7 +368,7 @@
       "type": "n8n-nodes-base.html",
       "typeVersion": 1,
       "position": [
-        880,
+        800,
         620
       ]
     },
@@ -381,7 +381,20 @@
       "type": "n8n-nodes-base.html",
       "typeVersion": 1,
       "position": [
-        1060,
+        980,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "html": "{{ $json.message.content }}"
+      },
+      "id": "e481b854-31af-421a-8e7e-fea076db05ec",
+      "name": "Template 9",
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1,
+      "position": [
+        1180,
         620
       ]
     }
@@ -442,6 +455,13 @@
           "html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>The Etymology of the word Wizard</title>\n    <style>\n        body {\n            font-family: Arial, sans-serif;\n            background-color: #f0f8ff;\n            color: #333;\n            margin: 0;\n            padding: 20px;\n        }\n        header {\n            background-color: #4b0082;\n            color: white;\n            padding: 10px 0;\n            text-align: center;\n        }\n        h1 {\n            font-size: 2.5em;\n            margin: 0;\n            text-shadow: 2px 2px #ccc;\n        }\n        h2 {\n            color: #800080;\n            border-bottom: 2px solid #800080;\n            padding-bottom: 5px;\n        }\n        p {\n            line-height: 1.6;\n            margin: 15px 0;\n        }\n        .highlight {\n            background-color: #ffeb3b;\n            padding: 2px 4px;\n            border-radius: 3px;\n        }\n        footer {\n            text-align: center;\n            margin-top: 20px;\n            font-style: italic;\n            color: #555;\n        }\n    </style>\n</head>\n<body>\n    <header>\n        <h1>The Etymology of the word <span class=\"highlight\">Wizard</span></h1>\n    </header>\n    <main>\n        <h2>Introduction</h2>\n        <p>The word <strong>\"wizard\"</strong> has a fascinating etymology. It originated from the Middle English word <em>\"wys\"</em> or <em>\"wysard,\"</em> which was derived from the Old English word <strong>\"wīs,\"</strong> meaning <em>\"wise.\"</em> The suffix <strong>\"-ard\"</strong> was added to indicate a person associated with or possessing a particular quality.</p>\n\n        <h2>Historical Roots</h2>\n        <p>The Old English word <strong>\"wīs\"</strong> itself can be traced back to the Proto-Germanic word <em>*wīsaz</em>, meaning <strong>\"wise\"</strong> or <strong>\"knowledgeable.\"</strong> This Proto-Germanic root is also related to the Old Norse word <strong>\"víss\"</strong> and the Old High German word <strong>\"wīs,\"</strong> both having similar meanings.</p>\n\n        <h2>Evolution of Meaning</h2>\n        <p>The term <strong>\"wizard\"</strong> originally referred to a wise or learned person, particularly someone skilled in magic or sorcery. In medieval times, a wizard was often associated with someone who had supernatural powers or who practiced divination. They were believed to possess deep knowledge and were sought after for their abilities in various mystical arts.</p>\n\n        <h2>Modern Usage</h2>\n        <p>Over time, the meaning of the word <strong>\"wizard\"</strong> has evolved. In modern usage, it typically refers to a person who is highly skilled or knowledgeable in a particular field. The magical connotations have somewhat diminished, and the term is often used metaphorically to describe someone who is exceptionally talented or adept at something.</p>\n\n        <h2>Interchangeable Terms</h2>\n        <p>It is worth noting that the word <strong>\"wizard\"</strong> is often used interchangeably with other terms such as <em>\"sorcerer,\"</em> <em>\"magician,\"</em> or <em>\"enchanter,\"</em> depending on the context and cultural references. The specific nuances and associations of the word can vary across different mythologies, folklore, and literary traditions.</p>\n\n        <h2>Conclusion</h2>\n        <p>Overall, the word <strong>\"wizard\"</strong> has its roots in Old English and Proto-Germanic, originally denoting a wise person with magical or supernatural abilities. While the magical aspect has diminished in modern usage, the term still carries connotations of exceptional skill and expertise.</p>\n    </main>\n    <footer>\n        <p>&copy; 2023 Etymology Insights. All rights reserved.</p>\n    </footer>\n</body>\n</html>"
         }
       }
+    ],
+    "Template 9": [
+      {
+        "json": {
+          "html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>The Etymology of the Word Wizard</title>\n    <style>\n        body {\n            font-family: 'Arial', sans-serif;\n            background-color: #f0f8ff;\n            color: #333;\n            margin: 0;\n            padding: 20px;\n        }\n        h1 {\n            color: #4b0082;\n            text-align: center;\n            text-decoration: underline;\n        }\n        h2 {\n            color: #8a2be2;\n            margin-top: 30px;\n        }\n        p {\n            font-size: 1.1em;\n            line-height: 1.6;\n        }\n        strong {\n            color: #ff4500;\n        }\n        em {\n            color: #4682b4;\n        }\n        .container {\n            max-width: 800px;\n            margin: auto;\n            padding: 20px;\n            border-radius: 8px;\n            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n            background-color: #ffffff;\n        }\n        footer {\n            text-align: center;\n            margin-top: 40px;\n            font-size: 0.9em;\n            color: #777;\n        }\n    </style>\n</head>\n<body>\n    <div class=\"container\">\n        <h1>The Etymology of the Word <strong>Wizard</strong></h1>\n        <p>The word <strong>\"wizard\"</strong> has an intriguing etymology that can be traced back to the <em>Middle English</em> period. The term ultimately derives from the <strong>Old English</strong> word <em>\"wīs,\"</em> which means <strong>\"wise\"</strong> or <strong>\"knowing.\"</strong> In Old English, the word \"wīs\" referred to someone who possessed knowledge, wisdom, or skill.</p>\n        \n        <h2>Evolution of the Term</h2>\n        <p>During the Middle English period, the suffix <em>\"-ard\"</em> was added to \"wīs,\" resulting in the term <strong>\"wīsard.\"</strong> This suffix was often used to form pejorative or derogatory words, but in the case of \"wizard,\" it actually conveyed a sense of proficiency or skill. Therefore, a <em>\"wīsard\"</em> was someone who was exceptionally wise or knowledgeable.</p>\n        \n        <h2>From Wīsard to Wizard</h2>\n        <p>Over time, the spelling of <em>\"wīsard\"</em> evolved, and by the <strong>16th century</strong>, it transformed into <strong>\"wizard\"</strong> as we know it today. The term continued to denote someone who possessed extraordinary knowledge or skill, particularly in the realm of magic or the occult.</p>\n        \n        <h2>Contemporary Usage</h2>\n        <p>Interestingly, the meaning of <strong>\"wizard\"</strong> has expanded beyond its original association with magic. In contemporary usage, it can refer to an expert or master in any field. For example, someone might be called a <strong>\"computer wizard\"</strong> if they have exceptional knowledge and skill in computer programming.</p>\n\n        <h2>Summary</h2>\n        <p>In summary, the word <strong>\"wizard\"</strong> originated from the Old English <em>\"wīs,\"</em> meaning <strong>\"wise\"</strong> or <strong>\"knowing,\"</strong> and the Middle English term <em>\"wīsard,\"</em> which denoted someone who possessed exceptional wisdom or knowledge. Over time, the spelling evolved to <strong>\"wizard,\"</strong> and the meaning expanded to include expertise in various domains, beyond just magic or the occult.</p>\n    </div>\n    <footer>\n        &copy; 2023 Etymology Insights\n    </footer>\n</body>\n</html>"
+        }
+      }
     ]
   },
   "settings": {
@@ -461,6 +481,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2024-10-07T03:18:22.000Z",
-  "versionId": "49b6f93b-d3b0-41ae-b1b5-0c8664e56030"
+  "updatedAt": "2024-10-08T02:10:27.000Z",
+  "versionId": "4777f39d-e417-4d6f-aa36-e6c68093f44a"
 }
