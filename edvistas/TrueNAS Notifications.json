@@ -1,22 +1,11 @@
 {
   "active": true,
   "connections": {
-    "Set Globals": {
-      "main": [
-        [
-          {
-            "node": "Execute Workflow",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Pass Identity Check?": {
       "main": [
         [
           {
-            "node": "Set Globals",
+            "node": "Set Alert Message",
             "type": "main",
             "index": 0
           }
@@ -40,6 +29,17 @@
           }
         ]
       ]
+    },
+    "Set Alert Message": {
+      "main": [
+        [
+          {
+            "node": "Post to Activity Log",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2024-09-16T16:00:15.621Z",
@@ -49,72 +49,6 @@
   },
   "name": "TrueNAS Notifications",
   "nodes": [
-    {
-      "parameters": {
-        "workflowId": {
-          "__rl": true,
-          "value": "RMGsRy908UOekKo3",
-          "mode": "list",
-          "cachedResultName": "Activity Log"
-        },
-        "options": {}
-      },
-      "id": "85fc4100-1084-40eb-944b-145d96a97164",
-      "name": "Execute Workflow",
-      "type": "n8n-nodes-base.executeWorkflow",
-      "typeVersion": 1.1,
-      "position": [
-        880,
-        200
-      ]
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "2f483b2f-f663-493d-b0d5-4735f9f9b4e3",
-              "name": "Title",
-              "value": "TrueNAS Notification",
-              "type": "string"
-            },
-            {
-              "id": "26b298f5-6e2f-4f05-9fd2-3c6a3bb84edc",
-              "name": "Message",
-              "value": "={{ $json.body.text }}",
-              "type": "string"
-            },
-            {
-              "id": "341f9c63-c78b-474f-89d0-92bcad634817",
-              "name": "Priority",
-              "value": 5,
-              "type": "number"
-            },
-            {
-              "id": "932c17ed-2498-4fdb-8731-4cc2153dd2d5",
-              "name": "Emojis",
-              "value": "={{ $json.body.icon_url }}",
-              "type": "array"
-            },
-            {
-              "id": "ea6cb544-19b4-41e8-80c4-7efbbadec1f3",
-              "name": "ClickURL",
-              "value": "http://nas02.edvistas.local/",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "02f3fcf5-a2db-42f1-b515-f78841b3cb00",
-      "name": "Set Globals",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        620,
-        200
-      ]
-    },
     {
       "parameters": {
         "conditions": {
@@ -177,6 +111,72 @@
         300
       ],
       "webhookId": "6928a2d2-18fc-4fe3-9ce6-9fff88d04995"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2f483b2f-f663-493d-b0d5-4735f9f9b4e3",
+              "name": "Title",
+              "value": "TrueNAS Notification",
+              "type": "string"
+            },
+            {
+              "id": "26b298f5-6e2f-4f05-9fd2-3c6a3bb84edc",
+              "name": "Message",
+              "value": "={{ $json.body.text }}",
+              "type": "string"
+            },
+            {
+              "id": "341f9c63-c78b-474f-89d0-92bcad634817",
+              "name": "Priority",
+              "value": 5,
+              "type": "number"
+            },
+            {
+              "id": "932c17ed-2498-4fdb-8731-4cc2153dd2d5",
+              "name": "Emojis",
+              "value": "={{ $json.body.icon_url }}",
+              "type": "array"
+            },
+            {
+              "id": "ea6cb544-19b4-41e8-80c4-7efbbadec1f3",
+              "name": "ClickURL",
+              "value": "http://nas02.edvistas.local/",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "02f3fcf5-a2db-42f1-b515-f78841b3cb00",
+      "name": "Set Alert Message",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        620,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "RMGsRy908UOekKo3",
+          "mode": "list",
+          "cachedResultName": "Activity Log"
+        },
+        "options": {}
+      },
+      "id": "85fc4100-1084-40eb-944b-145d96a97164",
+      "name": "Post to Activity Log",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.1,
+      "position": [
+        880,
+        200
+      ]
     }
   ],
   "pinData": {},
@@ -209,6 +209,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-09-30T14:50:34.000Z",
-  "versionId": "037898bf-2af8-4c5e-8a80-712b1007334a"
+  "updatedAt": "2024-10-08T23:11:58.000Z",
+  "versionId": "cb2bf2cd-6927-48f9-ac8d-0b3b6f4e0ec1"
 }
