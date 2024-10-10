@@ -104,7 +104,7 @@
             {
               "id": "09621611-f636-48dd-9f72-a32f755efe74",
               "leftValue": "={{ $json.from }}",
-              "rightValue": "\"sync@edvistas.com\" <sync@edvistas.com>",
+              "rightValue": "<sync@edvistas.com>",
               "operator": {
                 "type": "string",
                 "operation": "equals",
@@ -230,9 +230,9 @@
       "parameters": {
         "modelId": {
           "__rl": true,
-          "value": "gpt-4-turbo",
+          "value": "gpt-4o-mini",
           "mode": "list",
-          "cachedResultName": "GPT-4-TURBO"
+          "cachedResultName": "GPT-4O-MINI"
         },
         "messages": {
           "values": [
@@ -273,11 +273,11 @@
   },
   "staticData": {
     "node:Email Trigger (IMAP)": {
-      "lastMessageUid": 64
+      "lastMessageUid": 105
     }
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2024-09-27T13:49:17.000Z",
-  "versionId": "1ed1fead-e057-4f69-a8a7-40fd3a5b7083"
+  "updatedAt": "2024-10-10T14:55:05.000Z",
+  "versionId": "36ec2077-577b-41f5-b2a5-660c5c8a6c0f"
 }
