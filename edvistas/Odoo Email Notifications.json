@@ -1,33 +1,11 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "Schedule Trigger": {
       "main": [
         [
           {
             "node": "Incoming Mail Servers",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Inventory Warehouse": {
-      "main": [
-        [
-          {
-            "node": "Sort",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Messages": {
-      "main": [
-        [
-          {
-            "node": "Sort1",
             "type": "main",
             "index": 0
           }
@@ -111,141 +89,9 @@
       "position": [
         -260,
         360
-      ]
-    },
-    {
-      "parameters": {
-        "resource": "custom",
-        "customResource": "stock.move",
-        "operation": "getAll",
-        "returnAll": true,
-        "options": {
-          "fieldsList": [
-            "id",
-            "name",
-            "date",
-            "product_type",
-            "product_tmpl_id",
-            "location_id",
-            "location_dest_id",
-            "partner_id",
-            "picking_id",
-            "description_picking",
-            "state",
-            "origin"
-          ]
-        }
-      },
-      "id": "4f25b1d8-1d14-40a9-866d-7a81a22aa24a",
-      "name": "Inventory Warehouse",
-      "type": "n8n-nodes-base.odoo",
-      "typeVersion": 1,
-      "position": [
-        -260,
-        620
       ],
-      "credentials": {
-        "odooApi": {
-          "id": "22",
-          "name": "Odoo (OdooBot)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "sortFieldsUi": {
-          "sortField": [
-            {
-              "fieldName": "date",
-              "order": "descending"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "3099bd85-67b9-43e1-8efe-4366a26516fa",
-      "name": "Sort",
-      "type": "n8n-nodes-base.sort",
-      "typeVersion": 1,
-      "position": [
-        -40,
-        620
-      ]
-    },
-    {
-      "parameters": {
-        "resource": "custom",
-        "customResource": "mail.message",
-        "operation": "getAll",
-        "limit": 500,
-        "options": {}
-      },
-      "id": "2c595fef-f222-4a7c-bc15-9e0783689247",
-      "name": "Messages",
-      "type": "n8n-nodes-base.odoo",
-      "typeVersion": 1,
-      "position": [
-        420,
-        620
-      ],
-      "credentials": {
-        "odooApi": {
-          "id": "12",
-          "name": "Odoo (Administrator)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "sortFieldsUi": {
-          "sortField": [
-            {
-              "fieldName": "date",
-              "order": "descending"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "19ce60be-78ad-44a9-98d9-77559c2d4b8a",
-      "name": "Sort1",
-      "type": "n8n-nodes-base.sort",
-      "typeVersion": 1,
-      "position": [
-        640,
-        620
-      ]
-    },
-    {
-      "parameters": {
-        "resource": "custom",
-        "customResource": "ir.cron",
-        "operation": "get",
-        "customResourceId": "7",
-        "options": {
-          "fieldsList": [
-            "name",
-            "lastcall",
-            "model_name",
-            "user_id",
-            "nextcall"
-          ]
-        }
-      },
-      "id": "70c5b63d-0543-4668-a4c7-dbd6faee8d12",
-      "name": "Fetch Mail Service",
-      "type": "n8n-nodes-base.odoo",
-      "typeVersion": 1,
-      "position": [
-        220,
-        620
-      ],
-      "credentials": {
-        "odooApi": {
-          "id": "12",
-          "name": "Odoo (Administrator)"
-        }
-      }
+      "notesInFlow": true,
+      "notes": "Run every 8 hours"
     },
     {
       "parameters": {
@@ -273,12 +119,14 @@
         -40,
         360
       ],
+      "notesInFlow": true,
       "credentials": {
         "odooApi": {
           "id": "12",
           "name": "Odoo (Administrator)"
         }
-      }
+      },
+      "notes": "query the mails servers"
     },
     {
       "parameters": {
@@ -297,7 +145,9 @@
       "position": [
         200,
         360
-      ]
+      ],
+      "notesInFlow": true,
+      "notes": "calculate time diff"
     },
     {
       "parameters": {
@@ -330,31 +180,9 @@
       "position": [
         420,
         360
-      ]
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "6b59481c-106b-4ea3-8548-7d157549e99e",
-              "name": "date",
-              "value": "={{ $json.date.toDateTime(). }}",
-              "type": "string"
-            }
-          ]
-        },
-        "includeOtherFields": true,
-        "options": {}
-      },
-      "id": "47fa6c60-4bd5-4c46-a463-ccdc64dafa5b",
-      "name": "Edit Fields",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        840,
-        620
-      ]
+      ],
+      "notesInFlow": true,
+      "notes": "If"
     },
     {
       "parameters": {
@@ -443,9 +271,15 @@
     "executionTimeout": 300,
     "errorWorkflow": "NtBd2hj1eiR2xufe"
   },
-  "staticData": null,
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": [
+        0
+      ]
+    }
+  },
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2024-10-09T13:54:01.000Z",
-  "versionId": "0edbe51f-9ef1-418c-a326-6755b6d9bf58"
+  "triggerCount": 1,
+  "updatedAt": "2024-10-09T17:45:01.000Z",
+  "versionId": "b7532b22-5fe2-4175-8f78-aa5862b9d46d"
 }
