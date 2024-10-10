@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "Calculator": {
       "ai_tool": [
@@ -271,11 +271,14 @@
         "returnAll": true,
         "options": {
           "fieldsList": [
-            "won_status",
             "description",
             "email_from",
             "contact_name",
-            "expected_revenue"
+            "expected_revenue",
+            "activity_state",
+            "email_state",
+            "kanban_state",
+            "phone_state"
           ]
         }
       },
@@ -473,6 +476,6 @@
   },
   "tags": [],
   "triggerCount": 3,
-  "updatedAt": "2024-08-16T19:12:34.000Z",
-  "versionId": "a03aa4fd-e45e-4788-aded-9697834e6a9e"
+  "updatedAt": "2024-10-10T13:46:53.000Z",
+  "versionId": "2ce2fc59-909f-4683-bdb6-16c3a4d9e84b"
 }
