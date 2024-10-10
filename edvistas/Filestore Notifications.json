@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "Email Trigger (IMAP)": {
       "main": [
@@ -156,7 +156,8 @@
           "options": {
             "caseSensitive": true,
             "leftValue": "",
-            "typeValidation": "strict"
+            "typeValidation": "strict",
+            "version": 1
           },
           "conditions": [
             {
@@ -203,7 +204,7 @@
   },
   "staticData": {
     "node:Email Trigger (IMAP)": {
-      "lastMessageUid": 2872
+      "lastMessageUid": 2914
     }
   },
   "tags": [
@@ -227,6 +228,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-10-03T16:27:38.000Z",
-  "versionId": "eace8453-3c9d-4089-a58a-b31bd4514f52"
+  "updatedAt": "2024-10-10T15:18:44.000Z",
+  "versionId": "2d15639c-5bd3-4477-934a-df6299525dc6"
 }
