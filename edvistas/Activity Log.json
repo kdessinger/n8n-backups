@@ -342,7 +342,7 @@
           "parameters": [
             {
               "name": "text",
-              "value": "={{ $json.MessageClean }}\n{{ $json.ClickURL }}"
+              "value": "={{ $json.Message }}\n{{ $json.ClickURL }}"
             }
           ]
         },
@@ -386,33 +386,30 @@
     "Execute Workflow Trigger": [
       {
         "json": {
-          "id": "ed4da36961aa4d6fbb230bdff4c74708_I_611129246206748804",
-          "meetingNumber": "26331300969",
-          "title": "Weekly Sales Meeting",
-          "agenda": "Gents,\n\nHere is a weekly sales meeting invite, for Monday and Fridays. I'd like to talk through the agenda for the week in terms of activity planned on Mondays. Then on Fridays, we will talk about the activity (what went well, what didn't, what happened, sales made, etc.). \n\nThis will be a great opportunity to bounce ideas off each other, and strategize as a team. I'm scheduling for an hour to make sure we have plenty of time together, but may revise day/time depending on activity in the field.\n\nThank you,\nPete",
-          "password": "spVxTqv33C2",
-          "start": "2024-09-30T17:57:48Z",
-          "MeetingStart": "2024-09-30 17:57:48",
+          "id": "6b6d73b0aae845868ecebf24cf48636e_I_613798174458472638",
+          "meetingNumber": "28642658254",
+          "title": "DataMate Demo w/ EduTech",
+          "password": "HaGyKMi2P84",
+          "start": "2024-10-10T14:58:28Z",
+          "MeetingStart": "2024-10-10 14:58:28",
           "MeetingEnd": "NaN-NaN-NaN NaN:NaN:NaN",
           "duration": null,
           "timezone": "UTC",
           "reminderTime": 15,
-          "hostDisplayName": "Pete Cooper",
-          "hostEmail": "pcooper@edvistas.com",
-          "webLink": "https://educationalvistasinc.my.webex.com/educationalvistasinc.my/j.php?MTID=m478a61d7eec12a1a733175ddc36d6982",
+          "hostDisplayName": "TJ Leonard",
+          "hostEmail": "tjleonard@edvistas.com",
+          "webLink": "https://educationalvistasinc-535335.my.webex.com/educationalvistasinc-535335.my/j.php?MTID=m76dbb47ced127e7e251c5e5f89156d15",
           "Attendees": [
-            "cmartin@edvistas.com",
             "tjleonard@edvistas.com"
           ],
           "displayName": [
-            "cmartin@edvistas.com",
-            "tjleonard@edvistas.com"
+            "TJ Leonard"
           ],
           "Title": "A WebEX Meeting has Started",
-          "Message": "Pete Cooper has started the WebEx meeting titled \"Weekly Sales Meeting\".",
-          "ClickURL": "https://educationalvistasinc.my.webex.com/educationalvistasinc.my/j.php?MTID=m478a61d7eec12a1a733175ddc36d6982",
+          "Message": "TJ Leonard has started the WebEx meeting titled \"DataMate Demo w/ EduTech\".",
+          "ClickURL": "https://educationalvistasinc-535335.my.webex.com/educationalvistasinc-535335.my/j.php?MTID=m76dbb47ced127e7e251c5e5f89156d15",
           "Emojis": [
-            "+1",
+            "hourglass_flowing_sand",
             "date"
           ],
           "Priority": 1
@@ -443,6 +440,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-10-02T17:17:40.000Z",
-  "versionId": "1660f7b2-64f1-4760-8e2c-9bda48fa053f"
+  "updatedAt": "2024-10-10T15:05:40.000Z",
+  "versionId": "8274306c-794c-47f6-94b4-94c0928069b9"
 }
