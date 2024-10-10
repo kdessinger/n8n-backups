@@ -176,6 +176,39 @@
           }
         ]
       ]
+    },
+    "Inventory Warehouse": {
+      "main": [
+        [
+          {
+            "node": "Sort",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Messages": {
+      "main": [
+        [
+          {
+            "node": "Sort1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Mail Service": {
+      "main": [
+        [
+          {
+            "node": "Sort2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2024-09-18T21:19:39.484Z",
@@ -575,6 +608,153 @@
         1660,
         1120
       ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "stock.move",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {
+          "fieldsList": [
+            "id",
+            "name",
+            "date",
+            "product_type",
+            "product_tmpl_id",
+            "location_id",
+            "location_dest_id",
+            "partner_id",
+            "picking_id",
+            "description_picking",
+            "state",
+            "origin"
+          ]
+        }
+      },
+      "id": "c3f222c5-f0d8-485b-993e-3390ae0d3930",
+      "name": "Inventory Warehouse",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        1840,
+        460
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sortFieldsUi": {
+          "sortField": [
+            {
+              "fieldName": "date",
+              "order": "descending"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "85151834-3863-4457-9f9f-2d87fe505606",
+      "name": "Sort",
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        2060,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "mail.message",
+        "operation": "getAll",
+        "limit": 500,
+        "options": {}
+      },
+      "id": "d3c7769b-071e-43cf-b30b-a0d84b44d7c9",
+      "name": "Messages",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        1840,
+        820
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "12",
+          "name": "Odoo (Administrator)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sortFieldsUi": {
+          "sortField": [
+            {
+              "fieldName": "date",
+              "order": "descending"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "80a31a7b-3d6f-414d-a322-61e5e1c8e778",
+      "name": "Sort1",
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        2060,
+        820
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "ir.cron",
+        "operation": "get",
+        "customResourceId": "7",
+        "options": {
+          "fieldsList": [
+            "name",
+            "lastcall",
+            "model_name",
+            "user_id",
+            "nextcall"
+          ]
+        }
+      },
+      "id": "d1035af5-d822-4647-9ca5-1618da80333a",
+      "name": "Fetch Mail Service",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        1840,
+        640
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "12",
+          "name": "Odoo (Administrator)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "8fe49f1b-54b6-4116-947f-5d10ed7eab2f",
+      "name": "Sort2",
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        2060,
+        640
+      ]
     }
   ],
   "pinData": {},
@@ -584,6 +764,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-09-18T21:19:39.484Z",
-  "versionId": "079b57e9-9250-4406-b67e-81661964763f"
+  "updatedAt": "2024-10-09T17:42:13.000Z",
+  "versionId": "8700f63a-2a9a-4488-ae9c-dc100f499eb4"
 }
