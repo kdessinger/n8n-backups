@@ -74,7 +74,9 @@
     {
       "parameters": {
         "mailbox": "Inbox/Sync Errors",
-        "options": {}
+        "options": {
+          "forceReconnect": 120
+        }
       },
       "id": "21433e77-56c7-48be-9bdf-b4111463150d",
       "name": "Email Trigger (IMAP)",
@@ -273,11 +275,11 @@
   },
   "staticData": {
     "node:Email Trigger (IMAP)": {
-      "lastMessageUid": 105
+      "lastMessageUid": 108
     }
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2024-10-10T14:55:05.000Z",
-  "versionId": "36ec2077-577b-41f5-b2a5-660c5c8a6c0f"
+  "updatedAt": "2024-10-10T20:41:32.000Z",
+  "versionId": "c4b3384d-3546-44ce-9a14-e7367d2d3ce5"
 }
