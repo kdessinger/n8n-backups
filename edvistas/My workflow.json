@@ -209,6 +209,17 @@
           }
         ]
       ]
+    },
+    "Inventory Warehouse1": {
+      "main": [
+        [
+          {
+            "node": "Sort3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2024-09-18T21:19:39.484Z",
@@ -628,7 +639,17 @@
             "picking_id",
             "description_picking",
             "state",
-            "origin"
+            "origin",
+            "show_operations"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "state",
+              "operator": "notEqual",
+              "value": "done"
+            }
           ]
         }
       },
@@ -642,31 +663,10 @@
       ],
       "credentials": {
         "odooApi": {
-          "id": "22",
-          "name": "Odoo (OdooBot)"
+          "id": "13",
+          "name": "Odoo-Stage (kdessinger)"
         }
       }
-    },
-    {
-      "parameters": {
-        "sortFieldsUi": {
-          "sortField": [
-            {
-              "fieldName": "date",
-              "order": "descending"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "85151834-3863-4457-9f9f-2d87fe505606",
-      "name": "Sort",
-      "type": "n8n-nodes-base.sort",
-      "typeVersion": 1,
-      "position": [
-        2060,
-        460
-      ]
     },
     {
       "parameters": {
@@ -755,6 +755,81 @@
         2060,
         640
       ]
+    },
+    {
+      "parameters": {
+        "sortFieldsUi": {
+          "sortField": [
+            {
+              "fieldName": "date",
+              "order": "descending"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "75178f47-89ab-4d3d-82d0-fd780ee1ef7f",
+      "name": "Sort",
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        2060,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "stock.move",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {
+          "fieldsList": []
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "state",
+              "value": "assigned"
+            }
+          ]
+        }
+      },
+      "id": "e34e863c-1ca8-406c-af83-741b46f5e892",
+      "name": "Inventory Warehouse1",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        2380,
+        540
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "13",
+          "name": "Odoo-Stage (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sortFieldsUi": {
+          "sortField": [
+            {
+              "fieldName": "date",
+              "order": "descending"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b3258b84-1e76-45fc-9066-09ee9ba1ae59",
+      "name": "Sort3",
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        2560,
+        540
+      ]
     }
   ],
   "pinData": {},
@@ -764,6 +839,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-10-09T17:42:13.000Z",
-  "versionId": "8700f63a-2a9a-4488-ae9c-dc100f499eb4"
+  "updatedAt": "2024-10-11T14:02:15.000Z",
+  "versionId": "6c421759-60d5-4740-84f0-b32729fc0fbe"
 }
