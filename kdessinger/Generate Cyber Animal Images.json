@@ -1,0 +1,140 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Random Animal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cyberpunk Image Generator": {
+      "main": [
+        [
+          {
+            "node": "Save file to disk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Random Animal": {
+      "main": [
+        [
+          {
+            "node": "Cyberpunk Image Generator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-10-11T04:44:02.166Z",
+  "id": "euWMjZT0dZUg36Va",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Generate Cyber Animal Images",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "9d5d878b-1f61-44b8-be09-103679fbdd35",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "position": [
+        0,
+        300
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "path": "=/Public/Shared Pictures/uploaded/cyber_{{ $('Random Animal').item.json.message.content }}_{{ $now.format('yyMMdd-HHmm') }}.{{ $json.fileExtension }}",
+        "binaryDataUpload": true
+      },
+      "id": "e70bb8f3-206a-4a07-8cd4-72eec0faab27",
+      "name": "Save file to disk",
+      "type": "n8n-nodes-base.nextCloud",
+      "typeVersion": 1,
+      "position": [
+        860,
+        300
+      ],
+      "credentials": {
+        "nextCloudApi": {
+          "id": "z2gkXhk0EPG6w5sI",
+          "name": "NextCloud (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "prompt": "=Create a highly detailed digital art piece featuring a {{ $json.message.content }} character in a cyberpunk style. The {{ $json.message.content }} should have neon lighting, wearing futuristic headphones and reflective sunglasses. The {{ $json.message.content }} should have vibrant fur or skin with glowing elements, and the background should be filled with abstract neon cityscapes or digital circuit patterns. The style should be inspired by a mix of neon glow, vivid colors, and intricate cybernetic details. Ensure the {{ $json.message.content }}’s expression is confident and cool, and the composition highlights the reflective details in the sunglasses and headphones. Use colors like electric blue, hot pink, and vibrant purple to create a striking, high-contrast visual impact.\n\n",
+        "options": {}
+      },
+      "id": "70274d52-b3be-4e9b-ad7f-5f13e07469cc",
+      "name": "Cyberpunk Image Generator",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.5,
+      "position": [
+        640,
+        300
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "24",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4-turbo",
+          "mode": "list",
+          "cachedResultName": "GPT-4-TURBO"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "Your job is to generate a random animal. The output should only be the animal name and nothing else. Include animals from diverse categories like mammals, birds, reptiles, insects, aquatic creatures, and even mythical animals. Prioritize lesser-known species to ensure a broader range of outputs.\n",
+              "role": "system"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "5950aef4-c0e0-4d07-b5c4-6d1bf986d6a0",
+      "name": "Random Animal",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.5,
+      "position": [
+        240,
+        300
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "24",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-10-11T05:41:03.000Z",
+  "versionId": "3864fe58-c236-413c-86d2-120ddc7d0eb9"
+}
