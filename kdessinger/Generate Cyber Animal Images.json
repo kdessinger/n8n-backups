@@ -1,11 +1,11 @@
 {
   "active": false,
   "connections": {
-    "When clicking ‘Test workflow’": {
+    "Random Animal": {
       "main": [
         [
           {
-            "node": "Random Animal",
+            "node": "Cyberpunk Image Generator",
             "type": "main",
             "index": 0
           }
@@ -23,11 +23,11 @@
         ]
       ]
     },
-    "Random Animal": {
+    "Execute Workflow Trigger": {
       "main": [
         [
           {
-            "node": "Cyberpunk Image Generator",
+            "node": "Random Animal",
             "type": "main",
             "index": 0
           }
@@ -43,19 +43,8 @@
   "name": "Generate Cyber Animal Images",
   "nodes": [
     {
-      "parameters": {},
-      "id": "9d5d878b-1f61-44b8-be09-103679fbdd35",
-      "name": "When clicking ‘Test workflow’",
-      "type": "n8n-nodes-base.manualTrigger",
-      "position": [
-        0,
-        300
-      ],
-      "typeVersion": 1
-    },
-    {
       "parameters": {
-        "path": "=/Public/Shared Pictures/uploaded/cyber_{{ $('Random Animal').item.json.message.content }}_{{ $now.format('yyMMdd-HHmm') }}.{{ $json.fileExtension }}",
+        "path": "=/Public/Shared Pictures/uploaded/Cyber Animals/cyber_{{ $('Random Animal').item.json.message.content }}_{{ $now.format('yyMMdd-HHmm') }}.{{ $json.fileExtension }}",
         "binaryDataUpload": true
       },
       "id": "e70bb8f3-206a-4a07-8cd4-72eec0faab27",
@@ -63,34 +52,13 @@
       "type": "n8n-nodes-base.nextCloud",
       "typeVersion": 1,
       "position": [
-        860,
+        820,
         300
       ],
       "credentials": {
         "nextCloudApi": {
           "id": "z2gkXhk0EPG6w5sI",
           "name": "NextCloud (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "resource": "image",
-        "prompt": "=Create a highly detailed digital art piece featuring a {{ $json.message.content }} character in a cyberpunk style. The {{ $json.message.content }} should have neon lighting, wearing futuristic headphones and reflective sunglasses. The {{ $json.message.content }} should have vibrant fur or skin with glowing elements, and the background should be filled with abstract neon cityscapes or digital circuit patterns. The style should be inspired by a mix of neon glow, vivid colors, and intricate cybernetic details. Ensure the {{ $json.message.content }}’s expression is confident and cool, and the composition highlights the reflective details in the sunglasses and headphones. Use colors like electric blue, hot pink, and vibrant purple to create a striking, high-contrast visual impact.\n\n",
-        "options": {}
-      },
-      "id": "70274d52-b3be-4e9b-ad7f-5f13e07469cc",
-      "name": "Cyberpunk Image Generator",
-      "type": "@n8n/n8n-nodes-langchain.openAi",
-      "typeVersion": 1.5,
-      "position": [
-        640,
-        300
-      ],
-      "credentials": {
-        "openAiApi": {
-          "id": "24",
-          "name": "OpenAi (kdessinger)"
         }
       }
     },
@@ -126,15 +94,62 @@
           "name": "OpenAi (kdessinger)"
         }
       }
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "prompt": "=Create a highly detailed digital art piece featuring a {{ $json.message.content }} character in a cyberpunk style. The {{ $json.message.content }} should have neon lighting, wearing futuristic headphones and reflective sunglasses. The {{ $json.message.content }} should have vibrant fur or skin with glowing elements, and the background should be filled with abstract neon cityscapes or digital circuit patterns. The style should be inspired by a mix of neon glow, vivid colors, and intricate cybernetic details. Ensure the {{ $json.message.content }}’s expression is confident and cool, and the composition highlights the reflective details in the sunglasses and headphones. Use colors like electric blue, hot pink, and vibrant purple to create a striking, high-contrast visual impact.\n\n",
+        "options": {}
+      },
+      "id": "70274d52-b3be-4e9b-ad7f-5f13e07469cc",
+      "name": "Cyberpunk Image Generator",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.5,
+      "position": [
+        620,
+        300
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "24",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "fc5c22a2-0a73-40a4-be0b-0a3b2b69d0ad",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        20,
+        300
+      ]
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Random Animal": [
+      {
+        "json": {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "Cobra",
+            "refusal": null
+          },
+          "logprobs": null,
+          "finish_reason": "stop"
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1"
   },
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-10-11T05:41:03.000Z",
-  "versionId": "3864fe58-c236-413c-86d2-120ddc7d0eb9"
+  "updatedAt": "2024-10-12T02:45:43.000Z",
+  "versionId": "569fbdc9-0331-4fc9-901f-032bdd898d53"
 }
