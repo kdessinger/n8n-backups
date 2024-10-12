@@ -1,0 +1,120 @@
+{
+  "active": false,
+  "connections": {
+    "Random Halloween Monster": {
+      "main": [
+        [
+          {
+            "node": "Neon Halloween Character",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Neon Halloween Character": {
+      "main": [
+        [
+          {
+            "node": "Save file to disk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Random Halloween Monster",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-10-12T01:23:14.764Z",
+  "id": "2prSqkBoqOVntUGV",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Generate Neon Halloween Images",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "=/Public/Shared Pictures/uploaded/Neon Halloween Characters/neon_{{ $('Random Halloween Monster').item.json.character }}_{{ $now.format('yyMMdd-HHmm') }}.{{ $json.fileExtension }}",
+        "binaryDataUpload": true
+      },
+      "id": "9d63b787-a4ac-4867-b91b-cfbcac6164b8",
+      "name": "Save file to disk",
+      "type": "n8n-nodes-base.nextCloud",
+      "typeVersion": 1,
+      "position": [
+        600,
+        300
+      ],
+      "credentials": {
+        "nextCloudApi": {
+          "id": "z2gkXhk0EPG6w5sI",
+          "name": "NextCloud (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const monsters = [\n  'Vampire', 'Ghost', 'Pumpkin', 'Strawman', 'Red Monster', 'Blue Monster',\n  'Frankenstein', 'Witch', 'Ghoul', 'Gravestone', 'Devil', 'Alien',\n  'Werewolf', 'Zombie', 'Mummy', 'Skeleton', 'Banshee', 'Phantom',\n  'Reaper', 'Poltergeist', 'Gremlin', 'Goblin', 'Troll', 'Bat',\n  'Dracula', 'Jack-o-Lantern', 'Haunted Tree', 'Mad Scientist', 'Spider',\n  'Black Cat', 'Cerberus', 'Gorgon', 'Cyclops', 'Harpy', 'Chupacabra',\n  'Headless Horseman', 'Beelzebub', 'Kraken', 'Sea Monster', 'Baba Yaga',\n  'Wendigo', 'Mothman', 'Sknin Walker', 'Lich', 'Demon', 'Shadow Creature',\n  'Swamp Monster', 'Grim Reaper', 'Clown', 'Phantom Knight', 'Siren'\n];\n\nconst randomIndex = Math.floor(Math.random() * monsters.length);\n\n// Return a single string as a JSON object\nreturn [{\n  json: { character: monsters[randomIndex] }\n}];"
+      },
+      "id": "09ece2c8-bd78-411e-868e-120eb7416b66",
+      "name": "Random Halloween Monster",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        180,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "prompt": "=\"Create a single, centered neon-lit {{ $json.character }} in a glowing, futuristic style. The character should be the sole subject in the image, with no additional figures, side panels, color palettes, or design elements. Only the character should be visible, with no added color bars, grids, or secondary figures. The neon colors should include vibrant hues like electric blue, neon green, bright pink, and orange to highlight the character’s design, featuring glowing eyes, sharp outlines, and glowing accents. The background should be simple and dark to contrast the neon lighting. Ensure the image is clean and minimal, with no other decorative or graphical elements apart from the character.\"",
+        "options": {}
+      },
+      "id": "25c2c30a-5128-4a3a-9ea8-b2085e8d1ceb",
+      "name": "Neon Halloween Character",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.5,
+      "position": [
+        400,
+        300
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "24",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "f0339b4e-751e-429e-a651-cfa46a7068b5",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        300
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-10-12T02:51:48.000Z",
+  "versionId": "2d45491f-f254-4e01-8b1d-b00e79acfab6"
+}
