@@ -238,15 +238,15 @@
       "parameters": {
         "content": "# Alerts & Notifications\n#### This node will send alerts to multiple alerting systems. We are currently using NTFY & Odoo.  \nTo see a list of emoji's click here --> [Emoji List Here](https://ntfy.edvistas.com/docs/emojis/)\n\nField List:\n- Title\n- Message\n- Priority\n- Emojis (array)\n- ClickURL\n- Channel",
         "height": 322.2741444093105,
-        "width": 481
+        "width": 572.7495296963182
       },
       "id": "16f8d2c5-0471-4a75-8b66-62e5edc1df7b",
       "name": "Sticky Note",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -120,
-        -200
+        -171.54528352593366,
+        -240
       ]
     },
     {
@@ -380,6 +380,37 @@
           "name": "N8N Bearer Token"
         }
       }
+    },
+    {
+      "parameters": {
+        "content": "## Triggers",
+        "height": 506.2295081967215,
+        "color": 6
+      },
+      "id": "698ea736-e186-4a44-be2a-dbe5ff8d772d",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -420,
+        -20
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Notification Systems",
+        "height": 697.7049180327873,
+        "width": 295.08196721311464,
+        "color": 4
+      },
+      "id": "9cecb215-e277-4300-9dc2-7630d75a3224",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        406.5573770491802,
+        -80
+      ]
     }
   ],
   "pinData": {
@@ -440,6 +471,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-10-10T15:05:40.000Z",
-  "versionId": "8274306c-794c-47f6-94b4-94c0928069b9"
+  "updatedAt": "2024-10-11T20:16:50.000Z",
+  "versionId": "e364ec20-644b-4419-a9d2-c228223e2da4"
 }
