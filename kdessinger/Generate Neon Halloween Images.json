@@ -12,22 +12,22 @@
         ]
       ]
     },
-    "Neon Halloween Character": {
+    "Execute Workflow Trigger": {
       "main": [
         [
           {
-            "node": "Save file to disk",
+            "node": "Random Halloween Monster",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Execute Workflow Trigger": {
+    "Neon Halloween Character": {
       "main": [
         [
           {
-            "node": "Random Halloween Monster",
+            "node": "Save file to disk",
             "type": "main",
             "index": 0
           }
@@ -52,7 +52,7 @@
       "type": "n8n-nodes-base.nextCloud",
       "typeVersion": 1,
       "position": [
-        600,
+        580,
         300
       ],
       "credentials": {
@@ -76,9 +76,20 @@
       ]
     },
     {
+      "parameters": {},
+      "id": "f0339b4e-751e-429e-a651-cfa46a7068b5",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        -20,
+        300
+      ]
+    },
+    {
       "parameters": {
         "resource": "image",
-        "prompt": "=\"Create a single, centered neon-lit {{ $json.character }} in a glowing, futuristic style. The character should be the sole subject in the image, with no additional figures, side panels, color palettes, or design elements. Only the character should be visible, with no added color bars, grids, or secondary figures. The neon colors should include vibrant hues like electric blue, neon green, bright pink, and orange to highlight the character’s design, featuring glowing eyes, sharp outlines, and glowing accents. The background should be simple and dark to contrast the neon lighting. Ensure the image is clean and minimal, with no other decorative or graphical elements apart from the character.\"",
+        "prompt": "=Create a single, centered neon-lit {{ $json.character }} in a glowing, futuristic style. The character should be the sole subject in the image, with no additional figures, side panels, color palettes, or design elements. Only the character should be visible, with no added color bars, grids, or secondary figures. The neon colors should include vibrant hues like electric blue, neon green, bright pink, and orange to highlight the character’s design, featuring glowing eyes, sharp outlines, and glowing accents. The background should be simple and dark to contrast the neon lighting. Ensure the image is clean and minimal, with no other decorative or graphical elements apart from the character.",
         "options": {}
       },
       "id": "25c2c30a-5128-4a3a-9ea8-b2085e8d1ceb",
@@ -86,7 +97,7 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.5,
       "position": [
-        400,
+        380,
         300
       ],
       "credentials": {
@@ -95,17 +106,6 @@
           "name": "OpenAi (kdessinger)"
         }
       }
-    },
-    {
-      "parameters": {},
-      "id": "f0339b4e-751e-429e-a651-cfa46a7068b5",
-      "name": "Execute Workflow Trigger",
-      "type": "n8n-nodes-base.executeWorkflowTrigger",
-      "typeVersion": 1,
-      "position": [
-        -60,
-        300
-      ]
     }
   ],
   "pinData": {},
@@ -115,6 +115,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-10-12T02:51:48.000Z",
-  "versionId": "2d45491f-f254-4e01-8b1d-b00e79acfab6"
+  "updatedAt": "2024-10-12T19:26:15.000Z",
+  "versionId": "9e35282e-586d-4cbe-b3f3-a926c9122cdf"
 }
