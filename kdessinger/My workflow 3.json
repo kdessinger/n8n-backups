@@ -5,7 +5,7 @@
       "main": [
         [
           {
-            "node": "Reddit",
+            "node": "TOTP",
             "type": "main",
             "index": 0
           }
@@ -13,8 +13,8 @@
       ]
     }
   },
-  "createdAt": "2024-09-12T02:57:13.223Z",
-  "id": "NHtiUbgAXWkA0r40",
+  "createdAt": "2024-10-12T19:28:17.086Z",
+  "id": "58FwHkPub4Noj67e",
   "meta": {
     "templateCredsSetupCompleted": true
   },
@@ -22,35 +22,27 @@
   "nodes": [
     {
       "parameters": {},
-      "id": "5b1e21c7-029f-4ebe-a9f3-e916c7f0e962",
+      "id": "ea5074f8-b895-4ac7-bf9f-c154725c9511",
       "name": "When clicking ‘Test workflow’",
       "type": "n8n-nodes-base.manualTrigger",
       "position": [
-        620,
-        240
+        820,
+        360
       ],
       "typeVersion": 1
     },
     {
       "parameters": {
-        "operation": "getAll",
-        "limit": 25,
-        "filters": {}
+        "options": {}
       },
-      "id": "79ff6015-e9f9-4e3c-a188-8f408eb98cc7",
-      "name": "Reddit",
-      "type": "n8n-nodes-base.reddit",
+      "id": "188bc33d-5a02-4071-985a-84f35e0caf3e",
+      "name": "TOTP",
+      "type": "n8n-nodes-base.totp",
       "typeVersion": 1,
       "position": [
-        840,
-        240
-      ],
-      "credentials": {
-        "redditOAuth2Api": {
-          "id": "gA5Rq3SoA4VYNsm6",
-          "name": "Reddit (kdessinger)"
-        }
-      }
+        1040,
+        360
+      ]
     }
   ],
   "pinData": {},
@@ -60,6 +52,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-09-12T02:57:13.223Z",
-  "versionId": "d58e7ebc-3614-4f1c-8eba-6b2e98e2c268"
+  "updatedAt": "2024-10-12T19:28:17.086Z",
+  "versionId": "04d35d5d-b16f-454d-a825-db9ce15ca5b6"
 }
