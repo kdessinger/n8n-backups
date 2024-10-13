@@ -1,0 +1,120 @@
+{
+  "active": false,
+  "connections": {
+    "Random Halloween Monster": {
+      "main": [
+        [
+          {
+            "node": "Neon Halloween Character",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Random Halloween Monster",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Neon Halloween Character": {
+      "main": [
+        [
+          {
+            "node": "Save file to disk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-10-12T19:32:44.313Z",
+  "id": "088wnNhkll8KDtas",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Generate Comic Book Action Images",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "=/Public/Shared Pictures/uploaded/Neon Halloween Characters/neon_{{ $('Random Halloween Monster').item.json.character }}_{{ $now.format('yyMMdd-HHmm') }}.{{ $json.fileExtension }}",
+        "binaryDataUpload": true
+      },
+      "id": "df876fde-82a7-4dec-ac1a-a6139a8df204",
+      "name": "Save file to disk",
+      "type": "n8n-nodes-base.nextCloud",
+      "typeVersion": 1,
+      "position": [
+        580,
+        300
+      ],
+      "credentials": {
+        "nextCloudApi": {
+          "id": "z2gkXhk0EPG6w5sI",
+          "name": "NextCloud (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const monsters = [\n  'Vampire', 'Ghost', 'Pumpkin', 'Strawman', 'Red Monster', 'Blue Monster',\n  'Frankenstein', 'Witch', 'Ghoul', 'Gravestone', 'Devil', 'Alien',\n  'Werewolf', 'Zombie', 'Mummy', 'Skeleton', 'Banshee', 'Phantom',\n  'Reaper', 'Poltergeist', 'Gremlin', 'Goblin', 'Troll', 'Bat',\n  'Dracula', 'Jack-o-Lantern', 'Haunted Tree', 'Mad Scientist', 'Spider',\n  'Black Cat', 'Cerberus', 'Gorgon', 'Cyclops', 'Harpy', 'Chupacabra',\n  'Headless Horseman', 'Beelzebub', 'Kraken', 'Sea Monster', 'Baba Yaga',\n  'Wendigo', 'Mothman', 'Sknin Walker', 'Lich', 'Demon', 'Shadow Creature',\n  'Swamp Monster', 'Grim Reaper', 'Clown', 'Phantom Knight', 'Siren'\n];\n\nconst randomIndex = Math.floor(Math.random() * monsters.length);\n\n// Return a single string as a JSON object\nreturn [{\n  json: { character: monsters[randomIndex] }\n}];"
+      },
+      "id": "cd16d9ad-49fa-47a9-8f0b-e19a929734b9",
+      "name": "Random Halloween Monster",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        180,
+        300
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "c9197580-d4a4-4b2a-ba3a-285d31989528",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        -20,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "prompt": "=Create a single, centered neon-lit {{ $json.character }} in a glowing, futuristic style. The character should be the sole subject in the image, with no additional figures, side panels, color palettes, or design elements. Only the character should be visible, with no added color bars, grids, or secondary figures. The neon colors should include vibrant hues like electric blue, neon green, bright pink, and orange to highlight the character’s design, featuring glowing eyes, sharp outlines, and glowing accents. The background should be simple and dark to contrast the neon lighting. Ensure the image is clean and minimal, with no other decorative or graphical elements apart from the character.",
+        "options": {}
+      },
+      "id": "a3f99262-7f46-4981-82b6-412ae89e2404",
+      "name": "Neon Halloween Character",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.5,
+      "position": [
+        380,
+        300
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "24",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-10-12T19:32:44.313Z",
+  "versionId": "5c89a4c2-4fd3-4b99-877e-5f7a9962c588"
+}
