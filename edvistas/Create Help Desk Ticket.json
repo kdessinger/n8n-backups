@@ -1,0 +1,256 @@
+{
+  "active": false,
+  "connections": {
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set Defaults",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Set Defaults",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-10-21T18:48:11.907Z",
+  "id": "C7KxmVSCrYHrNTTc",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Create Help Desk Ticket",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "4376153e-b81e-4a26-9f57-256105ece850",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        -340,
+        80
+      ]
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "Title",
+              "stringValue": "={{$json.body?.Title || $json.Title || 'No Title Detected'}}"
+            },
+            {
+              "name": "Message",
+              "stringValue": "={{$json.body?.Message || $json.Message || 'No Message Detected'}}"
+            },
+            {
+              "name": "MessageClean",
+              "stringValue": "={{$json.body?.Message ? $json.body.Message.replace(/<[^>]+>/g, '') : ($json.Message ? $json.Message.replace(/<[^>]+>/g, '') : 'No Message Detected')}}\n\n"
+            },
+            {
+              "name": "Emojis",
+              "type": "arrayValue",
+              "arrayValue": "={{$json.body?.Emojis || $json.Emojis || ['hugs', '+1']}}"
+            },
+            {
+              "name": "Priority",
+              "type": "numberValue",
+              "numberValue": "={{$json.body?.Priority || $json.Priority || 5}}"
+            },
+            {
+              "name": "ClickURL",
+              "stringValue": "={{$json.body?.ClickURL || $json.ClickURL || '' }}"
+            },
+            {
+              "name": "Channel",
+              "stringValue": "={{$json.body?.Channel || $json.Channel || 'Activity Log'}}"
+            }
+          ]
+        },
+        "options": {
+          "ignoreConversionErrors": true
+        }
+      },
+      "id": "4151a9ed-3b7a-4d48-8ca0-cc38a80463ae",
+      "name": "Set Defaults",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.1,
+      "position": [
+        -80,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "content": "# Alerts & Notifications\n#### This node will send alerts to multiple alerting systems. We are currently using NTFY & Odoo.  \nTo see a list of emoji's click here --> [Emoji List Here](https://ntfy.edvistas.com/docs/emojis/)\n\nField List:\n- Title\n- Message\n- Priority\n- Emojis (array)\n- ClickURL\n- Channel",
+        "height": 322.2741444093105,
+        "width": 572.7495296963182
+      },
+      "id": "63155dda-0b7d-44c9-8003-3a29d0b732d6",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1000,
+        -20
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "Help Desk Ticket Created!",
+        "options": {}
+      },
+      "id": "1ec7bcd7-bf10-4fb6-969e-ec55ea7cec6b",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        800,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "helpdesk.ticket",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {}
+          ]
+        }
+      },
+      "id": "2af472d2-74d2-4f7b-8d5b-2188ae07079a",
+      "name": "Send to Odoo",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        500,
+        200
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "odooApi": {
+          "id": "12",
+          "name": "Odoo (Administrator)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Triggers",
+        "height": 506.2295081967215,
+        "color": 6
+      },
+      "id": "aa26fcc6-d3d4-49b3-80ee-0efb5f607c3e",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -420,
+        -20
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Notification Systems",
+        "height": 697.7049180327873,
+        "width": 295.08196721311464,
+        "color": 4
+      },
+      "id": "c7dfa31c-7356-468b-a61d-f6e1e7f4624b",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        406.5573770491802,
+        -80
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "helpdesk",
+        "authentication": "headerAuth",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "75dcc732-ff78-4abc-98d0-3c23f318a92d",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -340,
+        280
+      ],
+      "webhookId": "1138a896-3e8c-4e5d-844d-e96c1784babb",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "os5m1l0SgTiVl18p",
+          "name": "N8N Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "helpdesk.ticket",
+        "operation": "get",
+        "customResourceId": "411",
+        "options": {}
+      },
+      "id": "c1d2579b-3400-44a5-ade1-4cdde8a419af",
+      "name": "Get Tickets",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        0,
+        440
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "odooApi": {
+          "id": "12",
+          "name": "Odoo (Administrator)"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": 60,
+    "errorWorkflow": "NtBd2hj1eiR2xufe"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2022-12-09T05:43:36.104Z",
+      "updatedAt": "2022-12-09T05:43:36.104Z",
+      "id": "12",
+      "name": "odoo"
+    },
+    {
+      "createdAt": "2024-10-21T18:47:49.143Z",
+      "updatedAt": "2024-10-21T18:47:49.143Z",
+      "id": "MKghWnlF1ug1K8In",
+      "name": "WebHook"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-10-21T19:03:34.000Z",
+  "versionId": "967a5daa-5c8f-42d6-9093-ef0be8130b10"
+}
