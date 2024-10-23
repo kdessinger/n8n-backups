@@ -93,7 +93,7 @@
     },
     {
       "parameters": {
-        "content": "# Alerts & Notifications\n#### This node will send alerts to multiple alerting systems. We are currently using NTFY & Odoo.  \nTo see a list of emoji's click here --> [Emoji List Here](https://ntfy.edvistas.com/docs/emojis/)\n\nField List:\n- Title\n- Message\n- Priority\n- Emojis (array)\n- ClickURL\n- Channel",
+        "content": "# Helpdesk Ticket Webhook\n#### This node will create/modify/delete helpdesk tickets in odoo. \n\nField List:\n- Title\n- Message\n- Priority\n- Emojis (array)\n- ClickURL\n- Channel",
         "height": 322.2741444093105,
         "width": 572.7495296963182
       },
@@ -251,6 +251,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-10-21T19:03:34.000Z",
-  "versionId": "967a5daa-5c8f-42d6-9093-ef0be8130b10"
+  "updatedAt": "2024-10-22T18:00:59.000Z",
+  "versionId": "5708fe36-9b02-47c7-a192-2eddb13b320e"
 }
