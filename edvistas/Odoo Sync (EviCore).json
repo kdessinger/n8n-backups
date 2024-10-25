@@ -273,7 +273,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        2000,
+        2080,
         540
       ],
       "credentials": {
@@ -287,7 +287,7 @@
       "parameters": {
         "content": "# Sync Odoo Tags with the EVICore database\n### This node will update [Odoo Contacts](https://odoo.edvistas.com/web?debug=1#menu_id=111&action=139) which have the EVI District value present in the 'EVI_DistID' field.\n##### This info is found on the [Odoo contacts](https://odoo.edvistas.com/web?debug=1#menu_id=111&action=139) under the 'Integration' tab.  The following fields will be updated:\nTags, EVI District Name, EVI Last Sync, EVI Last Login, Student Info System, State District ID.\n##### Tags contain product names that a specific district have activated in [EVICore](https://apps.edvistas.com).\n\n**This is a **Sync** operation so it will add and remove remove tags from odoo that match [EVICore](https://apps.edvistas.com).",
         "height": 1128.065665097114,
-        "width": 1809.1475181811106
+        "width": 1460.2332269704111
       },
       "id": "8b5bf087-8ce5-4835-abf4-2fe0b22e0944",
       "name": "Sticky Note1",
@@ -333,9 +333,10 @@
     },
     {
       "parameters": {
-        "content": "# Triggers\nactivate workflow to enable",
-        "height": 817.8001985537583,
-        "width": 212.77512108632297
+        "content": "# Triggers\ncalls to start the workflow",
+        "height": 1117.6008689730309,
+        "width": 232.40492688758485,
+        "color": 4
       },
       "id": "247538ee-d24a-4d0e-9174-a8ddf4b61a29",
       "name": "Sticky Note3",
@@ -343,7 +344,7 @@
       "typeVersion": 1,
       "position": [
         20,
-        360
+        240
       ]
     },
     {
@@ -376,7 +377,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        740,
+        720,
         520
       ],
       "credentials": {
@@ -406,7 +407,7 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 2.1,
       "position": [
-        1760,
+        1720,
         540
       ]
     },
@@ -618,6 +619,22 @@
         }
       },
       "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "content": "# Output\nEnd results to get updated",
+        "height": 1123.3459003057826,
+        "width": 277.47508380240885,
+        "color": 3
+      },
+      "id": "16933dc0-b2fc-4758-844c-2acd9e45459f",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2000,
+        240
+      ]
     }
   ],
   "pinData": {
@@ -893,6 +910,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2024-10-22T19:55:40.000Z",
-  "versionId": "7ee3dcb7-f6cf-4884-8120-c1739126f6dd"
+  "updatedAt": "2024-10-25T14:20:55.000Z",
+  "versionId": "e715436b-955e-464e-ae7b-da4efc21a932"
 }
