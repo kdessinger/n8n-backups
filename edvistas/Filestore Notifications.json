@@ -204,7 +204,7 @@
   },
   "staticData": {
     "node:Email Trigger (IMAP)": {
-      "lastMessageUid": 3115
+      "lastMessageUid": 3146
     }
   },
   "tags": [
@@ -213,6 +213,12 @@
       "updatedAt": "2022-12-09T05:43:36.104Z",
       "id": "12",
       "name": "odoo"
+    },
+    {
+      "createdAt": "2023-03-31T17:07:07.225Z",
+      "updatedAt": "2023-03-31T17:07:07.225Z",
+      "id": "30",
+      "name": "Email"
     },
     {
       "createdAt": "2024-06-06T03:12:53.751Z",
@@ -228,6 +234,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-10-10T15:18:44.000Z",
-  "versionId": "2d15639c-5bd3-4477-934a-df6299525dc6"
+  "updatedAt": "2024-10-28T14:07:33.000Z",
+  "versionId": "7f388eeb-f456-488f-93b3-17c796ff4303"
 }
