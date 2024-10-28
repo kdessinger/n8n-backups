@@ -440,8 +440,8 @@
       "name": "Convert to XML",
       "type": "n8n-nodes-base.xml",
       "position": [
-        2400,
-        2000
+        4020,
+        860
       ],
       "typeVersion": 1
     },
@@ -453,8 +453,8 @@
       "name": "Create HTML",
       "type": "n8n-nodes-base.html",
       "position": [
-        2600,
-        2000
+        4220,
+        860
       ],
       "typeVersion": 1
     },
@@ -473,8 +473,8 @@
       "name": "Move Binary Data",
       "type": "n8n-nodes-base.moveBinaryData",
       "position": [
-        2800,
-        2000
+        4420,
+        860
       ],
       "typeVersion": 1
     },
@@ -501,8 +501,8 @@
       "name": "Respond to Webhook",
       "type": "n8n-nodes-base.respondToWebhook",
       "position": [
-        3000,
-        2000
+        4620,
+        860
       ],
       "typeVersion": 1
     },
@@ -516,8 +516,8 @@
       "name": "Sticky Note1",
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        1920,
-        2199
+        3540,
+        1059
       ],
       "typeVersion": 1
     },
@@ -541,8 +541,8 @@
       "name": "Respond to Webhook2",
       "type": "n8n-nodes-base.respondToWebhook",
       "position": [
-        2580,
-        2470
+        4200,
+        1330
       ],
       "typeVersion": 1
     },
@@ -564,8 +564,8 @@
       "name": "Final template",
       "type": "n8n-nodes-base.set",
       "position": [
-        2380,
-        2470
+        4000,
+        1330
       ],
       "typeVersion": 3.3
     },
@@ -617,8 +617,8 @@
       "name": "Template elements",
       "type": "n8n-nodes-base.set",
       "position": [
-        2180,
-        2470
+        3800,
+        1330
       ],
       "typeVersion": 3.3
     },
@@ -761,7 +761,8 @@
     },
     {
       "parameters": {
-        "filters": {}
+        "filters": {},
+        "requestOptions": {}
       },
       "id": "a8689fce-d017-4eab-a572-278fba91b6a6",
       "name": "n8n-get-workflows",
@@ -787,8 +788,8 @@
       "name": "Prepare JSON object",
       "type": "n8n-nodes-base.executeWorkflow",
       "position": [
-        2180,
-        2000
+        3800,
+        860
       ],
       "typeVersion": 1
     },
@@ -839,8 +840,8 @@
       "name": "Sticky Note2",
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        1880,
-        1680
+        3500,
+        540
       ],
       "typeVersion": 1
     },
@@ -854,8 +855,8 @@
       "name": "Request HTML dashboard",
       "type": "n8n-nodes-base.webhook",
       "position": [
-        1980,
-        2000
+        3600,
+        860
       ],
       "webhookId": "fb550a01-12f2-4709-ba2d-f71197b68340",
       "typeVersion": 2
@@ -870,8 +871,8 @@
       "name": "Request xsl template",
       "type": "n8n-nodes-base.webhook",
       "position": [
-        1980,
-        2470
+        3600,
+        1330
       ],
       "webhookId": "73a91e4d-143d-4168-9efb-6c56f2258aec",
       "typeVersion": 2
@@ -888,6 +889,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2024-06-04T05:09:05.000Z",
-  "versionId": "275f050b-986d-4ec7-9592-b51c49948d8a"
+  "updatedAt": "2024-10-28T14:36:50.000Z",
+  "versionId": "97835a6f-2c1e-4419-be3d-e511d07def87"
 }
