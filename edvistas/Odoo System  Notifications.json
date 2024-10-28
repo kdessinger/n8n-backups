@@ -278,8 +278,15 @@
       ]
     }
   },
-  "tags": [],
+  "tags": [
+    {
+      "createdAt": "2022-12-09T05:43:36.104Z",
+      "updatedAt": "2022-12-09T05:43:36.104Z",
+      "id": "12",
+      "name": "odoo"
+    }
+  ],
   "triggerCount": 1,
-  "updatedAt": "2024-10-18T03:50:21.000Z",
-  "versionId": "2141b0f4-1709-4932-9f46-60ab6995ac95"
+  "updatedAt": "2024-10-28T14:39:10.000Z",
+  "versionId": "671d4e8a-576e-4079-a3e7-39a3e0250e98"
 }
