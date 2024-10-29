@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "Email Trigger (IMAP)": {
       "main": [
@@ -30,22 +30,11 @@
         ]
       ]
     },
-    "Get District Info": {
-      "main": [
-        [
-          {
-            "node": "Set Globals",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Set Globals": {
       "main": [
         [
           {
-            "node": "Execute Workflow",
+            "node": "Activity Log",
             "type": "main",
             "index": 0
           }
@@ -56,7 +45,36 @@
       "main": [
         [
           {
-            "node": "Get District Info",
+            "node": "Get District Info (DB1)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get District Info (DB1)": {
+      "main": [
+        [
+          {
+            "node": "Set Globals",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get District Info (DB2)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get District Info (DB2)": {
+      "main": [
+        [
+          {
+            "node": "Set Globals",
             "type": "main",
             "index": 0
           }
@@ -150,45 +168,6 @@
     },
     {
       "parameters": {
-        "operation": "executeQuery",
-        "query": "SELECT        d.id AS districtID, d.name AS DistrictName, u.adminaccount, u.active, d.techcontact, d.techphone, d.techemail, d.sistype, u.userid, u.firstname, u.lastname, d.lastDataSync LastSync, DATEDIFF(day, d.lastDataSync, GETDATE()) as Duration\nFROM            evitesting.dbo.ecDistricts AS d LEFT OUTER JOIN\n                         evitesting.dbo.ecUsers AS u ON d.id = u.districtid\nWHERE        (u.userid = '{{ $json.message.content.Login.Login }}')"
-      },
-      "id": "e01d986f-7ed0-4a68-aee9-c6e8aaa7ecee",
-      "name": "Get District Info",
-      "type": "n8n-nodes-base.microsoftSql",
-      "typeVersion": 1.1,
-      "position": [
-        1020,
-        240
-      ],
-      "credentials": {
-        "microsoftSql": {
-          "id": "8",
-          "name": "DB1.DS1.GOWLS.COM (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "workflowId": {
-          "__rl": true,
-          "mode": "list",
-          "value": "RMGsRy908UOekKo3",
-          "cachedResultName": "Activity Log"
-        },
-        "options": {}
-      },
-      "id": "cf5e8bb3-acad-4033-94fb-31f01ca47d11",
-      "name": "Execute Workflow",
-      "type": "n8n-nodes-base.executeWorkflow",
-      "typeVersion": 1.1,
-      "position": [
-        1420,
-        240
-      ]
-    },
-    {
-      "parameters": {
         "assignments": {
           "assignments": [
             {
@@ -224,8 +203,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1220,
-        240
+        1380,
+        220
       ]
     },
     {
@@ -264,6 +243,66 @@
           "name": "OpenAi (kdessinger)"
         }
       }
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "RMGsRy908UOekKo3",
+          "cachedResultName": "Activity Log"
+        },
+        "options": {}
+      },
+      "id": "cf5e8bb3-acad-4033-94fb-31f01ca47d11",
+      "name": "Activity Log",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.1,
+      "position": [
+        1580,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT        d.id AS districtID, d.name AS DistrictName, u.adminaccount, u.active, d.techcontact, d.techphone, d.techemail, d.sistype, u.userid, u.firstname, u.lastname, d.lastDataSync LastSync, DATEDIFF(day, d.lastDataSync, GETDATE()) as Duration\nFROM            evitesting.dbo.ecDistricts AS d LEFT OUTER JOIN\n                         evitesting.dbo.ecUsers AS u ON d.id = u.districtid\nWHERE        (u.userid = '{{ $json.message.content.Login.Login }}')"
+      },
+      "id": "e01d986f-7ed0-4a68-aee9-c6e8aaa7ecee",
+      "name": "Get District Info (DB1)",
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1.1,
+      "position": [
+        1000,
+        240
+      ],
+      "credentials": {
+        "microsoftSql": {
+          "id": "8",
+          "name": "DB1.DS1.GOWLS.COM (kdessinger)"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT        d.id AS districtID, d.name AS DistrictName, u.adminaccount, u.active, d.techcontact, d.techphone, d.techemail, d.sistype, u.userid, u.firstname, u.lastname, d.lastDataSync LastSync, DATEDIFF(day, d.lastDataSync, GETDATE()) as Duration\nFROM            evitesting.dbo.ecDistricts AS d LEFT OUTER JOIN\n                         evitesting.dbo.ecUsers AS u ON d.id = u.districtid\nWHERE        (u.userid = '{{ $json.message.content.Login.Login }}')"
+      },
+      "id": "50924bc1-5204-43bd-91c9-416788a74561",
+      "name": "Get District Info (DB2)",
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1.1,
+      "position": [
+        1200,
+        400
+      ],
+      "credentials": {
+        "microsoftSql": {
+          "id": "lFidBVCvt5Wn1IsH",
+          "name": "DB2.DS1.GOWLS.COM (kdessinger)"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -293,6 +332,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-10-28T14:08:03.000Z",
-  "versionId": "4608be54-155f-4f89-94d9-efb9d175afc1"
+  "updatedAt": "2024-10-28T19:31:07.530Z",
+  "versionId": "88fbe6b1-795c-4346-83b0-aa2969518a28"
 }
