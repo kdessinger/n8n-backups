@@ -1,220 +1,33 @@
 {
   "active": false,
   "connections": {
-    "Postgres Chat Memory": {
-      "ai_memory": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_memory",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Ollama Chat Model": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Ollama Model": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "Vector Store Tool",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Vector Store Tool": {
-      "ai_tool": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Embeddings Ollama": {
-      "ai_embedding": [
-        [
-          {
-            "node": "Qdrant Vector Store",
-            "type": "ai_embedding",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "File Created": {
+    "Enable DataSync Notifications": {
       "main": [
         [
           {
-            "node": "Set File ID",
+            "node": "Wait 1 Minute",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "File Updated": {
+    "Schedule Trigger": {
       "main": [
         [
           {
-            "node": "Set File ID",
+            "node": "Enable DataSync Notifications",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Set File ID": {
+    "Wait 1 Minute": {
       "main": [
         [
           {
-            "node": "Clear Old Vectors",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Download File": {
-      "main": [
-        [
-          {
-            "node": "Extract Document Text",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Extract Document Text": {
-      "main": [
-        [
-          {
-            "node": "Qdrant Vector Store Insert",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Default Data Loader": {
-      "ai_document": [
-        [
-          {
-            "node": "Qdrant Vector Store Insert",
-            "type": "ai_document",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Recursive Character Text Splitter": {
-      "ai_textSplitter": [
-        [
-          {
-            "node": "Default Data Loader",
-            "type": "ai_textSplitter",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Embeddings Ollama1": {
-      "ai_embedding": [
-        [
-          {
-            "node": "Qdrant Vector Store Insert",
-            "type": "ai_embedding",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "When chat message received": {
-      "main": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Qdrant Vector Store": {
-      "ai_vectorStore": [
-        [
-          {
-            "node": "Vector Store Tool",
-            "type": "ai_vectorStore",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Clear Old Vectors": {
-      "main": [
-        [
-          {
-            "node": "Download File",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Inventory Warehouse": {
-      "main": [
-        [
-          {
-            "node": "Sort",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Messages": {
-      "main": [
-        [
-          {
-            "node": "Sort1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Fetch Mail Service": {
-      "main": [
-        [
-          {
-            "node": "Sort2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Inventory Warehouse1": {
-      "main": [
-        [
-          {
-            "node": "Sort3",
+            "node": "Disable DataSync Notifications",
             "type": "main",
             "index": 0
           }
@@ -222,614 +35,99 @@
       ]
     }
   },
-  "createdAt": "2024-09-18T21:19:39.484Z",
-  "id": "aBFkein1tsxraUeI",
-  "meta": null,
+  "createdAt": "2024-10-28T19:25:44.501Z",
+  "id": "8urL9IpbblqQVpei",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "My workflow",
   "nodes": [
     {
-      "parameters": {},
-      "id": "e2ae763c-f3d8-4586-8087-bbe551beab50",
-      "name": "Postgres Chat Memory",
-      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
-      "typeVersion": 1.1,
-      "position": [
-        800,
-        800
-      ]
-    },
-    {
       "parameters": {
-        "model": "llama3.1:latest",
-        "options": {}
-      },
-      "id": "dae39a21-84f8-4608-90b0-b52b87fb5d90",
-      "name": "Ollama Chat Model",
-      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
-      "typeVersion": 1,
-      "position": [
-        660,
-        800
-      ]
-    },
-    {
-      "parameters": {
-        "model": "llama3.1:latest",
-        "options": {}
-      },
-      "id": "0715ba4e-61aa-4c2a-8bb4-9b05b1dd9a08",
-      "name": "Ollama Model",
-      "type": "@n8n/n8n-nodes-langchain.lmOllama",
-      "typeVersion": 1,
-      "position": [
-        1560,
-        740
-      ]
-    },
-    {
-      "parameters": {
-        "name": "documents",
-        "topK": 3
-      },
-      "id": "d8621a5b-5479-4f21-9580-6b45b92ec570",
-      "name": "Vector Store Tool",
-      "type": "@n8n/n8n-nodes-langchain.toolVectorStore",
-      "typeVersion": 1,
-      "position": [
-        1340,
-        580
-      ]
-    },
-    {
-      "parameters": {
-        "model": "nomic-embed-text:latest"
-      },
-      "id": "2ef83e55-d0d3-4e0e-a85b-929af1fb45b4",
-      "name": "Embeddings Ollama",
-      "type": "@n8n/n8n-nodes-langchain.embeddingsOllama",
-      "typeVersion": 1,
-      "position": [
-        1440,
-        840
-      ]
-    },
-    {
-      "parameters": {
-        "pollTimes": {
-          "item": [
-            {
-              "mode": "everyMinute"
-            }
-          ]
-        },
-        "triggerOn": "specificFolder",
-        "folderToWatch": {
+        "operation": "activate",
+        "workflowId": {
           "__rl": true,
-          "value": "1914m3M7kRzkd5RJqAfzRY9EBcJrKemZC",
+          "value": "tn31n7QyRQNsLrpl",
           "mode": "list",
-          "cachedResultName": "Meeting Notes",
-          "cachedResultUrl": "https://drive.google.com/drive/folders/1914m3M7kRzkd5RJqAfzRY9EBcJrKemZC"
+          "cachedResultName": "DataSync Notifications (#tn31n7QyRQNsLrpl)"
         },
-        "event": "fileCreated",
-        "options": {}
+        "requestOptions": {}
       },
-      "id": "db1c5a03-5a2b-45ef-b52e-0075891e0a81",
-      "name": "File Created",
-      "type": "n8n-nodes-base.googleDriveTrigger",
+      "id": "1dffdce4-1a56-4b92-bf98-add33a1f64d5",
+      "name": "Enable DataSync Notifications",
+      "type": "n8n-nodes-base.n8n",
       "typeVersion": 1,
-      "position": [
-        500,
-        1120
-      ]
-    },
-    {
-      "parameters": {
-        "pollTimes": {
-          "item": [
-            {
-              "mode": "everyMinute"
-            }
-          ]
-        },
-        "triggerOn": "specificFolder",
-        "folderToWatch": {
-          "__rl": true,
-          "value": "1914m3M7kRzkd5RJqAfzRY9EBcJrKemZC",
-          "mode": "list",
-          "cachedResultName": "Meeting Notes",
-          "cachedResultUrl": "https://drive.google.com/drive/folders/1914m3M7kRzkd5RJqAfzRY9EBcJrKemZC"
-        },
-        "event": "fileUpdated",
-        "options": {}
-      },
-      "id": "0388a76f-5f2b-44c9-927a-51f03e07d91c",
-      "name": "File Updated",
-      "type": "n8n-nodes-base.googleDriveTrigger",
-      "typeVersion": 1,
-      "position": [
-        500,
-        1340
-      ]
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "10646eae-ae46-4327-a4dc-9987c2d76173",
-              "name": "file_id",
-              "value": "={{ $json.id }}",
-              "type": "string"
-            },
-            {
-              "id": "dd0aa081-79e7-4714-8a67-1e898285554c",
-              "name": "folder_id",
-              "value": "={{ $json.parents[0] }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "8ea7b459-67b4-4f59-8a02-592652390606",
-      "name": "Set File ID",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        760,
-        1120
-      ]
-    },
-    {
-      "parameters": {
-        "operation": "download",
-        "fileId": {
-          "__rl": true,
-          "value": "={{ $('Set File ID').item.json.file_id }}",
-          "mode": "id"
-        },
-        "options": {
-          "googleFileConversion": {
-            "conversion": {
-              "docsToFormat": "text/plain"
-            }
-          }
-        }
-      },
-      "id": "68d47f35-99d8-4217-8175-07d013ec3d8b",
-      "name": "Download File",
-      "type": "n8n-nodes-base.googleDrive",
-      "typeVersion": 3,
-      "position": [
-        1200,
-        1120
-      ],
-      "executeOnce": true
-    },
-    {
-      "parameters": {
-        "operation": "text",
-        "options": {}
-      },
-      "id": "473b67ad-535c-487e-bd35-b7701b64366b",
-      "name": "Extract Document Text",
-      "type": "n8n-nodes-base.extractFromFile",
-      "typeVersion": 1,
-      "position": [
-        1440,
-        1120
-      ],
-      "alwaysOutputData": true
-    },
-    {
-      "parameters": {
-        "options": {
-          "metadata": {
-            "metadataValues": [
-              {
-                "name": "file_id",
-                "value": "={{ $('Set File ID').item.json.file_id }}"
-              },
-              {
-                "name": "folder_id",
-                "value": "={{ $('Set File ID').item.json.folder_id }}"
-              }
-            ]
-          }
-        }
-      },
-      "id": "6b28380e-fada-44d1-8c41-3a9342c6a74e",
-      "name": "Default Data Loader",
-      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
-      "typeVersion": 1,
-      "position": [
-        1760,
-        1340
-      ]
-    },
-    {
-      "parameters": {
-        "chunkSize": 100,
-        "options": {}
-      },
-      "id": "e723a04c-3b68-41ce-9dac-3448d36d8060",
-      "name": "Recursive Character Text Splitter",
-      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
-      "typeVersion": 1,
-      "position": [
-        1760,
-        1560
-      ]
-    },
-    {
-      "parameters": {
-        "model": "nomic-embed-text:latest"
-      },
-      "id": "99b62806-7c97-4b92-8417-7b4d83122791",
-      "name": "Embeddings Ollama1",
-      "type": "@n8n/n8n-nodes-langchain.embeddingsOllama",
-      "typeVersion": 1,
-      "position": [
-        1600,
-        1340
-      ]
-    },
-    {
-      "parameters": {
-        "content": "## Local RAG AI Agent with Chat Interface",
-        "height": 527.3027193303974,
-        "width": 670.6821106717343
-      },
-      "id": "98661421-b4e4-4eeb-8a59-0b75573ab687",
-      "name": "Sticky Note2",
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        460,
-        460
-      ]
-    },
-    {
-      "parameters": {
-        "content": "## Agent Tools for Local RAG",
-        "height": 528.85546469693,
-        "width": 583.4552380860637,
-        "color": 4
-      },
-      "id": "6f59020d-ed22-4a63-86b4-78b2b3e97a74",
-      "name": "Sticky Note",
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        1140,
-        460
-      ]
-    },
-    {
-      "parameters": {
-        "content": "## Workflow to Create Local Knowledgebase from Google Drive Folder",
-        "height": 705.2695614889159,
-        "width": 1568.9362829025763,
-        "color": 5
-      },
-      "id": "e879d775-61de-48ea-808a-db9e882f8ec5",
-      "name": "Sticky Note1",
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        460,
-        1000
-      ]
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
-      "id": "b8b5dcde-f3f5-4308-a731-4c62d0dcc3ff",
-      "name": "AI Agent",
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 1.6,
       "position": [
         740,
-        580
-      ]
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
-      "id": "b94baea9-6fd5-4a38-b519-63e444a998ef",
-      "name": "When chat message received",
-      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
-      "typeVersion": 1.1,
-      "position": [
-        520,
-        580
+        360
       ],
-      "webhookId": "4b3b1838-d6b3-447e-9d79-d0931eddb9f8"
+      "credentials": {
+        "n8nApi": {
+          "id": "16",
+          "name": "admin@edvistas.com"
+        }
+      }
     },
     {
       "parameters": {
-        "qdrantCollection": {
+        "operation": "deactivate",
+        "workflowId": {
           "__rl": true,
-          "value": "documents",
+          "value": "tn31n7QyRQNsLrpl",
           "mode": "list",
-          "cachedResultName": "documents"
+          "cachedResultName": "DataSync Notifications (#tn31n7QyRQNsLrpl)"
         },
-        "options": {}
+        "requestOptions": {}
       },
-      "id": "8f0556be-c981-4204-8a87-82a2d9bc5021",
-      "name": "Qdrant Vector Store",
-      "type": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
+      "id": "ebb0e962-f976-4bb3-869c-16ca428936ca",
+      "name": "Disable DataSync Notifications",
+      "type": "n8n-nodes-base.n8n",
       "typeVersion": 1,
       "position": [
         1160,
-        720
-      ]
-    },
-    {
-      "parameters": {
-        "code": {
-          "execute": {
-            "code": "const { QdrantVectorStore } = require(\"@langchain/qdrant\");\nconst { OllamaEmbeddings } = require(\"@langchain/community/embeddings/ollama\");\n\nconst embeddings = new OllamaEmbeddings({\n  model: \"nomic-embed-text\",\n  baseUrl: \"http://host.docker.internal:11434\"\n});\n\nconst vectorStore = await QdrantVectorStore.fromExistingCollection(\n  embeddings,\n  {\n    url: \"http://host.docker.internal:6333\",\n    collectionName: \"documents\",\n  }\n);\n\nconst fileIdToDelete = this.getInputData()[0].json.file_id;\n\nconst filter = {\n        must: [\n            {\n                key: \"metadata.file_id\",\n                match: {\n                    value: fileIdToDelete,\n                },\n            },\n        ],\n    }\n\n// const results = await vectorStore.similaritySearch(\"this\", 10, filter);\n// const idsToDelete = results.map((doc) => doc.id);\n\n// NOT IMPLEMENTED!\n// await vectorStore.delete({ ids: idsToDelete });\n\nvectorStore.client.delete(\"documents\", {\n  filter\n});\n\nreturn [ {json: { file_id: fileIdToDelete } } ];\n"
-          }
-        },
-        "inputs": {
-          "input": [
-            {
-              "type": "main",
-              "required": true
-            }
-          ]
-        },
-        "outputs": {
-          "output": [
-            {
-              "type": "main"
-            }
-          ]
-        }
-      },
-      "id": "50583b1d-f025-496a-9354-abf8116a58ff",
-      "name": "Clear Old Vectors",
-      "type": "@n8n/n8n-nodes-langchain.code",
-      "typeVersion": 1,
-      "position": [
-        980,
-        1120
-      ],
-      "alwaysOutputData": false
-    },
-    {
-      "parameters": {
-        "mode": "insert",
-        "qdrantCollection": {
-          "__rl": true,
-          "value": "documents",
-          "mode": "list",
-          "cachedResultName": "documents"
-        },
-        "options": {}
-      },
-      "id": "22c5dc5d-f663-49a1-a670-03745bf27d99",
-      "name": "Qdrant Vector Store Insert",
-      "type": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
-      "typeVersion": 1,
-      "position": [
-        1660,
-        1120
-      ]
-    },
-    {
-      "parameters": {
-        "resource": "custom",
-        "customResource": "stock.move",
-        "operation": "getAll",
-        "returnAll": true,
-        "options": {
-          "fieldsList": [
-            "id",
-            "name",
-            "date",
-            "product_type",
-            "product_tmpl_id",
-            "location_id",
-            "location_dest_id",
-            "partner_id",
-            "picking_id",
-            "description_picking",
-            "state",
-            "origin",
-            "show_operations"
-          ]
-        },
-        "filterRequest": {
-          "filter": [
-            {
-              "fieldName": "state",
-              "operator": "notEqual",
-              "value": "done"
-            }
-          ]
-        }
-      },
-      "id": "c3f222c5-f0d8-485b-993e-3390ae0d3930",
-      "name": "Inventory Warehouse",
-      "type": "n8n-nodes-base.odoo",
-      "typeVersion": 1,
-      "position": [
-        1840,
-        460
+        360
       ],
       "credentials": {
-        "odooApi": {
-          "id": "13",
-          "name": "Odoo-Stage (kdessinger)"
+        "n8nApi": {
+          "id": "16",
+          "name": "admin@edvistas.com"
         }
       }
     },
     {
       "parameters": {
-        "resource": "custom",
-        "customResource": "mail.message",
-        "operation": "getAll",
-        "limit": 500,
-        "options": {}
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 8
+            }
+          ]
+        }
       },
-      "id": "d3c7769b-071e-43cf-b30b-a0d84b44d7c9",
-      "name": "Messages",
-      "type": "n8n-nodes-base.odoo",
-      "typeVersion": 1,
+      "id": "12d5f68d-1a74-4819-82d8-ecf50ddfab28",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
       "position": [
-        1840,
-        820
+        520,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "amount": 1,
+        "unit": "minutes"
+      },
+      "id": "db4d1a96-1ec8-4ca3-ad0b-ac334dac0a81",
+      "name": "Wait 1 Minute",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        940,
+        360
       ],
-      "credentials": {
-        "odooApi": {
-          "id": "12",
-          "name": "Odoo (Administrator)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "sortFieldsUi": {
-          "sortField": [
-            {
-              "fieldName": "date",
-              "order": "descending"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "80a31a7b-3d6f-414d-a322-61e5e1c8e778",
-      "name": "Sort1",
-      "type": "n8n-nodes-base.sort",
-      "typeVersion": 1,
-      "position": [
-        2060,
-        820
-      ]
-    },
-    {
-      "parameters": {
-        "resource": "custom",
-        "customResource": "ir.cron",
-        "operation": "get",
-        "customResourceId": "7",
-        "options": {
-          "fieldsList": [
-            "name",
-            "lastcall",
-            "model_name",
-            "user_id",
-            "nextcall"
-          ]
-        }
-      },
-      "id": "d1035af5-d822-4647-9ca5-1618da80333a",
-      "name": "Fetch Mail Service",
-      "type": "n8n-nodes-base.odoo",
-      "typeVersion": 1,
-      "position": [
-        1840,
-        640
-      ],
-      "credentials": {
-        "odooApi": {
-          "id": "12",
-          "name": "Odoo (Administrator)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
-      "id": "8fe49f1b-54b6-4116-947f-5d10ed7eab2f",
-      "name": "Sort2",
-      "type": "n8n-nodes-base.sort",
-      "typeVersion": 1,
-      "position": [
-        2060,
-        640
-      ]
-    },
-    {
-      "parameters": {
-        "sortFieldsUi": {
-          "sortField": [
-            {
-              "fieldName": "date",
-              "order": "descending"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "75178f47-89ab-4d3d-82d0-fd780ee1ef7f",
-      "name": "Sort",
-      "type": "n8n-nodes-base.sort",
-      "typeVersion": 1,
-      "position": [
-        2060,
-        460
-      ]
-    },
-    {
-      "parameters": {
-        "resource": "custom",
-        "customResource": "stock.move",
-        "operation": "getAll",
-        "returnAll": true,
-        "options": {
-          "fieldsList": []
-        },
-        "filterRequest": {
-          "filter": [
-            {
-              "fieldName": "state",
-              "value": "assigned"
-            }
-          ]
-        }
-      },
-      "id": "e34e863c-1ca8-406c-af83-741b46f5e892",
-      "name": "Inventory Warehouse1",
-      "type": "n8n-nodes-base.odoo",
-      "typeVersion": 1,
-      "position": [
-        2380,
-        540
-      ],
-      "credentials": {
-        "odooApi": {
-          "id": "13",
-          "name": "Odoo-Stage (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "sortFieldsUi": {
-          "sortField": [
-            {
-              "fieldName": "date",
-              "order": "descending"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "b3258b84-1e76-45fc-9066-09ee9ba1ae59",
-      "name": "Sort3",
-      "type": "n8n-nodes-base.sort",
-      "typeVersion": 1,
-      "position": [
-        2560,
-        540
-      ]
+      "webhookId": "dac151fe-a7cd-43fd-ab96-fc680f953f43"
     }
   ],
   "pinData": {},
@@ -839,6 +137,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-10-11T14:02:15.000Z",
-  "versionId": "6c421759-60d5-4740-84f0-b32729fc0fbe"
+  "updatedAt": "2024-10-28T19:25:44.501Z",
+  "versionId": "3e65c971-d1d7-4ea6-b029-54d65ea5031d"
 }
