@@ -1,0 +1,301 @@
+{
+  "active": true,
+  "connections": {
+    "Enable DataSync Notifications": {
+      "main": [
+        [
+          {
+            "node": "Wait 1 Minute",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait 1 Minute": {
+      "main": [
+        [
+          {
+            "node": "Disable DataSync Notifications",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enable Filestore Notifications": {
+      "main": [
+        [
+          {
+            "node": "Wait a Minute",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait a Minute": {
+      "main": [
+        [
+          {
+            "node": "Disable Filestore Notifications",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule (Hourly)": {
+      "main": [
+        [
+          {
+            "node": "Enable Filestore Notifications",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule (Every 4 Hours)": {
+      "main": [
+        [
+          {
+            "node": "Enable DataSync Notifications",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-10-28T19:25:44.501Z",
+  "id": "8urL9IpbblqQVpei",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Email Trigger Fix",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "activate",
+        "workflowId": {
+          "__rl": true,
+          "value": "tn31n7QyRQNsLrpl",
+          "mode": "list",
+          "cachedResultName": "DataSync Notifications (#tn31n7QyRQNsLrpl)"
+        },
+        "requestOptions": {}
+      },
+      "id": "1dffdce4-1a56-4b92-bf98-add33a1f64d5",
+      "name": "Enable DataSync Notifications",
+      "type": "n8n-nodes-base.n8n",
+      "typeVersion": 1,
+      "position": [
+        720,
+        360
+      ],
+      "credentials": {
+        "n8nApi": {
+          "id": "16",
+          "name": "admin@edvistas.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "deactivate",
+        "workflowId": {
+          "__rl": true,
+          "value": "tn31n7QyRQNsLrpl",
+          "mode": "list",
+          "cachedResultName": "DataSync Notifications (#tn31n7QyRQNsLrpl)"
+        },
+        "requestOptions": {}
+      },
+      "id": "ebb0e962-f976-4bb3-869c-16ca428936ca",
+      "name": "Disable DataSync Notifications",
+      "type": "n8n-nodes-base.n8n",
+      "typeVersion": 1,
+      "position": [
+        1160,
+        360
+      ],
+      "credentials": {
+        "n8nApi": {
+          "id": "16",
+          "name": "admin@edvistas.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 1,
+        "unit": "minutes"
+      },
+      "id": "db4d1a96-1ec8-4ca3-ad0b-ac334dac0a81",
+      "name": "Wait 1 Minute",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        940,
+        360
+      ],
+      "webhookId": "dac151fe-a7cd-43fd-ab96-fc680f953f43"
+    },
+    {
+      "parameters": {
+        "content": "## DataSync Notifications\n**Double click** to open me. [Open Workflow](https://n8n.edvistas.com/workflow/tn31n7QyRQNsLrpl)",
+        "height": 388,
+        "width": 1089
+      },
+      "id": "7cb51cfc-b5bc-4151-af36-87f3830ef1d3",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        360,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Filestore Notifications\n**Double click** to open me. [Open Workflow](https://n8n.edvistas.com/workflow/tn31n7QyRQNsLrpl)",
+        "height": 388,
+        "width": 1089,
+        "color": 2
+      },
+      "id": "f33091f2-a0d2-4e9d-b9b9-683af4bcf576",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        360,
+        660
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "activate",
+        "workflowId": {
+          "__rl": true,
+          "value": "tn31n7QyRQNsLrpl",
+          "mode": "list",
+          "cachedResultName": "DataSync Notifications (#tn31n7QyRQNsLrpl)"
+        },
+        "requestOptions": {}
+      },
+      "id": "ed9838c2-0ce0-4348-bfeb-41b402c34b49",
+      "name": "Enable Filestore Notifications",
+      "type": "n8n-nodes-base.n8n",
+      "typeVersion": 1,
+      "position": [
+        720,
+        800
+      ],
+      "credentials": {
+        "n8nApi": {
+          "id": "16",
+          "name": "admin@edvistas.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "deactivate",
+        "workflowId": {
+          "__rl": true,
+          "value": "tn31n7QyRQNsLrpl",
+          "mode": "list",
+          "cachedResultName": "DataSync Notifications (#tn31n7QyRQNsLrpl)"
+        },
+        "requestOptions": {}
+      },
+      "id": "32888de4-53ef-4a07-94ed-eb1488cc4eb9",
+      "name": "Disable Filestore Notifications",
+      "type": "n8n-nodes-base.n8n",
+      "typeVersion": 1,
+      "position": [
+        1160,
+        800
+      ],
+      "credentials": {
+        "n8nApi": {
+          "id": "16",
+          "name": "admin@edvistas.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 1,
+        "unit": "minutes"
+      },
+      "id": "e9f3a85c-d0fb-4959-96a8-26d92698fd27",
+      "name": "Wait a Minute",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        940,
+        800
+      ],
+      "webhookId": "dac151fe-a7cd-43fd-ab96-fc680f953f43"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours"
+            }
+          ]
+        }
+      },
+      "id": "94245ffb-a79f-4e1b-b363-737e4a8c2ef8",
+      "name": "Schedule (Hourly)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        480,
+        800
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 4
+            }
+          ]
+        }
+      },
+      "id": "12d5f68d-1a74-4819-82d8-ecf50ddfab28",
+      "name": "Schedule (Every 4 Hours)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        480,
+        360
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {
+    "node:Schedule (Hourly)": {
+      "recurrenceRules": []
+    },
+    "node:Schedule (Every 4 Hours)": {
+      "recurrenceRules": [
+        0
+      ]
+    }
+  },
+  "tags": [],
+  "triggerCount": 2,
+  "updatedAt": "2024-10-29T16:58:30.000Z",
+  "versionId": "ffa79ce6-630a-47bf-8a4a-ea64fb2752dd"
+}
