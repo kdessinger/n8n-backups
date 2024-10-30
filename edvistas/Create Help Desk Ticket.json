@@ -87,7 +87,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.1,
       "position": [
-        -80,
+        -120,
         180
       ]
     },
@@ -95,15 +95,15 @@
       "parameters": {
         "content": "# Helpdesk Ticket Webhook\n#### This node will create/modify/delete helpdesk tickets in odoo. \n\nField List:\n- Title\n- Message\n- Priority\n- Emojis (array)\n- ClickURL\n- Channel",
         "height": 322.2741444093105,
-        "width": 572.7495296963182
+        "width": 518.0544077450984
       },
       "id": "63155dda-0b7d-44c9-8003-3a29d0b732d6",
       "name": "Sticky Note",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -1000,
-        -20
+        -960,
+        80
       ]
     },
     {
@@ -117,40 +117,15 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        800,
-        200
+        880,
+        160
       ]
-    },
-    {
-      "parameters": {
-        "resource": "custom",
-        "customResource": "helpdesk.ticket",
-        "fieldsToCreateOrUpdate": {
-          "fields": [
-            {}
-          ]
-        }
-      },
-      "id": "2af472d2-74d2-4f7b-8d5b-2188ae07079a",
-      "name": "Send to Odoo",
-      "type": "n8n-nodes-base.odoo",
-      "typeVersion": 1,
-      "position": [
-        500,
-        200
-      ],
-      "alwaysOutputData": true,
-      "credentials": {
-        "odooApi": {
-          "id": "12",
-          "name": "Odoo (Administrator)"
-        }
-      }
     },
     {
       "parameters": {
         "content": "## Triggers",
         "height": 506.2295081967215,
+        "width": 248.55354481583993,
         "color": 6
       },
       "id": "aa26fcc6-d3d4-49b3-80ee-0efb5f607c3e",
@@ -174,8 +149,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        406.5573770491802,
-        -80
+        420,
+        -120
       ]
     },
     {
@@ -207,7 +182,7 @@
         "resource": "custom",
         "customResource": "helpdesk.ticket",
         "operation": "get",
-        "customResourceId": "411",
+        "customResourceId": "424",
         "options": {}
       },
       "id": "c1d2579b-3400-44a5-ade1-4cdde8a419af",
@@ -215,8 +190,79 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        0,
+        -120,
         440
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "odooApi": {
+          "id": "12",
+          "name": "Odoo (Administrator)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "helpdesk.ticket",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "name"
+            },
+            {
+              "fieldName": "email_subject"
+            },
+            {
+              "fieldName": "company_id",
+              "fieldValue": "1"
+            },
+            {
+              "fieldName": "state"
+            },
+            {
+              "fieldName": "ticket_type"
+            },
+            {
+              "fieldName": "team_id"
+            },
+            {
+              "fieldName": "team_head"
+            },
+            {
+              "fieldName": "subject_id"
+            },
+            {
+              "fieldName": "tag_ids"
+            },
+            {
+              "fieldName": "priority"
+            },
+            {
+              "fieldName": "partner_id"
+            },
+            {
+              "fieldName": "person_name"
+            },
+            {
+              "fieldName": "email"
+            },
+            {
+              "fieldName": "mobile_no"
+            },
+            {
+              "fieldName": "description"
+            }
+          ]
+        }
+      },
+      "id": "2af472d2-74d2-4f7b-8d5b-2188ae07079a",
+      "name": "Create Ticket",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        513,
+        160
       ],
       "alwaysOutputData": true,
       "credentials": {
@@ -251,6 +297,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-10-22T18:00:59.000Z",
-  "versionId": "5708fe36-9b02-47c7-a192-2eddb13b320e"
+  "updatedAt": "2024-10-29T22:22:15.000Z",
+  "versionId": "9aa87568-c66e-40a1-b2ed-d22e787520ff"
 }
