@@ -23,22 +23,6 @@
         ]
       ]
     },
-    "Get Meeting Details": {
-      "main": [
-        [
-          {
-            "node": "Fix Dates & Duration",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Get Participants",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Split Out": {
       "main": [
         [
@@ -61,45 +45,11 @@
         ]
       ]
     },
-    "Odoo Lookup": {
-      "main": [
-        [
-          {
-            "node": "Loop Over Items",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Loop Over Items": {
-      "main": [
-        [],
-        [
-          {
-            "node": "Odoo Lookup",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Get ID": {
       "main": [
         [
           {
             "node": "Update Meeting",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Webex (Admin)": {
-      "main": [
-        [
-          {
-            "node": "Delete Meeting?",
             "type": "main",
             "index": 0
           }
@@ -199,11 +149,40 @@
           }
         ]
       ]
+    },
+    "Webex (Admin)": {
+      "main": [
+        [
+          {
+            "node": "Delete Meeting?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Meeting Details": {
+      "main": [
+        [
+          {
+            "node": "Fix Dates & Duration",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Participants",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2024-01-08T15:49:11.741Z",
   "id": "QDRHPujwWOgonPR4",
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "Odoo-WebEx Sync (Admin)",
   "nodes": [
     {
@@ -324,28 +303,6 @@
     },
     {
       "parameters": {
-        "resource": "meeting",
-        "operation": "get",
-        "meetingId": "={{ $json.data.id }}",
-        "options": {}
-      },
-      "id": "2e21bdf6-a7ce-4910-9856-4f55be6caf91",
-      "name": "Get Meeting Details",
-      "type": "n8n-nodes-base.ciscoWebex",
-      "typeVersion": 1,
-      "position": [
-        280,
-        800
-      ],
-      "credentials": {
-        "ciscoWebexOAuth2Api": {
-          "id": "kP6MOeMVfJK5YFcD",
-          "name": "Webex (Admin)"
-        }
-      }
-    },
-    {
-      "parameters": {
         "fieldToSplitOut": "items",
         "options": {
           "destinationFieldName": "Attendees"
@@ -431,59 +388,6 @@
     {
       "parameters": {
         "resource": "custom",
-        "customResource": "res.partner",
-        "operation": "getAll",
-        "limit": 1,
-        "options": {
-          "fieldsList": [
-            "name",
-            "phone_sanitized",
-            "email_normalized"
-          ]
-        },
-        "filterRequest": {
-          "filter": [
-            {
-              "fieldName": "email",
-              "value": "={{ $json.Attendees.context[\"currentRunIndex\"]; }}"
-            }
-          ]
-        }
-      },
-      "id": "141fd1cc-d80b-49ee-942e-5191baf648ae",
-      "name": "Odoo Lookup",
-      "type": "n8n-nodes-base.odoo",
-      "typeVersion": 1,
-      "position": [
-        1100,
-        1160
-      ],
-      "alwaysOutputData": true,
-      "credentials": {
-        "odooApi": {
-          "id": "12",
-          "name": "Odoo (Administrator)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "options": {
-          "reset": false
-        }
-      },
-      "id": "0714fe8d-e8e8-4108-ba1e-05632d65172e",
-      "name": "Loop Over Items",
-      "type": "n8n-nodes-base.splitInBatches",
-      "typeVersion": 3,
-      "position": [
-        880,
-        1140
-      ]
-    },
-    {
-      "parameters": {
-        "resource": "custom",
         "customResource": "calendar.event",
         "operation": "getAll",
         "returnAll": true,
@@ -564,27 +468,6 @@
     },
     {
       "parameters": {
-        "event": "all",
-        "filters": {}
-      },
-      "id": "d2b3146d-258b-4a6a-90b3-c7be403c097c",
-      "name": "Webex (Admin)",
-      "type": "n8n-nodes-base.ciscoWebexTrigger",
-      "typeVersion": 1,
-      "position": [
-        -220,
-        980
-      ],
-      "webhookId": "9287f27b-7888-4d9c-8b64-dd94507cf756",
-      "credentials": {
-        "ciscoWebexOAuth2Api": {
-          "id": "kP6MOeMVfJK5YFcD",
-          "name": "Webex (Admin)"
-        }
-      }
-    },
-    {
-      "parameters": {
         "resource": "custom",
         "customResource": "calendar.event",
         "operation": "getAll",
@@ -642,7 +525,8 @@
           "options": {
             "caseSensitive": true,
             "leftValue": "",
-            "typeValidation": "strict"
+            "typeValidation": "strict",
+            "version": 1
           },
           "conditions": [
             {
@@ -806,7 +690,8 @@
     },
     {
       "parameters": {
-        "workflowId": "RMGsRy908UOekKo3"
+        "workflowId": "RMGsRy908UOekKo3",
+        "options": {}
       },
       "id": "08282537-507f-4cf2-86ff-de6066ce4d50",
       "name": "Log Activity (Starting)",
@@ -819,7 +704,8 @@
     },
     {
       "parameters": {
-        "workflowId": "RMGsRy908UOekKo3"
+        "workflowId": "RMGsRy908UOekKo3",
+        "options": {}
       },
       "id": "7bc74034-25af-402e-80aa-216066f0c116",
       "name": "Log Activity (Ending)",
@@ -863,41 +749,52 @@
         1320,
         720
       ]
-    }
-  ],
-  "pinData": {
-    "Webex (Admin)": [
-      {
-        "json": {
-          "id": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1dFQkhPT0svYTA3YWU3ZGEtZDc5NC00ZTg0LThhNDctMDU2NDA2YTM2MzZj",
-          "name": "n8n-webhook:https://n8n.edvistas.com/webhook/9287f27b-7888-4d9c-8b64-dd94507cf756/webhook",
-          "targetUrl": "https://n8n.edvistas.com/webhook/9287f27b-7888-4d9c-8b64-dd94507cf756/webhook",
-          "resource": "meetings",
-          "event": "created",
-          "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8yZjEzODhiOS1jMDVmLTRmYzktYjQ0OC00YzI1YTlhZjViYzQ",
-          "createdBy": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yOWI1ZjUxZi1lMjU5LTRiNDMtOGExOC1iODA5ZDA5ZjE5NDg",
-          "appId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0NjZWQwZjlkNTA0Y2MwYmFkNDA4YjIyMDBmN2ZjYjc4YmY3YmVlMDEyZGYzZjVlMzY4MjI4MDhhZDI1ZTJmMzhh",
-          "ownedBy": "creator",
-          "status": "active",
-          "created": "2024-01-12T21:06:01.109Z",
-          "data": {
-            "id": "5a5e494567be40ee925aafc247f4270a",
-            "meetingNumber": "26322409845",
-            "meetingType": "meetingSeries",
-            "timezone": "UTC",
-            "start": "2024-01-18T15:00:00Z",
-            "end": "2024-01-18T16:00:00Z",
-            "hostUserId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yOWI1ZjUxZi1lMjU5LTRiNDMtOGExOC1iODA5ZDA5ZjE5NDg",
-            "state": "active",
-            "hostEmail": "info@edvistas.com",
-            "siteUrl": "educationalvistasinc-535335.my.webex.com",
-            "orgId": "2f1388b9-c05f-4fc9-b448-4c25a9af5bc4",
-            "hostType": "1080080"
-          }
+    },
+    {
+      "parameters": {
+        "event": "all",
+        "filters": {}
+      },
+      "id": "56f74e5e-de9b-48d1-8f36-29b1162f510a",
+      "name": "Webex (Admin)",
+      "type": "n8n-nodes-base.ciscoWebexTrigger",
+      "typeVersion": 1,
+      "position": [
+        -240,
+        980
+      ],
+      "webhookId": "f8b81e94-ac20-4086-9b3c-d1e7980f22c2",
+      "credentials": {
+        "ciscoWebexOAuth2Api": {
+          "id": "kP6MOeMVfJK5YFcD",
+          "name": "Webex (Admin)"
         }
       }
-    ]
-  },
+    },
+    {
+      "parameters": {
+        "resource": "meeting",
+        "operation": "get",
+        "meetingId": "={{ $json.data.id }}",
+        "options": {}
+      },
+      "id": "a5e7a208-43e3-48b1-8606-1211fb88dd37",
+      "name": "Get Meeting Details",
+      "type": "n8n-nodes-base.ciscoWebex",
+      "typeVersion": 1,
+      "position": [
+        260,
+        800
+      ],
+      "credentials": {
+        "ciscoWebexOAuth2Api": {
+          "id": "kP6MOeMVfJK5YFcD",
+          "name": "Webex (Admin)"
+        }
+      }
+    }
+  ],
+  "pinData": {},
   "settings": {
     "executionOrder": "v1",
     "saveManualExecutions": true,
@@ -915,7 +812,7 @@
     },
     "node:Webex (Admin)": {
       "secret": "e64e863034813024d48981fca1789c29",
-      "webhookId": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1dFQkhPT0svN2Q3ZDg1YzAtMzc5Yi00MGVkLThjMDMtNTFiZWYxMTA4ODZh"
+      "webhookId": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1dFQkhPT0svNzk0OGUxNzgtZWVmYi00YzUyLTgwODktYWNmMDYyMTg4Yjdj"
     }
   },
   "tags": [
@@ -927,6 +824,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-01-15T15:56:26.000Z",
-  "versionId": "4ac32e18-3a33-4266-9e9f-7d585d232dda"
+  "updatedAt": "2024-10-29T17:24:48.000Z",
+  "versionId": "f824125c-a48c-4c65-8288-b20ebd23e51c"
 }
