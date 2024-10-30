@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "Email Trigger (IMAP)": {
       "main": [
@@ -59,7 +59,7 @@
       "type": "n8n-nodes-base.emailReadImap",
       "typeVersion": 2,
       "position": [
-        760,
+        860,
         460
       ],
       "credentials": {
@@ -120,7 +120,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.1,
       "position": [
-        1020,
+        1060,
         460
       ]
     },
@@ -234,6 +234,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-10-28T14:07:33.000Z",
-  "versionId": "7f388eeb-f456-488f-93b3-17c796ff4303"
+  "updatedAt": "2024-10-29T17:02:27.000Z",
+  "versionId": "a72864d2-f847-4083-8920-a9c89a5f8502"
 }
