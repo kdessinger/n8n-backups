@@ -118,7 +118,7 @@
       "typeVersion": 1.1,
       "position": [
         880,
-        160
+        180
       ]
     },
     {
@@ -181,8 +181,7 @@
       "parameters": {
         "resource": "custom",
         "customResource": "helpdesk.ticket",
-        "operation": "get",
-        "customResourceId": "424",
+        "operation": "getAll",
         "options": {}
       },
       "id": "c1d2579b-3400-44a5-ade1-4cdde8a419af",
@@ -190,8 +189,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -120,
-        440
+        120,
+        180
       ],
       "alwaysOutputData": true,
       "credentials": {
@@ -261,8 +260,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        513,
-        160
+        500,
+        180
       ],
       "alwaysOutputData": true,
       "credentials": {
@@ -297,6 +296,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-10-29T22:22:15.000Z",
-  "versionId": "9aa87568-c66e-40a1-b2ed-d22e787520ff"
+  "updatedAt": "2024-11-04T17:20:39.000Z",
+  "versionId": "2933a102-c0dd-475f-8058-0112c978c785"
 }
