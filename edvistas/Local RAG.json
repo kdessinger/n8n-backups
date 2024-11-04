@@ -800,8 +800,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        2380,
-        540
+        1840,
+        280
       ],
       "credentials": {
         "odooApi": {
@@ -827,8 +827,8 @@
       "type": "n8n-nodes-base.sort",
       "typeVersion": 1,
       "position": [
-        2560,
-        540
+        2060,
+        280
       ]
     }
   ],
@@ -839,6 +839,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-10-28T14:36:11.000Z",
-  "versionId": "5933bf8c-a2e6-4c9e-a96c-4cba2f704d9e"
+  "updatedAt": "2024-11-04T17:20:27.000Z",
+  "versionId": "397f8e3f-db4d-47d0-8a29-0d137312e85b"
 }
