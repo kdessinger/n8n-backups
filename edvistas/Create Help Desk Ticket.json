@@ -95,15 +95,15 @@
       "parameters": {
         "content": "# Helpdesk Ticket Webhook\n#### This node will create/modify/delete helpdesk tickets in odoo. \n\nField List:\n- Title\n- Message\n- Priority\n- Emojis (array)\n- ClickURL\n- Channel",
         "height": 322.2741444093105,
-        "width": 518.0544077450984
+        "width": 564.3102216985873
       },
       "id": "63155dda-0b7d-44c9-8003-3a29d0b732d6",
       "name": "Sticky Note",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -960,
-        80
+        -157.6860465116281,
+        -180
       ]
     },
     {
@@ -135,22 +135,6 @@
       "position": [
         -420,
         -20
-      ]
-    },
-    {
-      "parameters": {
-        "content": "## Notification Systems",
-        "height": 697.7049180327873,
-        "width": 295.08196721311464,
-        "color": 4
-      },
-      "id": "c7dfa31c-7356-468b-a61d-f6e1e7f4624b",
-      "name": "Sticky Note2",
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        420,
-        -120
       ]
     },
     {
@@ -189,7 +173,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        120,
+        160,
         180
       ],
       "alwaysOutputData": true,
@@ -296,6 +280,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-11-04T17:20:39.000Z",
-  "versionId": "2933a102-c0dd-475f-8058-0112c978c785"
+  "updatedAt": "2024-11-12T23:26:11.000Z",
+  "versionId": "85413956-4c54-4682-8ace-c04eb5ff152a"
 }
