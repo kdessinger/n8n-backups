@@ -1,17 +1,6 @@
 {
   "active": true,
   "connections": {
-    "Schedule Trigger": {
-      "main": [
-        [
-          {
-            "node": "Incoming Mail Servers",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Incoming Mail Servers": {
       "main": [
         [
@@ -62,6 +51,17 @@
           }
         ]
       ]
+    },
+    "Run Every 6 Hours": {
+      "main": [
+        [
+          {
+            "node": "Incoming Mail Servers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2024-10-08T21:04:33.405Z",
@@ -71,28 +71,6 @@
   },
   "name": "Odoo System  Notifications",
   "nodes": [
-    {
-      "parameters": {
-        "rule": {
-          "interval": [
-            {
-              "field": "hours",
-              "hoursInterval": 6
-            }
-          ]
-        }
-      },
-      "id": "af161e2b-9e1d-4eef-b858-36091fa9da01",
-      "name": "Schedule Trigger",
-      "type": "n8n-nodes-base.scheduleTrigger",
-      "typeVersion": 1.2,
-      "position": [
-        -260,
-        360
-      ],
-      "notesInFlow": true,
-      "notes": "Run every 6 hours"
-    },
     {
       "parameters": {
         "resource": "custom",
@@ -175,13 +153,13 @@
             {
               "id": "2f483b2f-f663-493d-b0d5-4735f9f9b4e3",
               "name": "Title",
-              "value": "Incoming Mail Server Failure",
+              "value": "=Incoming Mail Server Failure",
               "type": "string"
             },
             {
               "id": "26b298f5-6e2f-4f05-9fd2-3c6a3bb84edc",
               "name": "Message",
-              "value": "Odoo failed to retrieve incoming mail messages. ",
+              "value": "=Odoo failed to retrieve incoming mail messages. Last Mail Fetch was {{ $json.timeDifference.hours.round(1) }} hour(s) ago.",
               "type": "string"
             },
             {
@@ -261,6 +239,26 @@
       ],
       "notesInFlow": true,
       "notes": "If"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 6
+            }
+          ]
+        }
+      },
+      "id": "0eaebc0a-3ebc-48e3-ade6-837d7ce6c67c",
+      "name": "Run Every 6 Hours",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -280,
+        360
+      ]
     }
   ],
   "pinData": {},
@@ -276,6 +274,11 @@
       "recurrenceRules": [
         8
       ]
+    },
+    "node:Run Every 6 Hours": {
+      "recurrenceRules": [
+        12
+      ]
     }
   },
   "tags": [
@@ -287,6 +290,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-11-12T21:50:12.000Z",
-  "versionId": "53dbed8c-59a5-4ae7-911c-69eba3a9e1b7"
+  "updatedAt": "2024-11-13T07:06:47.000Z",
+  "versionId": "1ac51a2a-0d69-41ba-ab2d-9336fe51577f"
 }
