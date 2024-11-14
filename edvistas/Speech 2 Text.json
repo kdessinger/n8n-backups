@@ -12,17 +12,6 @@
         ]
       ]
     },
-    "Nextcloud": {
-      "main": [
-        [
-          {
-            "node": "Get audio files",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "IF Larger Than 25MB": {
       "main": [
         [
@@ -46,17 +35,6 @@
         [
           {
             "node": "Nextcloud1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Start": {
-      "main": [
-        [
-          {
-            "node": "Nextcloud",
             "type": "main",
             "index": 0
           }
@@ -151,18 +129,18 @@
       "main": [
         [
           {
-            "node": "Nextcloud",
+            "node": "Open File",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Local File Trigger1": {
+    "Open File": {
       "main": [
         [
           {
-            "node": "Nextcloud",
+            "node": "Get audio files",
             "type": "main",
             "index": 0
           }
@@ -172,20 +150,11 @@
   },
   "createdAt": "2023-03-22T03:28:24.318Z",
   "id": "33",
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "Speech 2 Text",
   "nodes": [
-    {
-      "parameters": {},
-      "name": "Start",
-      "type": "n8n-nodes-base.start",
-      "typeVersion": 1,
-      "position": [
-        -520,
-        -100
-      ],
-      "id": "20b747e9-5284-46e2-91d4-43c7513a6afc"
-    },
     {
       "parameters": {
         "method": "POST",
@@ -247,110 +216,8 @@
     },
     {
       "parameters": {
-        "values": {
-          "string": [
-            {
-              "name": "FilePath",
-              "value": "/mnt/share/_convert/Speech_2_Text/"
-            },
-            {
-              "name": "FileName",
-              "value": "edvistas_3-21-23"
-            },
-            {
-              "name": "FileType",
-              "value": ".mp3"
-            },
-            {
-              "name": "FileTypeDest",
-              "value": ".txt"
-            },
-            {
-              "name": "File",
-              "value": "={{ $parameter[\"values\"][\"string\"][0][\"value\"] }}{{ $parameter[\"values\"][\"string\"][1][\"value\"] }}{{ $parameter[\"values\"][\"string\"][2][\"value\"] }}"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "fbac74a3-1d1b-4b21-8197-ff2c1291d098",
-      "name": "GetFile",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 1,
-      "position": [
-        -180,
-        260
-      ],
-      "disabled": true
-    },
-    {
-      "parameters": {
-        "protocol": "sftp",
-        "operation": "list",
-        "path": "/mnt/DataVolume/share/_convert/Speech_2_Text/"
-      },
-      "id": "51490d41-26ff-414a-917e-75ea197a31d7",
-      "name": "FTP",
-      "type": "n8n-nodes-base.ftp",
-      "typeVersion": 1,
-      "position": [
-        -180,
-        80
-      ],
-      "credentials": {
-        "sftp": {
-          "id": "36",
-          "name": "SFTP account"
-        }
-      },
-      "disabled": true
-    },
-    {
-      "parameters": {
-        "triggerOn": "folder",
-        "path": "/mnt/share/_convert/Speech_2_Text/",
-        "events": [
-          "add"
-        ],
-        "options": {
-          "followSymlinks": true
-        }
-      },
-      "id": "eebfe09f-c507-45e4-b205-48e886920f1a",
-      "name": "Local File Trigger",
-      "type": "n8n-nodes-base.localFileTrigger",
-      "typeVersion": 1,
-      "position": [
-        -180,
-        -300
-      ],
-      "disabled": true
-    },
-    {
-      "parameters": {
-        "resource": "folder",
-        "operation": "list",
-        "path": "/_convert/Speech_2_Text"
-      },
-      "id": "27227a4f-529a-4042-85db-c881d1b0d899",
-      "name": "Nextcloud",
-      "type": "n8n-nodes-base.nextCloud",
-      "typeVersion": 1,
-      "position": [
-        -180,
-        -100
-      ],
-      "credentials": {
-        "nextCloudApi": {
-          "id": "18",
-          "name": "NextCloud (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {
         "content": "## Monitor a folder and get the file name(s) of new file(s).\n**Choose One** to edit to get the file name",
-        "height": 844.5256671025343,
+        "height": 472.39209595352963,
         "width": 352.9770840827728
       },
       "id": "5c5063c6-d3fa-4f90-8699-540b13c613eb",
@@ -358,8 +225,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -301.9719780702487,
-        -427.45747718144196
+        -480,
+        -385.1231600148933
       ]
     },
     {
@@ -367,9 +234,9 @@
         "conditions": {
           "number": [
             {
-              "value1": "={{ $json.contentLength }}",
+              "value1": "={{ parseFloat($json.fileSize) }}\n",
               "operation": "larger",
-              "value2": 24117248
+              "value2": 25
             }
           ]
         }
@@ -386,14 +253,14 @@
     {
       "parameters": {
         "executeOnce": false,
-        "command": "=/home/node/.n8n/scripts/splitaudiofile.sh /mnt/share/{{ $json.path }}"
+        "command": "=/home/node/.n8n/scripts/splitaudiofile.sh {{ $json.directory }}/{{ $json.fileName }}"
       },
       "id": "65f64f1d-928b-4138-8be6-68afda94bf8f",
       "name": "Split Files",
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
       "position": [
-        540,
+        520,
         -320
       ]
     },
@@ -402,8 +269,7 @@
         "conditions": {
           "string": [
             {
-              "value1": "={{ $json.contentType }}",
-              "operation": "contains",
+              "value1": "={{ $json.fileType }}",
               "value2": "audio"
             }
           ]
@@ -414,7 +280,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        120,
+        100,
         -180
       ]
     },
@@ -422,7 +288,7 @@
       "parameters": {
         "resource": "folder",
         "operation": "list",
-        "path": "/_convert/Speech_2_Text"
+        "path": "/!Share/_convert/Speech_2_Text"
       },
       "id": "3602a0dd-d57e-4a63-9d11-7b1594b9f583",
       "name": "Nextcloud1",
@@ -680,27 +546,6 @@
     },
     {
       "parameters": {
-        "triggerOn": "folder",
-        "path": "/mnt/share/",
-        "events": [
-          "add"
-        ],
-        "options": {
-          "followSymlinks": true
-        }
-      },
-      "id": "ccfc1c9a-22e5-4255-a575-c508e414e631",
-      "name": "Local File Trigger1",
-      "type": "n8n-nodes-base.localFileTrigger",
-      "typeVersion": 1,
-      "position": [
-        -520,
-        80
-      ],
-      "disabled": true
-    },
-    {
-      "parameters": {
         "conditions": {
           "boolean": [
             {
@@ -732,6 +577,41 @@
       "position": [
         560,
         -40
+      ]
+    },
+    {
+      "parameters": {
+        "triggerOn": "folder",
+        "path": "/mnt/share/_convert/Speech_2_Text/",
+        "events": [
+          "add"
+        ],
+        "options": {
+          "awaitWriteFinish": true,
+          "usePolling": true
+        }
+      },
+      "id": "5fe90b09-abbe-4e02-9418-deafeefabdca",
+      "name": "Local File Trigger",
+      "type": "n8n-nodes-base.localFileTrigger",
+      "typeVersion": 1,
+      "position": [
+        -360,
+        -180
+      ]
+    },
+    {
+      "parameters": {
+        "fileSelector": "={{ $json.path }}",
+        "options": {}
+      },
+      "id": "0f463abb-dddb-4e8e-b181-f3fa86c35336",
+      "name": "Open File",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        -180
       ]
     }
   ],
@@ -795,6 +675,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-07-11T20:12:47.000Z",
-  "versionId": "30b2cf0b-1dd4-4dce-8ee0-ee272f362cdc"
+  "updatedAt": "2024-11-13T20:58:23.000Z",
+  "versionId": "d8ae3824-1edf-419e-a0c1-3a505a34ba8f"
 }
