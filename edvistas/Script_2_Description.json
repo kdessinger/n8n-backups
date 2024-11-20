@@ -1,0 +1,281 @@
+{
+  "active": true,
+  "connections": {
+    "Local File Trigger": {
+      "main": [
+        [
+          {
+            "node": "Ignore .md Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Open File": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "OpenAI2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI2": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "Save File to Disk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ignore .md Files": {
+      "main": [
+        [
+          {
+            "node": "Open File",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Exit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-11-19T20:35:59.190Z",
+  "id": "lqkwbcMKiqBg14VD",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Script_2_Description",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Monitor a folder and get the file name(s) of new file(s).\n**Choose One** to edit to get the file name",
+        "height": 472.39209595352963,
+        "width": 352.9770840827728
+      },
+      "id": "e4ee080f-daa5-4251-831f-d3c76d91273c",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -700,
+        -380
+      ]
+    },
+    {
+      "parameters": {
+        "fileName": "={{ $('Local File Trigger').item.json.path }}.md",
+        "options": {
+          "append": false
+        }
+      },
+      "name": "Save File to Disk",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "position": [
+        920,
+        -180
+      ],
+      "typeVersion": 1,
+      "id": "d479b021-3af0-4d31-a8ab-41345f39a3f8"
+    },
+    {
+      "parameters": {
+        "triggerOn": "folder",
+        "path": "/mnt/share/_convert/Script_2_Description",
+        "events": [
+          "add"
+        ],
+        "options": {
+          "awaitWriteFinish": true,
+          "usePolling": true
+        }
+      },
+      "id": "e085c246-b71c-478a-a451-49f783a7e8e1",
+      "name": "Local File Trigger",
+      "type": "n8n-nodes-base.localFileTrigger",
+      "typeVersion": 1,
+      "position": [
+        -560,
+        -160
+      ]
+    },
+    {
+      "parameters": {
+        "fileSelector": "={{ $json.path }}",
+        "options": {}
+      },
+      "id": "cc9133c6-a9bf-48a1-86a2-46e2bde4fe05",
+      "name": "Open File",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        -180
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "text",
+        "options": {}
+      },
+      "id": "3572a6bb-57bb-4918-b392-4944c6684898",
+      "name": "Extract from File",
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        160,
+        -180
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "assistant",
+        "assistantId": {
+          "__rl": true,
+          "value": "asst_GhFu0glqVXk7S3PzKX9u2dxw",
+          "mode": "list",
+          "cachedResultName": "Code Description"
+        },
+        "prompt": "define",
+        "text": "={{ $json.data }}",
+        "options": {}
+      },
+      "id": "d84c5c9c-e379-46c8-a28c-5284540d19cb",
+      "name": "OpenAI2",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.6,
+      "position": [
+        360,
+        -180
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "toText",
+        "sourceProperty": "output",
+        "options": {}
+      },
+      "id": "3eb66ba5-56e0-4d95-ae9e-6c6454688159",
+      "name": "Convert to File",
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        720,
+        -180
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "b2651c12-21f0-4b2c-91ac-a0413de2229b",
+      "name": "Exit",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        20
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "e97e803e-e034-404b-8e93-5e97c0a6603d",
+              "leftValue": "={{ $json.path }}",
+              "rightValue": ".md",
+              "operator": {
+                "type": "string",
+                "operation": "notEndsWith"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {
+          "ignoreCase": true
+        }
+      },
+      "id": "7408c141-0a25-4cc9-9d4e-50b8b265091e",
+      "name": "Ignore .md Files",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -280,
+        -160
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "callerPolicy": "any",
+    "saveManualExecutions": false,
+    "executionTimeout": 300,
+    "executionOrder": "v1",
+    "errorWorkflow": "NtBd2hj1eiR2xufe"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2022-11-01T19:25:43.994Z",
+      "updatedAt": "2022-11-01T19:25:43.994Z",
+      "id": "4",
+      "name": "Convert"
+    },
+    {
+      "createdAt": "2023-02-14T20:17:22.566Z",
+      "updatedAt": "2023-02-14T20:17:22.566Z",
+      "id": "22",
+      "name": "ChatGPT"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-11-19T23:30:44.000Z",
+  "versionId": "bd9833ff-8a50-4137-a9fe-44e6380e0cc5"
+}
