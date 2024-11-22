@@ -145,11 +145,15 @@
     ]
   },
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": 300,
+    "errorWorkflow": "hbBAn9DYRcWLren1"
   },
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-10-12T02:45:43.000Z",
-  "versionId": "569fbdc9-0331-4fc9-901f-032bdd898d53"
+  "updatedAt": "2024-11-22T05:16:50.000Z",
+  "versionId": "ac703f52-78a0-44e4-8e31-a44d65b53c4d"
 }
