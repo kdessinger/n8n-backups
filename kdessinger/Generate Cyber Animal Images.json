@@ -1,17 +1,6 @@
 {
   "active": false,
   "connections": {
-    "Random Animal": {
-      "main": [
-        [
-          {
-            "node": "Cyberpunk Image Generator",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Cyberpunk Image Generator": {
       "main": [
         [
@@ -28,6 +17,17 @@
         [
           {
             "node": "Random Animal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Random Animal": {
+      "main": [
+        [
+          {
+            "node": "Cyberpunk Image Generator",
             "type": "main",
             "index": 0
           }
@@ -64,6 +64,38 @@
     },
     {
       "parameters": {
+        "resource": "image",
+        "prompt": "=Create a highly detailed digital art piece featuring a {{ $json.message.content }} character in a cyberpunk style. The {{ $json.message.content }} should have neon lighting, wearing futuristic headphones and reflective sunglasses. The {{ $json.message.content }} should have vibrant fur or skin with glowing elements, and the background should be filled with abstract neon cityscapes or digital circuit patterns. The style should be inspired by a mix of neon glow, vivid colors, and intricate cybernetic details. Ensure the {{ $json.message.content }}’s expression is confident and cool, and the composition highlights the reflective details in the sunglasses and headphones. Use colors like electric blue, hot pink, and vibrant purple to create a striking, high-contrast visual impact.\n\n",
+        "options": {}
+      },
+      "id": "70274d52-b3be-4e9b-ad7f-5f13e07469cc",
+      "name": "Cyberpunk Image Generator",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.5,
+      "position": [
+        620,
+        300
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "24",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "fc5c22a2-0a73-40a4-be0b-0a3b2b69d0ad",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        20,
+        300
+      ]
+    },
+    {
+      "parameters": {
         "modelId": {
           "__rl": true,
           "value": "gpt-4-turbo",
@@ -94,56 +126,9 @@
           "name": "OpenAi (kdessinger)"
         }
       }
-    },
-    {
-      "parameters": {
-        "resource": "image",
-        "prompt": "=Create a highly detailed digital art piece featuring a {{ $json.message.content }} character in a cyberpunk style. The {{ $json.message.content }} should have neon lighting, wearing futuristic headphones and reflective sunglasses. The {{ $json.message.content }} should have vibrant fur or skin with glowing elements, and the background should be filled with abstract neon cityscapes or digital circuit patterns. The style should be inspired by a mix of neon glow, vivid colors, and intricate cybernetic details. Ensure the {{ $json.message.content }}’s expression is confident and cool, and the composition highlights the reflective details in the sunglasses and headphones. Use colors like electric blue, hot pink, and vibrant purple to create a striking, high-contrast visual impact.\n\n",
-        "options": {}
-      },
-      "id": "70274d52-b3be-4e9b-ad7f-5f13e07469cc",
-      "name": "Cyberpunk Image Generator",
-      "type": "@n8n/n8n-nodes-langchain.openAi",
-      "typeVersion": 1.5,
-      "position": [
-        620,
-        300
-      ],
-      "credentials": {
-        "openAiApi": {
-          "id": "24",
-          "name": "OpenAi (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {},
-      "id": "fc5c22a2-0a73-40a4-be0b-0a3b2b69d0ad",
-      "name": "Execute Workflow Trigger",
-      "type": "n8n-nodes-base.executeWorkflowTrigger",
-      "typeVersion": 1,
-      "position": [
-        20,
-        300
-      ]
     }
   ],
-  "pinData": {
-    "Random Animal": [
-      {
-        "json": {
-          "index": 0,
-          "message": {
-            "role": "assistant",
-            "content": "Cobra",
-            "refusal": null
-          },
-          "logprobs": null,
-          "finish_reason": "stop"
-        }
-      }
-    ]
-  },
+  "pinData": {},
   "settings": {
     "executionOrder": "v1",
     "saveManualExecutions": true,
@@ -152,8 +137,15 @@
     "errorWorkflow": "hbBAn9DYRcWLren1"
   },
   "staticData": null,
-  "tags": [],
+  "tags": [
+    {
+      "createdAt": "2024-11-22T05:27:55.725Z",
+      "updatedAt": "2024-11-22T05:27:55.725Z",
+      "id": "oxzM5ZD7cwl7e40S",
+      "name": "Images"
+    }
+  ],
   "triggerCount": 0,
-  "updatedAt": "2024-11-22T05:16:50.000Z",
-  "versionId": "ac703f52-78a0-44e4-8e31-a44d65b53c4d"
+  "updatedAt": "2024-11-22T06:12:26.000Z",
+  "versionId": "f0b87122-7b79-4cf4-992b-40a104711668"
 }
