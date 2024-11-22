@@ -55,7 +55,7 @@
   "nodes": [
     {
       "parameters": {
-        "path": "=/Public/Shared Pictures/uploaded/Cyber Animals/cyber_{{ $('Random Animal').item.json.message.content }}_{{ $now.format('yyMMdd-HHmm') }}.{{ $json.fileExtension }}",
+        "path": "=/Public/Shared Pictures/uploaded/Comic Book Characters/comic_{{ $('Random Animal').item.json.message.content }}_{{ $now.format('yyMMdd-HHmm') }}.{{ $json.fileExtension }}",
         "binaryDataUpload": true
       },
       "id": "44a9ebad-9789-4655-b6cf-0939ab49d0ea",
@@ -80,7 +80,7 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1,
       "position": [
-        20,
+        40,
         300
       ]
     },
@@ -172,8 +172,15 @@
     "errorWorkflow": "hbBAn9DYRcWLren1"
   },
   "staticData": null,
-  "tags": [],
+  "tags": [
+    {
+      "createdAt": "2024-11-22T05:27:55.725Z",
+      "updatedAt": "2024-11-22T05:27:55.725Z",
+      "id": "oxzM5ZD7cwl7e40S",
+      "name": "Images"
+    }
+  ],
   "triggerCount": 0,
-  "updatedAt": "2024-11-22T05:25:39.000Z",
-  "versionId": "3a394ae1-bdad-427d-bf47-29a0f1746c3c"
+  "updatedAt": "2024-11-22T06:12:39.000Z",
+  "versionId": "9e4e382e-7a4c-4331-857d-72c231c735ed"
 }
