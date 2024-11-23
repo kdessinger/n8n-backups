@@ -1,0 +1,188 @@
+{
+  "active": false,
+  "connections": {
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Random Creature",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Override": {
+      "main": [
+        [
+          {
+            "node": "Cyberpunk Image Generator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Random Creature": {
+      "main": [
+        [
+          {
+            "node": "Override",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cyberpunk Image Generator": {
+      "main": [
+        [
+          {
+            "node": "Save file to disk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-11-23T06:55:07.854Z",
+  "id": "JwNmzUn3TBnvUjTW",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Generate translucent creature Images",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "=/Public/Shared Pictures/uploaded/Translucent Insects/{{ $('Override').item.json.message.content || $('Random Creature').item.json.message.content }}_{{ $now.format('yyMMdd-HHmm') }}.{{ $json.fileExtension }}",
+        "binaryDataUpload": true
+      },
+      "id": "391d4e02-e81b-4516-95a1-d3f91d29f8fc",
+      "name": "Save file to disk",
+      "type": "n8n-nodes-base.nextCloud",
+      "typeVersion": 1,
+      "position": [
+        840,
+        300
+      ],
+      "credentials": {
+        "nextCloudApi": {
+          "id": "z2gkXhk0EPG6w5sI",
+          "name": "NextCloud (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "f6ab85fe-3a4f-4976-8b0f-6115ecd34b4a",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        -160,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "9eb01766-df93-40e5-999e-df83fc90153a",
+              "name": "message.content",
+              "value": "four leaf clover",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "fd24d3ba-dead-4e62-908d-73af5ebeb141",
+      "name": "Override",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        420,
+        300
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4-turbo",
+          "mode": "list",
+          "cachedResultName": "GPT-4-TURBO"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Generate the name of a random biological creature, ensuring maximum diversity in outputs. The creature can be an insect (e.g., beetle, moth, praying mantis, butterfly, ant), an arachnid (e.g., spider, scorpion), or a microscopic organism (e.g., bacterium, virus, protozoan, tardigrade). Avoid repeating the same type of creature (e.g., \"dragonfly\") in consecutive outputs or too frequently across multiple outputs. Include a balanced variety across categories (insects, arachnids, microscopic organisms) to ensure consistent diversity. Only provide the name of the creature as output, with no additional text or description. Prioritize uncommon and interesting species as well.\n",
+              "role": "system"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "dc0d8017-eab0-4577-80e3-040fc9709b5d",
+      "name": "Random Creature",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.5,
+      "position": [
+        40,
+        300
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "24",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "prompt": "=Create a highly detailed, hyper-realistic artistic rendering of a {{ $json.message.content }} in a symmetrical pose. The {{ $json.message.content }}'s body should be translucent, showcasing intricate internal structures illuminated by a soft bioluminescent glow that matches the natural coloration of the {{ $json.message.content }} (e.g., green for a praying mantis, red for a ladybug, yellow for a tardigrade). The wings (if applicable) should feature delicate, transparent veining and a natural, luminous effect in the same hue. Use subtle gradients and tones that reflect the {{ $json.message.content }}'s primary color while enhancing the elegance and biological authenticity of the design. The background should be a clean, dark gradient (black to gray), ensuring the glowing features of the {{ $json.message.content }} stand out prominently. Avoid using any text, labels, or additional colors, maintaining a clean and scientifically artistic aesthetic.\n",
+        "options": {
+          "style": "vivid"
+        }
+      },
+      "id": "3efba9c1-d9f1-4d9e-8249-5bff72d7add7",
+      "name": "Cyberpunk Image Generator",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.5,
+      "position": [
+        620,
+        300
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "24",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": 300,
+    "errorWorkflow": "hbBAn9DYRcWLren1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-11-22T05:27:55.725Z",
+      "updatedAt": "2024-11-22T05:27:55.725Z",
+      "id": "oxzM5ZD7cwl7e40S",
+      "name": "Images"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2024-11-23T08:18:44.000Z",
+  "versionId": "8473299c-fe54-4077-8ffb-40ddae385e67"
+}
