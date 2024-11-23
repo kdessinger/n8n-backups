@@ -1,0 +1,450 @@
+{
+  "active": false,
+  "connections": {
+    "Get Status": {
+      "main": [
+        [
+          {
+            "node": "Redis Key exists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Running": {
+      "main": [
+        [
+          {
+            "node": "Execute Workflow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "No Operation": {
+      "main": [
+        [
+          {
+            "node": "Set Running",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Continue if Idle": {
+      "main": [
+        [
+          {
+            "node": "Set Running",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Workflow": {
+      "main": [
+        [
+          {
+            "node": "Set Idle",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis Key exists": {
+      "main": [
+        [
+          {
+            "node": "Continue if Idle",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking \"Test workflow\"": {
+      "main": [
+        [
+          {
+            "node": "Reset to Idle",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-11-22T19:56:19.095Z",
+  "id": "OC003pr8FtYA9CG8",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Workflow Status on Redis",
+  "nodes": [
+    {
+      "parameters": {
+        "workflowId": "4cnnwIeC9Sr5ngGZ",
+        "options": {}
+      },
+      "id": "0f96c454-ab6a-4e2a-bf31-497aa1441f28",
+      "name": "Execute Workflow",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "position": [
+        1592,
+        354
+      ],
+      "typeVersion": 1,
+      "alwaysOutputData": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "seconds",
+              "secondsInterval": 5
+            }
+          ]
+        }
+      },
+      "id": "c3d1d1be-7419-4152-8517-6640cd4eb3df",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "position": [
+        480,
+        360
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "propertyName": "=workflowStatus",
+        "key": "=workflowStatus_{{ $workflow.id }}",
+        "options": {}
+      },
+      "id": "3ca7425e-5720-49c0-a254-8564868c27ba",
+      "name": "Get Status",
+      "type": "n8n-nodes-base.redis",
+      "position": [
+        700,
+        360
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "redis": {
+          "id": "4TT1YrJ6Njf647nz",
+          "name": "Redis (local)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "=workflowStatus_{{ $workflow.id }}",
+        "value": "running"
+      },
+      "id": "85c78461-d50d-452a-aca3-c62ac6ff856e",
+      "name": "Set Running",
+      "type": "n8n-nodes-base.redis",
+      "position": [
+        1372,
+        354
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "redis": {
+          "id": "4TT1YrJ6Njf647nz",
+          "name": "Redis (local)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "=workflowStatus_{{ $workflow.id }}",
+        "value": "idle"
+      },
+      "id": "56ea6e92-d0fe-4024-a86b-6397cbd4c23e",
+      "name": "Set Idle",
+      "type": "n8n-nodes-base.redis",
+      "position": [
+        1812,
+        354
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "redis": {
+          "id": "4TT1YrJ6Njf647nz",
+          "name": "Redis (local)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "0c6308f0-1c96-41a9-b821-97031454d555",
+              "operator": {
+                "name": "filter.operator.equals",
+                "type": "string",
+                "operation": "equals"
+              },
+              "leftValue": "={{ $json.workflowStatus }}",
+              "rightValue": "idle"
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "32a839fa-de58-47aa-9d4f-23145f5d3a90",
+      "name": "Continue if Idle",
+      "type": "n8n-nodes-base.filter",
+      "position": [
+        1160,
+        280
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "a844597a-21f9-4869-9abb-4e4b1530931a",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              },
+              "leftValue": "={{ $json.workflowStatus }}",
+              "rightValue": ""
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "0592882e-1bec-4b69-9c7f-1983bd095f1d",
+      "name": "Redis Key exists",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        900,
+        360
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {},
+      "id": "fc766801-c8d6-4777-8975-d5d47bd3b97e",
+      "name": "No Operation",
+      "type": "n8n-nodes-base.noOp",
+      "position": [
+        1152,
+        434
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {},
+      "id": "5fcbfe16-f304-40f4-a1eb-8758c7ff58d5",
+      "name": "When clicking \"Test workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "position": [
+        472,
+        654
+      ],
+      "typeVersion": 1,
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "=workflowStatus_{{ $workflow.id }}",
+        "value": "idle"
+      },
+      "id": "aeeb198b-50b8-43df-899a-1442ef807d38",
+      "name": "Reset to Idle",
+      "type": "n8n-nodes-base.redis",
+      "position": [
+        692,
+        654
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "redis": {
+          "id": "4TT1YrJ6Njf647nz",
+          "name": "Redis (local)"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "## Troubleshooting\nUnplanned server outage? Need to reset the flag? Disable the schedule trigger, activate these nodes and run the **Reset to Idle** node manually.",
+        "height": 319.8590909090911,
+        "width": 433,
+        "color": 5
+      },
+      "id": "4aff86e4-3765-42bb-89f4-7b9e5c194760",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        423,
+        528
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "This updates the flag, indicating, that the workflow is currently running",
+        "height": 281,
+        "width": 222,
+        "color": 7
+      },
+      "id": "6f7f2886-c86d-4093-bfce-c464ea65db39",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1308,
+        234
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Set Interval\nDefine how frequently the main workflow should run.",
+        "height": 280,
+        "width": 205.18296892980436
+      },
+      "id": "73ef34bf-00d6-4767-a4d9-d91f462e81a9",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        422.81703107019564,
+        234
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "If the flag stored in Redis already exists and indicates, that the worklow is still running, another execution will be prevented. In that case this workflow ends here.",
+        "height": 382,
+        "width": 445,
+        "color": 7
+      },
+      "id": "0bba9e88-cfbe-453b-a404-6e10ea22a348",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        860,
+        200
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Set Workflow ID\nSet the ID of the main workflow which should be executed\n",
+        "height": 281,
+        "width": 218
+      },
+      "id": "b9e327a0-7c43-45fe-8e70-27e2e7ef907a",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1532,
+        234
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "This checks for a dynamic flag (containing the workflow ID) which represents if the workflow is currently running.",
+        "height": 281,
+        "width": 222,
+        "color": 7
+      },
+      "id": "26bb44cd-18b4-4bc9-a275-1e9f10c79a86",
+      "name": "Sticky Note5",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        632,
+        234
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "This updates the flag, indicating, that the workflow is currently idle",
+        "height": 281,
+        "width": 222,
+        "color": 7
+      },
+      "id": "2498eb0f-18e7-44a2-b47a-6b244b16a982",
+      "name": "Sticky Note6",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1752,
+        234
+      ],
+      "typeVersion": 1
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": 300,
+    "errorWorkflow": "NtBd2hj1eiR2xufe"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-11-22T22:02:55.892Z",
+      "updatedAt": "2024-11-22T22:02:55.892Z",
+      "id": "ZtJYJRla4KIbUMrp",
+      "name": "Redis"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2024-11-22T22:06:11.000Z",
+  "versionId": "7be6e18f-e839-4a23-8470-571bba34e1be"
+}
