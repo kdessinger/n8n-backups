@@ -158,7 +158,7 @@
       "credentials": {
         "redis": {
           "id": "4TT1YrJ6Njf647nz",
-          "name": "Redis (local)"
+          "name": "Redis (ai.edvistas.local)"
         }
       }
     },
@@ -179,7 +179,7 @@
       "credentials": {
         "redis": {
           "id": "4TT1YrJ6Njf647nz",
-          "name": "Redis (local)"
+          "name": "Redis (ai.edvistas.local)"
         }
       }
     },
@@ -200,7 +200,7 @@
       "credentials": {
         "redis": {
           "id": "4TT1YrJ6Njf647nz",
-          "name": "Redis (local)"
+          "name": "Redis (ai.edvistas.local)"
         }
       }
     },
@@ -445,6 +445,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2024-11-22T22:06:11.000Z",
-  "versionId": "7be6e18f-e839-4a23-8470-571bba34e1be"
+  "updatedAt": "2024-11-25T17:20:36.000Z",
+  "versionId": "0a758fb5-3241-403f-85e6-84587226a32f"
 }
