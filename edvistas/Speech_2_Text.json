@@ -1,17 +1,6 @@
 {
   "active": true,
   "connections": {
-    "Whisper Request": {
-      "main": [
-        [
-          {
-            "node": "Create Text File",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "IF Larger Than 25MB": {
       "main": [
         [
@@ -23,80 +12,7 @@
         ],
         [
           {
-            "node": "Load Local File",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Get audio files": {
-      "main": [
-        [
-          {
-            "node": "IF Larger Than 25MB",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Non audio files, do nothing",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Load Local File": {
-      "main": [
-        [
-          {
-            "node": "Whisper Request",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Create Text File": {
-      "main": [
-        [
-          {
-            "node": "Save File to Disk",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Load Nextcloud File": {
-      "main": [
-        [
-          {
-            "node": "Whisper Request1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Whisper Request1": {
-      "main": [
-        [
-          {
-            "node": "Create Text File1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Create Text File1": {
-      "main": [
-        [
-          {
-            "node": "Load Nextcloud File1",
+            "node": "Transcribe",
             "type": "main",
             "index": 0
           }
@@ -118,7 +34,7 @@
       "main": [
         [
           {
-            "node": "Get audio files",
+            "node": "Audio files only",
             "type": "main",
             "index": 0
           }
@@ -135,6 +51,46 @@
           }
         ]
       ]
+    },
+    "Text to Binary": {
+      "main": [
+        [
+          {
+            "node": "Save to Disk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Audio files only": {
+      "main": [
+        [
+          {
+            "node": "IF Larger Than 25MB",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Non audio files, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Transcribe": {
+      "main": [
+        [
+          {
+            "node": "Text to Binary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2023-03-22T03:28:24.318Z",
@@ -144,65 +100,6 @@
   },
   "name": "Speech_2_Text",
   "nodes": [
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://api.openai.com/v1/audio/transcriptions",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            {
-              "name": "content-type",
-              "value": "multipart/form-data"
-            }
-          ]
-        },
-        "sendBody": true,
-        "contentType": "multipart-form-data",
-        "bodyParameters": {
-          "parameters": [
-            {
-              "name": "=model",
-              "value": "whisper-1"
-            },
-            {
-              "name": "=response_format",
-              "value": "text"
-            },
-            {
-              "parameterType": "formBinaryData",
-              "name": "file",
-              "inputDataFieldName": "data"
-            }
-          ]
-        },
-        "options": {
-          "response": {
-            "response": {
-              "fullResponse": true,
-              "responseFormat": "text",
-              "outputPropertyName": "text"
-            }
-          }
-        }
-      },
-      "id": "f436c98c-4a1e-4fd6-b38c-2b64e1385e8d",
-      "name": "Whisper Request",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 3,
-      "position": [
-        720,
-        -180
-      ],
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "23",
-          "name": "OpenAI (kdessinger)"
-        }
-      }
-    },
     {
       "parameters": {
         "content": "## Monitor a folder and get the file name(s) of new file(s).\n**Choose One** to edit to get the file name",
@@ -215,7 +112,7 @@
       "typeVersion": 1,
       "position": [
         -480,
-        -385.1231600148933
+        -385
       ]
     },
     {
@@ -223,9 +120,9 @@
         "conditions": {
           "number": [
             {
-              "value1": "={{ parseFloat($json.fileSize) }}\n",
+              "value1": "={{ parseFloat($json.fileSize.match(/[\\d.]+/)[0]) * \n  ($json.fileSize.includes('MB') ? 1024 * 1024 : $json.fileSize.includes('kB') ? 1024 : 1) }}\n\n",
               "operation": "larger",
-              "value2": 25
+              "value2": 26214400
             }
           ]
         }
@@ -249,28 +146,8 @@
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
       "position": [
-        540,
+        640,
         -380
-      ]
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "string": [
-            {
-              "value1": "={{ $json.fileType }}",
-              "value2": "audio"
-            }
-          ]
-        }
-      },
-      "id": "b7914181-4220-442a-b5be-eebae56bb4d7",
-      "name": "Get audio files",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 1,
-      "position": [
-        100,
-        -180
       ]
     },
     {
@@ -282,204 +159,6 @@
       "position": [
         320,
         -40
-      ]
-    },
-    {
-      "parameters": {
-        "operation": "download",
-        "path": "={{ $json.path }}"
-      },
-      "id": "27416983-9cff-4fcb-9ffb-d315a1c746bd",
-      "name": "Load Nextcloud File",
-      "type": "n8n-nodes-base.nextCloud",
-      "typeVersion": 1,
-      "position": [
-        220,
-        -600
-      ],
-      "credentials": {
-        "nextCloudApi": {
-          "id": "18",
-          "name": "NextCloud (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "fileSelector": "=/mnt/share/{{ $json.path }}"
-      },
-      "id": "143547a4-8142-4f21-8b12-dd1297bedc49",
-      "name": "Load Local File",
-      "type": "n8n-nodes-base.readBinaryFiles",
-      "typeVersion": 1,
-      "position": [
-        540,
-        -180
-      ]
-    },
-    {
-      "parameters": {
-        "mode": "jsonToBinary",
-        "convertAllData": false,
-        "sourceKey": "text",
-        "destinationKey": "=data",
-        "options": {
-          "fileName": "=/mnt/share/{{ $json.path }}",
-          "keepSource": true,
-          "mimeType": "=text/plain"
-        }
-      },
-      "id": "024aad0b-04e5-4fe2-8e03-744f5dfab6c4",
-      "name": "Create Text File",
-      "type": "n8n-nodes-base.moveBinaryData",
-      "typeVersion": 1,
-      "position": [
-        900,
-        -180
-      ]
-    },
-    {
-      "parameters": {
-        "fileName": "={{ $binary.data.fileName }}",
-        "options": {
-          "append": false
-        }
-      },
-      "name": "Save File to Disk",
-      "type": "n8n-nodes-base.writeBinaryFile",
-      "position": [
-        1090,
-        -180
-      ],
-      "typeVersion": 1,
-      "id": "8e03cc03-5de4-4a1e-83fd-eea6f7ebc8c1"
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://api.openai.com/v1/audio/transcriptions",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            {
-              "name": "content-type",
-              "value": "multipart/form-data"
-            }
-          ]
-        },
-        "sendBody": true,
-        "contentType": "multipart-form-data",
-        "bodyParameters": {
-          "parameters": [
-            {
-              "name": "=model",
-              "value": "whisper-1"
-            },
-            {
-              "name": "=response_format",
-              "value": "text"
-            },
-            {
-              "parameterType": "formBinaryData",
-              "name": "file",
-              "inputDataFieldName": "data"
-            }
-          ]
-        },
-        "options": {
-          "response": {
-            "response": {
-              "fullResponse": true,
-              "responseFormat": "text",
-              "outputPropertyName": "text"
-            }
-          }
-        }
-      },
-      "id": "41ca3364-a714-4c72-ba3e-ce86bf54569c",
-      "name": "Whisper Request1",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 3,
-      "position": [
-        409,
-        -600
-      ],
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "23",
-          "name": "OpenAI (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "mode": "jsonToBinary",
-        "convertAllData": false,
-        "sourceKey": "text",
-        "options": {
-          "fileName": "={{ $node[\"Load Nextcloud File\"].json.path }}.txt",
-          "keepSource": true,
-          "mimeType": "={{ $json.headers[\"content-type\"] }}"
-        }
-      },
-      "id": "d8d5f77d-bb6f-40e9-a50f-38417cc8cd5b",
-      "name": "Create Text File1",
-      "type": "n8n-nodes-base.moveBinaryData",
-      "typeVersion": 1,
-      "position": [
-        580,
-        -600
-      ],
-      "alwaysOutputData": true
-    },
-    {
-      "parameters": {
-        "path": "={{ $binary.data.fileName }}",
-        "binaryDataUpload": true
-      },
-      "id": "b6327e5f-85ff-470d-b89f-2e784a7a4137",
-      "name": "Load Nextcloud File1",
-      "type": "n8n-nodes-base.nextCloud",
-      "typeVersion": 1,
-      "position": [
-        760,
-        -600
-      ],
-      "credentials": {
-        "nextCloudApi": {
-          "id": "18",
-          "name": "NextCloud (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "command": "=ls .n8n/scripts  "
-      },
-      "id": "0f029121-56af-4c78-a748-2a0f25c33bb9",
-      "name": "Execute Command",
-      "type": "n8n-nodes-base.executeCommand",
-      "typeVersion": 1,
-      "position": [
-        -100,
-        -600
-      ]
-    },
-    {
-      "parameters": {
-        "content": "## Need instructions on how to install n8n nativly?\n**click** here for a guide. [Guide](https://i12bretro.github.io/tutorials/0784.html)",
-        "height": 117.89351703909519,
-        "width": 347.1801384459393
-      },
-      "id": "c2a9e1fd-5a53-425d-90e4-9068889a3ba7",
-      "name": "Sticky Note3",
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        -480,
-        -600
       ]
     },
     {
@@ -524,9 +203,102 @@
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        720,
+        840,
         -380
       ]
+    },
+    {
+      "parameters": {
+        "content": "### When the file size is larger then 25MB a file split script will execute and cut the file into 25MB chunks.  No need to return loop because when a file chunk is created this workflow will execute again for each.",
+        "height": 274.3313953488371,
+        "width": 478.2906976744182
+      },
+      "id": "009d58f4-7077-41a7-9afb-07cf7c95f776",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        540,
+        -500
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "jsonToBinary",
+        "convertAllData": false,
+        "sourceKey": "text",
+        "destinationKey": "=data",
+        "options": {
+          "fileName": "={{ $('Open File').item.json.directory }}/{{ $('Open File').item.json.fileName }}.txt",
+          "keepSource": true,
+          "mimeType": "=text/plain"
+        }
+      },
+      "id": "024aad0b-04e5-4fe2-8e03-744f5dfab6c4",
+      "name": "Text to Binary",
+      "type": "n8n-nodes-base.moveBinaryData",
+      "typeVersion": 1,
+      "position": [
+        740,
+        -180
+      ]
+    },
+    {
+      "parameters": {
+        "fileName": "={{ $binary.data.directory }}/{{ $binary.data.fileName }}",
+        "options": {
+          "append": false
+        }
+      },
+      "name": "Save to Disk",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "position": [
+        920,
+        -180
+      ],
+      "typeVersion": 1,
+      "id": "8e03cc03-5de4-4a1e-83fd-eea6f7ebc8c1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.fileType }}",
+              "value2": "audio"
+            }
+          ]
+        }
+      },
+      "id": "b7914181-4220-442a-b5be-eebae56bb4d7",
+      "name": "Audio files only",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        100,
+        -180
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "operation": "transcribe",
+        "options": {}
+      },
+      "id": "bc3f31f5-d373-4bc5-b5e6-c4d281dafe9c",
+      "name": "Transcribe",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.7,
+      "position": [
+        540,
+        -180
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -565,6 +337,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-11-19T19:03:43.000Z",
-  "versionId": "2c987405-d232-4a6c-86d8-7a29122797c5"
+  "updatedAt": "2024-11-27T22:35:02.000Z",
+  "versionId": "223bb6a5-5dfc-44c9-aa30-529342f54fa9"
 }
