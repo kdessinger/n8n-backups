@@ -56,6 +56,28 @@
         ]
       ]
     },
+    "Unsupported Filetype": {
+      "main": [
+        [
+          {
+            "node": "Exit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read/Write Files from Disk": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "Get FileType": {
       "main": [
         [
@@ -81,29 +103,14 @@
         ],
         [
           {
+            "node": "Convert Office Document",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
             "node": "Unsupported Filetype",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Unsupported Filetype": {
-      "main": [
-        [
-          {
-            "node": "Exit",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Read/Write Files from Disk": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request",
             "type": "main",
             "index": 0
           }
@@ -242,7 +249,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "=https://api.cloudmersive.com/convert/{{ $json.fileExtension }}/to/pdf",
+        "url": "=https://api.cloudmersive.com/convert/{{ [\"md\", \"ini\", \"xml\", \"json\"].includes($json.fileExtension) ? \"txt\" : $json.fileExtension }}/to/pdf\n",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpCustomAuth",
         "sendBody": true,
@@ -280,93 +287,6 @@
           "name": "8x8 (kdessinger)"
         }
       }
-    },
-    {
-      "parameters": {
-        "rules": {
-          "values": [
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict"
-                },
-                "conditions": [
-                  {
-                    "id": "90420d38-7208-4a1e-b2ce-638ffa99d02a",
-                    "leftValue": "={{ $json.fileExtension }}",
-                    "rightValue": "doc",
-                    "operator": {
-                      "type": "string",
-                      "operation": "startsWith"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "Word"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "leftValue": "",
-                  "caseSensitive": true,
-                  "typeValidation": "strict"
-                },
-                "conditions": [
-                  {
-                    "operator": {
-                      "type": "string",
-                      "operation": "startsWith"
-                    },
-                    "leftValue": "={{ $json.fileExtension }}",
-                    "rightValue": "xls"
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "Excel"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "leftValue": "",
-                  "caseSensitive": true,
-                  "typeValidation": "strict"
-                },
-                "conditions": [
-                  {
-                    "id": "3a5f509d-46fe-490c-95f0-35124873c63e",
-                    "operator": {
-                      "type": "string",
-                      "operation": "startsWith"
-                    },
-                    "leftValue": "={{ $json.fileExtension }}",
-                    "rightValue": "ppt"
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "PowerPoint"
-            }
-          ]
-        },
-        "options": {
-          "fallbackOutput": "extra"
-        }
-      },
-      "id": "c101e55a-3129-44a8-8901-d6fc957708f4",
-      "name": "Get FileType",
-      "type": "n8n-nodes-base.switch",
-      "position": [
-        1140,
-        540
-      ],
-      "typeVersion": 3
     },
     {
       "parameters": {
@@ -454,6 +374,121 @@
         1340,
         100
       ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "id": "90420d38-7208-4a1e-b2ce-638ffa99d02a",
+                    "leftValue": "={{ $json.fileExtension }}",
+                    "rightValue": "doc",
+                    "operator": {
+                      "type": "string",
+                      "operation": "startsWith"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Word"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "operator": {
+                      "type": "string",
+                      "operation": "startsWith"
+                    },
+                    "leftValue": "={{ $json.fileExtension }}",
+                    "rightValue": "xls"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Excel"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "id": "3a5f509d-46fe-490c-95f0-35124873c63e",
+                    "operator": {
+                      "type": "string",
+                      "operation": "startsWith"
+                    },
+                    "leftValue": "={{ $json.fileExtension }}",
+                    "rightValue": "ppt"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "PowerPoint"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "id": "e37e095c-2254-4278-8559-97359a8c436a",
+                    "leftValue": "={{ [\"md\", \"txt\", \"ini\", \"xml\", \"yaml\", \"json\"].includes($json.fileExtension) }}",
+                    "rightValue": {},
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Text"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "id": "c101e55a-3129-44a8-8901-d6fc957708f4",
+      "name": "Get FileType",
+      "type": "n8n-nodes-base.switch",
+      "position": [
+        1140,
+        540
+      ],
+      "typeVersion": 3
     }
   ],
   "pinData": {},
@@ -480,6 +515,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-11-19T23:30:05.000Z",
-  "versionId": "e7f62f52-edaa-4263-97c2-0366f2cc7671"
+  "updatedAt": "2024-11-28T00:12:27.000Z",
+  "versionId": "fdeb6c9a-d9cf-4e77-97df-6b374f959136"
 }
