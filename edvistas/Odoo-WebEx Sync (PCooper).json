@@ -842,8 +842,7 @@
       "webhookId": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1dFQkhPT0svMzBiZGFlYzMtMTEwNi00ZmM2LThiMzQtMDdjNzJjMzBlNThm"
     },
     "node:Webex (Pete)": {
-      "secret": "a9ddc9918a9805105a1183b293a38541",
-      "webhookId": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svNGMwYjQ0MmItOWZjNS00OGM0LWE0MmEtOGE2Y2YwMjA0NWVh"
+      "secret": "a9ddc9918a9805105a1183b293a38541"
     }
   },
   "tags": [
