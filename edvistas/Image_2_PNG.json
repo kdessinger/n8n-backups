@@ -1,0 +1,160 @@
+{
+  "active": false,
+  "connections": {
+    "Local File Trigger": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read/Write Files from Disk": {
+      "main": [
+        [
+          {
+            "node": "Check if Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check if Image": {
+      "main": [
+        [
+          {
+            "node": "Edit Image",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Not an Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-12-12T22:59:59.379Z",
+  "id": "DmuwooUr1Y2D5aTI",
+  "meta": null,
+  "name": "Image_2_PNG",
+  "nodes": [
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.mimeType.split('/')[0] }}",
+              "value2": "image"
+            }
+          ]
+        }
+      },
+      "name": "Check if Image",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -280,
+        -260
+      ],
+      "id": "196f113e-232a-434c-bf59-cfc4b864fcc0"
+    },
+    {
+      "parameters": {
+        "triggerOn": "folder",
+        "path": "/mnt/share/_convert/Image_2_PNG",
+        "events": [
+          "add"
+        ],
+        "options": {
+          "usePolling": true
+        }
+      },
+      "type": "n8n-nodes-base.localFileTrigger",
+      "typeVersion": 1,
+      "position": [
+        -720,
+        -260
+      ],
+      "id": "c20da30a-cca1-4430-b8c1-080c782dc1d8",
+      "name": "Local File Trigger"
+    },
+    {
+      "parameters": {
+        "fileSelector": "={{ $json.path }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        -500,
+        -260
+      ],
+      "id": "f5f157cb-6c7d-4e50-8e17-ff39cdf134c1",
+      "name": "Read/Write Files from Disk"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        -140
+      ],
+      "id": "25515aa7-7214-417f-9e9b-a561fa681c88",
+      "name": "Not an Image"
+    },
+    {
+      "parameters": {
+        "operation": "information"
+      },
+      "type": "n8n-nodes-base.editImage",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        -360
+      ],
+      "id": "2d95ba0d-51d1-4846-9b11-4257f2964659",
+      "name": "Edit Image"
+    }
+  ],
+  "pinData": {
+    "Local File Trigger": [
+      {
+        "json": {
+          "event": "add",
+          "path": "/mnt/share/_convert/Image_2_PNG/IMG_2287.HEIC"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2022-11-01T19:25:43.994Z",
+      "updatedAt": "2022-11-01T19:25:43.994Z",
+      "id": "4",
+      "name": "Convert"
+    },
+    {
+      "createdAt": "2024-01-10T18:00:49.516Z",
+      "updatedAt": "2024-01-10T18:00:49.516Z",
+      "id": "nrRv1gTB6X9qMNK3",
+      "name": "Images"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2024-12-12T23:24:16.000Z",
+  "versionId": "ede9b0fb-4d8f-44c3-8e8c-99cc2c92726a"
+}
