@@ -290,7 +290,7 @@
     },
     "node:Schedule (Every 4 Hours)": {
       "recurrenceRules": [
-        0
+        12
       ]
     }
   },
