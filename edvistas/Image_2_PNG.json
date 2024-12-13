@@ -27,7 +27,7 @@
       "main": [
         [
           {
-            "node": "Edit Image",
+            "node": "Convert to PNG (ImageMagick)",
             "type": "main",
             "index": 0
           }
@@ -114,16 +114,30 @@
     },
     {
       "parameters": {
-        "operation": "information"
+        "mode": "runOnceForEachItem",
+        "jsCode": "const sharp = require('sharp');\nconst fs = require('fs');\n\n// Input file path (get from the previous node)\nconst inputPath = $json.path;\nconst outputPath = inputPath.replace(/\\.\\w+$/, '.png');\n\n// Convert to PNG\nawait sharp(inputPath).toFile(outputPath);\n\nreturn {\n  path: outputPath,\n  mimeType: 'image/png',\n};\n"
       },
-      "type": "n8n-nodes-base.editImage",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -300,
+        -80
+      ],
+      "id": "2820fe88-6a7a-4be3-8009-8f42b9084881",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "command": "convert \"/mnt/share/_convert/Image_2_PNG/IMG_2287.HEIC\" \"/mnt/share/_convert/Image_2_PNG/IMG_2287.HEIC.png\"\n"
+      },
+      "name": "Convert to PNG (ImageMagick)",
+      "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
       "position": [
         -60,
         -360
       ],
-      "id": "2d95ba0d-51d1-4846-9b11-4257f2964659",
-      "name": "Edit Image"
+      "id": "c997dd5b-6e55-48e9-a3b3-7444ac1922b4"
     }
   ],
   "pinData": {
@@ -155,6 +169,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2024-12-12T23:24:16.000Z",
-  "versionId": "ede9b0fb-4d8f-44c3-8e8c-99cc2c92726a"
+  "updatedAt": "2024-12-13T15:27:44.000Z",
+  "versionId": "27d082df-2c1a-4f94-95da-2a0582deb128"
 }
