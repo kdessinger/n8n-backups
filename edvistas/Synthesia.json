@@ -371,7 +371,8 @@
         },
         "options": {
           "maxTokens": 1500
-        }
+        },
+        "requestOptions": {}
       },
       "id": "1096b7dd-9942-4f52-9501-1cd35b3df059",
       "name": "Math Teacher",
@@ -406,7 +407,8 @@
         "options": {
           "maxTokens": 20,
           "temperature": 0.9
-        }
+        },
+        "requestOptions": {}
       },
       "id": "65bd96dc-2762-46e0-a549-ac44cd9ba74b",
       "name": "Generate Filename",
@@ -522,6 +524,7 @@
     {
       "parameters": {
         "resource": "chat",
+        "model": "gpt-4o-mini",
         "prompt": {
           "messages": [
             {
@@ -540,7 +543,8 @@
         "options": {
           "maxTokens": 400,
           "temperature": 0.7
-        }
+        },
+        "requestOptions": {}
       },
       "id": "4504d91b-89ab-4883-aff6-8624a9a076f9",
       "name": "stand-up comedian",
@@ -612,7 +616,8 @@
         },
         "options": {
           "maxTokens": 1500
-        }
+        },
+        "requestOptions": {}
       },
       "id": "80d381e4-94d2-46b6-8cb6-4e8139fc6b26",
       "name": "Guidance Counselor",
@@ -727,7 +732,8 @@
         "options": {
           "maxTokens": 2000,
           "temperature": 0.7
-        }
+        },
+        "requestOptions": {}
       },
       "id": "33c1b246-a977-463c-8929-b0bbf45e6b0f",
       "name": "Story Teller",
@@ -775,6 +781,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-11-17T14:15:57.000Z",
-  "versionId": "fe3e81ad-6e23-4f1b-b039-dfef2b3dba19"
+  "updatedAt": "2024-12-20T15:31:09.000Z",
+  "versionId": "553c4fe9-2c74-4bfe-9a2e-d878103a4bad"
 }
