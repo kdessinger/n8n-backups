@@ -153,7 +153,7 @@
       "type": "n8n-nodes-base.localFileTrigger",
       "position": [
         100,
-        500
+        520
       ],
       "typeVersion": 1
     },
@@ -223,7 +223,7 @@
       "type": "n8n-nodes-base.set",
       "position": [
         320,
-        500
+        520
       ],
       "typeVersion": 3.3
     },
@@ -237,7 +237,7 @@
       "type": "n8n-nodes-base.readWriteFile",
       "position": [
         520,
-        500
+        520
       ],
       "typeVersion": 1
     },
@@ -376,7 +376,7 @@
                 "conditions": [
                   {
                     "id": "3a369183-4881-45ed-b27d-7b093d593a99",
-                    "leftValue": "{{ $json.fileExtension }}",
+                    "leftValue": "={{ $json.fileExtension }}",
                     "rightValue": "txt",
                     "operator": {
                       "type": "string",
@@ -520,6 +520,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-12-20T15:51:03.000Z",
-  "versionId": "dbc349b4-36c2-4188-985b-8398fe3aa675"
+  "updatedAt": "2024-12-22T06:42:57.000Z",
+  "versionId": "3e9ce009-b14b-454e-bc99-b565e995a13a"
 }
