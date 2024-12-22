@@ -27,18 +27,7 @@
       "main": [
         [
           {
-            "node": "OpenAI2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "OpenAI2": {
-      "main": [
-        [
-          {
-            "node": "Convert to File",
+            "node": "OpenAI",
             "type": "main",
             "index": 0
           }
@@ -68,6 +57,17 @@
         [
           {
             "node": "Exit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
             "type": "main",
             "index": 0
           }
@@ -164,34 +164,6 @@
     },
     {
       "parameters": {
-        "resource": "assistant",
-        "assistantId": {
-          "__rl": true,
-          "value": "asst_GhFu0glqVXk7S3PzKX9u2dxw",
-          "mode": "list",
-          "cachedResultName": "Code Description"
-        },
-        "prompt": "define",
-        "text": "={{ $json.data }}",
-        "options": {}
-      },
-      "id": "d84c5c9c-e379-46c8-a28c-5284540d19cb",
-      "name": "OpenAI2",
-      "type": "@n8n/n8n-nodes-langchain.openAi",
-      "typeVersion": 1.6,
-      "position": [
-        360,
-        -180
-      ],
-      "credentials": {
-        "openAiApi": {
-          "id": "28",
-          "name": "OpenAi (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {
         "operation": "toText",
         "sourceProperty": "output",
         "options": {}
@@ -250,6 +222,34 @@
         -280,
         -160
       ]
+    },
+    {
+      "parameters": {
+        "resource": "assistant",
+        "assistantId": {
+          "__rl": true,
+          "value": "asst_GhFu0glqVXk7S3PzKX9u2dxw",
+          "mode": "list",
+          "cachedResultName": "Code Description"
+        },
+        "prompt": "define",
+        "text": "={{ $json.data }}",
+        "options": {}
+      },
+      "id": "d84c5c9c-e379-46c8-a28c-5284540d19cb",
+      "name": "OpenAI",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.6,
+      "position": [
+        360,
+        -180
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -276,6 +276,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-11-19T23:30:44.000Z",
-  "versionId": "bd9833ff-8a50-4137-a9fe-44e6380e0cc5"
+  "updatedAt": "2024-12-22T06:28:35.000Z",
+  "versionId": "ff298f7c-b46c-42d5-be8d-5106ce3c681f"
 }
