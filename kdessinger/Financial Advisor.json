@@ -1,0 +1,97 @@
+{
+  "active": false,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-12-31T00:21:26.605Z",
+  "id": "4eO2fJqLUHefrE36",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Financial Advisor",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "4ff509ab-8936-4cac-a6a4-5c1477851489",
+      "name": "When chat message received",
+      "type": "@n8n/n8n-nodes-langchain.manualChatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        820,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "bd53a28f-222f-4876-b439-bb562ea02006",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        580
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "24",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "agent": "planAndExecuteAgent",
+        "options": {
+          "humanMessageTemplate": "Previous steps: {previous_steps}\n\nCurrent objective: {current_step}\n\n{agent_scratchpad}\n\nYou may extract and combine relevant data from your previous steps when responding to me."
+        }
+      },
+      "id": "e6e27238-e133-4ee8-ad8e-370c4423777d",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        1040,
+        360
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-12-31T00:21:35.339Z",
+      "updatedAt": "2024-12-31T00:21:35.339Z",
+      "id": "6GxhHGeDuKWkAijH",
+      "name": "agent"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2024-12-31T00:31:49.000Z",
+  "versionId": "fda4749b-f4ec-4b8b-a2b4-453bd032ecc6"
+}
