@@ -1,0 +1,261 @@
+{
+  "active": false,
+  "connections": {
+    "Prep Output Fields": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prep Input Fields": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory1": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Prep Input Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Prep Output Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-12-31T06:56:58.251Z",
+  "id": "YVU7IlzaQaZtULg9",
+  "meta": null,
+  "name": "Tech Stack Expert Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "X-n8n-Signature",
+                "value": "EvtIS^EBVISeie6svB@6ev"
+              }
+            ]
+          }
+        }
+      },
+      "id": "f1034506-f6f5-4acb-8224-52ec457ce3b9",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        2300,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ee2bcd57-3b4c-43f9-b4b7-3a25687b9a68",
+              "name": "query",
+              "value": "={{ $json.body.query }}",
+              "type": "string"
+            },
+            {
+              "id": "63f23e51-af2b-47c4-a288-5abaf9b6c357",
+              "name": "user_id",
+              "value": "={{ $json.body.user_id }}",
+              "type": "string"
+            },
+            {
+              "id": "b97a3670-8a87-481b-8695-db44624be7d8",
+              "name": "request_id",
+              "value": "={{ $json.body.request_id }}",
+              "type": "string"
+            },
+            {
+              "id": "7d3fa06d-08f7-4517-b9c5-3c46ff476f55",
+              "name": "session_id",
+              "value": "={{ $json.body.session_id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "7bd926f5-daaf-499a-abb2-c16c15029dae",
+      "name": "Prep Input Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1460,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b5eaa2a2-a6bc-40ab-af5e-baa8a5dda1a7",
+              "name": "success",
+              "value": "=true",
+              "type": "boolean"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "be1feba2-8834-4515-ab01-91d859fe247c",
+      "name": "Prep Output Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2080,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "content": "# Tech Stack Expert Agent\n\nAuthor: [Cole Medin](https://www.youtube.com/@ColeMedin)\n\nA specialized n8n agent that helps users determine the ideal tech stack for their full-stack applications. This agent demonstrates how to create a basic conversational AI assistant in n8n.\n\n## Features\n\n- Conducts guided conversations to understand project requirements\n- Considers user experience with different technologies\n- Provides tailored recommendations for:\n  - Frontend frameworks\n  - Backend technologies\n  - Authentication solutions\n  - Database systems\n  - LLM integration\n- Maintains conversation context using Postgres chat memory",
+        "height": 492.97877906976817,
+        "width": 651.0139534883727,
+        "color": 6
+      },
+      "id": "13423b0e-9cc0-45ec-bf83-1ba8f2da8160",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        460,
+        460
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "07bcd79a-8e42-4016-a809-95664228372a",
+      "name": "Postgres Chat Memory1",
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.1,
+      "position": [
+        1760,
+        780
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "dcf62f21-d54e-4395-8e31-d8d1cc11b415",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        1600,
+        780
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "24",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "tech-stack-expert",
+        "authentication": "headerAuth",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "7a7a8ab9-d88e-4d53-94b5-f81ac7a3e04a",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        1200,
+        540
+      ],
+      "webhookId": "b64eb7c7-350f-4477-a56b-ffcd9d19dc2f"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{$('Prep Input Fields').item.json.query}}",
+        "options": {
+          "systemMessage": "=You are a tech stack expert and help users figure out what their tech stack should be for their full stack applications. Your goal is to guide users through a conversation to get the information you need from them to best define the ideal tech stack for their use case.\n\nIMPORTANT: Only ask one question at a time.\n\n1. First ask them to describe the application they are looking to build.\n\n2. Next ask them if they are using AI coding assistants, ask if they are using\n- Bolt.new\n- Bolt.diy\n- Windsurf\n- Lovable\n- Cursor\n- Aider\n- Another AI Coding Assistant\n\nIf they are using Bolt.new, Bolt.diy, or Lovable, assume their frontend needs to be a React frontend with Vite. Otherwise, you aren't sure at this point. You also don't know about the backend yet.\n\n3. Next ask them which technologies they have experience with for the frontend.\n\n4. Next ask them the same thing but for the backend.\n\n5. Next ask them how many users will be using the platform.\n- 1-100\n- 100-1,000\n- 1,000-10,000\n- 10,000+\n\n6. Next ask if there are any technologies they definitely need to use for the frontend, backend, authentication, the LLM, or cloud hosting. Or anything else that is a requirement.\n\nOnce you have all this information, generate them a full tech stack including:\n\n1. Frontend\n\nFor very simple applications with not a lot of users, recommend Streamlit unless they are building with a browser AI coding assistant like Bolt.new, Bolt.diy, or Lovable.\n\nFor more complicated apps or ones with more users, recommend Next.js or React/Svelte/Vue with Vite.\n\n2. Backend\n\nRecommend n8n/Flowise for building AI agents for simple use cases, otherwise recommend LangChain + LangGraph with either Python or JavaScript.\n\nThe backend should be Python or JavaScript mostly, only recommend Go if they need something very fast that doesn't have AI integrated.\n\nFor APIs, recommend FastAPI for Python and Express for JavaScript.\n\n3. Authentication\n\nRecommend Supabase authentication for most use cases unless it seems more complex/multiple parts of the site that could benefit from the robustness and SSO offered by Auth0.\n\n4. Database\n\nRecommend a SQL database for most use cases unless it really makes sense to use Firebase/MongoDB. Supabase is the go to for SQL and also using PGVector for RAG.\n\n5. LLM\n\nRecommend a Claude model (3.5 Sonnet or 3.5 Haiku depending on cost/speed) if there isn't private data. Otherwise, recommend using Ollama for a local model like Qwen 2.5 or Qwen 2.5 Coder 32b. Recommend Llama 3.2 for a vision model.\n\n\nFor all parts above, prioritize recommending what they are comfortable with/tied to unless it really doesn't make sense."
+        }
+      },
+      "id": "acc8d95b-6f0b-43af-adc5-d4af05e93349",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        1700,
+        540
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-12-31T00:21:35.339Z",
+      "updatedAt": "2024-12-31T00:21:35.339Z",
+      "id": "6GxhHGeDuKWkAijH",
+      "name": "agent"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2024-12-31T06:59:41.000Z",
+  "versionId": "1661efd1-5637-4146-b407-40ef249400e9"
+}
