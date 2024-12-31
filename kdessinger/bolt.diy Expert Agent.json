@@ -1,0 +1,542 @@
+{
+  "active": false,
+  "connections": {
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTML": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request2": {
+      "main": [
+        [
+          {
+            "node": "HTML1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTML1": {
+      "main": [
+        [
+          {
+            "node": "Summarize",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Add AI Documentation Message to DB",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call n8n Workflow Tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add AI Documentation Message to DB": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-12-31T06:52:17.558Z",
+  "id": "C44IXsSpAA1D1ENi",
+  "meta": null,
+  "name": "bolt.diy Expert Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ee2bcd57-3b4c-43f9-b4b7-3a25687b9a68",
+              "name": "query",
+              "value": "={{ $json.body.query }}",
+              "type": "string"
+            },
+            {
+              "id": "63f23e51-af2b-47c4-a288-5abaf9b6c357",
+              "name": "user_id",
+              "value": "={{ $json.body.user_id }}",
+              "type": "string"
+            },
+            {
+              "id": "b97a3670-8a87-481b-8695-db44624be7d8",
+              "name": "request_id",
+              "value": "={{ $json.body.request_id }}",
+              "type": "string"
+            },
+            {
+              "id": "b4a4acb2-b2c4-45c1-af2e-02636999af94",
+              "name": "session_id",
+              "value": "={{ $json.body.session_id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "1d03332f-d63c-4cbd-8812-1d2bfe2aff3d",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1460,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "X-n8n-Signature",
+                "value": "EvtIS^EBVISeie6svB@6ev"
+              }
+            ]
+          }
+        }
+      },
+      "id": "842786a0-9f50-4385-8e47-bb67841bce18",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        2100,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Edit Fields').item.json.session_id }}",
+        "tableName": "messages"
+      },
+      "id": "994701ca-c083-4eaf-8b59-c6b3cfda976b",
+      "name": "Postgres Chat Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1,
+      "position": [
+        1760,
+        720
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "ffc24616-c89f-47f9-a7cd-02a78ff69d70",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        1620,
+        720
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://stackblitz-labs.github.io/bolt.diy/",
+        "options": {}
+      },
+      "id": "8d8284a6-b87d-4281-aea3-f9cf03f4f04a",
+      "name": "HTTP Request1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1380,
+        960
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "extractHtmlContent",
+        "extractionValues": {
+          "values": [
+            {
+              "key": "links",
+              "cssSelector": "nav a.md-nav__link",
+              "returnValue": "attribute",
+              "attribute": "href",
+              "returnArray": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "5d8b2aa3-d972-4600-8eab-27123c75549e",
+      "name": "HTML",
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        1580,
+        960
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "320649a3-9c46-4067-bdec-7566a3e588ed",
+              "leftValue": "={{ $json.links }}",
+              "rightValue": "/",
+              "operator": {
+                "type": "string",
+                "operation": "endsWith"
+              }
+            },
+            {
+              "id": "dbd44d34-9f7e-4eae-9e14-cd82a5b33387",
+              "leftValue": "={{ $json.links }}",
+              "rightValue": ".",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "a9ab0fd4-2f84-4955-87aa-c186819fb9a7",
+      "name": "Filter",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [
+        1940,
+        960
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "links",
+        "options": {}
+      },
+      "id": "66304055-5ec9-4e4d-8f4c-5c5a2bcbd842",
+      "name": "Split Out",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1760,
+        960
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{ `https://stackblitz-labs.github.io/bolt.diy/${$json.links.replaceAll(\".\", \"\")}` }}",
+        "options": {}
+      },
+      "id": "2597dd0a-4c8e-490e-923c-47380bf73e14",
+      "name": "HTTP Request2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2120,
+        960
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "extractHtmlContent",
+        "extractionValues": {
+          "values": [
+            {
+              "key": "content",
+              "cssSelector": "article",
+              "returnArray": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "116279ac-4bb7-4eda-b5a9-a5667cfb357f",
+      "name": "HTML1",
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        2320,
+        960
+      ]
+    },
+    {
+      "parameters": {
+        "fieldsToSummarize": {
+          "values": [
+            {
+              "aggregation": "concatenate",
+              "field": "content",
+              "separateBy": "other",
+              "customSeparator": "\\n\\nNext page:\\n\\n"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "4bc12865-da1e-42bb-8efd-a6d9885bfabd",
+      "name": "Summarize",
+      "type": "n8n-nodes-base.summarize",
+      "typeVersion": 1,
+      "position": [
+        2520,
+        960
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "52139c89-bf6a-46bb-a674-f5695ec08e94",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        960,
+        960
+      ]
+    },
+    {
+      "parameters": {
+        "name": "fetch_ottodev_documentation",
+        "description": "Call this tool to get the oTToDev documentation when you need to answer a question for the user.",
+        "workflowId": {
+          "__rl": true,
+          "value": "={{ $workflow.id }}",
+          "mode": "id"
+        },
+        "responsePropertyName": "concatenated_content",
+        "fields": {
+          "values": [
+            {
+              "name": "session_id",
+              "stringValue": "={{$('Edit Fields').item.json.session_id}}"
+            }
+          ]
+        }
+      },
+      "id": "a6f109d7-a84f-4e91-850f-3d72740f3440",
+      "name": "Call n8n Workflow Tool",
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        1900,
+        720
+      ]
+    },
+    {
+      "parameters": {
+        "tableId": "messages",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "session_id",
+              "fieldValue": "={{ $json.session_id }}"
+            },
+            {
+              "fieldId": "message",
+              "fieldValue": "={{ {\n\"type\": \"ai\",\n\"content\": \"-> Reading bolt.diy documentation...\",\n\"data\": {},\n\"additional_kwargs\": {},\n\"response_metadata\": {}\n} }}"
+            }
+          ]
+        }
+      },
+      "id": "da970cc4-f206-4b6d-adb4-71502343660a",
+      "name": "Add AI Documentation Message to DB",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1160,
+        960
+      ]
+    },
+    {
+      "parameters": {
+        "content": "# bolt.diy Expert Agent\n\nAuthor: [Cole Medin](https://www.youtube.com/@ColeMedin)\n\nThe bolt.diy Expert Agent is a specialized n8n AI agent designed to assist users with questions and issues related to bolt.diy - the official open source bolt.new that enables users to choose from multiple LLM providers for web development. It does this by researching the bolt.diy documentation for the user.\n\n## Purpose\n\nThis agent serves as a knowledgeable assistant that:\n- Answers questions about bolt.diy features and capabilities\n- Helps troubleshoot installation and setup issues\n- Provides guidance on using different LLM providers\n- Assists with understanding bolt.diy architecture and components\n- Offers support for contributing to the project",
+        "height": 441.41627906976817,
+        "width": 651.0139534883727,
+        "color": 6
+      },
+      "id": "a5bbe00f-97af-4865-a617-fa908661c351",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        460,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "invoke-ottodev-expert",
+        "authentication": "headerAuth",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "132a8178-d301-4086-8b19-1ad36c246880",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        1220,
+        500
+      ],
+      "webhookId": "ba5e9235-01af-47f8-9f72-29df862bfa0f"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Edit Fields').item.json.query }}",
+        "options": {
+          "systemMessage": "=You are an expert at an open source AI coding assistant called bolt.diy. You also have access to fetch the full documentation for bolt.diy to answer any questions for the user. The documentation URL is:\n\nhttps://stackblitz-labs.github.io/bolt.diy\n\nYou use this README to answer user questions to the best of your ability. If you don't know the answer and the guide/FAQ doesn't help you with it, just be honest and tell the user you don't know the answer and they can instead post a question on the Discourse community for bolt.diy (the Think Tank):\n\nhttps://thinktank.ottomator.ai\n\nYour answers are focused around helping beginners use bolt.diy. Keep your answers simple yet still comprehensive!"
+        }
+      },
+      "id": "d7992b6a-1091-44b9-a7b3-ddd40e8342ea",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.6,
+      "position": [
+        1700,
+        500
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-12-31T00:21:35.339Z",
+      "updatedAt": "2024-12-31T00:21:35.339Z",
+      "id": "6GxhHGeDuKWkAijH",
+      "name": "agent"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2024-12-31T06:52:19.000Z",
+  "versionId": "ac4acec1-856f-4b67-98d6-cada28dfd5ad"
+}
