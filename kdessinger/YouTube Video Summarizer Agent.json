@@ -1,0 +1,541 @@
+{
+  "active": false,
+  "connections": {
+    "Find English Captions": {
+      "main": [
+        [
+          {
+            "node": "Download Captions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Retrieve Caption Data": {
+      "main": [
+        [
+          {
+            "node": "Find English Captions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Caption File Conversion": {
+      "main": [
+        [
+          {
+            "node": "Caption Summary with ChatGPT",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Captions": {
+      "main": [
+        [
+          {
+            "node": "Caption File Conversion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call n8n Workflow Tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add AI Documentation Message to DB": {
+      "main": [
+        [
+          {
+            "node": "Retrieve Caption Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Add AI Documentation Message to DB",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Caption Summary with ChatGPT": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-12-31T07:00:46.191Z",
+  "id": "TvUWCKXoTNbi9Nq0",
+  "meta": null,
+  "name": "YouTube Video Summarizer Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "https://www.googleapis.com/youtube/v3/captions",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "youTubeOAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "videoId",
+              "value": "={{ $('Execute Workflow Trigger').item.json.query.video_id }}"
+            },
+            {
+              "name": "part",
+              "value": "snippet"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "52658a69-2e8b-4262-806a-5a6ee14c9884",
+      "name": "Retrieve Caption Data",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        1600,
+        1160
+      ],
+      "typeVersion": 4.2
+    },
+    {
+      "parameters": {
+        "operation": "text",
+        "destinationKey": "content",
+        "options": {}
+      },
+      "id": "67c36cc0-4d59-4297-b061-54b6052bddb0",
+      "name": "Caption File Conversion",
+      "type": "n8n-nodes-base.extractFromFile",
+      "position": [
+        2220,
+        1160
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "eaf7dcb5-91cf-4405-917b-38845f0ef78d",
+              "name": "caption",
+              "type": "object",
+              "value": "={{ $jmespath( $json.items, \"[?snippet.language == 'en'] | [0]\" ) }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "29d01fe6-b81b-44b8-aa1d-340e661a14a8",
+      "name": "Find English Captions",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1820,
+        1160
+      ],
+      "typeVersion": 3.3
+    },
+    {
+      "parameters": {
+        "url": "=https://www.googleapis.com/youtube/v3/captions/{{ $json.caption.id }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "youTubeOAuth2Api",
+        "options": {}
+      },
+      "id": "64efcc1a-ed71-4f1a-a59c-cc844af10cd2",
+      "name": "Download Captions",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        2020,
+        1160
+      ],
+      "typeVersion": 4.2
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ee2bcd57-3b4c-43f9-b4b7-3a25687b9a68",
+              "name": "query",
+              "value": "={{ $json.body.query }}",
+              "type": "string"
+            },
+            {
+              "id": "63f23e51-af2b-47c4-a288-5abaf9b6c357",
+              "name": "user_id",
+              "value": "={{ $json.body.user_id }}",
+              "type": "string"
+            },
+            {
+              "id": "b97a3670-8a87-481b-8695-db44624be7d8",
+              "name": "request_id",
+              "value": "={{ $json.body.request_id }}",
+              "type": "string"
+            },
+            {
+              "id": "b4a4acb2-b2c4-45c1-af2e-02636999af94",
+              "name": "session_id",
+              "value": "={{ $json.body.session_id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "e2641011-71b0-4e2f-b790-e0546fe384bb",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1720,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "X-n8n-Signature",
+                "value": "EvtIS^EBVISeie6svB@6ev"
+              }
+            ]
+          }
+        }
+      },
+      "id": "44b522b9-1564-4e88-bd0a-10feae2143db",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        2360,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Edit Fields').item.json.session_id }}",
+        "tableName": "messages"
+      },
+      "id": "8e4d8d1b-967f-467e-bfec-40325c091101",
+      "name": "Postgres Chat Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1,
+      "position": [
+        2020,
+        920
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "8103fe7e-08d0-48dc-a21d-cad38d94d40d",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        1880,
+        920
+      ]
+    },
+    {
+      "parameters": {
+        "name": "fetch_youtube_video_summary_by_id",
+        "description": "Call this tool to get the summary of a YouTube video based on id.",
+        "workflowId": {
+          "__rl": true,
+          "value": "={{ $workflow.id }}",
+          "mode": "id"
+        },
+        "responsePropertyName": "summary",
+        "fields": {
+          "values": [
+            {
+              "name": "session_id",
+              "stringValue": "={{$('Edit Fields').item.json.session_id}}"
+            }
+          ]
+        },
+        "specifyInputSchema": true,
+        "jsonSchemaExample": "{\n\t\"video_id\": \"pC17ge_2n0Q\"\n}"
+      },
+      "id": "211160af-b700-4458-b0f4-cffb42059cca",
+      "name": "Call n8n Workflow Tool",
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        2160,
+        920
+      ]
+    },
+    {
+      "parameters": {
+        "tableId": "messages",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "session_id",
+              "fieldValue": "={{ $json.session_id }}"
+            },
+            {
+              "fieldId": "message",
+              "fieldValue": "={{ {\n\"type\": \"ai\",\n\"content\": \"-> Summarizing YouTube video...\",\n\"data\": {},\n\"additional_kwargs\": {},\n\"response_metadata\": {}\n} }}"
+            }
+          ]
+        }
+      },
+      "id": "3120b3e1-eb30-4294-8ea4-a093c13dda29",
+      "name": "Add AI Documentation Message to DB",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1380,
+        1160
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "6fe5605a-e7c7-4d11-901e-9c7845ebb595",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        1180,
+        1160
+      ]
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Summarise this transcript into three bullet points to sum up what the video is about and why someone should watch it: {{ $json[\"content\"] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "0d0afd7b-2ea4-4351-8503-3db61b354af6",
+      "name": "Caption Summary with ChatGPT",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "position": [
+        2440,
+        1160
+      ],
+      "typeVersion": 1.3
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "63b85480-7d13-46d3-9670-e4f3d0092f2e",
+              "name": "summary",
+              "value": "={{ $json.message.content }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "05db2dcb-5692-4729-a9c1-a3eaf8e96217",
+      "name": "Edit Fields1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2820,
+        1160
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Edit Fields').item.json.query }}",
+        "options": {
+          "systemMessage": "=You are an expert at summarizing YouTube videos based on a video ID and discussing them with users. Whenever you use your tool to summarize a video, you only pass in the ID of the video (like pC17ge_2n0Q). You don't include any other part of the URL."
+        }
+      },
+      "id": "50af18a1-331c-4a50-8f94-101241a4305e",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.6,
+      "position": [
+        1960,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "invoke-youtube-summarizer",
+        "authentication": "headerAuth",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "27c24fe6-2cdb-4815-a35c-b4d6a7005303",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        1480,
+        700
+      ],
+      "webhookId": "ba5e9235-01af-47f8-9f72-29df862bfa0f"
+    },
+    {
+      "parameters": {
+        "content": "# YouTube Video Summarizer Agent\n\nAuthor: [Mike Russell](https://n8n.io/creators/mikerussell/)\n\nThis n8n-powered agent is a conversational AI assistant that creates comprehensive summaries of YouTube videos from Cole Medin's channel. It can process both video IDs and full YouTube links, providing detailed summaries and engaging in follow-up discussions about the video content.\n\n## Features\n\n- Processes YouTube video IDs and full URLs\n- Retrieves and analyzes video captions\n- Generates detailed video summaries\n- Supports conversational follow-up questions\n- Maintains context for natural dialogue\n- Extracts key points and insights",
+        "height": 441.41627906976817,
+        "width": 651.0139534883727,
+        "color": 6
+      },
+      "id": "63035b4c-375d-42d1-b87a-6579d813d7c6",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        720,
+        620
+      ]
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.chayahfitness.com",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+            "content-length": "192",
+            "accept": "*/*",
+            "accept-encoding": "deflate, gzip",
+            "authorization": "Bearer 7vnvV*ELn.#FWNV(87g2WQc",
+            "content-type": "application/json",
+            "x-forwarded-for": "64.227.21.251",
+            "x-forwarded-host": "n8n.chayahfitness.com",
+            "x-forwarded-proto": "https",
+            "x-real-ip": "2601:441:4380:40b0:b4b3:724b:27e1:c4ba"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "query": "https://www.youtube.com/watch?v=pC17ge_2n0Q",
+            "user_id": "google-oauth2|116467443974012389959",
+            "request_id": "f98asdyf987yasd0f987asdf8",
+            "session_id": "google-oauth2|116467443974012389959~2~8dfbddbe603d"
+          },
+          "webhookUrl": "https://n8n.chayahfitness.com/webhook-test/invoke-n8n-expert",
+          "executionMode": "test"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-12-31T00:21:35.339Z",
+      "updatedAt": "2024-12-31T00:21:35.339Z",
+      "id": "6GxhHGeDuKWkAijH",
+      "name": "agent"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2024-12-31T07:00:49.000Z",
+  "versionId": "318a3641-2e10-4077-8cda-ab15f39019db"
+}
