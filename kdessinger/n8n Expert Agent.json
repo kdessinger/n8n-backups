@@ -1,0 +1,562 @@
+{
+  "active": false,
+  "connections": {
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Supabase2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase": {
+      "main": [
+        [
+          {
+            "node": "Aggregate1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Summarize",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Summarize": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Supabase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Supabase1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase2": {
+      "main": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase Vector Store": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-12-31T06:42:14.495Z",
+  "id": "FA2Ow6wcsR1m3rr7",
+  "meta": null,
+  "name": "n8n Expert Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ee2bcd57-3b4c-43f9-b4b7-3a25687b9a68",
+              "name": "query",
+              "value": "={{ $json.body.query }}",
+              "type": "string"
+            },
+            {
+              "id": "63f23e51-af2b-47c4-a288-5abaf9b6c357",
+              "name": "user_id",
+              "value": "={{ $json.body.user_id }}",
+              "type": "string"
+            },
+            {
+              "id": "b97a3670-8a87-481b-8695-db44624be7d8",
+              "name": "request_id",
+              "value": "={{ $json.body.request_id }}",
+              "type": "string"
+            },
+            {
+              "id": "7d3fa06d-08f7-4517-b9c5-3c46ff476f55",
+              "name": "session_id",
+              "value": "={{ $json.body.session_id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "92d206b9-4eaa-4a76-a3a3-4c2627868296",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1360,
+        740
+      ]
+    },
+    {
+      "parameters": {
+        "model": "text-embedding-3-small",
+        "options": {}
+      },
+      "id": "0d474246-773d-4bde-8d28-b9719d2c1cc5",
+      "name": "Embeddings OpenAI",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1,
+      "position": [
+        1880,
+        920
+      ]
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "text",
+              "renameField": true,
+              "outputFieldName": "workflow_ids"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "46f14a66-8065-4947-af36-76f20f523f05",
+      "name": "Aggregate",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        2440,
+        740
+      ]
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o",
+        "options": {}
+      },
+      "id": "5e9e7a05-e860-48f3-8ae3-b24eacd87c74",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        2200,
+        660
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "workflows",
+        "limit": 5,
+        "filterType": "string",
+        "filterString": "=workflow_id=in.{{ $json.query_string }}"
+      },
+      "id": "e6ecf398-6951-4050-8cdd-76cb5bd77fc0",
+      "name": "Supabase",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        3060,
+        500
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "fieldsToSummarize": {
+          "values": [
+            {
+              "aggregation": "concatenate",
+              "field": "workflow_ids"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a9e0445e-07f5-4e1d-96c3-0666581c3431",
+      "name": "Summarize",
+      "type": "n8n-nodes-base.summarize",
+      "typeVersion": 1,
+      "position": [
+        2660,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.query_string = $('Summarize').first().json.concatenated_workflow_ids.replaceAll(\"\\\"\", \"\").replaceAll(\"[\", \"(\").replaceAll(\"]\", \")\");\n}\n\nreturn $input.all();"
+      },
+      "id": "11010e7d-1702-4667-80de-7ce9dc3eb8d4",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2860,
+        740
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b5eaa2a2-a6bc-40ab-af5e-baa8a5dda1a7",
+              "name": "output",
+              "value": "={{ $('Aggregate1').item.json.data.length ? \"Here are the recommended workflows to use as an example for you:\" : \"No related workflows found at this time. Please try a different prompt.\" }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "b0137aa2-48c0-463f-bb41-4c99d0751f71",
+      "name": "Edit Fields1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3440,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "tableId": "messages",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "session_id",
+              "fieldValue": "={{ $('Edit Fields').first().json.session_id }}"
+            },
+            {
+              "fieldId": "message",
+              "fieldValue": "={{ {\n\"type\": \"ai\",\n\"content\": $json.output,\n\"data\": $json.data,\n\"additional_kwargs\": {},\n\"response_metadata\": {}\n} }}"
+            }
+          ]
+        }
+      },
+      "id": "53771dee-bf2c-4089-bbcb-78e9f77868b8",
+      "name": "Supabase1",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        3640,
+        740
+      ]
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "id": "88cb314a-9c61-4c91-88d4-33a088a47087",
+      "name": "Aggregate1",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        3240,
+        740
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "X-n8n-Signature",
+                "value": "EvtIS^EBVISeie6svB@6ev"
+              }
+            ]
+          }
+        }
+      },
+      "id": "e8567704-3c4c-439a-b9aa-6cd6820c4487",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        4040,
+        760
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Here is a n8n workflow descriptions:\n\n{{ $json.document.pageContent }}\n\nYour job is to identify if the workflow is relevant to the user query which is:\n\n{{ $('Edit Fields').first().json.query }}\n\nOutput the workflow ID if the workflow relates to the user query. Otherwise, output -1. ONLY ever output a number, nothing else. You will always output the workflow ID or -1.\n\nThe workflow ID is: {{ $json.document.metadata.workflow_id }}\n\nThe workflow ID or -1 if the workflow doesn't relate to the user query:"
+      },
+      "id": "98b63a10-399e-459c-94a1-493f2d51b285",
+      "name": "Basic LLM Chain",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.4,
+      "position": [
+        2080,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b5eaa2a2-a6bc-40ab-af5e-baa8a5dda1a7",
+              "name": "output",
+              "value": "={{ $('Edit Fields1').item.json.output }}",
+              "type": "string"
+            },
+            {
+              "id": "392160a6-53a6-4b7e-9c43-75571172c590",
+              "name": "data",
+              "value": "={{ $('Edit Fields1').item.json.data}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "90d81664-26bd-46c8-a823-50c74b445c3f",
+      "name": "Edit Fields2",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3840,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "tableId": "messages",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "session_id",
+              "fieldValue": "={{ $json.session_id }}"
+            },
+            {
+              "fieldId": "message",
+              "fieldValue": "={{ {\n\"type\": \"human\",\n\"content\": $json.query,\n\"additional_kwargs\": {},\n\"response_metadata\": {}\n} }}"
+            }
+          ]
+        }
+      },
+      "id": "11e00431-119b-4d36-9afe-d59b5b82d496",
+      "name": "Supabase2",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1560,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "load",
+        "tableName": {
+          "__rl": true,
+          "value": "workflows",
+          "mode": "list",
+          "cachedResultName": "workflows"
+        },
+        "prompt": "={{ $('Edit Fields').item.json.query }}",
+        "topK": 5,
+        "options": {
+          "queryName": "match_summaries"
+        }
+      },
+      "id": "ad1d43cd-10a8-4818-9235-40a471341242",
+      "name": "Supabase Vector Store",
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1,
+      "position": [
+        1740,
+        740
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## The n8n Expert Agent helps you find and understand n8n automation workflows. Simply describe what you're trying to automate, and the agent will recommend relevant workflows to help you get started.\n\nAuthor: [Cole Medin](https://www.youtube.com/@ColeMedin)\n\n## For example:\n\n### User: \"I need to automatically post tweets when new blog posts are published\"\n### Agent: Here are some recommended workflows to help you get started:\n- WordPress to Twitter Auto-Poster\n- Blog RSS Feed to Social Media\n- Content Distribution Workflow\nThe agent analyzes your request and provides matching workflows from its knowledge base, along with explanations of how to implement and customize them for your needs.",
+        "height": 502.790697674419,
+        "width": 651.0139534883727,
+        "color": 6
+      },
+      "id": "f0f3cc72-c765-4540-81b1-4e4445865942",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        460,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "invoke-n8n-expert",
+        "authentication": "headerAuth",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "1a311236-c18f-4531-8330-0d9ceaf422a0",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        1180,
+        560
+      ],
+      "webhookId": "ba5e9235-01af-47f8-9f72-29df862bfa0f"
+    },
+    {
+      "parameters": {
+        "content": "#### This agent is in beta, especially as its knowledgebase grows! Workflows won't always be super related to your query and sometimes it won't have any. This agent will also involve into a conversational agent eventually to help you build n8n workflows!",
+        "height": 111.41953488372111,
+        "width": 648.3795348837208
+      },
+      "id": "a4883e62-a435-4442-938d-ea622bafe5ed",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        460,
+        1000
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-12-31T00:21:35.339Z",
+      "updatedAt": "2024-12-31T00:21:35.339Z",
+      "id": "6GxhHGeDuKWkAijH",
+      "name": "agent"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2024-12-31T06:42:18.000Z",
+  "versionId": "c4a47fe2-8a06-4fd0-a1d1-daa5067a4b9b"
+}
