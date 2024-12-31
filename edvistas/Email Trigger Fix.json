@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "Enable DataSync Notifications": {
       "main": [
@@ -257,7 +257,8 @@
       "position": [
         480,
         800
-      ]
+      ],
+      "disabled": true
     },
     {
       "parameters": {
@@ -277,7 +278,8 @@
       "position": [
         480,
         360
-      ]
+      ],
+      "disabled": true
     }
   ],
   "pinData": {},
@@ -296,6 +298,6 @@
   },
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2024-10-29T16:58:30.000Z",
-  "versionId": "ffa79ce6-630a-47bf-8a4a-ea64fb2752dd"
+  "updatedAt": "2024-12-31T07:13:28.000Z",
+  "versionId": "efe4d49b-a8ea-4c45-91d9-214883c1f925"
 }
