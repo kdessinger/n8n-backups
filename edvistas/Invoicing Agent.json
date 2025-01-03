@@ -317,8 +317,15 @@
     "executionOrder": "v1"
   },
   "staticData": null,
-  "tags": [],
+  "tags": [
+    {
+      "createdAt": "2025-01-02T19:29:58.822Z",
+      "updatedAt": "2025-01-02T19:29:58.822Z",
+      "id": "WXisSD9AUSBjzVTs",
+      "name": "agent"
+    }
+  ],
   "triggerCount": 0,
-  "updatedAt": "2024-12-17T23:53:05.000Z",
-  "versionId": "9226ea96-8c49-4f96-ae2b-ce66dfb423fa"
+  "updatedAt": "2025-01-02T19:29:59.000Z",
+  "versionId": "7f5bf9ff-c00f-4e0d-a651-61f78a9c9d1d"
 }
