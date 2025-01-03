@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "OpenAI Model": {
       "ai_languageModel": [
@@ -108,8 +108,8 @@
       "name": "OpenAI Model",
       "type": "@n8n/n8n-nodes-langchain.lmOpenAi",
       "position": [
-        880,
-        480
+        780,
+        500
       ],
       "typeVersion": 1,
       "credentials": {
@@ -307,6 +307,7 @@
         1440,
         320
       ],
+      "webhookId": "15f4db7e-5623-4f86-9275-842325a6a427",
       "credentials": {
         "gmailOAuth2": {
           "id": "cRBJFJPxOYiwcDx0",
@@ -363,6 +364,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-09-25T21:33:53.000Z",
-  "versionId": "cd2090d5-1c1f-4559-af0e-b1fd06e436dd"
+  "updatedAt": "2025-01-02T20:33:17.000Z",
+  "versionId": "1b922ed0-67a1-4239-99f2-82b69230251d"
 }
