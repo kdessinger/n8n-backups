@@ -1,0 +1,121 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Odoo1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Odoo1": {
+      "main": [
+        [
+          {
+            "node": "Odoo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-01-06T20:03:16.507Z",
+  "id": "qJCHL92o7fLUFSEM",
+  "meta": null,
+  "name": "Parent Pathways API",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -300,
+        -60
+      ],
+      "id": "eeaa2ead-60f0-454f-b0c7-f7f7ee537897",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "event.registration",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {},
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "event_id",
+              "operator": "in",
+              "value": "14"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        160,
+        -60
+      ],
+      "id": "3211fe90-9db6-4ad2-b5dd-18181093605b",
+      "name": "Odoo",
+      "credentials": {
+        "odooApi": {
+          "id": "11",
+          "name": "Odoo (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "event.event",
+        "operation": "get",
+        "customResourceId": "14",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        -60
+      ],
+      "id": "14dc73bc-fae6-4b9c-a36d-270364ad5100",
+      "name": "Odoo1",
+      "credentials": {
+        "odooApi": {
+          "id": "11",
+          "name": "Odoo (kdessinger)"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2022-12-09T05:43:36.104Z",
+      "updatedAt": "2022-12-09T05:43:36.104Z",
+      "id": "12",
+      "name": "odoo"
+    },
+    {
+      "createdAt": "2023-07-28T19:16:19.587Z",
+      "updatedAt": "2023-07-28T19:16:19.587Z",
+      "id": "kqf2NqvduRmuLzdN",
+      "name": "API"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-01-06T20:23:31.000Z",
+  "versionId": "50a8ada0-c214-4aa2-af4e-e0d2e17d8aaf"
+}
