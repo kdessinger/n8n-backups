@@ -5,18 +5,66 @@
       "main": [
         [
           {
-            "node": "Odoo1",
+            "node": "Get Event",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Service Orders",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Odoo1": {
+    "Get Event": {
+      "main": [
+        [
+          {
+            "node": "Get Registrations",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Registrations": {
+      "main": [
+        []
+      ]
+    },
+    "Get Service Orders": {
       "main": [
         [
           {
             "node": "Odoo",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Odoo": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Crypto",
             "type": "main",
             "index": 0
           }
@@ -35,42 +83,10 @@
       "typeVersion": 1,
       "position": [
         -300,
-        -60
+        0
       ],
       "id": "eeaa2ead-60f0-454f-b0c7-f7f7ee537897",
       "name": "When clicking ‘Test workflow’"
-    },
-    {
-      "parameters": {
-        "resource": "custom",
-        "customResource": "event.registration",
-        "operation": "getAll",
-        "returnAll": true,
-        "options": {},
-        "filterRequest": {
-          "filter": [
-            {
-              "fieldName": "event_id",
-              "operator": "in",
-              "value": "14"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.odoo",
-      "typeVersion": 1,
-      "position": [
-        160,
-        -60
-      ],
-      "id": "3211fe90-9db6-4ad2-b5dd-18181093605b",
-      "name": "Odoo",
-      "credentials": {
-        "odooApi": {
-          "id": "11",
-          "name": "Odoo (kdessinger)"
-        }
-      }
     },
     {
       "parameters": {
@@ -84,16 +100,160 @@
       "typeVersion": 1,
       "position": [
         -80,
-        -60
+        -140
       ],
       "id": "14dc73bc-fae6-4b9c-a36d-270364ad5100",
-      "name": "Odoo1",
+      "name": "Get Event",
       "credentials": {
         "odooApi": {
           "id": "11",
           "name": "Odoo (kdessinger)"
         }
       }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "event.registration",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {},
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "event_id",
+              "value": "={{ $json.id }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        140,
+        -140
+      ],
+      "id": "3211fe90-9db6-4ad2-b5dd-18181093605b",
+      "name": "Get Registrations",
+      "credentials": {
+        "odooApi": {
+          "id": "11",
+          "name": "Odoo (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "stock.picking",
+        "operation": "getAll",
+        "options": {
+          "fieldsList": [
+            "id",
+            "name",
+            "origin",
+            "note",
+            "state",
+            "priority",
+            "group_id",
+            "scheduled_date",
+            "partner_id",
+            "location_id",
+            "product_id",
+            "sale_id"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "state",
+              "value": "assigned"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        260
+      ],
+      "id": "e36077be-3f62-4363-a931-c93598e110f5",
+      "name": "Get Service Orders",
+      "credentials": {
+        "odooApi": {
+          "id": "11",
+          "name": "Odoo (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "contactId": "={{ $json.partner_id[0] }}",
+        "options": {
+          "fieldsList": [
+            "id",
+            "name",
+            "parent_name",
+            "email",
+            "sistype",
+            "enrollment",
+            "gradeLevel",
+            "EVI_DistID",
+            "EVI_DistName",
+            "EVI_Last_login",
+            "EVI_LastSync",
+            "EVI_License",
+            "phone_sanitized"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        140,
+        260
+      ],
+      "id": "283ee618-5cc2-4bb5-abd5-126b2c17b47f",
+      "name": "Odoo",
+      "credentials": {
+        "odooApi": {
+          "id": "11",
+          "name": "Odoo (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "action": "generate",
+        "dataPropertyName": "GUID"
+      },
+      "type": "n8n-nodes-base.crypto",
+      "typeVersion": 1,
+      "position": [
+        500,
+        80
+      ],
+      "id": "72884b13-7e6b-4eb4-876d-d7c140ccf6cc",
+      "name": "Crypto"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {
+          "includeUnpaired": true
+        }
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        280,
+        80
+      ],
+      "id": "7223b023-5a22-4fe0-93b2-91d897a47353",
+      "name": "Merge"
     }
   ],
   "pinData": {},
@@ -116,6 +276,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-01-06T20:23:31.000Z",
-  "versionId": "50a8ada0-c214-4aa2-af4e-e0d2e17d8aaf"
+  "updatedAt": "2025-01-08T00:04:59.000Z",
+  "versionId": "868454f4-71f3-413a-8f41-f48a8bdba5ff"
 }
