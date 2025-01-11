@@ -277,7 +277,7 @@
     },
     "node:Run Every 6 Hours": {
       "recurrenceRules": [
-        6
+        18
       ]
     }
   },
