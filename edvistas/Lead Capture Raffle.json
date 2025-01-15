@@ -308,7 +308,7 @@
             },
             {
               "name": "Message",
-              "stringValue": "=A new lead ({{ $json[\"Full Name\"] === undefined ? $json[\"First Name\"].toLowerCase().toTitleCase().trim() : $json['Full Name'].first.toLowerCase().toTitleCase().trim() }} {{ $json[\"Full Name\"] === undefined ? $json[\"Last Name\"].toLowerCase().toTitleCase().trim() : $json['Full Name'].last.toLowerCase().toTitleCase().trim() }}) has been entered in the {{ $json[\"Campaign\"] }} raffle to win a drone. Best of luck to {{ $json[\"Full Name\"] === undefined ? $json[\"First Name\"].toLowerCase().toTitleCase().trim() : $json['Full Name'].first.toLowerCase().toTitleCase().trim() }}! {{ $json.Medium }}"
+              "stringValue": "=A new lead ({{ $json[\"Full Name\"] === undefined ? $json[\"First Name\"].toLowerCase().toTitleCase().trim() : $json['Full Name'].first.toLowerCase().toTitleCase().trim() }} {{ $json[\"Full Name\"] === undefined ? $json[\"Last Name\"].toLowerCase().toTitleCase().trim() : $json['Full Name'].last.toLowerCase().toTitleCase().trim() }}) has been entered in the {{ $json[\"Campaign\"] }} raffle to win a drone. Best of luck to {{ $json[\"Full Name\"] === undefined ? $json[\"First Name\"].toLowerCase().toTitleCase().trim() : $json['Full Name'].first.toLowerCase().toTitleCase().trim() }}!"
             },
             {
               "name": "ClickURL",
@@ -849,7 +849,7 @@
             "x-forwarded-proto": "https",
             "x-forwarded-for": "199.223.255.8",
             "x-real-ip": "199.223.255.8",
-            "content-length": "3866",
+            "content-length": "3868",
             "content-type": "application/xml;charset=utf-8"
           },
           "params": {},
@@ -860,7 +860,7 @@
               "password": "",
               "formid": "8992",
               "othersystemid": "",
-              "referid": "5cf497fb-b322-40b4-96f4-7d074dc24297",
+              "referid": "ef21ab2c-42d9-4607-8c79-2f1660221fae",
               "field": [
                 {
                   "id": "306143",
@@ -874,14 +874,14 @@
                   "name": "Affiliation",
                   "type": "1",
                   "txttype": "7",
-                  "value": "Mount Pleasant CSD"
+                  "value": "Galactic Empire"
                 },
                 {
                   "id": "306145",
                   "name": "First Name",
                   "type": "1",
                   "txttype": "7",
-                  "value": "Jessica"
+                  "value": "Darth"
                 },
                 {
                   "id": "306147",
@@ -916,21 +916,21 @@
                   "name": "E-mail",
                   "type": "1",
                   "txttype": "7",
-                  "value": "Jlynch@mtplcsd.org"
+                  "value": "darth.vader@aol.com"
                 },
                 {
                   "id": "306152",
                   "name": "Last Name",
                   "type": "1",
                   "txttype": "7",
-                  "value": "Lynch"
+                  "value": "Vader"
                 },
                 {
                   "id": "306153",
                   "name": "Position",
                   "type": "1",
                   "txttype": "7",
-                  "value": "Database Specialist"
+                  "value": "Emperor Supreme"
                 },
                 {
                   "id": "306154",
@@ -965,7 +965,7 @@
                   "name": "optin_datamate",
                   "type": "3",
                   "txttype": "7",
-                  "value": ""
+                  "value": "1"
                 },
                 {
                   "id": "306249",
@@ -1000,14 +1000,14 @@
                   "name": "optin_eduform",
                   "type": "3",
                   "txttype": "7",
-                  "value": ""
+                  "value": "1"
                 },
                 {
                   "id": "306254",
                   "name": "optin_safeschools",
                   "type": "3",
                   "txttype": "7",
-                  "value": ""
+                  "value": "1"
                 },
                 {
                   "id": "306255",
@@ -1021,7 +1021,7 @@
                   "name": "optin_stafftrac",
                   "type": "3",
                   "txttype": "7",
-                  "value": ""
+                  "value": "1"
                 },
                 {
                   "id": "306257",
@@ -1049,7 +1049,7 @@
                   "name": "Campaign",
                   "type": "1",
                   "txttype": "7",
-                  "value": ""
+                  "value": "FETC-2025"
                 },
                 {
                   "id": "306262",
@@ -1070,28 +1070,28 @@
                   "name": "Phone_p1",
                   "type": "1",
                   "txttype": "7",
-                  "value": "914"
+                  "value": "800"
                 },
                 {
                   "id": "307466",
                   "name": "Phone_p2",
                   "type": "1",
                   "txttype": "7",
-                  "value": "769"
+                  "value": "555"
                 },
                 {
                   "id": "307467",
                   "name": "Phone_p3",
                   "type": "1",
                   "txttype": "7",
-                  "value": "5500"
+                  "value": "1212"
                 },
                 {
                   "id": "307468",
                   "name": "Phone_p4",
                   "type": "1",
                   "txttype": "7",
-                  "value": "1952"
+                  "value": ""
                 },
                 {
                   "id": "307469",
@@ -1105,7 +1105,7 @@
                   "name": "optin_mtss",
                   "type": "3",
                   "txttype": "7",
-                  "value": ""
+                  "value": "1"
                 }
               ]
             }
@@ -1143,6 +1143,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2024-07-16T13:52:01.000Z",
-  "versionId": "b46fc2eb-cc60-42e5-8de8-ea7fb1f744ff"
+  "updatedAt": "2025-01-15T16:20:32.000Z",
+  "versionId": "001aa63b-6a4c-4277-b81e-177de566e4e4"
 }
