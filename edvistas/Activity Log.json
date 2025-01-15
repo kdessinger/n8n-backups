@@ -40,6 +40,11 @@
             "node": "Send to Slack",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Special Channels?",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -103,6 +108,22 @@
           }
         ]
       ]
+    },
+    "Sales": {
+      "main": [
+        []
+      ]
+    },
+    "Special Channels?": {
+      "main": [
+        [
+          {
+            "node": "Sales",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2023-10-26T20:56:58.677Z",
@@ -119,7 +140,7 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1,
       "position": [
-        -340,
+        -360,
         80
       ]
     },
@@ -152,7 +173,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        80,
+        40,
         320
       ],
       "credentials": {
@@ -181,7 +202,7 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 2.1,
       "position": [
-        240,
+        200,
         200
       ]
     },
@@ -230,7 +251,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.1,
       "position": [
-        -80,
+        -120,
         180
       ]
     },
@@ -245,8 +266,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -171.54528352593366,
-        -240
+        -180,
+        -280
       ]
     },
     {
@@ -260,8 +281,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        800,
-        200
+        940,
+        220
       ]
     },
     {
@@ -330,7 +351,7 @@
       "typeVersion": 1,
       "position": [
         500,
-        0
+        20
       ]
     },
     {
@@ -370,7 +391,7 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
-        -340,
+        -360,
         280
       ],
       "webhookId": "d7b50e12-768e-4f43-ac4d-9a3891afdfab",
@@ -384,7 +405,8 @@
     {
       "parameters": {
         "content": "## Triggers",
-        "height": 506.2295081967215,
+        "height": 766,
+        "width": 220,
         "color": 6
       },
       "id": "698ea736-e186-4a44-be2a-dbe5ff8d772d",
@@ -393,14 +415,14 @@
       "typeVersion": 1,
       "position": [
         -420,
-        -20
+        -280
       ]
     },
     {
       "parameters": {
         "content": "## Notification Systems",
-        "height": 697.7049180327873,
-        "width": 295.08196721311464,
+        "height": 898,
+        "width": 295,
         "color": 4
       },
       "id": "9cecb215-e277-4300-9dc2-7630d75a3224",
@@ -409,41 +431,200 @@
       "typeVersion": 1,
       "position": [
         406.5573770491802,
-        -80
+        -280
       ]
+    },
+    {
+      "parameters": {
+        "content": "## Special Channels",
+        "height": 340,
+        "width": 600,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        720,
+        -280
+      ],
+      "typeVersion": 1,
+      "id": "8e14a5b2-3143-441b-89a9-360bc4a77d2f",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "topic": "sales",
+        "message": "={{ $json.message }}",
+        "title": "={{ $json.title }}",
+        "click": "={{ $json.click }}",
+        "tags": "={{ $json.tags }}",
+        "additional_fields": {
+          "alternate_url": "https://ntfy.edvistas.com"
+        }
+      },
+      "id": "84651437-4ee1-4a32-8c58-7d2cd1d419da",
+      "name": "Sales",
+      "type": "n8n-nodes-ntfy.Ntfy",
+      "typeVersion": 1,
+      "position": [
+        760,
+        -160
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.Title }}",
+                    "rightValue": "New Lead",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Sales"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "none"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        500,
+        -160
+      ],
+      "id": "1d593687-5be1-4c15-b84e-f3b594bdb23b",
+      "name": "Special Channels?"
     }
   ],
   "pinData": {
     "Execute Workflow Trigger": [
       {
         "json": {
-          "id": "6b6d73b0aae845868ecebf24cf48636e_I_613798174458472638",
-          "meetingNumber": "28642658254",
-          "title": "DataMate Demo w/ EduTech",
-          "password": "HaGyKMi2P84",
-          "start": "2024-10-10T14:58:28Z",
-          "MeetingStart": "2024-10-10 14:58:28",
-          "MeetingEnd": "NaN-NaN-NaN NaN:NaN:NaN",
-          "duration": null,
-          "timezone": "UTC",
-          "reminderTime": 15,
-          "hostDisplayName": "TJ Leonard",
-          "hostEmail": "tjleonard@edvistas.com",
-          "webLink": "https://educationalvistasinc-535335.my.webex.com/educationalvistasinc-535335.my/j.php?MTID=m76dbb47ced127e7e251c5e5f89156d15",
-          "Attendees": [
-            "tjleonard@edvistas.com"
-          ],
-          "displayName": [
-            "TJ Leonard"
-          ],
-          "Title": "A WebEX Meeting has Started",
-          "Message": "TJ Leonard has started the WebEx meeting titled \"DataMate Demo w/ EduTech\".",
-          "ClickURL": "https://educationalvistasinc-535335.my.webex.com/educationalvistasinc-535335.my/j.php?MTID=m76dbb47ced127e7e251c5e5f89156d15",
+          "Formid": "8992",
+          "referid": "ef21ab2c-42d9-4607-8c79-2f1660221fae",
+          "host": "n8n.edvistas.com",
+          "Affiliation": "Galactic Empire",
+          "First Name": "Darth",
+          "E-mail": "darth.vader@aol.com",
+          "Last Name": "Vader",
+          "Position": "Emperor Supreme",
+          "optin_aims": "",
+          "optin_cd": "",
+          "optin_datamate": "1",
+          "optin_drp": "",
+          "optin_dmp": "",
+          "optin_eduview": "",
+          "optin_portfolioplus": "",
+          "optin_eduform": "1",
+          "optin_safeschools": "1",
+          "optin_scoring": "",
+          "optin_stafftrac": "1",
+          "optin_survate": "",
+          "optin_transsync": "",
+          "optin_reportplus": "",
+          "Campaign": "FETC-2025",
+          "Medium": "Raffle",
+          "Phone_p1": "800",
+          "Phone_p2": "555",
+          "Phone_p3": "1212",
+          "Phone_p4": "",
+          "optin_mtss": "1",
+          "Full Name": "Darth Vader",
+          "Phone Number": "+1 800-555-1212",
+          "Title": "New Lead",
+          "Source": "EduForm",
+          "Message": "A new lead (Darth Vader) has been entered in the FETC-2025 raffle to win a drone. Best of luck to Darth! Raffle",
+          "ClickURL": "https://aol.com",
           "Emojis": [
-            "hourglass_flowing_sand",
-            "date"
+            "hugs",
+            "+1"
           ],
-          "Priority": 1
+          "LogEvent": true,
+          "tags": [
+            10,
+            9,
+            19,
+            17,
+            49
+          ]
+        }
+      }
+    ],
+    "Merge": [
+      {
+        "json": {
+          "Formid": "8992",
+          "referid": "ef21ab2c-42d9-4607-8c79-2f1660221fae",
+          "host": "n8n.edvistas.com",
+          "Affiliation": "Galactic Empire",
+          "First Name": "Darth",
+          "E-mail": "darth.vader@aol.com",
+          "Last Name": "Vader",
+          "Position": "Emperor Supreme",
+          "optin_aims": "",
+          "optin_cd": "",
+          "optin_datamate": "1",
+          "optin_drp": "",
+          "optin_dmp": "",
+          "optin_eduview": "",
+          "optin_portfolioplus": "",
+          "optin_eduform": "1",
+          "optin_safeschools": "1",
+          "optin_scoring": "",
+          "optin_stafftrac": "1",
+          "optin_survate": "",
+          "optin_transsync": "",
+          "optin_reportplus": "",
+          "Campaign": "FETC-2025",
+          "Medium": "Raffle",
+          "Phone_p1": "800",
+          "Phone_p2": "555",
+          "Phone_p3": "1212",
+          "Phone_p4": "",
+          "optin_mtss": "1",
+          "Full Name": "Darth Vader",
+          "Phone Number": "+1 800-555-1212",
+          "Title": "New Lead",
+          "Source": "EduForm",
+          "Message": "A new lead (Darth Vader) has been entered in the FETC-2025 raffle to win a drone. Best of luck to Darth! Raffle",
+          "ClickURL": "https://aol.com",
+          "Emojis": [
+            "hugs",
+            "+1"
+          ],
+          "LogEvent": true,
+          "tags": [
+            10,
+            9,
+            19,
+            17,
+            49
+          ],
+          "MessageClean": "A new lead (Darth Vader) has been entered in the FETC-2025 raffle to win a drone. Best of luck to Darth! Raffle\n\n",
+          "Priority": 5,
+          "Channel": "Activity Log",
+          "id": 227,
+          "name": "Activity Log",
+          "description": "Log of activities for all things at EVI",
+          "public": "groups",
+          "active": true
         }
       }
     ]
@@ -477,6 +658,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-10-28T14:37:46.000Z",
-  "versionId": "a125d26c-e974-404f-9cc8-f3de7d5b7355"
+  "updatedAt": "2025-01-15T17:50:32.000Z",
+  "versionId": "3a0fca25-de2b-4b97-8985-0426a447d76b"
 }
