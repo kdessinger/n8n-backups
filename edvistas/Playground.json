@@ -213,6 +213,17 @@
           }
         ]
       ]
+    },
+    "Get Sales Order Line": {
+      "main": [
+        [
+          {
+            "node": "Get Sales Order",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2023-09-13T21:44:35.092Z",
@@ -912,6 +923,94 @@
         2080,
         400
       ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "sale.order",
+        "operation": "get",
+        "customResourceId": "={{ $json.order_id[0] }}",
+        "options": {
+          "fieldsList": [
+            "id",
+            "access_token",
+            "name",
+            "state",
+            "date_order",
+            "partner_id",
+            "order_line",
+            "cart_quantity",
+            "delivery_count"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        1860,
+        1140
+      ],
+      "id": "b64e003b-16cf-4216-991c-575851c46e67",
+      "name": "Get Sales Order",
+      "credentials": {
+        "odooApi": {
+          "id": "11",
+          "name": "Odoo (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "sale.order.line",
+        "operation": "getAll",
+        "options": {
+          "fieldsList": [
+            "id",
+            "order_id",
+            "order_partner_id",
+            "sale_order_option_ids",
+            "display_name",
+            "product_uom_qty",
+            "invoice_status",
+            "state",
+            "qty_delivered",
+            "qty_to_deliver",
+            "create_date"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "product_id",
+              "operator": "like",
+              "value": "PTA-2774"
+            },
+            {
+              "fieldName": "state",
+              "value": "sale"
+            },
+            {
+              "fieldName": "qty_delivered",
+              "value": "0"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        1860,
+        1340
+      ],
+      "id": "4bcde15c-3b85-404e-a0d9-de4064dc5227",
+      "name": "Get Sales Order Line",
+      "credentials": {
+        "odooApi": {
+          "id": "11",
+          "name": "Odoo (kdessinger)"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -921,6 +1020,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-01-06T19:32:26.000Z",
-  "versionId": "9903a345-1035-45aa-97b8-32e043cf6de3"
+  "updatedAt": "2025-01-14T19:54:26.000Z",
+  "versionId": "da65e4e4-83b3-4be7-ae37-adeec12687aa"
 }
