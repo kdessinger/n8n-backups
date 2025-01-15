@@ -27,7 +27,7 @@
       "main": [
         [
           {
-            "node": "OpenAI",
+            "node": "Code Description Agent",
             "type": "main",
             "index": 0
           }
@@ -63,7 +63,7 @@
         ]
       ]
     },
-    "OpenAI": {
+    "Code Description Agent": {
       "main": [
         [
           {
@@ -236,14 +236,14 @@
         "text": "={{ $json.data }}",
         "options": {}
       },
-      "id": "d84c5c9c-e379-46c8-a28c-5284540d19cb",
-      "name": "OpenAI",
       "type": "@n8n/n8n-nodes-langchain.openAi",
-      "typeVersion": 1.6,
+      "typeVersion": 1.8,
       "position": [
         360,
         -180
       ],
+      "id": "ed21184a-7f53-48bf-92d3-222f04017f1e",
+      "name": "Code Description Agent",
       "credentials": {
         "openAiApi": {
           "id": "28",
@@ -252,7 +252,16 @@
       }
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Local File Trigger": [
+      {
+        "json": {
+          "event": "add",
+          "path": "/mnt/share/_convert/Script_2_Description/playground.json"
+        }
+      }
+    ]
+  },
   "settings": {
     "callerPolicy": "any",
     "saveManualExecutions": false,
@@ -276,6 +285,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-12-22T06:28:35.000Z",
-  "versionId": "ff298f7c-b46c-42d5-be8d-5106ce3c681f"
+  "updatedAt": "2025-01-15T00:27:01.000Z",
+  "versionId": "91fcade3-087d-46a8-8a8f-67a231416229"
 }
