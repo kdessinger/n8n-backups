@@ -111,7 +111,13 @@
     },
     "Sales": {
       "main": [
-        []
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Special Channels?": {
@@ -438,7 +444,7 @@
       "parameters": {
         "content": "## Special Channels",
         "height": 340,
-        "width": 600,
+        "width": 640,
         "color": 5
       },
       "type": "n8n-nodes-base.stickyNote",
@@ -453,10 +459,10 @@
     {
       "parameters": {
         "topic": "sales",
-        "message": "={{ $json.message }}",
-        "title": "={{ $json.title }}",
-        "click": "={{ $json.click }}",
-        "tags": "={{ $json.tags }}",
+        "message": "={{ $json.MessageClean }}",
+        "title": "={{ $json.Title }}",
+        "click": "={{ $json.ClickURL }}",
+        "tags": "={{ $json.Emojis }}",
         "additional_fields": {
           "alternate_url": "https://ntfy.edvistas.com"
         }
@@ -467,7 +473,7 @@
       "typeVersion": 1,
       "position": [
         760,
-        -160
+        -180
       ]
     },
     {
@@ -507,7 +513,7 @@
       "typeVersion": 3.2,
       "position": [
         500,
-        -160
+        -180
       ],
       "id": "1d593687-5be1-4c15-b84e-f3b594bdb23b",
       "name": "Special Channels?"
@@ -550,7 +556,7 @@
           "Phone Number": "+1 800-555-1212",
           "Title": "New Lead",
           "Source": "EduForm",
-          "Message": "A new lead (Darth Vader) has been entered in the FETC-2025 raffle to win a drone. Best of luck to Darth! Raffle",
+          "Message": "A new lead (Darth Vader) has been entered in the FETC-2025 raffle to win a drone. Best of luck to Darth!",
           "ClickURL": "https://aol.com",
           "Emojis": [
             "hugs",
@@ -564,67 +570,6 @@
             17,
             49
           ]
-        }
-      }
-    ],
-    "Merge": [
-      {
-        "json": {
-          "Formid": "8992",
-          "referid": "ef21ab2c-42d9-4607-8c79-2f1660221fae",
-          "host": "n8n.edvistas.com",
-          "Affiliation": "Galactic Empire",
-          "First Name": "Darth",
-          "E-mail": "darth.vader@aol.com",
-          "Last Name": "Vader",
-          "Position": "Emperor Supreme",
-          "optin_aims": "",
-          "optin_cd": "",
-          "optin_datamate": "1",
-          "optin_drp": "",
-          "optin_dmp": "",
-          "optin_eduview": "",
-          "optin_portfolioplus": "",
-          "optin_eduform": "1",
-          "optin_safeschools": "1",
-          "optin_scoring": "",
-          "optin_stafftrac": "1",
-          "optin_survate": "",
-          "optin_transsync": "",
-          "optin_reportplus": "",
-          "Campaign": "FETC-2025",
-          "Medium": "Raffle",
-          "Phone_p1": "800",
-          "Phone_p2": "555",
-          "Phone_p3": "1212",
-          "Phone_p4": "",
-          "optin_mtss": "1",
-          "Full Name": "Darth Vader",
-          "Phone Number": "+1 800-555-1212",
-          "Title": "New Lead",
-          "Source": "EduForm",
-          "Message": "A new lead (Darth Vader) has been entered in the FETC-2025 raffle to win a drone. Best of luck to Darth! Raffle",
-          "ClickURL": "https://aol.com",
-          "Emojis": [
-            "hugs",
-            "+1"
-          ],
-          "LogEvent": true,
-          "tags": [
-            10,
-            9,
-            19,
-            17,
-            49
-          ],
-          "MessageClean": "A new lead (Darth Vader) has been entered in the FETC-2025 raffle to win a drone. Best of luck to Darth! Raffle\n\n",
-          "Priority": 5,
-          "Channel": "Activity Log",
-          "id": 227,
-          "name": "Activity Log",
-          "description": "Log of activities for all things at EVI",
-          "public": "groups",
-          "active": true
         }
       }
     ]
@@ -658,6 +603,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-01-15T17:50:32.000Z",
-  "versionId": "3a0fca25-de2b-4b97-8985-0426a447d76b"
+  "updatedAt": "2025-01-15T18:11:06.000Z",
+  "versionId": "6fd2e50e-735c-4115-b6bd-d44bcb91abef"
 }
