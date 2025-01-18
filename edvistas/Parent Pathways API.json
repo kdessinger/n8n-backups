@@ -676,8 +676,8 @@
       "type": "n8n-nodes-base.form",
       "typeVersion": 1,
       "position": [
-        80,
-        280
+        300,
+        420
       ],
       "id": "b680af27-1d14-49b5-896b-a7cba8155190",
       "name": "Form",
@@ -685,18 +685,80 @@
     },
     {
       "parameters": {
+        "formTitle": "Student Registration",
+        "formDescription": "Fill out student enrollment application",
         "formFields": {
           "values": [
-            {}
+            {
+              "fieldLabel": "s_first_name",
+              "placeholder": "Student's First Name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "s_last_name",
+              "placeholder": "Student's Last Name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "s_grade",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "2"
+                  },
+                  {
+                    "option": "3"
+                  },
+                  {
+                    "option": "4"
+                  },
+                  {
+                    "option": "5"
+                  },
+                  {
+                    "option": "6"
+                  },
+                  {
+                    "option": "7"
+                  },
+                  {
+                    "option": "8"
+                  },
+                  {
+                    "option": "9"
+                  },
+                  {
+                    "option": "10"
+                  },
+                  {
+                    "option": "11"
+                  },
+                  {
+                    "option": "12"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "s_district",
+              "placeholder": "Student's Closest School District",
+              "requiredField": true
+            }
           ]
         },
-        "options": {}
+        "options": {
+          "appendAttribution": false,
+          "ignoreBots": false,
+          "useWorkflowTimezone": false
+        }
       },
       "type": "n8n-nodes-base.formTrigger",
       "typeVersion": 2.2,
       "position": [
-        -120,
-        280
+        100,
+        420
       ],
       "id": "f505bd02-cbae-4906-b64d-e093e043d5f0",
       "name": "On form submission",
@@ -726,6 +788,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-01-16T22:24:10.000Z",
-  "versionId": "80f88868-8148-4112-b23a-8f8ede5e5dbe"
+  "updatedAt": "2025-01-17T18:21:58.000Z",
+  "versionId": "c271ce83-47a1-4db1-a895-bc6d769f9deb"
 }
