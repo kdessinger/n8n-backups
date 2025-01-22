@@ -118,7 +118,7 @@
       "main": [
         [
           {
-            "node": "Do we have new sales?",
+            "node": "Set End Date",
             "type": "main",
             "index": 0
           }
@@ -127,25 +127,8 @@
     },
     "Do we have new sales?": {
       "main": [
-        [
-          {
-            "node": "Set End Date",
-            "type": "main",
-            "index": 0
-          }
-        ],
+        [],
         []
-      ]
-    },
-    "On form submission": {
-      "main": [
-        [
-          {
-            "node": "Form",
-            "type": "main",
-            "index": 0
-          }
-        ]
       ]
     }
   },
@@ -298,7 +281,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "position": [
         -140,
-        -660
+        -640
       ],
       "typeVersion": 1,
       "id": "15b1fa44-32ea-4d8b-84c8-a1c7b4cd7d4c",
@@ -314,7 +297,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "position": [
         1960,
-        -660
+        -640
       ],
       "typeVersion": 1,
       "id": "3384d2c9-5166-4dbd-a519-d6dbd6bf0537",
@@ -335,7 +318,7 @@
       "typeVersion": 2,
       "position": [
         2080,
-        -260
+        -240
       ],
       "id": "14f535ac-1e9b-43a9-b016-383cc7bbe822",
       "name": "Set End Date",
@@ -570,12 +553,12 @@
       "parameters": {
         "content": "## Create DataMate™ Accounts",
         "height": 880,
-        "width": 780
+        "width": 600
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        1140,
-        -660
+        660,
+        -640
       ],
       "typeVersion": 1,
       "id": "69b44ba2-75d4-45fc-a459-7c8879dbcb93",
@@ -609,8 +592,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        820,
-        -240
+        1240,
+        -800
       ],
       "id": "9a6c39d5-105f-4dec-90c0-7d034af8d908",
       "name": "Do we have new sales?"
@@ -647,122 +630,18 @@
     },
     {
       "parameters": {
-        "formFields": {
-          "values": [
-            {
-              "fieldLabel": "s_First_Name",
-              "placeholder": "Student First Name",
-              "requiredField": true
-            },
-            {
-              "fieldLabel": "s_Last_Name",
-              "placeholder": "Student Last Name",
-              "requiredField": true
-            },
-            {
-              "fieldLabel": "s_Grade",
-              "placeholder": "Student Grade",
-              "requiredField": true
-            },
-            {
-              "fieldLabel": "s_District",
-              "placeholder": "Student District",
-              "requiredField": true
-            }
-          ]
-        },
-        "options": {}
+        "content": "## Copy test to user accounts",
+        "height": 880,
+        "width": 600
       },
-      "type": "n8n-nodes-base.form",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1320,
+        -640
+      ],
       "typeVersion": 1,
-      "position": [
-        300,
-        420
-      ],
-      "id": "b680af27-1d14-49b5-896b-a7cba8155190",
-      "name": "Form",
-      "webhookId": "ff82e957-e313-4420-b615-bde1dbaa2d13"
-    },
-    {
-      "parameters": {
-        "formTitle": "Student Registration",
-        "formDescription": "Fill out student enrollment application",
-        "formFields": {
-          "values": [
-            {
-              "fieldLabel": "s_first_name",
-              "placeholder": "Student's First Name",
-              "requiredField": true
-            },
-            {
-              "fieldLabel": "s_last_name",
-              "placeholder": "Student's Last Name",
-              "requiredField": true
-            },
-            {
-              "fieldLabel": "s_grade",
-              "fieldType": "dropdown",
-              "fieldOptions": {
-                "values": [
-                  {
-                    "option": "2"
-                  },
-                  {
-                    "option": "3"
-                  },
-                  {
-                    "option": "4"
-                  },
-                  {
-                    "option": "5"
-                  },
-                  {
-                    "option": "6"
-                  },
-                  {
-                    "option": "7"
-                  },
-                  {
-                    "option": "8"
-                  },
-                  {
-                    "option": "9"
-                  },
-                  {
-                    "option": "10"
-                  },
-                  {
-                    "option": "11"
-                  },
-                  {
-                    "option": "12"
-                  }
-                ]
-              },
-              "requiredField": true
-            },
-            {
-              "fieldLabel": "s_district",
-              "placeholder": "Student's Closest School District",
-              "requiredField": true
-            }
-          ]
-        },
-        "options": {
-          "appendAttribution": false,
-          "ignoreBots": false,
-          "useWorkflowTimezone": false
-        }
-      },
-      "type": "n8n-nodes-base.formTrigger",
-      "typeVersion": 2.2,
-      "position": [
-        100,
-        420
-      ],
-      "id": "f505bd02-cbae-4906-b64d-e093e043d5f0",
-      "name": "On form submission",
-      "webhookId": "76e62e60-e7c8-4a90-a1fe-b1e5d3d7f323"
+      "id": "9354bc2d-46c6-4321-8c58-71ed78a4ee27",
+      "name": "Sticky Note4"
     }
   ],
   "pinData": {},
@@ -788,6 +667,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-01-17T18:21:58.000Z",
-  "versionId": "c271ce83-47a1-4db1-a895-bc6d769f9deb"
+  "updatedAt": "2025-01-22T00:36:07.000Z",
+  "versionId": "4664d9bc-a216-4b04-b287-f36e6e748398"
 }
