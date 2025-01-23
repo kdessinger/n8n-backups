@@ -102,8 +102,8 @@
       ],
       "credentials": {
         "openAiApi": {
-          "id": "24",
-          "name": "OpenAi (kdessinger)"
+          "id": "e72QgqQnlpG6j1mz",
+          "name": "OpenAi (Home Lab)"
         }
       }
     }
@@ -122,6 +122,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2024-11-22T06:19:52.000Z",
-  "versionId": "a9792d1d-f3d5-4b77-84ac-103cae59f320"
+  "updatedAt": "2025-01-23T04:26:14.000Z",
+  "versionId": "55c3ecfd-884f-44f3-9661-220a78b206a0"
 }
