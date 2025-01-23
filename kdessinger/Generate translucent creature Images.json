@@ -167,8 +167,8 @@
       ],
       "credentials": {
         "openAiApi": {
-          "id": "24",
-          "name": "OpenAi (kdessinger)"
+          "id": "e72QgqQnlpG6j1mz",
+          "name": "OpenAi (Home Lab)"
         }
       }
     },
@@ -190,8 +190,8 @@
       ],
       "credentials": {
         "openAiApi": {
-          "id": "24",
-          "name": "OpenAi (kdessinger)"
+          "id": "e72QgqQnlpG6j1mz",
+          "name": "OpenAi (Home Lab)"
         }
       }
     }
@@ -224,6 +224,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-01-08T01:45:41.000Z",
-  "versionId": "4bd6d598-a22c-4799-8ca1-322a12362e2a"
+  "updatedAt": "2025-01-23T04:09:11.000Z",
+  "versionId": "a24dab79-8446-45d3-8136-5c0084ec9d30"
 }
