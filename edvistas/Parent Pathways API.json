@@ -126,35 +126,13 @@
             "node": "Clean up fields",
             "type": "main",
             "index": 0
-          },
-          {
-            "node": "Aggregate",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Aggregate": {
-      "main": [
-        [
-          {
-            "node": "Clean up fields",
-            "type": "main",
-            "index": 0
           }
         ]
       ]
     },
     "Clean up fields": {
       "main": [
-        [
-          {
-            "node": "HTTP Request",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Set First & Last name": {
@@ -308,7 +286,7 @@
       "parameters": {
         "content": "## Get new PTA sales from Odoo",
         "height": 860,
-        "width": 1380,
+        "width": 960,
         "color": 2
       },
       "type": "n8n-nodes-base.stickyNote",
@@ -329,7 +307,7 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        1960,
+        1480,
         -620
       ],
       "typeVersion": 1,
@@ -350,7 +328,7 @@
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 2,
       "position": [
-        2080,
+        1600,
         -240
       ],
       "id": "14f535ac-1e9b-43a9-b016-383cc7bbe822",
@@ -375,7 +353,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        2440,
+        1960,
         -160
       ],
       "id": "3bcb2a92-de5f-4b44-b237-e46697c3c907",
@@ -407,7 +385,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        2440,
+        1960,
         -380
       ],
       "id": "092448f1-977d-449f-aa3e-53a7f4cc09df",
@@ -593,7 +571,7 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        1340,
+        840,
         -620
       ],
       "typeVersion": 1,
@@ -632,21 +610,7 @@
     },
     {
       "parameters": {
-        "aggregate": "aggregateAllItemData",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.aggregate",
-      "typeVersion": 1,
-      "position": [
-        660,
-        -40
-      ],
-      "id": "27a20069-4eef-4a26-b6d6-c38f01f9a29c",
-      "name": "Aggregate"
-    },
-    {
-      "parameters": {
-        "content": "## Populate First & Last name fields in the database\n",
+        "content": "## 1) Populate First & Last name fields in the database\n## 2) Make Pete Cooper the Salesman\n## 3) Set TAG to 'PTA'\n",
         "height": 340,
         "width": 660,
         "color": 2
@@ -673,8 +637,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1560,
-        -240
+        1100,
+        -120
       ],
       "id": "f859d080-41d1-412a-a0a0-09cdd9579a77",
       "name": "HTTP Request",
@@ -683,13 +647,13 @@
     {
       "parameters": {
         "mode": "raw",
-        "jsonOutput": "={\n  \"id\": {{ $json.id }},\n  \"order_id\": \"{{ $json.order_id[1] }}\",\n  \"order_date\": \"{{ $json.date_order }}\",\n  \"order_qty\": {{ $json.product_uom_qty }},\n  \"access_token\": \"{{ $json.access_token }}\",\n  \"full_name\": \"{{ $json.name }}\",  \n  \"first_name\": \"{{ $json.first_name }}\",\n  \"last_name\": \"{{ $json.last_name }}\",\n  \"email\": \"{{ $json.email }}\",\n  \"phone\": \"{{ $json.phone }}\",\n  \"phone_sanitized\": \"{{ $json.phone_sanitized }}\",\n  \"street\": \"{{ $json.street }}\",\n  \"street2\": \"{{ $json.street2 }}\",\n  \"city\": \"{{ $json.city }}\",\n  \"state\": \"{{ $json.code }}\",\n  \"zip\": \"{{ $json.zip }}\",\n  \"country\": \"{{ $json.country_id[1] }}\"\n}\n",
+        "jsonOutput": "={\n  \"id\": {{ $json.order_id[0] }},\n  \"order_id\": \"{{ $json.order_id[1] }}\",\n  \"order_date\": \"{{ $json.date_order }}\",\n  \"order_qty\": {{ $json.product_uom_qty }},\n  \"access_token\": \"{{ $json.access_token }}\",\n  \"full_name\": \"{{ $json.name }}\",  \n  \"first_name\": \"{{ $json.name.split(' ')[0] }}\",\n  \"last_name\": \"{{ $json.name.split(' ').slice(1).join(' ') }}\",\n  \"email\": \"{{ $json.email }}\",\n  \"phone\": \"{{ $json.phone }}\",\n  \"phone_sanitized\": \"{{ $json.phone_sanitized }}\",\n  \"street\": \"{{ $json.street }}\",\n  \"street2\": \"{{ $json.street2 === 'false' || $json.street2 === null || !$json.street2 ? '' : $json.street2 }}\",\n  \"city\": \"{{ $json.city }}\",\n  \"state\": \"{{ $json.code }}\",\n  \"zip\": \"{{ $json.zip }}\",\n  \"country\": \"{{ $json.country_id[1] }}\"\n}\n",
         "options": {}
       },
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        880,
+        660,
         -240
       ],
       "id": "f4fbaf06-2b18-4ae5-9652-15ae876facdc",
@@ -718,7 +682,7 @@
       "typeVersion": 1,
       "position": [
         -40,
-        380
+        440
       ],
       "id": "b7901ccc-82c4-433a-8f87-3a8de588a6f1",
       "name": "Set First & Last name",
@@ -731,33 +695,21 @@
     },
     {
       "parameters": {
+        "resource": "custom",
+        "customResource": "sale.order",
         "operation": "getAll",
-        "options": {
-          "fieldsList": [
-            "id",
-            "name",
-            "first_name",
-            "middle_name",
-            "last_name",
-            "type",
-            "street",
-            "street2",
-            "city",
-            "state_id",
-            "zip",
-            "contact_address",
-            "email",
-            "phone",
-            "country_id",
-            "country_code"
+        "options": {},
+        "filterRequest": {
+          "filter": [
+            {}
           ]
         }
       },
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        640,
-        400
+        1380,
+        420
       ],
       "id": "56a7a15f-a12f-44be-8871-ed6f7af6e06e",
       "name": "Get Contact Info1",
@@ -792,6 +744,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-01-23T00:17:07.000Z",
-  "versionId": "a46465ac-5d63-4989-8114-3413ec459a68"
+  "updatedAt": "2025-01-23T17:03:51.000Z",
+  "versionId": "193f9f01-0281-4cbc-ba15-c3a03fcd4c9f"
 }
