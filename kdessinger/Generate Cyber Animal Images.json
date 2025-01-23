@@ -78,8 +78,8 @@
       ],
       "credentials": {
         "openAiApi": {
-          "id": "24",
-          "name": "OpenAi (kdessinger)"
+          "id": "e72QgqQnlpG6j1mz",
+          "name": "OpenAi (Home Lab)"
         }
       }
     },
@@ -98,9 +98,9 @@
       "parameters": {
         "modelId": {
           "__rl": true,
-          "value": "gpt-4-turbo",
+          "value": "gpt-4o-mini",
           "mode": "list",
-          "cachedResultName": "GPT-4-TURBO"
+          "cachedResultName": "GPT-4O-MINI"
         },
         "messages": {
           "values": [
@@ -122,8 +122,8 @@
       ],
       "credentials": {
         "openAiApi": {
-          "id": "24",
-          "name": "OpenAi (kdessinger)"
+          "id": "e72QgqQnlpG6j1mz",
+          "name": "OpenAi (Home Lab)"
         }
       }
     }
@@ -146,6 +146,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2024-11-22T06:12:26.000Z",
-  "versionId": "f0b87122-7b79-4cf4-992b-40a104711668"
+  "updatedAt": "2025-01-23T04:39:03.000Z",
+  "versionId": "1e8132c0-69c6-4abe-9c44-7f5a134284d6"
 }
