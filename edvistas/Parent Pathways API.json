@@ -88,6 +88,11 @@
             "node": "Merge",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Set First & Last name",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -118,23 +123,51 @@
       "main": [
         [
           {
-            "node": "Set End Date",
+            "node": "Clean up fields",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Aggregate",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Do we have new sales?": {
+    "Aggregate": {
       "main": [
-        [],
+        [
+          {
+            "node": "Clean up fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clean up fields": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set First & Last name": {
+      "main": [
         []
       ]
     }
   },
   "createdAt": "2025-01-06T20:03:16.507Z",
   "id": "qJCHL92o7fLUFSEM",
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "Parent Pathways API",
   "nodes": [
     {
@@ -273,15 +306,15 @@
     },
     {
       "parameters": {
-        "content": "## Get new PTA sales",
-        "height": 880,
-        "width": 740,
+        "content": "## Get new PTA sales from Odoo",
+        "height": 860,
+        "width": 1380,
         "color": 2
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -140,
-        -640
+        -160,
+        -620
       ],
       "typeVersion": 1,
       "id": "15b1fa44-32ea-4d8b-84c8-a1c7b4cd7d4c",
@@ -290,14 +323,14 @@
     {
       "parameters": {
         "content": "## Process orders\n\nSet Delivered Date\nSet Delivered Qty\n",
-        "height": 880,
+        "height": 860,
         "width": 780,
         "color": 3
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
         1960,
-        -640
+        -620
       ],
       "typeVersion": 1,
       "id": "3384d2c9-5166-4dbd-a519-d6dbd6bf0537",
@@ -472,7 +505,10 @@
             "zip",
             "contact_address",
             "email",
-            "phone"
+            "phone",
+            "country_id",
+            "country_code",
+            "phone_sanitized"
           ]
         }
       },
@@ -551,52 +587,18 @@
     },
     {
       "parameters": {
-        "content": "## Create DataMate™ Accounts",
-        "height": 880,
+        "content": "## Send payload to DataMate™",
+        "height": 860,
         "width": 600
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        660,
-        -640
+        1340,
+        -620
       ],
       "typeVersion": 1,
       "id": "69b44ba2-75d4-45fc-a459-7c8879dbcb93",
       "name": "Sticky Note3"
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 2
-          },
-          "conditions": [
-            {
-              "id": "1542079f-3988-43dd-a17d-cc9a66ab8a0c",
-              "leftValue": "={{ $json.id }}",
-              "rightValue": "",
-              "operator": {
-                "type": "number",
-                "operation": "exists",
-                "singleValue": true
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.2,
-      "position": [
-        1240,
-        -800
-      ],
-      "id": "9a6c39d5-105f-4dec-90c0-7d034af8d908",
-      "name": "Do we have new sales?"
     },
     {
       "parameters": {
@@ -630,18 +632,141 @@
     },
     {
       "parameters": {
-        "content": "## Copy test to user accounts",
-        "height": 880,
-        "width": 600
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        660,
+        -40
+      ],
+      "id": "27a20069-4eef-4a26-b6d6-c38f01f9a29c",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "content": "## Populate First & Last name fields in the database\n",
+        "height": 340,
+        "width": 660,
+        "color": 2
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        1320,
-        -640
+        -160,
+        260
       ],
       "typeVersion": 1,
-      "id": "9354bc2d-46c6-4321-8c58-71ed78a4ee27",
+      "id": "2997448b-0c61-4d92-a459-6cfe8bfe36d1",
       "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://apps.edvistas.com/datamate/odooapi.aspx?token=24A0A268-5991-45FF-9E78-C20275C43C9A",
+        "options": {
+          "response": {
+            "response": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1560,
+        -240
+      ],
+      "id": "f859d080-41d1-412a-a0a0-09cdd9579a77",
+      "name": "HTTP Request",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"id\": {{ $json.id }},\n  \"order_id\": \"{{ $json.order_id[1] }}\",\n  \"order_date\": \"{{ $json.date_order }}\",\n  \"order_qty\": {{ $json.product_uom_qty }},\n  \"access_token\": \"{{ $json.access_token }}\",\n  \"full_name\": \"{{ $json.name }}\",  \n  \"first_name\": \"{{ $json.first_name }}\",\n  \"last_name\": \"{{ $json.last_name }}\",\n  \"email\": \"{{ $json.email }}\",\n  \"phone\": \"{{ $json.phone }}\",\n  \"phone_sanitized\": \"{{ $json.phone_sanitized }}\",\n  \"street\": \"{{ $json.street }}\",\n  \"street2\": \"{{ $json.street2 }}\",\n  \"city\": \"{{ $json.city }}\",\n  \"state\": \"{{ $json.code }}\",\n  \"zip\": \"{{ $json.zip }}\",\n  \"country\": \"{{ $json.country_id[1] }}\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        880,
+        -240
+      ],
+      "id": "f4fbaf06-2b18-4ae5-9652-15ae876facdc",
+      "name": "Clean up fields"
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "res.partner",
+        "operation": "update",
+        "customResourceId": "={{ $json.id }}",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "first_name",
+              "fieldValue": "={{ $json.name.split(' ')[0] }}"
+            },
+            {
+              "fieldName": "last_name",
+              "fieldValue": "={{ $json.name.split(' ').slice(1).join(' ') }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        380
+      ],
+      "id": "b7901ccc-82c4-433a-8f87-3a8de588a6f1",
+      "name": "Set First & Last name",
+      "credentials": {
+        "odooApi": {
+          "id": "11",
+          "name": "Odoo (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "options": {
+          "fieldsList": [
+            "id",
+            "name",
+            "first_name",
+            "middle_name",
+            "last_name",
+            "type",
+            "street",
+            "street2",
+            "city",
+            "state_id",
+            "zip",
+            "contact_address",
+            "email",
+            "phone",
+            "country_id",
+            "country_code"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        640,
+        400
+      ],
+      "id": "56a7a15f-a12f-44be-8871-ed6f7af6e06e",
+      "name": "Get Contact Info1",
+      "credentials": {
+        "odooApi": {
+          "id": "11",
+          "name": "Odoo (kdessinger)"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -667,6 +792,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-01-22T00:36:07.000Z",
-  "versionId": "4664d9bc-a216-4b04-b287-f36e6e748398"
+  "updatedAt": "2025-01-23T00:17:07.000Z",
+  "versionId": "a46465ac-5d63-4989-8114-3413ec459a68"
 }
