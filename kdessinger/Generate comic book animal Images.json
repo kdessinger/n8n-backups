@@ -88,9 +88,9 @@
       "parameters": {
         "modelId": {
           "__rl": true,
-          "value": "gpt-4-turbo",
+          "value": "gpt-4o-mini",
           "mode": "list",
-          "cachedResultName": "GPT-4-TURBO"
+          "cachedResultName": "GPT-4O-MINI"
         },
         "messages": {
           "values": [
@@ -112,8 +112,8 @@
       ],
       "credentials": {
         "openAiApi": {
-          "id": "24",
-          "name": "OpenAi (kdessinger)"
+          "id": "e72QgqQnlpG6j1mz",
+          "name": "OpenAi (Home Lab)"
         }
       }
     },
@@ -157,8 +157,8 @@
       ],
       "credentials": {
         "openAiApi": {
-          "id": "24",
-          "name": "OpenAi (kdessinger)"
+          "id": "e72QgqQnlpG6j1mz",
+          "name": "OpenAi (Home Lab)"
         }
       }
     }
@@ -181,6 +181,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2024-11-22T06:12:39.000Z",
-  "versionId": "9e4e382e-7a4c-4331-857d-72c231c735ed"
+  "updatedAt": "2025-01-23T04:37:41.000Z",
+  "versionId": "5a37e5b0-4441-40f7-9b17-f268c9bc855c"
 }
