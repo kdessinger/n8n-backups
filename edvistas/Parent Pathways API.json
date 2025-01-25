@@ -14,7 +14,13 @@
     },
     "Webhook": {
       "main": [
-        []
+        [
+          {
+            "node": "Get Sales Order Line",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Get Sales Order": {
@@ -53,7 +59,7 @@
       "main": [
         [
           {
-            "node": "Merge2",
+            "node": "Merge3",
             "type": "main",
             "index": 0
           }
@@ -85,12 +91,7 @@
             "index": 0
           },
           {
-            "node": "Merge",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Set First & Last name",
+            "node": "Merge2",
             "type": "main",
             "index": 0
           }
@@ -101,29 +102,12 @@
       "main": [
         [
           {
-            "node": "Merge",
-            "type": "main",
-            "index": 1
-          }
-        ]
-      ]
-    },
-    "Merge": {
-      "main": [
-        [
-          {
             "node": "Merge2",
             "type": "main",
             "index": 1
-          }
-        ]
-      ]
-    },
-    "Merge2": {
-      "main": [
-        [
+          },
           {
-            "node": "Clean up fields",
+            "node": "Set First & Last name",
             "type": "main",
             "index": 0
           }
@@ -137,7 +121,57 @@
     },
     "Set First & Last name": {
       "main": [
-        []
+        [
+          {
+            "node": "Set Salesmen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get Sales Order Line",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Salesmen": {
+      "main": [
+        [
+          {
+            "node": "Set Tags",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge3": {
+      "main": [
+        [
+          {
+            "node": "Clean up fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge2": {
+      "main": [
+        [
+          {
+            "node": "Merge3",
+            "type": "main",
+            "index": 1
+          }
+        ]
       ]
     }
   },
@@ -153,8 +187,8 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -420,
-        -340
+        -440,
+        -740
       ],
       "id": "eeaa2ead-60f0-454f-b0c7-f7f7ee537897",
       "name": "When clicking ‘Test workflow’"
@@ -167,8 +201,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
-        -420,
-        -160
+        -440,
+        -540
       ],
       "id": "07b7b289-59d7-4c2f-bcaf-b52c4bee653e",
       "name": "Webhook",
@@ -191,7 +225,8 @@
             "partner_id",
             "order_line",
             "cart_quantity",
-            "delivery_count"
+            "delivery_count",
+            "tag_ids"
           ]
         }
       },
@@ -241,6 +276,7 @@
             },
             {
               "fieldName": "state",
+              "operator": "notEqual",
               "value": "sale"
             },
             {
@@ -303,7 +339,7 @@
         "content": "## Process orders\n\nSet Delivered Date\nSet Delivered Qty\n",
         "height": 860,
         "width": 780,
-        "color": 3
+        "color": 4
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
@@ -400,69 +436,18 @@
     {
       "parameters": {
         "content": "## Trigger the workflow\n\nManually\nWebHook",
-        "height": 540,
+        "height": 700,
         "width": 340,
         "color": 6
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -520,
-        -460
+        -540,
+        -840
       ],
       "typeVersion": 1,
       "id": "4437faa2-6ca5-4f19-b041-168a27f40557",
       "name": "Sticky Note2"
-    },
-    {
-      "parameters": {
-        "resource": "custom",
-        "customResource": "sale.order.line",
-        "operation": "getAll",
-        "returnAll": true,
-        "options": {
-          "fieldsList": [
-            "id",
-            "order_id",
-            "order_partner_id",
-            "sale_order_option_ids",
-            "display_name",
-            "product_uom_qty",
-            "invoice_status",
-            "state",
-            "qty_delivered",
-            "qty_to_deliver",
-            "create_date"
-          ]
-        },
-        "filterRequest": {
-          "filter": [
-            {
-              "fieldName": "product_id",
-              "operator": "like",
-              "value": "PTA-2774"
-            },
-            {
-              "fieldName": "state",
-              "value": "sale"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.odoo",
-      "typeVersion": 1,
-      "position": [
-        -400,
-        -620
-      ],
-      "id": "9eed9037-6892-4a1e-be2e-d34141fb6b6f",
-      "name": "Get Sales Order Line1",
-      "alwaysOutputData": false,
-      "credentials": {
-        "odooApi": {
-          "id": "11",
-          "name": "Odoo (kdessinger)"
-        }
-      }
     },
     {
       "parameters": {
@@ -534,37 +519,6 @@
     },
     {
       "parameters": {
-        "mode": "combine",
-        "combineBy": "combineAll",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 3,
-      "position": [
-        240,
-        -60
-      ],
-      "id": "7eea5673-8d72-43be-8fa0-b09322616a1e",
-      "name": "Merge",
-      "alwaysOutputData": false
-    },
-    {
-      "parameters": {
-        "mode": "combine",
-        "combineBy": "combineAll",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 3,
-      "position": [
-        440,
-        -240
-      ],
-      "id": "cb949868-b79c-4a5d-ba6f-8891c33c9e24",
-      "name": "Merge2"
-    },
-    {
-      "parameters": {
         "content": "## Send payload to DataMate™",
         "height": 860,
         "width": 600
@@ -596,8 +550,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -400,
-        120
+        -420,
+        20
       ],
       "id": "487ca20e-0b78-458f-ba99-53e66ab571ba",
       "name": "Set Delivered Qty = 0",
@@ -611,14 +565,14 @@
     {
       "parameters": {
         "content": "## 1) Populate First & Last name fields in the database\n## 2) Make Pete Cooper the Salesman\n## 3) Set TAG to 'PTA'\n",
-        "height": 340,
-        "width": 660,
+        "height": 380,
+        "width": 820,
         "color": 2
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
         -160,
-        260
+        280
       ],
       "typeVersion": 1,
       "id": "2997448b-0c61-4d92-a459-6cfe8bfe36d1",
@@ -653,7 +607,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        660,
+        640,
         -240
       ],
       "id": "f4fbaf06-2b18-4ae5-9652-15ae876facdc",
@@ -695,30 +649,132 @@
     },
     {
       "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 15
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -440,
+        -340
+      ],
+      "id": "2a2fea8d-9616-4de4-9580-7655dc727eb5",
+      "name": "Schedule Trigger",
+      "disabled": true
+    },
+    {
+      "parameters": {
         "resource": "custom",
-        "customResource": "sale.order",
-        "operation": "getAll",
-        "options": {},
-        "filterRequest": {
-          "filter": [
-            {}
+        "customResource": "sale.order.line",
+        "operation": "update",
+        "customResourceId": "={{ $('Get Sales Order Line').item.json.id }}",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "salesman_id",
+              "fieldValue": "={{ [26] }}"
+            }
           ]
         }
       },
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        1380,
-        420
+        180,
+        440
       ],
       "id": "56a7a15f-a12f-44be-8871-ed6f7af6e06e",
-      "name": "Get Contact Info1",
+      "name": "Set Salesmen",
       "credentials": {
         "odooApi": {
           "id": "11",
           "name": "Odoo (kdessinger)"
         }
       }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "sale.order",
+        "operation": "update",
+        "customResourceId": "={{ $('Get Sales Order').item.json.id }}",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "tag_ids",
+              "fieldValue": "={{ [60] }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        400,
+        440
+      ],
+      "id": "9eed9037-6892-4a1e-be2e-d34141fb6b6f",
+      "name": "Set Tags",
+      "alwaysOutputData": false,
+      "credentials": {
+        "odooApi": {
+          "id": "11",
+          "name": "Odoo (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "# Reset\n",
+        "height": 340,
+        "width": 340,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -540,
+        -100
+      ],
+      "typeVersion": 1,
+      "id": "10122d04-fe4e-4e34-969b-37962f57ccd8",
+      "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineAll",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        440,
+        -240
+      ],
+      "id": "cb949868-b79c-4a5d-ba6f-8891c33c9e24",
+      "name": "Merge3"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineAll",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        240,
+        -40
+      ],
+      "id": "7eea5673-8d72-43be-8fa0-b09322616a1e",
+      "name": "Merge2",
+      "alwaysOutputData": false
     }
   ],
   "pinData": {},
@@ -744,6 +800,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-01-23T17:03:51.000Z",
-  "versionId": "193f9f01-0281-4cbc-ba15-c3a03fcd4c9f"
+  "updatedAt": "2025-01-25T04:53:54.000Z",
+  "versionId": "2ac83e90-142b-4eef-b620-998b27a7e7cf"
 }
