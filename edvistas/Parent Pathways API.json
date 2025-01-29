@@ -80,7 +80,7 @@
             "index": 5
           },
           {
-            "node": "Set First & Last name",
+            "node": "Update Contacts",
             "type": "main",
             "index": 0
           }
@@ -98,17 +98,6 @@
         ]
       ]
     },
-    "Set First & Last name": {
-      "main": [
-        [
-          {
-            "node": "Set Tags",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Schedule Trigger": {
       "main": [
         [
@@ -118,11 +107,6 @@
             "index": 0
           }
         ]
-      ]
-    },
-    "Set Salesmen": {
-      "main": [
-        []
       ]
     },
     "Sales": {
@@ -170,17 +154,6 @@
         [
           {
             "node": "Respond to Webhook",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Set Tags": {
-      "main": [
-        [
-          {
-            "node": "Set Salesmen",
             "type": "main",
             "index": 0
           }
@@ -247,6 +220,33 @@
       ]
     },
     "Verify Datamate Received": {
+      "main": [
+        []
+      ]
+    },
+    "Update Contacts": {
+      "main": [
+        [
+          {
+            "node": "Update Sales Order",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Sales Order": {
+      "main": [
+        [
+          {
+            "node": "Update Sales Order Line",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Sales Order Line": {
       "main": [
         []
       ]
@@ -609,9 +609,9 @@
     },
     {
       "parameters": {
-        "content": "## Update Odoo Records\n\n## 1) Populate First & Last name fields in the database\n## 2) Set TAG to 'PTA'\n## 3) Make Pete Cooper the Salesman\n",
+        "content": "## Update Odoo Records\n\n## 1) Populate First & Last name fields in the database\n## 2) Set Payment Terms to 'Immediate'\n## 2) Set TAG to 'PTA'\n## 3) Set Salesman to 'Pete Cooper'\n",
         "height": 440,
-        "width": 740,
+        "width": 760,
         "color": 3
       },
       "type": "n8n-nodes-base.stickyNote",
@@ -669,40 +669,6 @@
     },
     {
       "parameters": {
-        "resource": "custom",
-        "customResource": "res.partner",
-        "operation": "update",
-        "customResourceId": "={{ $('Get Contact Info').item.json.id }}",
-        "fieldsToCreateOrUpdate": {
-          "fields": [
-            {
-              "fieldName": "first_name",
-              "fieldValue": "={{ $('Get Contact Info').item.json.name.split(' ')[0] }}"
-            },
-            {
-              "fieldName": "last_name",
-              "fieldValue": "={{ $('Get Contact Info').item.json.name.split(' ').slice(1).join(' ') }}"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.odoo",
-      "typeVersion": 1,
-      "position": [
-        -320,
-        200
-      ],
-      "id": "b7901ccc-82c4-433a-8f87-3a8de588a6f1",
-      "name": "Set First & Last name",
-      "credentials": {
-        "odooApi": {
-          "id": "22",
-          "name": "Odoo (OdooBot)"
-        }
-      }
-    },
-    {
-      "parameters": {
         "rule": {
           "interval": [
             {
@@ -721,71 +687,6 @@
       "id": "2a2fea8d-9616-4de4-9580-7655dc727eb5",
       "name": "Schedule Trigger",
       "disabled": true
-    },
-    {
-      "parameters": {
-        "resource": "custom",
-        "customResource": "sale.order.line",
-        "operation": "update",
-        "customResourceId": "={{ $('Get Sales Order Line').item.json.id }}",
-        "fieldsToCreateOrUpdate": {
-          "fields": [
-            {
-              "fieldName": "salesman_id",
-              "fieldValue": "26"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.odoo",
-      "typeVersion": 1,
-      "position": [
-        180,
-        200
-      ],
-      "id": "56a7a15f-a12f-44be-8871-ed6f7af6e06e",
-      "name": "Set Salesmen",
-      "credentials": {
-        "odooApi": {
-          "id": "22",
-          "name": "Odoo (OdooBot)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "resource": "custom",
-        "customResource": "sale.order",
-        "operation": "update",
-        "customResourceId": "={{ $('Get Sales Order').item.json.id }}",
-        "fieldsToCreateOrUpdate": {
-          "fields": [
-            {
-              "fieldName": "tag_ids",
-              "fieldValue": "={{ [60] }}"
-            },
-            {
-              "fieldName": "user_id",
-              "fieldValue": "={{ 26 }}"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.odoo",
-      "typeVersion": 1,
-      "position": [
-        -60,
-        200
-      ],
-      "id": "9eed9037-6892-4a1e-be2e-d34141fb6b6f",
-      "name": "Set Tags",
-      "alwaysOutputData": false,
-      "credentials": {
-        "odooApi": {
-          "id": "22",
-          "name": "Odoo (OdooBot)"
-        }
-      }
     },
     {
       "parameters": {
@@ -1076,6 +977,160 @@
           "name": "DB1.DS1.GOWLS.COM (kdessinger)"
         }
       }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "select * from odooorders"
+      },
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1.1,
+      "position": [
+        460,
+        580
+      ],
+      "id": "48be427f-12f1-4767-b412-d629aa961be5",
+      "name": "Verify Datamate Received1",
+      "credentials": {
+        "microsoftSql": {
+          "id": "8",
+          "name": "DB1.DS1.GOWLS.COM (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "sale.order",
+        "operation": "update",
+        "customResourceId": "1625",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "payment_term_id",
+              "fieldValue": "={{ 1 }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        200,
+        580
+      ],
+      "id": "5daf8d98-d2f3-4fee-8a84-9194c3b02a13",
+      "name": "Get Sales Order1",
+      "alwaysOutputData": false,
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "res.partner",
+        "operation": "update",
+        "customResourceId": "={{ $('Get Contact Info').item.json.id }}",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "first_name",
+              "fieldValue": "={{ $('Get Contact Info').item.json.name.split(' ')[0] }}"
+            },
+            {
+              "fieldName": "last_name",
+              "fieldValue": "={{ $('Get Contact Info').item.json.name.split(' ').slice(1).join(' ') }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        -320,
+        220
+      ],
+      "id": "b7901ccc-82c4-433a-8f87-3a8de588a6f1",
+      "name": "Update Contacts",
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "sale.order",
+        "operation": "update",
+        "customResourceId": "={{ $('Get Sales Order').item.json.id }}",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "tag_ids",
+              "fieldValue": "={{ [60] }}"
+            },
+            {
+              "fieldName": "user_id",
+              "fieldValue": "={{ 26 }}"
+            },
+            {
+              "fieldName": "payment_term_id",
+              "fieldValue": "={{ 1 }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        220
+      ],
+      "id": "9eed9037-6892-4a1e-be2e-d34141fb6b6f",
+      "name": "Update Sales Order",
+      "alwaysOutputData": false,
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "sale.order.line",
+        "operation": "update",
+        "customResourceId": "={{ $('Get Sales Order Line').item.json.id }}",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "salesman_id",
+              "fieldValue": "26"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        180,
+        220
+      ],
+      "id": "56a7a15f-a12f-44be-8871-ed6f7af6e06e",
+      "name": "Update Sales Order Line",
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -1101,6 +1156,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-01-28T16:14:09.000Z",
-  "versionId": "ad2b720f-7431-4c60-becb-9a43297f5c42"
+  "updatedAt": "2025-01-28T19:02:41.000Z",
+  "versionId": "04bc7752-8d04-4bef-9caa-d09374c009b1"
 }
