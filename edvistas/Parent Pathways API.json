@@ -135,7 +135,7 @@
       "main": [
         [
           {
-            "node": "Verify Datamate Received",
+            "node": "Set Delivered Qty",
             "type": "main",
             "index": 0
           }
@@ -248,7 +248,24 @@
     },
     "Update Sales Order Line": {
       "main": [
-        []
+        [
+          {
+            "node": "Get Email Template",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Email Template": {
+      "main": [
+        [
+          {
+            "node": "HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
@@ -418,7 +435,7 @@
         "resource": "custom",
         "customResource": "sale.order",
         "operation": "update",
-        "customResourceId": "={{ $('Sales').item.json.id }}",
+        "customResourceId": "={{ $('Get Sales Order').item.json.id }}",
         "fieldsToCreateOrUpdate": {
           "fields": [
             {
@@ -431,7 +448,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        2440,
+        2260,
         -380
       ],
       "id": "3bcb2a92-de5f-4b44-b237-e46697c3c907",
@@ -443,8 +460,7 @@
           "id": "22",
           "name": "Odoo (OdooBot)"
         }
-      },
-      "disabled": true
+      }
     },
     {
       "parameters": {
@@ -464,7 +480,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        2240,
+        2040,
         -380
       ],
       "id": "092448f1-977d-449f-aa3e-53a7f4cc09df",
@@ -474,8 +490,7 @@
           "id": "22",
           "name": "Odoo (OdooBot)"
         }
-      },
-      "disabled": true
+      }
     },
     {
       "parameters": {
@@ -582,7 +597,7 @@
         "resource": "custom",
         "customResource": "sale.order.line",
         "operation": "update",
-        "customResourceId": "3851",
+        "customResourceId": "3918",
         "fieldsToCreateOrUpdate": {
           "fields": [
             {
@@ -645,7 +660,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1600,
+        1560,
         -220
       ],
       "id": "f859d080-41d1-412a-a0a0-09cdd9579a77",
@@ -661,7 +676,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1260,
+        1240,
         -220
       ],
       "id": "f4fbaf06-2b18-4ae5-9652-15ae876facdc",
@@ -922,19 +937,20 @@
     },
     {
       "parameters": {
-        "fromEmail": "parentpathways@edvistas.com",
+        "fromEmail": "Parent Pathways <parentpathways@edvistas.com>",
         "toEmail": "=kdessinger@edvistas.com",
-        "subject": "Welcome to the Parent Pathways Exclusive Membership!",
+        "subject": "={{ $('Get Email Template').item.json.subject }}",
         "html": "={{ $json.html }}",
         "options": {
+          "appendAttribution": false,
           "allowUnauthorizedCerts": true
         }
       },
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
       "position": [
-        -100,
-        580
+        920,
+        220
       ],
       "id": "e2319e00-aaae-46e1-b3e9-9ba72fd7993f",
       "name": "Send Email",
@@ -947,13 +963,13 @@
     },
     {
       "parameters": {
-        "html": "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"box-sizing:border-box;padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;\" width=\"100%\">\n  <tbody>\n    <tr>\n      <td align=\"center\">\n\n        <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style=\"box-sizing:border-box;padding: 16px; background-color: white; color: #454748; border-collapse:separate;\">\n          <tbody>\n            <!-- HEADER -->\n            <tr>\n              <td align=\"center\" style=\"min-width: 590px;\">\n                <!-- Inserted Header Image -->\n                <img src=\"https://www.edvistas.com/wp-content/uploads/2024/11/Parent-Pathways-Email-Header.jpg\" alt=\"Parent Pathways Email Header\" width=\"590px\" style=\"box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;vertical-align:middle;width: 590px; height: 120px; display: block; border: 0px; padding-bottom: 16px;\" height=\"120\">\n              </td>\n            </tr>\n            <!-- CUSTOMER NAME -->\n            <tr>\n              <td align=\"center\" style=\"min-width: 590px;\">\n                <table width=\"590\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"box-sizing:border-box;min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;\">\n                  <tbody>\n                    <tr>\n                      <td valign=\"middle\">\n                        <span style=\"font-size: 10px;\">Order Confirmation</span><br>\n                        <span style=\"font-size: 20px; font-weight: bold;\">\n                          <t t-out=\"object.name or ''\" contenteditable=\"false\" data-oe-t-inline=\"true\">SO12345</t>\n                        </span>\n                      </td>\n                    </tr>\n                    <tr>\n                      <td colspan=\"2\" style=\"text-align:center;\">\n                        <hr width=\"100%\" style=\"border-top-color:#cccccc;border-top-style:solid;border-top-width:1px;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;overflow-y:visible;overflow-x:visible;height:0px;box-sizing:content-box;border-top: 1px solid #cccccc; margin: 16px 0px;\" contenteditable=\"false\">\n                      </td>\n                    </tr>\n                  </tbody>\n                </table>\n              </td>\n            </tr>\n            <!-- ORDER DETAILS -->\n            <tr>\n              <td align=\"center\" style=\"min-width: 590px;\">\n                <table width=\"590\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"box-sizing:border-box;min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;\">\n                  <tbody>\n                    <tr>\n                      <td valign=\"top\" style=\"font-size: 14px;\">\n                        <div>\n                          Hello <t t-out=\"object.partner_id.name or ''\" contenteditable=\"false\" data-oe-t-inline=\"true\">Customer Name</t>,<br><br>\n\n                          Thank you for purchasing the Parent Pathways Package! This exclusive offer is designed to support your child’s academic journey with tailored resources and tools to help them succeed.<br><br>\n\n                          <h3 style=\"box-sizing:border-box;margin:0px 0 6px 0;font-size:16.9px;color:#212529;line-height:1.2;font-weight:bold;\">What to Expect:</h3>\n                          <p style=\"box-sizing:border-box;margin:0px 0 12px 0;\">\n                            The Parent Pathways program includes comprehensive resources aligned with state standards. These tools are tailored to help students practice key academic skills with confidence.\n                          </p>\n\n                          <h3 style=\"box-sizing:border-box;margin:0px 0 6px 0;font-size:16.9px;color:#212529;line-height:1.2;font-weight:bold;\">Key Program Benefits:</h3>\n                          <ul style=\"box-sizing:border-box;margin:0px 0 12px 0;list-style-type: disc; padding-left: 20px;\">\n                            <li><strong style=\"box-sizing:border-box;font-weight:bolder;\">Personalized Learning Insights</strong>: Track your child's progress and growth.</li>\n                            <li><strong style=\"box-sizing:border-box;font-weight:bolder;\">Instant Feedback</strong>: Gain valuable insights into strengths and improvement areas.</li>\n                            <li><strong style=\"box-sizing:border-box;font-weight:bolder;\">Familiar Tools</strong>: Resources that simulate real-world academic environments.</li>\n                          </ul>\n\n                          <p style=\"box-sizing:border-box;margin:0px 0 12px 0;\">\n                            For any questions or assistance, please email us at <strong style=\"box-sizing:border-box;font-weight:bolder;\">parentpathways@edvistas.com</strong> or call <strong style=\"box-sizing:border-box;font-weight:bolder;\">518.691.3400</strong>.\n                          </p>\n\n                          <p style=\"box-sizing:border-box;margin:0px 0 12px 0;\">\n                            Thank you for choosing Parent Pathways!\n                          </p>\n                          <p style=\"box-sizing:border-box;margin:0px 0 12px 0;\">\n                            Warm regards,<br>\n                            The Parent Pathways Team<br><br></p>\n                        </div>\n                      </td>\n                    </tr>\n                  </tbody>\n                </table>\n              </td>\n            </tr>\n         <!-- PAGE FOOTER -->\n            <tr>\n              <td align=\"center\" style=\"min-width: 590px;\">\n                <table width=\"590\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"box-sizing:border-box;min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;\">\n                  <tbody>\n                    <tr>\n                      <td style=\"text-align: center; font-size: 14px;\">\n                        Sent by Educational Vistas</a>\n                      </td>\n                    </tr>\n                  </tbody>\n                </table>\n              </td>\n            </tr>\n          </tbody>\n        </table>\n\n      </td><!-- FOOTER -->\n            </tr><tr>\n              <td align=\"center\" style=\"min-width: 590px;\">\n                <table width=\"590\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"box-sizing:border-box;min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;\">\n                  <tbody>\n                    <tr>\n                      <td style=\"text-align: center; font-size: 14px;\">\n                        \n                      </td>\n                    </tr>\n                  </tbody>\n                </table>\n              </td>\n            </tr>\n          </tbody>\n        </table>"
+        "html": "{{ $json.body_html\n   .replace(/Customer Name/g, $('Get Contact Info').item.json.name)\n   .replace(/IS12345/g, $('Get Sales Order').item.json.name)\n}}"
       },
       "type": "n8n-nodes-base.html",
       "typeVersion": 1.2,
       "position": [
-        -320,
-        580
+        700,
+        220
       ],
       "id": "e243b343-7c84-4b8d-8b7f-c0d117979eb9",
       "name": "HTML"
@@ -966,8 +982,8 @@
       "type": "n8n-nodes-base.microsoftSql",
       "typeVersion": 1.1,
       "position": [
-        2040,
-        -380
+        2000,
+        220
       ],
       "id": "50334cec-0a12-455c-ab9b-86b69f47c551",
       "name": "Verify Datamate Received",
@@ -986,8 +1002,8 @@
       "type": "n8n-nodes-base.microsoftSql",
       "typeVersion": 1.1,
       "position": [
-        460,
-        580
+        1660,
+        220
       ],
       "id": "48be427f-12f1-4767-b412-d629aa961be5",
       "name": "Verify Datamate Received1",
@@ -1016,8 +1032,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        200,
-        580
+        1460,
+        220
       ],
       "id": "5daf8d98-d2f3-4fee-8a84-9194c3b02a13",
       "name": "Get Sales Order1",
@@ -1131,6 +1147,45 @@
           "name": "Odoo (OdooBot)"
         }
       }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "mail.template",
+        "operation": "get",
+        "customResourceId": "66",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        500,
+        220
+      ],
+      "id": "6c02bb03-e9c0-4e5e-b265-422fb29ec73f",
+      "name": "Get Email Template",
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Send out PTA Email\n**Double click** to edit the template in [Odoo](https://odoo.edvistas.com/web?debug=1#id=66&menu_id=4&cids=1&model=mail.template&view_type=form)",
+        "height": 440,
+        "width": 720,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        440,
+        -40
+      ],
+      "typeVersion": 1,
+      "id": "33955238-7512-4452-a066-cf673a41a8c1",
+      "name": "Sticky Note5"
     }
   ],
   "pinData": {},
@@ -1156,6 +1211,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-01-28T19:02:41.000Z",
-  "versionId": "04bc7752-8d04-4bef-9caa-d09374c009b1"
+  "updatedAt": "2025-01-29T21:04:21.000Z",
+  "versionId": "2d348ed6-3854-4845-9c0a-dad4ba048887"
 }
