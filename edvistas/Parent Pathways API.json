@@ -248,13 +248,7 @@
     },
     "Update Sales Order Line": {
       "main": [
-        [
-          {
-            "node": "Get Email Template",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Get Email Template": {
@@ -949,7 +943,7 @@
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
       "position": [
-        920,
+        900,
         220
       ],
       "id": "e2319e00-aaae-46e1-b3e9-9ba72fd7993f",
@@ -1211,6 +1205,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-01-29T21:04:21.000Z",
-  "versionId": "2d348ed6-3854-4845-9c0a-dad4ba048887"
+  "updatedAt": "2025-01-30T16:16:28.000Z",
+  "versionId": "5f589706-05d1-4177-b138-490013d28139"
 }
