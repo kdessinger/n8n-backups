@@ -1,11 +1,22 @@
 {
   "active": false,
   "connections": {
-    "Webhook": {
+    "When clicking \"Execute Workflow\"": {
       "main": [
         [
           {
-            "node": "Spotify",
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "OpenAI",
             "type": "main",
             "index": 0
           }
@@ -13,43 +24,69 @@
       ]
     }
   },
-  "createdAt": "2025-01-31T05:29:16.449Z",
-  "id": "oMuBW4Mu11XCvLTR",
-  "meta": {
-    "templateCredsSetupCompleted": true
-  },
+  "createdAt": "2023-11-15T05:48:34.882Z",
+  "id": "ingDpLiqbg6wHI7I",
+  "meta": null,
   "name": "My workflow 2",
   "nodes": [
     {
-      "parameters": {
-        "options": {}
-      },
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2,
+      "parameters": {},
+      "id": "e986a969-c6f2-4ab9-986f-8942e5e0bd78",
+      "name": "When clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
       "position": [
-        0,
-        0
-      ],
-      "id": "faabf189-339a-4287-8878-eef275d796ec",
-      "name": "Webhook",
-      "webhookId": "f4f79241-2ed2-465c-b699-800912894dcd"
+        880,
+        360
+      ]
     },
     {
       "parameters": {
-        "resource": "library"
+        "method": "POST",
+        "url": "http://10.20.30.136:1234/v1/chat/completions",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n   \"messages\":[{\"role\":\"system\",\"content\":\"Always answer in rhymes.\"},\n   {\"role\":\"user\",\"content\":\"Introduce yourself.\"}],\n   \"temperature\":0.7,\n   \"max_tokens\":-1,\n   \"stream\":false\n}",
+        "options": {}
       },
-      "type": "n8n-nodes-base.spotify",
+      "id": "c06da65f-e84e-49bb-b588-c366a0e02bb3",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1100,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "model": "gpt-4",
+        "prompt": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "You tend to over think things"
+            },
+            {
+              "content": "Who's on first?"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "3b8d6758-d1b8-491a-aa0b-8361bed7aa72",
+      "name": "OpenAI",
+      "type": "n8n-nodes-base.openAi",
       "typeVersion": 1,
       "position": [
-        220,
-        0
+        1320,
+        360
       ],
-      "id": "96c2dd58-6499-41c5-8eb8-4b3372cfa773",
-      "name": "Spotify",
       "credentials": {
-        "spotifyOAuth2Api": {
-          "id": "WSd8vZABejdLbMSg",
-          "name": "Spotify account"
+        "openAiApi": {
+          "id": "24",
+          "name": "OpenAi (kdessinger)"
         }
       }
     }
@@ -61,6 +98,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-01-31T05:29:16.449Z",
-  "versionId": "9926bd05-8297-4d34-831f-6ac22d3d8186"
+  "updatedAt": "2023-11-15T06:04:33.000Z",
+  "versionId": "0db29b2e-5f25-471b-9148-bfe53357c793"
 }
