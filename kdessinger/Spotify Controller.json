@@ -1,0 +1,526 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Currently Playing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Spotify": {
+      "main": [
+        [
+          {
+            "node": "My Jams",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "My Jams": {
+      "main": [
+        [
+          {
+            "node": "Extract Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Data": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Currently Playing": {
+      "main": [
+        [
+          {
+            "node": "data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "data": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2025-01-31T05:29:16.449Z",
+  "id": "oMuBW4Mu11XCvLTR",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Spotify Controller",
+  "nodes": [
+    {
+      "parameters": {
+        "resource": "playlist",
+        "operation": "getUserPlaylists",
+        "returnAll": true
+      },
+      "type": "n8n-nodes-base.spotify",
+      "typeVersion": 1,
+      "position": [
+        220,
+        -20
+      ],
+      "id": "96c2dd58-6499-41c5-8eb8-4b3372cfa773",
+      "name": "Spotify",
+      "credentials": {
+        "spotifyOAuth2Api": {
+          "id": "WSd8vZABejdLbMSg",
+          "name": "Spotify account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        200,
+        200
+      ],
+      "id": "f7f90309-e9d6-4239-a53a-03da4c380faa",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "currentlyPlaying"
+      },
+      "type": "n8n-nodes-base.spotify",
+      "typeVersion": 1,
+      "position": [
+        440,
+        200
+      ],
+      "id": "a7efd772-d5be-4f70-902b-388b28d4ca7d",
+      "name": "Currently Playing",
+      "credentials": {
+        "spotifyOAuth2Api": {
+          "id": "WSd8vZABejdLbMSg",
+          "name": "Spotify account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "647a8e5d-13a2-4892-a40c-10c7f6a4fc11",
+              "leftValue": "={{ $json.name }}",
+              "rightValue": "Jams",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        440,
+        -20
+      ],
+      "id": "efdd3bf8-824b-4d54-9399-d8845cd398bf",
+      "name": "My Jams"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        880,
+        -20
+      ],
+      "id": "4c42ce35-f126-4869-84d6-a6a5870a0c29",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "html": "{{ $json.data }}"
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        1100,
+        -20
+      ],
+      "id": "f3dfa709-1548-4d3e-a903-8ba14df6df3e",
+      "name": "HTML"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2f4d760d-7c0d-4aeb-ad81-03f35dc67231",
+              "name": "id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "fef6493f-31fa-4dbb-b37e-8d3b70657360",
+              "name": "name",
+              "value": "={{ $json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "5a8892f6-17df-45df-b00c-7a60330c719b",
+              "name": "tracks",
+              "value": "={{ $json.tracks.total }}",
+              "type": "number"
+            },
+            {
+              "id": "a7ac0a3f-daa6-42b4-9342-a8c61f74ea7c",
+              "name": "url",
+              "value": "={{ $json.external_urls.spotify }}",
+              "type": "string"
+            },
+            {
+              "id": "06d1d316-36e1-4961-8dbd-1e0e13b74951",
+              "name": "api",
+              "value": "={{ $json.href }}",
+              "type": "string"
+            },
+            {
+              "id": "1611e4fc-74b9-42a9-a5ae-d7b032f4d097",
+              "name": "tracks_url",
+              "value": "={{ $json.tracks.href }}",
+              "type": "string"
+            },
+            {
+              "id": "8d800d26-0ef7-4b09-a732-a888a3928ea3",
+              "name": "uri",
+              "value": "={{ $json.uri }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {
+          "dotNotation": true
+        }
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        660,
+        -20
+      ],
+      "id": "40a33872-8164-40b3-8c99-c3f81360c478",
+      "name": "Extract Data"
+    },
+    {
+      "parameters": {
+        "operation": "nextSong"
+      },
+      "type": "n8n-nodes-base.spotify",
+      "typeVersion": 1,
+      "position": [
+        820,
+        460
+      ],
+      "id": "6b00b801-697a-4e47-a177-59c64edc23d7",
+      "name": "Next Song",
+      "credentials": {
+        "spotifyOAuth2Api": {
+          "id": "WSd8vZABejdLbMSg",
+          "name": "Spotify account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "previousSong"
+      },
+      "type": "n8n-nodes-base.spotify",
+      "typeVersion": 1,
+      "position": [
+        220,
+        460
+      ],
+      "id": "e5844997-b93a-459a-b226-621658206b56",
+      "name": "Previous Song",
+      "credentials": {
+        "spotifyOAuth2Api": {
+          "id": "WSd8vZABejdLbMSg",
+          "name": "Spotify account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "pause"
+      },
+      "type": "n8n-nodes-base.spotify",
+      "typeVersion": 1,
+      "position": [
+        420,
+        460
+      ],
+      "id": "50cd4d31-a4d9-48b1-852a-c5fa6dcbc225",
+      "name": "Pause",
+      "credentials": {
+        "spotifyOAuth2Api": {
+          "id": "WSd8vZABejdLbMSg",
+          "name": "Spotify account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "resume"
+      },
+      "type": "n8n-nodes-base.spotify",
+      "typeVersion": 1,
+      "position": [
+        620,
+        460
+      ],
+      "id": "19b82e98-43b7-4a46-8c57-b4a06f69c92e",
+      "name": "Resume",
+      "credentials": {
+        "spotifyOAuth2Api": {
+          "id": "WSd8vZABejdLbMSg",
+          "name": "Spotify account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "startMusic",
+        "id": "spotify:playlist:7Fw02WTK4grlX3UFtIPa2g"
+      },
+      "type": "n8n-nodes-base.spotify",
+      "typeVersion": 1,
+      "position": [
+        1400,
+        0
+      ],
+      "id": "2ec18bac-7be4-4c31-aaa2-28e7edbd37d2",
+      "name": "Play My Jams 2024",
+      "credentials": {
+        "spotifyOAuth2Api": {
+          "id": "WSd8vZABejdLbMSg",
+          "name": "Spotify account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "volume",
+        "volumePercent": 100
+      },
+      "type": "n8n-nodes-base.spotify",
+      "typeVersion": 1,
+      "position": [
+        1420,
+        460
+      ],
+      "id": "ffe91a04-4db7-4060-a437-ed30c56d54cb",
+      "name": "Max Volume",
+      "credentials": {
+        "spotifyOAuth2Api": {
+          "id": "WSd8vZABejdLbMSg",
+          "name": "Spotify account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "volume"
+      },
+      "type": "n8n-nodes-base.spotify",
+      "typeVersion": 1,
+      "position": [
+        1220,
+        460
+      ],
+      "id": "b8364a0a-6ba5-409a-99b4-d3699b1d27a5",
+      "name": "Mid Volume",
+      "credentials": {
+        "spotifyOAuth2Api": {
+          "id": "WSd8vZABejdLbMSg",
+          "name": "Spotify account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "volume",
+        "volumePercent": 25
+      },
+      "type": "n8n-nodes-base.spotify",
+      "typeVersion": 1,
+      "position": [
+        1020,
+        460
+      ],
+      "id": "3f851dea-af4b-4e70-8b28-35167eed385b",
+      "name": "Low Volume",
+      "credentials": {
+        "spotifyOAuth2Api": {
+          "id": "WSd8vZABejdLbMSg",
+          "name": "Spotify account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c84f3f7b-821e-44d6-a676-a91ed79c53a8",
+              "name": "timestamp",
+              "value": "={{ $json.timestamp }}",
+              "type": "number"
+            },
+            {
+              "id": "c8d28c0d-9f8d-48ba-97ae-b6816988a5c3",
+              "name": "=artists",
+              "value": "={{ $json.item.artists.map(artist => artist.name).join(', ').trim() }}",
+              "type": "string"
+            },
+            {
+              "id": "917d6d19-43f9-4cd0-8be9-6704941e5cd5",
+              "name": "song",
+              "value": "={{ $json.item.name }}",
+              "type": "string"
+            },
+            {
+              "id": "96ebd425-ae9e-49b2-92fc-6233ae8ac74a",
+              "name": "type",
+              "value": "={{ $json.currently_playing_type }}",
+              "type": "string"
+            },
+            {
+              "id": "3fa5cf07-4d71-4987-a260-d7a8a5dce3e1",
+              "name": "length",
+              "value": "={{ Math.floor($json.item.duration_ms / 60000) }}:{{ (Math.floor(($json.item.duration_ms % 60000) / 1000)).toString().padStart(2, '0') }}",
+              "type": "string"
+            },
+            {
+              "id": "f336a9a7-21d5-4081-a82a-1b15fde9b687",
+              "name": "release_date",
+              "value": "={{ $json.item.album.release_date }}",
+              "type": "string"
+            },
+            {
+              "id": "7d7374a5-1ee0-4463-a998-4752ae117b82",
+              "name": "album_name",
+              "value": "={{ $json.item.album.name }}",
+              "type": "string"
+            },
+            {
+              "id": "a87e2a73-4425-49c3-9dbb-ae960049c00d",
+              "name": "album_type",
+              "value": "={{ $json.item.album.album_type }}",
+              "type": "string"
+            },
+            {
+              "id": "8519f94b-3dd4-4bf7-a124-cc0daeb540c5",
+              "name": "track_number",
+              "value": "={{ $json.item.track_number }}",
+              "type": "number"
+            },
+            {
+              "id": "e4a2f3e8-1249-420b-99f8-94a04e7e78b2",
+              "name": "disc_number",
+              "value": "={{ $json.item.disc_number }}",
+              "type": "number"
+            },
+            {
+              "id": "3ef42b66-11ad-4207-921a-f8bb9dd553e2",
+              "name": "progress_ms",
+              "value": "={{ Math.floor($json.progress_ms / 60000) }}:{{ (Math.floor(($json.progress_ms % 60000) / 1000)).toString().padStart(2, '0') }}",
+              "type": "string"
+            },
+            {
+              "id": "68fb7cf8-2031-4961-9f24-10a24e98b4d8",
+              "name": "is_playing",
+              "value": "={{ $json.is_playing }}",
+              "type": "boolean"
+            }
+          ]
+        },
+        "options": {
+          "dotNotation": false
+        }
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        660,
+        200
+      ],
+      "id": "23cb7d0e-fdcc-4db7-8b86-bb2937b9d3de",
+      "name": "data"
+    },
+    {
+      "parameters": {
+        "content": "## Controls",
+        "height": 240,
+        "width": 1460
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        160,
+        400
+      ],
+      "typeVersion": 1,
+      "id": "8e650f21-6cf8-4e2c-9a73-9c7d0ccd9629",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-01-31T07:14:58.000Z",
+  "versionId": "e0fa73a4-36f5-4c30-81cb-70f95e90d555"
+}
