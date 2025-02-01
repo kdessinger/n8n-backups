@@ -88,6 +88,17 @@
     },
     "New Employees Found": {
       "main": [
+        [
+          {
+            "node": "Add Employee to AD",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add Employee to AD": {
+      "main": [
         []
       ]
     }
@@ -117,7 +128,7 @@
       "credentials": {
         "ldap": {
           "id": "kMvso3rxAwRE3ZaH",
-          "name": "LDAP (edvistas.local)"
+          "name": "LDAP (nextcloud)"
         }
       }
     },
@@ -143,7 +154,8 @@
             "id",
             "name",
             "job_title",
-            "work_email"
+            "work_email",
+            "department_id"
           ]
         }
       },
@@ -202,7 +214,7 @@
       "typeVersion": 2.3,
       "position": [
         1840,
-        500
+        480
       ]
     },
     {
@@ -305,9 +317,21 @@
               "type": "string"
             },
             {
+              "id": "f17459d4-312a-492a-96b4-a3aeece918e0",
+              "name": "department",
+              "value": "={{ $json.department_id[1] }}",
+              "type": "string"
+            },
+            {
               "id": "bf66df56-038d-4f08-908e-051e2dd5f7f6",
               "name": "work_email",
               "value": "={{ $json.work_email }}",
+              "type": "string"
+            },
+            {
+              "id": "8a14148b-1641-4fc9-b790-e7369fa02b49",
+              "name": "cname",
+              "value": "={{ $json.name.split(' ')[0][0].toLowerCase() + $json.name.split(' ')[1].toLowerCase().trim() }}",
               "type": "string"
             }
           ]
@@ -320,25 +344,78 @@
       "typeVersion": 3.4,
       "position": [
         2080,
-        660
+        640
       ]
     },
     {
       "parameters": {
-        "operation": "create"
+        "operation": "create",
+        "dn": "=CN={{ $json.name }},CN=Users,DC=edvistas,DC=local",
+        "attributes": {
+          "attribute": [
+            {
+              "id": "description",
+              "value": "={{ $json.job_title }}"
+            },
+            {
+              "id": "homeDirectory",
+              "value": "=\\\\nas\\{{ $json.cname }}{{ $json.work_email }}"
+            },
+            {
+              "id": "mail",
+              "value": "={{ $json.work_email }}"
+            },
+            {
+              "id": "sAMAccountName",
+              "value": "={{ $json.cname }}"
+            },
+            {
+              "id": "title",
+              "value": "={{ $json.job_title }}"
+            },
+            {
+              "id": "userPrincipalName",
+              "value": "={{ $json.cname }}@EDVISTAS.LOCAL"
+            },
+            {
+              "id": "objectClass",
+              "value": "person"
+            },
+            {
+              "id": "objectClass",
+              "value": "user"
+            },
+            {
+              "id": "objectClass",
+              "value": "organizationalPerson"
+            },
+            {
+              "id": "objectClass",
+              "value": "posixAccount"
+            },
+            {
+              "id": "objectClass",
+              "value": "systemQuotas"
+            },
+            {
+              "id": "objectClass",
+              "value": "top"
+            }
+          ]
+        }
       },
       "id": "7c9973e3-9d29-488c-854a-ddc84d0bce3f",
-      "name": "LDAP1",
+      "name": "Add Employee to AD",
       "type": "n8n-nodes-base.ldap",
       "typeVersion": 1,
       "position": [
-        2320,
-        660
+        2280,
+        640
       ],
       "credentials": {
         "ldap": {
-          "id": "kMvso3rxAwRE3ZaH",
-          "name": "LDAP (edvistas.local)"
+          "id": "hFht3wq8gU3dyxS9",
+          "name": "LDAP (Domain Admin)"
         }
       }
     }
@@ -350,6 +427,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-12-02T17:46:45.000Z",
-  "versionId": "48473cad-f777-429f-ba8f-259f877c94fe"
+  "updatedAt": "2025-01-31T21:05:40.000Z",
+  "versionId": "5079615c-efdd-481d-a122-5ceb1f941539"
 }
