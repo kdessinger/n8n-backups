@@ -482,6 +482,18 @@
               "name": "is_playing",
               "value": "={{ $json.is_playing }}",
               "type": "boolean"
+            },
+            {
+              "id": "c0e5b04f-af6c-4f97-a551-4ecfe43197e9",
+              "name": "song_url",
+              "value": "={{ $json.item.external_urls.spotify }}",
+              "type": "string"
+            },
+            {
+              "id": "a5c7b571-5977-4e78-a18b-ec1bb70e0b68",
+              "name": "context.uri",
+              "value": "={{ $json.context.uri }}",
+              "type": "string"
             }
           ]
         },
@@ -521,6 +533,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-01-31T07:14:58.000Z",
-  "versionId": "e0fa73a4-36f5-4c30-81cb-70f95e90d555"
+  "updatedAt": "2025-01-31T19:47:36.000Z",
+  "versionId": "ccc975f3-13ee-472d-a5d7-93da8cef3f56"
 }
