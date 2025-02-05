@@ -44,7 +44,7 @@
   "nodes": [
     {
       "parameters": {
-        "path": "=/Public/Shared Pictures/uploaded/Cyber Animals/cyber_{{ $('Random Animals').item.json.name }}_{{ $now.format('yyMMdd-HHmm') }}.{{ $json.fileExtension }}",
+        "path": "=/Public/Shared Pictures/uploaded/Cyber Animals/cyber_{{ $('Random Animals').item.json.name.replace(/\\s+/g, '_') }}_{{ $now.format('yyMMdd-HHmm') }}.{{ $json.fileExtension }}",
         "binaryDataUpload": true
       },
       "id": "e70bb8f3-206a-4a07-8cd4-72eec0faab27",
@@ -133,6 +133,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-02-05T05:03:01.000Z",
-  "versionId": "a884be85-9575-4670-99eb-f5244cb6b12c"
+  "updatedAt": "2025-02-05T05:24:14.000Z",
+  "versionId": "8e1906b4-4646-4654-8c69-2b5c986b9759"
 }
