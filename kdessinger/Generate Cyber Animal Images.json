@@ -16,14 +16,14 @@
       "main": [
         [
           {
-            "node": "Random Animal",
+            "node": "Random Animals",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Random Animal": {
+    "Random Animals": {
       "main": [
         [
           {
@@ -44,7 +44,7 @@
   "nodes": [
     {
       "parameters": {
-        "path": "=/Public/Shared Pictures/uploaded/Cyber Animals/cyber_{{ $('Random Animal').item.json.message.content }}_{{ $now.format('yyMMdd-HHmm') }}.{{ $json.fileExtension }}",
+        "path": "=/Public/Shared Pictures/uploaded/Cyber Animals/cyber_{{ $('Random Animals').item.json.name }}_{{ $now.format('yyMMdd-HHmm') }}.{{ $json.fileExtension }}",
         "binaryDataUpload": true
       },
       "id": "e70bb8f3-206a-4a07-8cd4-72eec0faab27",
@@ -65,7 +65,7 @@
     {
       "parameters": {
         "resource": "image",
-        "prompt": "=Create a highly detailed digital art piece featuring a {{ $json.message.content }} character in a cyberpunk style. The {{ $json.message.content }} should have neon lighting, wearing futuristic headphones and reflective sunglasses. The {{ $json.message.content }} should have vibrant fur or skin with glowing elements, and the background should be filled with abstract neon cityscapes or digital circuit patterns. The style should be inspired by a mix of neon glow, vivid colors, and intricate cybernetic details. Ensure the {{ $json.message.content }}’s expression is confident and cool, and the composition highlights the reflective details in the sunglasses and headphones. Use colors like electric blue, hot pink, and vibrant purple to create a striking, high-contrast visual impact.\n\n",
+        "prompt": "=Create a highly detailed digital art piece featuring a {{ $json.name }} character in a cyberpunk style. The {{ $json.name }} should have neon lighting, wearing futuristic headphones and reflective sunglasses. The {{ $json.name }} should have vibrant fur or skin with glowing elements, and the background should be filled with abstract neon cityscapes or digital circuit patterns. The style should be inspired by a mix of neon glow, vivid colors, and intricate cybernetic details. Ensure the {{ $json.name }}’s expression is confident and cool, and the composition highlights the reflective details in the sunglasses and headphones. Use colors like electric blue, hot pink, and vibrant purple to create a striking, high-contrast visual impact.\n\n",
         "options": {}
       },
       "id": "70274d52-b3be-4e9b-ad7f-5f13e07469cc",
@@ -90,40 +90,27 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1,
       "position": [
-        20,
+        180,
         300
       ]
     },
     {
       "parameters": {
-        "modelId": {
-          "__rl": true,
-          "value": "gpt-4o-mini",
-          "mode": "list",
-          "cachedResultName": "GPT-4O-MINI"
-        },
-        "messages": {
-          "values": [
-            {
-              "content": "Your job is to generate a random animal. The output should only be the animal name and nothing else. Include animals from diverse categories like mammals, birds, reptiles, insects, aquatic creatures, and even mythical animals. Prioritize lesser-known species to ensure a broader range of outputs.\n",
-              "role": "system"
-            }
-          ]
-        },
-        "options": {}
+        "operation": "executeQuery",
+        "query": "SELECT TOP 1 * \nFROM Animals\nORDER BY NEWID();"
       },
-      "id": "5950aef4-c0e0-4d07-b5c4-6d1bf986d6a0",
-      "name": "Random Animal",
-      "type": "@n8n/n8n-nodes-langchain.openAi",
-      "typeVersion": 1.5,
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1.1,
       "position": [
-        240,
+        400,
         300
       ],
+      "id": "1767961d-8670-4fd1-9a04-9b798a4756f5",
+      "name": "Random Animals",
       "credentials": {
-        "openAiApi": {
-          "id": "e72QgqQnlpG6j1mz",
-          "name": "OpenAi (Home Lab)"
+        "microsoftSql": {
+          "id": "Y58NQy4MZL8TzNIH",
+          "name": "home.kdessinger.local"
         }
       }
     }
@@ -146,6 +133,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-01-23T04:39:03.000Z",
-  "versionId": "1e8132c0-69c6-4abe-9c44-7f5a134284d6"
+  "updatedAt": "2025-02-05T05:03:01.000Z",
+  "versionId": "a884be85-9575-4670-99eb-f5244cb6b12c"
 }
