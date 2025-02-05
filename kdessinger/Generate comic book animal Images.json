@@ -5,18 +5,7 @@
       "main": [
         [
           {
-            "node": "Random Animal",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Random Animal": {
-      "main": [
-        [
-          {
-            "node": "Set Message",
+            "node": "Random Animals",
             "type": "main",
             "index": 0
           }
@@ -44,6 +33,17 @@
           }
         ]
       ]
+    },
+    "Random Animals": {
+      "main": [
+        [
+          {
+            "node": "Set Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2024-11-22T05:18:27.050Z",
@@ -55,7 +55,7 @@
   "nodes": [
     {
       "parameters": {
-        "path": "=/Public/Shared Pictures/uploaded/Comic Book Characters/comic_{{ $('Random Animal').item.json.message.content }}_{{ $now.format('yyMMdd-HHmm') }}.{{ $json.fileExtension }}",
+        "path": "=/Public/Shared Pictures/uploaded/Comic Book Characters/comic_{{ $('Set Message').item.json.name.replace(/\\s+/g, '_') }}_{{ $now.format('yyMMdd-HHmm') }}.{{ $json.fileExtension }}",
         "binaryDataUpload": true
       },
       "id": "44a9ebad-9789-4655-b6cf-0939ab49d0ea",
@@ -86,39 +86,6 @@
     },
     {
       "parameters": {
-        "modelId": {
-          "__rl": true,
-          "value": "gpt-4o-mini",
-          "mode": "list",
-          "cachedResultName": "GPT-4O-MINI"
-        },
-        "messages": {
-          "values": [
-            {
-              "content": "Your job is to generate a random animal. The output should only be the animal name and nothing else. Include animals from diverse categories like mammals, birds, reptiles, insects, aquatic creatures, and even mythical animals. Prioritize lesser-known species to ensure a broader range of outputs.\n",
-              "role": "system"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "3564e2b7-308e-4d98-9bce-bccd91967bc1",
-      "name": "Random Animal",
-      "type": "@n8n/n8n-nodes-langchain.openAi",
-      "typeVersion": 1.5,
-      "position": [
-        240,
-        300
-      ],
-      "credentials": {
-        "openAiApi": {
-          "id": "e72QgqQnlpG6j1mz",
-          "name": "OpenAi (Home Lab)"
-        }
-      }
-    },
-    {
-      "parameters": {
         "assignments": {
           "assignments": [
             {
@@ -137,14 +104,14 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        580,
+        520,
         300
       ]
     },
     {
       "parameters": {
         "resource": "image",
-        "prompt": "=A vibrant and colorful pop-art illustration of a {{ $json.message.content }} wearing large headphones, sitting in front of a vintage-style microphone. The background features bold comic book-style patterns with radial lines, dots, and bright, dynamic colors such as red, blue, yellow, and orange. A speech bubble in the upper-left corner contains the text \"[{{ $json.message.expression }}]\" in bold, playful, comic-style font. The style is highly detailed with clean black outlines and a slightly retro comic book aesthetic. Ensure the {{ $json.message.content }} has an expressive, cheerful face, and the overall composition is lively and engaging.\n",
+        "prompt": "=A vibrant and colorful pop-art illustration of a {{ $json.name }} wearing large headphones, sitting in front of a vintage-style microphone. The background features bold comic book-style patterns with radial lines, dots, and bright, dynamic colors such as red, blue, yellow, and orange. A speech bubble in the upper-left corner contains the text \"[{{ $json.message.expression }}]\" in bold, playful, comic-style font. The style is highly detailed with clean black outlines and a slightly retro comic book aesthetic. Ensure the {{ $json.name }} has an expressive, cheerful face, and the overall composition is lively and engaging.\n",
         "options": {}
       },
       "id": "d27b479a-a173-49c5-be33-f04b5431e32f",
@@ -152,13 +119,33 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.5,
       "position": [
-        780,
+        740,
         300
       ],
       "credentials": {
         "openAiApi": {
           "id": "e72QgqQnlpG6j1mz",
           "name": "OpenAi (Home Lab)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT TOP 1 * \nFROM Animals\nORDER BY NEWID();"
+      },
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1.1,
+      "position": [
+        280,
+        300
+      ],
+      "id": "de36171e-e6e6-4faa-a476-18050d3ee615",
+      "name": "Random Animals",
+      "credentials": {
+        "microsoftSql": {
+          "id": "Y58NQy4MZL8TzNIH",
+          "name": "home.kdessinger.local"
         }
       }
     }
@@ -181,6 +168,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-01-23T04:37:41.000Z",
-  "versionId": "5a37e5b0-4441-40f7-9b17-f268c9bc855c"
+  "updatedAt": "2025-02-05T05:36:25.000Z",
+  "versionId": "c2377f13-e82c-40ea-b44b-24d155382059"
 }
