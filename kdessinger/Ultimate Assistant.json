@@ -532,6 +532,21 @@
           "name": "OpenAi (Home Lab)"
         }
       }
+    },
+    {
+      "parameters": {
+        "content": "## Ultimate Assistant\n**Taken from:** [YouTube](https://www.youtube.com/watch?v=9FuNtfsnRNo)",
+        "height": 120,
+        "width": 260
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        600,
+        -100
+      ],
+      "typeVersion": 1,
+      "id": "a0f45039-b709-4372-8fa5-39c4335d06e7",
+      "name": "Sticky Note"
     }
   ],
   "pinData": {},
@@ -554,6 +569,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-02-05T05:12:28.000Z",
-  "versionId": "18b205a3-cf07-499d-aab8-d952e51ab85d"
+  "updatedAt": "2025-02-05T05:40:53.000Z",
+  "versionId": "1446b832-cf63-46d5-aefa-5f45d26009ab"
 }
