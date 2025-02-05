@@ -3,9 +3,27 @@
   "connections": {},
   "createdAt": "2024-11-22T07:15:52.367Z",
   "id": "RJNX3uwnuiZV00d5",
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "Image Style Duplicator",
-  "nodes": [],
+  "nodes": [
+    {
+      "parameters": {
+        "content": "The goal is to input a few sample image styles and the agent will create a prompt that will replicate the image style.",
+        "height": 120,
+        "width": 420
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -180,
+        -200
+      ],
+      "typeVersion": 1,
+      "id": "0203848d-c75b-46b0-84ef-2c86b05035ab",
+      "name": "Sticky Note"
+    }
+  ],
   "pinData": {},
   "settings": {
     "executionOrder": "v1"
@@ -13,6 +31,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-11-22T07:15:52.367Z",
-  "versionId": "97b073ae-aa35-4cec-b603-41387903c446"
+  "updatedAt": "2025-02-05T05:42:21.000Z",
+  "versionId": "a2e8d894-28d3-4561-84de-5420cfa474b1"
 }
