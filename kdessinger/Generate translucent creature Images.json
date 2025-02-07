@@ -175,19 +175,17 @@
     {
       "parameters": {
         "resource": "image",
-        "prompt": "=Create a highly detailed, hyper-realistic artistic rendering of a {{ $json.message.content }} in a symmetrical pose. The {{ $json.message.content }}'s body should be translucent, showcasing intricate internal structures illuminated by a soft bioluminescent glow that matches the natural coloration of the {{ $json.message.content }} (e.g., green for a praying mantis, red for a ladybug, yellow for a tardigrade). The wings (if applicable) should feature delicate, transparent veining and a natural, luminous effect in the same hue. Use subtle gradients and tones that reflect the {{ $json.message.content }}'s primary color while enhancing the elegance and biological authenticity of the design. The background should be a clean, dark gradient (black to gray), ensuring the glowing features of the {{ $json.message.content }} stand out prominently. Avoid using any text, labels, or additional colors, maintaining a clean and scientifically artistic aesthetic.\n",
-        "options": {
-          "style": "vivid"
-        }
+        "prompt": "=Create a highly detailed, hyper-realistic artistic rendering of a {{ $json.message.content }} in a symmetrical pose. The {{ $json.message.content }}'s body should be translucent, showcasing intricate internal structures illuminated by a soft bioluminescent glow that matches the natural coloration of the {{ $json.message.content }} (e.g., green for a praying mantis, red for a ladybug, yellow for a tardigrade). The wings (if applicable) should feature delicate, transparent veining and a natural, luminous effect in the same hue. Use subtle gradients and tones that reflect the {{ $json.message.content }}'s primary color while enhancing the elegance and biological authenticity of the design. The background should be a clean, dark gradient (black to gray), ensuring the glowing features of the {{ $json.message.content }} stand out prominently. Avoid using any text, labels, or additional colors, maintaining a clean and scientifically artistic aesthetic.",
+        "options": {}
       },
-      "id": "3efba9c1-d9f1-4d9e-8249-5bff72d7add7",
-      "name": "translucent creature",
       "type": "@n8n/n8n-nodes-langchain.openAi",
-      "typeVersion": 1.5,
+      "typeVersion": 1.8,
       "position": [
-        620,
+        640,
         300
       ],
+      "id": "f34dc579-b978-4e48-96a4-0f5dfe2f892d",
+      "name": "translucent creature",
       "credentials": {
         "openAiApi": {
           "id": "e72QgqQnlpG6j1mz",
@@ -224,6 +222,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-01-23T04:09:11.000Z",
-  "versionId": "a24dab79-8446-45d3-8136-5c0084ec9d30"
+  "updatedAt": "2025-02-07T07:19:13.000Z",
+  "versionId": "2fbe3dc5-8113-43ac-b488-d59db91a05c2"
 }
