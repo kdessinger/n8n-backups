@@ -23,22 +23,22 @@
         ]
       ]
     },
-    "Comic Book Image Generator": {
+    "Random Animals": {
       "main": [
         [
           {
-            "node": "Save file to disk",
+            "node": "Set Message",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Random Animals": {
+    "Comic Book Image Generator": {
       "main": [
         [
           {
-            "node": "Set Message",
+            "node": "Save file to disk",
             "type": "main",
             "index": 0
           }
@@ -110,27 +110,6 @@
     },
     {
       "parameters": {
-        "resource": "image",
-        "prompt": "=A vibrant and colorful pop-art illustration of a {{ $json.name }} wearing large headphones, sitting in front of a vintage-style microphone. The background features bold comic book-style patterns with radial lines, dots, and bright, dynamic colors such as red, blue, yellow, and orange. A speech bubble in the upper-left corner contains the text \"[{{ $json.message.expression }}]\" in bold, playful, comic-style font. The style is highly detailed with clean black outlines and a slightly retro comic book aesthetic. Ensure the {{ $json.name }} has an expressive, cheerful face, and the overall composition is lively and engaging.\n",
-        "options": {}
-      },
-      "id": "d27b479a-a173-49c5-be33-f04b5431e32f",
-      "name": "Comic Book Image Generator",
-      "type": "@n8n/n8n-nodes-langchain.openAi",
-      "typeVersion": 1.5,
-      "position": [
-        740,
-        300
-      ],
-      "credentials": {
-        "openAiApi": {
-          "id": "e72QgqQnlpG6j1mz",
-          "name": "OpenAi (Home Lab)"
-        }
-      }
-    },
-    {
-      "parameters": {
         "operation": "executeQuery",
         "query": "SELECT TOP 1 * \nFROM Animals\nORDER BY NEWID();"
       },
@@ -146,6 +125,27 @@
         "microsoftSql": {
           "id": "Y58NQy4MZL8TzNIH",
           "name": "home.kdessinger.local"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "prompt": "=A vibrant and colorful pop-art illustration of a {{ $json.name }} wearing large headphones, sitting in front of a vintage-style microphone. The background features bold comic book-style patterns with radial lines, dots, and bright, dynamic colors such as red, blue, yellow, and orange. A speech bubble in the upper-left corner contains the text \"[{{ $json.message.expression }}]\" in bold, playful, comic-style font. The style is highly detailed with clean black outlines and a slightly retro comic book aesthetic. Ensure the {{ $json.name }} has an expressive, cheerful face, and the overall composition is lively and engaging.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        740,
+        300
+      ],
+      "id": "59bc02f3-b4cf-4213-88d6-ef251ed967e3",
+      "name": "Comic Book Image Generator",
+      "credentials": {
+        "openAiApi": {
+          "id": "e72QgqQnlpG6j1mz",
+          "name": "OpenAi (Home Lab)"
         }
       }
     }
@@ -168,6 +168,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-02-05T05:36:25.000Z",
-  "versionId": "c2377f13-e82c-40ea-b44b-24d155382059"
+  "updatedAt": "2025-02-07T07:14:19.000Z",
+  "versionId": "d926781b-f6cc-4755-85ab-345ed92b6a62"
 }
