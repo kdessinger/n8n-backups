@@ -92,14 +92,14 @@
         "prompt": "=Create a single, centered neon-lit {{ $json.character }} in a glowing, futuristic style. The character should be the sole subject in the image, with no additional figures, side panels, color palettes, or design elements. Only the character should be visible, with no added color bars, grids, or secondary figures. The neon colors should include vibrant hues like electric blue, neon green, bright pink, and orange to highlight the character’s design, featuring glowing eyes, sharp outlines, and glowing accents. The background should be simple and dark to contrast the neon lighting. Ensure the image is clean and minimal, with no other decorative or graphical elements apart from the character.",
         "options": {}
       },
-      "id": "25c2c30a-5128-4a3a-9ea8-b2085e8d1ceb",
-      "name": "Neon Halloween Character",
       "type": "@n8n/n8n-nodes-langchain.openAi",
-      "typeVersion": 1.5,
+      "typeVersion": 1.8,
       "position": [
         380,
         300
       ],
+      "id": "ff9dd8ae-8bb3-4f8d-a4f3-2017865614f2",
+      "name": "Neon Halloween Character",
       "credentials": {
         "openAiApi": {
           "id": "e72QgqQnlpG6j1mz",
@@ -122,6 +122,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-01-23T04:26:14.000Z",
-  "versionId": "55c3ecfd-884f-44f3-9661-220a78b206a0"
+  "updatedAt": "2025-02-07T07:15:56.000Z",
+  "versionId": "f81690a7-710c-40d1-bbca-06683a6c8b03"
 }
