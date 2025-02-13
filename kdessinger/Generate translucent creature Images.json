@@ -143,9 +143,9 @@
       "parameters": {
         "modelId": {
           "__rl": true,
-          "value": "gpt-4-turbo",
+          "value": "gpt-4o-mini",
           "mode": "list",
-          "cachedResultName": "GPT-4-TURBO"
+          "cachedResultName": "GPT-4O-MINI"
         },
         "messages": {
           "values": [
@@ -222,6 +222,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-02-07T07:19:13.000Z",
-  "versionId": "2fbe3dc5-8113-43ac-b488-d59db91a05c2"
+  "updatedAt": "2025-02-12T20:59:08.000Z",
+  "versionId": "d5e9c478-b9b4-49c7-afa6-37c45d9fca4f"
 }
