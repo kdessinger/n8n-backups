@@ -208,17 +208,6 @@
         []
       ]
     },
-    "HTML": {
-      "main": [
-        [
-          {
-            "node": "Send Email",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Verify Datamate Received": {
       "main": [
         []
@@ -255,12 +244,18 @@
       "main": [
         [
           {
-            "node": "HTML",
+            "node": "HTML1",
             "type": "main",
             "index": 0
-          },
+          }
+        ]
+      ]
+    },
+    "HTML1": {
+      "main": [
+        [
           {
-            "node": "HTML1",
+            "node": "Send Email",
             "type": "main",
             "index": 0
           }
@@ -948,8 +943,8 @@
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
       "position": [
-        900,
-        220
+        940,
+        160
       ],
       "id": "e2319e00-aaae-46e1-b3e9-9ba72fd7993f",
       "name": "Send Email",
@@ -960,19 +955,6 @@
           "name": "SMTP (mx.gowls.com)"
         }
       }
-    },
-    {
-      "parameters": {
-        "html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Email Template</title>\n    <style>\n        body {\n            font-family: Verdana, Arial, sans-serif;\n            color: #454748;\n            background-color: #F1F1F1;\n            margin: 0;\n            padding: 0;\n        }\n        .email-container {\n            width: 100%;\n            padding-top: 16px;\n        }\n        .email-content {\n            width: 590px;\n            margin: 0 auto;\n            background-color: white;\n            padding: 16px;\n            box-sizing: border-box;\n        }\n        .email-header img {\n            width: 590px;\n            height: 120px;\n            display: block;\n            margin-bottom: 16px;\n            border: 0;\n        }\n        .divider {\n            border-top: 1px solid #cccccc;\n            margin: 16px 0;\n        }\n        h3 {\n            color: #212529;\n            font-size: 16.9px;\n            margin-bottom: 6px;\n            font-weight: bold;\n        }\n        p, ul {\n            margin: 0 0 12px;\n            font-size: 14px;\n        }\n        ul {\n            list-style-type: disc;\n            padding-left: 20px;\n        }\n        .footer {\n            text-align: center;\n            font-size: 14px;\n            background-color: #F1F1F1;\n            padding: 8px;\n        }\n        .footer a {\n            color: #008f8c;\n            text-decoration: none;\n        }\n    </style>\n</head>\n<body>\n    <div class=\"email-container\">\n        <div class=\"email-content\">\n            <!-- Header -->\n            <div class=\"email-header\">\n                <img src=\"https://www.edvistas.com/wp-content/uploads/2024/11/Parent-Pathways-Email-Header.jpg\" alt=\"Parent Pathways Email Header\">\n            </div>\n\n            <!-- Order Confirmation -->\n            <div>\n                <p style=\"font-size: 10px;\">Order Confirmation</p>\n                <p style=\"font-size: 20px; font-weight: bold;\">IS12345</p>\n                <div class=\"divider\"></div>\n            </div>\n\n            <!-- Order Details -->\n            <div>\n                <p>Hello Customer Name,</p>\n                <p>Thank you for purchasing the Parent Pathways Package! This exclusive offer is designed to support your child’s academic journey with tailored resources and tools to help them succeed.</p>\n\n                <h3>What to Expect:</h3>\n                <p>The Parent Pathways program, Powered by DataMate™, includes comprehensive assessments in both literacy & math that are aligned with New York state standards. These tools are tailored to help students practice key academic skills with confidence.</p>\n\n                <h3>Key Program Benefits:</h3>\n                <ul>\n                    <li><strong>Personalized Learning Insights</strong>: Track your child's reading comprehension and math progress through the DRP™ (Degrees of Reading Power) and DMP™ (Degrees of Math Power) assessments.</li>\n                    <li><strong>Instant Feedback</strong>: After each test, receive immediate results that provide insight into your child's strengths and improvement areas.</li>\n                    <li><strong>Familiar Tools</strong>: Resources that simulate real-world academic environments such as highlighters, rulers, and calculators are all provided in the software.</li>\n                    <li><strong>Accessibility Options</strong>: Includes text-to-speech functionality for students who benefit from auditory support.</li>\n                </ul>\n\n                <p>With Parent Pathways, you'll have a clearer view of your child's progress and areas where they may need additional support or advanced challenges.</p>\n                <p>For any questions or assistance, please reach out to us at <strong><a href=\"mailto:parentpathways@edvistas.com\">parentpathways@edvistas.com</a></strong> or call our help desk at <strong>518-691-3400</strong>.</p>\n\n                <p>Thank you for choosing Parent Pathways!</p>\n                <p>Warm regards,<br>The Parent Pathways Team</p>\n            </div>\n        </div>\n\n        <!-- Footer -->\n        <div class=\"footer\">\n            Sent by <a href=\"http://www.edvistas.com\" target=\"_blank\">Educational Vistas</a>\n        </div>\n    </div>\n</body>\n</html>\n"
-      },
-      "type": "n8n-nodes-base.html",
-      "typeVersion": 1.2,
-      "position": [
-        700,
-        220
-      ],
-      "id": "e243b343-7c84-4b8d-8b7f-c0d117979eb9",
-      "name": "HTML"
     },
     {
       "parameters": {
@@ -1160,7 +1142,7 @@
       "typeVersion": 1,
       "position": [
         500,
-        220
+        160
       ],
       "id": "6c02bb03-e9c0-4e5e-b265-422fb29ec73f",
       "name": "Get Email Template",
@@ -1194,8 +1176,8 @@
       "type": "n8n-nodes-base.html",
       "typeVersion": 1.2,
       "position": [
-        700,
-        60
+        720,
+        160
       ],
       "id": "6b1825ce-9a74-4c67-8ca7-1688f350d38f",
       "name": "HTML1"
@@ -1224,6 +1206,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-02-12T20:37:19.000Z",
-  "versionId": "8f0008e3-8755-4855-8af1-6696fd38142d"
+  "updatedAt": "2025-02-18T22:31:36.000Z",
+  "versionId": "6d71fb1e-649b-41c9-8274-c6bc16cd8b6e"
 }
