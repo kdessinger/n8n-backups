@@ -491,11 +491,12 @@
                 "conditions": [
                   {
                     "leftValue": "={{ $json.Title }}",
-                    "rightValue": "New Lead",
+                    "rightValue": "Sales",
                     "operator": {
                       "type": "string",
-                      "operation": "equals"
-                    }
+                      "operation": "contains"
+                    },
+                    "id": "ae20dd40-1228-4f24-99d7-a3025a44ddf6"
                   }
                 ],
                 "combinator": "and"
@@ -603,6 +604,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-01-15T18:11:06.000Z",
-  "versionId": "6fd2e50e-735c-4115-b6bd-d44bcb91abef"
+  "updatedAt": "2025-03-03T23:44:49.000Z",
+  "versionId": "96ff2607-02f4-4914-9934-c7429686e6ae"
 }
