@@ -32,7 +32,7 @@
             "index": 0
           },
           {
-            "node": "Sales",
+            "node": "Merge",
             "type": "main",
             "index": 1
           }
@@ -48,7 +48,7 @@
             "index": 0
           },
           {
-            "node": "Sales",
+            "node": "Merge",
             "type": "main",
             "index": 2
           }
@@ -64,7 +64,7 @@
             "index": 0
           },
           {
-            "node": "Sales",
+            "node": "Merge",
             "type": "main",
             "index": 0
           }
@@ -75,7 +75,7 @@
       "main": [
         [
           {
-            "node": "Sales",
+            "node": "Merge",
             "type": "main",
             "index": 5
           },
@@ -109,17 +109,6 @@
         ]
       ]
     },
-    "Sales": {
-      "main": [
-        [
-          {
-            "node": "Clean up fields",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Set Delivered Qty": {
       "main": [
         [
@@ -142,7 +131,7 @@
         ],
         [
           {
-            "node": "Send Alert!",
+            "node": "Set Alert Message (Error)",
             "type": "main",
             "index": 0
           }
@@ -153,18 +142,7 @@
       "main": [
         [
           {
-            "node": "Respond to Webhook",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Send Alert!": {
-      "main": [
-        [
-          {
-            "node": "Respond to Webhook",
+            "node": "Set Alert Message (Success)",
             "type": "main",
             "index": 0
           }
@@ -180,7 +158,7 @@
             "index": 0
           },
           {
-            "node": "Sales",
+            "node": "Merge",
             "type": "main",
             "index": 4
           }
@@ -196,7 +174,7 @@
             "index": 0
           },
           {
-            "node": "Sales",
+            "node": "Merge",
             "type": "main",
             "index": 3
           }
@@ -244,14 +222,36 @@
       "main": [
         [
           {
-            "node": "HTML1",
+            "node": "HTML",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "HTML1": {
+    "Set Alert Message (Error)": {
+      "main": [
+        [
+          {
+            "node": "Log Activity (Error)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Alert Message (Success)": {
+      "main": [
+        [
+          {
+            "node": "Log Activity (Success)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTML": {
       "main": [
         [
           {
@@ -260,6 +260,22 @@
             "index": 0
           }
         ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Clean up fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Activity (Success)": {
+      "main": [
+        []
       ]
     }
   },
@@ -284,7 +300,11 @@
     {
       "parameters": {
         "path": "parent-pathways/payment",
-        "options": {}
+        "responseMode": "lastNode",
+        "responseData": "noData",
+        "options": {
+          "allowedOrigins": "*"
+        }
       },
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
@@ -294,8 +314,7 @@
       ],
       "id": "07b7b289-59d7-4c2f-bcaf-b52c4bee653e",
       "name": "Webhook",
-      "webhookId": "b4410a1a-7707-43bf-abed-b9a31b3a5a2f",
-      "disabled": true
+      "webhookId": "b4410a1a-7707-43bf-abed-b9a31b3a5a2f"
     },
     {
       "parameters": {
@@ -411,7 +430,7 @@
     {
       "parameters": {
         "content": "## Process orders\n\nSet Delivered Date\nSet Delivered Qty\n",
-        "height": 760,
+        "height": 400,
         "width": 1020,
         "color": 4
       },
@@ -442,8 +461,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        2260,
-        -380
+        2240,
+        -440
       ],
       "id": "3bcb2a92-de5f-4b44-b237-e46697c3c907",
       "name": "Set Delivery Date",
@@ -461,12 +480,12 @@
         "resource": "custom",
         "customResource": "sale.order.line",
         "operation": "update",
-        "customResourceId": "={{ $('Sales').item.json.order_line[0] }}",
+        "customResourceId": "={{ $('Merge').item.json.order_line[0] }}",
         "fieldsToCreateOrUpdate": {
           "fields": [
             {
               "fieldName": "qty_delivered",
-              "fieldValue": "={{ $('Sales').item.json.qty_to_deliver }}"
+              "fieldValue": "={{ $('Merge').item.json.qty_to_deliver }}"
             }
           ]
         }
@@ -475,7 +494,7 @@
       "typeVersion": 1,
       "position": [
         2040,
-        -380
+        -440
       ],
       "id": "092448f1-977d-449f-aa3e-53a7f4cc09df",
       "name": "Set Delivered Qty",
@@ -654,8 +673,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1560,
-        -220
+        1600,
+        -240
       ],
       "id": "f859d080-41d1-412a-a0a0-09cdd9579a77",
       "name": "HTTP Request",
@@ -671,7 +690,7 @@
       "typeVersion": 3.4,
       "position": [
         1240,
-        -220
+        -240
       ],
       "id": "f4fbaf06-2b18-4ae5-9652-15ae876facdc",
       "name": "Clean up fields"
@@ -681,8 +700,7 @@
         "rule": {
           "interval": [
             {
-              "field": "minutes",
-              "minutesInterval": 15
+              "field": "seconds"
             }
           ]
         }
@@ -694,8 +712,7 @@
         -20
       ],
       "id": "2a2fea8d-9616-4de4-9580-7655dc727eb5",
-      "name": "Schedule Trigger",
-      "disabled": true
+      "name": "Schedule Trigger"
     },
     {
       "parameters": {
@@ -712,75 +729,6 @@
       "typeVersion": 1,
       "id": "10122d04-fe4e-4e34-969b-37962f57ccd8",
       "name": "Sticky Note7"
-    },
-    {
-      "parameters": {
-        "mode": "combine",
-        "combineBy": "combineByPosition",
-        "numberInputs": 6,
-        "options": {
-          "clashHandling": {
-            "values": {
-              "resolveClash": "preferInput1",
-              "mergeMode": "shallowMerge"
-            }
-          },
-          "includeUnpaired": true
-        }
-      },
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 3,
-      "position": [
-        1020,
-        -560
-      ],
-      "id": "0abf86f0-8e1f-43da-9918-5c04c717e32f",
-      "name": "Sales",
-      "alwaysOutputData": false
-    },
-    {
-      "parameters": {
-        "respondWith": "text",
-        "responseBody": "Delivery Complete",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.1,
-      "position": [
-        2660,
-        -240
-      ],
-      "id": "091cbc62-baaf-452e-b00d-fc033b8672c0",
-      "name": "Respond to Webhook"
-    },
-    {
-      "parameters": {
-        "workflowId": {
-          "__rl": true,
-          "value": "RMGsRy908UOekKo3",
-          "mode": "list",
-          "cachedResultName": "Activity Log"
-        },
-        "workflowInputs": {
-          "mappingMode": "defineBelow",
-          "value": {},
-          "matchingColumns": [],
-          "schema": [],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": true
-        },
-        "mode": "each",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.executeWorkflow",
-      "typeVersion": 1.2,
-      "position": [
-        2040,
-        -120
-      ],
-      "id": "f590574d-4681-4874-8500-2e28174e7ba8",
-      "name": "Send Alert!",
-      "disabled": true
     },
     {
       "parameters": {
@@ -944,7 +892,7 @@
       "typeVersion": 2.1,
       "position": [
         940,
-        160
+        200
       ],
       "id": "e2319e00-aaae-46e1-b3e9-9ba72fd7993f",
       "name": "Send Email",
@@ -964,8 +912,8 @@
       "type": "n8n-nodes-base.microsoftSql",
       "typeVersion": 1.1,
       "position": [
-        2000,
-        220
+        1480,
+        260
       ],
       "id": "50334cec-0a12-455c-ab9b-86b69f47c551",
       "name": "Verify Datamate Received",
@@ -973,57 +921,6 @@
         "microsoftSql": {
           "id": "8",
           "name": "DB1.DS1.GOWLS.COM (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "executeQuery",
-        "query": "select * from odooorders"
-      },
-      "type": "n8n-nodes-base.microsoftSql",
-      "typeVersion": 1.1,
-      "position": [
-        1660,
-        220
-      ],
-      "id": "48be427f-12f1-4767-b412-d629aa961be5",
-      "name": "Verify Datamate Received1",
-      "credentials": {
-        "microsoftSql": {
-          "id": "8",
-          "name": "DB1.DS1.GOWLS.COM (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "resource": "custom",
-        "customResource": "sale.order",
-        "operation": "update",
-        "customResourceId": "1625",
-        "fieldsToCreateOrUpdate": {
-          "fields": [
-            {
-              "fieldName": "payment_term_id",
-              "fieldValue": "={{ 1 }}"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.odoo",
-      "typeVersion": 1,
-      "position": [
-        1460,
-        220
-      ],
-      "id": "5daf8d98-d2f3-4fee-8a84-9194c3b02a13",
-      "name": "Get Sales Order1",
-      "alwaysOutputData": false,
-      "credentials": {
-        "odooApi": {
-          "id": "22",
-          "name": "Odoo (OdooBot)"
         }
       }
     },
@@ -1142,7 +1039,7 @@
       "typeVersion": 1,
       "position": [
         500,
-        160
+        200
       ],
       "id": "6c02bb03-e9c0-4e5e-b265-422fb29ec73f",
       "name": "Get Email Template",
@@ -1158,7 +1055,7 @@
         "content": "## Send out PTA Email\n**Double click** to edit the template in [Odoo](https://odoo.edvistas.com/web?debug=1#id=66&menu_id=4&cids=1&model=mail.template&view_type=form)",
         "height": 440,
         "width": 720,
-        "color": 3
+        "color": 5
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
@@ -1171,16 +1068,163 @@
     },
     {
       "parameters": {
+        "content": "## Encountered an error",
+        "height": 340,
+        "width": 1020,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1940,
+        -180
+      ],
+      "typeVersion": 1,
+      "id": "5371744a-4a3e-452f-a6ee-94966279b20f",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "Title",
+              "stringValue": "Error - PTA Pathways Sales Order"
+            },
+            {
+              "name": "Message",
+              "stringValue": "={{ $json[\"hostDisplayName\"] }} has started the WebEx meeting titled \"{{ $json[\"title\"] }}\"."
+            },
+            {
+              "name": "ClickURL",
+              "stringValue": "=https://n8n.edvistas.com/workflow/qJCHL92o7fLUFSEM/executions"
+            },
+            {
+              "name": "Emojis",
+              "type": "arrayValue",
+              "arrayValue": "['spider_web', 'bangbang']"
+            },
+            {
+              "name": "Priority",
+              "type": "numberValue",
+              "numberValue": "1"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "56d62928-db64-436b-b772-0c1745e40921",
+      "name": "Set Alert Message (Error)",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        2040,
+        -60
+      ]
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "Title",
+              "stringValue": "PTA Pathways Sales Order"
+            },
+            {
+              "name": "Message",
+              "stringValue": "={{ $json[\"hostDisplayName\"] }} has started the WebEx meeting titled \"{{ $json[\"title\"] }}\"."
+            },
+            {
+              "name": "ClickURL",
+              "stringValue": "=https://n8n.edvistas.com/workflow/qJCHL92o7fLUFSEM/executions"
+            },
+            {
+              "name": "Emojis",
+              "type": "arrayValue",
+              "arrayValue": "['spider_web', 'heavy_check_mark']"
+            },
+            {
+              "name": "Priority",
+              "type": "numberValue",
+              "numberValue": "3"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "77634a45-467b-4f11-ab24-b2be7742aa30",
+      "name": "Set Alert Message (Success)",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        2420,
+        -440
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": "=RMGsRy908UOekKo3",
+        "options": {}
+      },
+      "id": "60a47d5c-924a-4be2-9205-65836c48b8b1",
+      "name": "Log Activity (Success)",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        2620,
+        -440
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": "RMGsRy908UOekKo3",
+        "options": {}
+      },
+      "id": "a079c3e7-0c51-4e08-b798-b8fd95bbb27d",
+      "name": "Log Activity (Error)",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        2220,
+        -60
+      ]
+    },
+    {
+      "parameters": {
         "html": "{{ $json.body_html }}"
       },
       "type": "n8n-nodes-base.html",
       "typeVersion": 1.2,
       "position": [
         720,
-        160
+        200
       ],
       "id": "6b1825ce-9a74-4c67-8ca7-1688f350d38f",
-      "name": "HTML1"
+      "name": "HTML"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "numberInputs": 6,
+        "options": {
+          "clashHandling": {
+            "values": {
+              "resolveClash": "preferInput1",
+              "mergeMode": "shallowMerge"
+            }
+          },
+          "includeUnpaired": true
+        }
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        1020,
+        -560
+      ],
+      "id": "0abf86f0-8e1f-43da-9918-5c04c717e32f",
+      "name": "Merge",
+      "alwaysOutputData": false
     }
   ],
   "pinData": {},
@@ -1190,7 +1234,11 @@
     "executionTimeout": 300,
     "errorWorkflow": "NtBd2hj1eiR2xufe"
   },
-  "staticData": null,
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    }
+  },
   "tags": [
     {
       "createdAt": "2022-12-09T05:43:36.104Z",
@@ -1205,7 +1253,7 @@
       "name": "API"
     }
   ],
-  "triggerCount": 0,
-  "updatedAt": "2025-02-18T22:31:36.000Z",
-  "versionId": "6d71fb1e-649b-41c9-8274-c6bc16cd8b6e"
+  "triggerCount": 2,
+  "updatedAt": "2025-03-04T00:28:05.000Z",
+  "versionId": "fa74f5b7-a171-4eff-9ca8-05f72ba57efd"
 }
