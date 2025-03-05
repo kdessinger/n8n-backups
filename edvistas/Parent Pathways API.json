@@ -431,7 +431,7 @@
       "parameters": {
         "content": "## Process orders\n\nSet Delivered Date\nSet Delivered Qty\n",
         "height": 400,
-        "width": 1020,
+        "width": 900,
         "color": 4
       },
       "type": "n8n-nodes-base.stickyNote",
@@ -912,8 +912,8 @@
       "type": "n8n-nodes-base.microsoftSql",
       "typeVersion": 1.1,
       "position": [
-        1480,
-        260
+        2580,
+        -60
       ],
       "id": "50334cec-0a12-455c-ab9b-86b69f47c551",
       "name": "Verify Datamate Received",
@@ -1070,7 +1070,7 @@
       "parameters": {
         "content": "## Encountered an error",
         "height": 340,
-        "width": 1020,
+        "width": 520,
         "color": 3
       },
       "type": "n8n-nodes-base.stickyNote",
@@ -1254,6 +1254,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2025-03-04T00:28:05.000Z",
-  "versionId": "fa74f5b7-a171-4eff-9ca8-05f72ba57efd"
+  "updatedAt": "2025-03-05T01:56:43.000Z",
+  "versionId": "a24c43aa-d47f-4a6c-9f12-f9ffb9991fde"
 }
