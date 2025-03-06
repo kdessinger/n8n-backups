@@ -544,7 +544,9 @@
             "country_id",
             "country_code",
             "phone_sanitized",
-            "company_name"
+            "company_name",
+            "parent_id",
+            "parent_name"
           ]
         }
       },
@@ -939,6 +941,14 @@
             {
               "fieldName": "last_name",
               "fieldValue": "={{ $('Get Contact Info').item.json.name.split(' ').slice(1).join(' ') }}"
+            },
+            {
+              "fieldName": "parent_id",
+              "fieldValue": "={{16972}}"
+            },
+            {
+              "fieldName": "parent_name",
+              "fieldValue": " PTA"
             }
           ]
         }
@@ -984,7 +994,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -60,
+        -80,
         220
       ],
       "id": "9eed9037-6892-4a1e-be2e-d34141fb6b6f",
@@ -1254,6 +1264,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2025-03-05T01:56:43.000Z",
-  "versionId": "a24c43aa-d47f-4a6c-9f12-f9ffb9991fde"
+  "updatedAt": "2025-03-06T05:36:45.000Z",
+  "versionId": "cc098254-71e8-4ce8-8e5e-eef95b0e3652"
 }
