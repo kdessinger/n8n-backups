@@ -1102,7 +1102,7 @@
             },
             {
               "name": "Message",
-              "stringValue": "={{ $json[\"hostDisplayName\"] }} has started the WebEx meeting titled \"{{ $json[\"title\"] }}\"."
+              "stringValue": "=There was an error while sending PTA Parent pathways payload to DataMate. The user {{ $('Clean up fields').item.json.full_name }} was not setup correctly.  Please check the workflow."
             },
             {
               "name": "ClickURL",
@@ -1141,7 +1141,7 @@
             },
             {
               "name": "Message",
-              "stringValue": "={{ $json[\"hostDisplayName\"] }} has started the WebEx meeting titled \"{{ $json[\"title\"] }}\"."
+              "stringValue": "=A new sale of the PTA Parent Pathways sale has been made. Congradulations to {{ $('Clean up fields').item.json.full_name }} for becomming our newest member. "
             },
             {
               "name": "ClickURL",
@@ -1264,6 +1264,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2025-03-06T05:36:45.000Z",
-  "versionId": "cc098254-71e8-4ce8-8e5e-eef95b0e3652"
+  "updatedAt": "2025-03-06T17:56:57.000Z",
+  "versionId": "8b599ec0-6279-433b-8ad6-f47b9a027ccd"
 }
