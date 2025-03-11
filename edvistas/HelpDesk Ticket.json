@@ -11,11 +11,84 @@
           }
         ]
       ]
+    },
+    "EduForm Pivot": {
+      "main": [
+        [
+          {
+            "node": "Get Subject Types",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Helpdesk Ticket": {
+      "main": [
+        []
+      ]
+    },
+    "Get Tags": {
+      "main": [
+        [
+          {
+            "node": "Get Priority",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Subject Types": {
+      "main": [
+        [
+          {
+            "node": "Get Ticket Types",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Ticket Types": {
+      "main": [
+        [
+          {
+            "node": "Get Tags",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Priority": {
+      "main": [
+        [
+          {
+            "node": "Get Contact",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Contact": {
+      "main": [
+        [
+          {
+            "node": "Create Helpdesk Ticket",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-03-07T16:04:59.855Z",
   "id": "Nfk7xf2YiAPvmFO2",
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "HelpDesk Ticket",
   "nodes": [
     {
@@ -28,7 +101,7 @@
       "typeVersion": 2,
       "position": [
         -480,
-        -40
+        -20
       ],
       "id": "56692d0a-b924-4268-92ae-38844c2c09a7",
       "name": "Webhook",
@@ -117,7 +190,7 @@
             },
             {
               "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][17][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][17][\"name\"] }}",
-              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][17][\"value\"] }}"
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][17][\"text\"] }}"
             },
             {
               "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][18][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][18][\"name\"] }}",
@@ -224,19 +297,453 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 1,
       "position": [
-        -260,
-        -40
+        -240,
+        -20
       ],
       "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "helpdesk.tags",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {
+          "fieldsList": [
+            "id",
+            "name"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "name",
+              "value": "={{ $('EduForm Pivot').item.json.x_product }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-odoo-patch.odoo",
+      "typeVersion": 1,
+      "position": [
+        300,
+        -20
+      ],
+      "id": "f0917728-7848-4788-9f85-6febd33409f8",
+      "name": "Get Tags",
+      "credentials": {
+        "odooApi": {
+          "id": "11",
+          "name": "Odoo (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "helpdesk.ticket",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "access_token",
+              "fieldValue": "={{ $('EduForm Pivot').item.json.referid }}"
+            },
+            {
+              "fieldName": "person_name",
+              "fieldValue": "={{ $('EduForm Pivot').item.json.name }}"
+            },
+            {
+              "fieldName": "description",
+              "fieldValue": "={{ $('EduForm Pivot').item.json.comments }}"
+            },
+            {
+              "fieldName": "mobile_no",
+              "fieldValue": "={{ $('EduForm Pivot').item.json.phone }}"
+            },
+            {
+              "fieldName": "email_subject",
+              "fieldValue": "={{ $('EduForm Pivot').item.json.x_product }} {{ $('Get Ticket Types').item.json.name }} with {{ $('EduForm Pivot').item.json.x_district }}({{ $('EduForm Pivot').item.json.x_dist_id }})"
+            },
+            {
+              "fieldName": "priority",
+              "fieldValue": "={{ $('Get Priority').item.json.id }}"
+            },
+            {
+              "fieldName": "ticket_type",
+              "fieldValue": "={{ $('Get Ticket Types').item.json.id }}"
+            },
+            {
+              "fieldName": "tag_ids",
+              "fieldValue": "={{ [$('Get Tags').item.json.id] }}"
+            },
+            {
+              "fieldName": "subject_id",
+              "fieldValue": "={{ $('Get Subject Types').item.json.id }}"
+            },
+            {
+              "fieldName": "partner_id",
+              "fieldValue": "={{ $('Get Contact').item.json.id }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        -240,
+        220
+      ],
+      "id": "afae022a-ccf4-4f5b-a000-b372437c037f",
+      "name": "Create Helpdesk Ticket",
+      "credentials": {
+        "odooApi": {
+          "id": "11",
+          "name": "Odoo (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "helpdesk.sub.type",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {
+          "fieldsList": [
+            "id",
+            "name"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "name",
+              "value": "={{ $json.Subject }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-odoo-patch.odoo",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        -20
+      ],
+      "id": "cc75aa5e-9c66-4569-aab4-14fc7fafebb5",
+      "name": "Get Subject Types",
+      "credentials": {
+        "odooApi": {
+          "id": "11",
+          "name": "Odoo (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "helpdesk.ticket.type",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {
+          "fieldsList": [
+            "id",
+            "name"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "name",
+              "value": "={{ $('EduForm Pivot').item.json.ticket_Type }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-odoo-patch.odoo",
+      "typeVersion": 1,
+      "position": [
+        120,
+        -20
+      ],
+      "id": "ede93a9a-ba48-45fe-a2e4-40ac38d395e3",
+      "name": "Get Ticket Types",
+      "credentials": {
+        "odooApi": {
+          "id": "11",
+          "name": "Odoo (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "helpdesk.priority",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {
+          "fieldsList": [
+            "id",
+            "name"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "name",
+              "value": "={{ $('EduForm Pivot').item.json.priority }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-odoo-patch.odoo",
+      "typeVersion": 1,
+      "position": [
+        480,
+        -20
+      ],
+      "id": "9b73fc10-f8e4-4410-938f-ab610b954a1e",
+      "name": "Get Priority",
+      "credentials": {
+        "odooApi": {
+          "id": "11",
+          "name": "Odoo (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "res.partner",
+        "operation": "getAll",
+        "options": {
+          "fieldsList": [
+            "id",
+            "EVI_DistID",
+            "name"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "EVI_DistID",
+              "value": "={{ $('EduForm Pivot').item.json.x_dist_id }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        660,
+        -20
+      ],
+      "id": "1d0a137b-e158-49c7-b2c5-9f296ed7cc72",
+      "name": "Get Contact",
+      "credentials": {
+        "odooApi": {
+          "id": "11",
+          "name": "Odoo (kdessinger)"
+        }
+      }
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "connection": "Keep-Alive",
+            "host": "n8n.edvistas.com",
+            "x-forwarded-scheme": "https",
+            "x-forwarded-proto": "https",
+            "x-forwarded-for": "199.223.255.8",
+            "x-real-ip": "199.223.255.8",
+            "content-length": "2671",
+            "content-type": "application/xml;charset=utf-8"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "queryresult": {
+              "username": "046348C2-F886-453A-B834-C51929E6990B",
+              "password": "F7A87DDD-1526-4DDF-8FBB-0D824DA459B9",
+              "formid": "9188",
+              "othersystemid": "",
+              "referid": "fa68a0a1-a8dc-460a-953e-147bcae59679",
+              "field": [
+                {
+                  "id": "325990",
+                  "name": "txt_title",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "326244",
+                  "name": "ticket_Type",
+                  "type": "8",
+                  "txttype": "7",
+                  "text": "Incident",
+                  "display": "Incident",
+                  "value": "1387140"
+                },
+                {
+                  "id": "326245",
+                  "name": "txt_ticket_type",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "326246",
+                  "name": "txt_comments",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "326247",
+                  "name": "comments",
+                  "type": "10",
+                  "txttype": "7",
+                  "value": "I need help creating a form in EduForm.  I want to make a hidden field and make sure that is submitted to odoo."
+                },
+                {
+                  "id": "326248",
+                  "name": "phone",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "518-344-7022"
+                },
+                {
+                  "id": "326249",
+                  "name": "txt_phone",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "326250",
+                  "name": "email",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "kdessinger@edvistas.com"
+                },
+                {
+                  "id": "326251",
+                  "name": "txt_email",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "326254",
+                  "name": "x_dist_id",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "771"
+                },
+                {
+                  "id": "326255",
+                  "name": "x_product",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "EduForm"
+                },
+                {
+                  "id": "326256",
+                  "name": "x_district",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "Educational Vistas"
+                },
+                {
+                  "id": "326257",
+                  "name": "txt_hidden",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "326258",
+                  "name": "txt_auto1",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "326259",
+                  "name": "txt_auto2",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "326260",
+                  "name": "name",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "Kenn Dessinger"
+                },
+                {
+                  "id": "326261",
+                  "name": "txt_name",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "326262",
+                  "name": "priority",
+                  "type": "8",
+                  "txttype": "7",
+                  "text": "Normal",
+                  "display": "Normal",
+                  "value": "1387166"
+                },
+                {
+                  "id": "326263",
+                  "name": "txt_priority",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "326264",
+                  "name": "txt_auto3",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "326265",
+                  "name": "Subject",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "Web Browser Issue"
+                },
+                {
+                  "id": "326266",
+                  "name": "txt_Subject",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "webhookUrl": "https://n8n.edvistas.com/webhook-test/odoo/helpdesk",
+          "executionMode": "test"
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1"
   },
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-03-07T17:00:29.000Z",
-  "versionId": "d7b4c748-ced9-4649-8568-0163f8c6bf99"
+  "updatedAt": "2025-03-11T00:28:04.000Z",
+  "versionId": "52d7be37-3c3f-46ad-b655-686c1e10d32a"
 }
