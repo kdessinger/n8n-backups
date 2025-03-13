@@ -1121,6 +1121,19 @@
       ],
       "id": "32242617-3aef-41cf-9dc2-9dedfa202dc7",
       "name": "Does user exist?"
+    },
+    {
+      "parameters": {
+        "content": "## Fix tags so no output doesn't stop ticket creation"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -460,
+        -180
+      ],
+      "typeVersion": 1,
+      "id": "dc7266d2-ab5b-4670-baaf-e0ed76d3b846",
+      "name": "Sticky Note8"
     }
   ],
   "pinData": {
@@ -1153,6 +1166,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-03-12T22:50:33.000Z",
-  "versionId": "2adc8ed9-6554-42e2-9052-9de32a8450d0"
+  "updatedAt": "2025-03-13T15:44:56.000Z",
+  "versionId": "57c20588-c9cb-4746-bfa9-69500803e18a"
 }
