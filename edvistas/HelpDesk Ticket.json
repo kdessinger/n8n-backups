@@ -60,34 +60,11 @@
       "main": [
         [
           {
-            "node": "Count",
+            "node": "Get District",
             "type": "main",
             "index": 0
           }
         ]
-      ]
-    },
-    "Count": {
-      "main": [
-        [
-          {
-            "node": "Switch",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Switch": {
-      "main": [
-        [
-          {
-            "node": "Odoo",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        []
       ]
     },
     "EduForm Webhook": {
@@ -117,6 +94,79 @@
         [
           {
             "node": "Get Subject Types",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create User": {
+      "main": [
+        [
+          {
+            "node": "Create Helpdesk Ticket",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get District": {
+      "main": [
+        [
+          {
+            "node": "Does user exist?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Alert Message": {
+      "main": [
+        [
+          {
+            "node": "Log Activity",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Helpdesk Ticket": {
+      "main": [
+        [
+          {
+            "node": "Load the ticket",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Load the ticket": {
+      "main": [
+        [
+          {
+            "node": "Set Alert Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Does user exist?": {
+      "main": [
+        [
+          {
+            "node": "Create User",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create Helpdesk Ticket",
             "type": "main",
             "index": 0
           }
@@ -358,8 +408,8 @@
       "alwaysOutputData": true,
       "credentials": {
         "odooApi": {
-          "id": "22",
-          "name": "Odoo (OdooBot)"
+          "id": "20",
+          "name": "Odoo-Stage (OdooBot)"
         }
       }
     },
@@ -395,8 +445,8 @@
       "alwaysOutputData": true,
       "credentials": {
         "odooApi": {
-          "id": "22",
-          "name": "Odoo (OdooBot)"
+          "id": "20",
+          "name": "Odoo-Stage (OdooBot)"
         }
       }
     },
@@ -432,8 +482,8 @@
       "alwaysOutputData": true,
       "credentials": {
         "odooApi": {
-          "id": "22",
-          "name": "Odoo (OdooBot)"
+          "id": "20",
+          "name": "Odoo-Stage (OdooBot)"
         }
       }
     },
@@ -469,14 +519,14 @@
       "alwaysOutputData": true,
       "credentials": {
         "odooApi": {
-          "id": "22",
-          "name": "Odoo (OdooBot)"
+          "id": "20",
+          "name": "Odoo-Stage (OdooBot)"
         }
       }
     },
     {
       "parameters": {
-        "content": "## Incomming Request from EduForm.\nSources\n* EduForm #9188\n\n\n\n\n\n\n\n\n\n\n\n\n\nhttps://n8n.edvistas.com/webhook/odoo/helpdesk",
+        "content": "## Incomming Request from EduForm.\nSources\n* EduForm #9188\n\n\n\n\n\n\n\n\n\n\n\n\n\nhttps://n8n.edvistas.com/webhook/https://n8n.edvistas.com/webhook-test/b93068fb-77db-4332-8b20-94b6dca12940",
         "height": 360,
         "width": 360,
         "color": 6
@@ -493,13 +543,13 @@
     {
       "parameters": {
         "content": "## Get Key Values from Odoo \nGets the ID Key for each of the following:\n",
-        "height": 360,
-        "width": 900
+        "height": 320,
+        "width": 1120
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
         -280,
-        -20
+        20
       ],
       "typeVersion": 1,
       "id": "4abf9f0a-2a2c-4406-a349-d2c733ecfa52",
@@ -509,7 +559,7 @@
       "parameters": {
         "content": "## Create the Helpdesk Ticket\n",
         "height": 280,
-        "width": 360,
+        "width": 220,
         "color": 3
       },
       "type": "n8n-nodes-base.stickyNote",
@@ -556,8 +606,8 @@
       "alwaysOutputData": true,
       "credentials": {
         "odooApi": {
-          "id": "22",
-          "name": "Odoo (OdooBot)"
+          "id": "20",
+          "name": "Odoo-Stage (OdooBot)"
         }
       }
     },
@@ -565,12 +615,12 @@
       "parameters": {
         "content": "## Log Activity",
         "height": 280,
-        "width": 520,
-        "color": 3
+        "width": 440,
+        "color": 5
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        100,
+        400,
         360
       ],
       "typeVersion": 1,
@@ -579,100 +629,15 @@
     },
     {
       "parameters": {
-        "fieldsToSummarize": {
-          "values": [
-            {
-              "field": "email"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.summarize",
-      "typeVersion": 1.1,
-      "position": [
-        660,
-        160
-      ],
-      "id": "980fef02-d0f0-4997-afed-7011d6698965",
-      "name": "Count"
-    },
-    {
-      "parameters": {
-        "rules": {
-          "values": [
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 2
-                },
-                "conditions": [
-                  {
-                    "leftValue": "={{ $json.count_email }}",
-                    "rightValue": 0,
-                    "operator": {
-                      "type": "number",
-                      "operation": "equals"
-                    },
-                    "id": "05c80cd2-ba74-48ec-89c5-0bd4b7a543f6"
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "Not Found"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 2
-                },
-                "conditions": [
-                  {
-                    "id": "e3f29233-83b4-4a7a-bb66-83dbb6770565",
-                    "leftValue": "={{ $json.count_email }}",
-                    "rightValue": 0,
-                    "operator": {
-                      "type": "number",
-                      "operation": "gt"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "Found"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.switch",
-      "typeVersion": 3.2,
-      "position": [
-        840,
-        160
-      ],
-      "id": "32242617-3aef-41cf-9dc2-9dedfa202dc7",
-      "name": "Switch"
-    },
-    {
-      "parameters": {
         "content": "## Add User",
-        "height": 340,
-        "width": 520,
+        "height": 320,
+        "width": 260,
         "color": 3
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
         1080,
-        0
+        20
       ],
       "typeVersion": 1,
       "id": "51fa1137-6021-40c9-b572-f7e86b0b96bc",
@@ -680,30 +645,8 @@
     },
     {
       "parameters": {
-        "contactName": "={{ $('EduForm Pivot').item.json.name }}",
-        "additionalFields": {
-          "email": "="
-        }
-      },
-      "type": "n8n-nodes-base.odoo",
-      "typeVersion": 1,
-      "position": [
-        1100,
-        140
-      ],
-      "id": "d90e377d-48d3-42e7-beb5-0c295d3b69a6",
-      "name": "Odoo",
-      "credentials": {
-        "odooApi": {
-          "id": "20",
-          "name": "Odoo-Stage (OdooBot)"
-        }
-      }
-    },
-    {
-      "parameters": {
         "httpMethod": "POST",
-        "path": "odoo/helpdesk/test",
+        "path": "b93068fb-77db-4332-8b20-94b6dca12940",
         "options": {}
       },
       "type": "n8n-nodes-base.webhook",
@@ -729,7 +672,8 @@
       ],
       "id": "bd93863a-2ee3-4fab-a2bc-d7c2e3f986dd",
       "name": "Application Webhook",
-      "webhookId": "19c2268e-0b25-4239-989e-e4f3cd67a661"
+      "webhookId": "19c2268e-0b25-4239-989e-e4f3cd67a661",
+      "disabled": true
     },
     {
       "parameters": {
@@ -868,7 +812,7 @@
             },
             {
               "fieldName": "email_subject",
-              "fieldValue": "={{ $('Get Ticket Types').item.json.name }} from {{ $('Sanatized').item.json.x_district }}({{ $('Sanatized').item.json.x_dist_id }})"
+              "fieldValue": "={{ $('Sanatized').item.json.email_subject }}"
             },
             {
               "fieldName": "priority",
@@ -888,7 +832,7 @@
             },
             {
               "fieldName": "partner_id",
-              "fieldValue": "={{ $('Get Partner').item.json.id }}"
+              "fieldValue": "={{ $json.id }}"
             },
             {
               "fieldName": "description",
@@ -915,6 +859,268 @@
           "name": "Odoo-Stage (OdooBot)"
         }
       }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "res.partner",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "name",
+              "fieldValue": "={{ $('Sanatized').item.json.name }}"
+            },
+            {
+              "fieldName": "email",
+              "fieldValue": "={{ $('Sanatized').item.json.email }}"
+            },
+            {
+              "fieldName": "phone",
+              "fieldValue": "={{ $('Sanatized').item.json.phone }}"
+            },
+            {
+              "fieldName": "EVI_DistName",
+              "fieldValue": "={{ $('Sanatized').item.json.x_district }}"
+            },
+            {
+              "fieldName": "parent_id",
+              "fieldValue": "={{ $('Get District').item.json.id }}"
+            },
+            {
+              "fieldName": "comment",
+              "fieldValue": "Automatically added by helpdesk ticket submission. "
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        1160,
+        140
+      ],
+      "id": "d90e377d-48d3-42e7-beb5-0c295d3b69a6",
+      "name": "Create User",
+      "credentials": {
+        "odooApi": {
+          "id": "20",
+          "name": "Odoo-Stage (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "res.partner",
+        "operation": "getAll",
+        "limit": 1,
+        "options": {
+          "fieldsList": [
+            "id",
+            "EVI_DistID",
+            "name",
+            "email",
+            "display_name"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "EVI_DistID",
+              "value": "={{ $('Sanatized').item.json.x_dist_id }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        660,
+        160
+      ],
+      "id": "ed74241a-f9ad-4c3c-a083-82d8583a6feb",
+      "name": "Get District",
+      "alwaysOutputData": true,
+      "credentials": {
+        "odooApi": {
+          "id": "20",
+          "name": "Odoo-Stage (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Credentials are set to STAGE server",
+        "height": 80,
+        "width": 440,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        80,
+        -100
+      ],
+      "typeVersion": 1,
+      "id": "72faa2db-8a8a-4afa-83af-efb7769f09a2",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "workflowId": "=RMGsRy908UOekKo3",
+        "options": {}
+      },
+      "id": "8cba5853-93c8-4047-b03a-d11bbb65b0fc",
+      "name": "Log Activity",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        680,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "Title",
+              "stringValue": "A New Helpdesk Ticket has been created"
+            },
+            {
+              "name": "Message",
+              "stringValue": "={{ $('Sanatized').item.json.x_product }} user {{ $('Sanatized').item.json.name }} from district {{ $('Sanatized').item.json.x_district }}({{ $('Sanatized').item.json.x_dist_id }}) has submitted a HelpDesk Tiket NO:{{ $json.name }}\n\n"
+            },
+            {
+              "name": "ClickURL",
+              "stringValue": "=https://odoo-stage.edvistas.com{{ $json.access_url }}?access_token={{ $json.access_token }}"
+            },
+            {
+              "name": "Emojis",
+              "type": "arrayValue",
+              "arrayValue": "['spider_web', 'heavy_check_mark']"
+            },
+            {
+              "name": "Priority",
+              "type": "numberValue",
+              "numberValue": "5"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "1c340b22-1d9b-4a7b-9220-8594dbb57142",
+      "name": "Set Alert Message",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        460,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "helpdesk.ticket",
+        "operation": "get",
+        "customResourceId": "={{ $json.id }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        100,
+        460
+      ],
+      "id": "77950cf8-b32b-48ee-a2d0-a62ede8f328a",
+      "name": "Load the ticket",
+      "credentials": {
+        "odooApi": {
+          "id": "20",
+          "name": "Odoo-Stage (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Load the newly created ticket",
+        "height": 280,
+        "width": 420
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -40,
+        360
+      ],
+      "typeVersion": 1,
+      "id": "1426411b-3e25-4b0e-a245-ff807f8498bf",
+      "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Get Partner').item.json.id }}",
+                    "rightValue": 0,
+                    "operator": {
+                      "type": "number",
+                      "operation": "empty",
+                      "singleValue": true
+                    },
+                    "id": "05c80cd2-ba74-48ec-89c5-0bd4b7a543f6"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Not Found"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "e3f29233-83b4-4a7a-bb66-83dbb6770565",
+                    "leftValue": "={{ $('Get Partner').item.json.id }}",
+                    "rightValue": 0,
+                    "operator": {
+                      "type": "number",
+                      "operation": "notEmpty",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Found"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        900,
+        160
+      ],
+      "id": "32242617-3aef-41cf-9dc2-9dedfa202dc7",
+      "name": "Does user exist?"
     }
   ],
   "pinData": {
@@ -947,6 +1153,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-03-12T05:58:00.000Z",
-  "versionId": "77fef131-72da-4855-abb5-5dd8714d5fa7"
+  "updatedAt": "2025-03-12T22:50:33.000Z",
+  "versionId": "2adc8ed9-6554-42e2-9052-9de32a8450d0"
 }
