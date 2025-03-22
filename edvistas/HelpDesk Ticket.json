@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "EduForm Pivot": {
       "main": [
@@ -950,7 +950,7 @@
     },
     {
       "parameters": {
-        "content": "## Credentials are set to STAGE server",
+        "content": "## Credentials are set to *STAGE* server",
         "height": 80,
         "width": 440,
         "color": 6
@@ -1165,7 +1165,7 @@
   },
   "staticData": null,
   "tags": [],
-  "triggerCount": 2,
-  "updatedAt": "2025-03-13T15:44:56.000Z",
-  "versionId": "57c20588-c9cb-4746-bfa9-69500803e18a"
+  "triggerCount": 1,
+  "updatedAt": "2025-03-21T21:37:42.000Z",
+  "versionId": "7df67d1e-26dc-4c1c-b719-e4ce55e9836e"
 }
