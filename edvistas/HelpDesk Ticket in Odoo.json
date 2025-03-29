@@ -1,0 +1,1337 @@
+{
+  "active": true,
+  "connections": {
+    "EduForm Pivot": {
+      "main": [
+        [
+          {
+            "node": "Sanatized",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Tags": {
+      "main": [
+        [
+          {
+            "node": "Get Priority",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Subject Types": {
+      "main": [
+        [
+          {
+            "node": "Get Ticket Types",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Ticket Types": {
+      "main": [
+        [
+          {
+            "node": "Get Tags",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Priority": {
+      "main": [
+        [
+          {
+            "node": "Get Partner",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Partner": {
+      "main": [
+        [
+          {
+            "node": "Get District",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "EduForm Webhook": {
+      "main": [
+        [
+          {
+            "node": "EduForm Pivot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Application Webhook": {
+      "main": [
+        [
+          {
+            "node": "Sanatized",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sanatized": {
+      "main": [
+        [
+          {
+            "node": "Get Subject Types",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create User": {
+      "main": [
+        [
+          {
+            "node": "Create Helpdesk Ticket",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get District": {
+      "main": [
+        [
+          {
+            "node": "Does user exist?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Alert Message": {
+      "main": [
+        [
+          {
+            "node": "Log Activity",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Helpdesk Ticket": {
+      "main": [
+        [
+          {
+            "node": "Load the ticket",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Load the ticket": {
+      "main": [
+        [
+          {
+            "node": "Set Alert Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Does user exist?": {
+      "main": [
+        [
+          {
+            "node": "Create User",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create Helpdesk Ticket",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Sanatized",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-03-07T16:04:59.855Z",
+  "id": "Nfk7xf2YiAPvmFO2",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "HelpDesk Ticket in Odoo",
+  "nodes": [
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "Formid",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"formid\"] }}"
+            },
+            {
+              "name": "referid",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"referid\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][0][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][0][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][0][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][1][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][1][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][1][\"text\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][2][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][2][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][2][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][3][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][3][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][3][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][4][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][4][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][4][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][5][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][5][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][5][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][6][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][6][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][6][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][7][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][7][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][7][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][8][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][8][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][8][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][9][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][9][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][9][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][10][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][10][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][10][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][11][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][11][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][11][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][12][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][12][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][12][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][13][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][13][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][13][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][14][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][14][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][14][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][15][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][15][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][15][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][16][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][16][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][16][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][17][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][17][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][17][\"text\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][18][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][18][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][18][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][19][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][19][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][19][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][20][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][20][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][20][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][21][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][21][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][21][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][22][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][22][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][22][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][23][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][23][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][23][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][24][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][24][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][24][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][25][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][25][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][25][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][26][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][26][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][26][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][27][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][27][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][27][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][28][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][28][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][28][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][29][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][29][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][29][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][30][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][30][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][30][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][31][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][31][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][31][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][32][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][32][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][32][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][33][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][33][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][33][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][34][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][34][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][34][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][35][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][35][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][35][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][36][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][36][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][36][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][37][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][37][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][37][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][38][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][38][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][38][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][39][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][39][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][39][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][40][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][40][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][40][\"value\"] }}"
+            },
+            {
+              "name": "host",
+              "value": "={{ $json.headers.host }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "28d1b944-0fa4-4866-93ad-ab8bc0047598",
+      "name": "EduForm Pivot",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        -680,
+        0
+      ],
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "helpdesk.tags",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {
+          "fieldsList": [
+            "id",
+            "name"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "name",
+              "value": "={{ $('Sanatized').item.json.x_product }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-odoo-patch.odoo",
+      "typeVersion": 1,
+      "position": [
+        120,
+        160
+      ],
+      "id": "f0917728-7848-4788-9f85-6febd33409f8",
+      "name": "Get Tags",
+      "alwaysOutputData": true,
+      "credentials": {
+        "odooApi": {
+          "id": "20",
+          "name": "Odoo-Stage (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "helpdesk.sub.type",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {
+          "fieldsList": [
+            "id",
+            "name"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "name",
+              "value": "={{ $('Sanatized').item.json.Subject }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-odoo-patch.odoo",
+      "typeVersion": 1,
+      "position": [
+        -240,
+        160
+      ],
+      "id": "cc75aa5e-9c66-4569-aab4-14fc7fafebb5",
+      "name": "Get Subject Types",
+      "alwaysOutputData": true,
+      "credentials": {
+        "odooApi": {
+          "id": "20",
+          "name": "Odoo-Stage (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "helpdesk.ticket.type",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {
+          "fieldsList": [
+            "id",
+            "name"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "name",
+              "value": "={{ $('Sanatized').item.json.ticket_Type }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-odoo-patch.odoo",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        160
+      ],
+      "id": "ede93a9a-ba48-45fe-a2e4-40ac38d395e3",
+      "name": "Get Ticket Types",
+      "alwaysOutputData": true,
+      "credentials": {
+        "odooApi": {
+          "id": "20",
+          "name": "Odoo-Stage (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "helpdesk.priority",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {
+          "fieldsList": [
+            "id",
+            "name"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "name",
+              "value": "={{ $('Sanatized').item.json.priority }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-odoo-patch.odoo",
+      "typeVersion": 1,
+      "position": [
+        300,
+        160
+      ],
+      "id": "9b73fc10-f8e4-4410-938f-ab610b954a1e",
+      "name": "Get Priority",
+      "alwaysOutputData": true,
+      "credentials": {
+        "odooApi": {
+          "id": "20",
+          "name": "Odoo-Stage (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Incomming Request from EduForm.\nSources\n* EduForm #9188\n\n\n\n\n\n\n\n\n\n\n\n\n\nhttps://n8n.edvistas.com/webhook/https://n8n.edvistas.com/webhook-test/b93068fb-77db-4332-8b20-94b6dca12940",
+        "height": 360,
+        "width": 360,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -920,
+        -160
+      ],
+      "typeVersion": 1,
+      "id": "e9a2dacc-b882-4b40-acae-f9aca8ec4db1",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Get Key Values from Odoo \nGets the ID Key for each of the following:\n",
+        "height": 320,
+        "width": 1120
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -280,
+        20
+      ],
+      "typeVersion": 1,
+      "id": "4abf9f0a-2a2c-4406-a349-d2c733ecfa52",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "## Create the Helpdesk Ticket\n",
+        "height": 280,
+        "width": 220,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -280,
+        360
+      ],
+      "typeVersion": 1,
+      "id": "e640bf2c-22d0-48a9-8ff7-82ea5e7bc82d",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "res.partner",
+        "operation": "getAll",
+        "limit": 1,
+        "options": {
+          "fieldsList": [
+            "id",
+            "EVI_DistID",
+            "name",
+            "email",
+            "display_name"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "email",
+              "value": "={{ $('Sanatized').item.json.email }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        480,
+        160
+      ],
+      "id": "1d0a137b-e158-49c7-b2c5-9f296ed7cc72",
+      "name": "Get Partner",
+      "alwaysOutputData": true,
+      "credentials": {
+        "odooApi": {
+          "id": "20",
+          "name": "Odoo-Stage (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Log Activity",
+        "height": 280,
+        "width": 440,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        400,
+        360
+      ],
+      "typeVersion": 1,
+      "id": "ea0cba4f-765f-4242-ad0b-dfda4b608a64",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "## Add User",
+        "height": 320,
+        "width": 260,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1080,
+        20
+      ],
+      "typeVersion": 1,
+      "id": "51fa1137-6021-40c9-b572-f7e86b0b96bc",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "b93068fb-77db-4332-8b20-94b6dca12940",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -880,
+        0
+      ],
+      "id": "56692d0a-b924-4268-92ae-38844c2c09a7",
+      "name": "EduForm Webhook",
+      "webhookId": "004a7afe-c9d5-4878-ae52-a89bb6fadf6d",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "path": "odoo/helpdesk",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -780,
+        380
+      ],
+      "id": "bd93863a-2ee3-4fab-a2bc-d7c2e3f986dd",
+      "name": "Application Webhook",
+      "webhookId": "19c2268e-0b25-4239-989e-e4f3cd67a661"
+    },
+    {
+      "parameters": {
+        "content": "## Incomming Request from webhook.\nSources\n* EVI Applications\n* Website \n\n\n\n\n\n\n\n\n\n\n\n\n\nhttps://n8n.edvistas.com/webhook/odoo/helpdesk",
+        "height": 360,
+        "width": 360,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -920,
+        220
+      ],
+      "typeVersion": 1,
+      "id": "f7ff7eb9-a988-41ec-a6cf-691c6963038e",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a4202d9f-4667-410b-bf86-db4888cdfa41",
+              "name": "Formid",
+              "value": "={{ $json.Formid }}",
+              "type": "string"
+            },
+            {
+              "id": "890c7102-ff06-4614-bf0b-25828dc974d1",
+              "name": "referid",
+              "value": "={{ $json.referid }}",
+              "type": "string"
+            },
+            {
+              "id": "029cb14b-f2d1-4050-b682-5e49b59354fb",
+              "name": "host",
+              "value": "={{ $json.host }}",
+              "type": "string"
+            },
+            {
+              "id": "3c530fae-aa2c-4a45-89c7-e66dfa803520",
+              "name": "ticket_Type",
+              "value": "={{ $json.ticket_Type }}",
+              "type": "string"
+            },
+            {
+              "id": "65b5fb2b-b209-458a-9c37-b35e092c689d",
+              "name": "priority",
+              "value": "={{ $json.priority }}",
+              "type": "string"
+            },
+            {
+              "id": "645d4dae-64c3-48a3-98f5-773063d276e8",
+              "name": "Subject",
+              "value": "={{ $json.Subject }}",
+              "type": "string"
+            },
+            {
+              "id": "72e22cf8-b90d-4619-aa57-7444eddde606",
+              "name": "name",
+              "value": "={{ $json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "d6f1d0c9-48c7-4a22-8866-fa2344604e76",
+              "name": "email",
+              "value": "={{ $json.email }}",
+              "type": "string"
+            },
+            {
+              "id": "b2f10286-ea03-403b-b520-62ebe0ea3cc9",
+              "name": "phone",
+              "value": "={{ $json.phone }}",
+              "type": "string"
+            },
+            {
+              "id": "e97f9c51-42cd-4e04-a4f8-3dbd72eb17b3",
+              "name": "x_dist_id",
+              "value": "={{ $json.x_dist_id }}",
+              "type": "string"
+            },
+            {
+              "id": "f45fdef2-3670-45d8-a526-1d999500c345",
+              "name": "x_district",
+              "value": "={{ $json.x_district }}",
+              "type": "string"
+            },
+            {
+              "id": "215484e7-b64b-4c17-9b86-f13cfbad191c",
+              "name": "x_product",
+              "value": "={{ $json.x_product }}",
+              "type": "string"
+            },
+            {
+              "id": "7bd6bf31-6480-42f6-ae70-c6dec6c05a7e",
+              "name": "comments",
+              "value": "={{ $json.comments }}",
+              "type": "string"
+            },
+            {
+              "id": "dcedfad0-ee31-468e-8300-e210cb86cf3e",
+              "name": "email_subject",
+              "value": "={{ $json.ticket_Type }} from {{ $json.x_district }}({{ $json.x_dist_id }})",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -460,
+        160
+      ],
+      "id": "2d67ddea-5b68-4454-89f8-b40d7768558c",
+      "name": "Sanatized"
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "helpdesk.ticket",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "access_token",
+              "fieldValue": "={{ $('Sanatized').item.json.referid }}"
+            },
+            {
+              "fieldName": "person_name",
+              "fieldValue": "={{ $('Sanatized').item.json.name }}"
+            },
+            {
+              "fieldName": "mobile_no",
+              "fieldValue": "={{ $('Sanatized').item.json.phone }}"
+            },
+            {
+              "fieldName": "email_subject",
+              "fieldValue": "={{ $('Sanatized').item.json.email_subject }}"
+            },
+            {
+              "fieldName": "priority",
+              "fieldValue": "={{ $('Get Priority').item.json.id }}"
+            },
+            {
+              "fieldName": "ticket_type",
+              "fieldValue": "={{ $('Get Ticket Types').item.json.id }}"
+            },
+            {
+              "fieldName": "tag_ids",
+              "fieldValue": "={{ [$('Get Tags').item.json.id] }}"
+            },
+            {
+              "fieldName": "subject_id",
+              "fieldValue": "={{ $('Get Subject Types').item.json.id }}"
+            },
+            {
+              "fieldName": "partner_id",
+              "fieldValue": "={{ $json.id }}"
+            },
+            {
+              "fieldName": "description",
+              "fieldValue": "={{ $('Sanatized').item.json.comments }}"
+            },
+            {
+              "fieldName": "email",
+              "fieldValue": "={{ $('Sanatized').item.json.email }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        -240,
+        460
+      ],
+      "id": "0f20fcd4-fefc-43ae-9592-a91cccc58b8d",
+      "name": "Create Helpdesk Ticket",
+      "credentials": {
+        "odooApi": {
+          "id": "20",
+          "name": "Odoo-Stage (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "res.partner",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "name",
+              "fieldValue": "={{ $('Sanatized').item.json.name }}"
+            },
+            {
+              "fieldName": "email",
+              "fieldValue": "={{ $('Sanatized').item.json.email }}"
+            },
+            {
+              "fieldName": "phone",
+              "fieldValue": "={{ $('Sanatized').item.json.phone }}"
+            },
+            {
+              "fieldName": "EVI_DistName",
+              "fieldValue": "={{ $('Sanatized').item.json.x_district }}"
+            },
+            {
+              "fieldName": "parent_id",
+              "fieldValue": "={{ $('Get District').item.json.id }}"
+            },
+            {
+              "fieldName": "comment",
+              "fieldValue": "Automatically added by helpdesk ticket submission. "
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        1160,
+        140
+      ],
+      "id": "d90e377d-48d3-42e7-beb5-0c295d3b69a6",
+      "name": "Create User",
+      "credentials": {
+        "odooApi": {
+          "id": "20",
+          "name": "Odoo-Stage (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "res.partner",
+        "operation": "getAll",
+        "limit": 1,
+        "options": {
+          "fieldsList": [
+            "id",
+            "EVI_DistID",
+            "name",
+            "email",
+            "display_name"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "EVI_DistID",
+              "value": "={{ $('Sanatized').item.json.x_dist_id }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        660,
+        160
+      ],
+      "id": "ed74241a-f9ad-4c3c-a083-82d8583a6feb",
+      "name": "Get District",
+      "alwaysOutputData": true,
+      "credentials": {
+        "odooApi": {
+          "id": "20",
+          "name": "Odoo-Stage (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Credentials are set to *STAGE* server",
+        "height": 80,
+        "width": 440,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        80,
+        -100
+      ],
+      "typeVersion": 1,
+      "id": "72faa2db-8a8a-4afa-83af-efb7769f09a2",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "workflowId": "=RMGsRy908UOekKo3",
+        "options": {}
+      },
+      "id": "8cba5853-93c8-4047-b03a-d11bbb65b0fc",
+      "name": "Log Activity",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        680,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "Title",
+              "stringValue": "A New Helpdesk Ticket has been created"
+            },
+            {
+              "name": "Message",
+              "stringValue": "={{ $('Sanatized').item.json.x_product }} user {{ $('Sanatized').item.json.name }} from district {{ $('Sanatized').item.json.x_district }}({{ $('Sanatized').item.json.x_dist_id }}) has submitted a HelpDesk Tiket NO:{{ $json.name }}\n\n"
+            },
+            {
+              "name": "ClickURL",
+              "stringValue": "=https://odoo-stage.edvistas.com{{ $json.access_url }}?access_token={{ $json.access_token }}"
+            },
+            {
+              "name": "Emojis",
+              "type": "arrayValue",
+              "arrayValue": "['spider_web', 'heavy_check_mark']"
+            },
+            {
+              "name": "Priority",
+              "type": "numberValue",
+              "numberValue": "5"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "1c340b22-1d9b-4a7b-9220-8594dbb57142",
+      "name": "Set Alert Message",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        460,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "helpdesk.ticket",
+        "operation": "get",
+        "customResourceId": "={{ $json.id }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        100,
+        460
+      ],
+      "id": "77950cf8-b32b-48ee-a2d0-a62ede8f328a",
+      "name": "Load the ticket",
+      "credentials": {
+        "odooApi": {
+          "id": "20",
+          "name": "Odoo-Stage (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Load the newly created ticket",
+        "height": 280,
+        "width": 420
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -40,
+        360
+      ],
+      "typeVersion": 1,
+      "id": "1426411b-3e25-4b0e-a245-ff807f8498bf",
+      "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Get Partner').item.json.id }}",
+                    "rightValue": 0,
+                    "operator": {
+                      "type": "number",
+                      "operation": "empty",
+                      "singleValue": true
+                    },
+                    "id": "05c80cd2-ba74-48ec-89c5-0bd4b7a543f6"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Not Found"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "e3f29233-83b4-4a7a-bb66-83dbb6770565",
+                    "leftValue": "={{ $('Get Partner').item.json.id }}",
+                    "rightValue": 0,
+                    "operator": {
+                      "type": "number",
+                      "operation": "notEmpty",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Found"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        900,
+        160
+      ],
+      "id": "32242617-3aef-41cf-9dc2-9dedfa202dc7",
+      "name": "Does user exist?"
+    },
+    {
+      "parameters": {
+        "content": "## Fix tags so no output doesn't stop ticket creation"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -460,
+        -180
+      ],
+      "typeVersion": 1,
+      "id": "dc7266d2-ab5b-4670-baaf-e0ed76d3b846",
+      "name": "Sticky Note8"
+    },
+    {
+      "parameters": {
+        "formTitle": "Create a Support Ticket",
+        "formDescription": "Enter in the information below to create a helpdesk ticket in Odoo.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "ticket_Type",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Bug"
+                  },
+                  {
+                    "option": "Feature Request"
+                  },
+                  {
+                    "option": "Feedback"
+                  },
+                  {
+                    "option": "Incident"
+                  },
+                  {
+                    "option": "Question"
+                  },
+                  {
+                    "option": "Support"
+                  },
+                  {
+                    "option": "Other"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "priority",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Low"
+                  },
+                  {
+                    "option": "Normal"
+                  },
+                  {
+                    "option": "High"
+                  },
+                  {
+                    "option": "Urgent"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Subject"
+            },
+            {
+              "fieldLabel": "name",
+              "placeholder": "Full Name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "email",
+              "fieldType": "email",
+              "placeholder": "someone@domain.com"
+            },
+            {
+              "fieldLabel": "phone",
+              "placeholder": "(518) 344-7022"
+            },
+            {
+              "fieldLabel": "dist_id",
+              "fieldType": "number",
+              "placeholder": "21"
+            },
+            {
+              "fieldLabel": "district",
+              "placeholder": "Appleville School District"
+            },
+            {
+              "fieldLabel": "product",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Aims"
+                  },
+                  {
+                    "option": "CD"
+                  },
+                  {
+                    "option": "DataMate"
+                  },
+                  {
+                    "option": "DataSync"
+                  },
+                  {
+                    "option": "EduForm"
+                  },
+                  {
+                    "option": "EduView"
+                  },
+                  {
+                    "option": "MTSS"
+                  },
+                  {
+                    "option": "Portfolio(+)"
+                  },
+                  {
+                    "option": "Scoring"
+                  },
+                  {
+                    "option": "SafeSchools"
+                  },
+                  {
+                    "option": "SELS"
+                  },
+                  {
+                    "option": "StaffTrac"
+                  },
+                  {
+                    "option": "SurVate"
+                  },
+                  {
+                    "option": "TransSync"
+                  },
+                  {
+                    "option": "Report(+)"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "comments",
+              "fieldType": "textarea",
+              "placeholder": "Please explain the need for a support ticket",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        -780,
+        640
+      ],
+      "id": "f174c709-65cf-4d62-a192-ff2019afdf71",
+      "name": "On form submission",
+      "webhookId": "46d567ad-fb78-4987-be8a-c595846f4744"
+    }
+  ],
+  "pinData": {
+    "Application Webhook": [
+      {
+        "json": {
+          "Formid": "9188",
+          "referid": "fa68a0a1-a8dc-460a-953e-147bcae59679",
+          "host": "n8n.edvistas.com",
+          "ticket_Type": "Feature Request",
+          "priority": "Low",
+          "Subject": "General",
+          "name": "Kenn Dessinger",
+          "email": "kdessinger@edvistas.com",
+          "phone": "518-344-7022",
+          "x_dist_id": "771",
+          "x_district": "Educational Vistas",
+          "x_product": "EduForm",
+          "comments": "I need help creating a form in EduForm.  I want to make a hidden field and make sure that is submitted to odoo."
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": 300,
+    "errorWorkflow": "NtBd2hj1eiR2xufe"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 3,
+  "updatedAt": "2025-03-29T05:45:50.000Z",
+  "versionId": "57acd14f-6585-4958-ad8e-6eb27773ee4d"
+}
