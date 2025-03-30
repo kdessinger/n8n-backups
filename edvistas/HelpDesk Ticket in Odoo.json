@@ -49,7 +49,7 @@
       "main": [
         [
           {
-            "node": "Get Partner",
+            "node": "Get District",
             "type": "main",
             "index": 0
           }
@@ -60,7 +60,7 @@
       "main": [
         [
           {
-            "node": "Get District",
+            "node": "Does user exist?",
             "type": "main",
             "index": 0
           }
@@ -115,7 +115,7 @@
       "main": [
         [
           {
-            "node": "Does user exist?",
+            "node": "Get Partner",
             "type": "main",
             "index": 0
           }
@@ -609,7 +609,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        480,
+        660,
         80
       ],
       "id": "1d0a137b-e158-49c7-b2c5-9f296ed7cc72",
@@ -668,8 +668,7 @@
       ],
       "id": "56692d0a-b924-4268-92ae-38844c2c09a7",
       "name": "EduForm Webhook",
-      "webhookId": "004a7afe-c9d5-4878-ae52-a89bb6fadf6d",
-      "disabled": true
+      "webhookId": "004a7afe-c9d5-4878-ae52-a89bb6fadf6d"
     },
     {
       "parameters": {
@@ -762,20 +761,20 @@
             },
             {
               "id": "e97f9c51-42cd-4e04-a4f8-3dbd72eb17b3",
-              "name": "x_dist_id",
-              "value": "={{ $json.x_dist_id }}",
+              "name": "distid",
+              "value": "={{ $json.distid }}",
               "type": "string"
             },
             {
               "id": "f45fdef2-3670-45d8-a526-1d999500c345",
-              "name": "x_district",
-              "value": "={{ $json.x_district }}",
+              "name": "district",
+              "value": "={{ $json.district }}",
               "type": "string"
             },
             {
               "id": "215484e7-b64b-4c17-9b86-f13cfbad191c",
-              "name": "x_product",
-              "value": "={{ $json.x_product }}",
+              "name": "product",
+              "value": "={{ $json.product }}",
               "type": "string"
             },
             {
@@ -787,7 +786,7 @@
             {
               "id": "dcedfad0-ee31-468e-8300-e210cb86cf3e",
               "name": "email_subject",
-              "value": "={{ $json.ticket_Type }} from {{ $json.x_district }}({{ $json.x_dist_id }})",
+              "value": "={{ $json.ticket_Type }} from {{ $json.district }}({{ $json.distid }})",
               "type": "string"
             }
           ]
@@ -946,7 +945,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        660,
+        480,
         80
       ],
       "id": "ed74241a-f9ad-4c3c-a083-82d8583a6feb",
@@ -968,8 +967,8 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        80,
-        -180
+        -20,
+        -160
       ],
       "typeVersion": 1,
       "id": "72faa2db-8a8a-4afa-83af-efb7769f09a2",
@@ -1139,8 +1138,8 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -240,
-        -260
+        -280,
+        -240
       ],
       "typeVersion": 1,
       "id": "dc7266d2-ab5b-4670-baaf-e0ed76d3b846",
@@ -1220,7 +1219,7 @@
               "placeholder": "(518) 344-7022"
             },
             {
-              "fieldLabel": "dist_id",
+              "fieldLabel": "distid",
               "fieldType": "number",
               "placeholder": "21"
             },
@@ -1331,10 +1330,223 @@
           "name": "Kenn Dessinger",
           "email": "kdessinger@edvistas.com",
           "phone": "518-344-7022",
-          "x_dist_id": "771",
-          "x_district": "Educational Vistas",
-          "x_product": "EduForm",
+          "distid": "771",
+          "district": "Educational Vistas",
+          "product": "EduForm",
           "comments": "I need help creating a form in EduForm.  I want to make a hidden field and make sure that is submitted to odoo."
+        }
+      }
+    ],
+    "On form submission": [
+      {
+        "json": {
+          "ticket_Type": "Feature Request",
+          "priority": "Normal",
+          "Subject": "test",
+          "name": "Kenn Dessinger",
+          "email": "kdessinger@edvistas.com",
+          "phone": "518-344-7022",
+          "distid": 21,
+          "district": "Appleville",
+          "product": "EduForm",
+          "comments": "This is just a test",
+          "submittedAt": "2025-03-29T23:29:36.834-04:00",
+          "formMode": "test"
+        }
+      }
+    ],
+    "EduForm Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.edvistas.com",
+            "x-forwarded-scheme": "https",
+            "x-forwarded-proto": "https",
+            "x-forwarded-for": "199.223.255.8",
+            "x-real-ip": "199.223.255.8",
+            "content-length": "2841",
+            "content-type": "application/xml;charset=utf-8"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "queryresult": {
+              "username": "046348C2-F886-453A-B834-C51929E6990B",
+              "password": "F7A87DDD-1526-4DDF-8FBB-0D824DA459B9",
+              "formid": "9188",
+              "othersystemid": "",
+              "referid": "4b9b19f4-320f-4d8a-9c93-776396b6f38f",
+              "field": [
+                {
+                  "id": "325990",
+                  "name": "txt_title",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "326244",
+                  "name": "ticket_Type",
+                  "type": "8",
+                  "txttype": "7",
+                  "text": "Feature Request",
+                  "display": "Feature Request",
+                  "value": "1387141"
+                },
+                {
+                  "id": "326245",
+                  "name": "txt_ticket_type",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "326246",
+                  "name": "txt_comments",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "326247",
+                  "name": "comments_bug",
+                  "type": "10",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "326248",
+                  "name": "phone",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "5183447022"
+                },
+                {
+                  "id": "326249",
+                  "name": "txt_phone",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "326250",
+                  "name": "email",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "kdessinger@edvistas.com"
+                },
+                {
+                  "id": "326251",
+                  "name": "txt_email",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "326254",
+                  "name": "distid",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "771"
+                },
+                {
+                  "id": "326255",
+                  "name": "product",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "EduForm"
+                },
+                {
+                  "id": "326256",
+                  "name": "district",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "Educational Vistas"
+                },
+                {
+                  "id": "326257",
+                  "name": "txt_hidden",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "326258",
+                  "name": "txt_auto1",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "326259",
+                  "name": "txt_auto2",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "326260",
+                  "name": "name",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "StaffTrac Administrator"
+                },
+                {
+                  "id": "326261",
+                  "name": "txt_name",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "326262",
+                  "name": "priority",
+                  "type": "8",
+                  "txttype": "7",
+                  "text": "Normal",
+                  "display": "Normal",
+                  "value": "1387166"
+                },
+                {
+                  "id": "326263",
+                  "name": "txt_priority",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "326264",
+                  "name": "txt_auto3",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "326265",
+                  "name": "Subject",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "test"
+                },
+                {
+                  "id": "326266",
+                  "name": "txt_Subject",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "326267",
+                  "name": "comments",
+                  "type": "1",
+                  "txttype": "6",
+                  "value": "I can't find my scores in Datamate. Can you help me locate them?"
+                }
+              ]
+            }
+          },
+          "webhookUrl": "https://n8n.edvistas.com/webhook/b93068fb-77db-4332-8b20-94b6dca12940",
+          "executionMode": "production"
         }
       }
     ]
@@ -1347,7 +1559,7 @@
   },
   "staticData": null,
   "tags": [],
-  "triggerCount": 3,
-  "updatedAt": "2025-03-30T03:37:13.000Z",
-  "versionId": "66ca8095-c2e9-4e1f-8a51-14a679a87544"
+  "triggerCount": 4,
+  "updatedAt": "2025-03-30T06:55:59.000Z",
+  "versionId": "d237eb40-205e-48ef-b318-60551627a550"
 }
