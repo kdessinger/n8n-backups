@@ -672,6 +672,7 @@
     },
     {
       "parameters": {
+        "httpMethod": "POST",
         "path": "odoo/helpdesk",
         "options": {}
       },
@@ -708,85 +709,73 @@
             {
               "id": "a4202d9f-4667-410b-bf86-db4888cdfa41",
               "name": "Formid",
-              "value": "={{ $json.Formid }}",
+              "value": "={{ $json.Formid ? $json.Formid : \"\" }}",
               "type": "string"
             },
             {
               "id": "890c7102-ff06-4614-bf0b-25828dc974d1",
               "name": "referid",
-              "value": "={{ $json.referid }}",
-              "type": "string"
-            },
-            {
-              "id": "029cb14b-f2d1-4050-b682-5e49b59354fb",
-              "name": "host",
-              "value": "={{ $json.host }}",
-              "type": "string"
-            },
-            {
-              "id": "3c530fae-aa2c-4a45-89c7-e66dfa803520",
-              "name": "ticket_Type",
-              "value": "={{ $json.ticket_Type }}",
+              "value": "={{ $json.referid ? $json.referid : \"\" }}",
               "type": "string"
             },
             {
               "id": "65b5fb2b-b209-458a-9c37-b35e092c689d",
               "name": "priority",
-              "value": "={{ $json.priority }}",
+              "value": "={{ $json.body[0].priority }}",
               "type": "string"
             },
             {
               "id": "645d4dae-64c3-48a3-98f5-773063d276e8",
               "name": "Subject",
-              "value": "={{ $json.Subject }}",
+              "value": "={{ $json.Subject ? $json.Subject : \"\" }}",
               "type": "string"
             },
             {
               "id": "72e22cf8-b90d-4619-aa57-7444eddde606",
               "name": "name",
-              "value": "={{ $json.name }}",
+              "value": "={{ $json.body[0].name }}",
               "type": "string"
             },
             {
               "id": "d6f1d0c9-48c7-4a22-8866-fa2344604e76",
               "name": "email",
-              "value": "={{ $json.email }}",
+              "value": "={{ $json.body[0].email }}",
               "type": "string"
             },
             {
               "id": "b2f10286-ea03-403b-b520-62ebe0ea3cc9",
               "name": "phone",
-              "value": "={{ $json.phone }}",
+              "value": "={{ $json.body[0].phone }}",
               "type": "string"
             },
             {
               "id": "e97f9c51-42cd-4e04-a4f8-3dbd72eb17b3",
               "name": "distid",
-              "value": "={{ $json.distid }}",
+              "value": "={{ $json.body[0].distid }}",
               "type": "string"
             },
             {
               "id": "f45fdef2-3670-45d8-a526-1d999500c345",
               "name": "district",
-              "value": "={{ $json.district }}",
+              "value": "={{ $json.body[0].district }}",
               "type": "string"
             },
             {
               "id": "215484e7-b64b-4c17-9b86-f13cfbad191c",
               "name": "product",
-              "value": "={{ $json.product }}",
+              "value": "={{ $json.body[0].product }}",
               "type": "string"
             },
             {
               "id": "7bd6bf31-6480-42f6-ae70-c6dec6c05a7e",
               "name": "comments",
-              "value": "={{ $json.comments }}",
+              "value": "={{ $json.body[0].comments }}",
               "type": "string"
             },
             {
               "id": "dcedfad0-ee31-468e-8300-e210cb86cf3e",
               "name": "email_subject",
-              "value": "={{ $json.ticket_Type }} from {{ $json.district }}({{ $json.distid }})",
+              "value": "={{ $json.body[0].ticket_Type }} from {{ $json.body[0].name }} @ {{ $json.body[0].district }}({{ $json.body[0].distid }})",
               "type": "string"
             }
           ]
@@ -809,10 +798,6 @@
         "fieldsToCreateOrUpdate": {
           "fields": [
             {
-              "fieldName": "access_token",
-              "fieldValue": "={{ $('Sanatized').item.json.referid }}"
-            },
-            {
               "fieldName": "person_name",
               "fieldValue": "={{ $('Sanatized').item.json.name }}"
             },
@@ -833,14 +818,6 @@
               "fieldValue": "={{ $('Get Ticket Types').item.json.id }}"
             },
             {
-              "fieldName": "tag_ids",
-              "fieldValue": "={{ [$('Get Tags').item.json.id] }}"
-            },
-            {
-              "fieldName": "subject_id",
-              "fieldValue": "={{ $('Get Subject Types').item.json.id }}"
-            },
-            {
               "fieldName": "partner_id",
               "fieldValue": "={{ $json.id }}"
             },
@@ -851,6 +828,9 @@
             {
               "fieldName": "email",
               "fieldValue": "={{ $('Sanatized').item.json.email }}"
+            },
+            {
+              "fieldName": "access_token"
             }
           ]
         }
@@ -1321,19 +1301,33 @@
     "Application Webhook": [
       {
         "json": {
-          "Formid": "9188",
-          "referid": "fa68a0a1-a8dc-460a-953e-147bcae59679",
-          "host": "n8n.edvistas.com",
-          "ticket_Type": "Feature Request",
-          "priority": "Low",
-          "Subject": "General",
-          "name": "Kenn Dessinger",
-          "email": "kdessinger@edvistas.com",
-          "phone": "518-344-7022",
-          "distid": "771",
-          "district": "Educational Vistas",
-          "product": "EduForm",
-          "comments": "I need help creating a form in EduForm.  I want to make a hidden field and make sure that is submitted to odoo."
+          "headers": {
+            "connection": "Keep-Alive",
+            "host": "n8n.edvistas.com",
+            "x-forwarded-scheme": "https",
+            "x-forwarded-proto": "https",
+            "x-forwarded-for": "172.100.196.44",
+            "x-real-ip": "172.100.196.44",
+            "content-length": "229",
+            "content-type": "application/json"
+          },
+          "params": {},
+          "query": {},
+          "body": [
+            {
+              "ticket_Type": "Incident",
+              "phone": "",
+              "email": "kdessinger@gmail.com",
+              "distid": 1020,
+              "product": "DataMate",
+              "district": "New York State PTA: Parent Pathways",
+              "name": "EVI Override",
+              "priority": "Normal",
+              "comments": "yo"
+            }
+          ],
+          "webhookUrl": "https://n8n.edvistas.com/webhook/odoo/helpdesk",
+          "executionMode": "production"
         }
       }
     ],
@@ -1560,6 +1554,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 4,
-  "updatedAt": "2025-03-30T06:55:59.000Z",
-  "versionId": "d237eb40-205e-48ef-b318-60551627a550"
+  "updatedAt": "2025-03-31T15:51:21.000Z",
+  "versionId": "adb69473-bdad-4a61-ab4b-cefbdc0dffda"
 }
