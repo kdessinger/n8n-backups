@@ -299,6 +299,7 @@
     },
     {
       "parameters": {
+        "httpMethod": "POST",
         "path": "parent-pathways/payment",
         "responseMode": "lastNode",
         "responseData": "noData",
@@ -1264,6 +1265,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2025-03-06T17:56:57.000Z",
-  "versionId": "8b599ec0-6279-433b-8ad6-f47b9a027ccd"
+  "updatedAt": "2025-03-31T14:29:46.000Z",
+  "versionId": "0f36d5f3-c6b0-4115-b23f-7d812ec638d3"
 }
