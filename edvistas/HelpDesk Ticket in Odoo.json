@@ -922,7 +922,7 @@
             },
             {
               "name": "Message",
-              "stringValue": "={{ $('Sanitized').item.json.product }} user {{ $('Sanitized').item.json.name }} from district {{ $('Sanitized').item.json.district }}({{ $('Sanitized').item.json.distid }}) has submitted a HelpDesk Ticket NO:{{ $json.name }}\n\n"
+              "stringValue": "={{ $('Sanitized').item.json.product }} user {{ $('Sanitized').item.json.name }} from district {{ $('Sanitized').item.json.district }}({{ $('Sanitized').item.json.distid }}) has submitted a HelpDesk Ticket NO:{{ $json.name }}"
             },
             {
               "name": "ClickURL",
@@ -1651,6 +1651,6 @@
     }
   ],
   "triggerCount": 4,
-  "updatedAt": "2025-03-31T22:40:19.000Z",
-  "versionId": "c882e2a4-8a5e-458b-b13f-44f1d726e943"
+  "updatedAt": "2025-04-01T13:36:21.000Z",
+  "versionId": "e6fb6206-9c75-49f1-b07e-2cb191b07b29"
 }
