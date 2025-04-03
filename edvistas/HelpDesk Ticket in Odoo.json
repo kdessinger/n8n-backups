@@ -148,7 +148,7 @@
       "main": [
         [
           {
-            "node": "Create User",
+            "node": "Special District?",
             "type": "main",
             "index": 0
           }
@@ -200,6 +200,46 @@
         [
           {
             "node": "Sanitized",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Special District?": {
+      "main": [
+        [
+          {
+            "node": "Get State Code",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create User",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get State Code": {
+      "main": [
+        [
+          {
+            "node": "Get School",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get School": {
+      "main": [
+        [
+          {
+            "node": "Create User",
             "type": "main",
             "index": 0
           }
@@ -576,13 +616,13 @@
     {
       "parameters": {
         "content": "## Get Key Values from Odoo \nGets the ID Key for each of the following:\n",
-        "height": 320,
-        "width": 1120
+        "height": 380,
+        "width": 1900
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
         -160,
-        -60
+        -120
       ],
       "typeVersion": 1,
       "id": "4abf9f0a-2a2c-4406-a349-d2c733ecfa52",
@@ -664,12 +704,12 @@
       "parameters": {
         "content": "## Add User",
         "height": 320,
-        "width": 260,
+        "width": 220,
         "color": 3
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        1200,
+        1760,
         -60
       ],
       "typeVersion": 1,
@@ -810,7 +850,7 @@
             },
             {
               "fieldName": "parent_id",
-              "fieldValue": "={{ $('Get District').item.json.id }}"
+              "fieldValue": "={{(() => {\n  try {\n    return $('Get School').item.json.id || $('Get District').item.json.id;\n  } catch (e) {\n    return $('Get District').item.json.id;\n  }\n})()}}"
             },
             {
               "fieldName": "comment",
@@ -830,8 +870,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        1280,
-        60
+        1820,
+        80
       ],
       "id": "d90e377d-48d3-42e7-beb5-0c295d3b69a6",
       "name": "Create User",
@@ -892,7 +932,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "position": [
         100,
-        -160
+        -220
       ],
       "typeVersion": 1,
       "id": "72faa2db-8a8a-4afa-83af-efb7769f09a2",
@@ -1063,7 +1103,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "position": [
         -160,
-        -240
+        -300
       ],
       "typeVersion": 1,
       "id": "dc7266d2-ab5b-4670-baaf-e0ed76d3b846",
@@ -1334,7 +1374,7 @@
             {
               "id": "72e22cf8-b90d-4619-aa57-7444eddde606",
               "name": "name",
-              "value": "={{ $json.body && $json.body[0].name ? $json.body[0].name : ($json.name ? $json.name : \"\") }}",
+              "value": "={{ $json.body[0].name && $json.body[0].name.toLowerCase().split(', ').map(part => part.charAt(0).toUpperCase() + part.slice(1)).join(', ') }}\n",
               "type": "string"
             },
             {
@@ -1385,6 +1425,99 @@
       ],
       "id": "c0a83416-3637-4800-a1ab-dfdf93767512",
       "name": "Parse Fields"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "a196bf11-d3a3-4516-a86c-dd9fb19a8f24",
+              "leftValue": "={{ $('Sanitized').item.json.distid }}",
+              "rightValue": 938,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1240,
+        60
+      ],
+      "id": "e349fcdc-dbc3-4894-ba51-648eb2550472",
+      "name": "Special District?",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "res.partner",
+        "operation": "getAll",
+        "limit": 1,
+        "options": {
+          "fieldsList": [
+            "id",
+            "name"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "name",
+              "operator": "like",
+              "value": "={{ $json.statecode }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        1600,
+        -100
+      ],
+      "id": "64a32f43-024f-4c30-af06-019ca6de5cd2",
+      "name": "Get School",
+      "alwaysOutputData": false,
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT s.statecode\n\tFROM [evicore].[dbo].[schools] s\n\tJOIN [evicore].[dbo].[userSchools] us ON s.id = us.schoolid\n\tJOIN [evicore].[dbo].[users] u ON us.userIdKey = u.id\nWHERE u.districtid = {{ $('Sanitized').item.json.distid }} AND u.userid = '{{ $('Sanitized').item.json.email }}'"
+      },
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1.1,
+      "position": [
+        1420,
+        -100
+      ],
+      "id": "92dbafa8-1a60-47da-8ccc-6a1f01e97612",
+      "name": "Get State Code",
+      "credentials": {
+        "microsoftSql": {
+          "id": "8",
+          "name": "DB1.DS1.GOWLS.COM (kdessinger)"
+        }
+      }
     }
   ],
   "pinData": {
@@ -1396,24 +1529,24 @@
             "host": "n8n.edvistas.com",
             "x-forwarded-scheme": "https",
             "x-forwarded-proto": "https",
-            "x-forwarded-for": "199.223.255.8",
-            "x-real-ip": "199.223.255.8",
-            "content-length": "307",
+            "x-forwarded-for": "199.223.255.7",
+            "x-real-ip": "199.223.255.7",
+            "content-length": "379",
             "content-type": "application/json"
           },
           "params": {},
           "query": {},
           "body": [
             {
-              "ticket_Type": "Feedback",
-              "phone": "518-344-7022",
-              "email": "wcole@edvistas.com",
-              "distid": 21,
+              "ticket_Type": "Support",
+              "phone": "6469827483",
+              "email": "spremmana@schools.nyc.gov",
+              "distid": 938,
               "product": "DataMate",
-              "district": "Appleville School District ****",
-              "name": "Cole, Walter",
+              "district": "New York City Department of Education",
+              "name": "PREMMANA, SAMANTHA",
               "priority": "Normal",
-              "comments": "Testing the new code to determine if user level ticket creation is working. "
+              "comments": "I uploaded a test in pdf however it does not populate the questions for me on Datamate for students to take online. Please advise! "
             }
           ],
           "webhookUrl": "https://n8n.edvistas.com/webhook/odoo/helpdesk",
@@ -1651,6 +1784,6 @@
     }
   ],
   "triggerCount": 4,
-  "updatedAt": "2025-04-01T13:36:21.000Z",
-  "versionId": "e6fb6206-9c75-49f1-b07e-2cb191b07b29"
+  "updatedAt": "2025-04-03T00:23:46.000Z",
+  "versionId": "f7d218ee-c011-4477-a0d9-256b62b23d14"
 }
