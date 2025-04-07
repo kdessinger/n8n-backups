@@ -148,17 +148,6 @@
         ]
       ]
     },
-    "Template elements": {
-      "main": [
-        [
-          {
-            "node": "Final template",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Sort-workflows": {
       "main": [
         [
@@ -274,6 +263,17 @@
         [
           {
             "node": "Template elements",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Template elements": {
+      "main": [
+        [
+          {
+            "node": "Final template",
             "type": "main",
             "index": 0
           }
@@ -542,7 +542,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "position": [
         4200,
-        1330
+        1340
       ],
       "typeVersion": 1
     },
@@ -565,60 +565,7 @@
       "type": "n8n-nodes-base.set",
       "position": [
         4000,
-        1330
-      ],
-      "typeVersion": 3.3
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "afbcca70-2977-46a3-89c3-27a96f791d13",
-              "name": "sidebar",
-              "type": "string",
-              "value": "=            <nav id=\"sidebar\" class=\"col-2 bg-light sidebar\">\n              <div class=\"sidebar-sticky\">\n                <ul class=\"list-unstyled ps-0\">\n                  <li class=\"mb-1\">\n                    <a href=\"#overview\" class=\"btn d-inline-flex align-items-center rounded border-0 sidebar-a\">Overview</a>\n                  </li>\n                  <li class=\"mb-1\">\n                    <button class=\"btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed\" data-bs-toggle=\"collapse\" data-bs-target=\"#workflows-collapse\" aria-expanded=\"false\">\n                      Workflows\n                    </button>\n                    <div class=\"collapse\" id=\"workflows-collapse\">\n                      <ul class=\"btn-toggle-nav list-unstyled fw-normal pb-1 small\">\n                        <xsl:for-each select=\"root/wf_stats\">\n                          <li><a href=\"#{wf_id}\" class=\"link-dark d-inline-flex text-decoration-none rounded sidebar-a\"><xsl:value-of select=\"wf_name\" /></a></li>\n                        </xsl:for-each>\n                      </ul>\n                    </div>\n                  </li>\n                  <li class=\"mb-1\">\n                    <button class=\"btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed\" data-bs-toggle=\"collapse\" data-bs-target=\"#nodes-collapse\" aria-expanded=\"false\">\n                      Nodes\n                    </button>\n                    <div class=\"collapse\" id=\"nodes-collapse\">\n                      <ul class=\"btn-toggle-nav list-unstyled fw-normal pb-1 small\">\n                        <xsl:for-each select=\"root/nodes-section\">\n                          <li><a href=\"#node-{node}\" class=\"link-dark d-inline-flex text-decoration-none rounded sidebar-a\"><xsl:value-of select=\"node\" /></a></li>\n                        </xsl:for-each>\n                      </ul>\n                    </div>\n                  </li>\n                  <li class=\"mb-1\">\n                    <button class=\"btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed\" data-bs-toggle=\"collapse\" data-bs-target=\"#tags-collapse\" aria-expanded=\"false\">\n                      Tags\n                    </button>\n                    <div class=\"collapse\" id=\"tags-collapse\">\n                      <ul class=\"btn-toggle-nav list-unstyled fw-normal pb-1 small\">\n                        <xsl:for-each select=\"root/tags-section\">\n                          <li><a href=\"#tag-{tag}\" class=\"link-dark d-inline-flex text-decoration-none rounded sidebar-a\"><xsl:value-of select=\"tag\" /></a></li>\n                        </xsl:for-each>\n                      </ul>\n                    </div>\n                  </li>\n                  <li class=\"border-top my-3\"></li>\n                  <li class=\"mb-1\">\n                    <a href=\"#about\" class=\"btn d-inline-flex align-items-center rounded border-0 sidebar-a\">About</a>\n                  </li>\n                </ul>\n                <div class=\"sidebar-bottom\">\n                  <p>n8n Dashboard ver 0.5<br/>\nContacts: <a class=\"link-offset-1 link-offset-1-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover\" href=\"https://www.linkedin.com/in/parsadanyan/\" target=\"_blank\">Eduard</a>, <a class=\"link-offset-1 link-offset-1-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover\" href=\"https://www.linkedin.com/in/yulia-dmitrievna-1112361b5/\" target=\"_blank\">Yulia</a></p>\n                </div>\n              </div>\n</nav>"
-            },
-            {
-              "id": "d6dc34a7-3c79-44ef-957c-63aec4b2d75a",
-              "name": "overview",
-              "type": "string",
-              "value": "=<section  id=\"overview\" class=\"container\">\n  <h1>n8n Workflow Dashboard</h1>\n</section>\n\n<section class=\"container mt-3\">\n  <h2>Overview</h2>\n  <div class=\"row\">\n    <div class=\"col-md-4\">\n      <div class=\"card bg-body-secondary mb-2 shadow-sm\">\n        <div class=\"card-body text-center\">\n          <h5 class=\"card-title\">Total Workflows</h5>\n          <p class=\"card-text display-4\">📊 <xsl:value-of select=\"root/globals/global_total\" /></p>\n        </div>\n      </div>\n    </div>\n    <div class=\"col-md-4\">\n      <div class=\"card bg-body-secondary mb-2 shadow-sm\">\n        <div class=\"card-body text-center\">\n          <h5 class=\"card-title\">Active Workflows</h5>\n          <p class=\"card-text display-4\">✅ <xsl:value-of select=\"root/globals/global_active\" /></p>\n        </div>\n      </div>\n    </div>\n    <div class=\"col-md-4\">\n      <div class=\"card bg-body-secondary mb-2 shadow-sm\">\n        <div class=\"card-body text-center\">\n          <h5 class=\"card-title\">Triggers Count</h5>\n          <p class=\"card-text display-4\">⚡ <xsl:value-of select=\"root/globals/global_trigger\" /></p>\n        </div>\n      </div>\n    </div>\n  </div>\n</section>"
-            },
-            {
-              "id": "19ed123c-404b-4a68-a298-8f24c285f71c",
-              "name": "workflows",
-              "type": "string",
-              "value": "=<section id=\"workflows\" class=\"container mt-3\">\n  <h2>Workflows</h2>\n  <xsl:for-each select=\"root/wf_stats\">\n    <div class=\"card mb-3 shadow-sm nooverflow\">\n      <div class=\"card-body\">\n        <div class=\"d-flex align-items-center mb-2\">\n          <div class=\"form-check form-switch me-3 position-relative\">\n            <input class=\"form-check-input\" type=\"checkbox\" role=\"switch\">\n              <xsl:attribute name=\"id\">\n                <xsl:value-of select=\"concat('switch-', wf_id)\" />\n              </xsl:attribute>\n              <xsl:if test=\"wf_active = 'true'\">\n                <xsl:attribute name=\"checked\">checked</xsl:attribute>\n              </xsl:if>\n            </input>\n            <label class=\"form-check-label\">\n              <xsl:attribute name=\"for\">\n                <xsl:value-of select=\"concat('switch-', wf_id)\" />\n              </xsl:attribute>\n            </label>\n            <div class=\"form-check-overlay\"></div>\n          </div>\n          <h5 class=\"card-title mb-0\">\n            <a class=\"link-offset-1 link-offset-1-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover\" href=\"{wf_url}\" target=\"_blank\" title=\"Open workflow in a new window\">\n              <xsl:attribute name=\"id\">\n                <xsl:value-of select=\"wf_id\" />\n              </xsl:attribute>\n              <xsl:value-of select=\"wf_name\" />\n            </a>\n          </h5>\n          <div class=\"ms-auto\">\n            <span class=\"badge bg-light font-monospace text-dark me-2\">\n              Updated At: <xsl:value-of select=\"wf_updated\" />\n            </span>\n            <span class=\"badge bg-light font-monospace text-dark me-2\">\n              Created At: <xsl:value-of select=\"wf_created\" />\n            </span>\n            <span class=\"badge bg-light font-monospace text-dark me-2\">\n              Nodes (Tot | Uniq | Trig): <xsl:value-of select=\"nodes_count_total\" /> | <xsl:value-of select=\"nodes_count_uniq\" /> | <xsl:value-of select=\"wf_trigcount\" />\n            </span>\n          </div>\n        </div>\n        <div class=\"row\">\n          <div class=\"d-flex\">\n            <div>\n              <xsl:for-each select=\"nodes_unique\">\n                <a href=\"#node-{.}\" title=\"Jump to this node\" class=\"badge-link\">\n                  <span class=\"badge bg-info-subtle border border-info-subtle text-info-emphasis rounded-pill me-2 mb-2\">\n                    <xsl:value-of select=\".\" />\n                  </span>\n                </a>\n              </xsl:for-each>\n            </div>\n            <xsl:if test=\"wf_tags\">\n              <div class=\"ms-auto\">\n                <xsl:for-each select=\"wf_tags\">\n                  <a href=\"#tag-{.}\" title=\"Jump to this tag\" class=\"badge-link\">\n                    <span class=\"badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-pill me-2 mb-2\">\n                      <xsl:value-of select=\".\" />\n                    </span>\n                  </a>\n                </xsl:for-each>\n              </div>\n            </xsl:if>\n          </div>\n        </div>\n      </div>\n    </div>\n  </xsl:for-each>\n</section>"
-            },
-            {
-              "id": "9869134d-ee39-49a2-a978-eb3adaac482d",
-              "name": "nodes",
-              "type": "string",
-              "value": "=<section id=\"nodes\" class=\"container mt-3\">\n  <h2>Nodes</h2>\n  <div class=\"accordion\" id=\"nodesAccordion\">\n    <xsl:for-each select=\"root/nodes-section\">\n      <div class=\"accordion-item shadow-sm\">\n        <h3 class=\"accordion-header\">\n          <button class=\"accordion-button collapsed\" type=\"button\" data-bs-toggle=\"collapse\">\n            <xsl:attribute name=\"data-bs-target\">\n              <xsl:value-of select=\"concat('#collapse-', position())\" />\n            </xsl:attribute>\n            <xsl:attribute name=\"aria-controls\">\n              <xsl:value-of select=\"concat('collapse-', position())\" />\n            </xsl:attribute>\n            <a>\n              <xsl:attribute name=\"id\">\n                <xsl:value-of select=\"concat('node-', node)\" />\n              </xsl:attribute>\n              <xsl:value-of select=\"node\" /> <span class=\"badge bg-info-subtle text-info-emphasis rounded-pill ms-2\"><xsl:value-of select=\"count\" /></span>\n            </a>\n          </button>\n        </h3>\n        <div class=\"accordion-collapse collapse\">\n          <xsl:attribute name=\"id\">\n            <xsl:value-of select=\"concat('collapse-', position())\" />\n          </xsl:attribute>\n          <xsl:attribute name=\"aria-labelledby\">\n            <xsl:value-of select=\"concat('heading-', position())\" />\n          </xsl:attribute>\n          <div class=\"accordion-body\">\n            <xsl:for-each select=\"workflows\">\n              <span class=\"badge bg-info-subtle border border-info-subtle text-info-emphasis rounded-pill me-2 mb-2\">\n                <a href=\"#{wf_id}\" class=\"text-primary-emphasis text-decoration-none me-1 section-offset\" title=\"Jump to workflow details\">\n                  <xsl:value-of select=\"wf_name\" />\n                </a>\n                <a href=\"{wf_url}\" target=\"_blank\" class=\"text-primary-emphasis text-decoration-none\" title=\"Open workflow in a new window\">\n                  🔗\n                </a>\n              </span>\n            </xsl:for-each>\n          </div>\n        </div>\n      </div>\n    </xsl:for-each>\n  </div>\n</section>"
-            },
-            {
-              "id": "f09bc0d1-017e-44f5-bc39-6bdfeffe22ec",
-              "name": "tags",
-              "type": "string",
-              "value": "=<section id=\"tags\" class=\"container mt-3\">\n  <h2>Tags</h2>\n  <div class=\"accordion\" id=\"tagsAccordion\">\n    <xsl:for-each select=\"root/tags-section\">\n      <div class=\"accordion-item shadow-sm\">\n        <h3 class=\"accordion-header\">\n          <button class=\"accordion-button collapsed\" type=\"button\" data-bs-toggle=\"collapse\">\n            <xsl:attribute name=\"data-bs-target\">\n              <xsl:value-of select=\"concat('#collapse-tag-', position())\" />\n            </xsl:attribute>\n            <xsl:attribute name=\"aria-controls\">\n              <xsl:value-of select=\"concat('collapse-tag-', position())\" />\n            </xsl:attribute>\n            <a>\n              <xsl:attribute name=\"id\">\n                <xsl:value-of select=\"concat('tag-', tag)\" />\n              </xsl:attribute>\n              <xsl:value-of select=\"tag\" /> <span class=\"badge bg-light-subtle text-light-emphasis rounded-pill ms-2\"><xsl:value-of select=\"count\" /></span>\n            </a>\n          </button>\n        </h3>\n        <div class=\"accordion-collapse collapse\">\n          <xsl:attribute name=\"id\">\n            <xsl:value-of select=\"concat('collapse-tag-', position())\" />\n          </xsl:attribute>\n          <xsl:attribute name=\"aria-labelledby\">\n            <xsl:value-of select=\"concat('heading-tag-', position())\" />\n          </xsl:attribute>\n          <div class=\"accordion-body\">\n            <xsl:for-each select=\"workflows\">\n              <span class=\"badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-pill me-2 mb-2\">\n                <a href=\"#{wf_id}\" class=\"text-primary-emphasis text-decoration-none me-1 section-offset\" title=\"Jump to workflow details\">\n                  <xsl:value-of select=\"wf_name\" />\n                </a>\n                <a href=\"{wf_url}\" target=\"_blank\" class=\"text-primary-emphasis text-decoration-none\" title=\"Open workflow in a new window\">\n                  🔗\n                </a>\n              </span>\n            </xsl:for-each>\n          </div>\n        </div>\n      </div>\n    </xsl:for-each>\n  </div>\n</section>"
-            },
-            {
-              "id": "2af68003-c9b9-4e60-8836-195da026ad2f",
-              "name": "about",
-              "type": "string",
-              "value": "=<hr class=\"featurette-divider border-dark\" />\n<section id=\"about\" class=\"container mt-3\">\n  <h2 class=\"text-center mb-5\">About</h2>\n  <div class=\"row\">\n\n    <div class=\"col-lg-3 text-center\">\n      <img src=\"https://gravatar.com/avatar/a551e67c6fe7affd5f882a527dee154bb6c3ac90cf878326accb3fb3ec77c8a6?r=pg&amp;d=retro&amp;size=200\" alt=\"Eduard\" class=\"rounded-circle mb-3\" width=\"140\" height=\"140\" />\n      <h3 class=\"fw-normal\">Eduard</h3>\n      <p><a class=\"btn btn-warning\" href=\"https://n8n.io/creators/eduard/\" target=\"_blank\">More templates</a></p>\n      <p><a class=\"btn btn-outline-primary\" href=\"https://www.linkedin.com/in/parsadanyan/\" target=\"_blank\">LinkedIn</a></p>\n    </div>\n\n    <div class=\"col-lg-3 text-center\">\n      <img src=\"https://gravatar.com/avatar/d29a8262aa8835d430919f8002957a77169f8da987dee0740aa494ae67a061b7?r=pg&amp;d=retro&amp;size=200\" alt=\"Yulia\" class=\"rounded-circle mb-3\" width=\"140\" height=\"140\" />\n      <h3 class=\"fw-normal\">Yulia</h3>\n      <p><a class=\"btn btn-warning\" href=\"https://n8n.io/creators/yulia/\" target=\"_blank\">More templates</a></p>\n      <p><a class=\"btn btn-outline-primary\" href=\"https://www.linkedin.com/in/yulia-dmitrievna-1112361b5/\" target=\"_blank\">LinkedIn</a></p>\n    </div>\n\n<div class=\"col-lg-6 text-center\">\n  <div class=\"card shadow-sm mb-3\">\n    <div class=\"card-img-container\">\n      <img src=\"https://blog.n8n.io/content/images/size/w800/2023/09/gg.png\" class=\"card-img-top\" alt=\"How to work with XML and SQL using n8n\" />\n    </div>\n    <div class=\"card-body\">\n      <h5 class=\"card-title\">Read the article to find out more!</h5>\n      <p class=\"card-text\">This dashboard was created using XML template language (XSLT) in n8n.</p>\n      <a href=\"https://blog.n8n.io/sql-xml/#how-to-deliver-the-xml-file\" class=\"btn btn-primary\" target=\"_blank\">Read Article</a>\n    </div>\n  </div>\n</div>\n\n  </div>\n</section>"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "fe69ed60-fc4a-4d57-ae0f-7f82cb3c73e5",
-      "name": "Template elements",
-      "type": "n8n-nodes-base.set",
-      "position": [
-        3800,
-        1330
+        1340
       ],
       "typeVersion": 3.3
     },
@@ -872,10 +819,63 @@
       "type": "n8n-nodes-base.webhook",
       "position": [
         3600,
-        1330
+        1340
       ],
       "webhookId": "73a91e4d-143d-4168-9efb-6c56f2258aec",
       "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "afbcca70-2977-46a3-89c3-27a96f791d13",
+              "name": "sidebar",
+              "type": "string",
+              "value": "=            <nav id=\"sidebar\" class=\"col-2 bg-light sidebar\">\n              <div class=\"sidebar-sticky\">\n                <ul class=\"list-unstyled ps-0\">\n                  <li class=\"mb-1\">\n                    <a href=\"#overview\" class=\"btn d-inline-flex align-items-center rounded border-0 sidebar-a\">Overview</a>\n                  </li>\n                  <li class=\"mb-1\">\n                    <button class=\"btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed\" data-bs-toggle=\"collapse\" data-bs-target=\"#workflows-collapse\" aria-expanded=\"false\">\n                      Workflows\n                    </button>\n                    <div class=\"collapse\" id=\"workflows-collapse\">\n                      <ul class=\"btn-toggle-nav list-unstyled fw-normal pb-1 small\">\n                        <xsl:for-each select=\"root/wf_stats\">\n                          <li><a href=\"#{wf_id}\" class=\"link-dark d-inline-flex text-decoration-none rounded sidebar-a\"><xsl:value-of select=\"wf_name\" /></a></li>\n                        </xsl:for-each>\n                      </ul>\n                    </div>\n                  </li>\n                  <li class=\"mb-1\">\n                    <button class=\"btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed\" data-bs-toggle=\"collapse\" data-bs-target=\"#nodes-collapse\" aria-expanded=\"false\">\n                      Nodes\n                    </button>\n                    <div class=\"collapse\" id=\"nodes-collapse\">\n                      <ul class=\"btn-toggle-nav list-unstyled fw-normal pb-1 small\">\n                        <xsl:for-each select=\"root/nodes-section\">\n                          <li><a href=\"#node-{node}\" class=\"link-dark d-inline-flex text-decoration-none rounded sidebar-a\"><xsl:value-of select=\"node\" /></a></li>\n                        </xsl:for-each>\n                      </ul>\n                    </div>\n                  </li>\n                  <li class=\"mb-1\">\n                    <button class=\"btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed\" data-bs-toggle=\"collapse\" data-bs-target=\"#tags-collapse\" aria-expanded=\"false\">\n                      Tags\n                    </button>\n                    <div class=\"collapse\" id=\"tags-collapse\">\n                      <ul class=\"btn-toggle-nav list-unstyled fw-normal pb-1 small\">\n                        <xsl:for-each select=\"root/tags-section\">\n                          <li><a href=\"#tag-{tag}\" class=\"link-dark d-inline-flex text-decoration-none rounded sidebar-a\"><xsl:value-of select=\"tag\" /></a></li>\n                        </xsl:for-each>\n                      </ul>\n                    </div>\n                  </li>\n                  <li class=\"border-top my-3\"></li>\n                  <li class=\"mb-1\">\n                    <a href=\"#about\" class=\"btn d-inline-flex align-items-center rounded border-0 sidebar-a\">About</a>\n                  </li>\n                </ul>\n                <div class=\"sidebar-bottom\">\n                  <p>n8n Dashboard ver 0.6<br/></p>\n                </div>\n              </div>\n</nav>"
+            },
+            {
+              "id": "d6dc34a7-3c79-44ef-957c-63aec4b2d75a",
+              "name": "overview",
+              "type": "string",
+              "value": "=<section  id=\"overview\" class=\"container\">\n  <h1>n8n Workflow Dashboard</h1>\n</section>\n\n<section class=\"container mt-3\">\n  <h2>Overview</h2>\n  <div class=\"row\">\n    <div class=\"col-md-4\">\n      <div class=\"card bg-body-secondary mb-2 shadow-sm\">\n        <div class=\"card-body text-center\">\n          <h5 class=\"card-title\">Total Workflows</h5>\n          <p class=\"card-text display-4\">📊 <xsl:value-of select=\"root/globals/global_total\" /></p>\n        </div>\n      </div>\n    </div>\n    <div class=\"col-md-4\">\n      <div class=\"card bg-body-secondary mb-2 shadow-sm\">\n        <div class=\"card-body text-center\">\n          <h5 class=\"card-title\">Active Workflows</h5>\n          <p class=\"card-text display-4\">✅ <xsl:value-of select=\"root/globals/global_active\" /></p>\n        </div>\n      </div>\n    </div>\n    <div class=\"col-md-4\">\n      <div class=\"card bg-body-secondary mb-2 shadow-sm\">\n        <div class=\"card-body text-center\">\n          <h5 class=\"card-title\">Triggers Count</h5>\n          <p class=\"card-text display-4\">⚡ <xsl:value-of select=\"root/globals/global_trigger\" /></p>\n        </div>\n      </div>\n    </div>\n  </div>\n</section>"
+            },
+            {
+              "id": "19ed123c-404b-4a68-a298-8f24c285f71c",
+              "name": "workflows",
+              "type": "string",
+              "value": "=<section id=\"workflows\" class=\"container mt-3\">\n  <h2>Workflows</h2>\n  <xsl:for-each select=\"root/wf_stats\">\n    <div class=\"card mb-3 shadow-sm nooverflow\">\n      <div class=\"card-body\">\n        <div class=\"d-flex align-items-center mb-2\">\n          <div class=\"form-check form-switch me-3 position-relative\">\n            <input class=\"form-check-input\" type=\"checkbox\" role=\"switch\">\n              <xsl:attribute name=\"id\">\n                <xsl:value-of select=\"concat('switch-', wf_id)\" />\n              </xsl:attribute>\n              <xsl:if test=\"wf_active = 'true'\">\n                <xsl:attribute name=\"checked\">checked</xsl:attribute>\n              </xsl:if>\n            </input>\n            <label class=\"form-check-label\">\n              <xsl:attribute name=\"for\">\n                <xsl:value-of select=\"concat('switch-', wf_id)\" />\n              </xsl:attribute>\n            </label>\n            <div class=\"form-check-overlay\"></div>\n          </div>\n          <h5 class=\"card-title mb-0\">\n            <a class=\"link-offset-1 link-offset-1-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover\" href=\"{wf_url}\" target=\"_blank\" title=\"Open workflow in a new window\">\n              <xsl:attribute name=\"id\">\n                <xsl:value-of select=\"wf_id\" />\n              </xsl:attribute>\n              <xsl:value-of select=\"wf_name\" />\n            </a>\n          </h5>\n          <div class=\"ms-auto\">\n            <span class=\"badge bg-light font-monospace text-dark me-2\">\n              Updated At: <xsl:value-of select=\"wf_updated\" />\n            </span>\n            <span class=\"badge bg-light font-monospace text-dark me-2\">\n              Created At: <xsl:value-of select=\"wf_created\" />\n            </span>\n            <span class=\"badge bg-light font-monospace text-dark me-2\">\n              Nodes (Tot | Uniq | Trig): <xsl:value-of select=\"nodes_count_total\" /> | <xsl:value-of select=\"nodes_count_uniq\" /> | <xsl:value-of select=\"wf_trigcount\" />\n            </span>\n          </div>\n        </div>\n        <div class=\"row\">\n          <div class=\"d-flex\">\n            <div>\n              <xsl:for-each select=\"nodes_unique\">\n                <a href=\"#node-{.}\" title=\"Jump to this node\" class=\"badge-link\">\n                  <span class=\"badge bg-info-subtle border border-info-subtle text-info-emphasis rounded-pill me-2 mb-2\">\n                    <xsl:value-of select=\".\" />\n                  </span>\n                </a>\n              </xsl:for-each>\n            </div>\n            <xsl:if test=\"wf_tags\">\n              <div class=\"ms-auto\">\n                <xsl:for-each select=\"wf_tags\">\n                  <a href=\"#tag-{.}\" title=\"Jump to this tag\" class=\"badge-link\">\n                    <span class=\"badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-pill me-2 mb-2\">\n                      <xsl:value-of select=\".\" />\n                    </span>\n                  </a>\n                </xsl:for-each>\n              </div>\n            </xsl:if>\n          </div>\n        </div>\n      </div>\n    </div>\n  </xsl:for-each>\n</section>"
+            },
+            {
+              "id": "9869134d-ee39-49a2-a978-eb3adaac482d",
+              "name": "nodes",
+              "type": "string",
+              "value": "=<section id=\"nodes\" class=\"container mt-3\">\n  <h2>Nodes</h2>\n  <div class=\"accordion\" id=\"nodesAccordion\">\n    <xsl:for-each select=\"root/nodes-section\">\n      <div class=\"accordion-item shadow-sm\">\n        <h3 class=\"accordion-header\">\n          <button class=\"accordion-button collapsed\" type=\"button\" data-bs-toggle=\"collapse\">\n            <xsl:attribute name=\"data-bs-target\">\n              <xsl:value-of select=\"concat('#collapse-', position())\" />\n            </xsl:attribute>\n            <xsl:attribute name=\"aria-controls\">\n              <xsl:value-of select=\"concat('collapse-', position())\" />\n            </xsl:attribute>\n            <a>\n              <xsl:attribute name=\"id\">\n                <xsl:value-of select=\"concat('node-', node)\" />\n              </xsl:attribute>\n              <xsl:value-of select=\"node\" /> <span class=\"badge bg-info-subtle text-info-emphasis rounded-pill ms-2\"><xsl:value-of select=\"count\" /></span>\n            </a>\n          </button>\n        </h3>\n        <div class=\"accordion-collapse collapse\">\n          <xsl:attribute name=\"id\">\n            <xsl:value-of select=\"concat('collapse-', position())\" />\n          </xsl:attribute>\n          <xsl:attribute name=\"aria-labelledby\">\n            <xsl:value-of select=\"concat('heading-', position())\" />\n          </xsl:attribute>\n          <div class=\"accordion-body\">\n            <xsl:for-each select=\"workflows\">\n              <span class=\"badge bg-info-subtle border border-info-subtle text-info-emphasis rounded-pill me-2 mb-2\">\n                <a href=\"#{wf_id}\" class=\"text-primary-emphasis text-decoration-none me-1 section-offset\" title=\"Jump to workflow details\">\n                  <xsl:value-of select=\"wf_name\" />\n                </a>\n                <a href=\"{wf_url}\" target=\"_blank\" class=\"text-primary-emphasis text-decoration-none\" title=\"Open workflow in a new window\">\n                  🔗\n                </a>\n              </span>\n            </xsl:for-each>\n          </div>\n        </div>\n      </div>\n    </xsl:for-each>\n  </div>\n</section>"
+            },
+            {
+              "id": "f09bc0d1-017e-44f5-bc39-6bdfeffe22ec",
+              "name": "tags",
+              "type": "string",
+              "value": "=<section id=\"tags\" class=\"container mt-3\">\n  <h2>Tags</h2>\n  <div class=\"accordion\" id=\"tagsAccordion\">\n    <xsl:for-each select=\"root/tags-section\">\n      <div class=\"accordion-item shadow-sm\">\n        <h3 class=\"accordion-header\">\n          <button class=\"accordion-button collapsed\" type=\"button\" data-bs-toggle=\"collapse\">\n            <xsl:attribute name=\"data-bs-target\">\n              <xsl:value-of select=\"concat('#collapse-tag-', position())\" />\n            </xsl:attribute>\n            <xsl:attribute name=\"aria-controls\">\n              <xsl:value-of select=\"concat('collapse-tag-', position())\" />\n            </xsl:attribute>\n            <a>\n              <xsl:attribute name=\"id\">\n                <xsl:value-of select=\"concat('tag-', tag)\" />\n              </xsl:attribute>\n              <xsl:value-of select=\"tag\" /> <span class=\"badge bg-light-subtle text-light-emphasis rounded-pill ms-2\"><xsl:value-of select=\"count\" /></span>\n            </a>\n          </button>\n        </h3>\n        <div class=\"accordion-collapse collapse\">\n          <xsl:attribute name=\"id\">\n            <xsl:value-of select=\"concat('collapse-tag-', position())\" />\n          </xsl:attribute>\n          <xsl:attribute name=\"aria-labelledby\">\n            <xsl:value-of select=\"concat('heading-tag-', position())\" />\n          </xsl:attribute>\n          <div class=\"accordion-body\">\n            <xsl:for-each select=\"workflows\">\n              <span class=\"badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-pill me-2 mb-2\">\n                <a href=\"#{wf_id}\" class=\"text-primary-emphasis text-decoration-none me-1 section-offset\" title=\"Jump to workflow details\">\n                  <xsl:value-of select=\"wf_name\" />\n                </a>\n                <a href=\"{wf_url}\" target=\"_blank\" class=\"text-primary-emphasis text-decoration-none\" title=\"Open workflow in a new window\">\n                  🔗\n                </a>\n              </span>\n            </xsl:for-each>\n          </div>\n        </div>\n      </div>\n    </xsl:for-each>\n  </div>\n</section>"
+            },
+            {
+              "id": "2af68003-c9b9-4e60-8836-195da026ad2f",
+              "name": "about",
+              "type": "string",
+              "value": "=<hr class=\"featurette-divider border-dark\" />\n<section id=\"about\" class=\"container mt-3\">\n  <h2 class=\"text-center mb-5\">About</h2>\n  <div class=\"row\">\n\n    <div class=\"col-lg-3 text-center\">\n      <img src=\"https://gravatar.com/avatar/a551e67c6fe7affd5f882a527dee154bb6c3ac90cf878326accb3fb3ec77c8a6?r=pg&amp;d=retro&amp;size=200\" alt=\"Eduard\" class=\"rounded-circle mb-3\" width=\"140\" height=\"140\" />\n      <h3 class=\"fw-normal\">Eduard</h3>\n      <p><a class=\"btn btn-warning\" href=\"https://n8n.io/creators/eduard/\" target=\"_blank\">More templates</a></p>\n      <p><a class=\"btn btn-outline-primary\" href=\"https://www.linkedin.com/in/parsadanyan/\" target=\"_blank\">LinkedIn</a></p>\n    </div>\n\n    <div class=\"col-lg-3 text-center\">\n      <img src=\"https://gravatar.com/avatar/d29a8262aa8835d430919f8002957a77169f8da987dee0740aa494ae67a061b7?r=pg&amp;d=retro&amp;size=200\" alt=\"Yulia\" class=\"rounded-circle mb-3\" width=\"140\" height=\"140\" />\n      <h3 class=\"fw-normal\">Yulia</h3>\n      <p><a class=\"btn btn-warning\" href=\"https://n8n.io/creators/yulia/\" target=\"_blank\">More templates</a></p>\n      <p><a class=\"btn btn-outline-primary\" href=\"https://www.linkedin.com/in/yulia-dmitrievna-1112361b5/\" target=\"_blank\">LinkedIn</a></p>\n    </div>\n\n<div class=\"col-lg-6 text-center\">\n  <div class=\"card shadow-sm mb-3\">\n    <div class=\"card-img-container\">\n      <img src=\"https://blog.n8n.io/content/images/size/w800/2023/09/gg.png\" class=\"card-img-top\" alt=\"How to work with XML and SQL using n8n\" />\n    </div>\n    <div class=\"card-body\">\n      <h5 class=\"card-title\">Read the article to find out more!</h5>\n      <p class=\"card-text\">This dashboard was created using XML template language (XSLT) in n8n.</p>\n      <a href=\"https://blog.n8n.io/sql-xml/#how-to-deliver-the-xml-file\" class=\"btn btn-primary\" target=\"_blank\">Read Article</a>\n    </div>\n  </div>\n</div>\n\n  </div>\n</section>"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "306c0e2a-9b20-4e79-9909-184c58514efa",
+      "name": "Template elements",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        3800,
+        1340
+      ],
+      "typeVersion": 3.3
     }
   ],
   "pinData": {},
@@ -889,6 +889,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2024-10-28T14:36:50.000Z",
-  "versionId": "97835a6f-2c1e-4419-be3d-e511d07def87"
+  "updatedAt": "2025-04-07T14:29:56.000Z",
+  "versionId": "86909482-da68-4f31-9de6-16095e0cd802"
 }
