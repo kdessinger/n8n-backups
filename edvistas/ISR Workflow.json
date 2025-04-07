@@ -1,0 +1,64 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "FTP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-04-04T19:22:34.432Z",
+  "id": "Ds7ycXOgcGUTSuog",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "ISR Workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "6e6dc2e7-0b66-42a7-a2fe-3c6a88db6975",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "protocol": "sftp",
+        "operation": "list"
+      },
+      "type": "n8n-nodes-base.ftp",
+      "typeVersion": 1,
+      "position": [
+        220,
+        0
+      ],
+      "id": "f43f9ff1-89d3-46ff-89e7-23f334f241e1",
+      "name": "FTP",
+      "credentials": {
+        "sftp": {
+          "id": "nNzGWNGOn5RM6kb4",
+          "name": "Lower Hudson Ric"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-04-07T14:21:53.000Z",
+  "versionId": "fcb22c4b-b9eb-4422-b10f-3db3d220847a"
+}
