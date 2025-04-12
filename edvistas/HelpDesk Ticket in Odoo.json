@@ -1491,7 +1491,8 @@
       ],
       "id": "64a32f43-024f-4c30-af06-019ca6de5cd2",
       "name": "Get School",
-      "alwaysOutputData": false,
+      "alwaysOutputData": true,
+      "executeOnce": false,
       "credentials": {
         "odooApi": {
           "id": "22",
@@ -1502,7 +1503,7 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "SELECT s.statecode\n\tFROM [evicore].[dbo].[schools] s\n\tJOIN [evicore].[dbo].[userSchools] us ON s.id = us.schoolid\n\tJOIN [evicore].[dbo].[users] u ON us.userIdKey = u.id\nWHERE u.districtid = {{ $('Sanitized').item.json.distid }} AND u.userid = '{{ $('Sanitized').item.json.email }}'"
+        "query": "SELECT TOP 1 s.statecode\n\tFROM [evicore].[dbo].[schools] s\n\tJOIN [evicore].[dbo].[userSchools] us ON s.id = us.schoolid\n\tJOIN [evicore].[dbo].[users] u ON us.userIdKey = u.id\nWHERE u.districtid = {{ $('Sanitized').item.json.distid }} AND u.userid = '{{ $('Sanitized').item.json.email }}'"
       },
       "type": "n8n-nodes-base.microsoftSql",
       "typeVersion": 1.1,
@@ -1512,6 +1513,8 @@
       ],
       "id": "92dbafa8-1a60-47da-8ccc-6a1f01e97612",
       "name": "Get State Code",
+      "alwaysOutputData": true,
+      "executeOnce": false,
       "credentials": {
         "microsoftSql": {
           "id": "8",
@@ -1525,13 +1528,12 @@
       {
         "json": {
           "headers": {
-            "connection": "Keep-Alive",
             "host": "n8n.edvistas.com",
             "x-forwarded-scheme": "https",
             "x-forwarded-proto": "https",
-            "x-forwarded-for": "199.223.255.7",
-            "x-real-ip": "199.223.255.7",
-            "content-length": "379",
+            "x-forwarded-for": "199.223.255.8",
+            "x-real-ip": "199.223.255.8",
+            "content-length": "437",
             "content-type": "application/json"
           },
           "params": {},
@@ -1539,14 +1541,14 @@
           "body": [
             {
               "ticket_Type": "Support",
-              "phone": "6469827483",
-              "email": "spremmana@schools.nyc.gov",
+              "phone": "201-456-3459",
+              "email": "lsilber2@schools.nyc.gov",
               "distid": 938,
               "product": "DataMate",
               "district": "New York City Department of Education",
-              "name": "PREMMANA, SAMANTHA",
+              "name": "SILBERMAN, LAURA",
               "priority": "Normal",
-              "comments": "I uploaded a test in pdf however it does not populate the questions for me on Datamate for students to take online. Please advise! "
+              "comments": "I am the math teacher for class 402 and 407, but I only see class 402.  Please make sure I can manage both class 402 and 407.  I need to see reports from both classes.\r\nThank you!\r\nLaura"
             }
           ],
           "webhookUrl": "https://n8n.edvistas.com/webhook/odoo/helpdesk",
@@ -1784,6 +1786,6 @@
     }
   ],
   "triggerCount": 4,
-  "updatedAt": "2025-04-03T00:23:46.000Z",
-  "versionId": "f7d218ee-c011-4477-a0d9-256b62b23d14"
+  "updatedAt": "2025-04-11T21:09:10.000Z",
+  "versionId": "1044c024-4729-46a1-9f7d-b510892e73aa"
 }
