@@ -5,7 +5,7 @@
       "main": [
         [
           {
-            "node": "If Arguments exist",
+            "node": "SSH-Check_Host",
             "type": "main",
             "index": 0
           }
@@ -14,16 +14,32 @@
     },
     "If Arguments exist": {
       "main": [
+        [],
+        [
+          {
+            "node": "Exit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Test workflow’": {
+      "main": [
         [
           {
             "node": "SSH-Check_Host",
             "type": "main",
             "index": 0
           }
-        ],
+        ]
+      ]
+    },
+    "SSH-Check_Host": {
+      "main": [
         [
           {
-            "node": "Exit",
+            "node": "Edit Fields",
             "type": "main",
             "index": 0
           }
@@ -56,7 +72,7 @@
       "typeVersion": 1.1,
       "position": [
         180,
-        120
+        160
       ],
       "id": "b2d262de-bf10-4421-bb8e-76b7e046df4c",
       "name": "When Executed by Another Workflow"
@@ -69,8 +85,8 @@
       "type": "n8n-nodes-base.ssh",
       "typeVersion": 1,
       "position": [
-        800,
-        100
+        500,
+        60
       ],
       "id": "79190380-e07f-4fb2-b7e8-c93f66b97b7e",
       "name": "SSH-Check_Host",
@@ -119,8 +135,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        400,
-        120
+        500,
+        260
       ],
       "id": "30b721c8-25c8-4741-802f-550f1ec8c14d",
       "name": "If Arguments exist"
@@ -130,11 +146,45 @@
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        620,
-        260
+        720,
+        280
       ],
       "id": "9cc44885-8b29-4b65-82b7-dd30b6cf3046",
       "name": "Exit"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        180,
+        -60
+      ],
+      "id": "d09cd81f-7980-4447-9c3d-9420436bd103",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "409e3e58-dfaf-4f95-b62c-351f9299ce81",
+              "name": "stdout",
+              "value": "={{ $json.stdout }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        720,
+        60
+      ],
+      "id": "b1b5aacf-4732-4f0c-8795-4d693429ab1f",
+      "name": "Edit Fields"
     }
   ],
   "pinData": {},
@@ -154,6 +204,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-04-15T04:00:35.000Z",
-  "versionId": "ee3620ce-53f7-4a46-9c26-4b33f4eee095"
+  "updatedAt": "2025-04-15T04:31:20.000Z",
+  "versionId": "c4de8cd7-a1b9-4fda-aa3b-64e4fea070c7"
 }
