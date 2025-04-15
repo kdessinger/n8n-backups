@@ -63,7 +63,7 @@
     },
     {
       "parameters": {
-        "command": "./checkup_vm.sh 106 192.168.148.40",
+        "command": "./checkup_all_vm.sh",
         "cwd": "/root"
       },
       "type": "n8n-nodes-base.ssh",
@@ -154,6 +154,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-04-14T15:35:52.000Z",
-  "versionId": "1ca5bc55-21e1-4ccd-b4c7-67ce1f7bf728"
+  "updatedAt": "2025-04-15T04:00:35.000Z",
+  "versionId": "ee3620ce-53f7-4a46-9c26-4b33f4eee095"
 }
