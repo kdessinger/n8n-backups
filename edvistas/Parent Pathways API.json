@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "When clicking ‘Test workflow’": {
       "main": [
@@ -703,8 +703,7 @@
         "rule": {
           "interval": [
             {
-              "field": "minutes",
-              "minutesInterval": 30
+              "field": "hours"
             }
           ]
         }
@@ -1266,6 +1265,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2025-04-17T16:17:07.000Z",
-  "versionId": "25ec29be-de06-4a76-9d0e-a6dcf7459f57"
+  "updatedAt": "2025-05-06T14:34:27.000Z",
+  "versionId": "c4f70d84-1680-4c5b-abb5-e793b2931413"
 }
