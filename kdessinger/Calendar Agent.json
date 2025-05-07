@@ -99,12 +99,14 @@
   },
   "createdAt": "2025-02-05T03:19:34.277Z",
   "id": "KDWho5ww69X3maxL",
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "Calendar Agent",
   "nodes": [
     {
       "parameters": {
-        "model": "gpt-4o",
+        "model": "gpt-4.1-mini",
         "options": {}
       },
       "id": "6af72a3f-2101-46c5-a2a6-261f5f1ed4cd",
@@ -114,7 +116,13 @@
       "position": [
         -920,
         360
-      ]
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "e72QgqQnlpG6j1mz",
+          "name": "OpenAi (Home Lab)"
+        }
+      }
     },
     {
       "parameters": {
@@ -184,9 +192,9 @@
       "parameters": {
         "calendar": {
           "__rl": true,
-          "value": "nateherk88@gmail.com",
+          "value": "kdessinger@gmail.com",
           "mode": "list",
-          "cachedResultName": "nateherk88@gmail.com"
+          "cachedResultName": "kdessinger@gmail.com"
         },
         "start": "={{ $fromAI(\"eventStart\") }}",
         "end": "={{ $fromAI(\"eventEnd\") }}",
@@ -204,15 +212,21 @@
         360
       ],
       "id": "9ab25283-d020-4767-8aef-cca6e6eae117",
-      "name": "Create Event with Attendee"
+      "name": "Create Event with Attendee",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "JY5bd39SS0e8vWyv",
+          "name": "Google (kdessinger)"
+        }
+      }
     },
     {
       "parameters": {
         "calendar": {
           "__rl": true,
-          "value": "nateherk88@gmail.com",
+          "value": "kdessinger@gmail.com",
           "mode": "list",
-          "cachedResultName": "nateherk88@gmail.com"
+          "cachedResultName": "kdessinger@gmail.com"
         },
         "start": "={{ $fromAI(\"eventStart\") }}",
         "end": "={{ $fromAI(\"eventEnd\") }}",
@@ -228,16 +242,22 @@
         460
       ],
       "id": "2a275322-2aa8-4b8c-839b-ed080989bbd8",
-      "name": "Create Event"
+      "name": "Create Event",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "JY5bd39SS0e8vWyv",
+          "name": "Google (kdessinger)"
+        }
+      }
     },
     {
       "parameters": {
         "operation": "getAll",
         "calendar": {
           "__rl": true,
-          "value": "nateherk88@gmail.com",
+          "value": "kdessinger@gmail.com",
           "mode": "list",
-          "cachedResultName": "nateherk88@gmail.com"
+          "cachedResultName": "kdessinger@gmail.com"
         },
         "timeMin": "={{ $fromAI(\"dayBefore\",\"the day before the date the user requested\") }}",
         "timeMax": "={{ $fromAI(\"dayAfter\",\"the day after the date the user requested\") }}",
@@ -250,16 +270,22 @@
         500
       ],
       "id": "99af3c5f-0a3a-4464-904d-fd14aab52b31",
-      "name": "Get Events"
+      "name": "Get Events",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "JY5bd39SS0e8vWyv",
+          "name": "Google (kdessinger)"
+        }
+      }
     },
     {
       "parameters": {
         "operation": "delete",
         "calendar": {
           "__rl": true,
-          "value": "nateherk88@gmail.com",
+          "value": "kdessinger@gmail.com",
           "mode": "list",
-          "cachedResultName": "nateherk88@gmail.com"
+          "cachedResultName": "kdessinger@gmail.com"
         },
         "eventId": "={{ $fromAI(\"eventID\") }}",
         "options": {}
@@ -271,16 +297,22 @@
         480
       ],
       "id": "f9caf730-5eea-4109-b760-92d969886cfa",
-      "name": "Delete Event"
+      "name": "Delete Event",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "JY5bd39SS0e8vWyv",
+          "name": "Google (kdessinger)"
+        }
+      }
     },
     {
       "parameters": {
         "operation": "update",
         "calendar": {
           "__rl": true,
-          "value": "nateherk88@gmail.com",
+          "value": "kdessinger@gmail.com",
           "mode": "list",
-          "cachedResultName": "nateherk88@gmail.com"
+          "cachedResultName": "kdessinger@gmail.com"
         },
         "eventId": "={{ $fromAI(\"eventID\") }}",
         "updateFields": {
@@ -295,7 +327,13 @@
         440
       ],
       "id": "4d335e7d-df0c-4bff-bb27-78d4b96fb3eb",
-      "name": "Update Event"
+      "name": "Update Event",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "JY5bd39SS0e8vWyv",
+          "name": "Google (kdessinger)"
+        }
+      }
     },
     {
       "parameters": {
@@ -325,6 +363,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-03-08T21:56:48.000Z",
-  "versionId": "1b3ae27a-cb34-4eff-b70e-c0465c7f742b"
+  "updatedAt": "2025-05-07T01:10:17.000Z",
+  "versionId": "f55c8fab-c22f-4ba0-a326-00e3ce3d39ae"
 }
