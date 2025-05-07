@@ -1,28 +1,6 @@
 {
   "active": false,
   "connections": {
-    "Get Contacts": {
-      "ai_tool": [
-        [
-          {
-            "node": "Contact Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Add or Update Contact": {
-      "ai_tool": [
-        [
-          {
-            "node": "Contact Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Contact Agent": {
       "main": [
         [
@@ -51,135 +29,76 @@
           }
         ]
       ]
+    },
+    "Get Contacts": {
+      "ai_tool": [
+        [
+          {
+            "node": "Contact Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Contacts": {
+      "ai_tool": [
+        [
+          {
+            "node": "Contact Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete Contacts": {
+      "ai_tool": [
+        [
+          {
+            "node": "Contact Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add Contacts": {
+      "ai_tool": [
+        [
+          {
+            "node": "Contact Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI (gpt-4o-mini)": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Contact Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-02-05T03:21:34.402Z",
   "id": "D2KvK6niFSL4pXO1",
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "Contact Agent",
   "nodes": [
-    {
-      "parameters": {},
-      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
-      "typeVersion": 1.2,
-      "position": [
-        -1000,
-        300
-      ],
-      "id": "b2fc3a22-1fb3-48c2-b6da-5e04f6f02cc8",
-      "name": "OpenAI Chat Model",
-      "credentials": {}
-    },
-    {
-      "parameters": {
-        "operation": "search",
-        "base": {
-          "__rl": true,
-          "value": "appK0rbtvf9e7vt6w",
-          "mode": "list",
-          "cachedResultName": "Contacts",
-          "cachedResultUrl": "https://airtable.com/appK0rbtvf9e7vt6w"
-        },
-        "table": {
-          "__rl": true,
-          "value": "tbl08JGCfUK1RhXsG",
-          "mode": "list",
-          "cachedResultName": "Contacts",
-          "cachedResultUrl": "https://airtable.com/appK0rbtvf9e7vt6w/tbl08JGCfUK1RhXsG"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.airtableTool",
-      "typeVersion": 2.1,
-      "position": [
-        -820,
-        300
-      ],
-      "id": "cafa7c9a-5b43-439c-8990-7e5720836123",
-      "name": "Get Contacts"
-    },
-    {
-      "parameters": {
-        "operation": "upsert",
-        "base": {
-          "__rl": true,
-          "value": "appK0rbtvf9e7vt6w",
-          "mode": "list",
-          "cachedResultName": "Contacts",
-          "cachedResultUrl": "https://airtable.com/appK0rbtvf9e7vt6w"
-        },
-        "table": {
-          "__rl": true,
-          "value": "tbl08JGCfUK1RhXsG",
-          "mode": "list",
-          "cachedResultName": "Contacts",
-          "cachedResultUrl": "https://airtable.com/appK0rbtvf9e7vt6w/tbl08JGCfUK1RhXsG"
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "name": "={{ $fromAI(\"name\") }}",
-            "email": "={{ $fromAI(\"emailAddress\") }}",
-            "phoneNumber": "={{ $fromAI(\"phoneNumber\") }}"
-          },
-          "matchingColumns": [
-            "name"
-          ],
-          "schema": [
-            {
-              "id": "name",
-              "displayName": "name",
-              "required": false,
-              "defaultMatch": false,
-              "canBeUsedToMatch": true,
-              "display": true,
-              "type": "string",
-              "readOnly": false,
-              "removed": false
-            },
-            {
-              "id": "email",
-              "displayName": "email",
-              "required": false,
-              "defaultMatch": false,
-              "canBeUsedToMatch": true,
-              "display": true,
-              "type": "string",
-              "readOnly": false,
-              "removed": false
-            },
-            {
-              "id": "phoneNumber",
-              "displayName": "phoneNumber",
-              "required": false,
-              "defaultMatch": false,
-              "canBeUsedToMatch": true,
-              "display": true,
-              "type": "string",
-              "readOnly": false,
-              "removed": false
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.airtableTool",
-      "typeVersion": 2.1,
-      "position": [
-        -660,
-        300
-      ],
-      "id": "e4e3b757-fefd-4b01-a340-438f16b824c8",
-      "name": "Add or Update Contact"
-    },
     {
       "parameters": {
         "promptType": "define",
         "text": "={{ $json.query }}",
         "options": {
-          "systemMessage": "=# Overview\nYou are a contact management assistant. Your responsibilities include looking up contacts, adding new contacts, or updating a contact's information.\n\n**Contact Management**  \n   - Use \"Get Contacts\" to retrieve contact information. \n   - Use \"Add or Update Contact\" to store new contact information or modify existing entries. "
+          "systemMessage": "=# Overview\nYou are a contact management assistant. Your responsibilities include looking up contacts, adding new contacts, or updating a contact's information.\n\n**Contact Management**  \n   - Use \"Get Contacts\" to retrieve contact information. \n   - Use \"Add Contacts\" to store new contact information.\n   - Use \"Update Contacts\" to modify existing contact information.\n   - Use \"Delete Contacts\" to delete existing contact information."
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
@@ -245,11 +164,124 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1.1,
       "position": [
-        -1100,
+        -1220,
         80
       ],
       "id": "abb02ad6-7965-4433-93b7-55b706f01990",
       "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "returnAll": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Return_All', ``, 'boolean') }}",
+        "fields": [
+          "*"
+        ],
+        "useQuery": true,
+        "query": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Query', ``, 'string') }}",
+        "rawData": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('RAW_Data', ``, 'boolean') }}"
+      },
+      "type": "n8n-nodes-base.googleContactsTool",
+      "typeVersion": 1,
+      "position": [
+        -680,
+        400
+      ],
+      "id": "3068ff43-5459-4325-8df0-149585c32f70",
+      "name": "Get Contacts",
+      "credentials": {
+        "googleContactsOAuth2Api": {
+          "id": "Im68Qm3MIUtvaF1l",
+          "name": "Google Contacts account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "contactId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Contact_ID', ``, 'string') }}",
+        "fields": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Fields', ``, 'string') }}",
+        "updateFields": {}
+      },
+      "type": "n8n-nodes-base.googleContactsTool",
+      "typeVersion": 1,
+      "position": [
+        -560,
+        400
+      ],
+      "id": "fe633069-9ae1-4a01-995f-90f7990c7705",
+      "name": "Update Contacts",
+      "credentials": {
+        "googleContactsOAuth2Api": {
+          "id": "Im68Qm3MIUtvaF1l",
+          "name": "Google Contacts account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "contactId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Contact_ID', ``, 'string') }}"
+      },
+      "type": "n8n-nodes-base.googleContactsTool",
+      "typeVersion": 1,
+      "position": [
+        -420,
+        400
+      ],
+      "id": "cb9282ca-fa0b-4d20-aad6-7dde22b572ad",
+      "name": "Delete Contacts",
+      "credentials": {
+        "googleContactsOAuth2Api": {
+          "id": "Im68Qm3MIUtvaF1l",
+          "name": "Google Contacts account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "familyName": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Family_Name', ``, 'string') }}",
+        "givenName": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Given_Name', ``, 'string') }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.googleContactsTool",
+      "typeVersion": 1,
+      "position": [
+        -800,
+        400
+      ],
+      "id": "2e4042db-b5a4-4e58-97ec-7a1fa59e5f74",
+      "name": "Add Contacts",
+      "credentials": {
+        "googleContactsOAuth2Api": {
+          "id": "Im68Qm3MIUtvaF1l",
+          "name": "Google Contacts account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -1020,
+        320
+      ],
+      "id": "c91aced5-7ef5-4196-9ef3-491febfe5b8d",
+      "name": "OpenAI (gpt-4o-mini)",
+      "credentials": {
+        "openAiApi": {
+          "id": "e72QgqQnlpG6j1mz",
+          "name": "OpenAi (Home Lab)"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -266,6 +298,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-02-05T03:21:42.000Z",
-  "versionId": "5590c03e-c6ca-45fd-bb53-70293d8219ce"
+  "updatedAt": "2025-05-07T01:37:26.000Z",
+  "versionId": "4f760e11-9e4c-4fca-b334-265bd59298e0"
 }
