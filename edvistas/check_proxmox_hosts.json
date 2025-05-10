@@ -12,38 +12,9 @@
         ]
       ]
     },
-    "If Arguments exist": {
-      "main": [
-        [],
-        [
-          {
-            "node": "Exit",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "When clicking ‘Test workflow’": {
-      "main": [
-        [
-          {
-            "node": "SSH-Check_Host",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "SSH-Check_Host": {
       "main": [
-        [
-          {
-            "node": "Edit Fields",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     }
   },
@@ -56,23 +27,13 @@
   "nodes": [
     {
       "parameters": {
-        "workflowInputs": {
-          "values": [
-            {
-              "name": "VMID",
-              "type": "number"
-            },
-            {
-              "name": "VMIP"
-            }
-          ]
-        }
+        "inputSource": "passthrough"
       },
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1.1,
       "position": [
-        180,
-        160
+        260,
+        60
       ],
       "id": "b2d262de-bf10-4421-bb8e-76b7e046df4c",
       "name": "When Executed by Another Workflow"
@@ -96,95 +57,6 @@
           "name": "VM0"
         }
       }
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 2
-          },
-          "conditions": [
-            {
-              "id": "366ed9c6-6a51-416c-860d-d44c44fa61ab",
-              "leftValue": "={{ $json.VMID }}",
-              "rightValue": "[null]",
-              "operator": {
-                "type": "number",
-                "operation": "notEmpty",
-                "singleValue": true
-              }
-            },
-            {
-              "id": "b93da846-524d-4599-bfec-22252a269f22",
-              "leftValue": "={{ $json.VMIP }}",
-              "rightValue": "",
-              "operator": {
-                "type": "string",
-                "operation": "notEmpty",
-                "singleValue": true
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.2,
-      "position": [
-        500,
-        260
-      ],
-      "id": "30b721c8-25c8-4741-802f-550f1ec8c14d",
-      "name": "If Arguments exist"
-    },
-    {
-      "parameters": {},
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [
-        720,
-        280
-      ],
-      "id": "9cc44885-8b29-4b65-82b7-dd30b6cf3046",
-      "name": "Exit"
-    },
-    {
-      "parameters": {},
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
-      "position": [
-        180,
-        -60
-      ],
-      "id": "d09cd81f-7980-4447-9c3d-9420436bd103",
-      "name": "When clicking ‘Test workflow’"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "409e3e58-dfaf-4f95-b62c-351f9299ce81",
-              "name": "stdout",
-              "value": "={{ $json.stdout }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        720,
-        60
-      ],
-      "id": "b1b5aacf-4732-4f0c-8795-4d693429ab1f",
-      "name": "Edit Fields"
     }
   ],
   "pinData": {},
@@ -204,6 +76,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-04-15T04:31:20.000Z",
-  "versionId": "c4de8cd7-a1b9-4fda-aa3b-64e4fea070c7"
+  "updatedAt": "2025-05-09T17:18:30.000Z",
+  "versionId": "fdbaaa5c-6db6-4321-88e8-efc3703a2e1e"
 }
