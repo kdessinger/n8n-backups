@@ -84,6 +84,17 @@
           }
         ]
       ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Send to Workflow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-02-05T03:21:34.402Z",
@@ -95,8 +106,6 @@
   "nodes": [
     {
       "parameters": {
-        "promptType": "define",
-        "text": "={{ $json.query }}",
         "options": {
           "systemMessage": "=# Overview\nYou are a contact management assistant. Your responsibilities include looking up contacts, adding new contacts, or updating a contact's information.\n\n**Contact Management**  \n   - Use \"Get Contacts\" to retrieve contact information. \n   - Use \"Add Contacts\" to store new contact information.\n   - Use \"Update Contacts\" to modify existing contact information.\n   - Use \"Delete Contacts\" to delete existing contact information."
         }
@@ -282,6 +291,47 @@
           "name": "OpenAi (Home Lab)"
         }
       }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -1700,
+        80
+      ],
+      "id": "7f404f86-c641-43f8-8110-69e9b6893c9d",
+      "name": "When chat message received",
+      "webhookId": "38930e68-3429-4b59-8a6a-ecc3e66bd102"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "D2KvK6niFSL4pXO1",
+          "mode": "list",
+          "cachedResultName": "Contact Agent"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        -1500,
+        80
+      ],
+      "id": "1c180abf-fa18-4d26-96c6-6c233cf9c4eb",
+      "name": "Send to Workflow"
     }
   ],
   "pinData": {},
@@ -298,6 +348,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-05-07T01:37:26.000Z",
-  "versionId": "4f760e11-9e4c-4fca-b334-265bd59298e0"
+  "updatedAt": "2025-05-18T07:17:02.000Z",
+  "versionId": "e8a12207-b5f0-4d4d-8445-48c7f2b9469c"
 }
