@@ -404,6 +404,7 @@
   },
   "createdAt": "2025-03-08T21:56:28.837Z",
   "id": "ANRXyVb5zGFGHgZL",
+  "isArchived": false,
   "meta": null,
   "name": "Ultimate RAG Agent",
   "nodes": [
