@@ -125,6 +125,7 @@
   },
   "createdAt": "2024-12-31T06:55:27.591Z",
   "id": "yVN0rzF4cSmRxORB",
+  "isArchived": false,
   "meta": null,
   "name": "Advanced Web Researcher Agent",
   "nodes": [
