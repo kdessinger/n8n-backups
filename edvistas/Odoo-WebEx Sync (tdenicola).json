@@ -180,6 +180,7 @@
   },
   "createdAt": "2025-02-21T18:24:40.400Z",
   "id": "yznpwF2YMDgQzStI",
+  "isArchived": false,
   "meta": {
     "templateCredsSetupCompleted": true
   },
@@ -815,7 +816,7 @@
       "webhookId": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1dFQkhPT0svOWViMThjY2QtMDM1Ny00NWQyLWI0YzYtOWRiNzVjZjJjMmQ1"
     },
     "node:Webex (tdenicola)": {
-      "webhookId": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1dFQkhPT0svNDcxMWMyMjYtMTNiNC00ZjMyLWE0ZTQtYmUyMWMyNzY1ZDQx",
+      "webhookId": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1dFQkhPT0svNjNjZGFlYTEtMjcwYy00OWM4LWJjMGUtMTE2ZGE5MjI2NjVm",
       "secret": "090bec07f2452a42a03be860014be9a0"
     }
   },
