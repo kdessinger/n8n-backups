@@ -15,6 +15,7 @@
   },
   "createdAt": "2023-10-16T23:51:30.737Z",
   "id": "hbBAn9DYRcWLren1",
+  "isArchived": false,
   "meta": null,
   "name": "Error Handler",
   "nodes": [
