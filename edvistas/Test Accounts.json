@@ -3,6 +3,7 @@
   "connections": {},
   "createdAt": "2022-02-10T21:57:15.216Z",
   "id": "3",
+  "isArchived": false,
   "meta": null,
   "name": "Test Accounts",
   "nodes": [
