@@ -147,6 +147,7 @@
   },
   "createdAt": "2024-12-31T07:00:46.191Z",
   "id": "TvUWCKXoTNbi9Nq0",
+  "isArchived": false,
   "meta": null,
   "name": "YouTube Video Summarizer Agent",
   "nodes": [
