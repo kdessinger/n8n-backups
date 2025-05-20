@@ -170,6 +170,7 @@
   },
   "createdAt": "2022-02-03T16:56:46.475Z",
   "id": "3",
+  "isArchived": false,
   "meta": null,
   "name": "LinkedIn Lead Gen Automation",
   "nodes": [
