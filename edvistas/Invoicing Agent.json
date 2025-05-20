@@ -108,6 +108,7 @@
   },
   "createdAt": "2024-12-17T22:42:32.770Z",
   "id": "L1bWPORqjktkyNqZ",
+  "isArchived": false,
   "meta": null,
   "name": "Invoicing Agent",
   "nodes": [
