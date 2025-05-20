@@ -70,6 +70,7 @@
   },
   "createdAt": "2023-10-08T19:00:45.400Z",
   "id": "htFLdd2Schbhojr9",
+  "isArchived": false,
   "meta": null,
   "name": "[AI/LangChain] Output Parser",
   "nodes": [
