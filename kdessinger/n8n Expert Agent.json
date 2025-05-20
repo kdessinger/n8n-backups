@@ -169,6 +169,7 @@
   },
   "createdAt": "2024-12-31T06:42:14.495Z",
   "id": "FA2Ow6wcsR1m3rr7",
+  "isArchived": false,
   "meta": null,
   "name": "n8n Expert Agent",
   "nodes": [
