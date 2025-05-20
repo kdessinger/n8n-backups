@@ -121,6 +121,7 @@
   },
   "createdAt": "2025-02-05T02:51:00.612Z",
   "id": "mJoXzTZPdgKX5xiz",
+  "isArchived": false,
   "meta": null,
   "name": "Email Agent",
   "nodes": [
