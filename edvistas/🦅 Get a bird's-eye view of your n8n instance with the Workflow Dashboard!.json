@@ -283,6 +283,7 @@
   },
   "createdAt": "2024-06-04T03:44:39.923Z",
   "id": "Qv18DwceJ1N0IAAz",
+  "isArchived": false,
   "meta": {
     "templateId": "2269",
     "templateCredsSetupCompleted": true
