@@ -3,6 +3,7 @@
   "connections": {},
   "createdAt": "2022-02-02T07:12:06.135Z",
   "id": "1",
+  "isArchived": false,
   "meta": null,
   "name": "Playing Around",
   "nodes": [
