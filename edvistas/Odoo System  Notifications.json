@@ -66,6 +66,7 @@
   },
   "createdAt": "2024-10-08T21:04:33.405Z",
   "id": "n9Pv9tSyGQ9fw41t",
+  "isArchived": false,
   "meta": {
     "templateCredsSetupCompleted": true
   },
@@ -277,7 +278,7 @@
     },
     "node:Run Every 6 Hours": {
       "recurrenceRules": [
-        12
+        0
       ]
     }
   },
