@@ -26,6 +26,7 @@
   },
   "createdAt": "2022-02-03T16:59:04.983Z",
   "id": "4",
+  "isArchived": false,
   "meta": null,
   "name": "Create Nextcloud Deck Card from IMAP email",
   "nodes": [
