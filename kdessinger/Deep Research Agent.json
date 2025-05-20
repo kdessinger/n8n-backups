@@ -974,6 +974,7 @@
   },
   "createdAt": "2025-04-01T03:12:20.020Z",
   "id": "uNmitSkUN56UgtYg",
+  "isArchived": false,
   "meta": null,
   "name": "Deep Research Agent",
   "nodes": [
