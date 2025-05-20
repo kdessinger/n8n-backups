@@ -59,6 +59,7 @@
   },
   "createdAt": "2022-11-01T19:25:33.787Z",
   "id": "7",
+  "isArchived": false,
   "meta": null,
   "name": "CSV_2_JSON",
   "nodes": [
