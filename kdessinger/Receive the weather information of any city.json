@@ -37,6 +37,7 @@
   },
   "createdAt": "2023-10-08T07:54:08.652Z",
   "id": "d6UIzPOtp0dHUDu3",
+  "isArchived": false,
   "meta": null,
   "name": "Receive the weather information of any city",
   "nodes": [
