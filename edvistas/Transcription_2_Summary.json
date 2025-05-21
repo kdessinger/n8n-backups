@@ -25,7 +25,13 @@
     },
     "Extract from File": {
       "main": [
-        []
+        [
+          {
+            "node": "Code Description Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Convert to File": {
@@ -160,8 +166,10 @@
     {
       "parameters": {
         "operation": "toText",
-        "sourceProperty": "output",
-        "options": {}
+        "sourceProperty": "message.content",
+        "options": {
+          "fileName": "={{ $('Open File').item.json.fileName }}.md"
+        }
       },
       "id": "a5eb4f8d-456c-4b25-a660-4a362fd950f2",
       "name": "Convert to File",
@@ -229,8 +237,11 @@
         "messages": {
           "values": [
             {
-              "content": "You are an AI meeting assistant. Your task is to analyze the provided transcription of an online meeting (from Webex, Zoom, Teams, etc.) and extract the following structured information:\n\n1. **Meeting Summary**: Provide a concise summary of the main topics discussed and decisions made.\n\n2. **Detailed Meeting Minutes**: Break down the conversation into timestamped or logically segmented notes. Identify key discussion points, who spoke, and what was said.\n\n3. **Action Items**: For each participant mentioned in the transcript, list any tasks or responsibilities assigned to them. Include:\n   - Person's name\n   - Task description\n   - Due date (if mentioned)\n   - Priority level (if inferred)\n\nFormat your output as follows:\n\n---\n**Meeting Summary:**\n\n[Short paragraph summarizing the meeting]\n\n---\n\n**Meeting Minutes:**\n- [Time/Section] - [Speaker Name]: [Discussion point or decision]\n- ...\n\n---\n\n**Action Items by Participant:**\n\n**[Participant Name]**\n- [Action Item 1]\n- [Action Item 2]\n\n**[Participant Name]**\n- [Action Item 1]\n- ...\n\n---\n\nHere is the meeting transcription:\n\n",
+              "content": "=You are an AI meeting assistant. Your task is to analyze the provided transcription of an online meeting (from Webex, Zoom, Teams, etc.) and output structured meeting minutes using the format below.\n\nPlease extract and fill in the following sections based on the transcription:\n\n\n**Meeting/Project Name:**  \n**Date of Meeting:**  \n**Time:**  \n**Location:**  \n**Minutes Prepared By:**  \n\n---\n\n**1. Attendees:**  \n[List names of all participants mentioned in the transcript]\n\n---\n\n**2. Meeting Objective:**  \n[Summarize the main objective or purpose of the meeting]\n\n---\n\n**3. Agenda and Notes, Decisions, Issues:**  \n\n| **Topic** | **Discussion** |\n|-----------|----------------|\n| [Insert topic] | [Summarize key discussion points, decisions, or outcomes related to the topic] |\n| [Insert topic] | [More content...] |\n| ... | ... |\n\n---\n\n**Action Items:**\n\n**[Participant Name]**\n- [Action Item 1]\n- [Action Item 2]\n\n**[Participant Name]**\n- [Action Item 1]\n- ...\n\n---\n\n~Created using N8N & OpenAI~\n\n---\n\nPlease ensure clarity, proper formatting, and logical organization in the output.\nAlways output in MarkDown Format.\n\n",
               "role": "system"
+            },
+            {
+              "content": "={{ $json.data }}"
             }
           ]
         },
@@ -276,6 +287,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-05-15T19:08:33.000Z",
-  "versionId": "241db458-eb05-4768-acc3-93b3fbbfd51f"
+  "updatedAt": "2025-05-20T23:23:22.000Z",
+  "versionId": "d1066aa1-3514-45f2-9128-2e1f9d4d9009"
 }
