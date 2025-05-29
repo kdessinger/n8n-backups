@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "OpenAI Model": {
       "ai_languageModel": [
@@ -41,17 +41,6 @@
         ]
       ]
     },
-    "Receive Emails": {
-      "main": [
-        [
-          {
-            "node": "Did we get a review?",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Post to Activity Log": {
       "main": [
         [
@@ -79,6 +68,17 @@
         [
           {
             "node": "Exit - No Review",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "Did we get a review?",
             "type": "main",
             "index": 0
           }
@@ -260,43 +260,6 @@
     },
     {
       "parameters": {
-        "pollTimes": {
-          "item": [
-            {
-              "hour": 8
-            },
-            {
-              "hour": 13
-            }
-          ]
-        },
-        "simple": false,
-        "filters": {
-          "labelIds": [
-            "INBOX"
-          ],
-          "readStatus": "unread",
-          "sender": "businessprofile-noreply@google.com"
-        },
-        "options": {}
-      },
-      "id": "64b02b70-e7f2-4df0-852f-b6959af8d8c5",
-      "name": "Receive Emails",
-      "type": "n8n-nodes-base.gmailTrigger",
-      "position": [
-        320,
-        560
-      ],
-      "typeVersion": 1.1,
-      "credentials": {
-        "gmailOAuth2": {
-          "id": "cRBJFJPxOYiwcDx0",
-          "name": "Gmail (infoedvistas@gmail.com)"
-        }
-      }
-    },
-    {
-      "parameters": {
         "operation": "markAsRead",
         "messageId": "={{ $('Receive Emails').item.json.id }}"
       },
@@ -334,6 +297,35 @@
         1240,
         320
       ]
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyHour"
+            }
+          ]
+        },
+        "filters": {
+          "readStatus": "unread",
+          "sender": "businessprofile-noreply@google.com"
+        }
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        300,
+        560
+      ],
+      "id": "93ecc98b-88de-4e3c-a39d-6a2ee0532544",
+      "name": "Gmail Trigger",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "cRBJFJPxOYiwcDx0",
+          "name": "Gmail (infoedvistas@gmail.com)"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -346,7 +338,24 @@
     },
     "node:Receive Emails": {
       "Receive Emails": {
-        "lastTimeChecked": 1734630452
+        "lastTimeChecked": 1747506397,
+        "possibleDuplicates": [
+          "196df7f856acb519",
+          "196a836e1d29e84b",
+          "19624574481e12e3",
+          "19611af1b3c1a4bd",
+          "1956cffe4bab17dd",
+          "195390a24a568c6f",
+          "194f1fa1a46cdf8f",
+          "194c130d69612808",
+          "194436f7f73cc7fb",
+          "193ef6035ce48794"
+        ]
+      }
+    },
+    "node:Gmail Trigger": {
+      "Gmail Trigger": {
+        "lastTimeChecked": 1748476187
       }
     }
   },
@@ -365,6 +374,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-01-02T20:33:17.000Z",
-  "versionId": "1b922ed0-67a1-4239-99f2-82b69230251d"
+  "updatedAt": "2025-05-28T23:49:47.000Z",
+  "versionId": "cba40d4f-2771-4eb0-a8e7-0d6c6c0a7e51"
 }
