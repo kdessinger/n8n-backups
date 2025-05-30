@@ -45,24 +45,6 @@
         ]
       ]
     },
-    "Ignore .md Files": {
-      "main": [
-        [
-          {
-            "node": "Open File",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Exit",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "OpenAI Chat Model": {
       "ai_languageModel": [
         [
@@ -106,6 +88,24 @@
           }
         ]
       ]
+    },
+    "Ignore .md Files": {
+      "main": [
+        [
+          {
+            "node": "Open File",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Exit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2024-11-19T20:35:59.190Z",
@@ -141,8 +141,8 @@
       "name": "Save File to Disk",
       "type": "n8n-nodes-base.writeBinaryFile",
       "position": [
-        980,
-        -280
+        960,
+        -180
       ],
       "typeVersion": 1,
       "id": "d479b021-3af0-4d31-a8ab-41345f39a3f8"
@@ -207,8 +207,8 @@
       "type": "n8n-nodes-base.convertToFile",
       "typeVersion": 1.1,
       "position": [
-        780,
-        -280
+        740,
+        -180
       ]
     },
     {
@@ -220,41 +220,6 @@
       "position": [
         -60,
         20
-      ]
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": false,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 2
-          },
-          "conditions": [
-            {
-              "id": "e97e803e-e034-404b-8e93-5e97c0a6603d",
-              "leftValue": "={{ $json.path }}",
-              "rightValue": ".md",
-              "operator": {
-                "type": "string",
-                "operation": "notEndsWith"
-              }
-            }
-          ],
-          "combinator": "or"
-        },
-        "options": {
-          "ignoreCase": true
-        }
-      },
-      "id": "7408c141-0a25-4cc9-9d4e-50b8b265091e",
-      "name": "Ignore .md Files",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.2,
-      "position": [
-        -280,
-        -160
       ]
     },
     {
@@ -283,7 +248,9 @@
           "mode": "list",
           "cachedResultName": "gpt-4o-mini"
         },
-        "options": {}
+        "options": {
+          "temperature": 1
+        }
       },
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.2,
@@ -324,6 +291,59 @@
       ],
       "id": "3eea7129-cbd2-44e0-87eb-07eaba5aaff5",
       "name": "Calculator"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "e97e803e-e034-404b-8e93-5e97c0a6603d",
+              "leftValue": "={{ $json.path }}",
+              "rightValue": "=.md",
+              "operator": {
+                "type": "string",
+                "operation": "notEndsWith"
+              }
+            },
+            {
+              "id": "4fd52f2a-3ee8-400b-adfa-449af91f274e",
+              "leftValue": "={{ $json.path }}",
+              "rightValue": ".exe",
+              "operator": {
+                "type": "string",
+                "operation": "notEndsWith"
+              }
+            },
+            {
+              "id": "5e27d489-3d42-49a6-b7f1-774379a263d6",
+              "leftValue": "={{ $json.path }}",
+              "rightValue": ".bin",
+              "operator": {
+                "type": "string",
+                "operation": "notEndsWith"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {
+          "ignoreCase": true
+        }
+      },
+      "id": "ecec0233-db22-47a7-ba48-ea5cb3137f38",
+      "name": "Ignore .md Files",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -280,
+        -160
+      ]
     }
   ],
   "pinData": {
@@ -359,6 +379,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-05-29T00:11:41.000Z",
-  "versionId": "917141c9-da3d-4128-bbcb-7e9d492aff6d"
+  "updatedAt": "2025-05-29T20:27:57.000Z",
+  "versionId": "65e4d555-dc3b-449f-85cc-99e2701e0b7d"
 }
