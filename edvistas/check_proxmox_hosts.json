@@ -14,7 +14,24 @@
     },
     "SSH-Check_Host": {
       "main": [
-        []
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
@@ -58,6 +75,48 @@
           "name": "VM0"
         }
       }
+    },
+    {
+      "parameters": {
+        "operation": "toText",
+        "sourceProperty": "stdout",
+        "options": {
+          "fileName": "stdout.log"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        720,
+        60
+      ],
+      "id": "7495878c-8739-4c19-834d-acb5ff745136",
+      "name": "Convert to File"
+    },
+    {
+      "parameters": {
+        "fromEmail": "ai.ed@edvistas.com",
+        "toEmail": "kdessinger@gmail.com",
+        "subject": "Server Check Results",
+        "emailFormat": "text",
+        "text": "=Hello,\n\nHere are the results of running the {{ $workflow.name }}.sh script on the VM0 server.\n\n---\n\n{{ $('SSH-Check_Host').item.json.stdout }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        940,
+        60
+      ],
+      "id": "0ae71305-4590-4409-a305-43cc9e956bdd",
+      "name": "Send Email",
+      "webhookId": "690bdffb-9e91-4d94-b5dc-478772230df3",
+      "credentials": {
+        "smtp": {
+          "id": "27",
+          "name": "SMTP (mx.gowls.com)"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -77,6 +136,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-05-09T17:18:30.000Z",
-  "versionId": "fdbaaa5c-6db6-4321-88e8-efc3703a2e1e"
+  "updatedAt": "2025-05-29T20:43:18.000Z",
+  "versionId": "fa4e6ee3-9688-40e2-9dc1-b390b3dad9e0"
 }
