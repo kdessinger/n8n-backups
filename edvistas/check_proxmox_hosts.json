@@ -96,11 +96,14 @@
     {
       "parameters": {
         "fromEmail": "ai.ed@edvistas.com",
-        "toEmail": "kdessinger@gmail.com",
+        "toEmail": "kdessinger@edvistas.com",
         "subject": "Server Check Results",
         "emailFormat": "text",
         "text": "=Hello,\n\nHere are the results of running the {{ $workflow.name }}.sh script on the VM0 server.\n\n---\n\n{{ $('SSH-Check_Host').item.json.stdout }}",
-        "options": {}
+        "options": {
+          "attachments": "data",
+          "allowUnauthorizedCerts": true
+        }
       },
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
@@ -136,6 +139,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-05-29T20:43:18.000Z",
-  "versionId": "fa4e6ee3-9688-40e2-9dc1-b390b3dad9e0"
+  "updatedAt": "2025-05-30T14:52:29.000Z",
+  "versionId": "5bcfb0d1-ceb8-4bbf-a9de-e7e600ff6a33"
 }
