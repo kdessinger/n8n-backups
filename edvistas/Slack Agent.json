@@ -1,0 +1,333 @@
+{
+  "active": false,
+  "connections": {
+    "Ana;yze Image": {
+      "main": [
+        [
+          {
+            "node": "Parse Text",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Text": {
+      "main": [
+        []
+      ]
+    },
+    "Update Database": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram": {
+      "main": [
+        [
+          {
+            "node": "Save Locally",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save Locally": {
+      "main": [
+        [
+          {
+            "node": "Set",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Slack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Slack Trigger": {
+      "main": [
+        [
+          {
+            "node": "Ana;yze Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-12-17T22:42:32.770Z",
+  "id": "L1bWPORqjktkyNqZ",
+  "isArchived": false,
+  "meta": null,
+  "name": "Slack Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        40,
+        -20
+      ],
+      "id": "619c3d8e-335b-471f-95a6-1e251cd0e0db",
+      "name": "Ana;yze Image",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $input.all();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -520,
+        240
+      ],
+      "id": "a96fb621-36c6-4b54-9ab2-0a804ce922e8",
+      "name": "Parse Text"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery"
+      },
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1.1,
+      "position": [
+        -300,
+        240
+      ],
+      "id": "b1d46e4c-545f-4dcc-8c92-e4eb0f1a24ae",
+      "name": "Update Database",
+      "credentials": {
+        "microsoftSql": {
+          "id": "9",
+          "name": "SQL01.edvistas.local (kdessinger)"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "resource": "file"
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -80,
+        240
+      ],
+      "id": "09ca6f6c-3222-40cb-ae6c-967788edcb8e",
+      "name": "Telegram",
+      "webhookId": "b098552f-1f33-47f9-8e50-132f698507bf",
+      "credentials": {
+        "telegramApi": {
+          "id": "34",
+          "name": "Telegram (kdessinger)"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.nextCloud",
+      "typeVersion": 1,
+      "position": [
+        140,
+        240
+      ],
+      "id": "e7aac155-b498-47b3-a3c7-a9cd95e038a8",
+      "name": "Save Locally",
+      "credentials": {
+        "nextCloudApi": {
+          "id": "XVnGMBV6JTse3WZo",
+          "name": "NextCloud (kdessinger/kdessinger)"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -400,
+        480
+      ],
+      "id": "2b5dbfc0-196d-41af-ab31-ac9d7d91c2dd",
+      "name": "Set"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        -220,
+        480
+      ],
+      "id": "f8975e43-4856-453a-abc4-057e7b721ecc",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -120,
+        700
+      ],
+      "id": "bc917686-3ae3-475a-844e-cb2ff2609b8b",
+      "name": "Window Buffer Memory"
+    },
+    {
+      "parameters": {
+        "trigger": [
+          "message",
+          "file_share"
+        ],
+        "channelId": {
+          "__rl": true,
+          "value": "C085Y4ELXDX",
+          "mode": "id"
+        },
+        "downloadFiles": true,
+        "options": {
+          "userIds": []
+        }
+      },
+      "type": "n8n-nodes-base.slackTrigger",
+      "typeVersion": 1,
+      "position": [
+        -360,
+        -20
+      ],
+      "id": "56386f8c-7648-47a3-8ac3-09316f4576a6",
+      "name": "Slack Trigger",
+      "webhookId": "f5847968-47c7-41ca-8eaa-4b8a07e3e9cc",
+      "credentials": {
+        "slackApi": {
+          "id": "z3YRSs4Q6PVcdhwT",
+          "name": "Slack bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        -280,
+        700
+      ],
+      "id": "d157c568-1962-450f-9057-6edda2a45838",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C085Y4ELXDX",
+          "mode": "id"
+        },
+        "text": "Testing",
+        "otherOptions": {}
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        140,
+        480
+      ],
+      "id": "89aeb2ba-5e74-47e5-8131-40a99c57ff5d",
+      "name": "Slack",
+      "webhookId": "10d6d5f2-80ed-4823-a6d6-db223fbe7bdd",
+      "credentials": {
+        "slackApi": {
+          "id": "eXI0SobN6BbG6HR0",
+          "name": "Slack (Full)"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-01-02T19:29:58.822Z",
+      "updatedAt": "2025-01-02T19:29:58.822Z",
+      "id": "WXisSD9AUSBjzVTs",
+      "name": "agent"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-05-29T20:31:34.000Z",
+  "versionId": "51839d34-d6a6-4c71-9618-6beb63a52627"
+}
