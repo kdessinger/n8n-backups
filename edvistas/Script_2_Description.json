@@ -249,6 +249,7 @@
           "cachedResultName": "gpt-4o-mini"
         },
         "options": {
+          "responseFormat": "text",
           "temperature": 1
         }
       },
@@ -379,6 +380,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-05-29T20:27:57.000Z",
-  "versionId": "65e4d555-dc3b-449f-85cc-99e2701e0b7d"
+  "updatedAt": "2025-05-30T21:42:36.000Z",
+  "versionId": "f03f40ce-ba57-4b1d-b9eb-81039fa0188f"
 }
