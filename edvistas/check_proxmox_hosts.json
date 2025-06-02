@@ -99,7 +99,7 @@
         "toEmail": "kdessinger@edvistas.com",
         "subject": "Server Check Results",
         "emailFormat": "text",
-        "text": "=Hello,\n\nHere are the results of running the {{ $workflow.name }}.sh script on the VM0 server.\n\n---\n\n{{ $('SSH-Check_Host').item.json.stdout }}",
+        "text": "=Hello,\n\nHere are the results of running the bash script '{{ $workflow.name }}.sh' on the proxmox server 'VM0.edvistas.local'.\n\n---\n\n{{ $('SSH-Check_Host').item.json.stdout }}",
         "options": {
           "attachments": "data",
           "allowUnauthorizedCerts": true
@@ -139,6 +139,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-05-30T14:52:29.000Z",
-  "versionId": "5bcfb0d1-ceb8-4bbf-a9de-e7e600ff6a33"
+  "updatedAt": "2025-06-02T14:35:24.000Z",
+  "versionId": "f0d83448-a1ee-4922-938e-6ba6fdd033be"
 }
