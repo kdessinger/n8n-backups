@@ -1,11 +1,27 @@
 {
   "active": false,
   "connections": {
-    "When clicking ‘Test workflow’": {
+    "When clicking ‘Execute workflow’": {
       "main": [
         [
           {
-            "node": "HTML",
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CoinGecko": {
+      "main": [
+        []
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
             "type": "main",
             "index": 0
           }
@@ -13,8 +29,9 @@
       ]
     }
   },
-  "createdAt": "2025-03-21T05:26:56.869Z",
-  "id": "sHG39zuY2908CRiM",
+  "createdAt": "2025-06-09T22:08:40.728Z",
+  "id": "i1WGqUvgkjOMBrmN",
+  "isArchived": false,
   "meta": null,
   "name": "My workflow",
   "nodes": [
@@ -23,22 +40,83 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        0,
+        -260,
         0
       ],
-      "id": "be57464f-1727-4add-abdf-b739ed9a5213",
-      "name": "When clicking ‘Test workflow’"
+      "id": "c0f06077-03a7-451b-b75a-20f958cb4003",
+      "name": "When clicking ‘Execute workflow’"
     },
     {
-      "parameters": {},
-      "type": "n8n-nodes-base.html",
-      "typeVersion": 1.2,
+      "parameters": {
+        "operation": "get",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.coinGecko",
+      "typeVersion": 1,
       "position": [
-        220,
+        100,
+        -380
+      ],
+      "id": "c3effdcd-431f-44e2-8433-669bec010350",
+      "name": "CoinGecko"
+    },
+    {
+      "parameters": {
+        "url": "https://sandbox-api.coinmarketcap.com/v1/cryptocurrency/listings/latest",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "start",
+              "value": "1"
+            },
+            {
+              "name": "limit",
+              "value": "5000"
+            },
+            {
+              "name": "convert",
+              "value": "USD"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-CMC_PRO_API_KEY",
+              "value": "887b0a00-d89e-40f6-94d4-3c5b43892bfc"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -40,
         0
       ],
-      "id": "49aaadd8-92e5-4981-a89b-e61851536706",
-      "name": "HTML"
+      "id": "ddbb158f-fc3b-41a1-a143-ed93f8221352",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "data, status",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        180,
+        0
+      ],
+      "id": "68caa0b0-9a91-41cc-bc11-5a9075004cdc",
+      "name": "Split Out"
     }
   ],
   "pinData": {},
@@ -48,6 +126,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-03-21T05:26:56.869Z",
-  "versionId": "f5c38a18-64f9-4c7e-8389-982592bafff0"
+  "updatedAt": "2025-06-09T22:29:04.000Z",
+  "versionId": "9d132702-86a9-4afd-8025-41ca437cb650"
 }
