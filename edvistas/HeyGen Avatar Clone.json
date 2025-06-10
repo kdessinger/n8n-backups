@@ -1,0 +1,555 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "News",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Video": {
+      "main": [
+        [
+          {
+            "node": "Get Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "News": {
+      "main": [
+        [
+          {
+            "node": "Script Writer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Script Writer": {
+      "main": [
+        [
+          {
+            "node": "Generate Video1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Video1": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "30 Seconds": {
+      "main": [
+        [
+          {
+            "node": "Get Video1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Get Video1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Video1": {
+      "main": [
+        [
+          {
+            "node": "30 Seconds",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GPT 4.1 Mini": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Script Writer",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-06-09T17:40:52.166Z",
+  "id": "cEsj6WC7vva7qdOI",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "HeyGen Avatar Clone",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        700,
+        720
+      ],
+      "id": "38e52db8-4501-4fb9-b6a0-c2d7a7fb2afc",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.heygen.com/v2/video/generate",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"video_inputs\": [\n    {\n      \"character\": {\n        \"type\": \"avatar\",\n        \"avatar_id\": \"avatar_id\",\n        \"avatar_style\": \"normal\"\n      },\n      \"voice\": {\n        \"type\": \"text\",\n        \"input_text\": \"Hey AI Automation Society Family. You guys rock.\",\n        \"voice_id\": \"voice_id\",\n        \"speed\": 1.1\n      }\n    }\n  ],\n  \"dimension\": {\n    \"width\": 1280,\n    \"height\": 720\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        760,
+        380
+      ],
+      "id": "d52d369b-6a3c-48a3-9b3f-34a9fef07f93",
+      "name": "Generate Video"
+    },
+    {
+      "parameters": {
+        "url": "https://api.heygen.com/v2/voices",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1180,
+        100
+      ],
+      "id": "233000d6-08be-4087-b4e0-2f2dc39ab4eb",
+      "name": "Get Voices",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "41",
+          "name": "Synthesia (infoedvistas)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://api.heygen.com/v2/avatars",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        760,
+        100
+      ],
+      "id": "25415443-0272-4fb9-b7eb-d2e0ee42f653",
+      "name": "Get Avatars",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "41",
+          "name": "Synthesia (infoedvistas)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "# Get Avatar ID\n",
+        "height": 260,
+        "width": 400,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        620,
+        0
+      ],
+      "id": "51b784ee-0a37-4f9a-9ceb-0869c638c5fa",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "# Get Voice ID\n",
+        "height": 260,
+        "width": 400,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        0
+      ],
+      "id": "d0111db9-1fca-4fbf-83f2-ac3d42a98404",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "url": "https://api.heygen.com/v1/video_status.get",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "video_id",
+              "value": "={{ $json.data.video_id }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1180,
+        380
+      ],
+      "id": "e9297075-dd52-4cfa-8584-bafda3bf5eb6",
+      "name": "Get Video"
+    },
+    {
+      "parameters": {
+        "content": "# Create Video\n",
+        "height": 300,
+        "width": 400,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        620,
+        280
+      ],
+      "id": "c03b6613-c6ca-461c-813e-fc686fe490c4",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apify.com/v2/acts/apify~website-content-crawler/run-sync-get-dataset-items",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n    \"aggressivePrune\": false,\n    \"clickElementsCssSelector\": \"[aria-expanded=\\\"false\\\"]\",\n    \"clientSideMinChangePercentage\": 15,\n    \"crawlerType\": \"playwright:adaptive\",\n    \"debugLog\": false,\n    \"debugMode\": false,\n    \"expandIframes\": true,\n    \"ignoreCanonicalUrl\": false,\n    \"keepUrlFragments\": false,\n    \"proxyConfiguration\": {\n        \"useApifyProxy\": true\n    },\n    \"readableTextCharThreshold\": 100,\n    \"removeCookieWarnings\": true,\n    \"removeElementsCssSelector\": \"nav, footer, script, style, noscript, svg, img[src^='data:'],\\n[role=\\\"alert\\\"],\\n[role=\\\"banner\\\"],\\n[role=\\\"dialog\\\"],\\n[role=\\\"alertdialog\\\"],\\n[role=\\\"region\\\"][aria-label*=\\\"skip\\\" i],\\n[aria-modal=\\\"true\\\"]\",\n    \"renderingTypeDetectionPercentage\": 10,\n    \"respectRobotsTxtFile\": true,\n    \"saveFiles\": false,\n    \"saveHtml\": false,\n    \"saveHtmlAsFile\": false,\n    \"saveMarkdown\": true,\n    \"saveScreenshots\": false,\n    \"startUrls\": [\n        {\n            \"url\": \"https://www.morningbrew.com/issues/latest\",\n            \"method\": \"GET\"\n        }\n    ],\n    \"useSitemaps\": false\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        860,
+        720
+      ],
+      "id": "20c87e9e-9d4d-48e7-b81c-ccb82a09beeb",
+      "name": "News"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.text }}",
+        "options": {
+          "systemMessage": "=### 📢 System Prompt: Morning Brew Video Recap Script Generator\n\nYou are a sharp, engaging scriptwriter AI who specializes in converting daily newsletter content into **fast-paced, digestible news recaps** for short-form video. You will be given the full text of a *Morning Brew* issue. Your job is to create a **concise 10–20 second script** (around 40–60 words) summarizing **the top 2–4 most important stories** in an **engaging, headline-driven tone** that sounds natural when spoken aloud.\n\n---\n\n### ✅ Core Requirements:\n- Output a **single paragraph** written for **spoken delivery**, not robotic narration.\n- Cover **only the top 2–4 stories** with the widest impact or highest interest.\n- Use a **punchy, conversational tone** — brief but informative.\n- Do **not include** intros, outros, or calls to action.\n- Keep the total script under **20 seconds of spoken content** (~40–60 words).\n\n---\n\n### 🗣️ Style Example:\n\n\"Stocks jumped after inflation cooled again in April, TikTok sued the US government over its forced sale law, and McDonald’s is dropping AI drive-thrus after too many sauce mishaps.\"\n\n---\n\n### 💡 Notes:\n- Prioritize clarity and relevance.\n- Avoid niche stories unless they’re especially compelling or viral.\n- Think of the recap as something someone could say on a podcast or short TikTok video.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        1020,
+        720
+      ],
+      "id": "1f63c258-29ba-40a9-ab17-a2919d30b4c7",
+      "name": "Script Writer"
+    },
+    {
+      "parameters": {
+        "url": "https://api.heygen.com/v1/video_status.get",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "video_id",
+              "value": "={{ $('Generate Video1').item.json.data.video_id }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1000,
+        960
+      ],
+      "id": "e1d7cdea-7881-4c85-ad93-3f4bb2a1f929",
+      "name": "Get Video1"
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        840,
+        960
+      ],
+      "id": "59057af1-7239-4900-b56b-eba529f79eae",
+      "name": "30 Seconds",
+      "webhookId": "c6346cbc-9d67-4868-80a4-bfc927f0830a"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "dd44e8b9-64ae-4a91-8d19-966910447f71",
+              "leftValue": "={{ $json.data.status }}",
+              "rightValue": "completed",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1160,
+        960
+      ],
+      "id": "77e1cf59-8395-4825-a408-9eb8eac79977",
+      "name": "If"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1340,
+        960
+      ],
+      "id": "f8da6b4a-4431-4808-a692-4c7825468cdb",
+      "name": "Wait",
+      "webhookId": "9f7623f7-6605-4455-a927-09b536ee9e99"
+    },
+    {
+      "parameters": {
+        "content": "# Create Video w/ Polling\n",
+        "height": 560,
+        "width": 960,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        620,
+        600
+      ],
+      "id": "09d628ba-7ef8-4fc9-bf83-1d1a188a119a",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "# Get Video\n",
+        "height": 300,
+        "width": 400,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        280
+      ],
+      "id": "14ae7780-15b9-47ff-9756-edcac3f75f83",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.heygen.com/v2/video/generate",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"video_inputs\": [\n    {\n      \"character\": {\n        \"type\": \"avatar\",\n        \"avatar_id\": \"avatar_id\",\n        \"avatar_style\": \"normal\"\n      },\n      \"voice\": {\n        \"type\": \"text\",\n        \"input_text\": \"Hey AI Automation Society Family. You guys rock.\",\n        \"voice_id\": \"voice_id\",\n        \"speed\": 1.1\n      }\n    }\n  ],\n  \"dimension\": {\n    \"width\": 1280,\n    \"height\": 720\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1360,
+        720
+      ],
+      "id": "99cba89c-c271-46de-9d3f-c6860223d81f",
+      "name": "Generate Video1"
+    },
+    {
+      "parameters": {
+        "content": "# 🛠️Setup Guide  \n## **Author: [Nate Herk](https://www.youtube.com/@nateherk)**\n\nFollow these steps to configure your HeyGen + n8n automation workflow:\n\n1. Go to [HeyGen](https://app.heygen.com/), create your AI avatar and voice.  \n   - You can import your [ElevenLabs](https://www.elevenlabs.io/) voice clone, or let HeyGen clone your voice automatically.\n\n2. Connect your **HeyGen API key** to the following nodes:\n   - `Generate Video`\n   - `Get Video`\n   - `Get Avatars`\n   - `Get Voices`\n\n3. If you want to test out the **\"Create video with polling\"** flow:\n   - Connect your [OpenRouter](https://openrouter.ai/) API key.\n   - Connect your **Apify token** in the node called `News`.\n\nMake sure all credentials are properly stored and referenced in your environment or credentials store for best security and reuse.\n\n[YouTube](https://www.youtube.com/watch?v=llm60n03x3c) video documentation ",
+        "height": 600,
+        "width": 600
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "95c3d015-3a4b-481c-9907-50577b023111",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        660,
+        940
+      ],
+      "id": "0e50f1de-44a6-4bdb-83f1-9616fef9ad89",
+      "name": "GPT 4.1 Mini",
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-01-02T19:29:58.822Z",
+      "updatedAt": "2025-01-02T19:29:58.822Z",
+      "id": "WXisSD9AUSBjzVTs",
+      "name": "agent"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-06-09T18:11:27.000Z",
+  "versionId": "8214f221-e834-4c3e-a420-1838e8f86a60"
+}
