@@ -65,18 +65,7 @@
       "main": [
         [
           {
-            "node": "Generate Image1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Generate Image1": {
-      "main": [
-        [
-          {
-            "node": "Convert to File",
+            "node": "Generate Image",
             "type": "main",
             "index": 0
           }
@@ -103,12 +92,7 @@
       "main": [
         [
           {
-            "node": "Nextcloud",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "set filename",
+            "node": "Rename File",
             "type": "main",
             "index": 0
           }
@@ -116,17 +100,6 @@
       ]
     },
     "Send Post": {
-      "main": [
-        [
-          {
-            "node": "Form",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Form": {
       "main": [
         [
           {
@@ -155,20 +128,35 @@
         ]
       ]
     },
-    "Nextcloud": {
-      "main": [
-        []
-      ]
-    },
-    "set filename": {
+    "Rename File": {
       "main": [
         [
           {
             "node": "Send Post",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Save File to Nextcloud",
+            "type": "main",
+            "index": 0
           }
         ]
+      ]
+    },
+    "Save File to Nextcloud": {
+      "main": [
+        []
+      ]
+    },
+    "Exit": {
+      "main": [
+        []
+      ]
+    },
+    "LinkedIn": {
+      "main": [
+        []
       ]
     }
   },
@@ -250,7 +238,7 @@
         "promptType": "define",
         "text": "=LinkedIn Post: \n{{ $json.output }}",
         "options": {
-          "systemMessage": "=# Overview\nYou are an AI agent that transforms LinkedIn posts into visual prompt descriptions for generating graphic marketing materials. These visuals are designed to be paired with the post on LinkedIn, helping communicate the message in a visually engaging, brand-aligned way.\n\n## Objective:\n- Read and analyze the given LinkedIn post.\n- Identify the main message, insight, or takeaway from the post.\n- Create a clear and compelling graphic prompt that can be used with a text-to-image generator.\n- The result should be a marketing-style graphic — not a literal scene or hyperrealistic photo — that:\n1) Visually supports or illustrates the key idea of the post\n2) Looks appropriate for use in a professional LinkedIn feed\n3) Feels polished, modern, and engaging\n\n## Output Instructions:\n- Output only the final image prompt. Do not output quotation marks.\n- Do not repeat or rephrase the LinkedIn post.\n- Do not add any explanations or extra content — just the image prompt.\n- Never leave things blank like \"Header area reserved for customizable callout text\"\n- Output numeric stats when available in the original post\n\n## Style Guidelines:\n- Think like a brand designer or marketing creative.\n- Visuals may include: text, charts, icons, abstract shapes, overlays, modern illustrations, motion-like effects, bold typography elements (described, not rendered), or metaphorical concepts.\n- You can mention layout suggestions (e.g., \"split screen design,\" \"header with bold title and subtle background illustration\").\n- Assume the output will be generated using AI image tools — your prompt should guide those tools effectively.\n\n## Example Prompt Format:\nA modern flat-style graphic showing a human brain connected to mechanical gears, representing the fusion of AI and automation. Minimalist background, soft gradients, clean sans-serif text placement space at the top.\n\n"
+          "systemMessage": "=# Overview\nYou are an AI agent that transforms LinkedIn posts into visual prompt descriptions for generating graphic marketing materials. These visuals are designed to be paired with the post on LinkedIn, helping communicate the message in a visually engaging, brand-aligned way.\n\n## Objective:\n- Read and analyze the given LinkedIn post.\n- Identify the main message, insight, or takeaway from the post.\n- Create a clear and compelling graphic prompt that can be used with a text-to-image generator.\n- The result should be a marketing-style graphic — not a literal scene or hyperrealistic photo — that:\n1) Visually supports or illustrates the key idea of the post\n2) Looks appropriate for use in a professional LinkedIn feed\n3) Feels polished, modern, and engaging\n\n## Output Instructions:\n- Output only the final image prompt. Do not output quotation marks.\n- Do not repeat or rephrase the LinkedIn post.\n- Do not add any explanations or extra content — just the image prompt.\n- Never leave things blank like \"Header area reserved for customizable callout text\"\n- Output numeric stats when available in the original post\n\n## Style Guidelines:\n- Think like a brand designer or marketing creative.\n- Visuals may include: text, charts, icons, abstract shapes, overlays, modern illustrations, motion-like effects, bold typography elements (described, not rendered), or metaphorical concepts.\n- You can mention layout suggestions (e.g., \"split screen design,\" \"header with bold title and subtle background illustration\").\n- Assume the output will be generated using AI image tools — your prompt should guide those tools effectively.\n\n## Example Prompt Format:\nA modern flat-style graphic showing a human brain connected to mechanical gears, representing the fusion of AI and automation. Minimalist background, soft gradients, clean sans-serif text placement space at the top."
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
@@ -290,8 +278,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1940,
-        -380
+        1000,
+        540
       ],
       "id": "a0bbbf6e-d423-48f5-906e-0f6063b21f24",
       "name": "Generate Image",
@@ -311,8 +299,8 @@
       "type": "n8n-nodes-base.convertToFile",
       "typeVersion": 1.1,
       "position": [
-        2140,
-        -380
+        1220,
+        540
       ],
       "id": "d2be3801-6ecc-44c6-9e1c-d7e4bc62b413",
       "name": "Convert to Binary"
@@ -321,7 +309,7 @@
       "parameters": {
         "sendTo": "={{ $('On form submission').item.json.Email }}",
         "subject": "Your LinkedIn Post is Here!",
-        "message": "=<div style=\"font-family: Arial, sans-serif; color: #ddd; background-color: #1e1e1e; padding: 20px; border-radius: 8px;\">\n  <h2 style=\"color: #6db3f2;\">Here is your LinkedIn post!</h2>\n  <pre style=\"background-color: #2d2d2d; padding: 12px; border-radius: 6px; color: #9cdcfe;\">\n    {{ $('LinkedIn Post Agent').item.json.output }}\n  </pre>\n</div>",
+        "message": "=<div style=\"font-family: Arial, sans-serif; background-color: #f9f9f9; color: #333; padding: 20px; border: 1px solid #ddd; border-radius: 6px;\">\n  <h2 style=\"color: #2a7ae2; margin-top: 0;\">Here is your LinkedIn post!</h2>\n  <pre style=\"background-color: #ffffff; border: 1px solid #ccc; padding: 12px; font-family: Consolas, monospace; color: #003499; white-space: pre-wrap; border-radius: 4px;\">\n{{ $('LinkedIn Post Agent').item.json.output }}\n  </pre>\n</div>",
         "options": {
           "appendAttribution": false,
           "attachmentsUi": {
@@ -337,7 +325,7 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
       "position": [
-        2380,
+        2460,
         -100
       ],
       "id": "1fe03c99-6b90-4b82-91ca-b9fadf8e49e3",
@@ -508,70 +496,6 @@
     },
     {
       "parameters": {
-        "operation": "toBinary",
-        "sourceProperty": "data[0].b64_json",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.convertToFile",
-      "typeVersion": 1.1,
-      "position": [
-        1220,
-        540
-      ],
-      "id": "1a38d1ea-b15d-4696-84a0-53b078bed44b",
-      "name": "Convert to File"
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://api.openai.com/v1/images/generations",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpBearerAuth",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            {
-              "name": "Authorization",
-              "value": "Bearer YOUR API KEY"
-            }
-          ]
-        },
-        "sendBody": true,
-        "bodyParameters": {
-          "parameters": [
-            {
-              "name": "model",
-              "value": "gpt-image-1"
-            },
-            {
-              "name": "prompt",
-              "value": "A cute baby sea otter"
-            },
-            {
-              "name": "size",
-              "value": "1024x1024"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        1000,
-        540
-      ],
-      "id": "f44a7400-1d56-4d26-a6aa-8c2be83163a0",
-      "name": "Generate Image1",
-      "credentials": {
-        "httpBearerAuth": {
-          "id": "0GDCTMXrmHoNbZm9",
-          "name": "OpenAI-kdessinger"
-        }
-      }
-    },
-    {
-      "parameters": {
         "content": "# Generation Image -> Binary Building Block",
         "height": 380,
         "width": 760,
@@ -620,8 +544,8 @@
       "type": "@n8n/n8n-nodes-langchain.toolSerpApi",
       "typeVersion": 1,
       "position": [
-        780,
-        180
+        720,
+        200
       ],
       "id": "2a0de93c-79ef-4234-be48-d09db5c30a0a",
       "name": "SerpAPI",
@@ -639,8 +563,7 @@
         "model": "gpt-image-1",
         "prompt": "={{ $json.output }}",
         "options": {
-          "quality": "high",
-          "size": "1024x1024"
+          "quality": "high"
         }
       },
       "type": "@n8n/n8n-nodes-langchain.openAi",
@@ -657,44 +580,6 @@
           "name": "OpenAi (kdessinger)"
         }
       }
-    },
-    {
-      "parameters": {
-        "path": "=/!Share/_tmp/data-{{ $now.format(\"MMddyyyy_HHmm\") }}.png",
-        "binaryDataUpload": true
-      },
-      "type": "n8n-nodes-base.nextCloud",
-      "typeVersion": 1,
-      "position": [
-        2180,
-        120
-      ],
-      "id": "ccc3c503-7a7b-45a5-b02c-c06a2574b272",
-      "name": "Nextcloud",
-      "credentials": {
-        "nextCloudApi": {
-          "id": "18",
-          "name": "kdessinger@nextcloud.edvistas.com"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "completion",
-        "respondWith": "returnBinary",
-        "completionTitle": "Your LinkedIn Post is Here!",
-        "completionMessage": "={{ $('LinkedIn Post Agent').item.json.output }}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.form",
-      "typeVersion": 1,
-      "position": [
-        2560,
-        -100
-      ],
-      "id": "ed27be2f-b226-4032-9392-ea0f26285ace",
-      "name": "Form",
-      "webhookId": "c9686662-7cfd-4a19-a820-0a53314affa7"
     },
     {
       "parameters": {
@@ -724,7 +609,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        2740,
+        2680,
         -100
       ],
       "id": "ec87ddf6-b6fd-474a-8a4e-74f8b376e08f",
@@ -743,30 +628,78 @@
     },
     {
       "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "97980a91-1e23-4765-bedb-6caccb514662",
-              "name": "fileName",
-              "value": "=file.png",
-              "type": "string"
-            }
+        "messages": {
+          "message": [
+            {}
           ]
         },
-        "includeOtherFields": true,
-        "options": {}
+        "simplify": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Simplify_Output', ``, 'boolean') }}",
+        "options": {},
+        "requestOptions": {}
       },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
+      "type": "n8n-nodes-base.perplexityTool",
+      "typeVersion": 1,
+      "position": [
+        840,
+        200
+      ],
+      "id": "c7e0c7d0-c26e-4e85-b151-3f754d3604bc",
+      "name": "Perplexity",
+      "credentials": {
+        "perplexityApi": {
+          "id": "qglZxtN0RjOz484O",
+          "name": "Perplexity (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const now = new Date();\nconst pad = (n) => n.toString().padStart(2, '0');\nconst timestamp = `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}_${pad(now.getHours())}-${pad(now.getMinutes())}-${pad(now.getSeconds())}`;\n\nif (item.binary && item.binary.data) {\n  item.binary.data.fileName = `post-${timestamp}.png`;\n  item.fileName = `post-${timestamp}.png`;\n}\n\nreturn item;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
       "position": [
         2160,
         -100
       ],
-      "id": "99ae56d5-de5a-4cda-9ba3-22b3dfaab07a",
-      "name": "set filename"
+      "id": "a50ce0c8-a648-4bad-8fdd-d26f588806f5",
+      "name": "Rename File"
+    },
+    {
+      "parameters": {
+        "path": "=/!Share/_tmp/data-{{ $now.format(\"MMddyyyy_HHmm\") }}.png",
+        "binaryDataUpload": true
+      },
+      "type": "n8n-nodes-base.nextCloud",
+      "typeVersion": 1,
+      "position": [
+        2460,
+        140
+      ],
+      "id": "ccc3c503-7a7b-45a5-b02c-c06a2574b272",
+      "name": "Save File to Nextcloud",
+      "credentials": {
+        "nextCloudApi": {
+          "id": "18",
+          "name": "kdessinger@nextcloud.edvistas.com"
+        }
+      }
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "On form submission": [
+      {
+        "json": {
+          "Email": "kdessinger@edvistas.com",
+          "Topic of Post": "AI in Educational",
+          "Target Audience": "Information Technology Managers",
+          "submittedAt": "2025-06-17T20:27:53.204-04:00",
+          "formMode": "test"
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1"
   },
@@ -780,6 +713,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-06-18T00:38:12.000Z",
-  "versionId": "b9d65609-11ef-412b-a032-04d4a251ea18"
+  "updatedAt": "2025-06-18T16:13:16.000Z",
+  "versionId": "5d9aeb57-b95e-4eb4-941b-865dd2da21a9"
 }
