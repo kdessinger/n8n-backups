@@ -63,13 +63,7 @@
     },
     "When clicking ‘Test workflow’": {
       "main": [
-        [
-          {
-            "node": "Generate Image",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "gpt4.1-mini": {
@@ -157,6 +151,17 @@
     "LinkedIn": {
       "main": [
         []
+      ]
+    },
+    "Baserow API": {
+      "main": [
+        [
+          {
+            "node": "Baserow MCP",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
@@ -685,6 +690,48 @@
           "name": "kdessinger@nextcloud.edvistas.com"
         }
       }
+    },
+    {
+      "parameters": {
+        "url": "https://baserow.edvistas.com/api/database/tables/all-tables/",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Token J8kVqL6z7tg7VXxoG1hGh0imzVEbMB99"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1540,
+        540
+      ],
+      "id": "b868618e-3100-4c15-91c3-61a398ac0be5",
+      "name": "Baserow API"
+    },
+    {
+      "parameters": {
+        "connectionType": "sse"
+      },
+      "type": "n8n-nodes-mcp.mcpClient",
+      "typeVersion": 1,
+      "position": [
+        1760,
+        540
+      ],
+      "id": "6dca1e6b-7981-4eb9-9296-61ff26bce609",
+      "name": "Baserow MCP",
+      "credentials": {
+        "mcpClientSseApi": {
+          "id": "FfLwAfUBcm18tJKm",
+          "name": "MCP Client (SSE) account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -701,6 +748,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-06-18T23:00:54.000Z",
-  "versionId": "181723c3-f6a9-4fa6-a7cd-e6c96be7d987"
+  "updatedAt": "2025-06-20T13:44:53.000Z",
+  "versionId": "adbc4464-1a23-4454-841a-8bbc98b70b1b"
 }
