@@ -158,7 +158,7 @@
       "main": [
         [
           {
-            "node": "Code",
+            "node": "Log the search results",
             "type": "main",
             "index": 0
           }
@@ -181,33 +181,6 @@
         [
           {
             "node": "response",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Edit Fields1": {
-      "main": [
-        []
-      ]
-    },
-    "Log the search results1": {
-      "main": [
-        [
-          {
-            "node": "Microsoft SQL",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Code": {
-      "main": [
-        [
-          {
-            "node": "Log the search results",
             "type": "main",
             "index": 0
           }
@@ -264,6 +237,12 @@
             {
               "fieldLabel": "Target Audience",
               "placeholder": "Educators",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Email",
+              "fieldType": "email",
+              "placeholder": "Email to send results to i.e 'user@edvistas.com'",
               "requiredField": true
             }
           ]
@@ -595,7 +574,7 @@
             {
               "id": "1ae0dd90-d1d0-494b-bd8b-1ef335f0bd8f",
               "name": "response",
-              "value": "=[Source 1]\nURL: {{ $json.results[0].url }}\nContent: {{ $json.results[0].content }}\n\n[Source 2]\nURL: {{ $json.results[1].url }}\nContent: {{ $json.results[1].content }}\n\n[Source 2]\nURL: {{ $json.results[2].url }}\nContent: {{ $json.results[2].content }}",
+              "value": "=[Source 1]\nURL: {{ $('Tavily').item.json.results[0].url }}\nContent: {{ $('Tavily').item.json.results[0].content }}\n\n[Source 2]\nURL: {{ $('Tavily').item.json.results[1].url }}\nContent: {{ $('Tavily').item.json.results[1].content }}\n\n[Source 2]\nURL: {{ $('Tavily').item.json.results[2].url }}\nContent: {{ $('Tavily').item.json.results[2].content }}\n",
               "type": "string"
             }
           ]
@@ -605,7 +584,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -140,
+        -360,
         1000
       ],
       "id": "8f7bdc8f-1cce-490a-84e3-d3acb17b837c",
@@ -631,7 +610,7 @@
       "parameters": {
         "content": "# Tavily Internet Search Tool",
         "height": 300,
-        "width": 1160,
+        "width": 940,
         "color": 4
       },
       "type": "n8n-nodes-base.stickyNote",
@@ -681,12 +660,12 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "INSERT INTO dbo.SearchResultsLog (URL, Title, Content)\nVALUES\n  (@url1, @title1, @content1),\n  (@url2, @title2, @content2),\n  (@url3, @title3, @content3);\n"
+        "query": "INSERT INTO dbo.SearchResultsLog (URL, Title, Content)\nVALUES\n(\n  '{{ $json.results[0].url.replace(/'/g, \"''\") }}',\n  '{{ $json.results[0].title.replace(/'/g, \"''\") }}',\n  '{{ $json.results[0].content.replace(/'/g, \"''\") }}'\n),\n(\n  '{{ $json.results[1].url.replace(/'/g, \"''\") }}',\n  '{{ $json.results[1].title.replace(/'/g, \"''\") }}',\n  '{{ $json.results[1].content.replace(/'/g, \"''\") }}'\n),\n(\n  '{{ $json.results[2].url.replace(/'/g, \"''\") }}',\n  '{{ $json.results[2].title.replace(/'/g, \"''\") }}',\n  '{{ $json.results[2].content.replace(/'/g, \"''\") }}'\n);\n"
       },
       "type": "n8n-nodes-base.microsoftSql",
       "typeVersion": 1.1,
       "position": [
-        -340,
+        -560,
         1000
       ],
       "id": "2bd1c22e-d948-4c42-8f15-dbe37bd130f2",
@@ -697,130 +676,9 @@
           "name": "SQL01.edvistas.local (kdessinger)"
         }
       }
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "efbbd8ff-2062-43fc-93b6-d67bdff74179",
-              "name": "url",
-              "value": "={{ $('Tavily').item.json.results[1].url }}",
-              "type": "string"
-            },
-            {
-              "id": "ccacac2a-9982-452f-9baa-a5efcdee566b",
-              "name": "title",
-              "value": "={{ $('Tavily').item.json.results[1].title }}",
-              "type": "string"
-            },
-            {
-              "id": "ca708c3e-9287-4e11-ad4f-67e99cd20bb2",
-              "name": "content",
-              "value": "=      raw: {{ $json.results[1].content }},\n      sanitized: {{ $json.results[1].content\n        .replace(/'/g, \"''\")\n        .replace(/;/g, \"\")\n        .replace(/USE\\s+\\w+/gi, \"\")\n        .replace(/[\\u0000-\\u001F\\u007F-\\u009F]/g, \"\") // remove control chars\n}}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        320,
-        1000
-      ],
-      "id": "86f6b1dc-b1e4-47b4-9d26-9c14f9c6de96",
-      "name": "Edit Fields1",
-      "disabled": true
-    },
-    {
-      "parameters": {
-        "operation": "executeQuery",
-        "query": "IF OBJECT_ID('dbo.SearchResultsLog', 'U') IS NOT NULL\n    DROP TABLE dbo.SearchResultsLog;\n\nCREATE TABLE dbo.SearchResultsLog (\n    id INT IDENTITY(1,1) PRIMARY KEY,\n    Timestamp DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME(),\n    Title NVARCHAR(512) NULL,\n    URL NVARCHAR(2048) NOT NULL,\n    Content NVARCHAR(MAX) NULL\n);\n"
-      },
-      "type": "n8n-nodes-base.microsoftSql",
-      "typeVersion": 1.1,
-      "position": [
-        560,
-        1280
-      ],
-      "id": "0fe015a9-bd18-498a-9975-42947ac20698",
-      "name": "Microsoft SQL",
-      "credentials": {
-        "microsoftSql": {
-          "id": "9",
-          "name": "SQL01.edvistas.local (kdessinger)"
-        }
-      },
-      "disabled": true
-    },
-    {
-      "parameters": {
-        "operation": "executeQuery",
-        "query": "SELECT\n  '{{ $(\"Tavily\").item.json.results[1].content }}' AS rawContent;\n"
-      },
-      "type": "n8n-nodes-base.microsoftSql",
-      "typeVersion": 1.1,
-      "position": [
-        340,
-        1280
-      ],
-      "id": "83766a20-c602-45b8-b97b-23b0900eb0c1",
-      "name": "Log the search results1",
-      "credentials": {
-        "microsoftSql": {
-          "id": "9",
-          "name": "SQL01.edvistas.local (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "table": "SearchResultsLog",
-        "columns": "results[0].url, results[0].title, results[0].content"
-      },
-      "type": "n8n-nodes-base.microsoftSql",
-      "typeVersion": 1.1,
-      "position": [
-        100,
-        1280
-      ],
-      "id": "112e458e-156d-4f50-94c7-f62c24f6c285",
-      "name": "Microsoft SQL1",
-      "credentials": {
-        "microsoftSql": {
-          "id": "9",
-          "name": "SQL01.edvistas.local (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "jsCode": "function clean(str) {\n  return str\n    .replace(/'/g, \"''\")\n    .replace(/;/g, \"\")\n    .replace(/\\bUSE\\b\\s+\\w+/gi, \"\")\n    .replace(/\\bDROP\\b\\s+\\w+/gi, \"\")\n    .replace(/\\bOPENAI\\b/gi, \"\")\n    .replace(/\\bAI\\b/gi, \"\")\n    .replace(/[\\u0000-\\u001F\\u007F-\\u009F]/g, \"\");\n}\n\nreturn [\n  {\n    json: {\n      values: [\n        {\n          url: $json.results[0].url,\n          title: $json.results[0].title,\n          content: clean($json.results[0].content)\n        },\n        {\n          url: $json.results[1].url,\n          title: $json.results[1].title,\n          content: clean($json.results[1].content)\n        },\n        {\n          url: $json.results[2].url,\n          title: $json.results[2].title,\n          content: clean($json.results[2].content)\n        }\n      ]\n    }\n  }\n];\n"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        -560,
-        1000
-      ],
-      "id": "14144067-c752-44eb-a2ae-f94bca2406bd",
-      "name": "Code"
     }
   ],
   "pinData": {
-    "On form submission": [
-      {
-        "json": {
-          "Topic": "AI in the Classroom",
-          "Tone": "Funny",
-          "Target Audience": "Educators",
-          "submittedAt": "2025-06-24T22:16:38.657-04:00",
-          "formMode": "test"
-        }
-      }
-    ],
     "Tavily": [
       {
         "json": {
@@ -875,6 +733,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-06-25T04:35:39.000Z",
-  "versionId": "a787b171-6378-466d-a89d-6af006fde6d8"
+  "updatedAt": "2025-06-25T05:02:15.000Z",
+  "versionId": "f06e7132-d440-451f-b739-070a36a003fe"
 }
