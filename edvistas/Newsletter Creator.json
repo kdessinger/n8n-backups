@@ -676,6 +676,17 @@
           "name": "SQL01.edvistas.local (kdessinger)"
         }
       }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.awsLambda",
+      "typeVersion": 1,
+      "position": [
+        700,
+        940
+      ],
+      "id": "6231557d-1e1b-4607-a143-a3fc22073979",
+      "name": "AWS Lambda"
     }
   ],
   "pinData": {
@@ -733,6 +744,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-06-25T05:02:15.000Z",
-  "versionId": "f06e7132-d440-451f-b739-070a36a003fe"
+  "updatedAt": "2025-06-26T20:58:46.000Z",
+  "versionId": "448da9c5-e27e-4597-bbb0-4f1823296062"
 }
