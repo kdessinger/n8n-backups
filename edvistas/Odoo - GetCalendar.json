@@ -1,0 +1,148 @@
+{
+  "active": true,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Get Calendar Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Calendar Items": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-06-27T17:14:50.065Z",
+  "id": "d06k2QIqg7QDgIRl",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Odoo - GetCalendar",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "4b5bf9b3-c001-428a-a627-6d141eb683d0",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -320,
+        0
+      ],
+      "id": "57a3af68-b6e6-43d0-b1f3-01eabf318c55",
+      "name": "Webhook",
+      "webhookId": "84c54688-9522-4bf7-937c-dad5e3872e1a"
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "calendar.event",
+        "operation": "getAll",
+        "options": {
+          "fieldsList": [
+            "id",
+            "name",
+            "description",
+            "user_id",
+            "partner_id",
+            "location",
+            "privacy",
+            "show_as",
+            "categ_ids",
+            "start",
+            "stop",
+            "display_time",
+            "duration",
+            "res_model_id",
+            "res_model",
+            "display_name",
+            "active"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        0
+      ],
+      "id": "fcb7b5d1-dd68-4145-adb7-e04fc47fe426",
+      "name": "Get Calendar Items",
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        140,
+        0
+      ],
+      "id": "c8f39b02-894e-4cf4-95e2-76a42b240948",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "content": "## Odoo Calendar EndPoint\nUsed to display the calendar in a Python Application in the Lobby\n\nApplication is being written by Jacob Woods",
+        "height": 400,
+        "width": 940
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -480,
+        -200
+      ],
+      "typeVersion": 1,
+      "id": "a42d743b-93f3-434f-95d0-e1f36e09b5af",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": 300,
+    "errorWorkflow": "NtBd2hj1eiR2xufe"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2022-12-09T05:43:36.104Z",
+      "updatedAt": "2022-12-09T05:43:36.104Z",
+      "id": "12",
+      "name": "odoo"
+    },
+    {
+      "createdAt": "2024-10-21T18:47:49.143Z",
+      "updatedAt": "2024-10-21T18:47:49.143Z",
+      "id": "MKghWnlF1ug1K8In",
+      "name": "WebHook"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2025-06-27T17:35:31.000Z",
+  "versionId": "d3167cc1-4f9d-4e28-8477-f152c4a7c922"
+}
