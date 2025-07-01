@@ -116,7 +116,7 @@
     },
     {
       "parameters": {
-        "content": "# Helpdesk Ticket Webhook\n#### This node will create/modify/delete helpdesk tickets in odoo. \n\nField List:\n- Title\n- Message\n- Priority\n- Emojis (array)\n- ClickURL\n- Channel",
+        "content": "# Helpdesk Ticket Webhook\n#### This workflow will create/modify/delete helpdesk tickets in odoo. \n\nField List:\n- Title\n- Message\n- Priority\n- Emojis (array)\n- ClickURL\n- Channel",
         "height": 322.2741444093105,
         "width": 564.3102216985873
       },
@@ -125,7 +125,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -157.6860465116281,
+        -160,
         -180
       ]
     },
@@ -140,8 +140,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        760,
-        -20
+        820,
+        200
       ]
     },
     {
@@ -197,7 +197,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        180,
+        100,
         200
       ],
       "alwaysOutputData": true,
@@ -268,8 +268,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        480,
-        -40
+        580,
+        200
       ],
       "alwaysOutputData": true,
       "credentials": {
@@ -299,7 +299,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        400,
+        340,
         200
       ],
       "alwaysOutputData": true,
@@ -332,9 +332,15 @@
       "updatedAt": "2024-10-21T18:47:49.143Z",
       "id": "MKghWnlF1ug1K8In",
       "name": "WebHook"
+    },
+    {
+      "createdAt": "2025-06-30T23:49:07.336Z",
+      "updatedAt": "2025-06-30T23:49:07.336Z",
+      "id": "myO8SC8CNjmtr6AI",
+      "name": "UC"
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-06-12T21:18:21.000Z",
-  "versionId": "9957ac32-e1ea-4293-b31f-5b0082454086"
+  "updatedAt": "2025-06-30T23:49:09.000Z",
+  "versionId": "38848a71-1fb4-4c3f-b93b-837f6c914662"
 }
