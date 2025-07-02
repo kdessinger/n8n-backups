@@ -584,7 +584,7 @@
     },
     {
       "parameters": {
-        "content": "# 🛠️ Setup Guide\n### 👤 Author: [Nate Herk](https://www.youtube.com/@nateherk)\n\n### 🔌 Steps to Connect:\n1. **Airtop Setup**  \n   - Visit [Airtop](https://www.airtop.ai/) to generate your API key and connect to the Airtop tools/nodes.  \n   - Set up a profile with credentials (if automating websites like X, \nLinkedIn, or Amazon).  \n   - Connect your profile in the Start Browser tool.\n   - 💸 Use code **`NateHalfOff`** for **50% off Airtop for 3 months**.\n\n2. **OpenRouter API Key**  \n   - Go to [OpenRouter](https://openrouter.ai/) and generate your API key.  \n   - Paste this key into your **Chat Model** node in n8n.\n\n3. **Start Browser Tool Setup**  \n   - Link your **Start Browser workflow** to the **Start Browser Tool**:\n     - Either link it using the **ID method** (explained in the YouTube video).\n     - Or paste the **Start Browser Tool** workflow into a separate n8n workflow and link it directly.\n\n4. **(Optional) Live Agent Browser View**  \n   - Connect additional services like:\n     - [Slack](https://slack.com/)\n     - [Telegram](https://telegram.org/)\n     - [Gmail](https://mail.google.com/)\n   - This allows you to **receive a live browser link** while your agent is running automations.\n\n---\n💡 Need help? Ask questions in the [AI Automation Society Community](https://www.skool.com/ai-automation-society/about) or check out Nate’s [YouTube Tutorials](https://www.youtube.com/@nateherk) .\n",
+        "content": "# 🛠️ Setup Guide\n\n### 🔌 Steps to Connect:\n1. **Airtop Setup**  \n   - Visit [Airtop](https://www.airtop.ai/) to generate your API key and connect to the Airtop tools/nodes.  \n   - Set up a profile with credentials (if automating websites like X, \nLinkedIn, or Amazon).  \n   - Connect your profile in the Start Browser tool.\n   - 💸 Use code **`NateHalfOff`** for **50% off Airtop for 3 months**.\n\n2. **OpenRouter API Key**  \n   - Go to [OpenRouter](https://openrouter.ai/) and generate your API key.  \n   - Paste this key into your **Chat Model** node in n8n.\n\n3. **Start Browser Tool Setup**  \n   - Link your **Start Browser workflow** to the **Start Browser Tool**:\n     - Either link it using the **ID method** (explained in the YouTube video).\n     - Or paste the **Start Browser Tool** workflow into a separate n8n workflow and link it directly.\n\n4. **(Optional) Live Agent Browser View**  \n   - Connect additional services like:\n     - [Slack](https://slack.com/)\n     - [Telegram](https://telegram.org/)\n     - [Gmail](https://mail.google.com/)\n   - This allows you to **receive a live browser link** while your agent is running automations.\n\n---\n💡 Need help? Ask questions in the [AI Automation Society Community](https://www.skool.com/ai-automation-society/about) or check out Nate’s [YouTube Tutorials](https://www.youtube.com/@nateherk) .\n",
         "height": 740,
         "width": 660
       },
@@ -612,6 +612,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-06-09T17:18:22.000Z",
-  "versionId": "0dbe62cd-dce8-4dd5-9a09-dcf7da430994"
+  "updatedAt": "2025-07-01T21:00:51.000Z",
+  "versionId": "76ca2833-771e-4e35-8e51-8c58d25274e5"
 }
