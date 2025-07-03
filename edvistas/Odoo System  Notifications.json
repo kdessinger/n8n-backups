@@ -16,7 +16,7 @@
       "main": [
         [
           {
-            "node": "More than 6 hours?",
+            "node": "More than 3 hours?",
             "type": "main",
             "index": 0
           }
@@ -34,7 +34,18 @@
         ]
       ]
     },
-    "More than 6 hours?": {
+    "Run Every 3 Hours": {
+      "main": [
+        [
+          {
+            "node": "Incoming Mail Servers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "More than 3 hours?": {
       "main": [
         [
           {
@@ -46,17 +57,6 @@
         [
           {
             "node": "All Good!",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Run Every 6 Hours": {
-      "main": [
-        [
-          {
-            "node": "Incoming Mail Servers",
             "type": "main",
             "index": 0
           }
@@ -208,6 +208,26 @@
     },
     {
       "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 3
+            }
+          ]
+        }
+      },
+      "id": "0eaebc0a-3ebc-48e3-ade6-837d7ce6c67c",
+      "name": "Run Every 3 Hours",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -280,
+        360
+      ]
+    },
+    {
+      "parameters": {
         "conditions": {
           "options": {
             "caseSensitive": true,
@@ -219,7 +239,7 @@
             {
               "id": "20774546-d7b7-487b-a25d-45792b8cd039",
               "leftValue": "={{ $json.timeDifference.hours }}",
-              "rightValue": 6,
+              "rightValue": 3,
               "operator": {
                 "type": "number",
                 "operation": "gt"
@@ -231,7 +251,7 @@
         "options": {}
       },
       "id": "bfa3e071-855b-4f99-81c9-1236e6a1cc7e",
-      "name": "More than 6 hours?",
+      "name": "More than 3 hours?",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
@@ -240,26 +260,6 @@
       ],
       "notesInFlow": true,
       "notes": "If"
-    },
-    {
-      "parameters": {
-        "rule": {
-          "interval": [
-            {
-              "field": "hours",
-              "hoursInterval": 6
-            }
-          ]
-        }
-      },
-      "id": "0eaebc0a-3ebc-48e3-ade6-837d7ce6c67c",
-      "name": "Run Every 6 Hours",
-      "type": "n8n-nodes-base.scheduleTrigger",
-      "typeVersion": 1.2,
-      "position": [
-        -280,
-        360
-      ]
     }
   ],
   "pinData": {},
@@ -278,8 +278,11 @@
     },
     "node:Run Every 6 Hours": {
       "recurrenceRules": [
-        0
+        6
       ]
+    },
+    "node:Run Every 3 Hours": {
+      "recurrenceRules": []
     }
   },
   "tags": [
@@ -291,6 +294,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-11-13T07:06:47.000Z",
-  "versionId": "1ac51a2a-0d69-41ba-ab2d-9336fe51577f"
+  "updatedAt": "2025-07-03T14:49:01.000Z",
+  "versionId": "1dcfa8c0-9c9f-448f-b4b9-3668c4226fa2"
 }
