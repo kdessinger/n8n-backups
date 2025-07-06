@@ -1,20 +1,8 @@
 {
   "active": false,
-  "connections": {
-    "When clicking ‘Execute workflow’": {
-      "main": [
-        [
-          {
-            "node": "Log the Search",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    }
-  },
-  "createdAt": "2025-06-25T03:33:38.283Z",
-  "id": "eKAF2V3X515Vs4CX",
+  "connections": {},
+  "createdAt": "2025-06-25T03:33:09.843Z",
+  "id": "o8u7X17lbsj1EjZN",
   "isArchived": true,
   "meta": null,
   "name": "My workflow 3",
@@ -38,17 +26,6 @@
           "name": "SQL01.edvistas.local (kdessinger)"
         }
       }
-    },
-    {
-      "parameters": {},
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
-      "position": [
-        -460,
-        -240
-      ],
-      "id": "8357dc34-28c6-4e6b-9969-847aed6e8876",
-      "name": "When clicking ‘Execute workflow’"
     }
   ],
   "pinData": {},
@@ -59,5 +36,5 @@
   "tags": [],
   "triggerCount": 0,
   "updatedAt": "2025-06-25T03:36:18.000Z",
-  "versionId": "c01f4a98-8603-45d3-96f3-6f3f332d8714"
+  "versionId": "6a354839-64ca-4a2b-a36f-dccb197f92cf"
 }
