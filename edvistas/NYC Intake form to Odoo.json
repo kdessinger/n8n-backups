@@ -1,0 +1,49 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2025-07-08T15:53:15.204Z",
+  "id": "VZw0ehEyP9naPKEM",
+  "isArchived": false,
+  "meta": null,
+  "name": "NYC Intake form to Odoo",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "199392d7-f9a0-45e4-bedb-2980eb775a93",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "36601c45-c22c-4524-80bc-a86b56a21190",
+      "name": "Webhook",
+      "webhookId": "199392d7-f9a0-45e4-bedb-2980eb775a93"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2022-12-09T05:43:36.104Z",
+      "updatedAt": "2022-12-09T05:43:36.104Z",
+      "id": "12",
+      "name": "odoo"
+    },
+    {
+      "createdAt": "2025-07-08T15:53:14.011Z",
+      "updatedAt": "2025-07-08T15:53:14.011Z",
+      "id": "yvHtDeL5tXcijdKT",
+      "name": "eduform"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-08T15:53:42.000Z",
+  "versionId": "d2c61fe3-923a-44ba-a496-dc2b640643f3"
+}
