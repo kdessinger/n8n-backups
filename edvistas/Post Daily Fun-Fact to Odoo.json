@@ -5,14 +5,14 @@
       "main": [
         [
           {
-            "node": "OpenAI",
+            "node": "Create a Completion",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "OpenAI": {
+    "Create a Completion": {
       "main": [
         [
           {
@@ -56,31 +56,6 @@
         1240,
         600
       ]
-    },
-    {
-      "parameters": {
-        "prompt": "Please write a fun-fact about the education industry.",
-        "simplifyOutput": false,
-        "options": {
-          "maxTokens": 180,
-          "temperature": 0.7,
-          "topP": 1
-        }
-      },
-      "id": "0cb5244b-43ee-4e1f-beff-b875cf4bb8af",
-      "name": "OpenAI",
-      "type": "n8n-nodes-base.openAi",
-      "typeVersion": 1,
-      "position": [
-        1440,
-        600
-      ],
-      "credentials": {
-        "openAiApi": {
-          "id": "28",
-          "name": "OpenAi (kdessinger)"
-        }
-      }
     },
     {
       "parameters": {
@@ -134,6 +109,33 @@
           "name": "Odoo (OdooBot)"
         }
       }
+    },
+    {
+      "parameters": {
+        "model": "o1-mini",
+        "prompt": "Please write a fun-fact about the education industry.",
+        "simplifyOutput": false,
+        "options": {
+          "maxTokens": 180,
+          "temperature": 0.7,
+          "topP": 1
+        },
+        "requestOptions": {}
+      },
+      "id": "0cb5244b-43ee-4e1f-beff-b875cf4bb8af",
+      "name": "Create a Completion",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        1440,
+        600
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -158,6 +160,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-05-31T19:27:28.000Z",
-  "versionId": "a152aadb-5ba1-4438-9371-6797cbc49811"
+  "updatedAt": "2025-07-08T15:55:07.000Z",
+  "versionId": "b6dd4c59-19cb-46a8-8e63-b201857f181e"
 }
