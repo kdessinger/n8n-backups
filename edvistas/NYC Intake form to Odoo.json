@@ -1,10 +1,46 @@
 {
   "active": false,
-  "connections": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "EduForm Pivot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "EduForm Pivot": {
+      "main": [
+        [
+          {
+            "node": "Create job in Odoo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create job in Odoo": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
   "createdAt": "2025-07-08T15:53:15.204Z",
   "id": "VZw0ehEyP9naPKEM",
   "isArchived": false,
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "NYC Intake form to Odoo",
   "nodes": [
     {
@@ -16,15 +52,770 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
-        0,
-        0
+        -240,
+        -260
       ],
       "id": "36601c45-c22c-4524-80bc-a86b56a21190",
       "name": "Webhook",
       "webhookId": "199392d7-f9a0-45e4-bedb-2980eb775a93"
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "Formid",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"formid\"] }}"
+            },
+            {
+              "name": "referid",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"referid\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][0][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][0][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][0][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][1][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][1][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][1][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][2][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][2][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][2][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][3][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][3][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][3][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][4][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][4][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][4][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][5][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][5][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][5][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][6][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][6][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][6][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][7][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][7][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][7][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][8][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][8][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][8][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][9][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][9][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][9][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][10][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][10][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][10][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][11][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][11][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][11][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][12][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][12][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][12][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][13][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][13][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][13][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][14][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][14][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][14][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][15][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][15][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][15][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][16][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][16][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][16][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][17][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][17][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][17][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][18][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][18][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][18][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][19][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][19][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][19][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][20][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][20][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][20][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][21][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][21][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][21][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][22][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][22][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][22][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][23][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][23][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][23][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][24][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][24][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][24][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][25][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][25][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][25][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][26][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][26][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][26][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][27][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][27][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][27][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][28][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][28][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][28][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][29][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][29][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][29][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][30][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][30][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][30][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][31][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][31][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][31][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][32][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][32][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][32][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][33][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][33][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][33][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][34][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][34][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][34][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][35][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][35][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][35][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][36][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][36][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][36][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][37][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][37][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][37][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][38][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][38][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][38][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][39][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][39][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][39][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][40][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][40][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][40][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][41][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][41][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][41][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][42][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][42][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][42][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][43][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][43][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][43][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][44][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][44][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][44][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][45][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][45][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][45][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][46][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][46][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][46][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][47][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][47][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][47][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][48][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][48][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][48][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][49][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][49][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][49][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][50][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][50][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][50][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][51][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][51][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][51][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][52][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][52][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][52][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][53][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][53][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][53][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][54][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][54][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][54][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][55][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][55][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][55][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][56][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][56][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][56][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][57][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][57][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][57][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][58][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][58][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][58][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][59][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][59][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][59][\"value\"] }}"
+            },
+            {
+              "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][60][\"type\"] == 6 ? 'host' : $json[\"body\"][\"queryresult\"][\"field\"][60][\"name\"] }}",
+              "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][60][\"value\"] }}"
+            },
+            {
+              "name": "host",
+              "value": "={{ $json.headers.host }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "5d220387-2879-4577-94b4-daf8e73b3eed",
+      "name": "EduForm Pivot",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        -20,
+        -260
+      ],
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "stock.move",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "company_id"
+            },
+            {
+              "fieldName": "date",
+              "fieldValue": "={{ $json.Date }}"
+            },
+            {
+              "fieldName": "location_dest_id"
+            },
+            {
+              "fieldName": "location_id"
+            },
+            {
+              "fieldName": "name"
+            },
+            {
+              "fieldName": "procure_method"
+            },
+            {
+              "fieldName": "product_id"
+            },
+            {
+              "fieldName": "product_uom"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        200,
+        -260
+      ],
+      "id": "7b6c1148-0ec4-4c2b-8fea-ee9cea72444a",
+      "name": "Create job in Odoo",
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://apps.edvistas.com/forms/pdfreports.aspx?report=formPDFMulti&formId=9184&referId1=50091edb-cdc8-42f1-b8f0-56a9bf8e8c1b&numEntry=1&language=-1",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        400,
+        -260
+      ],
+      "id": "10fe9f48-8dab-4602-9f01-e8137c2407f2",
+      "name": "HTTP Request"
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "connection": "Keep-Alive",
+            "host": "n8n.edvistas.com",
+            "x-forwarded-scheme": "https",
+            "x-forwarded-proto": "https",
+            "x-forwarded-for": "199.223.255.7",
+            "x-real-ip": "199.223.255.7",
+            "content-length": "6173",
+            "content-type": "application/xml;charset=utf-8"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "queryresult": {
+              "username": "046348C2-F886-453A-B834-C51929E6990B",
+              "password": "F7A87DDD-1526-4DDF-8FBB-0D824DA459B9",
+              "formid": "9184",
+              "othersystemid": "",
+              "referid": "50091edb-cdc8-42f1-b8f0-56a9bf8e8c1b",
+              "field": [
+                {
+                  "id": "325839",
+                  "name": "txt_title",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "325841",
+                  "name": "Info",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "325842",
+                  "name": "txt_Q1",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "325843",
+                  "name": "txt_Date",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "325844",
+                  "name": "School",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "PS/IS 238 Anne Sullivan School"
+                },
+                {
+                  "id": "325845",
+                  "name": "Date",
+                  "type": "1",
+                  "txttype": "3",
+                  "value": "4/30/2025"
+                },
+                {
+                  "id": "325846",
+                  "name": "txt_Q2",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "325847",
+                  "name": "Grades",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "345678"
+                },
+                {
+                  "id": "325848",
+                  "name": "txt_finance_contact",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "325849",
+                  "name": "Finance Contact",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "Tina Li"
+                },
+                {
+                  "id": "325850",
+                  "name": "txt_school_admins",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "325851",
+                  "name": "School Administrators",
+                  "type": "10",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "325852",
+                  "name": "txt_Grade_Coaches",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "325853",
+                  "name": "Grade Level Coaches",
+                  "type": "10",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "325854",
+                  "name": "txt_finance_email",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "325855",
+                  "name": "Finance Email",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "tli10@schools.nyc.gov"
+                },
+                {
+                  "id": "325856",
+                  "name": "txt_Finance_phone",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "325857",
+                  "name": "Finance Phone Number",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "718 339-4355"
+                },
+                {
+                  "id": "325858",
+                  "name": "txt_preloadsneeded",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "325859",
+                  "name": "txt_schooldbn",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "325860",
+                  "name": "School DBN Code",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "21k238"
+                },
+                {
+                  "id": "325861",
+                  "name": "txt_nypractice",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "325862",
+                  "name": "G3-5",
+                  "type": "2",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "325863",
+                  "name": "G6-8",
+                  "type": "2",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "325864",
+                  "name": "G3-8",
+                  "type": "2",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "325865",
+                  "name": "txt_regents",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "325868",
+                  "name": "Other",
+                  "type": "2",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "325869",
+                  "name": "Algebra I",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": "1"
+                },
+                {
+                  "id": "325870",
+                  "name": "Other Text",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "325871",
+                  "name": "Living Environment",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": "1"
+                },
+                {
+                  "id": "325872",
+                  "name": "txt_NYCReads",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "325873",
+                  "name": "HMH",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "325874",
+                  "name": "W&W",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "325875",
+                  "name": "EL Education",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "325876",
+                  "name": "N/A Regents",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "325877",
+                  "name": "N/A ELA",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "325878",
+                  "name": "txt_Main",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "325879",
+                  "name": "DataMate Contact Name",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "Jeanine Kucher"
+                },
+                {
+                  "id": "325880",
+                  "name": "txt_main_phone",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "325881",
+                  "name": "DataMate Contact Phone",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "718 339-4355"
+                },
+                {
+                  "id": "325882",
+                  "name": "txt_DataMate_email",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "325883",
+                  "name": "DataMate Contact Email",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "jkucher@schools.nyc,gov"
+                },
+                {
+                  "id": "325885",
+                  "name": "txt_position",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "325886",
+                  "name": "Position Title",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "AP"
+                },
+                {
+                  "id": "325983",
+                  "name": "txt_uploadlist",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "325984",
+                  "name": "Teacher Upload",
+                  "type": "13",
+                  "txttype": "7",
+                  "value": "3-8 Staff Emails (1).xlsx"
+                },
+                {
+                  "id": "325985",
+                  "name": "txt_additonal",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "325986",
+                  "name": "Spanish",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "325987",
+                  "name": "Chinese",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "325988",
+                  "name": "Haitian Creole",
+                  "type": "3",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "326858",
+                  "name": "txt_listdepartmentgrades",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "326859",
+                  "name": "Departmentalized Grades",
+                  "type": "10",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "327717",
+                  "name": "txt_quote",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                },
+                {
+                  "id": "327718",
+                  "name": "Quote Number",
+                  "type": "1",
+                  "txttype": "7",
+                  "value": "EST 250677"
+                },
+                {
+                  "id": "327719",
+                  "name": "txt_template",
+                  "type": "6",
+                  "txttype": "7",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "webhookUrl": "https://n8n.edvistas.com/webhook-test/199392d7-f9a0-45e4-bedb-2980eb775a93",
+          "executionMode": "test"
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1"
   },
@@ -44,6 +835,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-07-08T15:53:42.000Z",
-  "versionId": "d2c61fe3-923a-44ba-a496-dc2b640643f3"
+  "updatedAt": "2025-07-09T00:15:58.000Z",
+  "versionId": "ab92f1f9-a24a-4a1d-b3f9-b09465c6da9c"
 }
