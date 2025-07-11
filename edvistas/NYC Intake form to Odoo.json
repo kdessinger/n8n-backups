@@ -25,13 +25,12 @@
     },
     "Create job in Odoo": {
       "main": [
-        [
-          {
-            "node": "HTTP Request",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
+      ]
+    },
+    "Create job in Odoo2": {
+      "main": [
+        []
       ]
     }
   },
@@ -341,7 +340,8 @@
         "fieldsToCreateOrUpdate": {
           "fields": [
             {
-              "fieldName": "company_id"
+              "fieldName": "company_id",
+              "fieldValue": "1"
             },
             {
               "fieldName": "date",
@@ -351,19 +351,24 @@
               "fieldName": "location_dest_id"
             },
             {
-              "fieldName": "location_id"
+              "fieldName": "location_id",
+              "fieldValue": "5"
             },
             {
-              "fieldName": "name"
+              "fieldName": "name",
+              "fieldValue": "[Datamate] Software Packages:DataMate Elite [2023-25]:DataMate Elite <500"
             },
             {
-              "fieldName": "procure_method"
+              "fieldName": "procure_method",
+              "fieldValue": "make_to_stock"
             },
             {
-              "fieldName": "product_id"
+              "fieldName": "product_id",
+              "fieldValue": "744"
             },
             {
-              "fieldName": "product_uom"
+              "fieldName": "product_uom",
+              "fieldValue": "1"
             }
           ]
         }
@@ -381,7 +386,8 @@
           "id": "22",
           "name": "Odoo (OdooBot)"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -391,11 +397,128 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        400,
+        580,
         -260
       ],
       "id": "10fe9f48-8dab-4602-9f01-e8137c2407f2",
       "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "stock.move",
+        "operation": "getAll",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        -180,
+        0
+      ],
+      "id": "47278525-4a68-4895-b5d8-eeda4fb21314",
+      "name": "Create job in Odoo1",
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "stock.move",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {
+              "fieldName": "company_id",
+              "fieldValue": "1"
+            },
+            {
+              "fieldName": "date",
+              "fieldValue": "={{ $json.Date }}"
+            },
+            {
+              "fieldName": "location_dest_id"
+            },
+            {
+              "fieldName": "location_id",
+              "fieldValue": "5"
+            },
+            {
+              "fieldName": "name",
+              "fieldValue": "[Datamate] Software Packages:DataMate Elite [2023-25]:DataMate Elite <500"
+            },
+            {
+              "fieldName": "procure_method",
+              "fieldValue": "make_to_stock"
+            },
+            {
+              "fieldName": "product_id",
+              "fieldValue": "744"
+            },
+            {
+              "fieldName": "product_uom",
+              "fieldValue": "1"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        80,
+        0
+      ],
+      "id": "134fd7fb-bda7-4297-841d-723cea5f8074",
+      "name": "Create job in Odoo2",
+      "credentials": {
+        "odooApi": {
+          "id": "20",
+          "name": "Odoo-Stage (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "stock.move",
+        "operation": "getAll",
+        "options": {},
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "state",
+              "operator": "notEqual",
+              "value": "done"
+            },
+            {
+              "fieldName": "state",
+              "operator": "notEqual",
+              "value": "cancel"
+            },
+            {
+              "fieldName": "state",
+              "value": "draft"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        360,
+        0
+      ],
+      "id": "38a73428-0fe5-4dda-88f9-40b0882f8a45",
+      "name": "Get many items",
+      "credentials": {
+        "odooApi": {
+          "id": "13",
+          "name": "Odoo-Stage (kdessinger)"
+        }
+      }
     }
   ],
   "pinData": {
@@ -835,6 +958,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-07-09T00:15:58.000Z",
-  "versionId": "ab92f1f9-a24a-4a1d-b3f9-b09465c6da9c"
+  "updatedAt": "2025-07-11T04:22:00.000Z",
+  "versionId": "b51202c8-8f82-4219-8dfb-f4a984d97bd1"
 }
