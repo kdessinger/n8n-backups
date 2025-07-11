@@ -515,8 +515,8 @@
       "name": "Get many items",
       "credentials": {
         "odooApi": {
-          "id": "13",
-          "name": "Odoo-Stage (kdessinger)"
+          "id": "22",
+          "name": "Odoo (OdooBot)"
         }
       }
     }
@@ -958,6 +958,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-07-11T04:22:00.000Z",
-  "versionId": "b51202c8-8f82-4219-8dfb-f4a984d97bd1"
+  "updatedAt": "2025-07-11T04:59:02.000Z",
+  "versionId": "7e89717d-6d88-455c-9d78-2df5686928c1"
 }
