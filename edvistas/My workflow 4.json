@@ -1,35 +1,10 @@
 {
   "active": false,
-  "connections": {
-    "On form submission": {
-      "main": [
-        [
-          {
-            "node": "Microsoft SQL",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Microsoft SQL": {
-      "main": [
-        [
-          {
-            "node": "Form",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    }
-  },
-  "createdAt": "2025-07-21T15:35:47.313Z",
-  "id": "GTOnDMQLyVMoSDoj",
+  "connections": {},
+  "createdAt": "2025-07-21T15:35:47.302Z",
+  "id": "aRTZAg3iB12PA6kZ",
   "isArchived": false,
-  "meta": {
-    "templateCredsSetupCompleted": true
-  },
+  "meta": null,
   "name": "My workflow 4",
   "nodes": [
     {
@@ -50,49 +25,12 @@
       "type": "n8n-nodes-base.formTrigger",
       "typeVersion": 2.2,
       "position": [
-        -208,
-        -16
+        0,
+        0
       ],
       "id": "d7f3ee43-20cd-4202-9396-e63569ba4a97",
       "name": "On form submission",
       "webhookId": "a381b404-6f75-461a-91bc-77b4b4da6bf7"
-    },
-    {
-      "parameters": {
-        "operation": "executeQuery",
-        "query": "USE evicore\n\nDECLARE @SearchTerm NVARCHAR(100) = N'{{ $json.UserID }}';  -- ← change this as \n\nSELECT\n    CoreUsers.id            AS CoreID,\n    CoreUsers.firstname      AS FirstName,\n    CoreUsers.lastname       AS LastName,\n    CoreUsers.userid         AS UserID,\n    CoreUsers.email          AS EmailAddress,\n    CoreDist.name            AS DistrictName,\n    ISNULL(URLs.url, '')     AS DistrictURL,\n    CASE\n        WHEN DM_Prop.role IS NULL                                              THEN ''\n        WHEN DM_Prop.role = 'Report Viewer' AND DM_Prop.usersubjectarea IS NOT NULL\n                                                                              THEN 'Report Viewer - Teacher (With Options)'\n        WHEN DM_Prop.role = 'Report Viewer' AND DM_Prop.usersubjectarea IS NULL\n                                                                              THEN 'Report Viewer - Teacher (Own Classes)'\n        ELSE DM_Prop.role\n    END                                   AS DataMate_Role,   -- DataMate\n    ISNULL(ST_Roles.name,  '')            AS StaffTrac_Role,  -- StaffTrac\n    ISNULL(AIMS_UserProp.role, '')        AS AIMS_Role,       -- AIMS\n    ISNULL(CD_UserProp.role,  '')         AS CD_Role,         -- Curriculum Developer\n    ISNULL(F_Roles.name,   '')            AS Forms_Role,      -- EduForm\n    ISNULL(SS_UserProp.role, '')          AS SafeSch_Role,    -- SafeSchools\n    ISNULL(SV_Roles.name, '')             AS SV_Roles,        -- SurVate\n    ISNULL(CoreDist.lastDataSync, '')     AS Last_Sync        -- Last Sync date\nFROM evicore..users            CoreUsers\nJOIN evicore..districts        CoreDist     ON CoreDist.id      = CoreUsers.districtid          -- Districts\nLEFT JOIN evicore..districtUrls URLs        ON URLs.districtId  = CoreUsers.id                  -- District URL\nLEFT JOIN evitesting..userproperties        DM_Prop     ON DM_Prop.useridkey   = CoreUsers.id   -- DataMate\nLEFT JOIN stafftrac..userproperties         ST_UserProp ON ST_UserProp.useridkey = CoreUsers.id -- StaffTrac (1 of 2)\nLEFT JOIN stafftrac..roles                  ST_Roles    ON ST_UserProp.roleid   = ST_Roles.id   -- StaffTrac (2 of 2)\nLEFT JOIN aims..userproperties              AIMS_UserProp ON AIMS_UserProp.userIDKey = CoreUsers.id -- AIMS\nLEFT JOIN rbemcd..userproperties            CD_UserProp ON CD_UserProp.userIDKey  = CoreUsers.id   -- Curriculum Developer\nLEFT JOIN eviforms..userproperties          F_UserProp  ON F_UserProp.useridkey   = CoreUsers.id   -- EduForm (1 of 2)\nLEFT JOIN eviforms..roles                   F_Roles     ON F_Roles.id            = F_UserProp.roleid -- EduForm (2 of 2)\nLEFT JOIN safeschools..userProperties       SS_UserProp ON SS_UserProp.useridkey = CoreUsers.id   -- SafeSchools\nLEFT JOIN eviSurvate..userproperties        SV_UserProp ON SV_UserProp.useridkey = CoreUsers.id   -- SurVate (1 of 2)\nLEFT JOIN eviSurvate..roles                 SV_Roles    ON SV_Roles.id           = SV_UserProp.roleid -- SurVate (2 of 2)\nWHERE LOWER(CoreUsers.userid) LIKE '%' + LOWER(LTRIM(RTRIM(@SearchTerm))) + '%'\n      -- optionally extend search to email, etc.:\n      -- OR LOWER(CoreUsers.email)  LIKE '%' + LOWER(LTRIM(RTRIM(@SearchTerm))) + '%'\nORDER BY\n    CoreDist.name,\n    TRIM(CoreUsers.lastname),\n    TRIM(CoreUsers.firstname);"
-      },
-      "type": "n8n-nodes-base.microsoftSql",
-      "typeVersion": 1.1,
-      "position": [
-        0,
-        -16
-      ],
-      "id": "1f77052d-31d0-4a96-92cf-bf3603fb8e22",
-      "name": "Microsoft SQL",
-      "credentials": {
-        "microsoftSql": {
-          "id": "1",
-          "name": "DB1.DS1.GOWLS.COM (EVI)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "completion",
-        "completionTitle": "Retrieved Records",
-        "completionMessage": "=UserID: {{ $json.UserID }}\nFirst Name: {{ $json.FirstName }}\nLast Name: {{ $json.LastName }}\nDistrict Name: {{ $json.DistrictName }}\nDistrict URL: {{ $json.DistrictURL }}\nLast Synced Date: {{ $json.Last_Sync }}\n\nRoles\nDataMate: {{ $json.DataMate_Role }}\nStaffTrac: {{ $json.StaffTrac_Role }}\nAIMS: {{ $json.AIMS_Role }}\nCurriculum Developer: {{ $json.CD_Role }}\nEduForm: {{ $json.Forms_Role }}\nSafeSchools:{{ $json.SafeSch_Role }}\nSurvate: {{ $json.SV_Roles }}\n\n",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.form",
-      "typeVersion": 1,
-      "position": [
-        208,
-        -16
-      ],
-      "id": "8a7c4f69-cee5-4a13-9240-b744440b0cd2",
-      "name": "Form",
-      "webhookId": "91c69a33-d9d8-49aa-bbc9-d1a47fc47841"
     }
   ],
   "pinData": {},
@@ -102,6 +40,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-07-21T15:49:50.000Z",
-  "versionId": "0629785d-e66a-4dc6-9f86-f648efdf9384"
+  "updatedAt": "2025-07-21T15:35:47.302Z",
+  "versionId": "b2d126f4-ec61-4b40-9bbc-bff684c5483b"
 }
