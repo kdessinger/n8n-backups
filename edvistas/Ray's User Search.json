@@ -1,0 +1,133 @@
+{
+  "active": false,
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Microsoft SQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Microsoft SQL": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Form",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-21T15:35:47.313Z",
+  "id": "GTOnDMQLyVMoSDoj",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Ray's User Search",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "EVI-Core User ID Lookup",
+        "formDescription": "Search on: User ID / Email / Partial email / Email domain",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "UserID",
+              "placeholder": "example: “rschecter@edvistas.com”, “rschecter”, “@edvistas.com”, “Schecter”",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        -208,
+        -16
+      ],
+      "id": "d7f3ee43-20cd-4202-9396-e63569ba4a97",
+      "name": "On form submission",
+      "webhookId": "a381b404-6f75-461a-91bc-77b4b4da6bf7"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "USE evicore\n\nDECLARE @SearchTerm NVARCHAR(100) = N'{{ $json.UserID }}';  \n\nSELECT\n    CoreUsers.id            AS CoreID,\n    CoreUsers.firstname      AS FirstName,\n    CoreUsers.lastname       AS LastName,\n    CoreUsers.userid         AS UserID,\n    CoreUsers.email          AS EmailAddress,\n    CoreDist.name            AS DistrictName,\n    ISNULL(URLs.url, '')     AS DistrictURL,\n    CASE\n        WHEN DM_Prop.role IS NULL                                              THEN ''\n        WHEN DM_Prop.role = 'Report Viewer' AND DM_Prop.usersubjectarea IS NOT NULL\n                                                                              THEN 'Report Viewer - Teacher (With Options)'\n        WHEN DM_Prop.role = 'Report Viewer' AND DM_Prop.usersubjectarea IS NULL\n                                                                              THEN 'Report Viewer - Teacher (Own Classes)'\n        ELSE DM_Prop.role\n    END                                   AS DataMate_Role,   -- DataMate\n    ISNULL(ST_Roles.name,  '')            AS StaffTrac_Role,  -- StaffTrac\n    ISNULL(AIMS_UserProp.role, '')        AS AIMS_Role,       -- AIMS\n    ISNULL(CD_UserProp.role,  '')         AS CD_Role,         -- Curriculum Developer\n    ISNULL(F_Roles.name,   '')            AS Forms_Role,      -- EduForm\n    ISNULL(SS_UserProp.role, '')          AS SafeSch_Role,    -- SafeSchools\n    ISNULL(SV_Roles.name, '')             AS SV_Roles,        -- SurVate\n    ISNULL(CoreDist.lastDataSync, '')     AS Last_Sync        -- Last Sync date\nFROM evicore..users            CoreUsers\nJOIN evicore..districts        CoreDist     ON CoreDist.id      = CoreUsers.districtid          -- Districts\nLEFT JOIN evicore..districtUrls URLs        ON URLs.districtId  = CoreUsers.id                  -- District URL\nLEFT JOIN evitesting..userproperties        DM_Prop     ON DM_Prop.useridkey   = CoreUsers.id   -- DataMate\nLEFT JOIN stafftrac..userproperties         ST_UserProp ON ST_UserProp.useridkey = CoreUsers.id -- StaffTrac (1 of 2)\nLEFT JOIN stafftrac..roles                  ST_Roles    ON ST_UserProp.roleid   = ST_Roles.id   -- StaffTrac (2 of 2)\nLEFT JOIN aims..userproperties              AIMS_UserProp ON AIMS_UserProp.userIDKey = CoreUsers.id -- AIMS\nLEFT JOIN rbemcd..userproperties            CD_UserProp ON CD_UserProp.userIDKey  = CoreUsers.id   -- Curriculum Developer\nLEFT JOIN eviforms..userproperties          F_UserProp  ON F_UserProp.useridkey   = CoreUsers.id   -- EduForm (1 of 2)\nLEFT JOIN eviforms..roles                   F_Roles     ON F_Roles.id            = F_UserProp.roleid -- EduForm (2 of 2)\nLEFT JOIN safeschools..userProperties       SS_UserProp ON SS_UserProp.useridkey = CoreUsers.id   -- SafeSchools\nLEFT JOIN eviSurvate..userproperties        SV_UserProp ON SV_UserProp.useridkey = CoreUsers.id   -- SurVate (1 of 2)\nLEFT JOIN eviSurvate..roles                 SV_Roles    ON SV_Roles.id           = SV_UserProp.roleid -- SurVate (2 of 2)\nWHERE LOWER(CoreUsers.userid) LIKE '%' + LOWER(LTRIM(RTRIM(@SearchTerm))) + '%'\n      -- optionally extend search to email, etc.:\n      -- OR LOWER(CoreUsers.email)  LIKE '%' + LOWER(LTRIM(RTRIM(@SearchTerm))) + '%'\nORDER BY\n    CoreDist.name,\n    TRIM(CoreUsers.lastname),\n    TRIM(CoreUsers.firstname);"
+      },
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        -16
+      ],
+      "id": "1f77052d-31d0-4a96-92cf-bf3603fb8e22",
+      "name": "Microsoft SQL",
+      "credentials": {
+        "microsoftSql": {
+          "id": "1",
+          "name": "DB1.DS1.GOWLS.COM (EVI)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "completion",
+        "completionTitle": "Retrieved Records",
+        "completionMessage": "={{ $json.tableAscii }}",
+        "options": {
+          "formTitle": ""
+        }
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 1,
+      "position": [
+        416,
+        -16
+      ],
+      "id": "8a7c4f69-cee5-4a13-9240-b744440b0cd2",
+      "name": "Form",
+      "webhookId": "91c69a33-d9d8-49aa-bbc9-d1a47fc47841"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Fields you want to show (order matters)\nconst cols = [\n  'CoreID',\n  'FirstName',\n  'LastName',\n  'EmailAddress',\n  'DistrictName',\n  'DataMate_Role',\n  'StaffTrac_Role',\n];\n\n// Gather data\nconst rows = $items().map(item => item.json);\n\n// Compute column widths\nconst colWidths = cols.map(col =>\n  Math.max(\n    col.length,\n    ...rows.map(r => (r[col] == null ? '' : String(r[col]))?.length ?? 0),\n  ),\n);\n\n// Helper pad\nfunction pad(str, len) {\n  str = str == null ? '' : String(str);\n  if (str.length < len) return str + ' '.repeat(len - str.length);\n  return str;\n}\n\n// Build horizontal rule\nconst rule = '+' + colWidths.map(w => '-'.repeat(w + 2)).join('+') + '+';\n\n// Header row\nlet text = rule + '\\n| ' + cols.map((c, i) => pad(c, colWidths[i])).join(' | ') + ' |\\n' + rule + '\\n';\n\n// Data rows\nfor (const r of rows) {\n  text += '| ' + cols.map((c, i) => pad(r[c], colWidths[i])).join(' | ') + ' |\\n';\n}\ntext += rule;\n\n// Return single item carrying the table string\nreturn [\n  {\n    json: {\n      tableAscii: text,\n      recordCount: rows.length,\n    },\n  },\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        208,
+        -16
+      ],
+      "id": "1f6889c4-658c-4e33-9400-58c44fbe6b08",
+      "name": "Code"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-22T14:48:18.000Z",
+  "versionId": "4badd7ae-e97d-4803-930d-40537abe7734"
+}
