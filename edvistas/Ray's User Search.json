@@ -27,6 +27,22 @@
       "main": [
         [
           {
+            "node": "HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Form": {
+      "main": [
+        []
+      ]
+    },
+    "HTML": {
+      "main": [
+        [
+          {
             "node": "Form",
             "type": "main",
             "index": 0
@@ -92,7 +108,7 @@
       "parameters": {
         "operation": "completion",
         "completionTitle": "Retrieved Records",
-        "completionMessage": "={{ $json.tableAscii }}",
+        "completionMessage": "={{ $json.html }}",
         "options": {
           "formTitle": ""
         }
@@ -100,7 +116,7 @@
       "type": "n8n-nodes-base.form",
       "typeVersion": 1,
       "position": [
-        416,
+        640,
         -16
       ],
       "id": "8a7c4f69-cee5-4a13-9240-b744440b0cd2",
@@ -119,6 +135,19 @@
       ],
       "id": "1f6889c4-658c-4e33-9400-58c44fbe6b08",
       "name": "Code"
+    },
+    {
+      "parameters": {
+        "html": "<!DOCTYPE html>\n\n<html>\n<head>\n  <meta charset=\"UTF-8\" />\n  <title>My HTML document</title>\n</head>\n<body>\n  <div class=\"container\">\n    <h1>This is an H1 heading</h1>\n    <h2>This is an H2 heading</h2>\n    <p>{{ $json.tableAscii }}</p>\n  </div>\n</body>\n</html>\n\n<style>\n.container {\n  background-color: #ffffff;\n  text-align: center;\n  padding: 16px;\n  border-radius: 8px;\n}\n\nh1 {\n  color: #ff6d5a;\n  font-size: 24px;\n  font-weight: bold;\n  padding: 8px;\n}\n\nh2 {\n  color: #909399;\n  font-size: 18px;\n  font-weight: bold;\n  padding: 8px;\n}\n</style>\n\n<script>\nconsole.log(\"Hello World!\");\n</script>"
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        432,
+        -16
+      ],
+      "id": "20f2649a-9fc9-44f3-9eef-ff2bab69fbd0",
+      "name": "HTML"
     }
   ],
   "pinData": {},
@@ -128,6 +157,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-07-22T14:48:18.000Z",
-  "versionId": "4badd7ae-e97d-4803-930d-40537abe7734"
+  "updatedAt": "2025-07-22T21:39:58.000Z",
+  "versionId": "0b114f74-5990-436c-b154-c8962fdfa74a"
 }
