@@ -1,0 +1,366 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Active LDAP Accounts",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Odoo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Odoo": {
+      "main": [
+        [
+          {
+            "node": "Compare Datasets",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Sort by Name": {
+      "main": [
+        [
+          {
+            "node": "Compare Datasets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compare Datasets": {
+      "main": [
+        [],
+        [],
+        [],
+        [
+          {
+            "node": "New Employees Found",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "New Employees Found": {
+      "main": [
+        [
+          {
+            "node": "Add Employee to AD",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add Employee to AD": {
+      "main": [
+        []
+      ]
+    },
+    "Active LDAP Accounts": {
+      "main": [
+        [
+          {
+            "node": "Sort by Name",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-09-05T17:56:03.335Z",
+  "id": "1rohanxc5wagJ0vn",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Employee Onboarding",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "7d4161b7-ac60-483d-83bd-80bd575fc6ce",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        1184,
+        432
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "hr.employee",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {
+          "fieldsList": [
+            "id",
+            "name",
+            "job_title",
+            "work_email",
+            "department_id"
+          ]
+        }
+      },
+      "id": "0b254267-eca6-4d2b-a405-d8decc1429bc",
+      "name": "Odoo",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        1440,
+        544
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "12",
+          "name": "Odoo (Administrator)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "mail",
+              "field2": "work_email"
+            }
+          ]
+        },
+        "resolve": "preferInput2",
+        "options": {}
+      },
+      "id": "04b6028d-722f-441a-a258-b1e70aab3e83",
+      "name": "Compare Datasets",
+      "type": "n8n-nodes-base.compareDatasets",
+      "typeVersion": 2.3,
+      "position": [
+        1840,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "188a5842-957d-404a-8166-41df3477aecc",
+      "name": "Sort by Name",
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        1648,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Automated Employee Onboarding\n\nThis workflow will Query Odoo Employees against LDAP to see if there are any new employees entered.  The Compare Datasets will show all records in Odoo that are not in LDAP, Path B in the compare dataset will contain the new employee list.\n\n1) Add this employee to LDAP\n2) Create (or reactivate) an email account\n3) Create (or reactivate) a VOIP account\n4) Optional - Create (or reactivate) a Webex Account\n5) Send Onboarding Welcome Email\n6) Automated call by AI to new employee to ask questions.\n ",
+        "height": 327,
+        "width": 515
+      },
+      "id": "05534894-d06b-4715-b44c-4e8a3f7cd2ba",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1952,
+        128
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "80f4ae96-41a6-484c-8262-ef97a40be57b",
+              "name": "id",
+              "value": "={{ $json.id }}",
+              "type": "number"
+            },
+            {
+              "id": "508c4f01-ce85-4924-b91a-c8a9ad6aeca0",
+              "name": "name",
+              "value": "={{ $json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "8b467c90-a45d-4264-9d00-8fcfa1e5985c",
+              "name": "job_title",
+              "value": "={{ $json.job_title }}",
+              "type": "string"
+            },
+            {
+              "id": "f17459d4-312a-492a-96b4-a3aeece918e0",
+              "name": "department",
+              "value": "={{ $json.department_id[1] }}",
+              "type": "string"
+            },
+            {
+              "id": "bf66df56-038d-4f08-908e-051e2dd5f7f6",
+              "name": "work_email",
+              "value": "={{ $json.work_email }}",
+              "type": "string"
+            },
+            {
+              "id": "8a14148b-1641-4fc9-b790-e7369fa02b49",
+              "name": "cname",
+              "value": "={{ $json.name.split(' ')[0][0].toLowerCase() + $json.name.split(' ')[1].toLowerCase().trim() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "fac4c6f2-26d3-46ba-9e4b-8739dd64dffe",
+      "name": "New Employees Found",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2080,
+        640
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "dn": "=CN={{ $json.name }},CN=Users,DC=edvistas,DC=local",
+        "attributes": {
+          "attribute": [
+            {
+              "id": "description",
+              "value": "={{ $json.job_title }}"
+            },
+            {
+              "id": "homeDirectory",
+              "value": "=\\\\nas\\shared\\{{ $json.cname }}\\"
+            },
+            {
+              "id": "mail",
+              "value": "={{ $json.work_email }}"
+            },
+            {
+              "id": "sAMAccountName",
+              "value": "={{ $json.cname }}"
+            },
+            {
+              "id": "title",
+              "value": "={{ $json.job_title }}"
+            },
+            {
+              "id": "userPrincipalName",
+              "value": "={{ $json.cname }}@EDVISTAS.LOCAL"
+            },
+            {
+              "id": "objectClass",
+              "value": "person"
+            },
+            {
+              "id": "objectClass",
+              "value": "user"
+            },
+            {
+              "id": "objectClass",
+              "value": "organizationalPerson"
+            },
+            {
+              "id": "objectClass",
+              "value": "posixAccount"
+            },
+            {
+              "id": "objectClass",
+              "value": "systemQuotas"
+            },
+            {
+              "id": "objectClass",
+              "value": "top"
+            }
+          ]
+        }
+      },
+      "id": "7c9973e3-9d29-488c-854a-ddc84d0bce3f",
+      "name": "Add Employee to AD",
+      "type": "n8n-nodes-base.ldap",
+      "typeVersion": 1,
+      "position": [
+        2288,
+        640
+      ],
+      "credentials": {
+        "ldap": {
+          "id": "hFht3wq8gU3dyxS9",
+          "name": "LDAP (Domain Admin)"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "baseDN": "CN=Users,DC=edvistas,DC=local",
+        "searchFor": "custom",
+        "customFilter": "(&(objectCategory=Person)(!(userAccountControl:1.2.840.113556.1.4.803:=2))(mail=*))",
+        "returnAll": true,
+        "options": {
+          "attributes": [
+            "objectCategory",
+            "name",
+            "mail",
+            "dn",
+            "cn",
+            "objectClass",
+            "description"
+          ]
+        }
+      },
+      "id": "cd3d5322-fb16-4cef-b523-b189a02c68c8",
+      "name": "Active LDAP Accounts",
+      "type": "n8n-nodes-base.ldap",
+      "typeVersion": 1,
+      "position": [
+        1440,
+        320
+      ],
+      "credentials": {
+        "ldap": {
+          "id": "kMvso3rxAwRE3ZaH",
+          "name": "LDAP (nextcloud)"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2022-12-09T05:43:36.104Z",
+      "updatedAt": "2022-12-09T05:43:36.104Z",
+      "id": "12",
+      "name": "odoo"
+    },
+    {
+      "createdAt": "2025-07-23T02:29:26.129Z",
+      "updatedAt": "2025-07-23T02:29:26.129Z",
+      "id": "g5iepAHhXxU1ewPn",
+      "name": "IT"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-23T03:56:20.000Z",
+  "versionId": "b0e4aeee-36dd-4439-9ed8-9a4142f70fa2"
+}
