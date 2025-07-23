@@ -28,17 +28,6 @@
         ]
       ]
     },
-    "Sort by Name": {
-      "main": [
-        [
-          {
-            "node": "Compare Datasets",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Compare Datasets": {
       "main": [
         [],
@@ -73,7 +62,7 @@
       "main": [
         [
           {
-            "node": "Sort by Name",
+            "node": "Compare Datasets",
             "type": "main",
             "index": 0
           }
@@ -122,7 +111,7 @@
       "typeVersion": 1,
       "position": [
         1440,
-        544
+        560
       ],
       "credentials": {
         "odooApi": {
@@ -142,28 +131,17 @@
           ]
         },
         "resolve": "preferInput2",
-        "options": {}
+        "options": {
+          "multipleMatches": "first"
+        }
       },
       "id": "04b6028d-722f-441a-a258-b1e70aab3e83",
       "name": "Compare Datasets",
       "type": "n8n-nodes-base.compareDatasets",
       "typeVersion": 2.3,
       "position": [
-        1840,
-        480
-      ]
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
-      "id": "188a5842-957d-404a-8166-41df3477aecc",
-      "name": "Sort by Name",
-      "type": "n8n-nodes-base.sort",
-      "typeVersion": 1,
-      "position": [
-        1648,
-        320
+        1696,
+        416
       ]
     },
     {
@@ -230,8 +208,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        2080,
-        640
+        2048,
+        544
       ]
     },
     {
@@ -296,8 +274,8 @@
       "type": "n8n-nodes-base.ldap",
       "typeVersion": 1,
       "position": [
-        2288,
-        640
+        2272,
+        544
       ],
       "credentials": {
         "ldap": {
@@ -361,6 +339,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-07-23T03:56:20.000Z",
-  "versionId": "b0e4aeee-36dd-4439-9ed8-9a4142f70fa2"
+  "updatedAt": "2025-07-23T04:40:37.000Z",
+  "versionId": "12471494-0cdb-45b8-8383-1e7f23458c16"
 }
