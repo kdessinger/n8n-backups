@@ -1,0 +1,120 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Recent Contacts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recent Contacts": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-21T15:35:47.302Z",
+  "id": "aRTZAg3iB12PA6kZ",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Recent Odoo Contacts",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "90361028-1229-45fa-ac19-f0d8c91cfebd",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT \n    rp.id,\n    rp.name,\n    rp.email,\n    rp.create_date,\n    sp.name AS salesperson,\n    rp.\"EVI_DistID\"\nFROM res_partner rp\nLEFT JOIN res_users ru ON rp.user_id = ru.id\nLEFT JOIN res_partner sp ON ru.partner_id = sp.id\nWHERE rp.is_company = TRUE\n  AND rp.customer_rank > 0\nORDER BY rp.create_date DESC\nLIMIT 50;\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        208,
+        0
+      ],
+      "id": "fd28615a-2eec-4bf3-9ceb-4f0e36793a39",
+      "name": "Recent Contacts",
+      "credentials": {
+        "postgres": {
+          "id": "QuVSWo9jJJvmCuDA",
+          "name": "Odoo-Production"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "095d3733-436f-4266-96a4-4811f08ba9b4",
+              "leftValue": "={{ $json.EVI_DistID }}",
+              "rightValue": "",
+              "operator": {
+                "type": "number",
+                "operation": "notExists",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "51d72244-a6a9-4328-b12f-09ef90a97ad6",
+              "leftValue": "={{ $json.EVI_DistID }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        416,
+        0
+      ],
+      "id": "9850cbdb-25fb-4c3b-97bd-411384070bd1",
+      "name": "Filter"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-22T23:20:54.000Z",
+  "versionId": "c4bf0816-b73a-409d-96de-2b1b12e9dd6a"
+}
