@@ -37,8 +37,8 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        128,
-        64
+        256,
+        80
       ],
       "id": "90361028-1229-45fa-ac19-f0d8c91cfebd",
       "name": "When clicking ‘Execute workflow’"
@@ -52,8 +52,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        336,
-        64
+        464,
+        80
       ],
       "id": "fd28615a-2eec-4bf3-9ceb-4f0e36793a39",
       "name": "Recent Contacts",
@@ -101,8 +101,8 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.2,
       "position": [
-        544,
-        64
+        672,
+        80
       ],
       "id": "9850cbdb-25fb-4c3b-97bd-411384070bd1",
       "name": "Filter"
@@ -115,6 +115,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-07-23T21:49:52.000Z",
-  "versionId": "61a3f47d-02a6-42f8-8246-988657922a39"
+  "updatedAt": "2025-07-25T21:29:34.000Z",
+  "versionId": "d8692f9c-8e7e-45cc-9c9a-5100f921847f"
 }
