@@ -46,7 +46,7 @@
       "main": [
         [
           {
-            "node": "Add Employee to AD",
+            "node": "Send email",
             "type": "main",
             "index": 0
           }
@@ -63,6 +63,17 @@
         [
           {
             "node": "Compare Datasets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send email": {
+      "main": [
+        [
+          {
+            "node": "Add Employee to AD",
             "type": "main",
             "index": 0
           }
@@ -155,7 +166,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1952,
+        2032,
         128
       ]
     },
@@ -274,7 +285,7 @@
       "type": "n8n-nodes-base.ldap",
       "typeVersion": 1,
       "position": [
-        2272,
+        2432,
         544
       ],
       "credentials": {
@@ -317,6 +328,31 @@
           "name": "LDAP (nextcloud)"
         }
       }
+    },
+    {
+      "parameters": {
+        "operation": "sendAndWait",
+        "fromEmail": "admin@edvistas.com",
+        "toEmail": "kdessinger@edvistas.com",
+        "subject": "Approval Required",
+        "message": "=A new employee has been detected in Odoo.<BR>\nDo you want to add this user to Active Directory?  Y/N<BR>\n<BR>\nName: {{ $json.name }}<BR>\nEmail: {{ $json.work_email }}<BR>\nTitle: {{ $json.job_title }}<BR>\nDepartment: {{ $json.department }}<BR>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        2240,
+        544
+      ],
+      "id": "c6780522-6526-49fe-bfaf-fdae0618d252",
+      "name": "Send email",
+      "webhookId": "207b14eb-2896-447f-9b69-2dcea99a6472",
+      "credentials": {
+        "smtp": {
+          "id": "27",
+          "name": "SMTP (mx.gowls.com)"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -339,6 +375,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-07-23T04:40:37.000Z",
-  "versionId": "12471494-0cdb-45b8-8383-1e7f23458c16"
+  "updatedAt": "2025-07-31T20:56:32.000Z",
+  "versionId": "c5ecec56-4fef-4029-8cbb-c251f28bb4fd"
 }
