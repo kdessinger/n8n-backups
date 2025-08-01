@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "Get Participants": {
       "main": [
@@ -828,6 +828,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-06-28T20:51:24.000Z",
+  "updatedAt": "2025-07-31T17:11:48.000Z",
   "versionId": "4c7c85e2-f889-4e44-81f0-fd9fabbf407d"
 }
