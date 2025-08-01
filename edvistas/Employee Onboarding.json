@@ -73,7 +73,25 @@
       "main": [
         [
           {
+            "node": "Approval",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Approval": {
+      "main": [
+        [
+          {
             "node": "Add Employee to AD",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Not Approved",
             "type": "main",
             "index": 0
           }
@@ -166,8 +184,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        2032,
-        128
+        2016,
+        80
       ]
     },
     {
@@ -220,7 +238,7 @@
       "typeVersion": 3.4,
       "position": [
         2048,
-        544
+        496
       ]
     },
     {
@@ -285,8 +303,8 @@
       "type": "n8n-nodes-base.ldap",
       "typeVersion": 1,
       "position": [
-        2432,
-        544
+        2656,
+        368
       ],
       "credentials": {
         "ldap": {
@@ -335,14 +353,19 @@
         "fromEmail": "admin@edvistas.com",
         "toEmail": "kdessinger@edvistas.com",
         "subject": "Approval Required",
-        "message": "=A new employee has been detected in Odoo.<BR>\nDo you want to add this user to Active Directory?  Y/N<BR>\n<BR>\nName: {{ $json.name }}<BR>\nEmail: {{ $json.work_email }}<BR>\nTitle: {{ $json.job_title }}<BR>\nDepartment: {{ $json.department }}<BR>",
+        "message": "=<table style=\"width: 100%; font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px;\">\n  <tr>\n    <td align=\"center\">\n      <table style=\"max-width: 600px; background-color: #ffffff; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);\">\n        <tr>\n          <td style=\"text-align: center; font-size: 20px; font-weight: bold; color: #333;\">\n            🚨 Approval Required\n          </td>\n        </tr>\n        <tr>\n          <td style=\"padding: 20px 0 10px; font-size: 16px; color: #444; text-align: center;\">\n            A new employee has been detected in <strong>Odoo</strong>.<br>\n            Would you like to add this user to <strong>Active Directory</strong>?\n          </td>\n        </tr>\n        <tr>\n          <td style=\"padding: 20px 0; font-size: 14px; color: #333;\">\n            <table align=\"center\" cellpadding=\"4\" cellspacing=\"0\" style=\"border-collapse: collapse; margin: 0 auto;\">\n              <tr>\n                <td style=\"text-align: right; font-weight: bold; padding-right: 10px;\">Name:</td>\n                <td style=\"text-align: left;\">{{ $json.name }}</td>\n              </tr>\n              <tr>\n                <td style=\"text-align: right; font-weight: bold; padding-right: 10px;\">Email:</td>\n                <td style=\"text-align: left;\"><a href=\"mailto:{{ $json.work_email }}\" style=\"color: #0066cc;\">{{ $json.work_email }}</a></td>\n              </tr>\n              <tr>\n                <td style=\"text-align: right; font-weight: bold; padding-right: 10px;\">Title:</td>\n                <td style=\"text-align: left;\">{{ $json.job_title }}</td>\n              </tr>\n              <tr>\n                <td style=\"text-align: right; font-weight: bold; padding-right: 10px;\">Department:</td>\n                <td style=\"text-align: left;\">{{ $json.department }}</td>\n              </tr>\n            </table>\n          </td>\n        </tr>\n        <tr>\n          <td style=\"font-size: 12px; color: #888; text-align: center;\">\n            Automated with <a href=\"https://n8n.io\" style=\"color: #888; text-decoration: none;\">n8n</a>\n          </td>\n        </tr>\n      </table>\n\n      <p style=\"font-size: 11px; color: #666; max-width: 600px; margin-top: 20px; line-height: 1.4; text-align: center;\">\n        <strong>Confidentiality Notice:</strong> The information contained in this email and any attachments may be confidential. \n        If you are not an intended recipient, you are hereby notified that any dissemination, distribution, or copying of this email is strictly prohibited. \n        If you received this email in error, please notify the sender and permanently delete the email and any attachments. Thank you.\n      </p>\n    </td>\n  </tr>\n</table>\n",
+        "approvalOptions": {
+          "values": {
+            "approvalType": "double"
+          }
+        },
         "options": {}
       },
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
       "position": [
-        2240,
-        544
+        2256,
+        496
       ],
       "id": "c6780522-6526-49fe-bfaf-fdae0618d252",
       "name": "Send email",
@@ -353,6 +376,51 @@
           "name": "SMTP (mx.gowls.com)"
         }
       }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        2656,
+        608
+      ],
+      "id": "aa6b6247-bf0d-45cf-acef-aac36397722e",
+      "name": "Not Approved"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "64e9612e-53e6-498a-84c5-1899bfe97445",
+              "leftValue": "={{ $json.data.approved }}",
+              "rightValue": "Approved",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2448,
+        496
+      ],
+      "id": "a9b36079-7d0d-46df-a4e4-2ba62ef5a586",
+      "name": "Approval"
     }
   ],
   "pinData": {},
@@ -375,6 +443,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-07-31T20:56:32.000Z",
-  "versionId": "c5ecec56-4fef-4029-8cbb-c251f28bb4fd"
+  "updatedAt": "2025-08-01T16:08:04.000Z",
+  "versionId": "f451d894-a3ac-4832-b6cf-981904bb68a7"
 }
