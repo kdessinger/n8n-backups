@@ -237,7 +237,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        2048,
+        2016,
         496
       ]
     },
@@ -364,7 +364,7 @@
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
       "position": [
-        2256,
+        2224,
         496
       ],
       "id": "c6780522-6526-49fe-bfaf-fdae0618d252",
@@ -416,7 +416,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        2448,
+        2432,
         496
       ],
       "id": "a9b36079-7d0d-46df-a4e4-2ba62ef5a586",
@@ -443,6 +443,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-08-01T16:08:04.000Z",
-  "versionId": "f451d894-a3ac-4832-b6cf-981904bb68a7"
+  "updatedAt": "2025-08-01T18:19:10.000Z",
+  "versionId": "ae461c9e-54ce-480b-b42a-1f8b1765af1f"
 }
