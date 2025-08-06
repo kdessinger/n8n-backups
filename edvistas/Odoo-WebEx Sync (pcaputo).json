@@ -166,7 +166,7 @@
         ]
       ]
     },
-    "Webex (ANolan)": {
+    "Webex (Paul)": {
       "main": [
         [
           {
@@ -257,8 +257,8 @@
       ],
       "credentials": {
         "ciscoWebexOAuth2Api": {
-          "id": "1aevt011xprZtQyS",
-          "name": "Webex (Anolan)"
+          "id": "oT9uUH097Zxz2NwW",
+          "name": "Webex (pcaputo)"
         }
       }
     },
@@ -381,8 +381,8 @@
       ],
       "credentials": {
         "odooApi": {
-          "id": "UAkVrIsGyMFm7iej",
-          "name": "Odoo (anolan)"
+          "id": "JstyEfq6G5901mxJ",
+          "name": "Odoo (pcaputo)"
         }
       }
     },
@@ -412,8 +412,8 @@
       ],
       "credentials": {
         "odooApi": {
-          "id": "UAkVrIsGyMFm7iej",
-          "name": "Odoo (anolan)"
+          "id": "JstyEfq6G5901mxJ",
+          "name": "Odoo (pcaputo)"
         }
       }
     },
@@ -462,8 +462,8 @@
       ],
       "credentials": {
         "odooApi": {
-          "id": "UAkVrIsGyMFm7iej",
-          "name": "Odoo (anolan)"
+          "id": "JstyEfq6G5901mxJ",
+          "name": "Odoo (pcaputo)"
         }
       }
     },
@@ -493,8 +493,8 @@
       ],
       "credentials": {
         "odooApi": {
-          "id": "UAkVrIsGyMFm7iej",
-          "name": "Odoo (anolan)"
+          "id": "JstyEfq6G5901mxJ",
+          "name": "Odoo (pcaputo)"
         }
       }
     },
@@ -515,8 +515,8 @@
       ],
       "credentials": {
         "odooApi": {
-          "id": "UAkVrIsGyMFm7iej",
-          "name": "Odoo (anolan)"
+          "id": "JstyEfq6G5901mxJ",
+          "name": "Odoo (pcaputo)"
         }
       }
     },
@@ -720,7 +720,7 @@
     {
       "parameters": {
         "dataType": "string",
-        "value1": "={{ $('Webex (ANolan)').item.json[\"event\"] }}",
+        "value1": "={{ $('Webex (Paul)').item.json[\"event\"] }}",
         "rules": {
           "rules": [
             {
@@ -768,19 +768,18 @@
       ],
       "credentials": {
         "ciscoWebexOAuth2Api": {
-          "id": "1aevt011xprZtQyS",
-          "name": "Webex (Anolan)"
+          "id": "oT9uUH097Zxz2NwW",
+          "name": "Webex (pcaputo)"
         }
       }
     },
     {
       "parameters": {
         "event": "all",
-        "filters": {},
-        "path": "de7502fd-6aba-4d6b-bfd0-daf2ad129067"
+        "filters": {}
       },
       "id": "d97155fc-10ad-4aaf-826d-e2cf4b185d3d",
-      "name": "Webex (ANolan)",
+      "name": "Webex (Paul)",
       "type": "n8n-nodes-base.ciscoWebexTrigger",
       "typeVersion": 1,
       "position": [
@@ -790,8 +789,8 @@
       "webhookId": "de7502fd-6aba-4d6b-bfd0-daf2ad129067",
       "credentials": {
         "ciscoWebexOAuth2Api": {
-          "id": "1aevt011xprZtQyS",
-          "name": "Webex (Anolan)"
+          "id": "oT9uUH097Zxz2NwW",
+          "name": "Webex (pcaputo)"
         }
       }
     }
@@ -838,6 +837,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-08-05T22:48:54.692Z",
-  "versionId": "b55b2b78-bbaa-4d6b-a63a-15b9a94f0482"
+  "updatedAt": "2025-08-06T13:49:42.000Z",
+  "versionId": "622517e8-b7b4-4884-9597-ba556f6e9001"
 }
