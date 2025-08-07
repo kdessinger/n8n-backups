@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "Get Participants": {
       "main": [
@@ -826,6 +826,10 @@
     "node:Webex (ANolan)": {
       "secret": "0e57e10509efa93be6975789a2df27d7",
       "webhookId": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1dFQkhPT0svNjMwMzkxMzQtMWIzMy00NzRlLTg0MWMtYjc3N2I0NGVlNGFi"
+    },
+    "node:Webex (Paul)": {
+      "webhookId": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1dFQkhPT0svODE4N2ExNGUtZmY0Yi00NWE1LWI5YWEtOTA3M2RiZGQxNTBk",
+      "secret": "8daada98f8faf5a0c0abf51561ca3d2e"
     }
   },
   "tags": [
@@ -837,6 +841,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-08-06T13:49:42.000Z",
+  "updatedAt": "2025-08-06T20:11:37.000Z",
   "versionId": "622517e8-b7b4-4884-9597-ba556f6e9001"
 }
