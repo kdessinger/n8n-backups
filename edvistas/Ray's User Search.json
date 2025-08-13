@@ -138,7 +138,7 @@
     },
     {
       "parameters": {
-        "html": "<!DOCTYPE html>\n\n<html>\n<head>\n  <meta charset=\"UTF-8\" />\n  <title>My HTML document</title>\n</head>\n<body>\n  <div class=\"container\">\n    <h1>This is an H1 heading</h1>\n    <h2>This is an H2 heading</h2>\n    <p>{{ $json.tableAscii }}</p>\n  </div>\n</body>\n</html>\n\n<style>\n.container {\n  background-color: #ffffff;\n  text-align: center;\n  padding: 16px;\n  border-radius: 8px;\n}\n\nh1 {\n  color: #ff6d5a;\n  font-size: 24px;\n  font-weight: bold;\n  padding: 8px;\n}\n\nh2 {\n  color: #909399;\n  font-size: 18px;\n  font-weight: bold;\n  padding: 8px;\n}\n</style>\n\n<script>\nconsole.log(\"Hello World!\");\n</script>"
+        "html": "<!DOCTYPE html>\n\n<html>\n<head>\n  <meta charset=\"UTF-8\" />\n  <title>Evicore Search</title>\n</head>\n<body>\n  <div class=\"container\">\n    <h1>Search Term:  </h1>\n    <h2>Records Found: {{ $json.recordCount }}}</h2>\n    <p>{{ $json.tableAscii }}</p>\n  </div>\n</body>\n</html>\n\n<style>\n.container {\n  background-color: #ffffff;\n  text-align: center;\n  padding: 16px;\n  border-radius: 8px;\n}\n\nh1 {\n  color: #ff6d5a;\n  font-size: 24px;\n  font-weight: bold;\n  padding: 8px;\n}\n\nh2 {\n  color: #909399;\n  font-size: 18px;\n  font-weight: bold;\n  padding: 8px;\n}\n</style>\n\n<script>\nconsole.log(\"Hello World!\");\n</script>"
       },
       "type": "n8n-nodes-base.html",
       "typeVersion": 1.2,
@@ -157,6 +157,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-07-22T21:39:58.000Z",
-  "versionId": "0b114f74-5990-436c-b154-c8962fdfa74a"
+  "updatedAt": "2025-08-13T00:22:14.000Z",
+  "versionId": "ee31972c-806c-40cb-b682-af60e3fb79c8"
 }
