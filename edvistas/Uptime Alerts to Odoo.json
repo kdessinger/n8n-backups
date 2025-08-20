@@ -125,6 +125,15 @@
     "executionOrder": "v0",
     "errorWorkflow": "NtBd2hj1eiR2xufe"
   },
+  "shared": [
+    {
+      "createdAt": "2023-01-11T16:49:15.449Z",
+      "updatedAt": "2023-01-11T16:49:15.449Z",
+      "role": "workflow:owner",
+      "workflowId": "19",
+      "projectId": "3dtat9rk4vrp7A9f"
+    }
+  ],
   "staticData": null,
   "tags": [
     {
