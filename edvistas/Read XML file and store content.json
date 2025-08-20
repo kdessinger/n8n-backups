@@ -403,6 +403,15 @@
   ],
   "pinData": {},
   "settings": {},
+  "shared": [
+    {
+      "createdAt": "2022-11-02T21:58:30.542Z",
+      "updatedAt": "2022-11-02T21:58:30.542Z",
+      "role": "workflow:owner",
+      "workflowId": "9",
+      "projectId": "3dtat9rk4vrp7A9f"
+    }
+  ],
   "staticData": null,
   "tags": [
     {
