@@ -203,6 +203,15 @@
     "callerPolicy": "workflowsFromSameOwner",
     "executionTimeout": 300
   },
+  "shared": [
+    {
+      "createdAt": "2024-06-05T04:17:13.154Z",
+      "updatedAt": "2024-06-05T04:17:13.154Z",
+      "role": "workflow:owner",
+      "workflowId": "2V6QIFlv3HEqduGJ",
+      "projectId": "3dtat9rk4vrp7A9f"
+    }
+  ],
   "staticData": {
     "node:Email Trigger (IMAP)": {
       "lastMessageUid": 3197
