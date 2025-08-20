@@ -289,6 +289,15 @@
     "saveManualExecutions": false,
     "callerPolicy": "workflowsFromSameOwner"
   },
+  "shared": [
+    {
+      "createdAt": "2022-11-10T21:20:44.115Z",
+      "updatedAt": "2022-11-10T21:20:44.115Z",
+      "role": "workflow:owner",
+      "workflowId": "10",
+      "projectId": "3dtat9rk4vrp7A9f"
+    }
+  ],
   "staticData": {
     "node:Schedule Trigger": {
       "recurrencyRules": []
