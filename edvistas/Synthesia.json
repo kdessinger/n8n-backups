@@ -760,6 +760,15 @@
     "executionOrder": "v1",
     "errorWorkflow": "NtBd2hj1eiR2xufe"
   },
+  "shared": [
+    {
+      "createdAt": "2023-06-14T16:49:04.174Z",
+      "updatedAt": "2023-06-14T16:49:04.174Z",
+      "role": "workflow:owner",
+      "workflowId": "38",
+      "projectId": "3dtat9rk4vrp7A9f"
+    }
+  ],
   "staticData": null,
   "tags": [
     {
