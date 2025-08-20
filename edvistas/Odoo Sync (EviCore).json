@@ -884,6 +884,15 @@
     "executionTimeout": 300,
     "errorWorkflow": "NtBd2hj1eiR2xufe"
   },
+  "shared": [
+    {
+      "createdAt": "2023-09-29T21:33:33.637Z",
+      "updatedAt": "2023-09-29T21:33:33.637Z",
+      "role": "workflow:owner",
+      "workflowId": "HQyMcbgVeKG9G1FI",
+      "projectId": "3dtat9rk4vrp7A9f"
+    }
+  ],
   "staticData": {
     "node:Schedule": {
       "recurrencyRules": [],
