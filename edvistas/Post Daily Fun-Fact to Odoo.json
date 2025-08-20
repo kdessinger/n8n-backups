@@ -389,6 +389,15 @@
     ]
   },
   "settings": {},
+  "shared": [
+    {
+      "createdAt": "2023-02-14T20:17:12.982Z",
+      "updatedAt": "2023-02-14T20:17:12.982Z",
+      "role": "workflow:owner",
+      "workflowId": "26",
+      "projectId": "3dtat9rk4vrp7A9f"
+    }
+  ],
   "staticData": {
     "node:Schedule Trigger": {
       "recurrencyRules": []
