@@ -931,6 +931,15 @@
     ]
   },
   "settings": {},
+  "shared": [
+    {
+      "createdAt": "2022-09-13T15:50:10.000Z",
+      "updatedAt": "2022-09-13T15:50:10.000Z",
+      "role": "workflow:owner",
+      "workflowId": "3",
+      "projectId": "3dtat9rk4vrp7A9f"
+    }
+  ],
   "staticData": null,
   "tags": [
     {
