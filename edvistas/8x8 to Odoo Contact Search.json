@@ -304,6 +304,15 @@
     "executionOrder": "v0",
     "errorWorkflow": "NtBd2hj1eiR2xufe"
   },
+  "shared": [
+    {
+      "createdAt": "2023-01-05T07:10:27.942Z",
+      "updatedAt": "2023-01-05T07:10:27.942Z",
+      "role": "workflow:owner",
+      "workflowId": "17",
+      "projectId": "3dtat9rk4vrp7A9f"
+    }
+  ],
   "staticData": null,
   "tags": [
     {
