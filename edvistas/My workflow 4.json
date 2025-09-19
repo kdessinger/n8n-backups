@@ -1,45 +1,84 @@
 {
   "active": false,
-  "connections": {},
-  "createdAt": "2025-07-21T15:35:47.302Z",
-  "id": "aRTZAg3iB12PA6kZ",
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get many items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-09-18T20:57:38.048Z",
+  "id": "H7zxBSbhX9zTBHuV",
   "isArchived": false,
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "My workflow 4",
   "nodes": [
     {
       "parameters": {
-        "formTitle": "EVI-Core User ID Lookup",
-        "formDescription": "Search on: User ID / Email / Partial email / Email domain",
-        "formFields": {
-          "values": [
+        "rule": {
+          "interval": [
             {
-              "fieldLabel": "UserID",
-              "placeholder": "example: “rschecter@edvistas.com”, “rschecter”, “@edvistas.com”, “Schecter”",
-              "requiredField": true
+              "field": "hours"
             }
           ]
-        },
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -432,
+        -32
+      ],
+      "id": "50478a88-5c6d-4934-9e19-dc48328a3a5b",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "stock.move",
+        "operation": "getAll",
         "options": {}
       },
-      "type": "n8n-nodes-base.formTrigger",
-      "typeVersion": 2.2,
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
       "position": [
-        0,
-        0
+        -224,
+        -32
       ],
-      "id": "d7f3ee43-20cd-4202-9396-e63569ba4a97",
-      "name": "On form submission",
-      "webhookId": "a381b404-6f75-461a-91bc-77b4b4da6bf7"
+      "id": "c84b1b4f-c1e8-4364-a5f8-7829f549e678",
+      "name": "Get many items",
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
+        }
+      }
     }
   ],
   "pinData": {},
   "settings": {
     "executionOrder": "v1"
   },
+  "shared": [
+    {
+      "createdAt": "2025-09-18T20:57:38.055Z",
+      "updatedAt": "2025-09-18T20:57:38.055Z",
+      "role": "workflow:owner",
+      "workflowId": "H7zxBSbhX9zTBHuV",
+      "projectId": "3dtat9rk4vrp7A9f"
+    }
+  ],
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-07-21T15:35:47.302Z",
-  "versionId": "b2d126f4-ec61-4b40-9bbc-bff684c5483b"
+  "updatedAt": "2025-09-18T20:57:38.048Z",
+  "versionId": "f4d7e96e-e665-4450-bd04-b3e093c49e1c"
 }
