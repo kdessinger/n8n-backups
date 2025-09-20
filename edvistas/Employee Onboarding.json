@@ -5,7 +5,7 @@
       "main": [
         [
           {
-            "node": "Active LDAP Accounts",
+            "node": "Query PDC",
             "type": "main",
             "index": 0
           },
@@ -58,17 +58,6 @@
         []
       ]
     },
-    "Active LDAP Accounts": {
-      "main": [
-        [
-          {
-            "node": "Compare Datasets",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Send email": {
       "main": [
         [
@@ -97,6 +86,35 @@
           }
         ]
       ]
+    },
+    "Query PDC": {
+      "main": [
+        [
+          {
+            "node": "Compare Datasets",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Query BDC",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Query BDC": {
+      "main": [
+        [
+          {
+            "node": "Compare Datasets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2024-09-05T17:56:03.335Z",
@@ -114,8 +132,8 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        1184,
-        432
+        1120,
+        416
       ]
     },
     {
@@ -139,8 +157,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        1440,
-        560
+        1376,
+        608
       ],
       "credentials": {
         "odooApi": {
@@ -316,39 +334,6 @@
     },
     {
       "parameters": {
-        "baseDN": "CN=Users,DC=edvistas,DC=local",
-        "searchFor": "custom",
-        "customFilter": "(&(objectCategory=Person)(!(userAccountControl:1.2.840.113556.1.4.803:=2))(mail=*))",
-        "returnAll": true,
-        "options": {
-          "attributes": [
-            "objectCategory",
-            "name",
-            "mail",
-            "dn",
-            "cn",
-            "objectClass",
-            "description"
-          ]
-        }
-      },
-      "id": "cd3d5322-fb16-4cef-b523-b189a02c68c8",
-      "name": "Active LDAP Accounts",
-      "type": "n8n-nodes-base.ldap",
-      "typeVersion": 1,
-      "position": [
-        1440,
-        320
-      ],
-      "credentials": {
-        "ldap": {
-          "id": "kMvso3rxAwRE3ZaH",
-          "name": "LDAP (nextcloud)"
-        }
-      }
-    },
-    {
-      "parameters": {
         "operation": "sendAndWait",
         "fromEmail": "admin@edvistas.com",
         "toEmail": "kdessinger@edvistas.com",
@@ -421,6 +406,74 @@
       ],
       "id": "a9b36079-7d0d-46df-a4e4-2ba62ef5a586",
       "name": "Approval"
+    },
+    {
+      "parameters": {
+        "baseDN": "CN=Users,DC=edvistas,DC=local",
+        "searchFor": "custom",
+        "customFilter": "(&(objectCategory=Person)(!(userAccountControl:1.2.840.113556.1.4.803:=2))(mail=*))",
+        "returnAll": true,
+        "options": {
+          "attributes": [
+            "objectCategory",
+            "name",
+            "mail",
+            "dn",
+            "cn",
+            "objectClass",
+            "description"
+          ]
+        }
+      },
+      "id": "fc363d29-37ee-43b9-8636-dac306614ba2",
+      "name": "Query BDC",
+      "type": "n8n-nodes-base.ldap",
+      "typeVersion": 1,
+      "position": [
+        1376,
+        416
+      ],
+      "credentials": {
+        "ldap": {
+          "id": "hFht3wq8gU3dyxS9",
+          "name": "LDAP (Backup DC)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "baseDN": "CN=Users,DC=edvistas,DC=local",
+        "searchFor": "custom",
+        "customFilter": "(&(objectCategory=Person)(!(userAccountControl:1.2.840.113556.1.4.803:=2))(mail=*))",
+        "returnAll": true,
+        "options": {
+          "attributes": [
+            "objectCategory",
+            "name",
+            "mail",
+            "dn",
+            "cn",
+            "objectClass",
+            "description"
+          ]
+        }
+      },
+      "id": "cd3d5322-fb16-4cef-b523-b189a02c68c8",
+      "name": "Query PDC",
+      "type": "n8n-nodes-base.ldap",
+      "typeVersion": 1,
+      "position": [
+        1376,
+        208
+      ],
+      "retryOnFail": false,
+      "credentials": {
+        "ldap": {
+          "id": "kMvso3rxAwRE3ZaH",
+          "name": "LDAP (Primary DC)"
+        }
+      },
+      "onError": "continueErrorOutput"
     }
   ],
   "pinData": {},
@@ -454,6 +507,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-08-29T21:04:47.000Z",
-  "versionId": "1fc194ae-68e3-493d-a7f4-234a28b485f2"
+  "updatedAt": "2025-09-19T17:57:21.000Z",
+  "versionId": "5d766d42-0517-4c95-b185-e57e436f16d3"
 }
