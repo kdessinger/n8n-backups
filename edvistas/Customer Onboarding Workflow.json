@@ -1,0 +1,91 @@
+{
+  "active": false,
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get many items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-09-18T20:57:38.048Z",
+  "id": "H7zxBSbhX9zTBHuV",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Customer Onboarding Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -432,
+        -32
+      ],
+      "id": "50478a88-5c6d-4934-9e19-dc48328a3a5b",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "stock.move",
+        "operation": "getAll",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        -224,
+        -32
+      ],
+      "id": "c84b1b4f-c1e8-4364-a5f8-7829f549e678",
+      "name": "Get many items",
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-09-18T20:57:38.055Z",
+      "updatedAt": "2025-09-18T20:57:38.055Z",
+      "role": "workflow:owner",
+      "workflowId": "H7zxBSbhX9zTBHuV",
+      "projectId": "3dtat9rk4vrp7A9f"
+    }
+  ],
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-09-23T18:13:37.986Z",
+      "updatedAt": "2025-09-23T18:13:37.986Z",
+      "id": "NtAioiq9BM5ydUPB",
+      "name": "software_services"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-09-23T18:14:00.000Z",
+  "versionId": "82ec1fed-6bb0-4f52-a9ab-cd72e58334f0"
+}
