@@ -53,6 +53,7 @@
         "resource": "custom",
         "customResource": "calendar.event",
         "operation": "getAll",
+        "returnAll": true,
         "options": {
           "fieldsList": [
             "id",
@@ -72,6 +73,15 @@
             "res_model",
             "display_name",
             "active"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "start",
+              "operator": "greaterOrEqual",
+              "value": "={{ $now.minus({ months: 1 }).startOf('month').toFormat('yyyy-MM-dd') }}\n"
+            }
           ]
         }
       },
@@ -98,7 +108,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        140,
+        144,
         0
       ],
       "id": "c8f39b02-894e-4cf4-95e2-76a42b240948",
@@ -106,27 +116,70 @@
     },
     {
       "parameters": {
-        "content": "## Odoo Calendar EndPoint\nUsed to display the calendar in a Python Application in the Lobby\n\nApplication is being written by Jacob Woods",
+        "content": "## Odoo Calendar EndPoint\nUsed to display the calendar in a Python Application on a lobby display\n\n-> Application is being written by Jacob Woods\n",
         "height": 400,
         "width": 940
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
         -480,
-        -200
+        -208
       ],
       "typeVersion": 1,
       "id": "a42d743b-93f3-434f-95d0-e1f36e09b5af",
       "name": "Sticky Note"
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.edvistas.com",
+            "x-forwarded-scheme": "https",
+            "x-forwarded-proto": "https",
+            "x-forwarded-for": "192.168.148.1",
+            "x-real-ip": "192.168.148.1",
+            "sec-ch-ua-platform": "\"Windows\"",
+            "authorization": "Bearer your_secret_api_key_here",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+            "accept": "application/json",
+            "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
+            "sec-ch-ua-mobile": "?0",
+            "origin": "http://vdev03.edvistas.local",
+            "sec-fetch-site": "cross-site",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-dest": "empty",
+            "referer": "http://vdev03.edvistas.local/",
+            "accept-encoding": "gzip, deflate, br, zstd",
+            "accept-language": "en-US,en;q=0.9",
+            "if-none-match": "W/\"9b00-Mu1IMBcSQiFs+hIUfU8yKZUBXYg\"",
+            "priority": "u=1, i"
+          },
+          "params": {},
+          "query": {},
+          "body": {},
+          "webhookUrl": "https://n8n.edvistas.com/webhook/4b5bf9b3-c001-428a-a627-6d141eb683d0",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1",
     "callerPolicy": "workflowsFromSameOwner",
     "executionTimeout": 300,
     "errorWorkflow": "NtBd2hj1eiR2xufe"
   },
+  "shared": [
+    {
+      "createdAt": "2025-06-27T17:14:50.073Z",
+      "updatedAt": "2025-06-27T17:14:50.073Z",
+      "role": "workflow:owner",
+      "workflowId": "d06k2QIqg7QDgIRl",
+      "projectId": "3dtat9rk4vrp7A9f"
+    }
+  ],
   "staticData": null,
   "tags": [
     {
@@ -143,6 +196,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-06-27T17:35:31.000Z",
-  "versionId": "d3167cc1-4f9d-4e28-8477-f152c4a7c922"
+  "updatedAt": "2025-08-29T17:29:18.000Z",
+  "versionId": "30f585b1-e72a-4a82-bdf8-9a2fe48555d7"
 }
