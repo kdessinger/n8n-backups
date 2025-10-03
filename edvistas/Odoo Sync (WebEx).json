@@ -1868,6 +1868,15 @@
     "executionTimeout": 300,
     "errorWorkflow": "NtBd2hj1eiR2xufe"
   },
+  "shared": [
+    {
+      "createdAt": "2023-09-15T20:54:37.137Z",
+      "updatedAt": "2023-09-15T20:54:37.137Z",
+      "role": "workflow:owner",
+      "workflowId": "WL7QzJYItj90l98a",
+      "projectId": "3dtat9rk4vrp7A9f"
+    }
+  ],
   "staticData": {
     "node:Webex by Cisco Trigger": {
       "secret": "107c687ee654e759c75eb828439aabab"
