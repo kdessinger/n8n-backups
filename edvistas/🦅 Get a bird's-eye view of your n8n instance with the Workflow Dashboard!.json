@@ -887,6 +887,15 @@
     "executionOrder": "v1",
     "errorWorkflow": "NtBd2hj1eiR2xufe"
   },
+  "shared": [
+    {
+      "createdAt": "2024-06-04T03:44:39.973Z",
+      "updatedAt": "2024-06-04T03:44:39.973Z",
+      "role": "workflow:owner",
+      "workflowId": "Qv18DwceJ1N0IAAz",
+      "projectId": "3dtat9rk4vrp7A9f"
+    }
+  ],
   "staticData": null,
   "tags": [],
   "triggerCount": 2,
