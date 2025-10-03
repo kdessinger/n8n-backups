@@ -1246,6 +1246,15 @@
     "executionTimeout": 300,
     "errorWorkflow": "NtBd2hj1eiR2xufe"
   },
+  "shared": [
+    {
+      "createdAt": "2025-01-06T20:03:16.515Z",
+      "updatedAt": "2025-01-06T20:03:16.515Z",
+      "role": "workflow:owner",
+      "workflowId": "qJCHL92o7fLUFSEM",
+      "projectId": "3dtat9rk4vrp7A9f"
+    }
+  ],
   "staticData": {
     "node:Schedule Trigger": {
       "recurrenceRules": []
