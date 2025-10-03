@@ -51,8 +51,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
-        -240,
-        -260
+        -416,
+        -304
       ],
       "id": "36601c45-c22c-4524-80bc-a86b56a21190",
       "name": "Webhook",
@@ -328,8 +328,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 1,
       "position": [
-        -20,
-        -260
+        -192,
+        -304
       ],
       "alwaysOutputData": false
     },
@@ -376,8 +376,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        200,
-        -260
+        32,
+        -304
       ],
       "id": "7b6c1148-0ec4-4c2b-8fea-ee9cea72444a",
       "name": "Create job in Odoo",
@@ -397,8 +397,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        580,
-        -260
+        160,
+        -48
       ],
       "id": "10fe9f48-8dab-4602-9f01-e8137c2407f2",
       "name": "HTTP Request"
@@ -413,8 +413,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -180,
-        0
+        -448,
+        -48
       ],
       "id": "47278525-4a68-4895-b5d8-eeda4fb21314",
       "name": "Create job in Odoo1",
@@ -468,8 +468,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        80,
-        0
+        -240,
+        -48
       ],
       "id": "134fd7fb-bda7-4297-841d-723cea5f8074",
       "name": "Create job in Odoo2",
@@ -508,8 +508,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        360,
-        0
+        -48,
+        -48
       ],
       "id": "38a73428-0fe5-4dda-88f9-40b0882f8a45",
       "name": "Get many items",
@@ -942,6 +942,15 @@
   "settings": {
     "executionOrder": "v1"
   },
+  "shared": [
+    {
+      "createdAt": "2025-07-08T15:53:15.212Z",
+      "updatedAt": "2025-07-08T15:53:15.212Z",
+      "role": "workflow:owner",
+      "workflowId": "VZw0ehEyP9naPKEM",
+      "projectId": "3dtat9rk4vrp7A9f"
+    }
+  ],
   "staticData": null,
   "tags": [
     {
@@ -951,6 +960,12 @@
       "name": "odoo"
     },
     {
+      "createdAt": "2025-10-01T20:36:22.691Z",
+      "updatedAt": "2025-10-01T20:36:22.691Z",
+      "id": "G9MFnVcJOjNgOebB",
+      "name": "draft"
+    },
+    {
       "createdAt": "2025-07-08T15:53:14.011Z",
       "updatedAt": "2025-07-08T15:53:14.011Z",
       "id": "yvHtDeL5tXcijdKT",
@@ -958,6 +973,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-07-11T04:59:02.000Z",
-  "versionId": "7e89717d-6d88-455c-9d78-2df5686928c1"
+  "updatedAt": "2025-10-01T21:43:31.000Z",
+  "versionId": "ef02cdda-8a3f-46f1-81fd-24a332d9aebe"
 }
