@@ -69,7 +69,7 @@
       "typeVersion": 1,
       "position": [
         800,
-        600
+        608
       ]
     },
     {
@@ -109,8 +109,8 @@
       "type": "n8n-nodes-base.microsoftSql",
       "typeVersion": 1.1,
       "position": [
-        1320,
-        620
+        1328,
+        624
       ],
       "notesInFlow": true,
       "retryOnFail": true,
@@ -134,8 +134,8 @@
       "type": "n8n-nodes-base.microsoftSql",
       "typeVersion": 1.1,
       "position": [
-        1080,
-        500
+        1088,
+        512
       ],
       "notesInFlow": true,
       "credentials": {
@@ -157,13 +157,13 @@
       "type": "n8n-nodes-base.microsoftSql",
       "typeVersion": 1,
       "position": [
-        1540,
+        1552,
         480
       ],
       "credentials": {
         "microsoftSql": {
-          "id": "9",
-          "name": "SQL01.edvistas.local (kdessinger)"
+          "id": "c0eH277IuAIBbKLJ",
+          "name": "192.168.148.54 (SQL01)"
         }
       }
     }
@@ -176,6 +176,15 @@
     "executionTimeout": 300,
     "errorWorkflow": "NtBd2hj1eiR2xufe"
   },
+  "shared": [
+    {
+      "createdAt": "2023-09-27T20:22:55.263Z",
+      "updatedAt": "2023-09-27T20:22:55.263Z",
+      "role": "workflow:owner",
+      "workflowId": "VE30hvBsBs48MFvt",
+      "projectId": "3dtat9rk4vrp7A9f"
+    }
+  ],
   "staticData": {
     "node:Schedule Trigger": {
       "recurrencyRules": []
@@ -200,6 +209,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-10-07T14:50:41.000Z",
-  "versionId": "83849bc5-f7b7-45f6-96ae-94f5ff7e6ef1"
+  "updatedAt": "2025-10-03T14:16:01.000Z",
+  "versionId": "ee981680-d50e-48d1-9d8a-317747b21ffb"
 }
