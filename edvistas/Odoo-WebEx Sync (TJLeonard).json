@@ -802,6 +802,15 @@
     "executionTimeout": 120,
     "errorWorkflow": "NtBd2hj1eiR2xufe"
   },
+  "shared": [
+    {
+      "createdAt": "2024-01-09T22:19:48.899Z",
+      "updatedAt": "2024-01-09T22:19:48.899Z",
+      "role": "workflow:owner",
+      "workflowId": "jNOHTYQISnPnmaMZ",
+      "projectId": "3dtat9rk4vrp7A9f"
+    }
+  ],
   "staticData": {
     "node:Webex by Cisco Trigger": {
       "webhookId": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1dFQkhPT0svNDkxNjk0ZGQtOGIxYS00OGY4LWE2NjctYWViMzA0NDI5ZDcx",
