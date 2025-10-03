@@ -271,6 +271,15 @@
     "executionOrder": "v1",
     "errorWorkflow": "NtBd2hj1eiR2xufe"
   },
+  "shared": [
+    {
+      "createdAt": "2025-05-15T18:59:15.990Z",
+      "updatedAt": "2025-05-15T18:59:15.990Z",
+      "role": "workflow:owner",
+      "workflowId": "NvkGBQ1m8AyWq4N6",
+      "projectId": "3dtat9rk4vrp7A9f"
+    }
+  ],
   "staticData": null,
   "tags": [
     {
