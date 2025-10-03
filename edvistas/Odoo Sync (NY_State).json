@@ -340,6 +340,15 @@
     "saveExecutionProgress": false,
     "executionTimeout": 3600
   },
+  "shared": [
+    {
+      "createdAt": "2023-09-26T21:33:24.055Z",
+      "updatedAt": "2023-09-26T21:33:24.055Z",
+      "role": "workflow:owner",
+      "workflowId": "PYRy0yPMq9r48yYN",
+      "projectId": "3dtat9rk4vrp7A9f"
+    }
+  ],
   "staticData": {
     "node:Schedule Trigger": {
       "recurrencyRules": []
