@@ -1642,6 +1642,15 @@
     "executionTimeout": 300,
     "errorWorkflow": "NtBd2hj1eiR2xufe"
   },
+  "shared": [
+    {
+      "createdAt": "2025-03-31T22:34:42.729Z",
+      "updatedAt": "2025-03-31T22:34:42.729Z",
+      "role": "workflow:owner",
+      "workflowId": "fK3mj0Hw8e7zdH90",
+      "projectId": "3dtat9rk4vrp7A9f"
+    }
+  ],
   "staticData": null,
   "tags": [
     {
