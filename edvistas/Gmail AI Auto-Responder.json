@@ -341,6 +341,15 @@
     "executionOrder": "v1",
     "errorWorkflow": "NtBd2hj1eiR2xufe"
   },
+  "shared": [
+    {
+      "createdAt": "2024-05-29T20:33:22.376Z",
+      "updatedAt": "2024-05-29T20:33:22.376Z",
+      "role": "workflow:owner",
+      "workflowId": "eOindl1z0ogHeJzC",
+      "projectId": "3dtat9rk4vrp7A9f"
+    }
+  ],
   "staticData": {
     "node:Gmail Trigger": {
       "lastTimeChecked": 1721534984,
