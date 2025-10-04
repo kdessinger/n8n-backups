@@ -197,8 +197,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1620,
-        360
+        1632,
+        368
       ]
     },
     {
@@ -212,7 +212,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1620,
+        1632,
         640
       ]
     },
@@ -227,8 +227,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        200,
-        1100
+        208,
+        1104
       ]
     },
     {
@@ -252,7 +252,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        520,
+        528,
         880
       ],
       "credentials": {
@@ -273,7 +273,7 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 2.1,
       "position": [
-        1100,
+        1104,
         720
       ]
     },
@@ -298,7 +298,7 @@
       "type": "n8n-nodes-base.aggregate",
       "typeVersion": 1,
       "position": [
-        920,
+        928,
         880
       ]
     },
@@ -314,7 +314,7 @@
       "type": "n8n-nodes-base.ciscoWebex",
       "typeVersion": 1,
       "position": [
-        280,
+        288,
         800
       ],
       "credentials": {
@@ -399,7 +399,7 @@
       "typeVersion": 1,
       "position": [
         1680,
-        449
+        464
       ],
       "credentials": {
         "odooApi": {
@@ -479,7 +479,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        1880,
+        1888,
         720
       ],
       "credentials": {
@@ -511,7 +511,7 @@
       "typeVersion": 1,
       "position": [
         240,
-        1160
+        1168
       ],
       "credentials": {
         "odooApi": {
@@ -532,8 +532,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        440,
-        1160
+        448,
+        1168
       ],
       "credentials": {
         "odooApi": {
@@ -570,8 +570,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        -20,
-        980
+        -16,
+        992
       ]
     },
     {
@@ -585,8 +585,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        200,
-        641.646623741728
+        208,
+        656
       ]
     },
     {
@@ -598,8 +598,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        520,
-        700
+        528,
+        704
       ]
     },
     {
@@ -613,8 +613,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1620,
-        900
+        1632,
+        912
       ]
     },
     {
@@ -628,8 +628,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1620,
-        1160
+        1632,
+        1168
       ]
     },
     {
@@ -667,8 +667,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.2,
       "position": [
-        1660,
-        980
+        1664,
+        992
       ]
     },
     {
@@ -706,8 +706,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.2,
       "position": [
-        1660,
-        1260
+        1664,
+        1264
       ]
     },
     {
@@ -720,8 +720,8 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1,
       "position": [
-        1880,
-        986
+        1888,
+        992
       ]
     },
     {
@@ -734,8 +734,8 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1,
       "position": [
-        1880,
-        1260
+        1888,
+        1264
       ]
     },
     {
@@ -768,7 +768,7 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 2,
       "position": [
-        1320,
+        1328,
         720
       ]
     },
@@ -782,8 +782,8 @@
       "type": "n8n-nodes-base.ciscoWebexTrigger",
       "typeVersion": 1,
       "position": [
-        -220,
-        980
+        -224,
+        992
       ],
       "webhookId": "0a2ffcfd-022f-4270-9df3-13bc78179250",
       "credentials": {
@@ -798,30 +798,30 @@
     "Webex (Greg)": [
       {
         "json": {
-          "id": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1dFQkhPT0svYTA3YWU3ZGEtZDc5NC00ZTg0LThhNDctMDU2NDA2YTM2MzZj",
-          "name": "n8n-webhook:https://n8n.edvistas.com/webhook/9287f27b-7888-4d9c-8b64-dd94507cf756/webhook",
-          "targetUrl": "https://n8n.edvistas.com/webhook/9287f27b-7888-4d9c-8b64-dd94507cf756/webhook",
+          "id": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1dFQkhPT0svNDc1MjIzZTUtZDhkZi00NTcwLTliNGQtZjc4NzMwZTY1YWEw",
+          "name": "n8n-webhook:https://n8n.edvistas.com/webhook/0a2ffcfd-022f-4270-9df3-13bc78179250/webhook",
+          "targetUrl": "https://n8n.edvistas.com/webhook/0a2ffcfd-022f-4270-9df3-13bc78179250/webhook",
           "resource": "meetings",
           "event": "created",
           "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8yZjEzODhiOS1jMDVmLTRmYzktYjQ0OC00YzI1YTlhZjViYzQ",
-          "createdBy": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yOWI1ZjUxZi1lMjU5LTRiNDMtOGExOC1iODA5ZDA5ZjE5NDg",
-          "appId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0NjZWQwZjlkNTA0Y2MwYmFkNDA4YjIyMDBmN2ZjYjc4YmY3YmVlMDEyZGYzZjVlMzY4MjI4MDhhZDI1ZTJmMzhh",
+          "createdBy": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yYzBjNDkwNC0zMzdhLTRkNWQtOGUzYi04NWNkOTBjYTczMmY",
+          "appId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0NhNjQ3NzliODZkOGNkNDdhNTgwNWM3ODNiNDhmNDE1MTdhNWRlZDlhZGJkZmI2OWRmMmYyNjdiMDFiN2M0YzVl",
           "ownedBy": "creator",
           "status": "active",
-          "created": "2024-01-12T21:06:01.109Z",
+          "created": "2025-10-02T20:14:30.146Z",
           "data": {
-            "id": "5a5e494567be40ee925aafc247f4270a",
-            "meetingNumber": "26322409845",
+            "id": "8157b17a753c4fe28cf5e67869d8df39",
+            "meetingNumber": "28614895497",
             "meetingType": "meetingSeries",
             "timezone": "UTC",
-            "start": "2024-01-18T15:00:00Z",
-            "end": "2024-01-18T16:00:00Z",
-            "hostUserId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yOWI1ZjUxZi1lMjU5LTRiNDMtOGExOC1iODA5ZDA5ZjE5NDg",
+            "start": "2025-10-03T15:21:00Z",
+            "end": "2025-10-03T15:51:00Z",
+            "hostUserId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yYzBjNDkwNC0zMzdhLTRkNWQtOGUzYi04NWNkOTBjYTczMmY",
             "state": "active",
-            "hostEmail": "info@edvistas.com",
+            "hostEmail": "gpeters@edvistas.com",
             "siteUrl": "educationalvistasinc-535335.my.webex.com",
             "orgId": "2f1388b9-c05f-4fc9-b448-4c25a9af5bc4",
-            "hostType": "1080080"
+            "hostType": "1066066"
           }
         }
       }
@@ -857,7 +857,7 @@
     },
     "node:Webex (Greg)": {
       "secret": "1de59f427b3caa72ad3c65124618540a",
-      "webhookId": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1dFQkhPT0svNDc1MjIzZTUtZDhkZi00NTcwLTliNGQtZjc4NzMwZTY1YWEw"
+      "webhookId": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1dFQkhPT0svM2Y1ZGFhMzYtNWM3ZC00NTM5LTk5NDctZTA2ZWI3NGQ4NGEw"
     }
   },
   "tags": [
@@ -869,6 +869,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-10-02T18:06:02.000Z",
-  "versionId": "30e4e70a-470b-4e61-8892-3a81bad2e236"
+  "updatedAt": "2025-10-03T18:03:22.000Z",
+  "versionId": "f0af52e0-bcba-47bc-bed4-4edc1ec54e11"
 }
