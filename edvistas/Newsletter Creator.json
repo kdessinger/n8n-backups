@@ -318,7 +318,7 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        -460,
+        -464,
         400
       ],
       "id": "f25cdd58-28fa-4840-92c0-3ea6e19239b8",
@@ -338,7 +338,7 @@
       "type": "n8n-nodes-base.splitOut",
       "typeVersion": 1,
       "position": [
-        -140,
+        -144,
         400
       ],
       "id": "b69fdfba-8f72-4c2b-b032-396a330321ab",
@@ -355,8 +355,8 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 1.7,
       "position": [
-        100,
-        300
+        112,
+        304
       ],
       "id": "871569bc-29b6-4907-9e3d-e9ca3470c13e",
       "name": "Research Team"
@@ -369,7 +369,7 @@
       "typeVersion": 1.2,
       "position": [
         320,
-        660
+        672
       ],
       "id": "706ebdef-df05-46f7-bb8b-5831d87e7fc8",
       "name": "Anthropic Chat Model",
@@ -389,8 +389,8 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3,
       "position": [
-        460,
-        380
+        464,
+        384
       ],
       "id": "5393087b-0cb6-43eb-90f7-8a23e3093e53",
       "name": "Merge"
@@ -415,7 +415,7 @@
       "typeVersion": 1,
       "position": [
         640,
-        380
+        384
       ],
       "id": "4d5619dc-f671-436c-bcd4-08c0c53c0d00",
       "name": "Aggregate"
@@ -432,7 +432,7 @@
       "typeVersion": 1.7,
       "position": [
         800,
-        380
+        384
       ],
       "id": "ca0bf28d-968e-4d49-91f3-943b0034cc26",
       "name": "Editor"
@@ -450,8 +450,8 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
       "position": [
-        1460,
-        380
+        1472,
+        384
       ],
       "id": "0c003b1b-baa9-4033-b84f-39ec6d044456",
       "name": "Send Newsletter",
@@ -484,8 +484,8 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        1140,
-        380
+        1152,
+        384
       ],
       "id": "de2f692b-5412-4833-aab4-c0c63ad0299d",
       "name": "Create TItle",
@@ -531,8 +531,8 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1.1,
       "position": [
-        -1000,
-        1000
+        -1008,
+        1008
       ],
       "id": "efc39b3f-0671-4f1e-8576-9750e065d76f",
       "name": "Workflow Input Trigger"
@@ -553,8 +553,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        -780,
-        1000
+        -784,
+        1008
       ],
       "credentials": {
         "httpBearerAuth": {
@@ -584,8 +584,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -360,
-        1000
+        -368,
+        1008
       ],
       "id": "8f7bdc8f-1cce-490a-84e3-d3acb17b837c",
       "name": "response"
@@ -599,7 +599,7 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -1060,
+        -1056,
         160
       ],
       "typeVersion": 1,
@@ -615,8 +615,8 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -1060,
-        920
+        -1056,
+        928
       ],
       "typeVersion": 1,
       "id": "80cda999-15f9-4e89-bf48-8352bbccec06",
@@ -631,8 +631,8 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        20,
-        600
+        32,
+        608
       ],
       "typeVersion": 1,
       "id": "e0d0d648-9a83-4640-8469-e62fde47f2f7",
@@ -666,7 +666,7 @@
       "typeVersion": 1.1,
       "position": [
         -560,
-        1000
+        1008
       ],
       "id": "2bd1c22e-d948-4c42-8f15-dbe37bd130f2",
       "name": "Log the search results",
@@ -676,17 +676,6 @@
           "name": "SQL01.edvistas.local (kdessinger)"
         }
       }
-    },
-    {
-      "parameters": {},
-      "type": "n8n-nodes-base.awsLambda",
-      "typeVersion": 1,
-      "position": [
-        700,
-        940
-      ],
-      "id": "6231557d-1e1b-4607-a143-a3fc22073979",
-      "name": "AWS Lambda"
     }
   ],
   "pinData": {
@@ -746,6 +735,12 @@
   "staticData": null,
   "tags": [
     {
+      "createdAt": "2025-10-01T20:36:22.691Z",
+      "updatedAt": "2025-10-01T20:36:22.691Z",
+      "id": "G9MFnVcJOjNgOebB",
+      "name": "draft"
+    },
+    {
       "createdAt": "2025-01-02T19:29:58.822Z",
       "updatedAt": "2025-01-02T19:29:58.822Z",
       "id": "WXisSD9AUSBjzVTs",
@@ -753,6 +748,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-06-26T20:58:46.000Z",
-  "versionId": "448da9c5-e27e-4597-bbb0-4f1823296062"
+  "updatedAt": "2025-10-03T18:32:35.000Z",
+  "versionId": "ebcc6b65-1f14-4980-b23e-037be4c0f578"
 }
