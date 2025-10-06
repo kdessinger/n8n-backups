@@ -90,8 +90,8 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2.2,
       "position": [
-        208,
-        0
+        -48,
+        -48
       ],
       "id": "b9d2716b-9882-4fb6-9f67-deb193492a95",
       "name": "AI Agent"
@@ -109,8 +109,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.2,
       "position": [
-        176,
-        304
+        -80,
+        256
       ],
       "id": "31e0a1f8-796a-422d-9d32-9acf93a742c3",
       "name": "OpenAI Chat Model",
@@ -128,8 +128,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
       "typeVersion": 1,
       "position": [
-        256,
-        448
+        0,
+        400
       ],
       "id": "c1aa9cbd-ac94-4d66-bdb4-a14be723b63b",
       "name": "DeepSeek Chat Model",
@@ -149,8 +149,8 @@
       "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
       "typeVersion": 1.3,
       "position": [
-        336,
-        304
+        80,
+        256
       ],
       "id": "aa86df5c-07ab-496b-a8e5-cc9796a23611",
       "name": "Simple Memory"
@@ -204,8 +204,8 @@
       "type": "n8n-nodes-base.formTrigger",
       "typeVersion": 2.3,
       "position": [
-        -16,
-        0
+        -272,
+        -48
       ],
       "id": "75ba1d74-bf19-4edc-88e8-3d5cb8983141",
       "name": "On form submission",
@@ -219,7 +219,7 @@
           "fields": [
             {
               "fieldName": "project_id",
-              "fieldValue": "115"
+              "fieldValue": "[115]"
             },
             {
               "fieldName": "company_id",
@@ -242,8 +242,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        608,
-        0
+        400,
+        -48
       ],
       "id": "758a1a89-6ef1-4a9b-aa42-21ffb38c9d19",
       "name": "Create an item",
@@ -261,8 +261,8 @@
       "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
       "typeVersion": 1.3,
       "position": [
-        448,
-        224
+        192,
+        176
       ],
       "id": "99240646-d91c-4058-8118-7816063d5360",
       "name": "Structured Output Parser"
@@ -343,6 +343,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-10-05T02:54:25.000Z",
-  "versionId": "fd651bf3-1e4e-4d24-90aa-fd2e05772310"
+  "updatedAt": "2025-10-06T01:05:55.000Z",
+  "versionId": "7df4bd83-1bce-458f-a2b6-ef8a5b82577a"
 }
