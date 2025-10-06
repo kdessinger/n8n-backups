@@ -5,7 +5,7 @@
       "ai_languageModel": [
         [
           {
-            "node": "AI Agent",
+            "node": "Odoo Tasking Agent",
             "type": "ai_languageModel",
             "index": 0
           }
@@ -16,7 +16,7 @@
       "ai_languageModel": [
         [
           {
-            "node": "AI Agent",
+            "node": "Odoo Tasking Agent",
             "type": "ai_languageModel",
             "index": 1
           }
@@ -25,31 +25,14 @@
     },
     "Simple Memory": {
       "ai_memory": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_memory",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "On form submission": {
       "main": [
         [
           {
-            "node": "AI Agent",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "AI Agent": {
-      "main": [
-        [
-          {
-            "node": "Create an item",
+            "node": "Odoo Tasking Agent",
             "type": "main",
             "index": 0
           }
@@ -60,8 +43,19 @@
       "ai_outputParser": [
         [
           {
-            "node": "AI Agent",
+            "node": "Odoo Tasking Agent",
             "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Odoo Tasking Agent": {
+      "main": [
+        [
+          {
+            "node": "Create an item",
+            "type": "main",
             "index": 0
           }
         ]
@@ -76,26 +70,6 @@
   },
   "name": "Create a workflow task in odoo project",
   "nodes": [
-    {
-      "parameters": {
-        "promptType": "define",
-        "text": "=Title: {{ $json.Title }}\nDepartment: {{ $json.Department }}\nDescription: {{ $json.Description }}",
-        "hasOutputParser": true,
-        "needsFallback": true,
-        "options": {
-          "systemMessage": "=You are a professional technical documentation assistant for an IT automation team. Your purpose is to write ready-to-paste task descriptions for Odoo project workflows. These descriptions must be written in a clear, polished, business-professional tone with occasional emoji icons for visual clarity.\n\nStyle & Format Rules:\n\nAlways use section headers with emojis to organize content.\n\nWrite in plain, direct English, suitable for project/task documentation.\n\nAvoid code blocks or HTML unless explicitly requested.\n\nMake outputs ready to copy and paste directly into Odoo’s “Description” field.\n\nUse bold text for key terms, systems, or workflow names.\n\nEach description should include:\n\nA title line with emoji and bold text.\n\nA short overview paragraph of what the workflow does.\n\nA trigger section (how it starts).\n\nA step-by-step summary of what happens.\n\nAn outcome/final result section.\n\nAn optional note about future improvements or scalability.\n\nTone Guidelines:\n\nProfessional and confident.\n\nClear and concise — no filler sentences.\n\nOccasional emoji (📁, 🤖, ☁️, 📌, etc.) for visual organization.\n\nWrite as if the output will go directly into a client-facing document.\n\n📄 EXAMPLE 1 – “NYC Intake Form” Task\n\n📨 NYC Intake Form – Automated Workflow\nThis workflow automates the handling of the NYC Intake Form submitted through EduForm, ensuring submissions are validated, logged, and converted into actionable work orders without manual steps.\n\n⚙️ Trigger – Form Submission\nThe workflow is triggered when a customer submits the intake form via EduForm. A webhook captures the submission and initiates the automation.\n\n✅ Step 1 – Data Validation & CRM Check\nThe system validates all fields and checks whether the customer exists in the CRM.\n• If the customer exists → proceed.\n• If not → automatically create a new CRM record.\n\n📁 Step 2 – Work Order Creation\nA new work order is generated in Odoo, and the submitted form is attached to it for easy reference by the support team.\n\n🎯 Outcome\nAll intake submissions are automatically captured and turned into work orders, reducing manual effort and improving operational efficiency.\n\n📌 Note: This automation is part of the Corporate Workflows suite and can be extended with additional validation or follow-up steps in future iterations.\n\n📄 EXAMPLE 2 – “Employee Onboarding” Task\n\n👤 Employee Onboarding – Automated Provisioning Workflow\nThis workflow streamlines the process of onboarding new employees by automating system setup and account provisioning across all core services.\n\n🚀 Trigger – HR Record Creation\nWhen HR adds a new employee to Odoo, the workflow automatically begins provisioning.\n\n⚙️ Automated Steps\n• Add user to Active Directory\n• Create email inbox\n• Provision shared drive folder\n• Assign phone extension\n• Register user in commercial platforms\n• Create Odoo account\n• Set up Webex account\n\n📞 Future Feature – Guided Call\nA future enhancement will automatically call the new hire and walk them through the next steps in their onboarding journey.\n\n🎯 Outcome\nThe process ensures every employee has accounts, tools, and access ready before day one, creating a consistent and efficient onboarding experience.\n\n📌 Note: This automation is part of the Corporate Workflows project.\n\n✅ Instruction:\nAlways follow this structure and tone when generating new task descriptions. Focus on clarity, process flow, and outcome. Keep outputs optimized for real-world project documentation.",
-          "enableStreaming": true
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 2.2,
-      "position": [
-        -48,
-        -48
-      ],
-      "id": "b9d2716b-9882-4fb6-9f67-deb193492a95",
-      "name": "AI Agent"
-    },
     {
       "parameters": {
         "model": {
@@ -149,8 +123,8 @@
       "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
       "typeVersion": 1.3,
       "position": [
-        80,
-        256
+        -432,
+        160
       ],
       "id": "aa86df5c-07ab-496b-a8e5-cc9796a23611",
       "name": "Simple Memory"
@@ -219,11 +193,11 @@
           "fields": [
             {
               "fieldName": "project_id",
-              "fieldValue": "[115]"
+              "fieldValue": "={{115}}"
             },
             {
               "fieldName": "company_id",
-              "fieldValue": "1"
+              "fieldValue": "={{1}}"
             },
             {
               "fieldName": "name",
@@ -232,9 +206,6 @@
             {
               "fieldName": "description",
               "fieldValue": "={{ $json.output.Description }}"
-            },
-            {
-              "fieldName": "tag_ids"
             }
           ]
         }
@@ -249,14 +220,14 @@
       "name": "Create an item",
       "credentials": {
         "odooApi": {
-          "id": "11",
-          "name": "Odoo (kdessinger)"
+          "id": "22",
+          "name": "Odoo (OdooBot)"
         }
       }
     },
     {
       "parameters": {
-        "jsonSchemaExample": "{\n\t\"Title\": \"Employee Onboarding\",\n\t\"Department\": [\"HR\", \"IT\"],\n    \"Description\": \"This workflow will assist in onboarding a new employee into the company.  This gets triggered when HR adds a new employee to odoo.  It then follows the chain of events which will be:  Add user to Active Directory, Give the user an email box, create a folder for the user on the shared drive, setup the user with a phone extension, create an account in our commerical products, setup a user account in odoo, create a webex account.  This part is not completed yet but the workflow will actually call the user and walk them through what to do next.  :)\"\n}"
+        "jsonSchemaExample": "{\n\t\"Title\": \"📰 Create a Newsletter\",\n\t\"Department\": [\"Marketing\", \"IT\"],\n    \"Description\": \"<p data-last-history-steps=\\\"1422928172414105\\\">\\n\\n<strong style=\\\"font-weight: bolder;color: rgb(115, 24, 66);font-size: 13px\\\"><span style=\\\"font-size: 14px\\\">Workflow ID: </span></strong></p><hr><p>This task focuses on building an intelligent automation that enables users to quickly generate and deliver high-quality newsletters with minimal effort. The workflow leverages AI-driven research, content generation, and email delivery tools to streamline the entire process from concept to inbox.</p><p>📋 <strong>Step 1 – User Input Form</strong><br>\\nThe workflow begins by presenting the user with a simple form designed to collect key details needed for newsletter creation:<br>\\n• <strong>Topic</strong> – The main subject or focus of the newsletter.<br>\\n• <strong>Tone</strong> – The desired style or voice of the content (e.g., professional, casual, informative).<br>\\n• <strong>Target Audience</strong> – The intended reader demographic to guide content relevance and style.<br>\\n• <strong>Delivery Location</strong> – The email address where the final newsletter should be sent.</p><p>🔍 <strong>Step 2 – Automated Research (Tavily Integration)</strong><br>\\nUpon form submission, the workflow uses <strong>Tavily</strong> to search the web and gather the most relevant, up-to-date information related to the user’s chosen topic. These findings are then logged and stored as part of the newsletter creation process, providing rich context and supporting material for the content.</p><p>✏️ <strong>Step 3 – Content Generation &amp; Assembly</strong><br>\\nLeveraging advanced AI models, the workflow synthesizes the gathered research into a structured and well-written newsletter. The content is automatically tailored to the specified tone and audience, ensuring that each newsletter feels personalized and on-brand.</p><p>📤 <strong>Step 4 – Delivery to Inbox</strong><br>\\nOnce generated, the completed newsletter is formatted for readability and delivered directly to the email address provided by the user. The result is a polished, professional communication piece that requires no manual writing or content curation.</p><p>⚙️ <strong>Outcome</strong><br>\\nThis workflow dramatically reduces the time and effort needed to produce newsletters while ensuring high-quality, targeted content. By combining automated research, intelligent writing, and seamless email delivery, it empowers teams to engage their audiences more effectively and consistently.</p><p>📌 <em>Note:</em> This task is part of the <strong>Corporate Workflows</strong> project and can be extended to support recurring newsletters, multi-topic editions, or direct publishing to other communication channels in the future.</p><p data-last-history-steps=\\\"4043568045914975\\\">\\n\\n\\n <br></p>\"\n\n}"
       },
       "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
       "typeVersion": 1.3,
@@ -279,7 +250,7 @@
             {
               "fieldName": "name",
               "operator": "like",
-              "value": "Employee Onboarding"
+              "value": "Create a Newsletter"
             },
             {
               "fieldName": "stage_id",
@@ -292,8 +263,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -400,
-        240
+        416,
+        160
       ],
       "id": "b5ac1869-d983-42d0-b7b7-1a0915439a11",
       "name": "Get Example Tasks",
@@ -303,17 +274,139 @@
           "name": "Odoo (OdooBot)"
         }
       }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "project.tags",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {
+          "fieldsList": [
+            "id",
+            "name",
+            "color"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "color",
+              "value": "8"
+            }
+          ]
+        }
+      },
+      "id": "c2059d35-b991-4a88-9009-0c90bf3a1f37",
+      "name": "Tags",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        640,
+        160
+      ],
+      "credentials": {
+        "odooApi": {
+          "id": "12",
+          "name": "Odoo (Administrator)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Title: {{ $json.Title }}\nDepartment: {{ $json.Department }}\nDescription: {{ $json.Description }}",
+        "hasOutputParser": true,
+        "needsFallback": true,
+        "options": {
+          "systemMessage": "=You are a professional technical documentation assistant for an IT automation team. Your purpose is to write ready-to-paste task descriptions for Odoo project workflows. These descriptions must be written in a clear, polished, business-professional tone with occasional emoji icons for visual clarity.\n\nStyle & Format Rules:\n\nAlways use section headers with emojis to organize content.\n\nWrite in plain, direct English, suitable for project/task documentation.\n\nAlways use code blocks or HTML unless explicitly requested.\n\nThe first line should always have a spot to capture the workflow ID: and a seperator after that.\n\nUse bold text for key terms, systems, or workflow names.\n\nEach description should include:\n\nA title line with emoji and bold text.\n\nA short overview paragraph of what the workflow does.\n\nA trigger section (how it starts).\n\nA step-by-step summary of what happens.\n\nAn outcome/final result section.\n\nAn optional note about future improvements or scalability.\n\nTone Guidelines:\n\nProfessional and confident.\n\nClear and concise — no filler sentences.\n\nOccasional emoji (📁, 🤖, ☁️, 📌, etc.) for visual organization.\n\nWrite as if the output will go directly into a client-facing document.\n\n📄 EXAMPLE 1 – “NYC Intake Form” Task\n\n📨 NYC Intake Form – Automated Workflow\nThis workflow automates the handling of the NYC Intake Form submitted through EduForm, ensuring submissions are validated, logged, and converted into actionable work orders without manual steps.\n\n⚙️ Trigger – Form Submission\nThe workflow is triggered when a customer submits the intake form via EduForm. A webhook captures the submission and initiates the automation.\n\n✅ Step 1 – Data Validation & CRM Check\nThe system validates all fields and checks whether the customer exists in the CRM.\n• If the customer exists → proceed.\n• If not → automatically create a new CRM record.\n\n📁 Step 2 – Work Order Creation\nA new work order is generated in Odoo, and the submitted form is attached to it for easy reference by the support team.\n\n🎯 Outcome\nAll intake submissions are automatically captured and turned into work orders, reducing manual effort and improving operational efficiency.\n\n📌 Note: This automation is part of the Corporate Workflows suite and can be extended with additional validation or follow-up steps in future iterations.\n\n📄 EXAMPLE 2 – “Employee Onboarding” Task\n\n👤 Employee Onboarding – Automated Provisioning Workflow\nThis workflow streamlines the process of onboarding new employees by automating system setup and account provisioning across all core services.\n\n🚀 Trigger – HR Record Creation\nWhen HR adds a new employee to Odoo, the workflow automatically begins provisioning.\n\n⚙️ Automated Steps\n• Add user to Active Directory\n• Create email inbox\n• Provision shared drive folder\n• Assign phone extension\n• Register user in commercial platforms\n• Create Odoo account\n• Set up Webex account\n\n📞 Future Feature – Guided Call\nA future enhancement will automatically call the new hire and walk them through the next steps in their onboarding journey.\n\n🎯 Outcome\nThe process ensures every employee has accounts, tools, and access ready before day one, creating a consistent and efficient onboarding experience.\n\n📌 Note: This automation is part of the Corporate Workflows project.\n\n✅ Instruction:\nAlways follow this structure and tone when generating new task descriptions. Focus on clarity, process flow, and outcome. Keep outputs optimized for real-world project documentation.",
+          "enableStreaming": true
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -48,
+        -48
+      ],
+      "id": "b9d2716b-9882-4fb6-9f67-deb193492a95",
+      "name": "Odoo Tasking Agent"
     }
   ],
   "pinData": {
     "On form submission": [
       {
         "json": {
-          "Title": "Employee Onboarding",
-          "Department": "HR",
-          "Description": "This workflow will assist in onboarding a new employee into the company.  This gets triggered when HR adds a new employee to odoo.  It then follows the chain of events which will be:  Add user to Active Directory, Give the user an email box, create a folder for the user on the shared drive, setup the user with a phone extension, create an account in our commerical products, setup a user account in odoo, create a webex account.  This part is not completed yet but the workflow will actually call the user and walk them through what to do next.  :)",
-          "submittedAt": "2025-10-04T22:14:50.604-04:00",
-          "formMode": "test"
+          "Title": "WebEx Video Downloader",
+          "Department": "IT",
+          "Description": "This workflow will download recorded webex videos and save them to the local file store (location: R:\\Software Services\\Recorded Meetings).  The trigger will happen when a new video has been saved to the webex user hub.  Make sure the scope of each account has the appropriated rights.",
+          "submittedAt": "2025-10-06T10:05:44.430-04:00",
+          "formMode": "production"
+        }
+      }
+    ],
+    "Tags": [
+      {
+        "json": {
+          "id": 115,
+          "name": "ELA",
+          "color": 8
+        }
+      },
+      {
+        "json": {
+          "id": 130,
+          "name": "Private",
+          "color": 8
+        }
+      },
+      {
+        "json": {
+          "id": 133,
+          "name": "Personal",
+          "color": 8
+        }
+      },
+      {
+        "json": {
+          "id": 136,
+          "name": "Marketing",
+          "color": 8
+        }
+      },
+      {
+        "json": {
+          "id": 141,
+          "name": "webhook",
+          "color": 8
+        }
+      },
+      {
+        "json": {
+          "id": 144,
+          "name": "Software Services",
+          "color": 8
+        }
+      },
+      {
+        "json": {
+          "id": 145,
+          "name": "Sales",
+          "color": 8
+        }
+      },
+      {
+        "json": {
+          "id": 146,
+          "name": "HR",
+          "color": 8
+        }
+      },
+      {
+        "json": {
+          "id": 147,
+          "name": "IT",
+          "color": 8
         }
       }
     ]
@@ -343,6 +436,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-10-06T01:05:55.000Z",
-  "versionId": "7df4bd83-1bce-458f-a2b6-ef8a5b82577a"
+  "updatedAt": "2025-10-06T16:35:22.000Z",
+  "versionId": "2f087c95-f948-49c2-8469-d927520171e7"
 }
