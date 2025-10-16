@@ -158,7 +158,7 @@
       "typeVersion": 1,
       "position": [
         1552,
-        480
+        496
       ],
       "credentials": {
         "microsoftSql": {
@@ -209,6 +209,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-10-03T14:16:01.000Z",
-  "versionId": "ee981680-d50e-48d1-9d8a-317747b21ffb"
+  "updatedAt": "2025-10-16T14:43:50.000Z",
+  "versionId": "0c5da5b6-d368-402a-a6cc-d269dda85ff2"
 }
