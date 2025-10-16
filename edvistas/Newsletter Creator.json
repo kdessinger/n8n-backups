@@ -79,6 +79,11 @@
             "node": "Research Team",
             "type": "ai_languageModel",
             "index": 0
+          },
+          {
+            "node": "Editor",
+            "type": "ai_languageModel",
+            "index": 0
           }
         ]
       ]
@@ -167,13 +172,7 @@
     },
     "Anthropic Chat Model1": {
       "ai_languageModel": [
-        [
-          {
-            "node": "Editor",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Log the search results": {
@@ -261,13 +260,14 @@
     },
     {
       "parameters": {
+        "model": "gpt-5-mini",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.1,
       "position": [
         -800,
-        640
+        672
       ],
       "id": "3b3082ba-aa0f-4160-a0cb-6028345b232a",
       "name": "OpenAI Chat Model",
@@ -368,8 +368,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
       "typeVersion": 1.2,
       "position": [
-        320,
-        672
+        576,
+        656
       ],
       "id": "706ebdef-df05-46f7-bb8b-5831d87e7fc8",
       "name": "Anthropic Chat Model",
@@ -519,7 +519,7 @@
       "typeVersion": 2,
       "position": [
         80,
-        640
+        672
       ],
       "id": "b4c3e732-83f3-4acf-9302-922a4c820b95",
       "name": "tavily"
@@ -584,7 +584,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -368,
+        -336,
         1008
       ],
       "id": "8f7bdc8f-1cce-490a-84e3-d3acb17b837c",
@@ -631,8 +631,8 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        32,
-        608
+        16,
+        624
       ],
       "typeVersion": 1,
       "id": "e0d0d648-9a83-4640-8469-e62fde47f2f7",
@@ -646,7 +646,7 @@
       "typeVersion": 1.2,
       "position": [
         800,
-        640
+        672
       ],
       "id": "0187454f-3a9a-42c5-bd73-0f916a25dde5",
       "name": "Anthropic Chat Model1",
@@ -676,6 +676,38 @@
           "name": "SQL01.edvistas.local (kdessinger)"
         }
       }
+    },
+    {
+      "parameters": {
+        "content": "\n",
+        "height": 180,
+        "width": 200,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        512,
+        624
+      ],
+      "typeVersion": 1,
+      "id": "299fa4bb-e990-4d6a-a9ad-ee9a1088bd42",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "\n",
+        "height": 180,
+        "width": 200,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -864,
+        624
+      ],
+      "typeVersion": 1,
+      "id": "c4e42f7f-9514-484f-9e5f-faa5109c5380",
+      "name": "Sticky Note4"
     }
   ],
   "pinData": {
@@ -745,9 +777,15 @@
       "updatedAt": "2025-01-02T19:29:58.822Z",
       "id": "WXisSD9AUSBjzVTs",
       "name": "agent"
+    },
+    {
+      "createdAt": "2025-10-16T14:36:37.709Z",
+      "updatedAt": "2025-10-16T14:36:37.709Z",
+      "id": "f329Qs38pRXv9WZL",
+      "name": "tavily"
     }
   ],
-  "triggerCount": 0,
-  "updatedAt": "2025-10-03T18:32:35.000Z",
-  "versionId": "ebcc6b65-1f14-4980-b23e-037be4c0f578"
+  "triggerCount": 1,
+  "updatedAt": "2025-10-16T14:42:49.000Z",
+  "versionId": "acaa1ffb-f5ea-4739-a65b-4bc639ef2e24"
 }
