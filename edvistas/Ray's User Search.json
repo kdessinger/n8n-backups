@@ -16,6 +16,11 @@
       "main": [
         [
           {
+            "node": "Form",
+            "type": "main",
+            "index": 0
+          },
+          {
             "node": "Code",
             "type": "main",
             "index": 0
@@ -41,13 +46,7 @@
     },
     "HTML": {
       "main": [
-        [
-          {
-            "node": "Form",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     }
   },
@@ -78,7 +77,7 @@
       "typeVersion": 2.2,
       "position": [
         -208,
-        -16
+        -176
       ],
       "id": "d7f3ee43-20cd-4202-9396-e63569ba4a97",
       "name": "On form submission",
@@ -92,8 +91,8 @@
       "type": "n8n-nodes-base.microsoftSql",
       "typeVersion": 1.1,
       "position": [
-        0,
-        -16
+        16,
+        -176
       ],
       "id": "1f77052d-31d0-4a96-92cf-bf3603fb8e22",
       "name": "Microsoft SQL",
@@ -108,7 +107,7 @@
       "parameters": {
         "operation": "completion",
         "completionTitle": "Retrieved Records",
-        "completionMessage": "={{ $json.html }}",
+        "completionMessage": "={{\n'<div style=\"max-width:720px;margin:0 auto;\">' +\n  '<table style=\"width:100%;border-collapse:collapse;font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;font-size:14px;line-height:1.45;\">' +\n    '<tbody>' +\n    [\n      ['CoreID', $json.CoreID],\n      ['Name', [$json.FirstName, $json.LastName].filter(Boolean).join(\" \").trim()],\n      ['Email', $json.EmailAddress],\n      ['District', $json.DistrictName],\n      ['District URL', $json.DistrictURL],\n      ['DataMate Role', $json.DataMate_Role],\n      ['StaffTrac Role', $json.StaffTrac_Role],\n      ['AIMS Role', $json.AIMS_Role],\n      ['CD Role', $json.CD_Role],\n      ['Forms Role', $json.Forms_Role],\n      ['SafeSch Role', $json.SafeSch_Role],\n      ['SV Roles', $json.SV_Roles],\n    ]\n      .map(([k,v]) => (v ?? '').toString().trim()\n        ? `<tr>\n             <th style=\"text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid #eee;width:32%;\">${k}</th>\n             <td style=\"padding:8px 10px;border-bottom:1px solid #eee;\">${v}</td>\n           </tr>`\n        : ''\n      )\n      .filter(Boolean)\n      .join('') +\n    '</tbody>' +\n  '</table>' +\n'</div>'\n}}\n",
         "options": {
           "formTitle": ""
         }
@@ -116,8 +115,8 @@
       "type": "n8n-nodes-base.form",
       "typeVersion": 1,
       "position": [
-        640,
-        -16
+        240,
+        -80
       ],
       "id": "8a7c4f69-cee5-4a13-9240-b744440b0cd2",
       "name": "Form",
@@ -130,8 +129,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        208,
-        -16
+        240,
+        -272
       ],
       "id": "1f6889c4-658c-4e33-9400-58c44fbe6b08",
       "name": "Code"
@@ -143,8 +142,8 @@
       "type": "n8n-nodes-base.html",
       "typeVersion": 1.2,
       "position": [
-        432,
-        -16
+        464,
+        -272
       ],
       "id": "20f2649a-9fc9-44f3-9eef-ff2bab69fbd0",
       "name": "HTML"
@@ -166,6 +165,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-08-13T00:22:14.000Z",
-  "versionId": "ee31972c-806c-40cb-b682-af60e3fb79c8"
+  "updatedAt": "2025-10-17T06:19:19.000Z",
+  "versionId": "dec63d1c-e426-484b-8e21-54bd97d14e98"
 }
