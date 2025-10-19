@@ -1,11 +1,11 @@
 {
   "active": false,
   "connections": {
-    "Schedule Trigger": {
+    "When clicking ‘Execute workflow’": {
       "main": [
         [
           {
-            "node": "Get many items",
+            "node": "HTTP Request",
             "type": "main",
             "index": 0
           }
@@ -13,54 +13,36 @@
       ]
     }
   },
-  "createdAt": "2025-09-18T20:57:38.048Z",
-  "id": "H7zxBSbhX9zTBHuV",
+  "createdAt": "2025-10-19T07:20:37.209Z",
+  "id": "BK0lDl8Hygu1pbgn",
   "isArchived": false,
-  "meta": {
-    "templateCredsSetupCompleted": true
-  },
+  "meta": null,
   "name": "My workflow 4",
   "nodes": [
     {
-      "parameters": {
-        "rule": {
-          "interval": [
-            {
-              "field": "hours"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.scheduleTrigger",
-      "typeVersion": 1.2,
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
       "position": [
-        -432,
-        -32
+        0,
+        0
       ],
-      "id": "50478a88-5c6d-4934-9e19-dc48328a3a5b",
-      "name": "Schedule Trigger"
+      "id": "551e34b9-de2e-4a21-8feb-ea516680a4bf",
+      "name": "When clicking ‘Execute workflow’"
     },
     {
       "parameters": {
-        "resource": "custom",
-        "customResource": "stock.move",
-        "operation": "getAll",
+        "url": "https://www.limitless.ai/c/b9095f98-20f7-4d1f-99e3-78685956d9b2",
         "options": {}
       },
-      "type": "n8n-nodes-base.odoo",
-      "typeVersion": 1,
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
       "position": [
-        -224,
-        -32
+        208,
+        0
       ],
-      "id": "c84b1b4f-c1e8-4364-a5f8-7829f549e678",
-      "name": "Get many items",
-      "credentials": {
-        "odooApi": {
-          "id": "22",
-          "name": "Odoo (OdooBot)"
-        }
-      }
+      "id": "13c254da-388f-4fe0-a46c-399919ae59cd",
+      "name": "HTTP Request"
     }
   ],
   "pinData": {},
@@ -69,16 +51,16 @@
   },
   "shared": [
     {
-      "createdAt": "2025-09-18T20:57:38.055Z",
-      "updatedAt": "2025-09-18T20:57:38.055Z",
+      "createdAt": "2025-10-19T07:20:37.233Z",
+      "updatedAt": "2025-10-19T07:20:37.233Z",
       "role": "workflow:owner",
-      "workflowId": "H7zxBSbhX9zTBHuV",
+      "workflowId": "BK0lDl8Hygu1pbgn",
       "projectId": "3dtat9rk4vrp7A9f"
     }
   ],
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-18T20:57:38.048Z",
-  "versionId": "f4d7e96e-e665-4450-bd04-b3e093c49e1c"
+  "updatedAt": "2025-10-19T07:20:37.209Z",
+  "versionId": "7a14fdf9-81b9-4c45-aa13-40bae19e1161"
 }
