@@ -13,8 +13,8 @@
       ]
     }
   },
-  "createdAt": "2025-06-25T03:33:38.283Z",
-  "id": "CteMdMuZPnn0aSpZ",
+  "createdAt": "2025-06-25T03:33:38.282Z",
+  "id": "GmdDFtYOd6t0jx5l",
   "isArchived": true,
   "meta": null,
   "name": "My workflow 3",
@@ -60,13 +60,13 @@
       "createdAt": "2025-06-25T03:33:38.303Z",
       "updatedAt": "2025-06-25T03:33:38.303Z",
       "role": "workflow:owner",
-      "workflowId": "CteMdMuZPnn0aSpZ",
+      "workflowId": "GmdDFtYOd6t0jx5l",
       "projectId": "3dtat9rk4vrp7A9f"
     }
   ],
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-06-25T03:36:26.000Z",
-  "versionId": "077c6c8e-af19-47a4-8815-6d0e746e76f4"
+  "updatedAt": "2025-06-25T03:36:28.000Z",
+  "versionId": "c9240c73-8b44-4593-a2af-6e1459ee1d61"
 }
