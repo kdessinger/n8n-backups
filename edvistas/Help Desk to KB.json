@@ -61,7 +61,7 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1,
       "position": [
-        -340,
+        -336,
         80
       ]
     },
@@ -110,8 +110,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.1,
       "position": [
-        -120,
-        200
+        -128,
+        208
       ]
     },
     {
@@ -126,7 +126,7 @@
       "typeVersion": 1,
       "position": [
         -160,
-        -180
+        -176
       ]
     },
     {
@@ -140,8 +140,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        820,
-        200
+        832,
+        208
       ]
     },
     {
@@ -156,8 +156,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -420,
-        -20
+        -416,
+        -16
       ]
     },
     {
@@ -173,8 +173,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
-        -340,
-        280
+        -336,
+        288
       ],
       "webhookId": "1138a896-3e8c-4e5d-844d-e96c1784babb",
       "credentials": {
@@ -197,8 +197,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        100,
-        200
+        112,
+        208
       ],
       "alwaysOutputData": true,
       "credentials": {
@@ -268,8 +268,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        580,
-        200
+        592,
+        208
       ],
       "alwaysOutputData": true,
       "credentials": {
@@ -299,8 +299,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        340,
-        200
+        352,
+        208
       ],
       "alwaysOutputData": true,
       "credentials": {
@@ -337,19 +337,19 @@
       "name": "odoo"
     },
     {
+      "createdAt": "2025-10-01T20:36:22.691Z",
+      "updatedAt": "2025-10-01T20:36:22.691Z",
+      "id": "G9MFnVcJOjNgOebB",
+      "name": "draft"
+    },
+    {
       "createdAt": "2024-10-21T18:47:49.143Z",
       "updatedAt": "2024-10-21T18:47:49.143Z",
       "id": "MKghWnlF1ug1K8In",
       "name": "WebHook"
-    },
-    {
-      "createdAt": "2025-06-30T23:49:07.336Z",
-      "updatedAt": "2025-06-30T23:49:07.336Z",
-      "id": "myO8SC8CNjmtr6AI",
-      "name": "UC"
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-06-30T23:49:09.000Z",
-  "versionId": "38848a71-1fb4-4c3f-b93b-837f6c914662"
+  "updatedAt": "2025-10-21T15:27:56.000Z",
+  "versionId": "65cb4d7c-d2f9-41af-9fa6-9610acbba8b5"
 }
