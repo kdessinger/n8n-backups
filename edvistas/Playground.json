@@ -224,6 +224,17 @@
           }
         ]
       ]
+    },
+    "Load Globals": {
+      "main": [
+        [
+          {
+            "node": "Globals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2023-09-13T21:44:35.092Z",
@@ -1018,21 +1029,34 @@
         "operation": "get",
         "dataTableId": {
           "__rl": true,
-          "value": "8ezMva6eJoeZbfry",
+          "value": "xmc6gMgvj4vtbs4U",
           "mode": "list",
-          "cachedResultName": "Company Info",
-          "cachedResultUrl": "/projects/3dtat9rk4vrp7A9f/datatables/8ezMva6eJoeZbfry"
+          "cachedResultName": "Globals",
+          "cachedResultUrl": "/projects/3dtat9rk4vrp7A9f/datatables/xmc6gMgvj4vtbs4U"
         },
         "returnAll": true
       },
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        192,
-        688
+        96,
+        512
       ],
-      "id": "9033ca91-f0d3-4864-b7dc-e4765aa51645",
-      "name": "Get Data from DataTables"
+      "id": "b317b237-fbb4-4ddb-914b-3095c78370bf",
+      "name": "Load Globals"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Convert list of Name/Value pairs into a single object\nconst pivot = {};\nfor (const item of $input.all()) {\n  const { Name, Value } = item.json;\n  pivot[Name] = Value;\n}\nreturn [{ json: pivot }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        272,
+        512
+      ],
+      "id": "1cba26fb-3456-4ba3-b2c5-4bb12d0b9ae4",
+      "name": "Globals"
     }
   ],
   "pinData": {},
@@ -1051,6 +1075,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-10-17T05:10:05.000Z",
-  "versionId": "e98b850d-4987-40ab-b481-aacd1997ca1b"
+  "updatedAt": "2025-10-21T19:04:39.000Z",
+  "versionId": "8a8d4423-5040-4626-b78a-24a0e935b2c0"
 }
