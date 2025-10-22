@@ -292,8 +292,8 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -660,
-        -420
+        -656,
+        -416
       ],
       "id": "eeaa2ead-60f0-454f-b0c7-f7f7ee537897",
       "name": "When clicking ‘Test workflow’"
@@ -311,8 +311,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
-        -660,
-        -220
+        -656,
+        -224
       ],
       "id": "07b7b289-59d7-4c2f-bcaf-b52c4bee653e",
       "name": "Webhook",
@@ -344,8 +344,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -100,
-        -220
+        -96,
+        -224
       ],
       "id": "8d168c21-0af1-4221-8e98-052f24d31dbf",
       "name": "Get Sales Order",
@@ -400,8 +400,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -340,
-        -220
+        -336,
+        -224
       ],
       "id": "f3bb7273-f69c-4c62-a96f-2ffe35626ce9",
       "name": "Get Sales Order Line",
@@ -423,7 +423,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "position": [
         -400,
-        -600
+        -608
       ],
       "typeVersion": 1,
       "id": "15b1fa44-32ea-4d8b-84c8-a1c7b4cd7d4c",
@@ -438,8 +438,8 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        1940,
-        -600
+        1952,
+        -608
       ],
       "typeVersion": 1,
       "id": "3384d2c9-5166-4dbd-a519-d6dbd6bf0537",
@@ -464,7 +464,7 @@
       "typeVersion": 1,
       "position": [
         2240,
-        -440
+        -448
       ],
       "id": "3bcb2a92-de5f-4b44-b237-e46697c3c907",
       "name": "Set Delivery Date",
@@ -495,8 +495,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        2040,
-        -440
+        2048,
+        -448
       ],
       "id": "092448f1-977d-449f-aa3e-53a7f4cc09df",
       "name": "Set Delivered Qty",
@@ -516,8 +516,8 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -780,
-        -600
+        -784,
+        -608
       ],
       "typeVersion": 1,
       "id": "4437faa2-6ca5-4f19-b041-168a27f40557",
@@ -556,7 +556,7 @@
       "typeVersion": 1,
       "position": [
         560,
-        -220
+        -224
       ],
       "id": "283ee618-5cc2-4bb5-abd5-126b2c17b47f",
       "name": "Get Contact Info",
@@ -582,8 +582,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        760,
-        -220
+        768,
+        -224
       ],
       "id": "6a8d9306-57b2-4435-9879-43251f5d363c",
       "name": "Get State",
@@ -603,7 +603,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "position": [
         1440,
-        -600
+        -608
       ],
       "typeVersion": 1,
       "id": "69b44ba2-75d4-45fc-a459-7c8879dbcb93",
@@ -627,8 +627,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -680,
-        280
+        -688,
+        288
       ],
       "id": "487ca20e-0b78-458f-ba99-53e66ab571ba",
       "name": "Set Delivered Qty = 0",
@@ -641,15 +641,15 @@
     },
     {
       "parameters": {
-        "content": "## Update Odoo Records\n\n## 1) Populate First & Last name fields in the database\n## 2) Set Payment Terms to 'Immediate'\n## 2) Set TAG to 'PTA'\n## 3) Set Salesman to 'Pete Cooper'\n",
+        "content": "## Update Odoo Records\n\n## 1) Populate First & Last name fields in the database\n## 2) Set Payment Terms to 'Immediate'\n## 3) Set TAG to 'PTA'\n## 4) Set Salesman to 'Pete Cooper'\n",
         "height": 440,
         "width": 760,
         "color": 3
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -360,
-        -40
+        -368,
+        -48
       ],
       "typeVersion": 1,
       "id": "2997448b-0c61-4d92-a459-6cfe8bfe36d1",
@@ -693,7 +693,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1240,
+        1248,
         -240
       ],
       "id": "f4fbaf06-2b18-4ae5-9652-15ae876facdc",
@@ -712,8 +712,8 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
       "position": [
-        -660,
-        -20
+        -656,
+        -16
       ],
       "id": "2a2fea8d-9616-4de4-9580-7655dc727eb5",
       "name": "Schedule Trigger"
@@ -727,8 +727,8 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -780,
-        200
+        -784,
+        208
       ],
       "typeVersion": 1,
       "id": "10122d04-fe4e-4e34-969b-37962f57ccd8",
@@ -760,8 +760,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        360,
-        -220
+        368,
+        -224
       ],
       "id": "4e5c3704-6598-4d11-aa38-151ada1795c3",
       "name": "Payment",
@@ -801,8 +801,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        140,
-        -220
+        144,
+        -224
       ],
       "id": "ddd529db-5c01-42e6-b87a-67fea5e4c373",
       "name": "Payment Transaction",
@@ -835,8 +835,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -680,
-        460
+        -688,
+        464
       ],
       "id": "5352a6d1-db30-4b97-add7-c6626976017d",
       "name": "Turn off TEST acquirer ",
@@ -869,7 +869,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -680,
+        -688,
         640
       ],
       "id": "2c767fd7-6640-46bb-a051-706997ae71df",
@@ -895,8 +895,8 @@
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
       "position": [
-        940,
-        200
+        944,
+        208
       ],
       "id": "e2319e00-aaae-46e1-b3e9-9ba72fd7993f",
       "name": "Send Email",
@@ -916,8 +916,8 @@
       "type": "n8n-nodes-base.microsoftSql",
       "typeVersion": 1.1,
       "position": [
-        2580,
-        -60
+        2592,
+        -64
       ],
       "id": "50334cec-0a12-455c-ab9b-86b69f47c551",
       "name": "Verify Datamate Received",
@@ -959,7 +959,7 @@
       "typeVersion": 1,
       "position": [
         -320,
-        220
+        224
       ],
       "id": "b7901ccc-82c4-433a-8f87-3a8de588a6f1",
       "name": "Update Contacts",
@@ -997,7 +997,7 @@
       "typeVersion": 1,
       "position": [
         -80,
-        220
+        224
       ],
       "id": "9eed9037-6892-4a1e-be2e-d34141fb6b6f",
       "name": "Update Sales Order",
@@ -1027,8 +1027,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        180,
-        220
+        192,
+        224
       ],
       "id": "56a7a15f-a12f-44be-8871-ed6f7af6e06e",
       "name": "Update Sales Order Line",
@@ -1050,8 +1050,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        500,
-        200
+        512,
+        208
       ],
       "id": "6c02bb03-e9c0-4e5e-b265-422fb29ec73f",
       "name": "Get Email Template",
@@ -1071,8 +1071,8 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        440,
-        -40
+        448,
+        -48
       ],
       "typeVersion": 1,
       "id": "33955238-7512-4452-a066-cf673a41a8c1",
@@ -1087,8 +1087,8 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        1940,
-        -180
+        1952,
+        -176
       ],
       "typeVersion": 1,
       "id": "5371744a-4a3e-452f-a6ee-94966279b20f",
@@ -1129,8 +1129,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.2,
       "position": [
-        2040,
-        -60
+        2048,
+        -64
       ]
     },
     {
@@ -1168,8 +1168,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.2,
       "position": [
-        2420,
-        -440
+        2432,
+        -448
       ]
     },
     {
@@ -1182,8 +1182,8 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1,
       "position": [
-        2620,
-        -440
+        2624,
+        -448
       ]
     },
     {
@@ -1196,8 +1196,8 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1,
       "position": [
-        2220,
-        -60
+        2224,
+        -64
       ]
     },
     {
@@ -1208,7 +1208,7 @@
       "typeVersion": 1.2,
       "position": [
         720,
-        200
+        208
       ],
       "id": "6b1825ce-9a74-4c67-8ca7-1688f350d38f",
       "name": "HTML"
@@ -1231,7 +1231,7 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3,
       "position": [
-        1020,
+        1024,
         -560
       ],
       "id": "0abf86f0-8e1f-43da-9918-5c04c717e32f",
@@ -1275,6 +1275,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2025-05-07T21:30:46.000Z",
-  "versionId": "c4f70d84-1680-4c5b-abb5-e793b2931413"
+  "updatedAt": "2025-10-21T21:38:50.000Z",
+  "versionId": "351cf1a2-2b43-4ff8-991f-470ab9688394"
 }
