@@ -8,11 +8,6 @@
             "node": "Get Ready Work Orders from Odoo",
             "type": "main",
             "index": 0
-          },
-          {
-            "node": "Get row(s)",
-            "type": "main",
-            "index": 0
           }
         ]
       ]
@@ -50,26 +45,25 @@
         ]
       ]
     },
+    "Get row(s)": {
+      "main": [
+        []
+      ]
+    },
     "Get Ready Work Orders from Odoo": {
       "main": [
         [
           {
-            "node": "Merge",
-            "type": "main",
-            "index": 1
-          }
-        ]
-      ]
-    },
-    "Get row(s)": {
-      "main": [
-        [
-          {
-            "node": "Merge",
+            "node": "Get Order Tags",
             "type": "main",
             "index": 0
           }
         ]
+      ]
+    },
+    "Is this a renewal?": {
+      "main": [
+        []
       ]
     }
   },
@@ -183,7 +177,7 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        -768,
+        -1136,
         320
       ],
       "id": "2e445c00-ba48-4ce2-acb9-d08aa78c2642",
@@ -214,7 +208,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -560,
+        -912,
         320
       ],
       "id": "484a4bdd-19cb-4311-a94a-6a28143efeaf",
@@ -241,8 +235,8 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        -1088,
-        -336
+        -864,
+        -544
       ],
       "id": "3fd95d02-911c-4e56-ba8b-393b5773d973",
       "name": "Get row(s)"
@@ -274,7 +268,7 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        -1008,
+        -1360,
         320
       ],
       "id": "13641f60-4917-4512-a4da-7eb450cb0fb7",
@@ -288,8 +282,8 @@
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        -48,
-        304
+        -368,
+        320
       ],
       "id": "e5a09cba-89b3-42f0-89e9-166c39dfe736",
       "name": "Loop Over Items"
@@ -300,41 +294,10 @@
       "name": "Replace Me",
       "typeVersion": 1,
       "position": [
-        208,
-        368
+        -80,
+        352
       ],
       "id": "9d797729-a953-47ca-83be-3e145b23a290"
-    },
-    {
-      "parameters": {
-        "resource": "custom",
-        "customResource": "stock.move",
-        "operation": "getAll",
-        "returnAll": true,
-        "options": {},
-        "filterRequest": {
-          "filter": [
-            {
-              "fieldName": "state",
-              "value": "assigned"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.odoo",
-      "typeVersion": 1,
-      "position": [
-        -1088,
-        -160
-      ],
-      "id": "c84b1b4f-c1e8-4364-a5f8-7829f549e678",
-      "name": "Get Ready Work Orders from Odoo",
-      "credentials": {
-        "odooApi": {
-          "id": "22",
-          "name": "Odoo (OdooBot)"
-        }
-      }
     },
     {
       "parameters": {
@@ -348,7 +311,7 @@
       "type": "n8n-nodes-base.compareDatasets",
       "typeVersion": 2.3,
       "position": [
-        -320,
+        -656,
         288
       ],
       "id": "caeaa270-c44f-42b1-8de4-ffe8e2239541",
@@ -371,15 +334,15 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        -880,
-        -240
+        -624,
+        -544
       ],
       "id": "868ebbd0-7a35-4f07-9bb2-21922457c0dd",
       "name": "Merge"
     },
     {
       "parameters": {
-        "content": "## Helpers\n**Double click** to edit me. [Guide](https://docs.n8n.io/workflows/sticky-notes/)",
+        "content": "## Helpers",
         "height": 384,
         "width": 2496
       },
@@ -395,14 +358,14 @@
     {
       "parameters": {
         "content": "## Daily Check: Platfrom Orders\n**Double click** to edit me. [Guide](https://docs.n8n.io/workflows/sticky-notes/)",
-        "height": 704,
+        "height": 560,
         "width": 896,
         "color": 4
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
         -1312,
-        -512
+        -368
       ],
       "typeVersion": 1,
       "id": "cac87a0c-714f-4d56-8baf-c97a2b167e27",
@@ -417,7 +380,7 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -688,
+        -384,
         -560
       ],
       "typeVersion": 1,
@@ -519,6 +482,146 @@
       "typeVersion": 1,
       "id": "c81575bf-80c4-43cc-adcc-1bf8ae1e55df",
       "name": "Sticky Note8"
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "stock.picking",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {
+          "fieldsList": [
+            "id",
+            "name",
+            "tag_ids"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "state",
+              "value": "assigned"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        -1072,
+        -240
+      ],
+      "id": "0dc45755-9b75-4cd6-a038-857eae607b88",
+      "name": "Get Ready Work Orders from Odoo",
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "",
+                    "rightValue": "renewal",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    },
+                    "id": "6388be28-dc42-4edd-bffc-cee5c9c11799"
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        -1264,
+        -544
+      ],
+      "id": "1063b79b-9997-40a9-b327-71b9aa9a9fa3",
+      "name": "Is this a renewal?"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "16202347-b2f4-4462-b6f4-96d37550a773",
+              "leftValue": "",
+              "rightValue": "renewal",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -1072,
+        -544
+      ],
+      "id": "af1dd0c9-848c-472e-a08b-29af738a91f3",
+      "name": "Is it renewal?"
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "crm.tag",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {},
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "id",
+              "value": "={{ $json.tag_ids[0] }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        -864,
+        -240
+      ],
+      "id": "37e9d358-7e20-487b-a871-fa813c0c2362",
+      "name": "Get Order Tags",
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -548,6 +651,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-10-21T20:44:42.000Z",
-  "versionId": "ffb20df1-95db-4add-a2ff-90c8d710aa23"
+  "updatedAt": "2025-10-22T14:41:34.000Z",
+  "versionId": "4bbd553e-021e-43e8-85be-c54851a31d52"
 }
