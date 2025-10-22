@@ -105,8 +105,8 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
       "position": [
-        -1168,
-        -32
+        -1280,
+        -240
       ],
       "id": "50478a88-5c6d-4934-9e19-dc48328a3a5b",
       "name": "Schedule Trigger"
@@ -241,8 +241,8 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        -928,
-        -176
+        -1088,
+        -336
       ],
       "id": "3fd95d02-911c-4e56-ba8b-393b5773d973",
       "name": "Get row(s)"
@@ -324,8 +324,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -928,
-        -32
+        -1088,
+        -160
       ],
       "id": "c84b1b4f-c1e8-4364-a5f8-7829f549e678",
       "name": "Get Ready Work Orders from Odoo",
@@ -371,8 +371,8 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        -688,
-        -48
+        -880,
+        -240
       ],
       "id": "868ebbd0-7a35-4f07-9bb2-21922457c0dd",
       "name": "Merge"
@@ -381,11 +381,11 @@
       "parameters": {
         "content": "## Helpers\n**Double click** to edit me. [Guide](https://docs.n8n.io/workflows/sticky-notes/)",
         "height": 384,
-        "width": 1744
+        "width": 2496
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -1296,
+        -2000,
         224
       ],
       "typeVersion": 1,
@@ -401,7 +401,7 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -1296,
+        -1312,
         -512
       ],
       "typeVersion": 1,
@@ -410,15 +410,15 @@
     },
     {
       "parameters": {
-        "content": "## New onboarding ticket?",
-        "height": 224,
+        "content": "## New onboarding ticket?\n\nNew Tickets will be set to status='Ready' in the workorders (platform orders) section in Odoo.  \n\n1) Add a note that this workorder is being processed.\n2) What do we do next? ",
+        "height": 272,
         "width": 432,
-        "color": 2
+        "color": 7
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -384,
-        -512
+        -688,
+        -560
       ],
       "typeVersion": 1,
       "id": "b7f60f50-03f3-49ab-a7c8-ff1d4b4f0d06",
@@ -503,6 +503,22 @@
       "typeVersion": 1,
       "id": "fc6c4377-7495-4f80-920a-212efa3136e0",
       "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "content": "Workflow ID:  H7zxBSbhX9zTBHuV\nDiagram: https://nextcloud.edvistas.com/f/23444746\n\nThis task focuses on the technical setup phase of the Customer Onboarding process for Educational Vistas. The objective is to design and implement a structured, automated workflow that ensures every step of the onboarding sequence is executed efficiently, consistently, and with minimal manual intervention.\n\n🧩 Phase 1 – Process Mapping\nA detailed visual workflow will be created in Draw.io by Ray Schecter. This diagram will define the logical flow of all required onboarding tasks — from initial system configuration to client-specific integration points.\n\n🤖 Phase 2 – Automation Build\nOnce the visual workflow is finalized, Kenn Dessinger will develop an n8n automation pipeline to orchestrate the entire process.\n• Tasks capable of being automated will run autonomously.\n• Steps requiring manual review or decision-making will trigger a “human-in-the-loop” process, ensuring the workflow pauses and resumes seamlessly once the necessary input is provided.\n\n🛠️ Outcome\nA scalable, reliable onboarding workflow that reduces repetitive work, improves internal efficiency, and guarantees a smooth, standardized experience for every new client. This solution will serve as the technical backbone of the corporate onboarding process and can be expanded or modified as the company’s service offerings evolve.\n\n📌 Note: This task is part of the Corporate Workflows project and will integrate with other organizational processes over time.",
+        "height": 704,
+        "width": 656,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -2000,
+        -512
+      ],
+      "typeVersion": 1,
+      "id": "c81575bf-80c4-43cc-adcc-1bf8ae1e55df",
+      "name": "Sticky Note8"
     }
   ],
   "pinData": {},
@@ -532,6 +548,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-10-17T06:54:50.000Z",
-  "versionId": "c0b9ee82-abf4-4e57-9d1b-2d3e3fc73dae"
+  "updatedAt": "2025-10-21T20:44:42.000Z",
+  "versionId": "ffb20df1-95db-4add-a2ff-90c8d710aa23"
 }
