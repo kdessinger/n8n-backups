@@ -1,0 +1,127 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2025-10-21T20:04:11.288Z",
+  "id": "fyiKMDGc0n28bY1H",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "N8N to Odoo Sync",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -544,
+        -32
+      ],
+      "id": "0bf0afc5-0eba-49db-ac94-9bcbd8e86fe4",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "content": "## Output\n",
+        "height": 672
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        560,
+        -304
+      ],
+      "typeVersion": 1,
+      "id": "a0767dcd-4c65-400c-bf66-2fae4b16051a",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Process",
+        "height": 672,
+        "width": 896
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -352,
+        -304
+      ],
+      "typeVersion": 1,
+      "id": "4d460c62-ea3a-4ff8-a00c-e4bc205a18de",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Trigger",
+        "height": 672
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -608,
+        -304
+      ],
+      "typeVersion": 1,
+      "id": "8c68d863-08bd-428c-a24d-5eaf546ee65a",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "project.project",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        -256,
+        -160
+      ],
+      "id": "91a1b0f6-dd89-4832-a4ee-fec0283a2480",
+      "name": "Get many items",
+      "credentials": {
+        "odooApi": {
+          "id": "13",
+          "name": "Odoo-Stage (kdessinger)"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-21T20:04:11.304Z",
+      "updatedAt": "2025-10-21T20:04:11.304Z",
+      "role": "workflow:owner",
+      "workflowId": "fyiKMDGc0n28bY1H",
+      "projectId": "3dtat9rk4vrp7A9f"
+    }
+  ],
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2022-10-19T03:37:58.555Z",
+      "updatedAt": "2022-10-19T03:37:58.555Z",
+      "id": "2",
+      "name": "n8n"
+    },
+    {
+      "createdAt": "2022-12-09T05:43:36.104Z",
+      "updatedAt": "2022-12-09T05:43:36.104Z",
+      "id": "12",
+      "name": "odoo"
+    },
+    {
+      "createdAt": "2025-10-21T20:04:29.696Z",
+      "updatedAt": "2025-10-21T20:04:29.696Z",
+      "id": "m5Ni7GBM0tPSORku",
+      "name": "sync"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-21T20:17:44.000Z",
+  "versionId": "74651b53-3d53-4c39-8b1b-f1bcaeb1cc5e"
+}
