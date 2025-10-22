@@ -13,6 +13,11 @@
             "node": "Query Odoo Employees",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Load Globals",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -115,6 +120,28 @@
           }
         ]
       ]
+    },
+    "Load Globals": {
+      "main": [
+        [
+          {
+            "node": "Globals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Load Globals1": {
+      "main": [
+        [
+          {
+            "node": "Summarize",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2024-09-05T17:56:03.335Z",
@@ -132,7 +159,7 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        1120,
+        1104,
         416
       ]
     },
@@ -231,32 +258,32 @@
     {
       "parameters": {
         "operation": "create",
-        "dn": "=CN={{ $json.name }},CN=Users,DC=edvistas,DC=local",
+        "dn": "=CN={{ $('New Employees Found').item.json.name }},CN=Users,DC=edvistas,DC=local",
         "attributes": {
           "attribute": [
             {
               "id": "description",
-              "value": "={{ $json.job_title }}"
+              "value": "={{ $('New Employees Found').item.json.job_title }}"
             },
             {
               "id": "homeDirectory",
-              "value": "=\\\\nas\\shared\\{{ $json.cname }}\\"
+              "value": "=\\\\nas\\{{ $('New Employees Found').item.json.name }}"
             },
             {
               "id": "mail",
-              "value": "={{ $json.work_email }}"
+              "value": "={{ $('New Employees Found').item.json.work_email }}"
             },
             {
               "id": "sAMAccountName",
-              "value": "={{ $json.cname }}"
+              "value": "={{ $('New Employees Found').item.json.cname }}"
             },
             {
               "id": "title",
-              "value": "={{ $json.job_title }}"
+              "value": "={{ $('New Employees Found').item.json.job_title }}"
             },
             {
               "id": "userPrincipalName",
-              "value": "={{ $json.cname }}@EDVISTAS.LOCAL"
+              "value": "={{ $('New Employees Found').item.json.cname }}@edvistas.local"
             },
             {
               "id": "objectClass",
@@ -295,11 +322,10 @@
       ],
       "credentials": {
         "ldap": {
-          "id": "hFht3wq8gU3dyxS9",
-          "name": "LDAP (Backup DC)"
+          "id": "kMvso3rxAwRE3ZaH",
+          "name": "LDAP (Primary DC)"
         }
-      },
-      "disabled": true
+      }
     },
     {
       "parameters": {},
@@ -474,6 +500,89 @@
           "name": "SMTP (mx.gowls.com)"
         }
       }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "xmc6gMgvj4vtbs4U",
+          "mode": "list",
+          "cachedResultName": "Globals",
+          "cachedResultUrl": "/projects/3dtat9rk4vrp7A9f/datatables/xmc6gMgvj4vtbs4U"
+        },
+        "returnAll": true
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        1104,
+        0
+      ],
+      "id": "12c61769-7969-418a-824d-05f072232aba",
+      "name": "Load Globals"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Convert list of Name/Value pairs into a single object\nconst pivot = {};\nfor (const item of $input.all()) {\n  const { Name, Value } = item.json;\n  pivot[Name] = Value;\n}\nreturn [{ json: pivot }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1280,
+        0
+      ],
+      "id": "14fbb9fa-a00d-4ac6-ba37-561aa98586e8",
+      "name": "Globals"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "xmc6gMgvj4vtbs4U",
+          "mode": "list",
+          "cachedResultName": "Globals",
+          "cachedResultUrl": "/projects/3dtat9rk4vrp7A9f/datatables/xmc6gMgvj4vtbs4U"
+        },
+        "returnAll": true
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        1104,
+        -160
+      ],
+      "id": "3275b9e4-4af1-4435-a50f-65bb9eadbba7",
+      "name": "Load Globals1"
+    },
+    {
+      "parameters": {
+        "fieldsToSummarize": {
+          "values": [
+            {
+              "aggregation": "append",
+              "field": "Name"
+            },
+            {
+              "aggregation": "append",
+              "field": "Value"
+            }
+          ]
+        },
+        "fieldsToSplitBy": "Name, Value",
+        "options": {
+          "skipEmptySplitFields": true
+        }
+      },
+      "type": "n8n-nodes-base.summarize",
+      "typeVersion": 1.1,
+      "position": [
+        1280,
+        -160
+      ],
+      "id": "f7a7f567-e63a-433f-9d2e-d6e1a0f3f788",
+      "name": "Summarize"
     }
   ],
   "pinData": {},
@@ -500,6 +609,12 @@
       "name": "odoo"
     },
     {
+      "createdAt": "2025-10-21T16:05:40.346Z",
+      "updatedAt": "2025-10-21T16:05:40.346Z",
+      "id": "N5P5G4Hq8V8IUYHB",
+      "name": "globals"
+    },
+    {
       "createdAt": "2025-07-23T02:29:26.129Z",
       "updatedAt": "2025-07-23T02:29:26.129Z",
       "id": "g5iepAHhXxU1ewPn",
@@ -507,6 +622,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-10-21T15:57:31.000Z",
-  "versionId": "1369b47b-e935-4dc2-b129-097ddcfb6f54"
+  "updatedAt": "2025-10-21T20:39:40.000Z",
+  "versionId": "dab33435-26fa-45a6-a39d-18ce5d2c9bbe"
 }
