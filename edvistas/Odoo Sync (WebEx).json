@@ -493,8 +493,8 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 1,
       "position": [
-        -5100,
-        3080
+        -5104,
+        3088
       ]
     },
     {
@@ -513,8 +513,8 @@
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 1,
       "position": [
-        -4580,
-        2740
+        -4576,
+        2752
       ]
     },
     {
@@ -533,8 +533,8 @@
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 1,
       "position": [
-        -4380,
-        2740
+        -4384,
+        2752
       ]
     },
     {
@@ -548,7 +548,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -4820,
+        -4816,
         2640
       ]
     },
@@ -563,7 +563,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -4820,
+        -4816,
         2960
       ]
     },
@@ -578,7 +578,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -4600,
+        -4608,
         3280
       ]
     },
@@ -594,8 +594,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -4360,
-        3380
+        -4368,
+        3392
       ],
       "credentials": {
         "odooApi": {
@@ -616,8 +616,8 @@
       "type": "n8n-nodes-base.ciscoWebex",
       "typeVersion": 1,
       "position": [
-        -4780,
-        2740
+        -4784,
+        2752
       ],
       "credentials": {
         "ciscoWebexOAuth2Api": {
@@ -638,8 +638,8 @@
       "type": "n8n-nodes-base.ciscoWebex",
       "typeVersion": 1,
       "position": [
-        -4780,
-        3060
+        -4784,
+        3072
       ],
       "credentials": {
         "ciscoWebexOAuth2Api": {
@@ -664,8 +664,8 @@
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 1,
       "position": [
-        -4580,
-        3060
+        -4576,
+        3072
       ]
     },
     {
@@ -684,8 +684,8 @@
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 1,
       "position": [
-        -4380,
-        3060
+        -4384,
+        3072
       ]
     },
     {
@@ -697,8 +697,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        -4180,
-        3060
+        -4176,
+        3072
       ]
     },
     {
@@ -710,8 +710,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 1,
       "position": [
-        -4180,
-        2740
+        -4176,
+        2752
       ]
     },
     {
@@ -734,8 +734,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -3980,
-        3060
+        -3984,
+        3072
       ],
       "credentials": {
         "odooApi": {
@@ -801,8 +801,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -3980,
-        2740
+        -3984,
+        2752
       ],
       "credentials": {
         "odooApi": {
@@ -859,8 +859,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -3780,
-        3060
+        -3776,
+        3072
       ],
       "credentials": {
         "odooApi": {
@@ -890,7 +890,7 @@
       "typeVersion": 1,
       "position": [
         -4560,
-        3380
+        3392
       ],
       "credentials": {
         "odooApi": {
@@ -907,7 +907,7 @@
       "typeVersion": 1,
       "position": [
         -4800,
-        3380
+        3392
       ]
     },
     {
@@ -936,7 +936,7 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 1,
       "position": [
-        -5080,
+        -5088,
         5280
       ]
     },
@@ -957,7 +957,7 @@
       "typeVersion": 1,
       "position": [
         -4560,
-        4940
+        4944
       ]
     },
     {
@@ -976,8 +976,8 @@
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 1,
       "position": [
-        -4360,
-        4940
+        -4368,
+        4944
       ]
     },
     {
@@ -992,7 +992,7 @@
       "typeVersion": 1,
       "position": [
         -4800,
-        4840
+        4848
       ]
     },
     {
@@ -1007,7 +1007,7 @@
       "typeVersion": 1,
       "position": [
         -4800,
-        5160
+        5168
       ]
     },
     {
@@ -1021,8 +1021,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -4580,
-        5480
+        -4576,
+        5488
       ]
     },
     {
@@ -1037,8 +1037,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -4340,
-        5580
+        -4336,
+        5584
       ],
       "credentials": {
         "odooApi": {
@@ -1059,8 +1059,8 @@
       "type": "n8n-nodes-base.ciscoWebex",
       "typeVersion": 1,
       "position": [
-        -4760,
-        4940
+        -4768,
+        4944
       ],
       "credentials": {
         "ciscoWebexOAuth2Api": {
@@ -1081,8 +1081,8 @@
       "type": "n8n-nodes-base.ciscoWebex",
       "typeVersion": 1,
       "position": [
-        -4760,
-        5260
+        -4768,
+        5264
       ],
       "credentials": {
         "ciscoWebexOAuth2Api": {
@@ -1108,7 +1108,7 @@
       "typeVersion": 1,
       "position": [
         -4560,
-        5260
+        5264
       ]
     },
     {
@@ -1127,8 +1127,8 @@
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 1,
       "position": [
-        -4360,
-        5260
+        -4368,
+        5264
       ]
     },
     {
@@ -1141,7 +1141,7 @@
       "typeVersion": 1,
       "position": [
         -4160,
-        5260
+        5264
       ]
     },
     {
@@ -1154,7 +1154,7 @@
       "typeVersion": 1,
       "position": [
         -4160,
-        4940
+        4944
       ]
     },
     {
@@ -1177,8 +1177,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -3960,
-        5260
+        -3968,
+        5264
       ],
       "credentials": {
         "odooApi": {
@@ -1244,8 +1244,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -3960,
-        4940
+        -3968,
+        4944
       ],
       "credentials": {
         "odooApi": {
@@ -1303,7 +1303,7 @@
       "typeVersion": 1,
       "position": [
         -3760,
-        5260
+        5264
       ],
       "credentials": {
         "odooApi": {
@@ -1332,8 +1332,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -4540,
-        5580
+        -4544,
+        5584
       ],
       "credentials": {
         "odooApi": {
@@ -1349,8 +1349,8 @@
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        -4780,
-        5580
+        -4784,
+        5584
       ]
     },
     {
@@ -1379,8 +1379,8 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 1,
       "position": [
-        -5080,
-        4200
+        -5088,
+        4208
       ]
     },
     {
@@ -1400,7 +1400,7 @@
       "typeVersion": 1,
       "position": [
         -4560,
-        3860
+        3872
       ]
     },
     {
@@ -1419,8 +1419,8 @@
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 1,
       "position": [
-        -4360,
-        3860
+        -4368,
+        3872
       ]
     },
     {
@@ -1464,7 +1464,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -4580,
+        -4576,
         4400
       ]
     },
@@ -1480,8 +1480,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -4340,
-        4500
+        -4336,
+        4512
       ],
       "credentials": {
         "odooApi": {
@@ -1502,8 +1502,8 @@
       "type": "n8n-nodes-base.ciscoWebex",
       "typeVersion": 1,
       "position": [
-        -4760,
-        3860
+        -4768,
+        3872
       ],
       "credentials": {
         "ciscoWebexOAuth2Api": {
@@ -1524,8 +1524,8 @@
       "type": "n8n-nodes-base.ciscoWebex",
       "typeVersion": 1,
       "position": [
-        -4760,
-        4180
+        -4768,
+        4192
       ],
       "credentials": {
         "ciscoWebexOAuth2Api": {
@@ -1551,7 +1551,7 @@
       "typeVersion": 1,
       "position": [
         -4560,
-        4180
+        4192
       ]
     },
     {
@@ -1570,8 +1570,8 @@
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 1,
       "position": [
-        -4360,
-        4180
+        -4368,
+        4192
       ]
     },
     {
@@ -1584,7 +1584,7 @@
       "typeVersion": 1,
       "position": [
         -4160,
-        4180
+        4192
       ]
     },
     {
@@ -1597,7 +1597,7 @@
       "typeVersion": 1,
       "position": [
         -4160,
-        3860
+        3872
       ]
     },
     {
@@ -1620,8 +1620,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -3960,
-        4180
+        -3968,
+        4192
       ],
       "credentials": {
         "odooApi": {
@@ -1687,8 +1687,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -3960,
-        3860
+        -3968,
+        3872
       ],
       "credentials": {
         "odooApi": {
@@ -1746,7 +1746,7 @@
       "typeVersion": 1,
       "position": [
         -3760,
-        4180
+        4192
       ],
       "credentials": {
         "odooApi": {
@@ -1775,8 +1775,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -4540,
-        4500
+        -4544,
+        4512
       ],
       "credentials": {
         "odooApi": {
@@ -1792,8 +1792,8 @@
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        -4780,
-        4500
+        -4784,
+        4512
       ]
     },
     {
@@ -1806,8 +1806,8 @@
       "type": "n8n-nodes-base.ciscoWebexTrigger",
       "typeVersion": 1,
       "position": [
-        -5340,
-        4200
+        -5344,
+        4208
       ],
       "webhookId": "ca420c09-0e1a-4d4c-9e39-d8cd316e4e02",
       "credentials": {
@@ -1827,8 +1827,8 @@
       "type": "n8n-nodes-base.ciscoWebexTrigger",
       "typeVersion": 1,
       "position": [
-        -5340,
-        3080
+        -5344,
+        3088
       ],
       "webhookId": "50fb14dd-d8bf-464a-99fd-c21ed5cba687",
       "credentials": {
@@ -1848,7 +1848,7 @@
       "type": "n8n-nodes-base.ciscoWebexTrigger",
       "typeVersion": 1,
       "position": [
-        -5300,
+        -5296,
         5280
       ],
       "webhookId": "ab5d705f-bb47-421e-adfa-6530bc764dbe",
@@ -1909,9 +1909,15 @@
       "updatedAt": "2023-03-11T08:29:05.672Z",
       "id": "25",
       "name": "WebEx"
+    },
+    {
+      "createdAt": "2025-10-21T20:04:29.696Z",
+      "updatedAt": "2025-10-21T20:04:29.696Z",
+      "id": "m5Ni7GBM0tPSORku",
+      "name": "sync"
     }
   ],
   "triggerCount": 3,
-  "updatedAt": "2025-10-13T15:49:36.000Z",
-  "versionId": "11dd3269-4b3e-4588-9e30-a0082cd4a500"
+  "updatedAt": "2025-10-21T20:18:56.000Z",
+  "versionId": "7293cf04-c780-41ae-a289-881cb29d8145"
 }
