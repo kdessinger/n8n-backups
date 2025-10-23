@@ -116,21 +116,6 @@
     },
     {
       "parameters": {
-        "content": "# Helpdesk Ticket Webhook\n#### This workflow will create/modify/delete helpdesk tickets in odoo. \n\nField List:\n- Title\n- Message\n- Priority\n- Emojis (array)\n- ClickURL\n- Channel",
-        "height": 322.2741444093105,
-        "width": 564.3102216985873
-      },
-      "id": "63155dda-0b7d-44c9-8003-3a29d0b732d6",
-      "name": "Sticky Note",
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        -160,
-        -176
-      ]
-    },
-    {
-      "parameters": {
         "respondWith": "text",
         "responseBody": "Help Desk Ticket Created!",
         "options": {}
@@ -309,6 +294,21 @@
           "name": "Odoo (Administrator)"
         }
       }
+    },
+    {
+      "parameters": {
+        "content": "# 🧠 Extract FAQ's from HelpDesk Tickets\n\nThis workflow reviews incoming helpdesk tickets to identify common questions and produce concise question-and-answer pairs for the knowledgebase. It automates extraction, validation, and formatting of FAQs for publication.\n\n## 🔔 Trigger\n New or updated helpdesk tickets flagged for knowledgebase review.\n\n## 🧩 Steps\n* Scan selected tickets and extract candidate Q&A pairs\n* Validate and deduplicate entries against existing KB\n* Format and insert approved FAQs into the knowledgebase\n\n## 🎯 Outcome\n A curated set of validated FAQs added to the knowledgebase, improving self-service and reducing repeat tickets.\n\n### 📝 Note: Ensure sensitive or PII-containing content is redacted before publication.",
+        "height": 528,
+        "width": 1024
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -112,
+        -352
+      ],
+      "typeVersion": 1,
+      "id": "b09d34e0-4c98-4f2c-91e6-fc2eb71ae0ea",
+      "name": "Sticky Note"
     }
   ],
   "pinData": {},
@@ -350,6 +350,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-10-21T15:27:56.000Z",
-  "versionId": "65cb4d7c-d2f9-41af-9fa6-9610acbba8b5"
+  "updatedAt": "2025-10-23T04:27:35.000Z",
+  "versionId": "a723917a-cc87-4754-ae13-830a6fb856bd"
 }
