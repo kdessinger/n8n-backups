@@ -12,6 +12,32 @@
         ]
       ]
     },
+    "Get Tickets": {
+      "main": [
+        [
+          {
+            "node": "Get Messages",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Defaults": {
+      "main": [
+        []
+      ]
+    },
     "Webhook": {
       "main": [
         [
@@ -23,24 +49,50 @@
         ]
       ]
     },
-    "Get Tickets": {
+    "Get Messages": {
       "main": [
         [
           {
-            "node": "Set Tickets",
+            "node": "Get Tags",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 1
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
           }
         ]
       ]
     },
-    "Set Defaults": {
+    "Get Tags": {
       "main": [
         [
           {
-            "node": "Get Tickets",
+            "node": "Rename Keys",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Rename Keys": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 2
           }
         ]
       ]
@@ -125,8 +177,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        832,
-        208
+        -368,
+        544
       ]
     },
     {
@@ -144,6 +196,78 @@
         -416,
         -16
       ]
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "helpdesk.ticket",
+        "operation": "getAll",
+        "limit": 5,
+        "options": {
+          "fieldsList": [
+            "name",
+            "partner_id",
+            "person_name",
+            "priority",
+            "state",
+            "stage_id",
+            "ticket_type",
+            "tag_ids",
+            "subject_id",
+            "email",
+            "description",
+            "customer_comment",
+            "comment",
+            "color",
+            "message_partner_ids",
+            "message_ids",
+            "invoice_count",
+            "user_id"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "stage_id",
+              "value": "Closed"
+            },
+            {
+              "fieldName": "id",
+              "value": "2817"
+            }
+          ]
+        }
+      },
+      "id": "c1d2579b-3400-44a5-ade1-4cdde8a419af",
+      "name": "Get Tickets",
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        112,
+        208
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "odooApi": {
+          "id": "12",
+          "name": "Odoo (Administrator)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "# 🧠 Extract FAQ's from HelpDesk Tickets\n\nThis workflow reviews incoming helpdesk tickets to identify common questions and produce concise question-and-answer pairs for the knowledgebase. It automates extraction, validation, and formatting of FAQs for publication.\n\n## 🔔 Trigger\n New or updated helpdesk tickets flagged for knowledgebase review.\n\n## 🧩 Steps\n* Scan selected tickets and extract candidate Q&A pairs\n* Validate and deduplicate entries against existing KB\n* Format and insert approved FAQs into the knowledgebase\n\n## 🎯 Outcome\n A curated set of validated FAQs added to the knowledgebase, improving self-service and reducing repeat tickets.\n\n### 📝 Note: Ensure sensitive or PII-containing content is redacted before publication.",
+        "height": 528,
+        "width": 1024
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -112,
+        -352
+      ],
+      "typeVersion": 1,
+      "id": "b09d34e0-4c98-4f2c-91e6-fc2eb71ae0ea",
+      "name": "Sticky Note"
     },
     {
       "parameters": {
@@ -172,115 +296,42 @@
     {
       "parameters": {
         "resource": "custom",
-        "customResource": "helpdesk.ticket",
+        "customResource": "mail.message",
         "operation": "getAll",
-        "limit": 1,
-        "options": {}
-      },
-      "id": "c1d2579b-3400-44a5-ade1-4cdde8a419af",
-      "name": "Get Tickets",
-      "type": "n8n-nodes-base.odoo",
-      "typeVersion": 1,
-      "position": [
-        112,
-        208
-      ],
-      "alwaysOutputData": true,
-      "credentials": {
-        "odooApi": {
-          "id": "12",
-          "name": "Odoo (Administrator)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "resource": "custom",
-        "customResource": "helpdesk.ticket",
-        "fieldsToCreateOrUpdate": {
-          "fields": [
+        "returnAll": true,
+        "options": {
+          "fieldsList": [
+            "subject",
+            "body",
+            "email_from",
+            "author_id",
+            "message_type",
+            "record_name",
+            "parent_id",
+            "subtype_id",
+            "res_id"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
             {
-              "fieldName": "name"
+              "fieldName": "id",
+              "value": "={{ $json.message_ids }}"
             },
             {
-              "fieldName": "email_subject"
+              "fieldName": "subtype_id",
+              "operator": "notEqual",
+              "value": "={{ false }}"
             },
             {
-              "fieldName": "company_id",
-              "fieldValue": "1"
-            },
-            {
-              "fieldName": "state"
-            },
-            {
-              "fieldName": "ticket_type"
-            },
-            {
-              "fieldName": "team_id"
-            },
-            {
-              "fieldName": "team_head"
-            },
-            {
-              "fieldName": "subject_id"
-            },
-            {
-              "fieldName": "tag_ids"
-            },
-            {
-              "fieldName": "priority"
-            },
-            {
-              "fieldName": "partner_id"
-            },
-            {
-              "fieldName": "person_name"
-            },
-            {
-              "fieldName": "email"
-            },
-            {
-              "fieldName": "mobile_no"
-            },
-            {
-              "fieldName": "description"
+              "fieldName": "message_type",
+              "value": "email"
             }
           ]
         }
       },
-      "id": "2af472d2-74d2-4f7b-8d5b-2188ae07079a",
-      "name": "Create Ticket",
-      "type": "n8n-nodes-base.odoo",
-      "typeVersion": 1,
-      "position": [
-        592,
-        208
-      ],
-      "alwaysOutputData": true,
-      "credentials": {
-        "odooApi": {
-          "id": "12",
-          "name": "Odoo (Administrator)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "resource": "custom",
-        "customResource": "helpdesk.ticket",
-        "operation": "update",
-        "customResourceId": "={{ $json.id }}",
-        "fieldsToCreateOrUpdate": {
-          "fields": [
-            {
-              "fieldName": "category_bool",
-              "fieldValue": "true"
-            }
-          ]
-        }
-      },
-      "id": "3b627001-eb17-4303-9665-95612ae3b31f",
-      "name": "Set Tickets",
+      "id": "4b6191f1-8df9-4c0a-b4f8-40ca6f66c1f2",
+      "name": "Get Messages",
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
@@ -297,18 +348,101 @@
     },
     {
       "parameters": {
-        "content": "# 🧠 Extract FAQ's from HelpDesk Tickets\n\nThis workflow reviews incoming helpdesk tickets to identify common questions and produce concise question-and-answer pairs for the knowledgebase. It automates extraction, validation, and formatting of FAQs for publication.\n\n## 🔔 Trigger\n New or updated helpdesk tickets flagged for knowledgebase review.\n\n## 🧩 Steps\n* Scan selected tickets and extract candidate Q&A pairs\n* Validate and deduplicate entries against existing KB\n* Format and insert approved FAQs into the knowledgebase\n\n## 🎯 Outcome\n A curated set of validated FAQs added to the knowledgebase, improving self-service and reducing repeat tickets.\n\n### 📝 Note: Ensure sensitive or PII-containing content is redacted before publication.",
-        "height": 528,
-        "width": 1024
+        "resource": "custom",
+        "customResource": "helpdesk.tags",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {
+          "fieldsList": [
+            "name"
+          ]
+        },
+        "filterRequest": {
+          "filter": [
+            {
+              "fieldName": "id",
+              "value": "={{ $('Get Tickets').item.json.tag_ids }}"
+            }
+          ]
+        }
       },
-      "type": "n8n-nodes-base.stickyNote",
-      "position": [
-        -112,
-        -352
-      ],
+      "id": "029f3e0a-8aa2-4856-8efe-c91636edec5f",
+      "name": "Get Tags",
+      "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
-      "id": "b09d34e0-4c98-4f2c-91e6-fc2eb71ae0ea",
-      "name": "Sticky Note"
+      "position": [
+        560,
+        208
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "odooApi": {
+          "id": "12",
+          "name": "Odoo (Administrator)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combineBySql",
+        "numberInputs": 3,
+        "query": "SELECT * FROM input1\n  LEFT JOIN input2 ON input1.id = input2.res_id\n  LEFT JOIN input3 ON input1.tag_ids = input3.id",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        496,
+        496
+      ],
+      "id": "06377d4e-371c-424a-8b75-8bd8b1d55f50",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "numberInputs": 3,
+        "options": {
+          "clashHandling": {
+            "values": {
+              "resolveClash": "preferInput1",
+              "mergeMode": "shallowMerge"
+            }
+          },
+          "includeUnpaired": true
+        }
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        848,
+        464
+      ],
+      "id": "4ef0246e-d0f7-4b5e-b7f2-c39d66b030ab",
+      "name": "Merge1",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "keys": {
+          "key": [
+            {
+              "currentKey": "name",
+              "newKey": "tag"
+            }
+          ]
+        },
+        "additionalOptions": {}
+      },
+      "type": "n8n-nodes-base.renameKeys",
+      "typeVersion": 1,
+      "position": [
+        768,
+        208
+      ],
+      "id": "0a04bc9a-14c1-45b5-8acf-31a31e3ed32f",
+      "name": "Rename Keys"
     }
   ],
   "pinData": {},
@@ -350,6 +484,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-10-23T04:27:35.000Z",
-  "versionId": "a723917a-cc87-4754-ae13-830a6fb856bd"
+  "updatedAt": "2025-10-23T06:03:33.000Z",
+  "versionId": "96f10778-4aad-4eb2-9074-6e6ce899a185"
 }
