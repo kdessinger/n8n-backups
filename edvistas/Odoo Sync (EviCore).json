@@ -204,7 +204,7 @@
       "typeVersion": 1,
       "position": [
         1120,
-        740
+        752
       ],
       "notesInFlow": false,
       "notes": "Odoo will remove 4 hours from the EVI_Last_login field so use a +4 in the Time Zone to compensate."
@@ -224,8 +224,8 @@
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 1,
       "position": [
-        1320,
-        740
+        1328,
+        752
       ],
       "notesInFlow": false,
       "notes": "Odoo will remove 4 hours from the EVI_Last_login field so use a +4 in the Time Zone to compensate."
@@ -274,8 +274,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        2060,
-        540
+        2064,
+        544
       ],
       "credentials": {
         "odooApi": {
@@ -295,7 +295,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        420,
+        432,
         240
       ]
     },
@@ -307,7 +307,7 @@
       "typeVersion": 1,
       "position": [
         80,
-        980
+        992
       ]
     },
     {
@@ -327,7 +327,7 @@
       "typeVersion": 1.1,
       "position": [
         80,
-        760
+        768
       ],
       "notesInFlow": true,
       "notes": "every-hour (M-F 5AM-5PM)\n"
@@ -344,7 +344,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        20,
+        32,
         240
       ]
     },
@@ -379,7 +379,7 @@
       "typeVersion": 1,
       "position": [
         720,
-        520
+        528
       ],
       "credentials": {
         "odooApi": {
@@ -408,8 +408,8 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 2.1,
       "position": [
-        1720,
-        540
+        1728,
+        544
       ]
     },
     {
@@ -438,8 +438,8 @@
       "type": "n8n-nodes-base.itemLists",
       "typeVersion": 3,
       "position": [
-        1220,
-        1000
+        1232,
+        1008
       ]
     },
     {
@@ -458,8 +458,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.2,
       "position": [
-        460,
-        760
+        464,
+        768
       ]
     },
     {
@@ -491,7 +491,7 @@
       "typeVersion": 1,
       "position": [
         1280,
-        300
+        304
       ],
       "credentials": {
         "odooApi": {
@@ -535,8 +535,8 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 2.1,
       "position": [
-        1560,
-        860
+        1568,
+        864
       ]
     },
     {
@@ -550,7 +550,7 @@
       "typeVersion": 1.1,
       "position": [
         720,
-        760
+        768
       ],
       "credentials": {
         "microsoftSql": {
@@ -570,7 +570,7 @@
       "type": "n8n-nodes-base.microsoftSql",
       "typeVersion": 1.1,
       "position": [
-        940,
+        944,
         880
       ],
       "credentials": {
@@ -591,7 +591,7 @@
       "typeVersion": 1.1,
       "position": [
         960,
-        1160
+        1168
       ],
       "credentials": {
         "microsoftSql": {
@@ -611,7 +611,7 @@
       "typeVersion": 1.1,
       "position": [
         720,
-        1020
+        1024
       ],
       "credentials": {
         "microsoftSql": {
@@ -917,9 +917,15 @@
       "updatedAt": "2023-09-29T18:54:01.860Z",
       "id": "Sl85YMFRpXn5g4Db",
       "name": "evicore"
+    },
+    {
+      "createdAt": "2025-10-21T20:04:29.696Z",
+      "updatedAt": "2025-10-21T20:04:29.696Z",
+      "id": "m5Ni7GBM0tPSORku",
+      "name": "sync"
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2025-07-15T13:55:01.000Z",
-  "versionId": "913e2436-cf10-44ea-ba6b-585f0758f897"
+  "updatedAt": "2025-10-23T15:02:49.000Z",
+  "versionId": "95879e92-212c-4f16-8a2c-4ebd1c4a540d"
 }
