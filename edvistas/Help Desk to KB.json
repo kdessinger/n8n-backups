@@ -5,7 +5,7 @@
       "main": [
         [
           {
-            "node": "Set Defaults",
+            "node": "Get Tickets",
             "type": "main",
             "index": 0
           }
@@ -21,11 +21,6 @@
             "index": 0
           },
           {
-            "node": "Merge1",
-            "type": "main",
-            "index": 0
-          },
-          {
             "node": "Merge",
             "type": "main",
             "index": 0
@@ -35,7 +30,13 @@
     },
     "Set Defaults": {
       "main": [
-        []
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Webhook": {
@@ -58,11 +59,6 @@
             "index": 0
           },
           {
-            "node": "Merge1",
-            "type": "main",
-            "index": 1
-          },
-          {
             "node": "Merge",
             "type": "main",
             "index": 1
@@ -74,23 +70,7 @@
       "main": [
         [
           {
-            "node": "Rename Keys",
-            "type": "main",
-            "index": 0
-          },
-          {
             "node": "Merge",
-            "type": "main",
-            "index": 2
-          }
-        ]
-      ]
-    },
-    "Rename Keys": {
-      "main": [
-        [
-          {
-            "node": "Merge1",
             "type": "main",
             "index": 2
           }
@@ -113,8 +93,8 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1,
       "position": [
-        -336,
-        80
+        -320,
+        208
       ]
     },
     {
@@ -162,8 +142,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.1,
       "position": [
-        -128,
-        208
+        -496,
+        -272
       ]
     },
     {
@@ -177,8 +157,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        -368,
-        544
+        -320,
+        -272
       ]
     },
     {
@@ -233,6 +213,7 @@
             },
             {
               "fieldName": "id",
+              "operator": "greaterThen",
               "value": "2817"
             }
           ]
@@ -243,7 +224,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        112,
+        64,
         208
       ],
       "alwaysOutputData": true,
@@ -282,8 +263,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
-        -336,
-        288
+        -688,
+        -272
       ],
       "webhookId": "1138a896-3e8c-4e5d-844d-e96c1784babb",
       "credentials": {
@@ -361,7 +342,7 @@
           "filter": [
             {
               "fieldName": "id",
-              "value": "={{ $('Get Tickets').item.json.tag_ids }}"
+              "value": "={{ $('Get Tickets').item.json.tag_ids.all() }}"
             }
           ]
         }
@@ -371,7 +352,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        560,
+        624,
         208
       ],
       "alwaysOutputData": true,
@@ -392,57 +373,46 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        496,
-        496
+        1008,
+        -208
       ],
       "id": "06377d4e-371c-424a-8b75-8bd8b1d55f50",
       "name": "Merge"
     },
     {
       "parameters": {
-        "mode": "combine",
-        "combineBy": "combineByPosition",
-        "numberInputs": 3,
-        "options": {
-          "clashHandling": {
-            "values": {
-              "resolveClash": "preferInput1",
-              "mergeMode": "shallowMerge"
-            }
-          },
-          "includeUnpaired": true
-        }
+        "operation": "executeQuery",
+        "query": "SELECT\n  t.id,\n  t.name,\n  array_remove(array_agg(DISTINCT tg.name), NULL) AS tags,\n  jsonb_agg(\n    jsonb_build_object(\n      'date', m.date,\n      'author_id', m.author_id,\n      'type', m.message_type,\n      'body', m.body\n    ) ORDER BY m.date\n  ) AS messages\nFROM helpdesk_ticket t\nLEFT JOIN helpdesk_tags_helpdesk_ticket_rel rel\n  ON rel.helpdesk_ticket_id = t.id\nLEFT JOIN helpdesk_tags tg\n  ON tg.id = rel.helpdesk_tags_id\nLEFT JOIN mail_message m\n  ON m.model = 'helpdesk.ticket'\n  AND m.res_id = t.id\n  AND m.message_type IN ('comment', 'email')\nWHERE t.write_date > now() - interval '7 days'\nGROUP BY t.id;\n",
+        "options": {}
       },
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 3,
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
       "position": [
-        848,
+        432,
         464
       ],
-      "id": "4ef0246e-d0f7-4b5e-b7f2-c39d66b030ab",
-      "name": "Merge1",
-      "alwaysOutputData": false
+      "id": "4dbc8119-e5aa-4ed7-80e2-3ee3b6bfcd71",
+      "name": "Execute a SQL query",
+      "credentials": {
+        "postgres": {
+          "id": "QuVSWo9jJJvmCuDA",
+          "name": "Odoo-Production"
+        }
+      }
     },
     {
       "parameters": {
-        "keys": {
-          "key": [
-            {
-              "currentKey": "name",
-              "newKey": "tag"
-            }
-          ]
-        },
-        "additionalOptions": {}
+        "authentication": "genericCredentialType",
+        "options": {}
       },
-      "type": "n8n-nodes-base.renameKeys",
-      "typeVersion": 1,
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
       "position": [
-        768,
-        208
+        192,
+        464
       ],
-      "id": "0a04bc9a-14c1-45b5-8acf-31a31e3ed32f",
-      "name": "Rename Keys"
+      "id": "8d64d4ff-ff52-46cc-a78e-ca663643c8b7",
+      "name": "HTTP Request"
     }
   ],
   "pinData": {},
@@ -484,6 +454,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-10-23T06:03:33.000Z",
-  "versionId": "96f10778-4aad-4eb2-9074-6e6ce899a185"
+  "updatedAt": "2025-10-23T21:18:49.000Z",
+  "versionId": "7c183af1-06c1-4e57-948c-f40801b0281f"
 }
