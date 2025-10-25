@@ -40,7 +40,7 @@
       "main": [
         [
           {
-            "node": "Send Approval Email",
+            "node": "Loop Over Items",
             "type": "main",
             "index": 0
           }
@@ -118,7 +118,8 @@
             "type": "main",
             "index": 0
           }
-        ]
+        ],
+        []
       ]
     },
     "Load Globals": {
@@ -137,6 +138,24 @@
         [
           {
             "node": "Summarize",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "End",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send Approval Email",
             "type": "main",
             "index": 0
           }
@@ -198,8 +217,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        2016,
-        80
+        1712,
+        32
       ]
     },
     {
@@ -251,7 +270,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        2016,
+        1984,
         496
       ]
     },
@@ -286,28 +305,8 @@
               "value": "={{ $('New Employees Found').item.json.cname }}@edvistas.local"
             },
             {
-              "id": "objectClass",
-              "value": "person"
-            },
-            {
-              "id": "objectClass",
-              "value": "user"
-            },
-            {
-              "id": "objectClass",
-              "value": "organizationalPerson"
-            },
-            {
-              "id": "objectClass",
-              "value": "posixAccount"
-            },
-            {
-              "id": "objectClass",
-              "value": "systemQuotas"
-            },
-            {
-              "id": "objectClass",
-              "value": "top"
+              "id": "password",
+              "value": "Changeme2025!"
             }
           ]
         }
@@ -317,8 +316,8 @@
       "type": "n8n-nodes-base.ldap",
       "typeVersion": 1,
       "position": [
-        2656,
-        368
+        2864,
+        176
       ],
       "credentials": {
         "ldap": {
@@ -332,8 +331,8 @@
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        2656,
-        608
+        2848,
+        416
       ],
       "id": "aa6b6247-bf0d-45cf-acef-aac36397722e",
       "name": "Not Approved"
@@ -366,8 +365,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        2432,
-        496
+        2656,
+        320
       ],
       "id": "a9b36079-7d0d-46df-a4e4-2ba62ef5a586",
       "name": "Approval"
@@ -429,7 +428,7 @@
       "typeVersion": 1,
       "position": [
         1376,
-        208
+        192
       ],
       "retryOnFail": false,
       "credentials": {
@@ -488,8 +487,8 @@
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
       "position": [
-        2224,
-        496
+        2464,
+        560
       ],
       "id": "c6780522-6526-49fe-bfaf-fdae0618d252",
       "name": "Send Approval Email",
@@ -499,7 +498,8 @@
           "id": "27",
           "name": "SMTP (mx.gowls.com)"
         }
-      }
+      },
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -583,6 +583,66 @@
       ],
       "id": "f7a7f567-e63a-433f-9d2e-d6e1a0f3f788",
       "name": "Summarize"
+    },
+    {
+      "parameters": {
+        "options": {
+          "reset": false
+        }
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        2224,
+        496
+      ],
+      "id": "49cde485-ba34-41a6-bdd8-24f3e45c85c5",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        2384,
+        336
+      ],
+      "id": "48a01f31-eab4-457c-838e-c1d46a7cb00a",
+      "name": "End"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "454c3e6b-3a57-4e75-8434-d67c0ac431f7",
+              "leftValue": "",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2672,
+        640
+      ],
+      "id": "6eded603-d2e5-4d23-a600-60f3c77d7b13",
+      "name": "If"
     }
   ],
   "pinData": {},
@@ -622,6 +682,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-10-21T20:39:40.000Z",
-  "versionId": "dab33435-26fa-45a6-a39d-18ce5d2c9bbe"
+  "updatedAt": "2025-10-24T19:07:03.000Z",
+  "versionId": "82ab0a53-af28-4cf3-bed5-b1f981edc842"
 }
