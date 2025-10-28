@@ -411,8 +411,8 @@
   },
   "shared": [
     {
-      "createdAt": "2023-07-26T20:38:53.167Z",
       "updatedAt": "2023-07-26T20:38:53.167Z",
+      "createdAt": "2023-07-26T20:38:53.167Z",
       "role": "workflow:owner",
       "workflowId": "86pPkz1Uw2GOBm5w",
       "projectId": "3dtat9rk4vrp7A9f"
