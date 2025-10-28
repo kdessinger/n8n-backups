@@ -213,8 +213,8 @@
   "settings": {},
   "shared": [
     {
-      "createdAt": "2023-03-03T15:26:40.972Z",
       "updatedAt": "2023-03-03T15:26:40.972Z",
+      "createdAt": "2023-03-03T15:26:40.972Z",
       "role": "workflow:owner",
       "workflowId": "28",
       "projectId": "3dtat9rk4vrp7A9f"
@@ -223,14 +223,14 @@
   "staticData": null,
   "tags": [
     {
-      "createdAt": "2022-10-19T03:37:58.555Z",
       "updatedAt": "2022-10-19T03:37:58.555Z",
+      "createdAt": "2022-10-19T03:37:58.555Z",
       "id": "2",
       "name": "n8n"
     },
     {
-      "createdAt": "2023-06-10T20:29:40.879Z",
       "updatedAt": "2023-06-10T20:29:40.879Z",
+      "createdAt": "2023-06-10T20:29:40.879Z",
       "id": "34",
       "name": "system"
     }
