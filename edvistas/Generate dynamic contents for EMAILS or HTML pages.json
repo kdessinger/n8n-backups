@@ -218,8 +218,8 @@
   "settings": null,
   "shared": [
     {
-      "createdAt": "2025-06-09T22:32:15.554Z",
       "updatedAt": "2025-06-09T22:32:15.554Z",
+      "createdAt": "2025-06-09T22:32:15.554Z",
       "role": "workflow:owner",
       "workflowId": "7DBaB54eeNK1CJFq",
       "projectId": "3dtat9rk4vrp7A9f"
