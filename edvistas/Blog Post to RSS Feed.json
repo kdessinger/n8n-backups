@@ -342,8 +342,8 @@
   "settings": {},
   "shared": [
     {
-      "createdAt": "2023-03-15T14:22:38.464Z",
       "updatedAt": "2023-03-15T14:22:38.464Z",
+      "createdAt": "2023-03-15T14:22:38.464Z",
       "role": "workflow:owner",
       "workflowId": "32",
       "projectId": "3dtat9rk4vrp7A9f"
@@ -352,8 +352,8 @@
   "staticData": null,
   "tags": [
     {
-      "createdAt": "2023-06-10T20:20:06.155Z",
       "updatedAt": "2023-06-10T20:20:06.155Z",
+      "createdAt": "2023-06-10T20:20:06.155Z",
       "id": "32",
       "name": "done"
     }
