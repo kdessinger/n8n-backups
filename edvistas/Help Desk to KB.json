@@ -5,23 +5,7 @@
       "main": [
         [
           {
-            "node": "Get Tickets",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Get Tickets": {
-      "main": [
-        [
-          {
-            "node": "Get Messages",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Merge",
+            "node": "Get Helpdesk Tickets",
             "type": "main",
             "index": 0
           }
@@ -50,11 +34,27 @@
         ]
       ]
     },
-    "Get Messages": {
+    "Get Helpdesk Tickets": {
       "main": [
         [
           {
-            "node": "Get Tags",
+            "node": "Get Ticket Messages",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Ticket Messages": {
+      "main": [
+        [
+          {
+            "node": "Get Ticket Tags",
             "type": "main",
             "index": 0
           },
@@ -66,7 +66,7 @@
         ]
       ]
     },
-    "Get Tags": {
+    "Get Ticket Tags": {
       "main": [
         [
           {
@@ -142,8 +142,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.1,
       "position": [
-        -496,
-        -272
+        -432,
+        528
       ]
     },
     {
@@ -157,8 +157,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        -320,
-        -272
+        -272,
+        528
       ]
     },
     {
@@ -176,6 +176,96 @@
         -416,
         -16
       ]
+    },
+    {
+      "parameters": {
+        "content": "# 🧠 Extract FAQ's from HelpDesk Tickets\n\nThis workflow reviews incoming helpdesk tickets to identify common questions and produce concise question-and-answer pairs for the knowledgebase. It automates extraction, validation, and formatting of FAQs for publication.\n\n## 🔔 Trigger\n New or updated helpdesk tickets flagged for knowledgebase review.\n\n## 🧩 Steps\n* Scan selected tickets and extract candidate Q&A pairs\n* Validate and deduplicate entries against existing KB\n* Format and insert approved FAQs into the knowledgebase\n\n## 🎯 Outcome\n A curated set of validated FAQs added to the knowledgebase, improving self-service and reducing repeat tickets.\n\n### 📝 Note: Ensure sensitive or PII-containing content is redacted before publication.",
+        "height": 528,
+        "width": 1024
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -112,
+        -352
+      ],
+      "typeVersion": 1,
+      "id": "b09d34e0-4c98-4f2c-91e6-fc2eb71ae0ea",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "helpdesk",
+        "authentication": "headerAuth",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "75dcc732-ff78-4abc-98d0-3c23f318a92d",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -624,
+        528
+      ],
+      "webhookId": "1138a896-3e8c-4e5d-844d-e96c1784babb",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "os5m1l0SgTiVl18p",
+          "name": "N8N Bearer Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combineBySql",
+        "numberInputs": 3,
+        "query": "SELECT * FROM input1\n  LEFT JOIN input2 ON input1.id = input2.res_id\n  LEFT JOIN input3 ON input1.tag_ids = input3.id",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -496,
+        -240
+      ],
+      "id": "06377d4e-371c-424a-8b75-8bd8b1d55f50",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT\n  t.id,\n  t.name,\n  array_remove(array_agg(DISTINCT tg.name), NULL) AS tags,\n  jsonb_agg(\n    jsonb_build_object(\n      'date', m.date,\n      'author_id', m.author_id,\n      'type', m.message_type,\n      'body', m.body\n    ) ORDER BY m.date\n  ) AS messages\nFROM helpdesk_ticket t\nLEFT JOIN helpdesk_tags_helpdesk_ticket_rel rel\n  ON rel.helpdesk_ticket_id = t.id\nLEFT JOIN helpdesk_tags tg\n  ON tg.id = rel.helpdesk_tags_id\nLEFT JOIN mail_message m\n  ON m.model = 'helpdesk.ticket'\n  AND m.res_id = t.id\n  AND m.message_type IN ('comment', 'email')\nWHERE t.write_date > now() - interval '7 days'\nGROUP BY t.id;\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        432,
+        464
+      ],
+      "id": "4dbc8119-e5aa-4ed7-80e2-3ee3b6bfcd71",
+      "name": "Execute a SQL query",
+      "credentials": {
+        "postgres": {
+          "id": "QuVSWo9jJJvmCuDA",
+          "name": "Odoo-Production"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "genericCredentialType",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        192,
+        464
+      ],
+      "id": "8d64d4ff-ff52-46cc-a78e-ca663643c8b7",
+      "name": "HTTP Request"
     },
     {
       "parameters": {
@@ -220,7 +310,7 @@
         }
       },
       "id": "c1d2579b-3400-44a5-ade1-4cdde8a419af",
-      "name": "Get Tickets",
+      "name": "Get Helpdesk Tickets",
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
@@ -232,45 +322,6 @@
         "odooApi": {
           "id": "12",
           "name": "Odoo (Administrator)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "content": "# 🧠 Extract FAQ's from HelpDesk Tickets\n\nThis workflow reviews incoming helpdesk tickets to identify common questions and produce concise question-and-answer pairs for the knowledgebase. It automates extraction, validation, and formatting of FAQs for publication.\n\n## 🔔 Trigger\n New or updated helpdesk tickets flagged for knowledgebase review.\n\n## 🧩 Steps\n* Scan selected tickets and extract candidate Q&A pairs\n* Validate and deduplicate entries against existing KB\n* Format and insert approved FAQs into the knowledgebase\n\n## 🎯 Outcome\n A curated set of validated FAQs added to the knowledgebase, improving self-service and reducing repeat tickets.\n\n### 📝 Note: Ensure sensitive or PII-containing content is redacted before publication.",
-        "height": 528,
-        "width": 1024
-      },
-      "type": "n8n-nodes-base.stickyNote",
-      "position": [
-        -112,
-        -352
-      ],
-      "typeVersion": 1,
-      "id": "b09d34e0-4c98-4f2c-91e6-fc2eb71ae0ea",
-      "name": "Sticky Note"
-    },
-    {
-      "parameters": {
-        "httpMethod": "POST",
-        "path": "helpdesk",
-        "authentication": "headerAuth",
-        "responseMode": "responseNode",
-        "options": {}
-      },
-      "id": "75dcc732-ff78-4abc-98d0-3c23f318a92d",
-      "name": "Webhook",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2,
-      "position": [
-        -688,
-        -272
-      ],
-      "webhookId": "1138a896-3e8c-4e5d-844d-e96c1784babb",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "os5m1l0SgTiVl18p",
-          "name": "N8N Bearer Token"
         }
       }
     },
@@ -312,7 +363,7 @@
         }
       },
       "id": "4b6191f1-8df9-4c0a-b4f8-40ca6f66c1f2",
-      "name": "Get Messages",
+      "name": "Get Ticket Messages",
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
@@ -342,13 +393,13 @@
           "filter": [
             {
               "fieldName": "id",
-              "value": "={{ $('Get Tickets').item.json.tag_ids.all() }}"
+              "value": "={{ $('Get Helpdesk Tickets').item.json.tag_ids.all() }}"
             }
           ]
         }
       },
       "id": "029f3e0a-8aa2-4856-8efe-c91636edec5f",
-      "name": "Get Tags",
+      "name": "Get Ticket Tags",
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
@@ -362,57 +413,6 @@
           "name": "Odoo (Administrator)"
         }
       }
-    },
-    {
-      "parameters": {
-        "mode": "combineBySql",
-        "numberInputs": 3,
-        "query": "SELECT * FROM input1\n  LEFT JOIN input2 ON input1.id = input2.res_id\n  LEFT JOIN input3 ON input1.tag_ids = input3.id",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 3.2,
-      "position": [
-        1008,
-        -208
-      ],
-      "id": "06377d4e-371c-424a-8b75-8bd8b1d55f50",
-      "name": "Merge"
-    },
-    {
-      "parameters": {
-        "operation": "executeQuery",
-        "query": "SELECT\n  t.id,\n  t.name,\n  array_remove(array_agg(DISTINCT tg.name), NULL) AS tags,\n  jsonb_agg(\n    jsonb_build_object(\n      'date', m.date,\n      'author_id', m.author_id,\n      'type', m.message_type,\n      'body', m.body\n    ) ORDER BY m.date\n  ) AS messages\nFROM helpdesk_ticket t\nLEFT JOIN helpdesk_tags_helpdesk_ticket_rel rel\n  ON rel.helpdesk_ticket_id = t.id\nLEFT JOIN helpdesk_tags tg\n  ON tg.id = rel.helpdesk_tags_id\nLEFT JOIN mail_message m\n  ON m.model = 'helpdesk.ticket'\n  AND m.res_id = t.id\n  AND m.message_type IN ('comment', 'email')\nWHERE t.write_date > now() - interval '7 days'\nGROUP BY t.id;\n",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.postgres",
-      "typeVersion": 2.6,
-      "position": [
-        432,
-        464
-      ],
-      "id": "4dbc8119-e5aa-4ed7-80e2-3ee3b6bfcd71",
-      "name": "Execute a SQL query",
-      "credentials": {
-        "postgres": {
-          "id": "QuVSWo9jJJvmCuDA",
-          "name": "Odoo-Production"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "authentication": "genericCredentialType",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        192,
-        464
-      ],
-      "id": "8d64d4ff-ff52-46cc-a78e-ca663643c8b7",
-      "name": "HTTP Request"
     }
   ],
   "pinData": {},
@@ -454,6 +454,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-10-23T21:18:49.000Z",
-  "versionId": "7c183af1-06c1-4e57-948c-f40801b0281f"
+  "updatedAt": "2025-10-28T15:48:09.000Z",
+  "versionId": "32286176-069c-4d5c-be5e-7238373f3d2d"
 }
