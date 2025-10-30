@@ -1,0 +1,194 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Get Test Info",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Test Info": {
+      "main": [
+        [
+          {
+            "node": "Get Questions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Questions": {
+      "main": [
+        [
+          {
+            "node": "Get Answers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Answers": {
+      "main": [
+        [
+          {
+            "node": "Build Test Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-29T16:34:51.309Z",
+  "id": "RoRaekr8ni3AccwY",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "01_TEST_retrieve_test_data",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -560,
+        -336
+      ],
+      "id": "71957c27-754d-44a8-823b-a27f92afc9ae",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "16cf8f1f-950c-4258-8617-ca7696deae5c",
+              "name": "test_id",
+              "value": "82839",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -384,
+        -336
+      ],
+      "id": "66e65285-90f0-4034-9990-6e878391ec9a",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT \n    t.id, \n    t.name, \n    t.testgrade, \n    COALESCE(s.name, 'Unknown') as subject_name \nFROM tests t \nLEFT JOIN ecsubjects s ON t.testsubjectarea = s.id \nWHERE t.id = {{ $json.test_id }}"
+      },
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1.1,
+      "position": [
+        -544,
+        -144
+      ],
+      "id": "1bc176c4-5fe2-4712-a40a-03574d26aaa3",
+      "name": "Get Test Info",
+      "credentials": {
+        "microsoftSql": {
+          "id": "QcWy3mb6JUrBhobj",
+          "name": "192.168.148.54(JW-EVITESTING)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT \n    q.id, \n    q.name, \n    q.type, \n    q.points, \n    q.qorder, \n    COALESCE(h.htmlmod, h.html, '') as html \nFROM questions q \nLEFT JOIN questionobjecthtml h ON q.id = h.questionid \nWHERE q.testid = {{ $json.id }} \n  AND q.excluded = 0 \nORDER BY q.qorder"
+      },
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1.1,
+      "position": [
+        -384,
+        -144
+      ],
+      "id": "e3cf2fd5-9919-40a7-9303-7f8ee200053c",
+      "name": "Get Questions",
+      "credentials": {
+        "microsoftSql": {
+          "id": "QcWy3mb6JUrBhobj",
+          "name": "192.168.148.54(JW-EVITESTING)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT \n    qo.questionid, \n    qo.answer, \n    COALESCE(qo.answertextmod, qo.answertext, '') as answertext, \n    ISNULL(qo.iscorrect, 0) as iscorrect \nFROM questionobjects qo \nINNER JOIN questions q ON qo.questionid = q.id \nWHERE q.testid = {{ $('Get Test Info').first().json.id }} \n  AND q.excluded = 0 \nORDER BY qo.questionid, qo.answer"
+      },
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1.1,
+      "position": [
+        -224,
+        -144
+      ],
+      "id": "5cf85e16-1471-46d0-be3d-b62d880c7e84",
+      "name": "Get Answers",
+      "credentials": {
+        "microsoftSql": {
+          "id": "QcWy3mb6JUrBhobj",
+          "name": "192.168.148.54(JW-EVITESTING)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get data from previous nodes\nconst testInfo = $('Get Test Info').first().json;\nconst questionsData = $('Get Questions').all();\nconst answersData = $('Get Answers').all();\n\n// Group answers by question ID\nconst answersByQuestion = {};\nfor (const answerItem of answersData) {\n  const qid = answerItem.json.questionid;\n  if (!answersByQuestion[qid]) {\n    answersByQuestion[qid] = [];\n  }\n  answersByQuestion[qid].push({\n    letter: answerItem.json.answer,\n    text: answerItem.json.answertext,\n    is_correct: answerItem.json.iscorrect === 1\n  });\n}\n\n// Build questions array with answers\nconst questions = questionsData.map(qItem => {\n  const q = qItem.json;\n  return {\n    id: q.id,\n    name: q.name,\n    type: q.type,\n    points: q.points,\n    qorder: q.qorder,\n    html: q.html,\n    answers: answersByQuestion[q.id] || []\n  };\n});\n\n// Sort by question order\nquestions.sort((a, b) => a.qorder - b.qorder);\n\n// Return complete test data\nreturn [{\n  json: {\n    test_id: testInfo.id,\n    test_name: testInfo.name,\n    grade: testInfo.testgrade,\n    subject: testInfo.subject_name,\n    questions: questions,\n    total_questions: questions.length\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -544,
+        48
+      ],
+      "id": "31ae7548-8956-47dd-a305-c167fdf30eb8",
+      "name": "Build Test Data"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-10-29T16:34:51.313Z",
+      "createdAt": "2025-10-29T16:34:51.313Z",
+      "role": "workflow:owner",
+      "workflowId": "RoRaekr8ni3AccwY",
+      "projectId": "nnENoAdZsswut53f"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-29T16:56:36.000Z",
+  "versionId": "accc44f4-507c-436c-8dfc-ca6e3b9edaab"
+}
