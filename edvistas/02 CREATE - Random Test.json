@@ -27,17 +27,6 @@
       "main": [
         [
           {
-            "node": "Get QuestionBank Answers",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Get QuestionBank Answers": {
-      "main": [
-        [
-          {
             "node": "Prepare Test Data",
             "type": "main",
             "index": 0
@@ -134,10 +123,10 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        528,
+        -1776,
         112
       ],
-      "id": "871df0f0-84b3-4d8f-a624-94f45d43d1b9",
+      "id": "fcb871ee-0d61-4e9b-a8f4-64add7a3057d",
       "name": "When clicking 'Execute workflow'"
     },
     {
@@ -163,10 +152,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        752,
+        -1552,
         112
       ],
-      "id": "9416891c-cb8e-4166-a2f4-ce251f9e2053",
+      "id": "7fb120db-d3a4-4e16-9a19-778a12fbb0d0",
       "name": "Set Parameters"
     },
     {
@@ -177,31 +166,11 @@
       "type": "n8n-nodes-base.microsoftSql",
       "typeVersion": 1.1,
       "position": [
-        976,
+        -1344,
         112
       ],
-      "id": "82215259-1912-45d1-8d9e-72fa99773cc0",
+      "id": "4dc45853-958c-47d0-8553-177d794ba3ce",
       "name": "Get Random QuestionBank Items",
-      "credentials": {
-        "microsoftSql": {
-          "id": "QcWy3mb6JUrBhobj",
-          "name": "192.168.148.54(JW-EVITESTING)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "executeQuery",
-        "query": "SELECT\n    answer,\n    COALESCE(answertextmod, answertext) as answertext,\n    ISNULL(iscorrect, 0) as iscorrect\nFROM questionobjects\nWHERE questionbankid = {{ $json.id }}\nORDER BY answer"
-      },
-      "type": "n8n-nodes-base.microsoftSql",
-      "typeVersion": 1.1,
-      "position": [
-        1200,
-        112
-      ],
-      "id": "f26b2d2c-cfe3-4b1b-aa7d-84beca51a432",
-      "name": "Get QuestionBank Answers",
       "credentials": {
         "microsoftSql": {
           "id": "QcWy3mb6JUrBhobj",
@@ -216,10 +185,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1408,
+        -896,
         112
       ],
-      "id": "5c9efef5-6b00-428f-aec9-a4bc029d2592",
+      "id": "b2c648bf-8e0a-4e3e-ac1a-5bf940c07664",
       "name": "Prepare Test Data"
     },
     {
@@ -230,10 +199,10 @@
       "type": "n8n-nodes-base.microsoftSql",
       "typeVersion": 1.1,
       "position": [
-        1632,
+        -672,
         112
       ],
-      "id": "dc1e870f-6168-4128-878b-930077d59d8a",
+      "id": "598b8b37-c736-4e5c-8831-49ce0abc768a",
       "name": "Create Test",
       "credentials": {
         "microsoftSql": {
@@ -249,24 +218,24 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1856,
+        -464,
         112
       ],
-      "id": "b88708c3-da97-40da-bdb7-997e7a9647e7",
+      "id": "304e8f6b-0aab-4f88-93a9-c1138dd3c3ff",
       "name": "Split for Loop"
     },
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "-- Insert question\nINSERT INTO questions (\n    testid,\n    name,\n    shortname,\n    type,\n    points,\n    book,\n    qorder,\n    excluded,\n    pagebreakbefore,\n    noAnswerSpace,\n    planningPage\n)\nVALUES (\n    {{ $json.test_id }},\n    'Question {{ $json.qorder }}',\n    'Q{{ $json.qorder }}',\n    {{ $json.qb_type }},\n    {{ $json.qb_points }},\n    'Book 1',\n    {{ $json.qorder }},\n    0,\n    0,\n    0,\n    0\n);\n\nSELECT SCOPE_IDENTITY() as question_id, {{ $json.qorder }} as qorder;"
+        "query": "-- Insert question\nINSERT INTO questions (\n    testid,\n    name,\n    shortname,\n    type,\n    points,\n    book,\n    qorder,\n    excluded,\n    pagebreakbefore,\n    noAnswerSpace,\n    planningPage\n)\nVALUES (\n    {{ $json.test_id }},\n    'Question {{ $json.qorder }}',\n    'Q{{ $json.qorder }}',\n    {{ $json.qb_type }},\n    {{ $json.qb_points }},\n    'Book 1',\n    {{ $json.qorder }},\n    0,\n    0,\n    0,\n    0\n);\n\nSELECT SCOPE_IDENTITY() as question_id, {{ $json.qorder }} as qorder, {{ $json.qb_id }} as qb_id;"
       },
       "type": "n8n-nodes-base.microsoftSql",
       "typeVersion": 1.1,
       "position": [
-        2080,
+        -240,
         112
       ],
-      "id": "6949d23f-b2e6-4b6e-85db-1c433b189e55",
+      "id": "76603690-6e92-436d-bb9f-7bce20490919",
       "name": "Insert Question",
       "credentials": {
         "microsoftSql": {
@@ -278,15 +247,15 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "INSERT INTO questionobjecthtml (\n    questionid,\n    html,\n    htmlmod\n)\nVALUES (\n    {{ $json.question_id }},\n    '{{ $json.qb_html }}',\n    '{{ $json.qb_html }}'\n);\n\nSELECT {{ $json.question_id }} as question_id, {{ $json.qorder }} as qorder;"
+        "query": "INSERT INTO questionobjecthtml (\n    questionid,\n    html,\n    htmlmod\n)\nVALUES (\n    {{ $json.question_id }},\n    '{{ $json.qb_html }}',\n    '{{ $json.qb_html }}'\n);\n\nSELECT {{ $json.question_id }} as question_id, {{ $json.qorder }} as qorder, {{ $json.qb_id }} as qb_id;"
       },
       "type": "n8n-nodes-base.microsoftSql",
       "typeVersion": 1.1,
       "position": [
-        2288,
+        -16,
         112
       ],
-      "id": "64721e3a-6b73-4f64-825f-d4c7413a1a5b",
+      "id": "4e3f4dba-e043-4f1d-a0cb-4e35e605ffd9",
       "name": "Insert Question HTML",
       "credentials": {
         "microsoftSql": {
@@ -297,29 +266,36 @@
     },
     {
       "parameters": {
-        "jsCode": "// Debug: Let's see what we have\nconst questionId = $json.question_id;\nconst qorder = $json.qorder;\n\nconsole.log('question_id:', questionId);\nconsole.log('qorder:', qorder);\n\n// Get all loop data\nconst loopData = $('Split for Loop').all();\nconsole.log('loopData length:', loopData.length);\n\n// Log first loop item to see structure\nif (loopData.length > 0) {\n  console.log('First loop item:', JSON.stringify(loopData[0].json));\n}\n\n// Simple test: just return test data\nreturn [{\n  json: {\n    question_id: questionId,\n    answer_letter: 'A',\n    answer_text: 'Test Answer',\n    is_correct: 1\n  }\n}];"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        2512,
-        112
-      ],
-      "id": "70c8f7d5-4667-4ded-8368-da88aaf3e866",
-      "name": "Split Answers"
-    },
-    {
-      "parameters": {
         "operation": "executeQuery",
-        "query": "INSERT INTO questionobjects (\n    questionid,\n    answer,\n    answertext,\n    answertextmod,\n    iscorrect\n)\nVALUES (\n    {{ $json.question_id }},\n    {{ $json.answer_letter }},\n    {{ $json.answer_text }},\n    {{ $json.answer_text }},\n    {{ $json.is_correct }}\n);\n\nSELECT 1 as done;"
+        "query": "SELECT\n    {{ $json.question_id }} as question_id,\n    answer as answer_letter,\n    COALESCE(answertextmod, answertext, '') as answer_text,\n    ISNULL(iscorrect, 0) as is_correct\nFROM questionobjects\nWHERE questionbankid = {{ $json.qb_id }}\nORDER BY answer"
       },
       "type": "n8n-nodes-base.microsoftSql",
       "typeVersion": 1.1,
       "position": [
-        2736,
+        208,
         112
       ],
-      "id": "dabae9b1-f8f7-49dd-abf1-0ed67402febd",
+      "id": "46f113c4-9e28-4fab-956e-246843c34a7f",
+      "name": "Split Answers",
+      "credentials": {
+        "microsoftSql": {
+          "id": "QcWy3mb6JUrBhobj",
+          "name": "192.168.148.54(JW-EVITESTING)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO questionobjects (\n    questionid,\n    answer,\n    answertext,\n    answertextmod,\n    iscorrect\n)\nVALUES (\n    {{ $json.question_id }},\n    '{{ $json.answer_letter }}',\n    '{{ $json.answer_text.replace(/'/g, \"''\") }}',\n    '{{ $json.answer_text.replace(/'/g, \"''\") }}',\n    {{ typeof $json.is_correct === 'boolean' ? ($json.is_correct ? 1 : 0) : $json.is_correct }}\n);\n\nSELECT 1 as done;"
+      },
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1.1,
+      "position": [
+        432,
+        112
+      ],
+      "id": "7ff3a523-5ed0-49ec-9a21-ec1cf444f05b",
       "name": "Insert Answer",
       "credentials": {
         "microsoftSql": {
@@ -363,10 +339,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        2960,
+        656,
         112
       ],
-      "id": "e7b9ace3-be11-42b3-8994-82481d5da906",
+      "id": "3ae11bb8-549b-4e46-96ab-3375b12b9e3f",
       "name": "Final Result"
     }
   ],
@@ -386,6 +362,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-10-29T17:28:07.000Z",
-  "versionId": "6d52665a-aa80-4377-afdd-b8a8b10b0c82"
+  "updatedAt": "2025-10-30T13:55:30.000Z",
+  "versionId": "eb42cadd-1fbe-45a0-9941-fb3789c46a72"
 }
