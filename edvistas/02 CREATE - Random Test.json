@@ -1,0 +1,391 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking 'Execute workflow'": {
+      "main": [
+        [
+          {
+            "node": "Set Parameters",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Parameters": {
+      "main": [
+        [
+          {
+            "node": "Get Random QuestionBank Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Random QuestionBank Items": {
+      "main": [
+        [
+          {
+            "node": "Get QuestionBank Answers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get QuestionBank Answers": {
+      "main": [
+        [
+          {
+            "node": "Prepare Test Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Test Data": {
+      "main": [
+        [
+          {
+            "node": "Create Test",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Test": {
+      "main": [
+        [
+          {
+            "node": "Split for Loop",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split for Loop": {
+      "main": [
+        [
+          {
+            "node": "Insert Question",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert Question": {
+      "main": [
+        [
+          {
+            "node": "Insert Question HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert Question HTML": {
+      "main": [
+        [
+          {
+            "node": "Split Answers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Answers": {
+      "main": [
+        [
+          {
+            "node": "Insert Answer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert Answer": {
+      "main": [
+        [
+          {
+            "node": "Final Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-29T17:02:34.017Z",
+  "id": "jSqCcr6XTYvDm2y5",
+  "isArchived": false,
+  "meta": null,
+  "name": "02 CREATE - Random Test",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        528,
+        112
+      ],
+      "id": "871df0f0-84b3-4d8f-a624-94f45d43d1b9",
+      "name": "When clicking 'Execute workflow'"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "param-num-questions",
+              "name": "num_questions",
+              "value": "10",
+              "type": "number"
+            },
+            {
+              "id": "param-test-name",
+              "name": "test_name",
+              "value": "Random Test - N8N",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        752,
+        112
+      ],
+      "id": "9416891c-cb8e-4166-a2f4-ce251f9e2053",
+      "name": "Set Parameters"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT TOP {{ $json.num_questions }}\n    qb.id,\n    qb.type,\n    qb.correct,\n    qb.points,\n    qb.grade,\n    qb.subjectarea,\n    COALESCE(h.htmlmod, h.html) as html\nFROM questionbank qb\nLEFT JOIN questionobjecthtml h ON qb.id = h.questionbankid\nWHERE (h.html IS NOT NULL OR h.htmlmod IS NOT NULL)\n  AND qb.type = 0\n  AND qb.grade IS NOT NULL\n  AND qb.subjectarea IS NOT NULL\nORDER BY NEWID()"
+      },
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1.1,
+      "position": [
+        976,
+        112
+      ],
+      "id": "82215259-1912-45d1-8d9e-72fa99773cc0",
+      "name": "Get Random QuestionBank Items",
+      "credentials": {
+        "microsoftSql": {
+          "id": "QcWy3mb6JUrBhobj",
+          "name": "192.168.148.54(JW-EVITESTING)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT\n    answer,\n    COALESCE(answertextmod, answertext) as answertext,\n    ISNULL(iscorrect, 0) as iscorrect\nFROM questionobjects\nWHERE questionbankid = {{ $json.id }}\nORDER BY answer"
+      },
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1.1,
+      "position": [
+        1200,
+        112
+      ],
+      "id": "f26b2d2c-cfe3-4b1b-aa7d-84beca51a432",
+      "name": "Get QuestionBank Answers",
+      "credentials": {
+        "microsoftSql": {
+          "id": "QcWy3mb6JUrBhobj",
+          "name": "192.168.148.54(JW-EVITESTING)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Aggregate answers with their questions\nconst qbItems = $('Get Random QuestionBank Items').all();\nconst answersData = $('Get QuestionBank Answers').all();\n\n// Group answers by questionbank ID\nconst answersByQB = {};\nfor (const answerItem of answersData) {\n  const qbid = answerItem.json.questionbankid || $json.id;\n  if (!answersByQB[qbid]) {\n    answersByQB[qbid] = [];\n  }\n  answersByQB[qbid].push({\n    letter: answerItem.json.answer,\n    text: answerItem.json.answertext,\n    is_correct: answerItem.json.iscorrect === 1\n  });\n}\n\n// Get first item to determine test grade and subject\nconst firstItem = qbItems[0].json;\nconst grade = firstItem.grade || '3';\nconst subjectarea = firstItem.subjectarea || 2;\nconst testName = $('Set Parameters').first().json.test_name;\n\n// Build questionbank items with answers\nconst qbWithAnswers = qbItems.map(qbItem => {\n  const qb = qbItem.json;\n  return {\n    id: qb.id,\n    type: qb.type,\n    correct: qb.correct,\n    points: qb.points || 1.0,\n    grade: qb.grade,\n    subjectarea: qb.subjectarea,\n    html: qb.html,\n    answers: answersByQB[qb.id] || []\n  };\n});\n\nreturn [{\n  json: {\n    test_name: testName,\n    grade: grade,\n    subjectarea: subjectarea,\n    questionbank_items: qbWithAnswers\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1408,
+        112
+      ],
+      "id": "5c9efef5-6b00-428f-aec9-a4bc029d2592",
+      "name": "Prepare Test Data"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO tests (\n    name,\n    testgrade,\n    testsubjectarea,\n    marginTop,\n    marginBottom,\n    marginLeft,\n    marginRight,\n    printQuestionNames,\n    booktitles\n)\nVALUES (\n    '{{ $json.test_name }}',\n    '{{ $json.grade }}',\n    {{ $json.subjectarea }},\n    0.5,\n    0.5,\n    0.5,\n    0.5,\n    1,\n    'Book 1'\n);\n\nSELECT SCOPE_IDENTITY() as test_id;"
+      },
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1.1,
+      "position": [
+        1632,
+        112
+      ],
+      "id": "dc1e870f-6168-4128-878b-930077d59d8a",
+      "name": "Create Test",
+      "credentials": {
+        "microsoftSql": {
+          "id": "QcWy3mb6JUrBhobj",
+          "name": "192.168.148.54(JW-EVITESTING)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get the test ID and questionbank items\nconst testId = $('Create Test').first().json.test_id;\nconst qbItems = $('Prepare Test Data').first().json.questionbank_items;\n\n// Return each questionbank item with test_id and question order\nreturn qbItems.map((qb, index) => ({\n  json: {\n    test_id: testId,\n    qorder: index + 1,\n    qb_id: qb.id,\n    qb_type: qb.type,\n    qb_points: qb.points,\n    qb_html: qb.html,\n    qb_answers: qb.answers\n  }\n}));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1856,
+        112
+      ],
+      "id": "b88708c3-da97-40da-bdb7-997e7a9647e7",
+      "name": "Split for Loop"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "-- Insert question\nINSERT INTO questions (\n    testid,\n    name,\n    shortname,\n    type,\n    points,\n    book,\n    qorder,\n    excluded,\n    pagebreakbefore,\n    noAnswerSpace,\n    planningPage\n)\nVALUES (\n    {{ $json.test_id }},\n    'Question {{ $json.qorder }}',\n    'Q{{ $json.qorder }}',\n    {{ $json.qb_type }},\n    {{ $json.qb_points }},\n    'Book 1',\n    {{ $json.qorder }},\n    0,\n    0,\n    0,\n    0\n);\n\nSELECT SCOPE_IDENTITY() as question_id, {{ $json.qorder }} as qorder;"
+      },
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1.1,
+      "position": [
+        2080,
+        112
+      ],
+      "id": "6949d23f-b2e6-4b6e-85db-1c433b189e55",
+      "name": "Insert Question",
+      "credentials": {
+        "microsoftSql": {
+          "id": "QcWy3mb6JUrBhobj",
+          "name": "192.168.148.54(JW-EVITESTING)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO questionobjecthtml (\n    questionid,\n    html,\n    htmlmod\n)\nVALUES (\n    {{ $json.question_id }},\n    '{{ $json.qb_html }}',\n    '{{ $json.qb_html }}'\n);\n\nSELECT {{ $json.question_id }} as question_id, {{ $json.qorder }} as qorder;"
+      },
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1.1,
+      "position": [
+        2288,
+        112
+      ],
+      "id": "64721e3a-6b73-4f64-825f-d4c7413a1a5b",
+      "name": "Insert Question HTML",
+      "credentials": {
+        "microsoftSql": {
+          "id": "QcWy3mb6JUrBhobj",
+          "name": "192.168.148.54(JW-EVITESTING)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Debug: Let's see what we have\nconst questionId = $json.question_id;\nconst qorder = $json.qorder;\n\nconsole.log('question_id:', questionId);\nconsole.log('qorder:', qorder);\n\n// Get all loop data\nconst loopData = $('Split for Loop').all();\nconsole.log('loopData length:', loopData.length);\n\n// Log first loop item to see structure\nif (loopData.length > 0) {\n  console.log('First loop item:', JSON.stringify(loopData[0].json));\n}\n\n// Simple test: just return test data\nreturn [{\n  json: {\n    question_id: questionId,\n    answer_letter: 'A',\n    answer_text: 'Test Answer',\n    is_correct: 1\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2512,
+        112
+      ],
+      "id": "70c8f7d5-4667-4ded-8368-da88aaf3e866",
+      "name": "Split Answers"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO questionobjects (\n    questionid,\n    answer,\n    answertext,\n    answertextmod,\n    iscorrect\n)\nVALUES (\n    {{ $json.question_id }},\n    {{ $json.answer_letter }},\n    {{ $json.answer_text }},\n    {{ $json.answer_text }},\n    {{ $json.is_correct }}\n);\n\nSELECT 1 as done;"
+      },
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1.1,
+      "position": [
+        2736,
+        112
+      ],
+      "id": "dabae9b1-f8f7-49dd-abf1-0ed67402febd",
+      "name": "Insert Answer",
+      "credentials": {
+        "microsoftSql": {
+          "id": "QcWy3mb6JUrBhobj",
+          "name": "192.168.148.54(JW-EVITESTING)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "result-test-id",
+              "name": "test_id",
+              "value": "={{ $('Create Test').first().json.test_id }}",
+              "type": "number"
+            },
+            {
+              "id": "result-test-name",
+              "name": "test_name",
+              "value": "={{ $('Prepare Test Data').first().json.test_name }}",
+              "type": "string"
+            },
+            {
+              "id": "result-status",
+              "name": "status",
+              "value": "success",
+              "type": "string"
+            },
+            {
+              "id": "result-message",
+              "name": "message",
+              "value": "Test created successfully with {{ $('Prepare Test Data').first().json.questionbank_items.length }} questions",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2960,
+        112
+      ],
+      "id": "e7b9ace3-be11-42b3-8994-82481d5da906",
+      "name": "Final Result"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-10-29T17:02:34.024Z",
+      "createdAt": "2025-10-29T17:02:34.024Z",
+      "role": "workflow:owner",
+      "workflowId": "jSqCcr6XTYvDm2y5",
+      "projectId": "nnENoAdZsswut53f"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-29T17:28:07.000Z",
+  "versionId": "6d52665a-aa80-4377-afdd-b8a8b10b0c82"
+}
