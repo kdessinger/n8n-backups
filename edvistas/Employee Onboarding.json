@@ -604,8 +604,8 @@
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        2384,
-        336
+        2368,
+        288
       ],
       "id": "48a01f31-eab4-457c-838e-c1d46a7cb00a",
       "name": "End"
@@ -682,6 +682,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-10-24T19:07:03.000Z",
-  "versionId": "82ab0a53-af28-4cf3-bed5-b1f981edc842"
+  "updatedAt": "2025-10-29T21:44:19.000Z",
+  "versionId": "edaba876-b034-4182-b09a-fdfdd653ad29"
 }
