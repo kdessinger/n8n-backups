@@ -74,8 +74,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -256,
-        -160
+        -272,
+        -32
       ],
       "id": "91a1b0f6-dd89-4832-a4ee-fec0283a2480",
       "name": "Get many items",
@@ -83,6 +83,29 @@
         "odooApi": {
           "id": "13",
           "name": "Odoo-Stage (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "project.project",
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        -48,
+        -32
+      ],
+      "id": "1cc75bf7-c65c-4af8-8604-e6a7aa332e1b",
+      "name": "Get many items1",
+      "credentials": {
+        "odooApi": {
+          "id": "14",
+          "name": "Odoo-Stage (Administrator)"
         }
       }
     }
@@ -122,6 +145,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-10-21T20:17:44.000Z",
-  "versionId": "74651b53-3d53-4c39-8b1b-f1bcaeb1cc5e"
+  "updatedAt": "2025-10-31T22:30:01.000Z",
+  "versionId": "0cceae29-a28e-4894-a557-b552cb4c51a0"
 }
