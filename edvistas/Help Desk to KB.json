@@ -3,13 +3,7 @@
   "connections": {
     "Execute Workflow Trigger": {
       "main": [
-        [
-          {
-            "node": "Get Helpdesk Tickets",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Set Defaults": {
@@ -25,13 +19,7 @@
     },
     "Webhook": {
       "main": [
-        [
-          {
-            "node": "Set Defaults",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Get Helpdesk Tickets": {
@@ -114,8 +102,8 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1,
       "position": [
-        -320,
-        160
+        -896,
+        912
       ]
     },
     {
@@ -163,8 +151,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.1,
       "position": [
-        -432,
-        528
+        288,
+        1408
       ]
     },
     {
@@ -178,15 +166,15 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        -272,
-        528
+        288,
+        1632
       ]
     },
     {
       "parameters": {
         "content": "## Triggers",
-        "height": 506.2295081967215,
-        "width": 248.55354481583993,
+        "height": 490,
+        "width": 249,
         "color": 6
       },
       "id": "aa26fcc6-d3d4-49b3-80ee-0efb5f607c3e",
@@ -194,20 +182,21 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -416,
-        -16
+        -944,
+        800
       ]
     },
     {
       "parameters": {
         "content": "# 🧠 Extract FAQ's from HelpDesk Tickets\n\nThis workflow reviews incoming helpdesk tickets to identify common questions and produce concise question-and-answer pairs for the knowledgebase. It automates extraction, validation, and formatting of FAQs for publication.\n\n## 🔔 Trigger\n New or updated helpdesk tickets flagged for knowledgebase review.\n\n## 🧩 Steps\n* Scan selected tickets and extract candidate Q&A pairs\n* Validate and deduplicate entries against existing KB\n* Format and insert approved FAQs into the knowledgebase\n\n## 🎯 Outcome\n A curated set of validated FAQs added to the knowledgebase, improving self-service and reducing repeat tickets.\n\n### 📝 Note: Ensure sensitive or PII-containing content is redacted before publication.",
-        "height": 528,
-        "width": 1024
+        "height": 1008,
+        "width": 832,
+        "color": 6
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -48,
-        -432
+        -1808,
+        800
       ],
       "typeVersion": 1,
       "id": "b09d34e0-4c98-4f2c-91e6-fc2eb71ae0ea",
@@ -226,8 +215,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
-        -624,
-        528
+        -896,
+        1120
       ],
       "webhookId": "1138a896-3e8c-4e5d-844d-e96c1784babb",
       "credentials": {
@@ -247,8 +236,8 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        -512,
-        -224
+        272,
+        1008
       ],
       "id": "06377d4e-371c-424a-8b75-8bd8b1d55f50",
       "name": "Merge"
@@ -262,8 +251,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        480,
-        624
+        -176,
+        1504
       ],
       "id": "4dbc8119-e5aa-4ed7-80e2-3ee3b6bfcd71",
       "name": "Execute a SQL query",
@@ -273,20 +262,6 @@
           "name": "Odoo-Production"
         }
       }
-    },
-    {
-      "parameters": {
-        "authentication": "genericCredentialType",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        256,
-        624
-      ],
-      "id": "8d64d4ff-ff52-46cc-a78e-ca663643c8b7",
-      "name": "HTTP Request"
     },
     {
       "parameters": {
@@ -335,8 +310,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -48,
-        160
+        -624,
+        912
       ],
       "alwaysOutputData": true,
       "credentials": {
@@ -380,8 +355,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        96,
-        432
+        -336,
+        864
       ],
       "alwaysOutputData": true,
       "credentials": {
@@ -418,8 +393,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        272,
-        288
+        -352,
+        1088
       ],
       "alwaysOutputData": true,
       "credentials": {
@@ -441,8 +416,8 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3,
       "position": [
-        832,
-        208
+        -816,
+        1408
       ],
       "id": "a6e0abb1-55d3-4fd8-a106-2488a060b623",
       "name": "FAQ Extractor"
@@ -454,8 +429,8 @@
       "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
       "typeVersion": 1.3,
       "position": [
-        1056,
-        480
+        -608,
+        1632
       ],
       "id": "858479d3-325f-4e28-9d77-533b498d86fb",
       "name": "Structured Output Parser"
@@ -473,8 +448,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.2,
       "position": [
-        816,
-        512
+        -864,
+        1632
       ],
       "id": "06926616-03be-486c-89ab-c6b4aa8a370e",
       "name": "OpenAI Chat Model",
@@ -514,8 +489,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1328,
-        -32
+        48,
+        1136
       ],
       "id": "7eb3f065-410e-46fa-9085-3988b3a89331",
       "name": "Edit Fields"
@@ -529,11 +504,87 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        608,
-        176
+        48,
+        928
       ],
       "id": "1a319bed-8ded-4ad6-921c-2e643f372777",
       "name": "Merge1"
+    },
+    {
+      "parameters": {
+        "content": "## Get Helpdesk Tickets",
+        "height": 496,
+        "width": 560
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -672,
+        800
+      ],
+      "typeVersion": 1,
+      "id": "71a55d18-cf26-4146-a1e8-0682384f6bf7",
+      "name": "Get Helpdesk Tickets1"
+    },
+    {
+      "parameters": {
+        "content": "## Analyze Tickets for Questions & Answers",
+        "height": 496,
+        "width": 560
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -96,
+        800
+      ],
+      "typeVersion": 1,
+      "id": "adcb2d98-784e-417c-b3d3-8e6245d58e83",
+      "name": "Get Helpdesk Tickets2"
+    },
+    {
+      "parameters": {
+        "content": "## Extract FAQ's",
+        "height": 496,
+        "width": 560
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -944,
+        1312
+      ],
+      "typeVersion": 1,
+      "id": "952ce9bb-bfea-4f61-9d9b-56089c4764a7",
+      "name": "Get Helpdesk Tickets3"
+    },
+    {
+      "parameters": {
+        "content": "## Add FAQ's to Knowledgebase",
+        "height": 496,
+        "width": 560
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -368,
+        1312
+      ],
+      "typeVersion": 1,
+      "id": "e05101aa-bc59-4ebe-a38e-7eac9a6175e9",
+      "name": "Get Helpdesk Tickets4"
+    },
+    {
+      "parameters": {
+        "content": "## Outputs",
+        "height": 490,
+        "width": 249,
+        "color": 6
+      },
+      "id": "9db3e67f-a80d-4839-b5e0-3a0007333b9f",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        208,
+        1312
+      ]
     }
   ],
   "pinData": {
@@ -864,6 +915,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-10-29T04:10:52.000Z",
-  "versionId": "8ff7e0a7-335f-457b-935b-b77c322a2eaf"
+  "updatedAt": "2025-10-31T22:03:13.000Z",
+  "versionId": "d5943e4f-ea44-43a5-8a85-5f1a19ce1d5e"
 }
