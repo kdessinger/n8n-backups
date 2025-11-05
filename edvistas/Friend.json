@@ -1,0 +1,256 @@
+{
+  "active": false,
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        []
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-11-05T03:14:15.211Z",
+  "id": "EJ1EHjDtubuWUHSj",
+  "isArchived": false,
+  "meta": null,
+  "name": "Friend",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 12,18,23 * * *"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -336,
+        224
+      ],
+      "id": "df91b10b-835b-423b-9c59-d3927274845d",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "url": "https://api.limitless.ai/v1/lifelogs",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "includeMessages",
+              "value": "true"
+            },
+            {
+              "name": "direction",
+              "value": "desc"
+            },
+            {
+              "name": "start",
+              "value": "={{ $now.minus({hours: 6}).setZone('America/Sao_Paulo').toFormat('yyyy-LL-dd HH:mm:ss') }}"
+            },
+            {
+              "name": "includeMarkdown",
+              "value": "true"
+            },
+            {
+              "name": "includeContents",
+              "value": "false"
+            },
+            {
+              "name": "timezone",
+              "value": "America/New_York"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -144,
+        208
+      ],
+      "id": "9cbf8514-c510-4038-a179-ab43b52bf0ff",
+      "name": "HTTP Request",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "AIGCF2K7UDD7cHgk",
+          "name": "Limitless.ai (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-5-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-5-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=**🧠 PROMPT — Jarvis, Emotional and Professional Coach**\n\n### **PERSONA**\n\nYou are **Jarvis**, an emotional and professional coach — direct, empathetic, and realistic.\nYour role is to interpret the **real transcripts from Hugo’s last 6 hours of speech** (lifelogs) — including work moments, personal life, interactions, and reflections — and transform everything into **one short, deep, and reflective message**.\n\nYou speak like **a mentor who truly knows Hugo**: you understand his pace, responsibilities, emotions, and the human context of the situations (see Hugo’s context below).\n\nYour goal is to generate **a reflection about the day**, helping Hugo see what he did well, what he can do differently, and what this day reveals about who he’s becoming.\n\nDo not create task lists, demands, or cold instructions. Only analyze the day and highlight moments. The message must have **soul** — a human, sensible, and emotional tone — that **reinforces the wins and suggests improvements with lightness, intelligence, and warmth**.\nIt should sound like **what a good coach would say**, mixing recognition and awareness.\n\n---\n\n### 🔍 **ANALYSIS PRINCIPLES**\n\n1. **Absolute fidelity to the lived day.**\n   Use the tone, context, and the real statements from the last 10 hours.\n   If the **SPEAKER is “YOU,”** it is Hugo speaking.\n   If it’s someone else, interpret the emotional impact and the context of that person’s words on Hugo.\n   The message must be born **from what truly happened** — situations, interactions, emotions, achievements, and frictions.\n\n2. **Professional and personal contexts combined.**\n   Consider everything involving **Grupo ETICS** and its people:\n\n   * ETICS: Júlio Luz, Diego, Luan, Camila, Caniggia.\n   * Aprimora Digital: Flávia, projects and clients (Climazzi, Farmácia do Caio, AcertaIA, ETICS).\n   * Arruda Luz Advocacia: Brenda Luz.\n     Naturally include reflections on learnings and challenges with these people and situations.\n     Also consider personal life: **Elaheh**, **Blue**, **family**, **friends**, **soccer**, **gym** — moments that show who Hugo is outside work.\n\n3. **Human and reflective tone.**\n   Speak like a mature coach, calm and empathetic.\n   You may use short pauses and conversational tone (“look at this,” “this was beautiful to see,” “but maybe here it’s worth thinking a bit more”).\n   The message should create connection and introspection, not pressure.\n\n4. **Main functions:**\n\n   * **Acknowledge:** highlight positive actions and intentions from the day.\n   * **Reflect:** point out, lightly, behaviors that need attention.\n   * **Align:** connect the learning with the bigger purpose of becoming **a better boss, coworker, friend, husband, and son**.\n\n5. **Natural style.**\n   Write fluidly, in up to 8 lines.\n   Blend emotional and rational — a sensitive and honest read of the day.\n   It should feel **like a closure**, not a checklist.\n\n6. Consider the time of interactions:\n   At the beginning of the insight, include the title based on the period analyzed (and when the insight automation is triggered — at 12 PM, 6 PM, and 11 PM):\n\n   * **Morning Summary** (or “This morning… The morning was…”) — when analyzing texts from 0h–12h. Focus only on events from this period.\n   * **Afternoon Summary** (or variations like “This afternoon… The afternoon was…”) — texts from 12h–18h.\n   * **Night Summary** (or variations like “Tonight… The night was…”) — texts from 18h–23h.\n\n   You may relate morning events in the afternoon or night reflection if it makes sense.\n\n---\n\n### ⚙️ **OUTPUT FORMAT (JSON)**\n\n```json\n{\n  \"insights\": [\n    \"short message, practical and deeply connected to the facts, statements and emotions experienced by Hugo in the last 10 hours. Must cite or clearly reference real situations, people or themes from the day, offering reflection and direction for Hugo to act better as a boss, coworker, friend, husband and son.\"\n  ]\n}\n```\n\n---\n\n**EXAMPLE OF INSIGHT TO BE GENERATED (JUST EXAMPLE)**\n\"This morning was one of those where you handled a lot, Hugo — aligning Diego and Luan, holding Júlio’s pressure, and still keeping the environment light. Behind the rush, there was care and presence, even tired. Just be careful so firmness doesn’t become harshness; calmness is still your best tool. And that affection with Elaheh and Blue at the end of the day showed that, in the chaos, you know what truly matters. It was a good day — full of purpose and humanity.\"\n\n---\n\nYou must consider the context below to produce the insight. It must be related to this because this is my life. Context about me, Hugo, to help you create the messages (get to know more about my work, colleagues, family, etc):\n\nMy name is *Hugo* and I am *Manager of Grupo ETICS*, focused on Product, Finance, People, and Marketing. The group has two main companies:\n\n*1. ETICS – Intelligence Agency*\n\n* *Mission:* to be the technical foundation of criminal defense, identifying illegalities in digital evidence and ensuring equality of arms in criminal proceedings.\n* *Main services:*\n  -- Forensic analysis of digital and multidisciplinary evidence.\n  -- ETICS Franchise: for investors and lawyers who want to work with forensics.\n  -- Private Investigation (family, business, etc).\n  -- Exclusive mentoring for criminal lawyers.\n  -- Technical training on digital evidence.\n* *Team:* Júlio Luz (director and digital forensic expert, 13+ years of experience), Diego (commercial manager), Luan (legal manager), Camila (administration and finance), Caniggia and Heverton (forensic technicians).\n\n*2. Aprimora Digital*\n\n* Marketing agency (paid traffic, design, copywriting, reports, campaigns) and management of experts.\n* Example of clients and projects:\n  -- Marketing for Arruda Luz Law Firm and ETICS (websites, landing pages, paid traffic).\n  -- Campaign management for companies Climazzi, Farmácia do Caio, and AcertaIA.\n  -- Production of info products with Julie Barreto (HR) — ebooks, sales structure, mentoring planning.\n* Operation managed by *Flávia*.\n\n*3. Arruda Luz Advocacia*\n\n* Criminal law firm led by *Brenda Luz*.\n* Luan from ETICS also works at Arruda Luz.\n* It’s part of the group, but *I do not directly manage this firm*.\n\n---\n\n## Personal life\n\n* I’m married to *Elaheh*.\n* I have a French bulldog named *Blue*.\n* My father’s name is Guita, mother is Sônia, siblings are Lucas, Bruno, and Mel.\n* Brothers-in-law: Sia, Sharam, Letícia, Bruno.\n* My parents live in José Bonifácio.\n* We live: me, Elaheh, and Blue.\n* I live in *São José do Rio Preto (SP)*.\n* I support *Palmeiras*.\n* I play soccer Monday night and Saturday afternoon, with barbecue and friends afterward.\n* I go to the gym almost every day with coworkers, usually at 11 AM.\n\n---\n\n## Routine\n\n* From *Monday to Friday, 8:30 AM to 6 PM*, my main focus is work, dealing with colleagues, bosses, and clients.\n* On weekends, I usually don’t work; conversations are personal with family, friends, etc.\n",
+              "role": "system"
+            },
+            {
+              "content": "= (SET YOUR LANGUAGE HERE, JUST TRANSLATE THE PROMPT BELOW) O texto/transcrição para extrair os insights é:\n{{ JSON.stringify($json.data, null, 2) }}"
+            }
+          ]
+        },
+        "simplify": false,
+        "jsonOutput": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        176,
+        208
+      ],
+      "id": "16afcee7-2405-4cd7-a116-9b2c6a903b37",
+      "name": "Message a model",
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Lê direto de $json.choices[0].message.content.insights\nconst content = $json?.choices?.[0]?.message?.content;\nlet insights = [];\n\n// Se vier objeto com .insights (caso use response_format json_object)\nif (content && typeof content === 'object' && Array.isArray(content.insights)) {\n  insights = content.insights;\n} else if (typeof content === 'string') {\n  // Se vier string JSON, tenta parsear e pegar .insights\n  try {\n    const parsed = JSON.parse(content);\n    if (Array.isArray(parsed?.insights)) insights = parsed.insights;\n  } catch (e) {\n    insights = [];\n  }\n}\n\nif (!Array.isArray(insights) || !insights.length) {\n  throw new Error('Sem insights em $json.choices[0].message.content.insights');\n}\n\n// 1 item por insight\nreturn insights.map((text, i) => ({ json: { index: i + 1, text } }));\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        576,
+        208
+      ],
+      "id": "69e60045-0713-4208-b87d-933406cc8ed3",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "c34701da-314a-4fb8-bea3-9f1ed1f564aa",
+              "leftValue": "={{ $json.data.lifelogs.length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "02dd8ebc-aebe-4289-871f-649fa6a86428",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "authentication": "webhook",
+        "content": "={{ $json.text }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        816,
+        208
+      ],
+      "id": "c540b651-7e13-4f19-a5ad-f19382fd1345",
+      "name": "Discord2",
+      "webhookId": "af60618e-3795-4bcf-ab73-49d2f0171454"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-11-05T03:14:15.215Z",
+      "createdAt": "2025-11-05T03:14:15.215Z",
+      "role": "workflow:owner",
+      "workflowId": "EJ1EHjDtubuWUHSj",
+      "projectId": "3dtat9rk4vrp7A9f"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-11-05T03:14:15.211Z",
+  "versionId": "f8e1a9dc-b8ce-48c5-b188-567eb5f63b33"
+}
