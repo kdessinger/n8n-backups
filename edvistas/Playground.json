@@ -1057,6 +1057,21 @@
       ],
       "id": "1cba26fb-3456-4ba3-b2c5-4bb12d0b9ae4",
       "name": "Globals"
+    },
+    {
+      "parameters": {
+        "endpointUrl": "https://mcp.api.coingecko.com/sse",
+        "serverTransport": "sse",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1.2,
+      "position": [
+        1568,
+        336
+      ],
+      "id": "3ec082f0-c61d-4051-9007-c2a61c237b92",
+      "name": "CoinGecko (MCP)"
     }
   ],
   "pinData": {},
@@ -1073,8 +1088,21 @@
     }
   ],
   "staticData": null,
-  "tags": [],
+  "tags": [
+    {
+      "updatedAt": "2025-11-05T02:43:23.693Z",
+      "createdAt": "2025-11-05T02:43:23.693Z",
+      "id": "gnDo5S5AsSpuvUj9",
+      "name": "MCP"
+    },
+    {
+      "updatedAt": "2023-07-28T19:16:19.587Z",
+      "createdAt": "2023-07-28T19:16:19.587Z",
+      "id": "kqf2NqvduRmuLzdN",
+      "name": "API"
+    }
+  ],
   "triggerCount": 0,
-  "updatedAt": "2025-10-21T19:04:39.000Z",
-  "versionId": "8a8d4423-5040-4626-b78a-24a0e935b2c0"
+  "updatedAt": "2025-11-05T02:43:40.000Z",
+  "versionId": "1a83404b-1db3-491c-9a86-fc98f0f78d47"
 }
