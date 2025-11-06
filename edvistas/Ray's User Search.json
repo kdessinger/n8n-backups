@@ -30,21 +30,10 @@
     },
     "Code": {
       "main": [
-        [
-          {
-            "node": "HTML",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Form": {
-      "main": [
         []
       ]
     },
-    "HTML": {
+    "Form": {
       "main": [
         []
       ]
@@ -134,19 +123,6 @@
       ],
       "id": "1f6889c4-658c-4e33-9400-58c44fbe6b08",
       "name": "Code"
-    },
-    {
-      "parameters": {
-        "html": "<!DOCTYPE html>\n\n<html>\n<head>\n  <meta charset=\"UTF-8\" />\n  <title>Evicore Search</title>\n</head>\n<body>\n  <div class=\"container\">\n    <h1>Search Term:  </h1>\n    <h2>Records Found: {{ $json.recordCount }}}</h2>\n    <p>{{ $json.tableAscii }}</p>\n  </div>\n</body>\n</html>\n\n<style>\n.container {\n  background-color: #ffffff;\n  text-align: center;\n  padding: 16px;\n  border-radius: 8px;\n}\n\nh1 {\n  color: #ff6d5a;\n  font-size: 24px;\n  font-weight: bold;\n  padding: 8px;\n}\n\nh2 {\n  color: #909399;\n  font-size: 18px;\n  font-weight: bold;\n  padding: 8px;\n}\n</style>\n\n<script>\nconsole.log(\"Hello World!\");\n</script>"
-      },
-      "type": "n8n-nodes-base.html",
-      "typeVersion": 1.2,
-      "position": [
-        464,
-        -272
-      ],
-      "id": "20f2649a-9fc9-44f3-9eef-ff2bab69fbd0",
-      "name": "HTML"
     }
   ],
   "pinData": {},
@@ -165,6 +141,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-10-17T06:19:19.000Z",
-  "versionId": "dec63d1c-e426-484b-8e21-54bd97d14e98"
+  "updatedAt": "2025-11-06T00:01:08.000Z",
+  "versionId": "5c190a36-3271-4bdd-9a73-88205ad66e99"
 }
