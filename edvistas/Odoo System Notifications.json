@@ -485,7 +485,7 @@
     },
     "node:Run Every 3 Hours": {
       "recurrenceRules": [
-        0
+        12
       ]
     }
   },
