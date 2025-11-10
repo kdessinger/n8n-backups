@@ -34,17 +34,6 @@
         ]
       ]
     },
-    "Run Every 3 Hours": {
-      "main": [
-        [
-          {
-            "node": "Incoming Mail Servers",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Restart Odoo Services": {
       "main": [
         [
@@ -97,6 +86,17 @@
         [
           {
             "node": "All Good!",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Run Every Hour": {
+      "main": [
+        [
+          {
+            "node": "Incoming Mail Servers",
             "type": "main",
             "index": 0
           }
@@ -244,26 +244,6 @@
       "position": [
         560,
         384
-      ]
-    },
-    {
-      "parameters": {
-        "rule": {
-          "interval": [
-            {
-              "field": "hours",
-              "hoursInterval": 3
-            }
-          ]
-        }
-      },
-      "id": "0eaebc0a-3ebc-48e3-ade6-837d7ce6c67c",
-      "name": "Run Every 3 Hours",
-      "type": "n8n-nodes-base.scheduleTrigger",
-      "typeVersion": 1.2,
-      "position": [
-        -240,
-        368
       ]
     },
     {
@@ -453,6 +433,39 @@
       ],
       "notesInFlow": true,
       "notes": "If"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 6-17 * * 1-5"
+            },
+            {
+              "field": "cronExpression",
+              "expression": "0 18,21 * * 1-5"
+            },
+            {
+              "field": "cronExpression",
+              "expression": "0 0,3 * * 1-5"
+            },
+            {
+              "field": "cronExpression",
+              "expression": "0 */3 * * Sat,Sun"
+            }
+          ]
+        }
+      },
+      "id": "0eaebc0a-3ebc-48e3-ade6-837d7ce6c67c",
+      "name": "Run Every Hour",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -240,
+        368
+      ],
+      "notes": "M–F from 6am → 5pm → every 1 hour.\nAny other time (including nights + weekends) → every 3 hours."
     }
   ],
   "pinData": {},
@@ -485,8 +498,11 @@
     },
     "node:Run Every 3 Hours": {
       "recurrenceRules": [
-        0
+        12
       ]
+    },
+    "node:Run Every Hour": {
+      "recurrenceRules": []
     }
   },
   "tags": [
@@ -498,6 +514,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-11-06T20:44:04.000Z",
-  "versionId": "dc2d40fb-56fc-48b6-a418-c2f659e25bb5"
+  "updatedAt": "2025-11-10T17:08:04.000Z",
+  "versionId": "aee73050-f31a-4557-9a8c-ad9960a25550"
 }
