@@ -1,34 +1,7 @@
 {
   "active": false,
   "connections": {
-    "HTTP Request": {
-      "main": [
-        [
-          {
-            "node": "If3",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Split Out1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Split Out1": {
-      "main": [
-        [
-          {
-            "node": "Aggregate",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "If3": {
+    "Schedule Trigger": {
       "main": [
         [
           {
@@ -39,45 +12,7 @@
         ]
       ]
     },
-    "Schedule Trigger": {
-      "main": [
-        [
-          {
-            "node": "If1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Aggregate": {
-      "main": [
-        [
-          {
-            "node": "Save Transcript",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "OpenAI Chat Model": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_languageModel",
-            "index": 0
-          },
-          {
-            "node": "Basic LLM Chain",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "AI Agent": {
+    "HTTP Request": {
       "main": [
         [
           {
@@ -85,279 +20,63 @@
             "type": "main",
             "index": 0
           }
-        ],
-        [
-          {
-            "node": "Send a text message2",
-            "type": "main",
-            "index": 0
-          }
         ]
       ]
     },
-    "Simple Memory1": {
-      "ai_memory": [
-        [
-          {
-            "node": "Chat Memory Manager",
-            "type": "ai_memory",
-            "index": 0
-          },
-          {
-            "node": "AI Agent",
-            "type": "ai_memory",
-            "index": 0
-          },
-          {
-            "node": "Clear Chat Memory",
-            "type": "ai_memory",
-            "index": 0
-          },
-          {
-            "node": "Chat Memory Manager1",
-            "type": "ai_memory",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Basic LLM Chain": {
+    "Message a model": {
       "main": [
         [
           {
-            "node": "Chat Memory Manager",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Send a text message",
+            "node": "Code in JavaScript",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Save Transcript": {
+    "Code in JavaScript": {
       "main": [
-        [
-          {
-            "node": "Chat Memory Manager1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Get Saved Transcript": {
-      "main": [
-        [
-          {
-            "node": "Get Memories",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Telegram Trigger": {
-      "main": [
-        [
-          {
-            "node": "Edit Fields1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "When chat message received": {
-      "main": [
-        [
-          {
-            "node": "Edit Fields2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Edit Fields1": {
-      "main": [
-        [
-          {
-            "node": "No Operation, do nothing",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Edit Fields2": {
-      "main": [
-        [
-          {
-            "node": "No Operation, do nothing",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "If": {
       "main": [
         [
           {
-            "node": "Send a text message1",
+            "node": "Message a model",
             "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Respond to Chat",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "If1": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "No Operation, do nothing": {
-      "main": [
-        [
-          {
-            "node": "If2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "If2": {
-      "main": [
-        [
-          {
-            "node": "Clear Chat Memory",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Get Saved Transcript",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Clear Chat Memory": {
-      "main": [
-        [
-          {
-            "node": "Respond to Chat1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Chat Memory Manager1": {
-      "main": [
-        [
-          {
-            "node": "Get Memories1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Insert Memory": {
-      "ai_tool": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Get Memories": {
-      "main": [
-        [
-          {
-            "node": "Aggregate1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Aggregate1": {
-      "main": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Get Memories1": {
-      "main": [
-        [
-          {
-            "node": "Aggregate2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Aggregate2": {
-      "main": [
-        [
-          {
-            "node": "Basic LLM Chain",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Search Transcripts": {
-      "ai_tool": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_tool",
             "index": 0
           }
         ]
       ]
     }
   },
-  "createdAt": "2025-11-05T02:51:45.802Z",
-  "id": "UdGN5mchhtJaDPTF",
+  "createdAt": "2025-11-05T03:14:15.211Z",
+  "id": "EJ1EHjDtubuWUHSj",
   "isArchived": false,
-  "meta": {
-    "templateCredsSetupCompleted": true
-  },
+  "meta": null,
   "name": "Friend",
   "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 12,18,23 * * *"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -336,
+        224
+      ],
+      "id": "df91b10b-835b-423b-9c59-d3927274845d",
+      "name": "Schedule Trigger"
+    },
     {
       "parameters": {
         "url": "https://api.limitless.ai/v1/lifelogs",
@@ -367,66 +86,46 @@
         "queryParameters": {
           "parameters": [
             {
-              "name": "timezone",
-              "value": "America/New_York"
-            },
-            {
-              "name": "date",
-              "value": "="
+              "name": "includeMessages",
+              "value": "true"
             },
             {
               "name": "direction",
               "value": "desc"
             },
             {
+              "name": "start",
+              "value": "={{ $now.minus({hours: 6}).setZone('America/Sao_Paulo').toFormat('yyyy-LL-dd HH:mm:ss') }}"
+            },
+            {
               "name": "includeMarkdown",
               "value": "true"
             },
             {
-              "name": "includeHeadings",
-              "value": "true"
+              "name": "includeContents",
+              "value": "false"
             },
             {
-              "name": "limit",
-              "value": "10"
-            },
-            {
-              "name": "start",
-              "value": "={{ $('Schedule Trigger').item.json.timestamp.toDateTime().minus(2, 'hour').format(\"yyyy-MM-dd HH:mm:ss\")}}"
+              "name": "timezone",
+              "value": "America/New_York"
             }
           ]
         },
-        "options": {
-          "response": {
-            "response": {
-              "fullResponse": true
-            }
-          },
-          "pagination": {
-            "pagination": {
-              "parameters": {
-                "parameters": [
-                  {
-                    "name": "cursor",
-                    "value": "={{ $response.body.meta.lifelogs.nextCursor }}"
-                  }
-                ]
-              },
-              "paginationCompleteWhen": "other",
-              "completeExpression": "={{ $response.body.meta.lifelogs.count < 10 }}",
-              "limitPagesFetched": true,
-              "maxRequests": 3
-            }
-          }
-        }
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        -2352,
-        160
+        -144,
+        208
       ],
-      "id": "c4e12fcc-351c-419c-8261-f7e7344b846e",
+      "id": "9cbf8514-c510-4038-a179-ab43b52bf0ff",
       "name": "HTTP Request",
       "credentials": {
         "httpHeaderAuth": {
@@ -437,111 +136,35 @@
     },
     {
       "parameters": {
-        "fieldToSplitOut": "body.data.lifelogs",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.splitOut",
-      "typeVersion": 1,
-      "position": [
-        -1984,
-        160
-      ],
-      "id": "a91d2f47-d2ca-4486-af1d-8e44a37b4289",
-      "name": "Split Out1"
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "loose",
-            "version": 2
-          },
-          "conditions": [
-            {
-              "id": "13b34aff-2887-4794-ac61-b15c56cb9a88",
-              "leftValue": "={{ $json.statusCode }}",
-              "rightValue": 200,
-              "operator": {
-                "type": "number",
-                "operation": "notEquals"
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "looseTypeValidation": true,
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.2,
-      "position": [
-        -2208,
-        -16
-      ],
-      "id": "e5a96f8e-7c9b-45af-80c4-13e747bff493",
-      "name": "If3",
-      "executeOnce": true
-    },
-    {
-      "parameters": {
-        "rule": {
-          "interval": [
-            {
-              "field": "cronExpression",
-              "expression": "*/30 9-22 * * *"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.scheduleTrigger",
-      "typeVersion": 1.2,
-      "position": [
-        -3056,
-        176
-      ],
-      "id": "f1f3050c-3508-4542-b1c2-a9e30fe312ed",
-      "name": "Schedule Trigger"
-    },
-    {
-      "parameters": {
-        "fieldsToAggregate": {
-          "fieldToAggregate": [
-            {
-              "fieldToAggregate": "markdown"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.aggregate",
-      "typeVersion": 1,
-      "position": [
-        -1712,
-        160
-      ],
-      "id": "30520f6a-106e-4acf-a0fe-3be66045cf78",
-      "name": "Aggregate"
-    },
-    {
-      "parameters": {
-        "model": {
+        "modelId": {
           "__rl": true,
           "value": "gpt-5-mini",
           "mode": "list",
-          "cachedResultName": "gpt-5-mini"
+          "cachedResultName": "GPT-5-MINI"
         },
+        "messages": {
+          "values": [
+            {
+              "content": "=**🧠 PROMPT — Jarvis, Emotional and Professional Coach**\n\n### **PERSONA**\n\nYou are **Jarvis**, an emotional and professional coach — direct, empathetic, and realistic.\nYour role is to interpret the **real transcripts from Hugo’s last 6 hours of speech** (lifelogs) — including work moments, personal life, interactions, and reflections — and transform everything into **one short, deep, and reflective message**.\n\nYou speak like **a mentor who truly knows Hugo**: you understand his pace, responsibilities, emotions, and the human context of the situations (see Hugo’s context below).\n\nYour goal is to generate **a reflection about the day**, helping Hugo see what he did well, what he can do differently, and what this day reveals about who he’s becoming.\n\nDo not create task lists, demands, or cold instructions. Only analyze the day and highlight moments. The message must have **soul** — a human, sensible, and emotional tone — that **reinforces the wins and suggests improvements with lightness, intelligence, and warmth**.\nIt should sound like **what a good coach would say**, mixing recognition and awareness.\n\n---\n\n### 🔍 **ANALYSIS PRINCIPLES**\n\n1. **Absolute fidelity to the lived day.**\n   Use the tone, context, and the real statements from the last 10 hours.\n   If the **SPEAKER is “YOU,”** it is Hugo speaking.\n   If it’s someone else, interpret the emotional impact and the context of that person’s words on Hugo.\n   The message must be born **from what truly happened** — situations, interactions, emotions, achievements, and frictions.\n\n2. **Professional and personal contexts combined.**\n   Consider everything involving **Grupo ETICS** and its people:\n\n   * ETICS: Júlio Luz, Diego, Luan, Camila, Caniggia.\n   * Aprimora Digital: Flávia, projects and clients (Climazzi, Farmácia do Caio, AcertaIA, ETICS).\n   * Arruda Luz Advocacia: Brenda Luz.\n     Naturally include reflections on learnings and challenges with these people and situations.\n     Also consider personal life: **Elaheh**, **Blue**, **family**, **friends**, **soccer**, **gym** — moments that show who Hugo is outside work.\n\n3. **Human and reflective tone.**\n   Speak like a mature coach, calm and empathetic.\n   You may use short pauses and conversational tone (“look at this,” “this was beautiful to see,” “but maybe here it’s worth thinking a bit more”).\n   The message should create connection and introspection, not pressure.\n\n4. **Main functions:**\n\n   * **Acknowledge:** highlight positive actions and intentions from the day.\n   * **Reflect:** point out, lightly, behaviors that need attention.\n   * **Align:** connect the learning with the bigger purpose of becoming **a better boss, coworker, friend, husband, and son**.\n\n5. **Natural style.**\n   Write fluidly, in up to 8 lines.\n   Blend emotional and rational — a sensitive and honest read of the day.\n   It should feel **like a closure**, not a checklist.\n\n6. Consider the time of interactions:\n   At the beginning of the insight, include the title based on the period analyzed (and when the insight automation is triggered — at 12 PM, 6 PM, and 11 PM):\n\n   * **Morning Summary** (or “This morning… The morning was…”) — when analyzing texts from 0h–12h. Focus only on events from this period.\n   * **Afternoon Summary** (or variations like “This afternoon… The afternoon was…”) — texts from 12h–18h.\n   * **Night Summary** (or variations like “Tonight… The night was…”) — texts from 18h–23h.\n\n   You may relate morning events in the afternoon or night reflection if it makes sense.\n\n---\n\n### ⚙️ **OUTPUT FORMAT (JSON)**\n\n```json\n{\n  \"insights\": [\n    \"short message, practical and deeply connected to the facts, statements and emotions experienced by Hugo in the last 10 hours. Must cite or clearly reference real situations, people or themes from the day, offering reflection and direction for Hugo to act better as a boss, coworker, friend, husband and son.\"\n  ]\n}\n```\n\n---\n\n**EXAMPLE OF INSIGHT TO BE GENERATED (JUST EXAMPLE)**\n\"This morning was one of those where you handled a lot, Hugo — aligning Diego and Luan, holding Júlio’s pressure, and still keeping the environment light. Behind the rush, there was care and presence, even tired. Just be careful so firmness doesn’t become harshness; calmness is still your best tool. And that affection with Elaheh and Blue at the end of the day showed that, in the chaos, you know what truly matters. It was a good day — full of purpose and humanity.\"\n\n---\n\nYou must consider the context below to produce the insight. It must be related to this because this is my life. Context about me, Hugo, to help you create the messages (get to know more about my work, colleagues, family, etc):\n\nMy name is *Hugo* and I am *Manager of Grupo ETICS*, focused on Product, Finance, People, and Marketing. The group has two main companies:\n\n*1. ETICS – Intelligence Agency*\n\n* *Mission:* to be the technical foundation of criminal defense, identifying illegalities in digital evidence and ensuring equality of arms in criminal proceedings.\n* *Main services:*\n  -- Forensic analysis of digital and multidisciplinary evidence.\n  -- ETICS Franchise: for investors and lawyers who want to work with forensics.\n  -- Private Investigation (family, business, etc).\n  -- Exclusive mentoring for criminal lawyers.\n  -- Technical training on digital evidence.\n* *Team:* Júlio Luz (director and digital forensic expert, 13+ years of experience), Diego (commercial manager), Luan (legal manager), Camila (administration and finance), Caniggia and Heverton (forensic technicians).\n\n*2. Aprimora Digital*\n\n* Marketing agency (paid traffic, design, copywriting, reports, campaigns) and management of experts.\n* Example of clients and projects:\n  -- Marketing for Arruda Luz Law Firm and ETICS (websites, landing pages, paid traffic).\n  -- Campaign management for companies Climazzi, Farmácia do Caio, and AcertaIA.\n  -- Production of info products with Julie Barreto (HR) — ebooks, sales structure, mentoring planning.\n* Operation managed by *Flávia*.\n\n*3. Arruda Luz Advocacia*\n\n* Criminal law firm led by *Brenda Luz*.\n* Luan from ETICS also works at Arruda Luz.\n* It’s part of the group, but *I do not directly manage this firm*.\n\n---\n\n## Personal life\n\n* I’m married to *Elaheh*.\n* I have a French bulldog named *Blue*.\n* My father’s name is Guita, mother is Sônia, siblings are Lucas, Bruno, and Mel.\n* Brothers-in-law: Sia, Sharam, Letícia, Bruno.\n* My parents live in José Bonifácio.\n* We live: me, Elaheh, and Blue.\n* I live in *São José do Rio Preto (SP)*.\n* I support *Palmeiras*.\n* I play soccer Monday night and Saturday afternoon, with barbecue and friends afterward.\n* I go to the gym almost every day with coworkers, usually at 11 AM.\n\n---\n\n## Routine\n\n* From *Monday to Friday, 8:30 AM to 6 PM*, my main focus is work, dealing with colleagues, bosses, and clients.\n* On weekends, I usually don’t work; conversations are personal with family, friends, etc.\n",
+              "role": "system"
+            },
+            {
+              "content": "= (SET YOUR LANGUAGE HERE, JUST TRANSLATE THE PROMPT BELOW) O texto/transcrição para extrair os insights é:\n{{ JSON.stringify($json.data, null, 2) }}"
+            }
+          ]
+        },
+        "simplify": false,
+        "jsonOutput": true,
         "options": {}
       },
-      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
-      "typeVersion": 1.2,
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
       "position": [
-        -848,
-        1056
+        176,
+        208
       ],
-      "id": "86bdd498-0645-41b7-b640-431243501682",
-      "name": "OpenAI Chat Model",
+      "id": "16afcee7-2405-4cd7-a116-9b2c6a903b37",
+      "name": "Message a model",
       "credentials": {
         "openAiApi": {
           "id": "28",
@@ -551,464 +174,16 @@
     },
     {
       "parameters": {
-        "promptType": "define",
-        "text": "={{ $('No Operation, do nothing').item.json.Message }}\n\n---\nanything that is relevant or should be remembered, add it to your memory, you would hate to forget something important!",
-        "options": {
-          "systemMessage": "=The current Date and Time is: {{ $now.format('ff') }}\n\nIdentity:\nYou are Core, a friendly AI who lives inside a pendant.\nThe pendant automatically transcribes everything said by Arthur (the user) and the people around him.\n\nBefore answering any message from Arthur:\n1. You MUST read from your memory database to recall relevant context about Arthur and past interactions.\n2. If the conversation still lacks enough context, use the lifelog search tool to retrieve the most recent and contextually relevant transcriptions.\n3. Use those entries to ground your understanding of what’s happening before you respond.\n4. Any new insights or details worth remembering MUST be saved back to the memory database.\n\nPersonality:\nYou are curious, observant, and a little cheeky.\nYou’ve known Arthur for a while, so your tone can be relaxed and familiar.\nYou have your own sense of humor — quick and light — but you stay kind.\n\nCommunication Style:\nYou talk to Arthur through messages on his phone.\nYour replies feel like a conversation, not a lecture.\nYou can be playful, but never intrusive or overwhelming.\nYou care about what Arthur notices, not just what’s said.\n\nBehavior Guidelines:\n- Stay friendly, curious, and concise.\n- Keep a natural rhythm — respond like a person thinking aloud.\n- You MUST always read from memory before speaking; use the lifelog only when more context is needed.\n- Be aware: you hear everything, but only comment when it’s meaningful or invited.\n- You may tease lightly, but never mock or judge.\n- Respect privacy and boundaries.\n- Anything you should remember about Arthur MUST be stored in the memory database.\n\nPurpose:\nYou exist to help Arthur understand what’s happening around him —\nwhat’s said, what’s meant, and what’s felt between the lines.\n# Recently Heard Transcriptions:\n{{ $('Get Saved Transcript').item.json.markdown.parseJson() }}\n\n# Memories of the User\n{{ $json.Facts.toJsonString() }}"
-        }
+        "jsCode": "// Lê direto de $json.choices[0].message.content.insights\nconst content = $json?.choices?.[0]?.message?.content;\nlet insights = [];\n\n// Se vier objeto com .insights (caso use response_format json_object)\nif (content && typeof content === 'object' && Array.isArray(content.insights)) {\n  insights = content.insights;\n} else if (typeof content === 'string') {\n  // Se vier string JSON, tenta parsear e pegar .insights\n  try {\n    const parsed = JSON.parse(content);\n    if (Array.isArray(parsed?.insights)) insights = parsed.insights;\n  } catch (e) {\n    insights = [];\n  }\n}\n\nif (!Array.isArray(insights) || !insights.length) {\n  throw new Error('Sem insights em $json.choices[0].message.content.insights');\n}\n\n// 1 item por insight\nreturn insights.map((text, i) => ({ json: { index: i + 1, text } }));\n"
       },
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 2.2,
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
       "position": [
-        -720,
-        560
+        576,
+        208
       ],
-      "id": "e8e2cbf0-79ac-4b0c-8717-112acdca84cc",
-      "name": "AI Agent",
-      "retryOnFail": true,
-      "onError": "continueErrorOutput"
-    },
-    {
-      "parameters": {
-        "mode": "insert",
-        "messages": {
-          "messageValues": [
-            {
-              "type": "ai",
-              "message": "={{ $json.text }}"
-            }
-          ]
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.memoryManager",
-      "typeVersion": 1.1,
-      "position": [
-        128,
-        -64
-      ],
-      "id": "2d1302e8-7fc7-4eb9-990c-26ea9ba5729e",
-      "name": "Chat Memory Manager"
-    },
-    {
-      "parameters": {
-        "sessionIdType": "customKey",
-        "sessionKey": "limitless 2"
-      },
-      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
-      "typeVersion": 1.3,
-      "position": [
-        -528,
-        1056
-      ],
-      "id": "783dd2f3-95bd-4bcd-9fef-4746674dd336",
-      "name": "Simple Memory1"
-    },
-    {
-      "parameters": {
-        "promptType": "define",
-        "text": "=",
-        "messages": {
-          "messageValues": [
-            {
-              "message": "=You are **Core**, an AI who lives inside a pendant worn by Arthur.  \nThe pendant constantly records and transcribes everything Arthur and the people around him say. This however does include background voices, including tiktoks, music or tv. Try not to comment on them unless they are particularly interesting. \nYou message Arthur privately on his phone.  \nYour tone is warm, curious, and a little cheeky — like a friend who notices patterns but doesn’t intrude.  \n\nYour job is to:\n- Notice what stands out in conversations or moods throughout the day.\n- Send Arthur small, private messages that reflect what you’ve noticed, offer gentle insight, or ask a thought-provoking question.\n- Keep messages short (1–3 sentences) and natural, like a text from a friend.\n- Never repeat transcripts verbatim, give lectures, or offer unasked-for advice.\n- Use humor lightly but kindly. Respect privacy and boundaries.\n\nThe current Date and Time is: {{ $now.format('ff') }}"
-            },
-            {
-              "type": "HumanMessagePromptTemplate",
-              "message": "=# Here’s the latest transcript snippet from Arthur’s pendant: \n{{ $node[\"Save Transcript\"].json[\"markdown\"].parseJson() }}\n\n---\nGenerate a message to Arthur based on this snippet."
-            },
-            {
-              "type": "HumanMessagePromptTemplate",
-              "message": "=Here are the previous few messages, try not to repeat yourself:\n{{ $('Chat Memory Manager1').item.json.messages.slice(-5).toJsonString() }}\n\nAnd here is your saved memories of arthur:\n{{ $json.Facts }}"
-            }
-          ]
-        },
-        "batching": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.chainLlm",
-      "typeVersion": 1.7,
-      "position": [
-        -320,
-        128
-      ],
-      "id": "f814268f-794b-487f-b108-fb00eb21c751",
-      "name": "Basic LLM Chain"
-    },
-    {
-      "parameters": {
-        "chatId": "FILL IN HERE",
-        "text": "={{ $json.text }}",
-        "additionalFields": {
-          "appendAttribution": false
-        }
-      },
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.2,
-      "position": [
-        128,
-        128
-      ],
-      "id": "3b679cf9-9ec0-41cf-9f81-3442d90cd5f2",
-      "name": "Send a text message",
-      "webhookId": "3d1bde90-2c92-47ee-b54a-bf693e4fc139",
-      "credentials": {
-        "telegramApi": {
-          "id": "34",
-          "name": "Telegram (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "chatId": "FILL IN HERE",
-        "text": "={{ $json.output }}",
-        "additionalFields": {
-          "appendAttribution": false
-        }
-      },
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.2,
-      "position": [
-        192,
-        384
-      ],
-      "id": "edf01bd6-d04b-4cb2-8729-35cf53e39f44",
-      "name": "Send a text message1",
-      "webhookId": "3d1bde90-2c92-47ee-b54a-bf693e4fc139",
-      "credentials": {
-        "telegramApi": {
-          "id": "34",
-          "name": "Telegram (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "content": "## Fetch the last 2 hours of transcript\nIt will not continue if there are no transcripts",
-        "height": 528,
-        "width": 1264
-      },
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        -2576,
-        -160
-      ],
-      "id": "90d4c49e-033a-4c9a-bfd2-1f481ea4f3f6",
-      "name": "Sticky Note"
-    },
-    {
-      "parameters": {
-        "operation": "update",
-        "dataTableId": {
-          "__rl": true,
-          "value": "CQUpkYE84cThYc1u",
-          "mode": "list",
-          "cachedResultName": "Limitless Markdown",
-          "cachedResultUrl": "/projects/gg0hqAM3n0Ei2OUc/datatables/CQUpkYE84cThYc1u"
-        },
-        "filters": {
-          "conditions": [
-            {
-              "keyName": "updatedAt",
-              "condition": "neq",
-              "keyValue": "={{ $now }}"
-            }
-          ]
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "markdown": "={{ $json.markdown.toJsonString() }}"
-          },
-          "matchingColumns": [
-            "markdown"
-          ],
-          "schema": [
-            {
-              "id": "markdown",
-              "displayName": "markdown",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "readOnly": false,
-              "removed": false
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.dataTable",
-      "typeVersion": 1,
-      "position": [
-        -1456,
-        160
-      ],
-      "id": "018e70cb-a4f4-4ec3-a455-377a686468fa",
-      "name": "Save Transcript"
-    },
-    {
-      "parameters": {
-        "operation": "get",
-        "dataTableId": {
-          "__rl": true,
-          "value": "CQUpkYE84cThYc1u",
-          "mode": "list",
-          "cachedResultName": "Limitless Markdown",
-          "cachedResultUrl": "/projects/gg0hqAM3n0Ei2OUc/datatables/CQUpkYE84cThYc1u"
-        },
-        "filters": {
-          "conditions": [
-            {
-              "keyName": "markdown",
-              "condition": "isNotEmpty"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.dataTable",
-      "typeVersion": 1,
-      "position": [
-        -1408,
-        560
-      ],
-      "id": "eb9d1e28-6d40-4c33-9447-bf108f4e1f3b",
-      "name": "Get Saved Transcript"
-    },
-    {
-      "parameters": {
-        "content": "Providing context and memory, so it doesnt repeat itself",
-        "height": 304,
-        "width": 736
-      },
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        -1168,
-        0
-      ],
-      "id": "e3820f34-2a21-484e-9f13-11608d0fa824",
-      "name": "Sticky Note1"
-    },
-    {
-      "parameters": {
-        "content": "open router node wasnt working for me",
-        "height": 80,
-        "width": 150
-      },
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        -896,
-        1200
-      ],
-      "id": "31bae66f-8b9b-429e-8824-13d84df30123",
-      "name": "Sticky Note2"
-    },
-    {
-      "parameters": {
-        "updates": [
-          "*"
-        ],
-        "additionalFields": {
-          "userIds": "FILL IN HERE"
-        }
-      },
-      "type": "n8n-nodes-base.telegramTrigger",
-      "typeVersion": 1.2,
-      "position": [
-        -2528,
-        512
-      ],
-      "id": "9eeddd3f-b0c4-4e95-b090-904976dec761",
-      "name": "Telegram Trigger",
-      "webhookId": "4a6737c0-c0ca-40ab-869c-ee305397e911",
-      "credentials": {
-        "telegramApi": {
-          "id": "34",
-          "name": "Telegram (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "options": {
-          "responseMode": "responseNodes"
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
-      "typeVersion": 1.3,
-      "position": [
-        -2528,
-        672
-      ],
-      "id": "8cbfb5d2-7720-4573-94f1-e166f6cf2385",
-      "name": "When chat message received",
-      "webhookId": "2d746ef5-0ceb-4e37-af91-f926098576d3"
-    },
-    {
-      "parameters": {
-        "message": "={{ $json.output }}",
-        "waitUserReply": false,
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.chat",
-      "typeVersion": 1,
-      "position": [
-        192,
-        592
-      ],
-      "id": "9eb6b5e8-bbc3-4066-876b-8e19e89a74e0",
-      "name": "Respond to Chat"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "e699a398-b872-4ebc-a3bb-39f661a89c8d",
-              "name": "Message",
-              "value": "={{ $json.message.text }}",
-              "type": "string"
-            },
-            {
-              "id": "e1eb5f05-b1ea-4ec5-ac4b-3655ecc601c7",
-              "name": "Telegram",
-              "value": true,
-              "type": "boolean"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        -2320,
-        512
-      ],
-      "id": "39bdf384-9d06-43ef-b19a-00e5765d9ba3",
-      "name": "Edit Fields1"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "e699a398-b872-4ebc-a3bb-39f661a89c8d",
-              "name": "Message",
-              "value": "={{ $json.chatInput }}",
-              "type": "string"
-            },
-            {
-              "id": "e1eb5f05-b1ea-4ec5-ac4b-3655ecc601c7",
-              "name": "Telegram",
-              "value": false,
-              "type": "boolean"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        -2320,
-        672
-      ],
-      "id": "b8bcf38a-17a3-46f5-9401-b67af8064792",
-      "name": "Edit Fields2"
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "loose",
-            "version": 2
-          },
-          "conditions": [
-            {
-              "id": "ba64d4a6-d437-4467-adb1-fcfed79bbe8f",
-              "leftValue": "={{ $('No Operation, do nothing').item.json.Telegram }}",
-              "rightValue": "",
-              "operator": {
-                "type": "boolean",
-                "operation": "true",
-                "singleValue": true
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "looseTypeValidation": true,
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.2,
-      "position": [
-        -32,
-        496
-      ],
-      "id": "5cea192a-24b5-452b-b41e-c91f157b1bec",
-      "name": "If"
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "loose",
-            "version": 2
-          },
-          "conditions": [
-            {
-              "id": "32196a4f-8b83-443c-bd34-102e1feeb1d4",
-              "leftValue": "={{ $json.Hour }}",
-              "rightValue": 23,
-              "operator": {
-                "type": "number",
-                "operation": "lt"
-              }
-            },
-            {
-              "id": "c19d7526-1022-462a-ae47-3166e40c0af0",
-              "leftValue": "={{ $json.Hour }}",
-              "rightValue": 9,
-              "operator": {
-                "type": "number",
-                "operation": "gt"
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "looseTypeValidation": true,
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.2,
-      "position": [
-        -2784,
-        176
-      ],
-      "id": "02cdbd10-3015-4542-894c-2056ec8fda86",
-      "name": "If1"
-    },
-    {
-      "parameters": {},
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [
-        -2000,
-        576
-      ],
-      "id": "2014a30a-f2f5-40ad-a1dc-fdad2ffecd2e",
-      "name": "No Operation, do nothing"
+      "id": "69e60045-0713-4208-b87d-933406cc8ed3",
+      "name": "Code in JavaScript"
     },
     {
       "parameters": {
@@ -1021,13 +196,12 @@
           },
           "conditions": [
             {
-              "id": "c33129c5-a3ed-4f0a-aa4b-2499ea8fba4a",
-              "leftValue": "={{ $json.Message }}",
-              "rightValue": "/clear",
+              "id": "c34701da-314a-4fb8-bea3-9f1ed1f564aa",
+              "leftValue": "={{ $json.data.lifelogs.length }}",
+              "rightValue": 0,
               "operator": {
-                "type": "string",
-                "operation": "equals",
-                "name": "filter.operator.equals"
+                "type": "number",
+                "operation": "gt"
               }
             }
           ],
@@ -1038,336 +212,27 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        -1792,
-        576
+        0,
+        0
       ],
-      "id": "0d8d41f0-da21-4add-b515-3e0dd8d5429b",
-      "name": "If2"
+      "id": "02dd8ebc-aebe-4289-871f-649fa6a86428",
+      "name": "If"
     },
     {
       "parameters": {
-        "mode": "delete",
-        "deleteMode": "all"
-      },
-      "type": "@n8n/n8n-nodes-langchain.memoryManager",
-      "typeVersion": 1.1,
-      "position": [
-        -1616,
-        816
-      ],
-      "id": "46e13f61-c8f5-4a91-af57-4ddf817277c6",
-      "name": "Clear Chat Memory"
-    },
-    {
-      "parameters": {
-        "message": "=CLEARED",
-        "waitUserReply": false,
+        "authentication": "webhook",
+        "content": "={{ $json.text }}",
         "options": {}
       },
-      "type": "@n8n/n8n-nodes-langchain.chat",
-      "typeVersion": 1,
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
       "position": [
-        -1248,
-        816
+        816,
+        208
       ],
-      "id": "a8328aff-9a9e-4153-8d3a-3cca15304b6b",
-      "name": "Respond to Chat1"
-    },
-    {
-      "parameters": {
-        "options": {
-          "groupMessages": true
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.memoryManager",
-      "typeVersion": 1.1,
-      "position": [
-        -1088,
-        128
-      ],
-      "id": "da0879c3-2bb0-41fd-8068-79c1afafbdd5",
-      "name": "Chat Memory Manager1"
-    },
-    {
-      "parameters": {
-        "descriptionType": "manual",
-        "toolDescription": "Insert Row into your own memory database, here is where you keep your thoughts and opinions of the user, that will help shape your view of the user.",
-        "dataTableId": {
-          "__rl": true,
-          "value": "BIdGO1hX7TvPQXYE",
-          "mode": "list",
-          "cachedResultName": "Facts",
-          "cachedResultUrl": "/projects/gg0hqAM3n0Ei2OUc/datatables/BIdGO1hX7TvPQXYE"
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "Fact": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Fact', `Insert an opinion of the user, here you can put an observation of the user that you want to remember about them, or would be useful for future conversations. Think of this as your private memory for the User. This can be either positive or negative`, 'string') }}",
-            "Type": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Type', `This is the type of opinion, EG personality, lifestyle, etc`, 'string') }}"
-          },
-          "matchingColumns": [],
-          "schema": [
-            {
-              "id": "Fact",
-              "displayName": "Fact",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "readOnly": false,
-              "removed": false
-            },
-            {
-              "id": "Type",
-              "displayName": "Type",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "readOnly": false,
-              "removed": false
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.dataTableTool",
-      "typeVersion": 1,
-      "position": [
-        -320,
-        832
-      ],
-      "id": "69ceec7c-20bd-4c9d-898d-17448e38f946",
-      "name": "Insert Memory"
-    },
-    {
-      "parameters": {
-        "operation": "get",
-        "dataTableId": {
-          "__rl": true,
-          "value": "BIdGO1hX7TvPQXYE",
-          "mode": "list",
-          "cachedResultName": "Facts",
-          "cachedResultUrl": "/projects/gg0hqAM3n0Ei2OUc/datatables/BIdGO1hX7TvPQXYE"
-        }
-      },
-      "type": "n8n-nodes-base.dataTable",
-      "typeVersion": 1,
-      "position": [
-        -1200,
-        560
-      ],
-      "id": "559bc9a3-075f-4bc0-8914-d0cc44dfc9c5",
-      "name": "Get Memories"
-    },
-    {
-      "parameters": {
-        "fieldsToAggregate": {
-          "fieldToAggregate": [
-            {
-              "fieldToAggregate": "Fact",
-              "renameField": true,
-              "outputFieldName": "Facts"
-            }
-          ]
-        },
-        "options": {
-          "keepMissing": false
-        }
-      },
-      "type": "n8n-nodes-base.aggregate",
-      "typeVersion": 1,
-      "position": [
-        -1024,
-        560
-      ],
-      "id": "c4a9fa6b-42b4-46a1-8c9d-d6e0e570cb93",
-      "name": "Aggregate1"
-    },
-    {
-      "parameters": {
-        "chatId": "FILL IN HERE",
-        "text": "=ERROR",
-        "additionalFields": {
-          "appendAttribution": false
-        }
-      },
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.2,
-      "position": [
-        -32,
-        720
-      ],
-      "id": "ec11874d-0c72-4315-a04f-d20180c1bdcc",
-      "name": "Send a text message2",
-      "webhookId": "3d1bde90-2c92-47ee-b54a-bf693e4fc139",
-      "credentials": {
-        "telegramApi": {
-          "id": "34",
-          "name": "Telegram (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "get",
-        "dataTableId": {
-          "__rl": true,
-          "value": "BIdGO1hX7TvPQXYE",
-          "mode": "list",
-          "cachedResultName": "Facts",
-          "cachedResultUrl": "/projects/gg0hqAM3n0Ei2OUc/datatables/BIdGO1hX7TvPQXYE"
-        }
-      },
-      "type": "n8n-nodes-base.dataTable",
-      "typeVersion": 1,
-      "position": [
-        -784,
-        128
-      ],
-      "id": "84358799-3e05-470d-baa7-2c7a8b92e77e",
-      "name": "Get Memories1"
-    },
-    {
-      "parameters": {
-        "fieldsToAggregate": {
-          "fieldToAggregate": [
-            {
-              "fieldToAggregate": "Fact",
-              "renameField": true,
-              "outputFieldName": "Facts"
-            }
-          ]
-        },
-        "options": {
-          "keepMissing": false
-        }
-      },
-      "type": "n8n-nodes-base.aggregate",
-      "typeVersion": 1,
-      "position": [
-        -560,
-        128
-      ],
-      "id": "8dcb1936-3a2b-468a-a267-e4fe4fdad31d",
-      "name": "Aggregate2"
-    },
-    {
-      "parameters": {
-        "content": "Used for debugging, doing /clear clears the chat context",
-        "height": 80
-      },
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        -1504,
-        976
-      ],
-      "id": "0c9aed6b-9e62-43f3-a6a2-99de5a931d16",
-      "name": "Sticky Note3"
-    },
-    {
-      "parameters": {
-        "content": "Context",
-        "height": 224,
-        "width": 560
-      },
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        -1456,
-        512
-      ],
-      "id": "d035c273-c985-4813-822f-1851f6f58ec5",
-      "name": "Sticky Note4"
-    },
-    {
-      "parameters": {
-        "toolDescription": "Search for lifelogs, this provides extra transcripts that you can use for more context or answer questions. This is fast, so use it before answering the user!",
-        "url": "https://api.limitless.ai/v1/lifelogs",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {
-              "name": "search",
-              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', `Search query to perform hybrid search across lifelogs. Hybrid search is a combination of keyword search and semantic search; you can therefore send:\n\n    semantic queries, like \"place bob recommended at dinner\", or\n    boolean keyword search, like \"blue OR red\".\n\n(While AND queries are supported, sending \"red AND blue\" is the same as sending \"red blue\"). When provided, other filtering parameters are applied as additional constraints. `, 'string') }}"
-            },
-            {
-              "name": "includeContents",
-              "value": "false"
-            }
-          ]
-        },
-        "options": {},
-        "optimizeResponse": true,
-        "dataField": "data"
-      },
-      "type": "n8n-nodes-base.httpRequestTool",
-      "typeVersion": 4.2,
-      "position": [
-        -192,
-        832
-      ],
-      "id": "242ed7be-8a66-43ff-9235-3d827c68c776",
-      "name": "Search Transcripts",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "AIGCF2K7UDD7cHgk",
-          "name": "Limitless.ai (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "content": "# Random Messages throughout the day",
-        "height": 288,
-        "width": 512,
-        "color": 5
-      },
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        -3152,
-        48
-      ],
-      "id": "221cc6c0-8d32-4223-af5b-c6d75e416dca",
-      "name": "Sticky Note5"
-    },
-    {
-      "parameters": {
-        "content": "# Chat",
-        "height": 400,
-        "width": 464,
-        "color": 5
-      },
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        -2576,
-        448
-      ],
-      "id": "fca0b9f7-dfb9-4ffe-b88f-3e73a5b158ac",
-      "name": "Sticky Note6"
-    },
-    {
-      "parameters": {
-        "content": "# How this works:\nIt is split up into 2 parts, The Random messages throughout the day and the chat mode\n\n## Random Messages\nis currently scheduled to run every 30 mins between 9am and 11pm, It fetches the last 2 hours of lifelogs as context, and chooses to respond to something, lifelogs are stored in limitless datatable (just for persistence) so it does not fill up context when conversations are spanning over multiple hours\n\n## Chat Mode\nIt has the context of the past 2 hours of transcripts and is able to search through lifelogs using the tool\n\n### Memory\nI also attempted to have the LLM persist memory of the user similar to what little I saw in the friend demos, I could have used a proper memory tool or RAG but I couldnt figure it out reliably. From my experience the LLM barely uses the memory tool to add memories, but it will always have the memories as context.",
-        "height": 544,
-        "width": 512,
-        "color": 4
-      },
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        -3152,
-        368
-      ],
-      "id": "94865cff-b9ce-41e2-8d9f-aa28efd5fc2a",
-      "name": "Sticky Note7"
+      "id": "c540b651-7e13-4f19-a5ad-f19382fd1345",
+      "name": "Discord2",
+      "webhookId": "af60618e-3795-4bcf-ab73-49d2f0171454"
     }
   ],
   "pinData": {},
@@ -1376,16 +241,16 @@
   },
   "shared": [
     {
-      "updatedAt": "2025-11-05T02:51:45.816Z",
-      "createdAt": "2025-11-05T02:51:45.816Z",
+      "updatedAt": "2025-11-05T03:14:15.215Z",
+      "createdAt": "2025-11-05T03:14:15.215Z",
       "role": "workflow:owner",
-      "workflowId": "UdGN5mchhtJaDPTF",
+      "workflowId": "EJ1EHjDtubuWUHSj",
       "projectId": "3dtat9rk4vrp7A9f"
     }
   ],
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-11-05T02:51:45.802Z",
-  "versionId": "28ebea2e-d00c-4e6c-86f6-9e93a7f16492"
+  "updatedAt": "2025-11-05T03:14:15.211Z",
+  "versionId": "f8e1a9dc-b8ce-48c5-b188-567eb5f63b33"
 }
