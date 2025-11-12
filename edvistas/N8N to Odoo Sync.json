@@ -1,6 +1,56 @@
 {
   "active": false,
-  "connections": {},
+  "connections": {
+    "Compare Datasets": {
+      "main": [
+        [
+          {
+            "node": "Push Customers (New System)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Contacts (Old System)": {
+      "main": [
+        [
+          {
+            "node": "Compare Datasets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Contacts (New System)": {
+      "main": [
+        [
+          {
+            "node": "Compare Datasets",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get Contacts (Old System)",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Contacts (New System)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
   "createdAt": "2025-10-21T20:04:11.288Z",
   "id": "fyiKMDGc0n28bY1H",
   "isArchived": false,
@@ -14,8 +64,8 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -544,
-        -32
+        -560,
+        -80
       ],
       "id": "0bf0afc5-0eba-49db-ac94-9bcbd8e86fe4",
       "name": "When clicking ‘Execute workflow’"
@@ -65,26 +115,21 @@
     },
     {
       "parameters": {
-        "resource": "custom",
-        "customResource": "project.project",
-        "operation": "getAll",
-        "returnAll": true,
+        "mergeByFields": {
+          "values": [
+            {}
+          ]
+        },
         "options": {}
       },
-      "type": "n8n-nodes-base.odoo",
-      "typeVersion": 1,
+      "type": "n8n-nodes-base.compareDatasets",
+      "typeVersion": 2.3,
       "position": [
-        -272,
-        -32
+        16,
+        -128
       ],
-      "id": "91a1b0f6-dd89-4832-a4ee-fec0283a2480",
-      "name": "Get many items",
-      "credentials": {
-        "odooApi": {
-          "id": "13",
-          "name": "Odoo-Stage (kdessinger)"
-        }
-      }
+      "id": "a3e3473b-6238-4e9a-bf0d-dd645fa11670",
+      "name": "Compare Datasets"
     },
     {
       "parameters": {
@@ -97,15 +142,57 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -48,
-        -32
+        320,
+        -144
       ],
-      "id": "1cc75bf7-c65c-4af8-8604-e6a7aa332e1b",
-      "name": "Get many items1",
+      "id": "df57c1cd-1f14-45fe-9589-96399e41d039",
+      "name": "Push Customers (New System)",
       "credentials": {
         "odooApi": {
-          "id": "14",
-          "name": "Odoo-Stage (Administrator)"
+          "id": "4t3XFZUwFHx1p08w",
+          "name": "Odoo Enterprise (Administrator)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "limit": 1000,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        -224,
+        -192
+      ],
+      "id": "91a1b0f6-dd89-4832-a4ee-fec0283a2480",
+      "name": "Get Contacts (Old System)",
+      "credentials": {
+        "odooApi": {
+          "id": "12",
+          "name": "Odoo (Administrator)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "limit": 1000,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        -224,
+        0
+      ],
+      "id": "1cc75bf7-c65c-4af8-8604-e6a7aa332e1b",
+      "name": "Get Contacts (New System)",
+      "credentials": {
+        "odooApi": {
+          "id": "4t3XFZUwFHx1p08w",
+          "name": "Odoo Enterprise (Administrator)"
         }
       }
     }
@@ -145,6 +232,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-10-31T22:30:01.000Z",
-  "versionId": "0cceae29-a28e-4894-a557-b552cb4c51a0"
+  "updatedAt": "2025-11-12T01:15:37.000Z",
+  "versionId": "4c673d1b-fcb5-46d6-9028-8c5fbf55736d"
 }
