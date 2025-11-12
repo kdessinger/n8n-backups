@@ -3,7 +3,13 @@
   "connections": {
     "Execute Workflow Trigger": {
       "main": [
-        []
+        [
+          {
+            "node": "Get Helpdesk Tickets",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Set Defaults": {
@@ -19,7 +25,13 @@
     },
     "Webhook": {
       "main": [
-        []
+        [
+          {
+            "node": "Get Helpdesk Tickets",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Get Helpdesk Tickets": {
@@ -188,7 +200,7 @@
     },
     {
       "parameters": {
-        "content": "# 🧠 Extract FAQ's from HelpDesk Tickets\n\nThis workflow reviews incoming helpdesk tickets to identify common questions and produce concise question-and-answer pairs for the knowledgebase. It automates extraction, validation, and formatting of FAQs for publication.\n\n## 🔔 Trigger\n New or updated helpdesk tickets flagged for knowledgebase review.\n\n## 🧩 Steps\n* Scan selected tickets and extract candidate Q&A pairs\n* Validate and deduplicate entries against existing KB\n* Format and insert approved FAQs into the knowledgebase\n\n## 🎯 Outcome\n A curated set of validated FAQs added to the knowledgebase, improving self-service and reducing repeat tickets.\n\n### 📝 Note: Ensure sensitive or PII-containing content is redacted before publication.",
+        "content": "# 🧠 Extract FAQ's from HelpDesk Ticket\n\nThis workflow reviews incoming helpdesk tickets to identify common questions and produce concise question-and-answer pairs for the knowledgebase. It automates extraction, validation, and formatting of FAQs for publication.\n\n## 🔔 Trigger\n New or updated helpdesk tickets flagged for knowledgebase review.\n\n## 🧩 Steps\n* Scan selected tickets and extract candidate Q&A pairs\n* Validate and deduplicate entries against existing KB\n* Format and insert approved FAQs into the knowledgebase\n\n## 🎯 Outcome\n A curated set of validated FAQs added to the knowledgebase, improving self-service and reducing repeat tickets.\n\n### 📝 Note: Ensure sensitive or PII-containing content is redacted before publication.",
         "height": 1008,
         "width": 832,
         "color": 6
@@ -236,8 +248,8 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        272,
-        1008
+        288,
+        1040
       ],
       "id": "06377d4e-371c-424a-8b75-8bd8b1d55f50",
       "name": "Merge"
@@ -310,8 +322,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -624,
-        912
+        -608,
+        960
       ],
       "alwaysOutputData": true,
       "credentials": {
@@ -355,8 +367,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -336,
-        864
+        -352,
+        832
       ],
       "alwaysOutputData": true,
       "credentials": {
@@ -505,7 +517,7 @@
       "typeVersion": 3.2,
       "position": [
         48,
-        928
+        976
       ],
       "id": "1a319bed-8ded-4ad6-921c-2e643f372777",
       "name": "Merge1"
@@ -915,6 +927,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-10-31T22:03:13.000Z",
-  "versionId": "d5943e4f-ea44-43a5-8a85-5f1a19ce1d5e"
+  "updatedAt": "2025-11-12T03:23:16.000Z",
+  "versionId": "ccd8e02a-7dbf-4d7b-91b3-e4059b42026b"
 }
