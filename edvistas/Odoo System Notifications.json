@@ -85,18 +85,29 @@
         ],
         [
           {
-            "node": "All Good!",
+            "node": "set reply",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Run Every Hour": {
+    "Schedule Task": {
       "main": [
         [
           {
             "node": "Incoming Mail Servers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "set reply": {
+      "main": [
+        [
+          {
+            "node": "All Good!",
             "type": "main",
             "index": 0
           }
@@ -117,25 +128,15 @@
         "resource": "custom",
         "customResource": "fetchmail.server",
         "operation": "get",
-        "customResourceId": "1",
-        "options": {
-          "fieldsList": [
-            "id",
-            "name",
-            "date",
-            "server",
-            "port",
-            "user",
-            "email_folder"
-          ]
-        }
+        "customResourceId": "5",
+        "options": {}
       },
       "id": "38f050ac-9baf-48aa-9563-a2f60ca40da3",
       "name": "Incoming Mail Servers",
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -48,
+        -64,
         368
       ],
       "notesInFlow": true,
@@ -236,25 +237,14 @@
       ]
     },
     {
-      "parameters": {},
-      "id": "f4744c88-a8bc-40d9-ba1a-b29e1e23d65a",
-      "name": "All Good!",
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [
-        560,
-        384
-      ]
-    },
-    {
       "parameters": {
         "content": "## Odoo Email Tester\n\nThis workflow will check odoo's Incomming mail servers to see when the last fetch operation occured.  The cron system is supposed to check email every 15 minutes but sometimes cron gets locked up.   When that happens this workflow will connect to odoo and restart the cron system.\n\nOdoomaster!",
         "height": 208,
-        "width": 704
+        "width": 720
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -256,
+        -272,
         128
       ],
       "typeVersion": 1,
@@ -285,7 +275,7 @@
       "type": "n8n-nodes-base.ssh",
       "typeVersion": 1,
       "position": [
-        560,
+        544,
         160
       ],
       "id": "85c0cbf5-e3d5-4e67-95ee-d99b4c60653f",
@@ -329,7 +319,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        768,
+        752,
         160
       ],
       "id": "e25a34bd-f2ae-4a14-a647-1e47a98bb769",
@@ -458,14 +448,56 @@
         }
       },
       "id": "0eaebc0a-3ebc-48e3-ade6-837d7ce6c67c",
-      "name": "Run Every Hour",
+      "name": "Schedule Task",
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
       "position": [
-        -240,
+        -272,
         368
       ],
       "notes": "M–F from 6am → 5pm → every 1 hour.\nAny other time (including nights + weekends) → every 3 hours."
+    },
+    {
+      "parameters": {},
+      "id": "f4744c88-a8bc-40d9-ba1a-b29e1e23d65a",
+      "name": "All Good!",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        752,
+        384
+      ],
+      "notesInFlow": true,
+      "notes": "Exit"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "797a577e-60b9-4524-b489-624526e5d7be",
+              "name": "status",
+              "value": "OK",
+              "type": "string"
+            },
+            {
+              "id": "01c65600-d794-47e0-942f-135a49d51bf0",
+              "name": "code",
+              "value": 200,
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        544,
+        384
+      ],
+      "id": "d44fe596-98ab-469f-b1df-31210b8074a1",
+      "name": "set reply"
     }
   ],
   "pinData": {},
@@ -503,6 +535,9 @@
     },
     "node:Run Every Hour": {
       "recurrenceRules": []
+    },
+    "node:Schedule Task": {
+      "recurrenceRules": []
     }
   },
   "tags": [
@@ -514,6 +549,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-11-10T17:08:04.000Z",
-  "versionId": "aee73050-f31a-4557-9a8c-ad9960a25550"
+  "updatedAt": "2025-11-11T21:16:56.000Z",
+  "versionId": "8cddad90-6456-4792-bac9-061a5e59f30a"
 }
