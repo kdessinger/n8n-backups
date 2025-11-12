@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "Tavily": {
       "ai_tool": [
@@ -193,8 +193,8 @@
       "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
       "typeVersion": 1.1,
       "position": [
-        1060,
-        180
+        1072,
+        192
       ],
       "id": "71df5464-8c6a-461b-89ea-f0bff74437db",
       "name": "Tavily",
@@ -214,7 +214,7 @@
       "type": "n8n-nodes-base.linkedIn",
       "typeVersion": 1,
       "position": [
-        2980,
+        2992,
         -240
       ],
       "id": "abfe1929-3c63-4207-acf3-c98c07750bcd",
@@ -233,7 +233,7 @@
       "typeVersion": 1.9,
       "position": [
         1040,
-        -100
+        -112
       ],
       "id": "20dd903a-5e99-4c52-b7d0-c21bccdcf4f3",
       "name": "LinkedIn Post Agent"
@@ -249,8 +249,8 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 1.9,
       "position": [
-        1480,
-        -100
+        1488,
+        -112
       ],
       "id": "672c91fb-1e81-4502-885c-709aff607f5d",
       "name": "Image Prompt Agent"
@@ -283,8 +283,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1000,
-        540
+        1008,
+        544
       ],
       "id": "a0bbbf6e-d423-48f5-906e-0f6063b21f24",
       "name": "Generate Image",
@@ -304,8 +304,8 @@
       "type": "n8n-nodes-base.convertToFile",
       "typeVersion": 1.1,
       "position": [
-        1220,
-        540
+        1232,
+        544
       ],
       "id": "d2be3801-6ecc-44c6-9e1c-d7e4bc62b413",
       "name": "Convert to Binary"
@@ -330,8 +330,8 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
       "position": [
-        2460,
-        -100
+        2464,
+        -112
       ],
       "id": "1fe03c99-6b90-4b82-91ca-b9fadf8e49e3",
       "name": "Send Post",
@@ -371,8 +371,8 @@
       "type": "n8n-nodes-base.formTrigger",
       "typeVersion": 2.2,
       "position": [
-        760,
-        -100
+        768,
+        -112
       ],
       "id": "482f276e-6f42-4040-916b-8491c151360c",
       "name": "On form submission",
@@ -387,24 +387,24 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        980,
-        -200
+        992,
+        -208
       ],
       "id": "f74a87aa-2473-4b22-b2ff-38af28be1468",
       "name": "Sticky Note"
     },
     {
       "parameters": {
-        "content": "# Generate Image\n",
+        "content": "# Image Generation\n",
         "height": 260,
-        "width": 460,
+        "width": 908,
         "color": 5
       },
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1840,
-        -200
+        1392,
+        -208
       ],
       "id": "1c34c2b6-ef8f-4633-978c-0f3205df07f0",
       "name": "Sticky Note1"
@@ -420,26 +420,10 @@
       "typeVersion": 1,
       "position": [
         2320,
-        -200
+        -208
       ],
       "id": "714872ba-e5c2-43b3-8632-9b8bce6518a5",
       "name": "Sticky Note3"
-    },
-    {
-      "parameters": {
-        "content": "# Image Prompt\n",
-        "height": 260,
-        "width": 440,
-        "color": 3
-      },
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        1380,
-        -200
-      ],
-      "id": "9c0b2fb6-0ae6-47ef-85c4-9249a3dc436f",
-      "name": "Sticky Note4"
     },
     {
       "parameters": {
@@ -451,8 +435,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        680,
-        -200
+        688,
+        -208
       ],
       "id": "284025ac-7408-4687-8043-d337eabfce56",
       "name": "Sticky Note5"
@@ -467,8 +451,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        980,
-        120
+        992,
+        128
       ],
       "id": "a1328985-c554-469d-aff7-aca049650891",
       "name": "Sticky Note2"
@@ -482,8 +466,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -60,
-        -200
+        -64,
+        -208
       ],
       "id": "5b973edd-6ed4-4ba1-baed-da274b4ff522",
       "name": "Sticky Note6"
@@ -493,8 +477,8 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        780,
-        540
+        784,
+        544
       ],
       "id": "c81f1d80-3730-4655-8dfa-fa4eae1e2eff",
       "name": "When clicking ‘Test workflow’"
@@ -509,7 +493,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        680,
+        688,
         400
       ],
       "id": "8a3bba1c-8aee-403f-bc78-f3526403387f",
@@ -519,16 +503,17 @@
       "parameters": {
         "model": {
           "__rl": true,
+          "value": "gpt-5-mini",
           "mode": "list",
-          "value": "gpt-4.1-mini"
+          "cachedResultName": "gpt-5-mini"
         },
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.2,
       "position": [
-        1220,
-        180
+        1232,
+        192
       ],
       "id": "05e86862-4a39-4302-a4d9-a4b0efcb5e1f",
       "name": "gpt4.1-mini",
@@ -550,7 +535,7 @@
       "typeVersion": 1,
       "position": [
         720,
-        200
+        208
       ],
       "id": "2a0de93c-79ef-4234-be48-d09db5c30a0a",
       "name": "SerpAPI",
@@ -574,8 +559,8 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        1940,
-        -100
+        1808,
+        -112
       ],
       "id": "3bb5d7b8-0dd1-4d16-90a6-3ca1dfbca6eb",
       "name": "OpenAI",
@@ -614,8 +599,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        2680,
-        -100
+        2688,
+        -112
       ],
       "id": "ec87ddf6-b6fd-474a-8a4e-74f8b376e08f",
       "name": "Approved?"
@@ -625,7 +610,7 @@
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        2980,
+        2992,
         0
       ],
       "id": "77cac40f-6a01-4eb4-bf37-b2f864b38b83",
@@ -645,8 +630,8 @@
       "type": "n8n-nodes-base.perplexityTool",
       "typeVersion": 1,
       "position": [
-        840,
-        200
+        848,
+        208
       ],
       "id": "c7e0c7d0-c26e-4e85-b151-3f754d3604bc",
       "name": "Perplexity",
@@ -665,8 +650,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2160,
-        -100
+        2032,
+        -112
       ],
       "id": "a50ce0c8-a648-4bad-8fdd-d26f588806f5",
       "name": "Rename File"
@@ -679,8 +664,8 @@
       "type": "n8n-nodes-base.nextCloud",
       "typeVersion": 1,
       "position": [
-        2460,
-        140
+        2192,
+        80
       ],
       "id": "ccc3c503-7a7b-45a5-b02c-c06a2574b272",
       "name": "Save File to Nextcloud",
@@ -708,8 +693,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1540,
-        540
+        1552,
+        544
       ],
       "id": "b868618e-3100-4c15-91c3-61a398ac0be5",
       "name": "Baserow API"
@@ -722,7 +707,7 @@
       "typeVersion": 1,
       "position": [
         1760,
-        540
+        544
       ],
       "id": "6dca1e6b-7981-4eb9-9296-61ff26bce609",
       "name": "Baserow MCP",
@@ -760,6 +745,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-07-09T20:56:03.000Z",
-  "versionId": "4fffb57a-1f3b-43d6-af00-5adb4ca18513"
+  "updatedAt": "2025-11-11T22:58:43.000Z",
+  "versionId": "8d305eba-4911-46f3-8b84-90db3dfc14c9"
 }
