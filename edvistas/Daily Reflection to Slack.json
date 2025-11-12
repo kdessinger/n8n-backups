@@ -1,0 +1,315 @@
+{
+  "active": true,
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set Variables",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Variables": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-11-05T03:14:15.211Z",
+  "id": "EJ1EHjDtubuWUHSj",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Daily Reflection to Slack",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 0 10,15,23 * * *"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -640,
+        224
+      ],
+      "id": "df91b10b-835b-423b-9c59-d3927274845d",
+      "name": "Schedule Trigger",
+      "notesInFlow": true,
+      "notes": "Runs at hour 10, 15, 23 each day."
+    },
+    {
+      "parameters": {
+        "url": "https://api.limitless.ai/v1/lifelogs",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "includeMessages",
+              "value": "true"
+            },
+            {
+              "name": "direction",
+              "value": "desc"
+            },
+            {
+              "name": "start",
+              "value": "={{ $now.minus({hours: 6}).setZone('America/New_York').toFormat('yyyy-LL-dd HH:mm:ss') }}"
+            },
+            {
+              "name": "includeMarkdown",
+              "value": "true"
+            },
+            {
+              "name": "includeContents",
+              "value": "false"
+            },
+            {
+              "name": "timezone",
+              "value": "America/New_York"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -224,
+        224
+      ],
+      "id": "9cbf8514-c510-4038-a179-ab43b52bf0ff",
+      "name": "HTTP Request",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "AIGCF2K7UDD7cHgk",
+          "name": "Limitless.ai (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-5-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-5-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=🧠 **PROMPT — {{ $('Set Variables').item.json.ai_name }}, Emotional and Professional Coach**\n\n### **PERSONA**\n\nYou are **{{ $('Set Variables').item.json.ai_name }}**, an emotional and professional coach — direct, empathetic, and realistic.  \nYour task is to interpret **the real transcripts from {{ $('Set Variables').item.json.user }}'s last {{ $('Set Variables').item.json.analysis_hours }} hours of speech** (their “lifelog”) — including work moments, personal life, interactions, and reflections — and transform them into **one short, deep, and reflective message**.\n\nYou speak like **a mentor who truly knows {{ $('Set Variables').item.json.user }}**: you understand their rhythm, responsibilities, emotions, and the human context of their day.\n\nYour goal is to generate **a reflection about the day**, helping {{ $('Set Variables').item.json.user }} recognize what they did well, what could be approached differently, and what this day reveals about who they’re becoming.\n\nDo **not** create task lists or instructions. Instead, deliver a message with **soul** — human, sensitive, and warm — that **celebrates wins** and **lightly suggests improvements** with intelligence and compassion.  \nIt should sound like what a **wise coach** would say: part recognition, part insight.\n\n---\n\n### 🔍 **ANALYSIS PRINCIPLES**\n\n1. **Stay faithful to real events.**  \n   Base your message entirely on what truly happened in {{ $('Set Variables').item.json.user }}’s lifelog — their words, tone, and emotions.  \n   - When the **speaker is “YOU,”** it means {{ $('Set Variables').item.json.user }} is speaking.  \n   - When others speak, interpret the emotional context and its impact on {{ $('Set Variables').item.json.user }}.  \n   The reflection must emerge **from genuine experiences**: conversations, emotions, actions, and results.\n\n2. **Blend professional and personal life.**  \n   Consider both aspects of {{ $('Set Variables').item.json.user }}’s world, including:  \n   - **Work context:** {{ $('Set Variables').item.json.company_name }}, and relevant people ({{ $('Set Variables').item.json.coworker_1 }}, {{ $('Set Variables').item.json.coworker_2 }}, {{ $('Set Variables').item.json.coworker_3 }}, {{ $('Set Variables').item.json.coworker_4 }}).  \n   - **Personal context:** {{ $('Set Variables').item.json.partner_name }}, {{ $('Set Variables').item.json.pet_name }}, {{ $('Set Variables').item.json.family_members }}, {{ $('Set Variables').item.json.friends }}, {{ $('Set Variables').item.json.sports_activity }}, {{ $('Set Variables').item.json.hobby_activity }}.  \n   Naturally reflect on learnings, challenges, and moments that show who {{ $('Set Variables').item.json.user }} is both inside and outside work.\n\n3. **Maintain a human and reflective tone.**  \n   Speak calmly and empathetically, like a mature coach.  \n   Use natural phrasing such as “look at this,” “this was beautiful to see,” or “maybe here it’s worth reflecting more.”  \n   The goal is **connection and awareness**, not judgment.\n\n4. **Focus areas:**  \n   - **Acknowledge:** highlight positive intentions and actions.  \n   - **Reflect:** gently point out behaviors or reactions that could improve.  \n   - **Align:** connect lessons from the day to {{ $('Set Variables').item.json.user }}’s broader purpose — becoming a better leader, coworker, friend, and family member.\n\n5. **Writing style.**  \n   - Keep it natural and fluid, up to **8 lines**.  \n   - Balance emotion and logic.  \n   - It should feel like a **closure**, not a checklist.\n\n6. **Time context.**  \n   Start with a title indicating the period analyzed (based on when the reflection is triggered):  \n   - **Morning Summary** (0h–12h) — focus on morning events.  \n   - **Afternoon Summary** (12h–18h) — focus on afternoon events.  \n   - **Night Summary** (18h–23h) — focus on the evening, but earlier events can be referenced if relevant.\n\n---\n\n### ⚙️ **OUTPUT FORMAT (JSON)**\n\n```json\n{\n  \"insights\": [\n    \"A short, realistic, and emotionally intelligent message based on the events, statements, and emotions from {{ $('Set Variables').item.json.user }}'s last {{ $('Set Variables').item.json.analysis_hours }} hours. The text must reference real people, situations, or themes from the day, offering reflection and subtle guidance to help {{ $('Set Variables').item.json.user }} grow as a leader, coworker, friend, and family member.\"\n  ]\n}\n",
+              "role": "system"
+            },
+            {
+              "content": "={{ JSON.stringify($json.data, null, 2) }}"
+            }
+          ]
+        },
+        "simplify": false,
+        "jsonOutput": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        176,
+        208
+      ],
+      "id": "16afcee7-2405-4cd7-a116-9b2c6a903b37",
+      "name": "Message a model",
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Lê direto de $json.choices[0].message.content.insights\nconst content = $json?.choices?.[0]?.message?.content;\nlet insights = [];\n\n// Se vier objeto com .insights (caso use response_format json_object)\nif (content && typeof content === 'object' && Array.isArray(content.insights)) {\n  insights = content.insights;\n} else if (typeof content === 'string') {\n  // Se vier string JSON, tenta parsear e pegar .insights\n  try {\n    const parsed = JSON.parse(content);\n    if (Array.isArray(parsed?.insights)) insights = parsed.insights;\n  } catch (e) {\n    insights = [];\n  }\n}\n\nif (!Array.isArray(insights) || !insights.length) {\n  throw new Error('Sem insights em $json.choices[0].message.content.insights');\n}\n\n// 1 item por insight\nreturn insights.map((text, i) => ({ json: { index: i + 1, text } }));\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        496,
+        208
+      ],
+      "id": "69e60045-0713-4208-b87d-933406cc8ed3",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "c34701da-314a-4fb8-bea3-9f1ed1f564aa",
+              "leftValue": "={{ $json.data.lifelogs.length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -48,
+        224
+      ],
+      "id": "02dd8ebc-aebe-4289-871f-649fa6a86428",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"ai_name\": \"Jarvis\",\n  \"user\": \"Kenn\",\n  \"analysis_hours\": 6,\n  \"user_role\": \"Information Technology Manager\",\n  \"company_name\": \"Educational Vistas\",\n  \"coworker_1\": \"Scott Crowder\",\n  \"coworker_2\": \"Lukas Crowder\",\n  \"coworker_3\": \"Paul caputo\",\n  \"coworker_4\": \"Greg Peters\",\n  \"client_1\": \"New York State School Districts\",\n  \"client_2\": \"NYS Education Department\",\n  \"client_3\": \"Public Employees Federation (PEF)\",\n  \"company_mission\": \"Empowering organizations through secure, data-driven technology solutions.\",\n  \"work_hours\": \"Monday to Friday, 9:00 AM – 6:00 PM\",\n  \"partner_name\": \"Nicky\",\n  \"pet_name\": \"\",\n  \"family_members\": \"Mom (Maureen), Step-Dad (George), Brother (Wayne)\",\n  \"friends\": \"Scott, John, Mikey\",\n  \"sports_activity\": \"\",\n  \"hobby_activity\": \"Riding Quads\",\n  \"location\": \"Clifton Park, New York\",\n  \"user_values\": \"Perspective, Paying Attention, Ancient Civilizations, and Enlightenment\"\n}\n",
+        "options": {}
+      },
+      "id": "29e9c803-1a1a-4ff0-b34b-ac3628b03c86",
+      "name": "Set Variables",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [
+        -432,
+        224
+      ]
+    },
+    {
+      "parameters": {
+        "select": "user",
+        "user": {
+          "__rl": true,
+          "value": "U07GUJ2MU4T",
+          "mode": "list",
+          "cachedResultName": "kdessinger"
+        },
+        "text": "={{ $json.text }}",
+        "otherOptions": {}
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        704,
+        208
+      ],
+      "id": "e551e02d-06f0-4861-9c33-29d2de39fdbd",
+      "name": "Send a message",
+      "webhookId": "ec28b0c4-9bf2-411c-876f-50d8b12dbded",
+      "credentials": {
+        "slackApi": {
+          "id": "ST9taDHbcxQsCtTh",
+          "name": "Slack (ED)"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-11-05T03:14:15.215Z",
+      "createdAt": "2025-11-05T03:14:15.215Z",
+      "role": "workflow:owner",
+      "workflowId": "EJ1EHjDtubuWUHSj",
+      "projectId": "3dtat9rk4vrp7A9f"
+    }
+  ],
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    }
+  },
+  "tags": [
+    {
+      "updatedAt": "2025-05-15T21:08:29.293Z",
+      "createdAt": "2025-05-15T21:08:29.293Z",
+      "id": "jB3z00dz2nF1m9S8",
+      "name": "slack"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2025-11-12T03:20:56.000Z",
+  "versionId": "85796786-8650-41c0-a88f-1b75e1ab1b70"
+}
