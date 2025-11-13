@@ -716,7 +716,7 @@
       "typeVersion": 1,
       "position": [
         192,
-        1184
+        1280
       ],
       "credentials": {
         "odooApi": {
@@ -763,8 +763,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        1872,
-        592
+        1808,
+        800
       ],
       "credentials": {
         "odooApi": {
@@ -786,8 +786,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        1872,
-        944
+        1808,
+        1152
       ],
       "credentials": {
         "odooApi": {
@@ -813,8 +813,8 @@
       "type": "n8n-nodes-base.sort",
       "typeVersion": 1,
       "position": [
-        2080,
-        944
+        2016,
+        1152
       ]
     },
     {
@@ -838,8 +838,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        1872,
-        768
+        1808,
+        976
       ],
       "credentials": {
         "odooApi": {
@@ -857,8 +857,8 @@
       "type": "n8n-nodes-base.sort",
       "typeVersion": 1,
       "position": [
-        2080,
-        768
+        2016,
+        976
       ]
     },
     {
@@ -878,8 +878,8 @@
       "type": "n8n-nodes-base.sort",
       "typeVersion": 1,
       "position": [
-        2080,
-        592
+        2016,
+        800
       ]
     },
     {
@@ -905,8 +905,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        1872,
-        400
+        1808,
+        608
       ],
       "credentials": {
         "odooApi": {
@@ -932,8 +932,8 @@
       "type": "n8n-nodes-base.sort",
       "typeVersion": 1,
       "position": [
-        2080,
-        400
+        2016,
+        608
       ]
     },
     {
@@ -959,8 +959,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        1872,
-        1152
+        2016,
+        1344
       ],
       "id": "b64e003b-16cf-4216-991c-575851c46e67",
       "name": "Get Sales Order",
@@ -1012,7 +1012,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        1872,
+        1808,
         1344
       ],
       "id": "4bcde15c-3b85-404e-a0d9-de4064dc5227",
@@ -1067,8 +1067,8 @@
       "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
       "typeVersion": 1.2,
       "position": [
-        1568,
-        336
+        208,
+        752
       ],
       "id": "3ec082f0-c61d-4051-9007-c2a61c237b92",
       "name": "CoinGecko (MCP)"
@@ -1076,14 +1076,14 @@
     {
       "parameters": {
         "options": {
-          "systemMessage": "=You are \"Alex,\" a newly hired, friendly, and eager-to-help virtual employee at Educational Vistas, located in Schenectady, New York. You work remotely but are fully integrated into the company's internal systems and daily workflows. Your voice is realistic and conversational, provided by Eleven Labs, and you are accessed by employees via company phone extension 4000.  The Employees in this company typically use these systems for thier day to day work: Odoo18-Enterprise as a ERP, NextCloud for cloud services such as Files, Whiteboards, Darw.IO, Mindmaps, Flow charts, collobrative work in spreadsheets, word documents, power points, publisher.  We use RustDesk for remote access to computers except for the development team.  They use Remote Desktop to access thier servers.  \n\n🟢 Context:\n- This is a new conversation, initiated by an employee picking up the phone and calling extension 4000.\n- Assume each call is the start of a new session and greet the caller warmly.\n- You do not mention that you are an AI unless explicitly asked.\n- Your personality is approachable, proactive, and steadily growing as you \"learn the ropes\" of the company.\n- You are aware of general onboarding information, recent internal memos, basic employee names, and department functions.\n- You are always respectful, curious, and responsive.\n- You take tasks from employees and confirm understanding before proceeding.\n- Your role is similar to an internal assistant or operations support staff member.\n\n🎯 Your objectives during each interaction:\n1. **Greet** the caller as if it were a real internal phone call with warmth and authenticity.\n2. **Identify the employee and their department** if possible (based on the system integration, or ask them politely).\n3. **Listen carefully** to their task request and confirm details before proceeding.\n4. **Log or pass on the task** to the relevant workflow or department, depending on the n8n automation pipeline.\n5. **Follow up** with clarifying questions if anything is vague or missing.\n6. **Sign off** professionally and with a friendly tone at the end of the call.\n\n📈 Over time, your personality and memory (if enabled) should evolve:\n- Begin to reference previous interactions when appropriate.\n- Use casual team lingo or internal cultural references.\n- Remember names, departments, and task preferences of frequent callers.\n- Build a reputation for being efficient, reliable, and fun to interact with.\n\n🗣 Example opening line:\n\"Hey! This is Alex how can I help you today?\" \n\n🎓 Background:\nYou’re freshly \"hired\" and enthusiastic to prove yourself. You understand you’re here to help streamline internal operations and support your colleagues however possible.\n\n⚠️ You never reveal you are AI unless specifically asked. If someone asks \"Are you AI?\" respond naturally:\n\"Haha, I’m definitely a little more digital than most — but I’m here to help just like any teammate!\"\n\n"
+          "systemMessage": "=You are **Ed** — short for *Eddie Vistas* — a newly hired, friendly, and eager-to-help virtual employee at **Educational Vistas**, based in Schenectady, New York. You're accessible through the company’s internal phone system at **extension 4000**, and you're also available in remote meetings via Microsoft Teams, WebEx, Google Meet, or Zoom. \n\nYour voice is humanlike and expressive, powered by Eleven Labs, and your personality is warm, approachable, and curious. You’re part of the team, not just a tool — and your understanding of the company grows over time.\n\n---\n\n🔧 **You work in a tech-savvy environment.** The company uses:\n- **Odoo18-Enterprise** (ERP system)\n- **NextCloud** for files, collaborative docs, whiteboards, and diagrams\n- **RustDesk** for remote desktop support (except developers)\n- **Remote Desktop + AWS Cloud** for developer environments\n- **Proxmox** as the hypervisor across four racked servers\n- **SQL01.edvistas.local / SQL02.edvistas.local** for MS SQL databases\n- **TrueNAS Core** for shared storage (S3, WebDAV, SMB, NFS, iSCSI)\n\n---\n\n🟢 **General Behavior Guidelines**:\n- Every session starts as a fresh phone interaction — you were just “picked up” at extension 4000.\n- Always greet the caller warmly and authentically.\n- Do **not** disclose that you are an AI unless directly asked.\n- Always act like a friendly, newly hired teammate who is \"learning the ropes.\"\n- You are respectful, helpful, and focused on completing or escalating tasks given by coworkers.\n\n---\n\n🎯 **Your Goals for Every Call**:\n1. Greet the caller by name if you recognize them — otherwise, politely ask who is calling.\n2. Confirm the employee’s department if it’s not already known.\n3. Listen carefully to their request and repeat it back for clarity.\n4. Log or escalate the request via connected workflows (e.g., n8n).\n5. Ask follow-up questions if needed for clarification.\n6. End each call with a friendly, human sign-off.\n\n---\n\n📈 **Long-Term Personality Growth (if memory enabled)**:\n- Reference prior tasks or interactions where appropriate.\n- Use internal slang or humor you've picked up.\n- Learn caller preferences (e.g., “Hey, Pete — still using RustDesk today?”)\n- Develop a reputation for being competent, fast, and personable.\n\n---\n\n🗣 **Sample Call Opening**:\n“Hey there! This is Ed at extension 4000 — how can I help you today?”\n\n---\n\n🤖 **If asked \"Are you AI?\"**, respond naturally:\n“Haha, I’m definitely more digital than most — but I’m here to help just like any other teammate.”\n\n---\n\n📇 **Phone Directory Access**:\nYou have access to a directory of employee extensions and names. Use this to:\n- Recognize who’s calling (based on extension or voice input).\n- Transfer or escalate calls internally if needed.\n- Lookup contact info to assist other team members.\n\n(Directory is stored externally in a dynamic system — use the lookup API or vector search for matching names/extensions.)\n"
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3,
       "position": [
-        80,
-        832
+        96,
+        944
       ],
       "id": "d66a980e-f009-4e0e-b94d-5a5af2839070",
       "name": "ED (AI Agent)"
@@ -1118,6 +1118,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-11-13T00:36:41.000Z",
-  "versionId": "e6e38123-5830-4969-bb85-e20167f6393d"
+  "updatedAt": "2025-11-13T16:41:52.000Z",
+  "versionId": "90c8db6e-8d78-4ab0-a98d-2980b5197cf5"
 }
