@@ -240,7 +240,9 @@
   "createdAt": "2023-09-13T21:44:35.092Z",
   "id": "R3exrELZFhj5SeTL",
   "isArchived": false,
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "Playground",
   "nodes": [
     {
@@ -1087,6 +1089,25 @@
       ],
       "id": "d66a980e-f009-4e0e-b94d-5a5af2839070",
       "name": "ED (AI Agent)"
+    },
+    {
+      "parameters": {
+        "job": "Odoo15"
+      },
+      "type": "n8n-nodes-base.jenkins",
+      "typeVersion": 1,
+      "position": [
+        0,
+        256
+      ],
+      "id": "d8187e71-4f8c-4c0d-8d79-5d47db1cee79",
+      "name": "Trigger a job",
+      "credentials": {
+        "jenkinsApi": {
+          "id": "ZH7slPo10ojaLtuN",
+          "name": "Jenkins (kdessinger)"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -1118,6 +1139,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-11-13T16:41:52.000Z",
-  "versionId": "90c8db6e-8d78-4ab0-a98d-2980b5197cf5"
+  "updatedAt": "2025-11-14T21:08:58.000Z",
+  "versionId": "51b4fb23-92e6-4676-a782-a0f9be7ac6cc"
 }
