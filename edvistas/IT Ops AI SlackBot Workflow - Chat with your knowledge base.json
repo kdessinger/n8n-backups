@@ -518,7 +518,13 @@
     }
   ],
   "pinData": {},
-  "settings": {},
+  "settings": {
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": 300,
+    "executionOrder": "v1",
+    "availableInMCP": false,
+    "errorWorkflow": "NtBd2hj1eiR2xufe"
+  },
   "shared": [
     {
       "updatedAt": "2025-05-15T20:56:11.649Z",
@@ -538,6 +544,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-05-15T21:08:34.000Z",
-  "versionId": "0c3e168a-6b4a-4b8d-a54f-8943ef51caec"
+  "updatedAt": "2025-11-19T17:15:22.000Z",
+  "versionId": "8bbfc2d7-c898-4cac-9135-bb959e4ebb21"
 }
