@@ -200,7 +200,7 @@
     },
     {
       "parameters": {
-        "content": "# 🧠 Extract FAQ's from HelpDesk Ticket\n\nThis workflow reviews incoming helpdesk tickets to identify common questions and produce concise question-and-answer pairs for the knowledgebase. It automates extraction, validation, and formatting of FAQs for publication.\n\n## 🔔 Trigger\n New or updated helpdesk tickets flagged for knowledgebase review.\n\n## 🧩 Steps\n* Scan selected tickets and extract candidate Q&A pairs\n* Validate and deduplicate entries against existing KB\n* Format and insert approved FAQs into the knowledgebase\n\n## 🎯 Outcome\n A curated set of validated FAQs added to the knowledgebase, improving self-service and reducing repeat tickets.\n\n### 📝 Note: Ensure sensitive or PII-containing content is redacted before publication.",
+        "content": "# 🧠 Extract FAQ's from HelpDesk Tickets\n\nThis workflow reviews incoming helpdesk tickets to identify common questions and produce concise question-and-answer pairs for the knowledgebase. It automates extraction, validation, and formatting of FAQs for publication.\n\n## 🔔 Trigger\n New or updated helpdesk tickets flagged for knowledgebase review.\n\n## 🧩 Steps\n* Scan selected tickets and extract candidate Q&A pairs\n* Validate and deduplicate entries against existing KB\n* Format and insert approved FAQs into the knowledgebase\n\n## 🎯 Outcome\n A curated set of validated FAQs added to the knowledgebase, improving self-service and reducing repeat tickets.\n\n### 📝 Note: Ensure sensitive or PII-containing content is redacted before publication.",
         "height": 1008,
         "width": 832,
         "color": 6
@@ -376,8 +376,7 @@
           "id": "12",
           "name": "Odoo (Administrator)"
         }
-      },
-      "disabled": true
+      }
     },
     {
       "parameters": {
@@ -422,7 +421,7 @@
         "text": "=Source: {{ $json.record_name }}\nSubject: {{ $json.subject }}\nBody: {{ $json.body.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '\"').replace(/&#39;/g, \"'\").trim() }}",
         "hasOutputParser": true,
         "options": {
-          "systemMessage": "You are an FAQ generation assistant. Your task is to analyze email chains from our helpdesk ticketing system. Some threads contain a customer question and a support agent’s answer.\n\nIf you find a clear question-and-answer pair, extract them as follows:\n\nSource: (Ticket number)\nQuestion: (summarize the customer’s question)\nAnswer: (summarize the support agent’s answer)\n\nIf no valid Q&A pair is found, output only: false\n\nInstructions:\n\nOnly extract information that is clearly a question from the customer and an answer from the agent.\n\nRedact or omit any sensitive or personally identifiable information.\n\nFormat each result exactly as specified above."
+          "systemMessage": "You are an FAQ generation assistant. Your task is to analyze helpdesk tickets from Odoo18-EE. Your job is to analyze the data presented to you from the database and then you will determine if the ticket has a Question/Answer pair that can be added to our knowledgebase.\n\nIf you find a clear question-and-answer pair, extract them as follows:\n\nId: (Ticket's database id)\nSource: (Ticket number)\nQuestion: (summarize the customer’s question)\nAnswer: (summarize the support agent’s answer)\n\nIf no valid Q&A pair is found, output only: false\n\nInstructions:\n\nOnly extract information that is clearly a question from the customer and an answer from the agent.\n\nRedact or omit any sensitive or personally identifiable information.\n\nFormat each result exactly as specified above."
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
@@ -599,296 +598,7 @@
       ]
     }
   ],
-  "pinData": {
-    "Get Helpdesk Tickets": [
-      {
-        "json": {
-          "id": 2935,
-          "name": "TICKET/2937",
-          "partner_id": [
-            5340,
-            "Rocky Point UFSD"
-          ],
-          "person_name": "Rocky Point UFSD",
-          "priority": [
-            2,
-            "Normal"
-          ],
-          "state": "staff_replied",
-          "stage_id": [
-            1,
-            "Closed"
-          ],
-          "ticket_type": [
-            3,
-            "Question"
-          ],
-          "tag_ids": [
-            29,
-            31
-          ],
-          "subject_id": [
-            7,
-            "Change Request"
-          ],
-          "email": false,
-          "description": "<p><b><span style=\"font-size:11.0pt\">From:</span></b><span style=\"font-size:11.0pt\"> Factor, Aaron &lt;<a href=\"mailto:AaronFactor@rockypoint.k12.ny.us\">AaronFactor@rockypoint.k12.ny.us</a>&gt;\n<br>\n<b>Sent:</b> Tuesday, October 28, 2025 2:49 PM<br>\n<b>To:</b> Canzanella, Amy &lt;<a href=\"mailto:AmyCanzanella@rockypoint.k12.ny.us\">AmyCanzanella@rockypoint.k12.ny.us</a>&gt;<br>\n<b>Cc:</b> Reyes, Joseph &lt;<a href=\"mailto:JosephReyes@rockypoint.k12.ny.us\">JosephReyes@rockypoint.k12.ny.us</a>&gt;;\nRichard Sabados &lt;<a href=\"mailto:rsabados@edvistas.com\">rsabados@edvistas.com</a>&gt;<br>\n<b>Subject:</b> RE: Educational Vistas Your Ticket is generated (Ref\nTICKET/2627)</span></p><p> </p><p><span style=\"font-size:11.0pt\">Thanks\nAmy, I appreciate you taking care of these items. Richard, please see below. Is\nthere a way to include Amy and Joe on the notification when reports are\navailable to be uploaded into the portal?</span></p><p><span style=\"font-size:11.0pt\"> </span></p><p><span style=\"font-size:11.0pt\">Thanks\nagain and enjoy the rest of your day,</span></p><p>\n\n<span style=\"font-size:11.0pt\">Aaron</span>\n\n\n\n<br></p>",
-          "customer_comment": false,
-          "comment": false,
-          "color": 2,
-          "message_partner_ids": [
-            22,
-            5340
-          ],
-          "message_ids": [
-            342181,
-            342180,
-            342179,
-            342178,
-            342177,
-            342176,
-            342175,
-            342174,
-            342172,
-            342171,
-            342170
-          ],
-          "invoice_count": 0,
-          "user_id": [
-            20,
-            "Richard Sabados"
-          ]
-        }
-      }
-    ],
-    "Get Ticket Messages": [
-      {
-        "json": {
-          "id": 342181,
-          "subject": false,
-          "body": "",
-          "email_from": "\"Richard Sabados\" <rsabados@edvistas.com>",
-          "author_id": [
-            22,
-            "Educational Vistas, Richard Sabados"
-          ],
-          "message_type": "notification",
-          "record_name": false,
-          "parent_id": false,
-          "subtype_id": [
-            2,
-            "Note"
-          ],
-          "res_id": 2935
-        }
-      },
-      {
-        "json": {
-          "id": 342180,
-          "subject": "Educational Vistas Your ticket is closed (Ref TICKET/2937)",
-          "body": "<div style=\"margin:0px; padding:0px\">\n        <table border=\"0\" width=\"100%\" cellpadding=\"0\" style=\"padding:20px; background-color:#ededed; border-collapse:separate\">\n          <tbody>\n            <tr>\n              <td align=\"center\" style=\"min-width:590px\">\n                <table width=\"590\" border=\"0\" cellpadding=\"0\" style=\"min-width:590px; background-color:rgb(135,90,123); padding:20px; border-collapse:separate\">\n                  <tr>\n                    <td valign=\"middle\">\n                      <span style=\"font-size:20px; color:white; font-weight:bold\">\n                        TICKET/2937\n                      </span>\n                    </td>\n                    <td valign=\"middle\" align=\"right\">\n                      <img src=\"http://odoo.edvistas.com/logo.png?company={{object.company_id.id}}\" style=\"padding:0px; margin:0px; height:auto; width:80px\" alt=\"${object.company_id.name}\">\n                    </td>\n                  </tr>\n                </table>\n              </td>\n            </tr>\n            <tr>\n              <td align=\"center\" style=\"min-width:590px\">\n                <table width=\"590\" border=\"0\" cellpadding=\"0\" style=\"min-width:590px; background-color:rgb(255, 255, 255); padding:20px; border-collapse:separate\">\n                  <tbody>\n                    <td valign=\"top\" style=\"font-family:Arial,Helvetica,sans-serif; color:#555; font-size:14px\">\n                      <p style=\"margin:0px; padding:0px; font-size:13px\">\n                        Dear\n                        Rocky Point UFSD\n                        ,\n                        <br>\n                        <br>\n                        Your Ticket is closed for now, if you want to Re-open your ticket please give your reply.\n                        <br>\n                        <br>\n                        We would like to get your feedback on the support.\n                        <br>\n                        <br>\n                        <br>\n                        </p><center>\n                          <a style=\"background-color:#1abc9c; padding:10px; text-decoration:none; color:#fff; border-radius:5px; font-size:16px\" class=\"o_default_snippet_text\" href=\"http://odoo.edvistas.com/ticket/feedback/2935\">Give Feedback</a>\n                          <br>\n                          <br>\n                            <a style=\"background-color:#1abc9c; padding:10px; text-decoration:none; color:#fff; border-radius:5px; font-size:16px\" class=\"o_default_snippet_text\" href=\"http://odoo.edvistas.com/my/tickets/2935?access_token=6debe13a-38e1-400d-9776-0a1bd78e6a8f\">View Ticket</a> \n                        </center>\n                        <br>\n                        <br>\n                    </td>\n                  </tbody>\n                </table>\n              </td>\n            </tr>\n            <tr>\n              <td align=\"center\" style=\"min-width:590px\">\n                <table width=\"590\" border=\"0\" cellpadding=\"0\" style=\"min-width:590px; background-color:rgb(135,90,123); padding:20px; border-collapse:separate\">\n                  <tr>\n                    <td valign=\"middle\" align=\"left\" style=\"color:#fff; padding-top:10px; padding-bottom:10px; font-size:12px\">\n                      Educational Vistas\n                      <br>\n                      +1 518-344-7022\n                    </td>\n                    <td valign=\"middle\" align=\"right\" style=\"color:#fff; padding-top:10px; padding-bottom:10px; font-size:12px\">\n                      <br>\n                        <a style=\"text-decoration:none; color:white\" href=\"https://www.edvistas.com\">\n                          https://www.edvistas.com\n                        </a>\n                    </td>\n                  </tr>\n                </table>\n              </td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n    ",
-          "email_from": "\"Richard Sabados\" <rsabados@edvistas.com>",
-          "author_id": [
-            22,
-            "Educational Vistas, Richard Sabados"
-          ],
-          "message_type": "email",
-          "record_name": "TICKET/2937",
-          "parent_id": false,
-          "subtype_id": false,
-          "res_id": 2935
-        }
-      },
-      {
-        "json": {
-          "id": 342179,
-          "subject": false,
-          "body": "",
-          "email_from": "\"Richard Sabados\" <rsabados@edvistas.com>",
-          "author_id": [
-            22,
-            "Educational Vistas, Richard Sabados"
-          ],
-          "message_type": "notification",
-          "record_name": false,
-          "parent_id": false,
-          "subtype_id": [
-            2,
-            "Note"
-          ],
-          "res_id": 2935
-        }
-      },
-      {
-        "json": {
-          "id": 342178,
-          "subject": "Educational Vistas Your ticket is resolved (Ref TICKET/2937)",
-          "body": "<div style=\"margin:0px; padding:0px\">\n        <table border=\"0\" width=\"100%\" cellpadding=\"0\" style=\"padding:20px; background-color:#ededed; border-collapse:separate\">\n          <tbody>\n            <tr>\n              <td align=\"center\" style=\"min-width:590px\">\n                <table width=\"590\" border=\"0\" cellpadding=\"0\" style=\"min-width:590px; background-color:#875a7b; padding:20px; border-collapse:separate\">\n                  <tbody><tr>\n                    <td valign=\"middle\">\n                      <span style=\"font-size:20px; color:white; font-weight:bold\">\n                        TICKET/2937\n                      </span>\n                    </td>\n                    <td valign=\"middle\" align=\"right\">\n                      <img src=\"http://odoo.edvistas.com/logo.png?company={{object.company_id.id}}\" style=\"border-style:none; vertical-align:middle; padding:0px; margin:0px; height:auto; width:80px\" alt=\"{{object.company_id.name}}\" width=\"80px\" height=\"35\">\n                    </td>\n                  </tr>\n                </tbody></table>\n              </td>\n            </tr>\n            <tr>\n              <td align=\"center\" style=\"min-width:590px\">\n                <table width=\"590\" border=\"0\" cellpadding=\"0\" style=\"min-width:590px; background-color:#ffffff; padding:20px; border-collapse:separate\">\n                  <tbody>\n                    <tr><td valign=\"top\" style=\"font-family:Arial,Helvetica,sans-serif; color:#555; font-size:14px\">\n                      <p style=\"margin:0px; padding:0px; font-size:13px\">\n                        Dear\n                        Rocky Point UFSD\n                        <br>\n                        <br>\n                        As your request we have resolved your ticket.\n                        <br>\n                        <br>\n                        <br>\n                        </p><center>\n                          <a style=\"background-color:#1abc9c; padding:10px; text-decoration:none; color:#fff; border-radius:5px; font-size:16px\" class=\"o_default_snippet_text\" href=\"http://odoo.edvistas.com/my/tickets/2935?access_token=6debe13a-38e1-400d-9776-0a1bd78e6a8f\">View Ticket</a>\n                        </center>\n                        <br>\n                        <br>\n                      <p style=\"margin:0px 0 12px 0\"></p>\n                    </td>\n                  </tr></tbody>\n                </table>\n              </td>\n            </tr>\n            <tr>\n              <td align=\"center\" style=\"min-width:590px\">\n                <table width=\"590\" border=\"0\" cellpadding=\"0\" style=\"min-width:590px; background-color:#875a7b; padding:20px; border-collapse:separate\">\n                  <tbody><tr>\n                    <td valign=\"middle\" align=\"left\" style=\"color:#fff; padding-top:10px; padding-bottom:10px; font-size:12px\">\n                      Educational Vistas\n                      <br>\n                      +1 518-344-7022\n                    </td>\n                    <td valign=\"middle\" align=\"right\" style=\"color:#fff; padding-top:10px; padding-bottom:10px; font-size:12px\">\n<a style=\"text-decoration:none; background-color:transparent; color:inherit\">support@edvistas.com</a>\n<br>\n                        <a style=\"background-color:transparent; text-decoration:none; color:white\" href=\"https://www.edvistas.com\">\n                          https://www.edvistas.com\n                        </a>\n                    </td>\n                  </tr>\n                </tbody></table>\n              </td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n    ",
-          "email_from": "\"Richard Sabados\" <rsabados@edvistas.com>",
-          "author_id": [
-            22,
-            "Educational Vistas, Richard Sabados"
-          ],
-          "message_type": "email",
-          "record_name": "TICKET/2937",
-          "parent_id": false,
-          "subtype_id": false,
-          "res_id": 2935
-        }
-      },
-      {
-        "json": {
-          "id": 342177,
-          "subject": false,
-          "body": "",
-          "email_from": "\"Richard Sabados\" <rsabados@edvistas.com>",
-          "author_id": [
-            22,
-            "Educational Vistas, Richard Sabados"
-          ],
-          "message_type": "notification",
-          "record_name": false,
-          "parent_id": false,
-          "subtype_id": [
-            2,
-            "Note"
-          ],
-          "res_id": 2935
-        }
-      },
-      {
-        "json": {
-          "id": 342176,
-          "subject": false,
-          "body": "\n    <p>\n        <span class=\"fa fa-envelope fa-fw\"></span><span>Email</span> done\n    </p>\n        <div class=\"o_mail_note_title\"><strong>Original note:</strong></div>\n        <div><p><span style=\"font-size:11.0pt\">Hi\nAaron,</span></p><p><span style=\"font-size:11.0pt\"> </span></p><p><span style=\"font-size:11.0pt\">I\nincluded them on the notification I send out.</span></p><p><span style=\"font-size:11.0pt\"> </span></p><p><span style=\"font-size:11.0pt\">Thanks,</span></p><p><span style=\"font-size:11.0pt\"> </span></p><table class=\"table table-bordered\">\n <tbody><tr>\n  <td>\n  <p><img src=\"/web/image/70473?access_token=a89a107e-6774-4be7-ac95-0c615b5ea436\" alt=\"image0\"><span style=\"font-size:11.0pt\"></span></p>\n  </td>\n  <td>\n  <p><b><span style=\"font-size:16.0pt\">Richard\n  Sabados</span></b></p>\n  <p>Platform\n  Support Manager</p>\n  <p>Email\n  <a href=\"mailto:support@edvistas.com\">support@edvistas.com</a> to create a\n  ticket</p>\n  <p>(518)\n  344-7022</p>\n  <p><a href=\"http://www.edvistas.com/\" target=\"_blank\"><span style=\"color:#0563C1\">www.edvistas.com</span></a> \n  </p>\n  </td>\n </tr>\n</tbody></table><p>\n<br></p></div>\n",
-          "email_from": "\"Richard Sabados\" <rsabados@edvistas.com>",
-          "author_id": [
-            22,
-            "Educational Vistas, Richard Sabados"
-          ],
-          "message_type": "notification",
-          "record_name": "TICKET/2937",
-          "parent_id": [
-            342170,
-            "False"
-          ],
-          "subtype_id": [
-            3,
-            "Activities"
-          ],
-          "res_id": 2935
-        }
-      },
-      {
-        "json": {
-          "id": 342175,
-          "subject": false,
-          "body": "",
-          "email_from": "\"Richard Sabados\" <rsabados@edvistas.com>",
-          "author_id": [
-            22,
-            "Educational Vistas, Richard Sabados"
-          ],
-          "message_type": "notification",
-          "record_name": false,
-          "parent_id": false,
-          "subtype_id": [
-            2,
-            "Note"
-          ],
-          "res_id": 2935
-        }
-      },
-      {
-        "json": {
-          "id": 342174,
-          "subject": false,
-          "body": "",
-          "email_from": "\"Richard Sabados\" <rsabados@edvistas.com>",
-          "author_id": [
-            22,
-            "Educational Vistas, Richard Sabados"
-          ],
-          "message_type": "notification",
-          "record_name": false,
-          "parent_id": false,
-          "subtype_id": [
-            2,
-            "Note"
-          ],
-          "res_id": 2935
-        }
-      },
-      {
-        "json": {
-          "id": 342172,
-          "subject": "Educational Vistas Ticket is assign to user (Ref TICKET/2937",
-          "body": "<div style=\"margin:0px; padding:0px\">\n        <table border=\"0\" width=\"100%\" cellpadding=\"0\" style=\"padding:20px; background-color:#ededed; border-collapse:separate\">\n          <tbody>\n            <tr>\n              <td align=\"center\" style=\"min-width:590px\">\n                <table width=\"590\" border=\"0\" cellpadding=\"0\" style=\"min-width:590px; background-color:#875a7b; padding:20px; border-collapse:separate\">\n                  <tbody><tr>\n                    <td valign=\"middle\">\n                      <span style=\"font-size:20px; color:white; font-weight:bold\">\n                        TICKET/2937\n                      </span>\n                    </td>\n                    <td valign=\"middle\" align=\"right\">\n                      <img src=\"http://odoo.edvistas.com/logo.png?company={{object.company_id.id}}\" style=\"border-style:none; vertical-align:middle; padding:0px; margin:0px; height:auto; width:80px\" alt=\"{{object.company_id.name}}\" width=\"80px\" height=\"35\">\n                    </td>\n                  </tr>\n                </tbody></table>\n              </td>\n            </tr>\n            <tr>\n              <td align=\"center\" style=\"min-width:590px\">\n                <table width=\"590\" border=\"0\" cellpadding=\"0\" style=\"min-width:590px; background-color:#ffffff; padding:20px; border-collapse:separate\">\n                  <tbody>\n                    <tr><td valign=\"top\" style=\"font-family:Arial,Helvetica,sans-serif; color:#555; font-size:14px\">\n                      <p style=\"margin:0px; padding:0px; font-size:13px\">\n                        We Have received new ticket from customer.\n                        <br>\n                        <br>\n                        Please take a follow-up as soon as possible.\n                        <br>\n                        <br>\n                        <br>\n                        </p><center>\n                          <a style=\"background-color:#1abc9c; padding:10px; text-decoration:none; color:#fff; border-radius:5px; font-size:16px\" class=\"o_default_snippet_text\" href=\"http://odoo.edvistas.com/web#id=2935&amp;action=752&amp;model=helpdesk.ticket&amp;view_type=form\">View Ticket</a>\n                        </center>\n                        <br>\n                        <br>\n                      <p style=\"margin:0px 0 12px 0\"></p>\n                    </td>\n                  </tr></tbody>\n                </table>\n              </td>\n            </tr>\n            <tr>\n              <td align=\"center\" style=\"min-width:590px\">\n                <table width=\"590\" border=\"0\" cellpadding=\"0\" style=\"min-width:590px; background-color:#875a7b; padding:20px; border-collapse:separate\">\n                  <tbody><tr>\n                    <td valign=\"middle\" align=\"left\" style=\"color:#fff; padding-top:10px; padding-bottom:10px; font-size:12px\">\n                      Educational Vistas\n                      <br>\n                      +1 518-344-7022\n                    </td>\n                    <td valign=\"middle\" align=\"right\" style=\"color:#fff; padding-top:10px; padding-bottom:10px; font-size:12px\">\n                      <br>\n                        <a style=\"background-color:transparent; text-decoration:none; color:white\" href=\"https://www.edvistas.com\">\n                          https://www.edvistas.com\n                        </a>\n                    </td>\n                  </tr>\n                </tbody></table>\n              </td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n    ",
-          "email_from": "\"Richard Sabados\" <rsabados@edvistas.com>",
-          "author_id": [
-            22,
-            "Educational Vistas, Richard Sabados"
-          ],
-          "message_type": "email",
-          "record_name": "TICKET/2937",
-          "parent_id": false,
-          "subtype_id": false,
-          "res_id": 2935
-        }
-      },
-      {
-        "json": {
-          "id": 342171,
-          "subject": "Educational Vistas Your Ticket is generated (Ref TICKET/2937)",
-          "body": "<div style=\"margin:0px; padding:0px\">\n        <table border=\"0\" width=\"100%\" cellpadding=\"0\" style=\"padding:20px; background-color:#ededed; border-collapse:separate\">\n          <tbody>\n            <tr>\n              <td align=\"center\" style=\"min-width:590px\">\n                <table width=\"590\" border=\"0\" cellpadding=\"0\" style=\"min-width:590px; background-color:#875a7b; padding:20px; border-collapse:separate\">\n                  <tbody><tr>\n                    <td valign=\"middle\">\n                      <span style=\"font-size:20px; color:white; font-weight:bold\">\n                        TICKET/2937\n                      </span>\n                    </td>\n                    <td valign=\"middle\" align=\"right\">\n                      <img src=\"http://odoo.edvistas.com/logo.png?company={{ object.company_id.id }}\" style=\"border-style:none; vertical-align:middle; padding:0px; margin:0px; height:auto; width:80px\" alt=\"{{object.company_id.name}}\" width=\"80px\" height=\"35\">\n                    </td>\n                  </tr>\n                </tbody></table>\n              </td>\n            </tr>\n            <tr>\n              <td align=\"center\" style=\"min-width:590px\">\n                <table width=\"590\" border=\"0\" cellpadding=\"0\" style=\"min-width:590px; background-color:#ffffff; padding:20px; border-collapse:separate\">\n                  <tbody>\n                    <tr><td valign=\"top\" style=\"font-family:Arial,Helvetica,sans-serif; color:#555; font-size:14px\">\n                      <p style=\"margin:0px; padding:0px; font-size:13px\">\n                        Dear\n                        Rocky Point UFSD\n                        We received your request.\n                        <br>\n                        <br>\n                        Our Support Team will contact you as soon as possible.\n                        <br>\n                        <br>\n                        <br>\n                        </p><center>\n                            <a style=\"background-color:#1abc9c; padding:10px; text-decoration:none; color:#fff; border-radius:5px; font-size:16px\" class=\"o_default_snippet_text\" href=\"http://odoo.edvistas.com/my/tickets/2935?access_token=6debe13a-38e1-400d-9776-0a1bd78e6a8f\">View Ticket</a>\n                        </center>\n                        <br>\n                        <br>\n                      <p style=\"margin:0px 0 12px 0\"></p>\n                    </td>\n                  </tr></tbody>\n                </table>\n              </td>\n            </tr>\n            <tr>\n              <td align=\"center\" style=\"min-width:590px\">\n                <table width=\"590\" border=\"0\" cellpadding=\"0\" style=\"min-width:590px; background-color:#875a7b; padding:20px; border-collapse:separate\">\n                  <tbody><tr>\n                    <td valign=\"middle\" align=\"left\" style=\"color:#fff; padding-top:10px; padding-bottom:10px; font-size:12px\">\n                      Educational Vistas\n                      <br>\n                      +1 518-344-7022\n                    </td>\n                    <td valign=\"middle\" align=\"right\" style=\"color:#fff; padding-top:10px; padding-bottom:10px; font-size:12px\">\n                      <br>\n                        <a style=\"background-color:transparent; text-decoration:none; color:white\" href=\"https://www.edvistas.com\">\n                          https://www.edvistas.com\n                        </a>\n                    </td>\n                  </tr>\n                </tbody></table>\n              </td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n    ",
-          "email_from": "\"Richard Sabados\" <rsabados@edvistas.com>",
-          "author_id": [
-            22,
-            "Educational Vistas, Richard Sabados"
-          ],
-          "message_type": "email",
-          "record_name": "TICKET/2937",
-          "parent_id": false,
-          "subtype_id": false,
-          "res_id": 2935
-        }
-      },
-      {
-        "json": {
-          "id": 342170,
-          "subject": false,
-          "body": "<p>Helpdesk Ticket created</p>",
-          "email_from": "\"Richard Sabados\" <rsabados@edvistas.com>",
-          "author_id": [
-            22,
-            "Educational Vistas, Richard Sabados"
-          ],
-          "message_type": "notification",
-          "record_name": false,
-          "parent_id": false,
-          "subtype_id": [
-            2,
-            "Note"
-          ],
-          "res_id": 2935
-        }
-      }
-    ],
-    "Get Ticket Tags": [
-      {
-        "json": {
-          "id": 29,
-          "name": "Portfolio(+)"
-        }
-      },
-      {
-        "json": {
-          "id": 31,
-          "name": "Conductor(+)"
-        }
-      }
-    ]
-  },
+  "pinData": {},
   "settings": {
     "executionOrder": "v1",
     "saveManualExecutions": true,
@@ -927,6 +637,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-11-12T03:23:16.000Z",
-  "versionId": "ccd8e02a-7dbf-4d7b-91b3-e4059b42026b"
+  "updatedAt": "2025-11-20T01:03:24.000Z",
+  "versionId": "67e1502a-f2d5-4521-a00d-e65e8c73956a"
 }
