@@ -378,8 +378,15 @@
     }
   ],
   "staticData": null,
-  "tags": [],
+  "tags": [
+    {
+      "updatedAt": "2025-11-20T16:12:17.256Z",
+      "createdAt": "2025-11-20T16:12:17.256Z",
+      "id": "gL98L0Ai9zdUEktU",
+      "name": "tutorial"
+    }
+  ],
   "triggerCount": 0,
-  "updatedAt": "2025-11-19T20:20:02.000Z",
-  "versionId": "feb433ee-b392-4aad-8c75-39fb60c787fd"
+  "updatedAt": "2025-11-20T16:12:30.000Z",
+  "versionId": "4f3db991-76ff-43c4-a431-39449bf380ca"
 }
