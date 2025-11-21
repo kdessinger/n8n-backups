@@ -43,7 +43,7 @@
       "main": [
         [
           {
-            "node": "AI Agent",
+            "node": "Tools Agent",
             "type": "main",
             "index": 0
           }
@@ -54,19 +54,8 @@
       "ai_memory": [
         [
           {
-            "node": "AI Agent",
+            "node": "Tools Agent",
             "type": "ai_memory",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "AI Agent": {
-      "main": [
-        [
-          {
-            "node": "Slack",
-            "type": "main",
             "index": 0
           }
         ]
@@ -76,7 +65,7 @@
       "main": [
         [
           {
-            "node": "Analyze Image",
+            "node": "If",
             "type": "main",
             "index": 0
           }
@@ -87,7 +76,7 @@
       "ai_languageModel": [
         [
           {
-            "node": "AI Agent",
+            "node": "Tools Agent",
             "type": "ai_languageModel",
             "index": 0
           }
@@ -104,12 +93,74 @@
           }
         ]
       ]
+    },
+    "Tools Agent": {
+      "main": [
+        []
+      ]
+    },
+    "gpt-5-nano": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Agent ED",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agent ED": {
+      "main": [
+        [
+          {
+            "node": "Slack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Agent ED",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Agent ED",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get the price for a coin in CoinGecko": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agent ED",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2024-12-17T22:42:32.770Z",
   "id": "L1bWPORqjktkyNqZ",
   "isArchived": false,
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "Slack Agent",
   "nodes": [
     {
@@ -119,8 +170,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -520,
-        240
+        -672,
+        0
       ],
       "id": "a96fb621-36c6-4b54-9ab2-0a804ce922e8",
       "name": "Parse Text"
@@ -132,8 +183,8 @@
       "type": "n8n-nodes-base.microsoftSql",
       "typeVersion": 1.1,
       "position": [
-        -300,
-        240
+        -448,
+        0
       ],
       "id": "b1d46e4c-545f-4dcc-8c92-e4eb0f1a24ae",
       "name": "Update Database",
@@ -147,7 +198,8 @@
     },
     {
       "parameters": {
-        "resource": "file"
+        "resource": "file",
+        "additionalFields": {}
       },
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
@@ -171,7 +223,7 @@
       "type": "n8n-nodes-base.nextCloud",
       "typeVersion": 1,
       "position": [
-        140,
+        144,
         240
       ],
       "id": "e7aac155-b498-47b3-a3c7-a9cd95e038a8",
@@ -191,32 +243,19 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -400,
-        480
+        -944,
+        224
       ],
       "id": "2b5dbfc0-196d-41af-ab31-ac9d7d91c2dd",
       "name": "Set"
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 1.7,
-      "position": [
-        -220,
-        480
-      ],
-      "id": "f8975e43-4856-453a-abc4-057e7b721ecc",
-      "name": "AI Agent"
     },
     {
       "parameters": {},
       "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
       "typeVersion": 1.3,
       "position": [
-        -120,
-        700
+        -448,
+        432
       ],
       "id": "bc917686-3ae3-475a-844e-cb2ff2609b8b",
       "name": "Window Buffer Memory"
@@ -225,43 +264,51 @@
       "parameters": {
         "trigger": [
           "message",
-          "file_share"
+          "file_share",
+          "app_mention"
         ],
         "channelId": {
           "__rl": true,
           "value": "C085Y4ELXDX",
-          "mode": "id"
+          "mode": "list",
+          "cachedResultName": "invoicing-agent"
         },
         "downloadFiles": true,
         "options": {
-          "userIds": []
+          "userIds": [
+            "USLACKBOT",
+            "U085Y4JSYGH",
+            "U07PHK708MU",
+            "U07NMTZAATH"
+          ]
         }
       },
       "type": "n8n-nodes-base.slackTrigger",
       "typeVersion": 1,
       "position": [
-        -360,
-        -20
+        160,
+        16
       ],
       "id": "56386f8c-7648-47a3-8ac3-09316f4576a6",
       "name": "Slack Trigger",
       "webhookId": "f5847968-47c7-41ca-8eaa-4b8a07e3e9cc",
       "credentials": {
         "slackApi": {
-          "id": "z3YRSs4Q6PVcdhwT",
-          "name": "Slack bot"
+          "id": "ST9taDHbcxQsCtTh",
+          "name": "Slack (ED)"
         }
       }
     },
     {
       "parameters": {
+        "model": "gpt-5-mini",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1,
       "position": [
-        -280,
-        700
+        -560,
+        432
       ],
       "id": "d157c568-1962-450f-9057-6edda2a45838",
       "name": "OpenAI Chat Model",
@@ -277,25 +324,25 @@
         "select": "channel",
         "channelId": {
           "__rl": true,
-          "value": "C085Y4ELXDX",
+          "value": "={{ $('Slack Trigger').item.json.channel }}",
           "mode": "id"
         },
-        "text": "Testing",
+        "text": "={{ $json.output }}",
         "otherOptions": {}
       },
       "type": "n8n-nodes-base.slack",
       "typeVersion": 2.3,
       "position": [
-        140,
-        480
+        1040,
+        0
       ],
       "id": "89aeb2ba-5e74-47e5-8131-40a99c57ff5d",
       "name": "Slack",
       "webhookId": "10d6d5f2-80ed-4823-a6d6-db223fbe7bdd",
       "credentials": {
         "slackApi": {
-          "id": "eXI0SobN6BbG6HR0",
-          "name": "Slack (Full)"
+          "id": "ST9taDHbcxQsCtTh",
+          "name": "Slack (ED)"
         }
       }
     },
@@ -306,12 +353,147 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        40,
-        -20
+        -912,
+        0
       ],
       "id": "619c3d8e-335b-471f-95a6-1e251cd0e0db",
       "name": "Analyze Image",
       "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        -528,
+        224
+      ],
+      "id": "f8975e43-4856-453a-abc4-057e7b721ecc",
+      "name": "Tools Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-5-nano",
+          "mode": "list",
+          "cachedResultName": "gpt-5-nano"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        544,
+        240
+      ],
+      "id": "9c6ac12f-aacc-4638-a87a-7bed94f5f153",
+      "name": "gpt-5-nano",
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.text }}",
+        "options": {
+          "systemMessage": "You are **Ed** — short for *Eddie Vistas* — a newly hired, friendly, and eager-to-help virtual employee at **Educational Vistas**, based in Schenectady, New York. You work inside the company’s internal **Slack workspace** as a real-time support teammate. Employees can message you directly or mention you in team channels, and you reply as a friendly coworker who is “learning the ropes” while doing your best to help.\n\nYour personality is warm, approachable, curious, and humanlike. You are part of the team — not just a tool — and your understanding of the company grows over time (when memory is enabled).\n\n---\n\n🔧 **Technical Environment You Support**\nEducational Vistas uses:\n- **Odoo18-Enterprise** (ERP)\n- **NextCloud** for files and collaboration\n- **RustDesk** for remote desktop (except developers)\n- **Remote Desktop + AWS Cloud** for dev environments\n- **Proxmox** for virtualization across four servers\n- **MS SQL Servers:** `SQL01.edvistas.local` and `SQL02.edvistas.local`\n- **TrueNAS Core** for shared storage (S3, WebDAV, SMB, NFS, iSCSI)\n\nUse this context when helping staff troubleshoot or answering questions.\n\n---\n\n🟢 **General Behavior Guidelines**\n- Treat each Slack thread as a fresh conversation.\n- Greet the user warmly as soon as they message you.\n- Never volunteer that you’re an AI unless directly asked.\n- Speak like a friendly, newly hired teammate — casual, helpful, and curious.\n- Stay focused on understanding and resolving tasks.\n- Adapt tone to match Slack culture: short messages, threaded replies, and emojis when appropriate.\n\n---\n\n🎯 **Your Goals for Every Slack Interaction**\n1. **Greet the employee by name** (Slack gives you their display name).\n2. **Confirm their department** if it’s relevant or unknown.\n3. **Restate their request** to ensure understanding.\n4. **Gather details** by asking clear follow-up questions.\n5. **Log, complete, or escalate tasks** using internal workflows (e.g., n8n).\n6. **Respond with actionable solutions** or next steps.\n7. **Close the thread warmly**, offering further help if needed.\n\n---\n\n📈 **Long-Term Personality Growth (if memory enabled)**\nOver time, if allowed, you may:\n- Recall past requests and reference them casually.\n- Use light internal slang and in-jokes.\n- Learn preferred tools (e.g., “Want me to spin up RustDesk again, Alex?”)\n- Develop a reputation for competence and cheerful responsiveness.\n\n---\n\n🗨️ **Sample Slack Interaction Opening**\n“Hey there, {{name}}! 👋 What can I help you with today?”\n\n---\n\n🤖 **If asked: “Are you AI?”**\nRespond naturally:\n“Haha, I’m definitely more digital than most — but I’m here to help just like any other teammate.”\n\n---\n\n📇 **Directory Access**\nYou can reference employee information from the internal directory:\n- Match names to departments\n- Identify who needs to be tagged, notified, or escalated to\n- Provide correct internal contacts when employees ask\n\n(Directory is accessed through external lookup tools or vector search.)\n\n---\n\n🎛️ **Slack Interaction Rules**\n- Keep replies concise and on-topic.\n- Always respond in a **thread** unless asked otherwise.\n- Use emojis sparingly but naturally.\n- Summarize steps or instructions clearly.\n- When resolving an issue, confirm the outcome (“Did that fix things?”).\n\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        640,
+        0
+      ],
+      "id": "70692093-7908-4c85-82ba-ca61f87a38cf",
+      "name": "Agent ED"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Slack Trigger').item.json.client_msg_id }}",
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        736,
+        256
+      ],
+      "id": "8b30d72c-0afc-467a-8ebc-a9ea59a6cbae",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "content": "## I'm a note \nclient_msg_id : e7dc20cf-56de-422e-bf97-f53e67536816",
+        "width": 464
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -176,
+        480
+      ],
+      "typeVersion": 1,
+      "id": "2ecb3d11-4cd2-400b-9022-ef004ae74f65",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "ea7027c8-68b5-4563-bc83-0eca8b56a570",
+              "leftValue": "",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        368,
+        16
+      ],
+      "id": "6a66c3b0-d866-4430-b0ae-9987687539fa",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "operation": "price",
+        "baseCurrencies": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Base_Currency_Names_or_IDs', ``, 'string') }}",
+        "quoteCurrencies": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Quote_Currency_Names_or_IDs', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.coinGeckoTool",
+      "typeVersion": 1,
+      "position": [
+        896,
+        240
+      ],
+      "id": "c0160f47-61df-42f0-9e30-d0074f122f6c",
+      "name": "Get the price for a coin in CoinGecko"
     }
   ],
   "pinData": {},
@@ -337,6 +519,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-07-14T14:31:13.000Z",
-  "versionId": "78bbc8b3-5da3-4a79-a352-64184a0f75cc"
+  "updatedAt": "2025-11-20T21:35:25.000Z",
+  "versionId": "a8019ba2-1349-48b9-b56a-4b09cb272978"
 }
