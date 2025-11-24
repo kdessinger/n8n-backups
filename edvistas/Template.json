@@ -1,0 +1,83 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2025-11-23T21:36:13.325Z",
+  "id": "cYLKTSlxHWeoIRmP",
+  "isArchived": false,
+  "meta": null,
+  "name": "Template",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Output\n",
+        "height": 672
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        544,
+        -208
+      ],
+      "typeVersion": 1,
+      "id": "722cac25-3d05-4508-9fd3-c53c33a541b7",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Process",
+        "height": 672,
+        "width": 896
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -368,
+        -208
+      ],
+      "typeVersion": 1,
+      "id": "f09be8b5-4041-4853-8ee4-4cb44e3ba533",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Trigger",
+        "height": 672
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -624,
+        -208
+      ],
+      "typeVersion": 1,
+      "id": "4f5b9edf-e738-4bad-b806-afc01ffdc4d1",
+      "name": "Sticky Note2"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": 300,
+    "availableInMCP": false,
+    "errorWorkflow": "NtBd2hj1eiR2xufe"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-11-23T21:36:13.334Z",
+      "createdAt": "2025-11-23T21:36:13.334Z",
+      "role": "workflow:owner",
+      "workflowId": "cYLKTSlxHWeoIRmP",
+      "projectId": "3dtat9rk4vrp7A9f"
+    }
+  ],
+  "staticData": null,
+  "tags": [
+    {
+      "updatedAt": "2025-11-20T16:12:17.256Z",
+      "createdAt": "2025-11-20T16:12:17.256Z",
+      "id": "gL98L0Ai9zdUEktU",
+      "name": "tutorial"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-11-23T21:36:51.000Z",
+  "versionId": "c7a9e0f1-b9ed-447c-b3c3-07b3176cc464"
+}
