@@ -178,8 +178,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -624,
-        288
+        -384,
+        208
       ],
       "id": "b5ac1869-d983-42d0-b7b7-1a0915439a11",
       "name": "Get Example Tasks",
@@ -217,8 +217,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -432,
-        288
+        -560,
+        208
       ],
       "credentials": {
         "odooApi": {
@@ -391,6 +391,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-10-20T23:07:37.000Z",
-  "versionId": "f4b92ee8-42f3-4276-b6a7-01c903921b19"
+  "updatedAt": "2025-11-23T21:19:32.000Z",
+  "versionId": "67467ed3-878c-4d5d-9374-6df626ad0691"
 }
