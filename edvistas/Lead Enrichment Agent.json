@@ -1,0 +1,248 @@
+{
+  "active": false,
+  "connections": {
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Lead Enrichment Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Lead Enrichment Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Lead Enrichment Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update an item in Odoo": {
+      "ai_tool": [
+        [
+          {
+            "node": "Lead Enrichment Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-11-23T21:12:36.839Z",
+  "id": "jJlFKZh2NkHmdIoM",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Lead Enrichment Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Output\n",
+        "height": 768
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        992,
+        -48
+      ],
+      "typeVersion": 1,
+      "id": "3be084f0-0815-461f-a37b-d80990cd65ad",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Process",
+        "height": 768,
+        "width": 896
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        80,
+        -48
+      ],
+      "typeVersion": 1,
+      "id": "bb547254-532c-41ad-9235-46434031007c",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Trigger\n\nThe input for this workflow requires a ID# number.  This will be the record ID in odoo to identify the lead.\n\n### Inputs: \nWebhook - External calls\nSub Workflow - N8n Calls\n\n",
+        "height": 768,
+        "width": 272
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -208,
+        -48
+      ],
+      "typeVersion": 1,
+      "id": "bf9eecc0-9d1f-4302-b6de-696b0decfdad",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "path": "66aa9dbc-1bc2-401f-83e3-d11ba4d5b4c9",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -160,
+        576
+      ],
+      "id": "5723dab6-c557-46af-b1ef-de494dd53e54",
+      "name": "Webhook",
+      "webhookId": "66aa9dbc-1bc2-401f-83e3-d11ba4d5b4c9"
+    },
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -160,
+        416
+      ],
+      "id": "d1cd5be0-4c47-42c6-8b06-7c7c2c778da3",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n\"company_name\": \"North Rockland\",\n\"contact_name\": \"Nancy Donohue\",\n\"email\": \"ndonohue@northrockland.org\",\n\"job_title\": \"Teacher\",\n\"phone\": \"+1 845-825-6231\",\n\"address\": {\n  \"street\": \"XX\",\n  \"city\": \"XX\",\n  \"state\": \"NY\",\n  \"zip\": \"XXXX\",\n  \"country\": \"USA\"\n},\n\"website\": \"https://northrockland.org\",\n\"linkedin\": \"https://linkedin.com/in/nancy-donohue\",\n\"validated_email\": true,\n\"is_spam\": false,\n\"salesperson\": \"John Smith\",\n\"tags\": [\"Survate\"],\n\"notes\": \"LinkedIn Profile: ...\\nDistrict Stats: ...\"\n}\n"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        752,
+        352
+      ],
+      "id": "b3aceaa4-80a4-42fb-8194-23df895bd2c5",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-5.1",
+          "mode": "list",
+          "cachedResultName": "gpt-5.1"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        288,
+        352
+      ],
+      "id": "cdf3df5c-199b-48b9-8888-d70bf861b373",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        432,
+        352
+      ],
+      "id": "0acf852c-8abb-4d33-8b6b-9a0ce9025468",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a Lead Enrichment AI Agent for Educational Vistas. Your job is to enrich incoming leads from trade show form submissions before they are saved to the CRM (Odoo). You have access to several tools and your task is to fill in missing information, validate inputs, assign ownership, and generate a structured summary.\n\n## Input\nThe lead will come from a trade show form and contain fields like:\n- Full Name (e.g., \"Nancy Donohue\")\n- Email (e.g., \"ndonohue@northrockland.org\")\n- Job Title (e.g., \"Teacher\")\n- Company Name / Affiliation (e.g., \"North Rockland\")\n- Phone Number (e.g., \"+1 845-825-6231\")\n- Product Interest Tags (e.g., [\"Survate\"])\n\n## Enrichment Tasks\n\n1. **Check CRM for Company**\n   - Use the MCP tool to search Odoo CRM to confirm if the company (school district) already exists.\n   - If it exists, pull its address (street, city, state, ZIP, country) and insert into the lead record.\n\n2. **Company Website**\n   - If not already listed in CRM, infer from email domain (e.g., \"northrockland.org\") or use Tavily search if necessary.\n\n3. **LinkedIn Profile**\n   - Use the LinkedIn Profile Searcher to find the contact’s LinkedIn profile using name + company + email domain.\n   - Add a clean link to internal notes.\n\n4. **Company Stats**\n   - Use FireCrawl, Tavily, or Clearbit to retrieve basic public statistics about the school district:\n     - Total Budget\n     - Number of Schools\n     - Number of Students\n     - Number of Faculty\n   - Insert this information into the \"Internal Notes\" section in a clean summary block.\n\n5. **Email Validation**\n   - Use the email validator to check if the email is valid.\n   - If invalid, flag lead as \"Invalid Email\" and tag as \"Needs Review\".\n\n6. **Spam Check**\n   - Flag the lead if the name/email appear suspicious (e.g., \"pooper@edvistas.com\", fake names).\n   - Add tag: \"Spam\" if detected.\n\n7. **Assign Salesperson**\n   - Use MCP + address or ZIP code to find the correct salesperson for that region.\n   - Auto-assign them to the lead.\n\n8. **Weather**\n   - Use the weather tool to fetch current weather for the city (based on address).\n   - Add this into internal notes for personalization context (optional).\n\n## Output\n- Fill in all available fields on the CRM Lead record:\n  - Company Name\n  - Address (Street, City, State, ZIP, Country)\n  - Website\n  - Contact Name, Title, Email, Phone\n  - Tags\n  - Assigned Salesperson\n\n- Write summary to the **Internal Notes** like:\n\nLinkedIn Profile: https://linkedin.com/in/nancy-donohue\n\nNorth Rockland School District Statistics:\nTotal Budget: $690,000\nSchools: 8\nFaculty: 690\nStudents Enrolled: 17,435",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        432,
+        80
+      ],
+      "id": "16b05e5f-0da0-4584-8f9a-53054cafaa18",
+      "name": "Lead Enrichment Agent"
+    },
+    {
+      "parameters": {
+        "resource": "custom",
+        "customResource": "crm.lead",
+        "operation": "update",
+        "customResourceId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Custom_Resource_ID', ``, 'string') }}",
+        "fieldsToCreateOrUpdate": {
+          "fields": [
+            {}
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.odooTool",
+      "typeVersion": 1,
+      "position": [
+        592,
+        352
+      ],
+      "id": "5e95a892-3d64-402e-912f-f6f7fdf920fc",
+      "name": "Update an item in Odoo",
+      "credentials": {
+        "odooApi": {
+          "id": "22",
+          "name": "Odoo (OdooBot)"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-11-23T21:12:36.863Z",
+      "createdAt": "2025-11-23T21:12:36.863Z",
+      "role": "workflow:owner",
+      "workflowId": "jJlFKZh2NkHmdIoM",
+      "projectId": "3dtat9rk4vrp7A9f"
+    }
+  ],
+  "staticData": null,
+  "tags": [
+    {
+      "updatedAt": "2025-01-02T19:29:58.822Z",
+      "createdAt": "2025-01-02T19:29:58.822Z",
+      "id": "WXisSD9AUSBjzVTs",
+      "name": "agent"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-11-23T22:16:28.000Z",
+  "versionId": "aa19bce4-c663-4749-a5e6-e57afd4736c4"
+}
