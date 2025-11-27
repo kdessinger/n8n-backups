@@ -1139,7 +1139,8 @@
     "saveManualExecutions": true,
     "callerPolicy": "workflowsFromSameOwner",
     "executionTimeout": 60,
-    "errorWorkflow": "NtBd2hj1eiR2xufe"
+    "errorWorkflow": "NtBd2hj1eiR2xufe",
+    "availableInMCP": true
   },
   "shared": [
     {
@@ -1170,6 +1171,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2025-11-23T22:21:33.000Z",
-  "versionId": "64110372-334c-45b1-ab98-030505465475"
+  "updatedAt": "2025-11-26T22:56:18.000Z",
+  "versionId": "1e4a55d8-65cd-40a9-97c0-ec45f84759bf"
 }
