@@ -1,5 +1,646 @@
 {
   "active": true,
+  "activeVersion": {
+    "updatedAt": "2025-11-26T05:18:06.453Z",
+    "createdAt": "2025-11-26T05:18:06.453Z",
+    "versionId": "95879e92-212c-4f16-8a2c-4ebd1c4a540d",
+    "workflowId": "HQyMcbgVeKG9G1FI",
+    "nodes": [
+      {
+        "parameters": {
+          "value": "={{ $json.lastlogin }}",
+          "dataPropertyName": "EVI_Last_login",
+          "custom": true,
+          "toFormat": "YYYY-MM-DD HH:mm:ss",
+          "options": {
+            "toTimezone": "Etc/GMT-5"
+          }
+        },
+        "id": "993ce257-481b-4af4-bb4a-bed3652802f4",
+        "name": "FixDate LastLogin",
+        "type": "n8n-nodes-base.dateTime",
+        "typeVersion": 1,
+        "position": [
+          1120,
+          752
+        ],
+        "notesInFlow": false,
+        "notes": "Odoo will remove 4 hours from the EVI_Last_login field so use a +4 in the Time Zone to compensate."
+      },
+      {
+        "parameters": {
+          "value": "={{ $json.LastSync  }}",
+          "dataPropertyName": "EVI_LastSync",
+          "custom": true,
+          "toFormat": "YYYY-MM-DD HH:mm:ss",
+          "options": {
+            "toTimezone": "Etc/GMT-5"
+          }
+        },
+        "id": "acf804a7-3124-4c35-9380-7f2b3dec9622",
+        "name": "FixDate LastSync",
+        "type": "n8n-nodes-base.dateTime",
+        "typeVersion": 1,
+        "position": [
+          1328,
+          752
+        ],
+        "notesInFlow": false,
+        "notes": "Odoo will remove 4 hours from the EVI_Last_login field so use a +4 in the Time Zone to compensate."
+      },
+      {
+        "parameters": {
+          "resource": "custom",
+          "customResource": "res.partner",
+          "operation": "update",
+          "customResourceId": "={{ $json.id }}",
+          "fieldsToCreateOrUpdate": {
+            "fields": [
+              {
+                "fieldName": "EVI_DistName",
+                "fieldValue": "={{ $json.DistrictName }}"
+              },
+              {
+                "fieldName": "sistype",
+                "fieldValue": "={{ $json.sistype }}"
+              },
+              {
+                "fieldName": "EVI_LastSync",
+                "fieldValue": "={{ $json.LastSync == null ? null : $json.EVI_LastSync }}"
+              },
+              {
+                "fieldName": "EVI_Last_login",
+                "fieldValue": "={{ $json.lastlogin === null ? null : $json.EVI_Last_login }}"
+              },
+              {
+                "fieldName": "stateID",
+                "fieldValue": "={{ $json.statecode }}"
+              },
+              {
+                "fieldName": "category_id",
+                "fieldValue": "={{ $json.appended_tagId }}"
+              },
+              {
+                "fieldName": "EVI_License",
+                "fieldValue": "={{ $json.concatenated_Product.replace(/(District|Business|Boces|false)(, )?/gi, '').replace(/,\\s*$/, '') }}"
+              }
+            ]
+          }
+        },
+        "id": "8f1341c9-2c50-4a09-adb3-e1995b1ae1c2",
+        "name": "Update Odoo Contacts",
+        "type": "n8n-nodes-base.odoo",
+        "typeVersion": 1,
+        "position": [
+          2064,
+          544
+        ],
+        "credentials": {
+          "odooApi": {
+            "id": "12",
+            "name": "Odoo (Administrator)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "content": "# Sync Odoo Tags with the EVICore database\n### This node will update [Odoo Contacts](https://odoo.edvistas.com/web?debug=1#menu_id=111&action=139) which have the EVI District value present in the 'EVI_DistID' field.\n##### This info is found on the [Odoo contacts](https://odoo.edvistas.com/web?debug=1#menu_id=111&action=139) under the 'Integration' tab.  The following fields will be updated:\nTags, EVI District Name, EVI Last Sync, EVI Last Login, Student Info System, State District ID.\n##### Tags contain product names that a specific district have activated in [EVICore](https://apps.edvistas.com).\n\n**This is a **Sync** operation so it will add and remove remove tags from odoo that match [EVICore](https://apps.edvistas.com).",
+          "height": 1128.065665097114,
+          "width": 1460.2332269704111
+        },
+        "id": "8b5bf087-8ce5-4835-abf4-2fe0b22e0944",
+        "name": "Sticky Note1",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          432,
+          240
+        ]
+      },
+      {
+        "parameters": {},
+        "id": "a6d8d885-88c0-4e7e-9eeb-89db400deeac",
+        "name": "Workflow",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1,
+        "position": [
+          80,
+          992
+        ]
+      },
+      {
+        "parameters": {
+          "rule": {
+            "interval": [
+              {
+                "field": "cronExpression",
+                "expression": "0 5-17 * * 1-5"
+              }
+            ]
+          }
+        },
+        "id": "02718497-47e8-4eda-99b0-339e5d71736f",
+        "name": "Schedule",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          80,
+          768
+        ],
+        "notesInFlow": true,
+        "notes": "every-hour (M-F 5AM-5PM)\n"
+      },
+      {
+        "parameters": {
+          "content": "# Triggers\ncalls to start the workflow",
+          "height": 1117.6008689730309,
+          "width": 232.40492688758485,
+          "color": 4
+        },
+        "id": "247538ee-d24a-4d0e-9174-a8ddf4b61a29",
+        "name": "Sticky Note3",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          32,
+          240
+        ]
+      },
+      {
+        "parameters": {
+          "resource": "custom",
+          "customResource": "res.partner",
+          "operation": "getAll",
+          "returnAll": true,
+          "options": {
+            "fieldsList": [
+              "active",
+              "display_name",
+              "EVI_DistID",
+              "EVI_DistName",
+              "EVI_Last_login",
+              "category_id"
+            ]
+          },
+          "filterRequest": {
+            "filter": [
+              {
+                "fieldName": "EVI_DistID",
+                "operator": "notEqual"
+              }
+            ]
+          }
+        },
+        "id": "092142f4-6def-4b7e-a7c2-55ec7df38580",
+        "name": "Get Odoo Contacts",
+        "type": "n8n-nodes-base.odoo",
+        "typeVersion": 1,
+        "position": [
+          720,
+          528
+        ],
+        "credentials": {
+          "odooApi": {
+            "id": "12",
+            "name": "Odoo (Administrator)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "mode": "combine",
+          "mergeByFields": {
+            "values": [
+              {
+                "field1": "EVI_DistID",
+                "field2": "districtID"
+              }
+            ]
+          },
+          "options": {
+            "fuzzyCompare": true
+          }
+        },
+        "id": "6f9799e3-cd46-4316-8667-c7056086bb8b",
+        "name": "Matching",
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 2.1,
+        "position": [
+          1728,
+          544
+        ]
+      },
+      {
+        "parameters": {
+          "operation": "summarize",
+          "fieldsToSummarize": {
+            "values": [
+              {
+                "aggregation": "concatenate",
+                "field": "Product",
+                "includeEmpty": true,
+                "separateBy": ", "
+              },
+              {
+                "aggregation": "append",
+                "field": "tagId",
+                "includeEmpty": true
+              }
+            ]
+          },
+          "fieldsToSplitBy": "distId",
+          "options": {}
+        },
+        "id": "89546040-d3a1-4d4b-9594-a85b272f3608",
+        "name": "Pivot Table",
+        "type": "n8n-nodes-base.itemLists",
+        "typeVersion": 3,
+        "position": [
+          1232,
+          1008
+        ]
+      },
+      {
+        "parameters": {
+          "fields": {
+            "values": [
+              {
+                "name": "source"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "9ce38f07-d289-47d7-a0c4-19bf78cdc0fc",
+        "name": "Globals",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.2,
+        "position": [
+          464,
+          768
+        ]
+      },
+      {
+        "parameters": {
+          "resource": "custom",
+          "customResource": "res.partner.category",
+          "operation": "getAll",
+          "returnAll": true,
+          "options": {
+            "fieldsList": [
+              "id",
+              "name",
+              "color",
+              "active"
+            ]
+          },
+          "filterRequest": {
+            "filter": [
+              {
+                "fieldName": "color",
+                "value": "2"
+              }
+            ]
+          }
+        },
+        "id": "d0b903dc-cd9c-46cd-a8d5-0ec6a6dece57",
+        "name": "Tags",
+        "type": "n8n-nodes-base.odoo",
+        "typeVersion": 1,
+        "position": [
+          1280,
+          304
+        ],
+        "credentials": {
+          "odooApi": {
+            "id": "12",
+            "name": "Odoo (Administrator)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "path": "odoo/sync/evicore",
+          "options": {}
+        },
+        "id": "9382972c-ea7c-443e-b651-05b5eb176d91",
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 1,
+        "position": [
+          80,
+          560
+        ],
+        "webhookId": "2ea717ea-44c6-4a8a-a8be-83a8396f0130"
+      },
+      {
+        "parameters": {
+          "mode": "combine",
+          "mergeByFields": {
+            "values": [
+              {
+                "field1": "districtID",
+                "field2": "distId"
+              }
+            ]
+          },
+          "options": {
+            "fuzzyCompare": true
+          }
+        },
+        "id": "5846e494-0c76-4d8d-94bf-d41bf9aff6d0",
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 2.1,
+        "position": [
+          1568,
+          864
+        ]
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "WITH LastLoginRanked AS (\n    SELECT d.id AS districtID, d.name AS DistrictName, u.id as useridkey, u.userid, u.firstname, u.lastname, up.lastlogin,\n    ROW_NUMBER() OVER (PARTITION BY d.id ORDER BY up.lastlogin DESC) AS rn\n\tFROM evitesting.dbo.ecDistricts d\n\tLEFT JOIN evitesting.dbo.ecUsers u ON d.id = u.districtid\n\tLEFT JOIN (SELECT useridkey, MAX(lastlogin) AS lastlogin FROM evitesting.dbo.userproperties GROUP BY useridkey) up ON u.id = up.useridkey\n)\nSELECT llr.districtID, DistrictName, lastlogin, d.lastDataSync as LastSync, sistype, statecode\nFROM LastLoginRanked llr\njoin evicore..districts d on llr.districtID = d.id\nWHERE rn = 1\nOrder by DistrictName;\n"
+        },
+        "id": "56a2281f-703a-4b72-ada6-5d513e189523",
+        "name": "Evicore (DB1)",
+        "type": "n8n-nodes-base.microsoftSql",
+        "typeVersion": 1.1,
+        "position": [
+          720,
+          768
+        ],
+        "credentials": {
+          "microsoftSql": {
+            "id": "8",
+            "name": "DB1.DS1.GOWLS.COM (kdessinger)"
+          }
+        },
+        "onError": "continueErrorOutput"
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "WITH LastLoginRanked AS (\n    SELECT d.id AS districtID, d.name AS DistrictName, u.id as useridkey, u.userid, u.firstname, u.lastname, up.lastlogin,\n    ROW_NUMBER() OVER (PARTITION BY d.id ORDER BY up.lastlogin DESC) AS rn\n\tFROM evitesting.dbo.ecDistricts d\n\tLEFT JOIN evitesting.dbo.ecUsers u ON d.id = u.districtid\n\tLEFT JOIN (SELECT useridkey, MAX(lastlogin) AS lastlogin FROM evitesting.dbo.userproperties GROUP BY useridkey) up ON u.id = up.useridkey\n)\nSELECT llr.districtID, DistrictName, lastlogin, d.lastDataSync as LastSync, sistype, statecode\nFROM LastLoginRanked llr\njoin evicore..districts d on llr.districtID = d.id\nWHERE rn = 1\nOrder by DistrictName;\n"
+        },
+        "id": "47c57455-2fdd-4e2f-ad61-b9aebd857f9a",
+        "name": "Evicore (DB2)",
+        "type": "n8n-nodes-base.microsoftSql",
+        "typeVersion": 1.1,
+        "position": [
+          944,
+          880
+        ],
+        "credentials": {
+          "microsoftSql": {
+            "id": "lFidBVCvt5Wn1IsH",
+            "name": "DB2.DS1.GOWLS.COM (kdessinger)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "/* All Districts */\nSELECT d.id as distId, d.name as district,\nCASE\n    WHEN d.name LIKE '%Boces%' THEN 'Boces'\n    WHEN d.isbusiness = 1 THEN 'Business'\n    ELSE 'District'\nEND AS Product,\nCASE\n    WHEN d.name LIKE '%Boces%' THEN 2\n    WHEN d.isbusiness = 1 THEN 43\n    ELSE 3\nEND AS tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nWhere t.enabled=1\nUNION\n\n/* Aims Districts */\nSELECT d.id, d.name as district, 'Aims' as Product, 71 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join aims..districts a on d.id = a.id\nWhere a.enabled=1 --and t.enabled=1\nUNION\n\n/* Bars Districts */\nSELECT d.id, d.name as district, 'Bars' as Product, 75 as tagId\nFROM evicore..districts d \nleft join evitesting..districts t on d.id = t.id\nWhere t.barsDistrict=1 --and t.enabled=1\nUNION\n\n/* Curriculum Developer Districts */\nSELECT d.id, d.name as district, 'CD' as Product, 74 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join rbemcd..districts cd on d.id = cd.districtid\nWhere cd.enabled=1 --and t.enabled=1\nUNION\n\n/* Datamate Basic Districts\nSELECT d.id, d.name as district, 'DataMate' as Product, 47 as tagId\nFROM evicore..districts d \nleft join evitesting..districts t on d.id = t.id\nWhere t.dmversion='Basic' and t.enabled=1\nUNION */\n\n/* Datamate Live Districts */\nSELECT d.id, d.name as district, 'DataMate:Live' as Product, 77 as tagId\nFROM evicore..districts d \nleft join evitesting..districts t on d.id = t.id\nWhere t.dmversion='Live' and t.enabled=1\nUNION\n\n/* DRP Districts */\nSELECT d.id, d.name as district, 'DRP' as Product, 46 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nWhere t.drpDistrict = 1 and t.enabled=1\nUNION\n\n/* EduForm Districts */\nSELECT d.id, d.name as district, 'EduForm' as Product, 69 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join eviForms..districts f on d.id = f.id\nWhere f.enabled=1 --and t.enabled=1\nUNION\n\n/* EduView Districts */\nSELECT d.id, d.name as district, 'EduView' as Product, 80 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join eduviewEvi..rptDistricts ev on d.id = ev.id\nWhere ev.disabled=0 --and t.enabled=1\nUNION\n\n/* Datamate Elite Districts */\nSELECT d.id, d.name as district, 'Elite' as Product, 76 as tagId\nFROM evicore..districts d \nleft join evitesting..districts t on d.id = t.id\nWhere t.datamateElite=1 and t.enabled=1\nUNION\n\n/* SafeSchools Districts */\nSELECT d.id, d.name as district, 'SafeSchool' as Product, 73 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join safeschools..district ss on d.id = ss.id\nWhere ss.enabled=1 --and t.enabled=1\nUNION\n\n/* Scoring Districts */\nSELECT d.id, d.name as district, 'Scoring' as Product, 16 as tagId\nFROM evicore..districts d \nleft join evitesting..districts t on d.id = t.id\nWhere t.enabled=1 and t.nyScoringDistrict = 1\nUNION\n\n/* StaffTrac Districts */\nSELECT d.id, d.name as district, 'StaffTrac' as Product, 70 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join stafftrac..districts s on d.id = s.id\nWhere s.enabled=1 --and t.enabled=1\nUNION\n\n/* Survate */\nSELECT d.id, d.name as district, 'Survate' as Product, 81 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join eviSurvate..districts sv on d.id = sv.id\nWhere sv.enabled=1 --and t.enabled=1\nUNION\n\n/* TransSync Districts */\nSelect d.id, name as district, 'TransSync' as Product, 82 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nWhere enableTransSync=1 --and t.enabled=1\nUNION\n\n/* Portfolio(+) Districts */\nSELECT EviCoreDistrictId as id, name as district, 'Portfolio(+)' as Product, 67 as tagId\nFROM WebEDGE_Prod..ClientMain\nWhere Enabled=1 and EviCoreDistrictId is not null\nUNION\n\n/* Report(+) Districts */\nSELECT EviCoreDistrictId as id, name as district, 'Report(+)' as Product, 79 as tagId\nFROM WebEDGE_Prod..ClientMain\nWhere Enabled=1 and EviCoreDistrictId is not null and ReportPlus=1\n\nORDER by distId, Product;"
+        },
+        "id": "42811286-94d4-4e3b-a5ec-c41ea5bceacf",
+        "name": "Products by District (DB2)",
+        "type": "n8n-nodes-base.microsoftSql",
+        "typeVersion": 1.1,
+        "position": [
+          960,
+          1168
+        ],
+        "credentials": {
+          "microsoftSql": {
+            "id": "lFidBVCvt5Wn1IsH",
+            "name": "DB2.DS1.GOWLS.COM (kdessinger)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "/* All Districts */\nSELECT d.id as distId, d.name as district,\nCASE\n    WHEN d.name LIKE '%Boces%' THEN 'Boces'\n    WHEN d.isbusiness = 1 THEN 'Business'\n    ELSE 'District'\nEND AS Product,\nCASE\n    WHEN d.name LIKE '%Boces%' THEN 2\n    WHEN d.isbusiness = 1 THEN 43\n    ELSE 3\nEND AS tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nWhere t.enabled=1\nUNION\n\n/* Aims Districts */\nSELECT d.id, d.name as district, 'Aims' as Product, 71 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join aims..districts a on d.id = a.id\nWhere a.enabled=1 --and t.enabled=1\nUNION\n\n/* Bars Districts */\nSELECT d.id, d.name as district, 'Bars' as Product, 75 as tagId\nFROM evicore..districts d \nleft join evitesting..districts t on d.id = t.id\nWhere t.barsDistrict=1 --and t.enabled=1\nUNION\n\n/* Curriculum Developer Districts */\nSELECT d.id, d.name as district, 'CD' as Product, 74 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join rbemcd..districts cd on d.id = cd.districtid\nWhere cd.enabled=1 --and t.enabled=1\nUNION\n\n/* Datamate Basic Districts\nSELECT d.id, d.name as district, 'DataMate' as Product, 47 as tagId\nFROM evicore..districts d \nleft join evitesting..districts t on d.id = t.id\nWhere t.dmversion='Basic' and t.enabled=1\nUNION */\n\n/* Datamate Live Districts */\nSELECT d.id, d.name as district, 'DataMate:Live' as Product, 77 as tagId\nFROM evicore..districts d \nleft join evitesting..districts t on d.id = t.id\nWhere t.dmversion='Live' and t.enabled=1\nUNION\n\n/* DRP Districts */\nSELECT d.id, d.name as district, 'DRP' as Product, 46 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nWhere t.drpDistrict = 1 and t.enabled=1\nUNION\n\n/* EduForm Districts */\nSELECT d.id, d.name as district, 'EduForm' as Product, 69 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join eviForms..districts f on d.id = f.id\nWhere f.enabled=1 --and t.enabled=1\nUNION\n\n/* EduView Districts */\nSELECT d.id, d.name as district, 'EduView' as Product, 80 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join eduviewEvi..rptDistricts ev on d.id = ev.id\nWhere ev.disabled=0 --and t.enabled=1\nUNION\n\n/* Datamate Elite Districts */\nSELECT d.id, d.name as district, 'Elite' as Product, 76 as tagId\nFROM evicore..districts d \nleft join evitesting..districts t on d.id = t.id\nWhere t.datamateElite=1 and t.enabled=1\nUNION\n\n/* SafeSchools Districts */\nSELECT d.id, d.name as district, 'SafeSchool' as Product, 73 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join safeschools..district ss on d.id = ss.id\nWhere ss.enabled=1 --and t.enabled=1\nUNION\n\n/* Scoring Districts */\nSELECT d.id, d.name as district, 'Scoring' as Product, 16 as tagId\nFROM evicore..districts d \nleft join evitesting..districts t on d.id = t.id\nWhere t.enabled=1 and t.nyScoringDistrict = 1\nUNION\n\n/* StaffTrac Districts */\nSELECT d.id, d.name as district, 'StaffTrac' as Product, 70 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join stafftrac..districts s on d.id = s.id\nWhere s.enabled=1 --and t.enabled=1\nUNION\n\n/* Survate */\nSELECT d.id, d.name as district, 'Survate' as Product, 81 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nleft join eviSurvate..districts sv on d.id = sv.id\nWhere sv.enabled=1 --and t.enabled=1\nUNION\n\n/* TransSync Districts */\nSelect d.id, name as district, 'TransSync' as Product, 82 as tagId\nFROM evicore..districts d\nleft join evitesting..districts t on d.id = t.id\nWhere enableTransSync=1 --and t.enabled=1\nUNION\n\n/* Portfolio(+) Districts */\nSELECT EviCoreDistrictId as id, name as district, 'Portfolio(+)' as Product, 67 as tagId\nFROM WebEDGE_Prod..ClientMain\nWhere Enabled=1 and EviCoreDistrictId is not null\nUNION\n\n/* Report(+) Districts */\nSELECT EviCoreDistrictId as id, name as district, 'Report(+)' as Product, 79 as tagId\nFROM WebEDGE_Prod..ClientMain\nWhere Enabled=1 and EviCoreDistrictId is not null and ReportPlus=1\n\nORDER by distId, Product;"
+        },
+        "id": "0244f1e4-72cf-4044-986f-ffdebb5c55d3",
+        "name": "Products by District (DB1)",
+        "type": "n8n-nodes-base.microsoftSql",
+        "typeVersion": 1.1,
+        "position": [
+          720,
+          1024
+        ],
+        "credentials": {
+          "microsoftSql": {
+            "id": "8",
+            "name": "DB1.DS1.GOWLS.COM (kdessinger)"
+          }
+        },
+        "onError": "continueErrorOutput"
+      },
+      {
+        "parameters": {
+          "content": "# Output\nEnd results to get updated",
+          "height": 1123.3459003057826,
+          "width": 277.47508380240885,
+          "color": 3
+        },
+        "id": "16933dc0-b2fc-4758-844c-2acd9e45459f",
+        "name": "Sticky Note",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          2000,
+          240
+        ]
+      }
+    ],
+    "connections": {
+      "FixDate LastLogin": {
+        "main": [
+          [
+            {
+              "node": "FixDate LastSync",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "FixDate LastSync": {
+        "main": [
+          [
+            {
+              "node": "Merge",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get Odoo Contacts": {
+        "main": [
+          [
+            {
+              "node": "Matching",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Matching": {
+        "main": [
+          [
+            {
+              "node": "Update Odoo Contacts",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Pivot Table": {
+        "main": [
+          [
+            {
+              "node": "Merge",
+              "type": "main",
+              "index": 1
+            }
+          ]
+        ]
+      },
+      "Schedule": {
+        "main": [
+          [
+            {
+              "node": "Globals",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Workflow": {
+        "main": [
+          [
+            {
+              "node": "Globals",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Globals": {
+        "main": [
+          [
+            {
+              "node": "Get Odoo Contacts",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Products by District (DB1)",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Evicore (DB1)",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "Globals",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Merge": {
+        "main": [
+          [
+            {
+              "node": "Matching",
+              "type": "main",
+              "index": 1
+            }
+          ]
+        ]
+      },
+      "Evicore (DB1)": {
+        "main": [
+          [
+            {
+              "node": "FixDate LastLogin",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Evicore (DB2)",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Evicore (DB2)": {
+        "main": [
+          [
+            {
+              "node": "FixDate LastLogin",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Products by District (DB2)": {
+        "main": [
+          [
+            {
+              "node": "Pivot Table",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Products by District (DB1)": {
+        "main": [
+          [
+            {
+              "node": "Pivot Table",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Products by District (DB2)",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "system migration",
+    "name": null,
+    "description": null
+  },
+  "activeVersionId": "95879e92-212c-4f16-8a2c-4ebd1c4a540d",
   "connections": {
     "FixDate LastLogin": {
       "main": [
