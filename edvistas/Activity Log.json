@@ -1,5 +1,529 @@
 {
   "active": true,
+  "activeVersion": {
+    "updatedAt": "2025-11-26T05:18:06.453Z",
+    "createdAt": "2025-11-26T05:18:06.453Z",
+    "versionId": "b487eac5-e112-4b82-9d9d-a33229015d50",
+    "workflowId": "RMGsRy908UOekKo3",
+    "nodes": [
+      {
+        "parameters": {},
+        "id": "c47619b4-9220-459b-b534-b60572cef793",
+        "name": "Execute Workflow Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1,
+        "position": [
+          -360,
+          80
+        ]
+      },
+      {
+        "parameters": {
+          "resource": "custom",
+          "customResource": "mail.channel",
+          "operation": "getAll",
+          "limit": 1,
+          "options": {
+            "fieldsList": [
+              "id",
+              "name",
+              "description",
+              "public",
+              "active"
+            ]
+          },
+          "filterRequest": {
+            "filter": [
+              {
+                "fieldName": "name",
+                "value": "={{ $json[\"Channel\"] }}"
+              }
+            ]
+          }
+        },
+        "id": "9b347a60-65ab-4569-a6eb-96a33c5dcb7c",
+        "name": "Get Channel ID",
+        "type": "n8n-nodes-base.odoo",
+        "typeVersion": 1,
+        "position": [
+          40,
+          320
+        ],
+        "credentials": {
+          "odooApi": {
+            "id": "22",
+            "name": "Odoo (OdooBot)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "mode": "combine",
+          "mergeByFields": {
+            "values": [
+              {
+                "field1": "Channel",
+                "field2": "name"
+              }
+            ]
+          },
+          "joinMode": "enrichInput1",
+          "options": {}
+        },
+        "id": "937e2ed2-fcdf-48f2-9d2b-2c66592c4538",
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 2.1,
+        "position": [
+          200,
+          200
+        ]
+      },
+      {
+        "parameters": {
+          "fields": {
+            "values": [
+              {
+                "name": "Title",
+                "stringValue": "={{$json.body?.Title || $json.Title || 'No Title Detected'}}"
+              },
+              {
+                "name": "Message",
+                "stringValue": "={{$json.body?.Message || $json.Message || 'No Message Detected'}}"
+              },
+              {
+                "name": "MessageClean",
+                "stringValue": "={{$json.body?.Message ? $json.body.Message.replace(/<[^>]+>/g, '') : ($json.Message ? $json.Message.replace(/<[^>]+>/g, '') : 'No Message Detected')}}\n\n"
+              },
+              {
+                "name": "Emojis",
+                "type": "arrayValue",
+                "arrayValue": "={{$json.body?.Emojis || $json.Emojis || ['hugs', '+1']}}"
+              },
+              {
+                "name": "Priority",
+                "type": "numberValue",
+                "numberValue": "={{$json.body?.Priority || $json.Priority || 5}}"
+              },
+              {
+                "name": "ClickURL",
+                "stringValue": "={{$json.body?.ClickURL || $json.ClickURL || '' }}"
+              },
+              {
+                "name": "Channel",
+                "stringValue": "={{$json.body?.Channel || $json.Channel || 'Activity Log'}}"
+              }
+            ]
+          },
+          "options": {
+            "ignoreConversionErrors": true
+          }
+        },
+        "id": "de4e03b3-cbdd-49ee-9743-c35298ca0674",
+        "name": "Set Defaults",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.1,
+        "position": [
+          -120,
+          180
+        ]
+      },
+      {
+        "parameters": {
+          "content": "# Alerts & Notifications\n#### This node will send alerts to multiple alerting systems. We are currently using NTFY & Odoo.  \nTo see a list of emoji's click here --> [Emoji List Here](https://ntfy.edvistas.com/docs/emojis/)\n\nField List:\n- Title\n- Message\n- Priority\n- Emojis (array)\n- ClickURL\n- Channel",
+          "height": 322.2741444093105,
+          "width": 572.7495296963182
+        },
+        "id": "16f8d2c5-0471-4a75-8b66-62e5edc1df7b",
+        "name": "Sticky Note",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -180,
+          -280
+        ]
+      },
+      {
+        "parameters": {
+          "respondWith": "text",
+          "responseBody": "Notification Sent",
+          "options": {}
+        },
+        "id": "abc47798-8caa-4ab0-ad75-b13a27465764",
+        "name": "Respond to Webhook",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.1,
+        "position": [
+          940,
+          200
+        ]
+      },
+      {
+        "parameters": {
+          "resource": "custom",
+          "customResource": "=mail.message",
+          "fieldsToCreateOrUpdate": {
+            "fields": [
+              {
+                "fieldName": "email_from",
+                "fieldValue": "odoobot@edvistas.com"
+              },
+              {
+                "fieldName": "message_type",
+                "fieldValue": "comment"
+              },
+              {
+                "fieldName": "model",
+                "fieldValue": "mail.channel"
+              },
+              {
+                "fieldName": "record_name",
+                "fieldValue": "=ntfy: {{ $json.Title }}"
+              },
+              {
+                "fieldName": "body",
+                "fieldValue": "={{ $json.Message }}<BR>\n{{ $json.ClickURL }}"
+              },
+              {
+                "fieldName": "res_id",
+                "fieldValue": "={{ $json[\"id\"] }}"
+              }
+            ]
+          }
+        },
+        "id": "ad4b52ae-44ff-4a02-92de-af765b0b6880",
+        "name": "Send to Odoo",
+        "type": "n8n-nodes-base.odoo",
+        "typeVersion": 1,
+        "position": [
+          500,
+          200
+        ],
+        "alwaysOutputData": true,
+        "credentials": {
+          "odooApi": {
+            "id": "22",
+            "name": "Odoo (OdooBot)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "topic": "={{$json.Channel.replace(/\\s+/g, '-') || 'Activity-Log'}}",
+          "message": "={{ $json.MessageClean }}",
+          "title": "={{ $json.Title }}",
+          "click": "={{ $json.ClickURL }}",
+          "tags": "={{ $json.Emojis }}",
+          "additional_fields": {
+            "alternate_url": "https://ntfy.edvistas.com"
+          }
+        },
+        "id": "9377267e-7401-4071-aad0-2d6b0c817116",
+        "name": "Send to Ntfy",
+        "type": "n8n-nodes-ntfy.Ntfy",
+        "typeVersion": 1,
+        "position": [
+          500,
+          20
+        ]
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://hooks.slack.com/services/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",
+          "sendBody": true,
+          "bodyParameters": {
+            "parameters": [
+              {
+                "name": "text",
+                "value": "={{ $json.Message }}\n{{ $json.ClickURL }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "7ecabe7d-f091-4fee-90df-6f5c45529960",
+        "name": "Send to Slack",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          500,
+          420
+        ]
+      },
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "notification",
+          "authentication": "headerAuth",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "id": "b97e4761-0852-4fdd-b822-0f526a2b5ceb",
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2,
+        "position": [
+          -360,
+          280
+        ],
+        "webhookId": "d7b50e12-768e-4f43-ac4d-9a3891afdfab",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "os5m1l0SgTiVl18p",
+            "name": "N8N Bearer Token"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "content": "## Triggers",
+          "height": 766,
+          "width": 220,
+          "color": 6
+        },
+        "id": "698ea736-e186-4a44-be2a-dbe5ff8d772d",
+        "name": "Sticky Note1",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -420,
+          -280
+        ]
+      },
+      {
+        "parameters": {
+          "content": "## Notification Systems",
+          "height": 898,
+          "width": 295,
+          "color": 4
+        },
+        "id": "9cecb215-e277-4300-9dc2-7630d75a3224",
+        "name": "Sticky Note2",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          406.5573770491802,
+          -280
+        ]
+      },
+      {
+        "parameters": {
+          "content": "## Special Channels",
+          "height": 340,
+          "width": 640,
+          "color": 5
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          720,
+          -280
+        ],
+        "typeVersion": 1,
+        "id": "8e14a5b2-3143-441b-89a9-360bc4a77d2f",
+        "name": "Sticky Note3"
+      },
+      {
+        "parameters": {
+          "topic": "sales",
+          "message": "={{ $json.MessageClean }}",
+          "title": "={{ $json.Title }}",
+          "click": "={{ $json.ClickURL }}",
+          "tags": "={{ $json.Emojis }}",
+          "additional_fields": {
+            "alternate_url": "https://ntfy.edvistas.com"
+          }
+        },
+        "id": "84651437-4ee1-4a32-8c58-7d2cd1d419da",
+        "name": "Sales",
+        "type": "n8n-nodes-ntfy.Ntfy",
+        "typeVersion": 1,
+        "position": [
+          760,
+          -180
+        ]
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $json.Title }}",
+                      "rightValue": "Sales",
+                      "operator": {
+                        "type": "string",
+                        "operation": "contains"
+                      },
+                      "id": "ae20dd40-1228-4f24-99d7-a3025a44ddf6"
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "Sales"
+              }
+            ]
+          },
+          "options": {
+            "fallbackOutput": "none"
+          }
+        },
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.2,
+        "position": [
+          500,
+          -180
+        ],
+        "id": "1d593687-5be1-4c15-b84e-f3b594bdb23b",
+        "name": "Special Channels?"
+      }
+    ],
+    "connections": {
+      "Get Channel ID": {
+        "main": [
+          [
+            {
+              "node": "Merge",
+              "type": "main",
+              "index": 1
+            }
+          ]
+        ]
+      },
+      "Execute Workflow Trigger": {
+        "main": [
+          [
+            {
+              "node": "Set Defaults",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Merge": {
+        "main": [
+          [
+            {
+              "node": "Send to Ntfy",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Send to Odoo",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Send to Slack",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Special Channels?",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Set Defaults": {
+        "main": [
+          [
+            {
+              "node": "Merge",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Get Channel ID",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Send to Odoo": {
+        "main": [
+          [
+            {
+              "node": "Respond to Webhook",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Send to Ntfy": {
+        "main": [
+          [
+            {
+              "node": "Respond to Webhook",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Send to Slack": {
+        "main": [
+          [
+            {
+              "node": "Respond to Webhook",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "Set Defaults",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Sales": {
+        "main": [
+          [
+            {
+              "node": "Respond to Webhook",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Special Channels?": {
+        "main": [
+          [
+            {
+              "node": "Sales",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "system migration",
+    "name": null,
+    "description": null
+  },
+  "activeVersionId": "b487eac5-e112-4b82-9d9d-a33229015d50",
   "connections": {
     "Get Channel ID": {
       "main": [
