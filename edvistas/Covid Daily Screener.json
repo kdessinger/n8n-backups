@@ -1,5 +1,415 @@
 {
   "active": true,
+  "activeVersion": {
+    "updatedAt": "2025-11-26T05:18:06.453Z",
+    "createdAt": "2025-11-26T05:18:06.453Z",
+    "versionId": "b812df26-c562-4afd-ba89-303c9a3fa3b6",
+    "workflowId": "25",
+    "nodes": [
+      {
+        "parameters": {
+          "content": "## Covid Daily Screener\nEduForm Submissions and workflow processees.\nClick to open EVI's form: [5264](https://apps.edvistas.com/forms/formEntry.aspx?formid=5264)\n\n- Fields Catalog references all Fields used in this EduForm Submission.\n- The workflow starts with \"Submit Form\" as the entry point.\n- EduForm Pivot - Pivots the data into human readable.\n- IF - Logical Test to see if 'No' option was pressed.\n- Alert - Will send out Alert via Email.",
+          "height": 269.60835376671974,
+          "width": 737.8050865341586
+        },
+        "id": "a6574388-9dc9-4701-824d-f1bfc7986251",
+        "name": "Sticky Note1",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          40,
+          -120
+        ]
+      },
+      {
+        "parameters": {},
+        "id": "6ee35826-5fce-47aa-9851-5e0af19b8d67",
+        "name": "All Good, Do Nothing",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          620,
+          220
+        ]
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "string": [
+              {
+                "value1": "={{ $json.Q1_No }}",
+                "value2": "qid219742"
+              },
+              {
+                "value1": "={{ $json.Q2_No }}",
+                "value2": "qid219748"
+              },
+              {
+                "value1": "={{ $json.Q3_No }}",
+                "value2": "qid219750"
+              },
+              {
+                "value1": "={{ $json.Q4_No }}",
+                "value2": "qid219752"
+              }
+            ]
+          }
+        },
+        "id": "94bb5138-b42e-4144-b2b1-9c23d547e5f2",
+        "name": "IF Screener Answers All No's",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 1,
+        "position": [
+          400,
+          340
+        ]
+      },
+      {
+        "parameters": {
+          "keepOnlySet": true,
+          "values": {
+            "string": [
+              {
+                "name": "Formid",
+                "value": "={{ $json[\"body\"][\"queryresult\"][\"formid\"] }}"
+              },
+              {
+                "name": "referid",
+                "value": "={{ $json[\"body\"][\"queryresult\"][\"referid\"] }}"
+              },
+              {
+                "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][0][\"name\"] }}",
+                "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][0][\"value\"] }}"
+              },
+              {
+                "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][1][\"name\"] }}",
+                "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][1][\"value\"] }}"
+              },
+              {
+                "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][2][\"name\"] }}",
+                "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][2][\"value\"] }}"
+              },
+              {
+                "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][3][\"name\"] }}",
+                "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][3][\"value\"] }}"
+              },
+              {
+                "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][4][\"name\"] }}",
+                "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][4][\"value\"] }}"
+              },
+              {
+                "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][5][\"name\"] }}",
+                "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][5][\"value\"] }}"
+              },
+              {
+                "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][6][\"name\"] }}",
+                "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][6][\"value\"] }}"
+              },
+              {
+                "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][7][\"name\"] }}",
+                "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][7][\"value\"] }}"
+              },
+              {
+                "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][8][\"name\"] }}",
+                "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][8][\"value\"] }}"
+              },
+              {
+                "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][9][\"name\"] }}",
+                "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][9][\"value\"] }}"
+              },
+              {
+                "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][10][\"name\"] }}",
+                "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][10][\"value\"] }}"
+              },
+              {
+                "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][11][\"name\"] }}",
+                "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][11][\"value\"] }}"
+              },
+              {
+                "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][12][\"name\"] }}",
+                "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][12][\"value\"] }}"
+              },
+              {
+                "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][13][\"name\"] }}",
+                "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][13][\"value\"] }}"
+              },
+              {
+                "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][14][\"name\"] }}",
+                "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][14][\"value\"] }}"
+              },
+              {
+                "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][15][\"name\"] }}",
+                "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][15][\"value\"] }}"
+              },
+              {
+                "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][16][\"name\"] }}",
+                "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][16][\"value\"] }}"
+              },
+              {
+                "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][17][\"name\"] }}",
+                "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][17][\"value\"] }}"
+              },
+              {
+                "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][18][\"name\"] }}",
+                "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][18][\"value\"] }}"
+              },
+              {
+                "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][19][\"name\"] }}",
+                "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][19][\"value\"] }}"
+              },
+              {
+                "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][20][\"name\"] }}",
+                "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][20][\"value\"] }}"
+              },
+              {
+                "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][21][\"name\"] }}",
+                "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][21][\"value\"] }}"
+              },
+              {
+                "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][22][\"name\"] }}",
+                "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][22][\"value\"] }}"
+              },
+              {
+                "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][23][\"name\"] }}",
+                "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][23][\"value\"] }}"
+              },
+              {
+                "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][24][\"name\"] }}",
+                "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][24][\"value\"] }}"
+              },
+              {
+                "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][25][\"name\"] }}",
+                "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][25][\"value\"] }}"
+              },
+              {
+                "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][26][\"name\"] }}",
+                "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][26][\"value\"] }}"
+              },
+              {
+                "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][27][\"name\"] }}",
+                "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][27][\"value\"] }}"
+              },
+              {
+                "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][28][\"name\"] }}",
+                "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][28][\"value\"] }}"
+              },
+              {
+                "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][29][\"name\"] }}",
+                "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][29][\"value\"] }}"
+              },
+              {
+                "name": "={{ $json[\"body\"][\"queryresult\"][\"field\"][30][\"name\"] }}",
+                "value": "={{ $json[\"body\"][\"queryresult\"][\"field\"][30][\"value\"] }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "6ded0d48-8515-4491-8108-f0bcf7a7df0d",
+        "name": "EduForm Pivot",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 1,
+        "position": [
+          200,
+          340
+        ],
+        "alwaysOutputData": false
+      },
+      {
+        "parameters": {
+          "fieldToSplitOut": "body.queryresult.field",
+          "options": {}
+        },
+        "id": "da83859c-5e1e-4e67-b2da-598659449fa7",
+        "name": "Fields Catalogue",
+        "type": "n8n-nodes-base.itemLists",
+        "typeVersion": 1,
+        "position": [
+          580,
+          -40
+        ]
+      },
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "screener",
+          "options": {
+            "responseData": "true"
+          }
+        },
+        "id": "46a8a079-87e4-4a69-959d-30de39c65ce5",
+        "name": "Submit Form",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 1,
+        "position": [
+          0,
+          340
+        ],
+        "webhookId": "9f93b254-ec79-4389-9a6a-6bc767e254b7"
+      },
+      {
+        "parameters": {
+          "fromEmail": "noreply@edvistas.com",
+          "toEmail": "admin@edvistas.com",
+          "subject": "COVID Trace - Potential Exposure Alert",
+          "text": "=Public Safety Alert Detected!\nDate: {{ $json.Date }}\nName: {{ $json[\"Staff_Name\"] }}\nEmail: {{ $json[\"Email\"] }}\n\nPlease note that during a screening test a Guest or Staff member has reported a potential exposure risk to the Covid-19 Virus. Please check the submitted records in EduFrom: https://apps.edvistas.com/forms/formView.aspx?formId={{ $json[\"Formid\"] }}&referId={{ $json[\"referid\"] }}\n\n",
+          "options": {
+            "allowUnauthorizedCerts": true
+          }
+        },
+        "id": "0448e1e1-ea1c-48e8-8d05-c1b6852f6565",
+        "name": "Covid Alert! Send Email",
+        "type": "n8n-nodes-base.emailSend",
+        "typeVersion": 2,
+        "position": [
+          620,
+          520
+        ],
+        "credentials": {
+          "smtp": {
+            "id": "27",
+            "name": "SMTP (mx.gowls.com)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "content": "The workflow is designed to handle a COVID daily screener form submission process. Let me break down the different components and their purposes:\n\n1. **Sticky Note1**: This node seems to be a visual representation of information and serves as a note or documentation. It contains information about the COVID Daily Screener and provides a link to the form.\n\n2. **All Good, Do Nothing**: This node doesn't have any parameters defined, and its purpose is to do nothing when triggered. It seems like a placeholder or a way to create a pause in the workflow.\n\n3. **IF Screener Answers All No's**: This node is an \"IF\" condition node. It checks whether specific questions in the screener have been answered with \"No.\" The conditions are defined based on the values of `$json.Q1_No`, `$json.Q2_No`, `$json.Q3_No`, and `$json.Q4_No`. If all of these conditions are met (i.e., all answers are \"No\"), it will proceed to the next nodes.\n\n4. **EduForm Pivot**: This node is used to pivot data from the form submission. It appears to extract specific fields from the form submission and set them as key-value pairs. The key names are based on the names of the fields from the form.\n\n5. **Fields Catalogue**: This node seems to catalog or list the fields used in the EduForm submission. It likely provides a structured view of the form fields and their values.\n\n6. **Submit Form (Webhook)**: This node is configured to make an HTTP POST request to a webhook endpoint located at the path \"evi/screener.\" It appears to submit data to an external system, possibly the COVID screener form.\n\n7. **Covid Alert! Send Email**: This node sends an email alert if a potential COVID-19 exposure risk is detected. It includes details like the date, name, email, and a link to the submitted records in EduForm.\n\nThe connections between these nodes define the flow of the workflow:\n\n- The workflow starts with \"Submit Form\" as the entry point.\n- Data from the form submission is passed to the \"EduForm Pivot\" node.\n- The pivoted data is then checked by the \"IF Screener Answers All No's\" node.\n- If all answers are \"No,\" it proceeds to the \"All Good, Do Nothing\" node and then to the \"Covid Alert! Send Email\" node.\n- If any of the conditions in the \"IF Screener Answers All No's\" node are not met, it doesn't proceed to send an alert.\n\nThis workflow appears to be designed to automate the screening process for potential COVID-19 exposure based on the answers provided in the form and send an email alert if certain conditions are met.\n\nPlease note that this workflow is based on the information provided in the JSON configuration, and the actual behavior may depend on the specific implementation and the systems integrated with it.",
+          "height": 813.213978729604,
+          "width": 820.8274511946383
+        },
+        "id": "2068aefd-0336-4db1-b284-896b11045c1d",
+        "name": "Sticky Note",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          820,
+          -320
+        ]
+      },
+      {
+        "parameters": {
+          "workflowId": "RMGsRy908UOekKo3",
+          "options": {}
+        },
+        "id": "67d87060-e549-4cce-9a9a-58b4c4dddf52",
+        "name": "Log Activity",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "typeVersion": 1,
+        "position": [
+          1020,
+          520
+        ]
+      },
+      {
+        "parameters": {
+          "fields": {
+            "values": [
+              {
+                "name": "Title",
+                "stringValue": "COVID Trace - Potential Exposure Alert!"
+              },
+              {
+                "name": "Message",
+                "stringValue": "=Public Safety Alert Detected!<BR>\nDate: {{ $('EduForm Pivot').item.json[\"Date\"] }}<BR>\nName: {{ $('EduForm Pivot').item.json[\"Staff_Name\"] }}<BR>\nEmail: {{ $('EduForm Pivot').item.json.Email }}<BR>\n<BR>\nPlease note that during a screening test a Guest or Staff member has reported a potential exposure risk to the Covid-19 Virus. Please check the submitted records in EduFrom."
+              },
+              {
+                "name": "ClickURL",
+                "stringValue": "=https://apps.edvistas.com/forms/formView.aspx?formId={{ $('EduForm Pivot').item.json.Formid }}&referId={{ $('EduForm Pivot').item.json.referid }}"
+              },
+              {
+                "name": "Emojis",
+                "type": "arrayValue",
+                "arrayValue": "['stethoscope', 'stop_sign']"
+              },
+              {
+                "name": "Priority",
+                "type": "numberValue",
+                "numberValue": "4"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "de46101d-b019-4ea6-a6b0-012da4e9eea3",
+        "name": "Send NTFY",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.2,
+        "position": [
+          820,
+          520
+        ]
+      }
+    ],
+    "connections": {
+      "IF Screener Answers All No's": {
+        "main": [
+          [
+            {
+              "node": "All Good, Do Nothing",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Covid Alert! Send Email",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "EduForm Pivot": {
+        "main": [
+          [
+            {
+              "node": "IF Screener Answers All No's",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Submit Form": {
+        "main": [
+          [
+            {
+              "node": "EduForm Pivot",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Covid Alert! Send Email": {
+        "main": [
+          [
+            {
+              "node": "Send NTFY",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Send NTFY": {
+        "main": [
+          [
+            {
+              "node": "Log Activity",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "system migration",
+    "name": null,
+    "description": null
+  },
+  "activeVersionId": "b812df26-c562-4afd-ba89-303c9a3fa3b6",
   "connections": {
     "IF Screener Answers All No's": {
       "main": [
