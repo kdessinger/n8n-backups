@@ -1,5 +1,335 @@
 {
   "active": true,
+  "activeVersion": {
+    "updatedAt": "2025-11-26T05:18:06.453Z",
+    "createdAt": "2025-11-26T05:18:06.453Z",
+    "versionId": "cba40d4f-2771-4eb0-a8e7-0d6c6c0a7e51",
+    "workflowId": "HOkzl7iuO22wm9gZ",
+    "nodes": [
+      {
+        "parameters": {
+          "model": {
+            "__rl": true,
+            "value": "gpt-4o-mini",
+            "mode": "list",
+            "cachedResultName": "gpt-4o-mini"
+          },
+          "options": {}
+        },
+        "id": "a57e0e51-50d3-49de-8dc6-6fe592604765",
+        "name": "OpenAI Model",
+        "type": "@n8n/n8n-nodes-langchain.lmOpenAi",
+        "position": [
+          780,
+          500
+        ],
+        "typeVersion": 1,
+        "credentials": {
+          "openAiApi": {
+            "id": "28",
+            "name": "OpenAi (kdessinger)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "2f483b2f-f663-493d-b0d5-4735f9f9b4e3",
+                "name": "Title",
+                "value": "A user has left a rating!",
+                "type": "string"
+              },
+              {
+                "id": "26b298f5-6e2f-4f05-9fd2-3c6a3bb84edc",
+                "name": "Message",
+                "value": "=Great job, you got a new {{ $('Information Extractor').item.json.output.reviewer_rating }} review!\nReviewer: {{ $('Information Extractor').item.json.output.reviewer_name }}\nTitle: {{ $('Information Extractor').item.json.output.reviewer_title }}\nRating: {{ $('Information Extractor').item.json.output.reviewer_rating }}\nReview: {{ $('Information Extractor').item.json.output.reviewer_content }}",
+                "type": "string"
+              },
+              {
+                "id": "341f9c63-c78b-474f-89d0-92bcad634817",
+                "name": "Priority",
+                "value": 5,
+                "type": "number"
+              },
+              {
+                "id": "932c17ed-2498-4fdb-8731-4cc2153dd2d5",
+                "name": "Emojis",
+                "value": "=[[\"+1\",\"star\"]]",
+                "type": "array"
+              },
+              {
+                "id": "ea6cb544-19b4-41e8-80c4-7efbbadec1f3",
+                "name": "ClickURL",
+                "value": "={{ $json.output.ClickURL }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "73704f6b-3d9c-4828-ad71-c6fe401ac96f",
+        "name": "Set Globals",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1040,
+          320
+        ]
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict"
+            },
+            "conditions": [
+              {
+                "id": "549a4639-f12e-4199-99cc-f2eefc8a8ff1",
+                "leftValue": "={{ $json.from.value[0].address }}",
+                "rightValue": "businessprofile-noreply@google.com",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals",
+                  "name": "filter.operator.equals"
+                }
+              },
+              {
+                "id": "b6a7e85e-42f6-4c3e-ac14-bb929b9a19da",
+                "leftValue": "={{ $json.subject }}",
+                "rightValue": "left a review",
+                "operator": {
+                  "type": "string",
+                  "operation": "contains"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "id": "bddacbd5-02a3-413d-9b22-2fdccf5ff075",
+        "name": "Did we get a review?",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.1,
+        "position": [
+          520,
+          560
+        ]
+      },
+      {
+        "parameters": {},
+        "id": "3757fb7a-cd7d-40be-b7a8-65086b5ebd23",
+        "name": "Exit - No Review",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          1620,
+          580
+        ]
+      },
+      {
+        "parameters": {
+          "text": "=You will analyze emails from Google Business Profile (businessprofile-noreply@google.com). Your task is to extract the following structured information:\n\n- Reviewer's full name\n- Reviewer's title or role (if available)\n- Star rating (e.g., 5-star, 4-star)\n- Review content (if provided, otherwise say \"Only rating given\")\n- A link to reply to the review (remove the tracking info everything after '?fid=')\n\nEmail content: \"{{ $json.text }}\"",
+          "attributes": {
+            "attributes": [
+              {
+                "name": "reviewer_name",
+                "description": "Name of the reviewer"
+              },
+              {
+                "name": "reviewer_title",
+                "description": "Title of the reviewer"
+              },
+              {
+                "name": "reviewer_rating",
+                "description": "Star rating (e.g., 5-star, 4-star)"
+              },
+              {
+                "name": "reviewer_content",
+                "description": "Review content (if provided, otherwise say \"Only rating given\")"
+              },
+              {
+                "name": "ClickURL",
+                "description": " A link to reply to the review"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "624c406a-240a-4db0-a256-564d484e794f",
+        "name": "Information Extractor",
+        "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+        "typeVersion": 1,
+        "position": [
+          700,
+          320
+        ]
+      },
+      {
+        "parameters": {
+          "operation": "markAsRead",
+          "messageId": "={{ $('Receive Emails').item.json.id }}"
+        },
+        "id": "49998cf4-108e-4387-b9fb-f04d58ff2794",
+        "name": "Mark as Read",
+        "type": "n8n-nodes-base.gmail",
+        "typeVersion": 2.1,
+        "position": [
+          1440,
+          320
+        ],
+        "webhookId": "15f4db7e-5623-4f86-9275-842325a6a427",
+        "credentials": {
+          "gmailOAuth2": {
+            "id": "cRBJFJPxOYiwcDx0",
+            "name": "Gmail (infoedvistas@gmail.com)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "workflowId": {
+            "__rl": true,
+            "value": "RMGsRy908UOekKo3",
+            "mode": "list",
+            "cachedResultName": "Activity Log"
+          },
+          "options": {}
+        },
+        "id": "9b219989-edd6-4a0f-8473-84feb7f22df5",
+        "name": "Post to Activity Log",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "typeVersion": 1.1,
+        "position": [
+          1240,
+          320
+        ]
+      },
+      {
+        "parameters": {
+          "pollTimes": {
+            "item": [
+              {
+                "mode": "everyHour"
+              }
+            ]
+          },
+          "filters": {
+            "readStatus": "unread",
+            "sender": "businessprofile-noreply@google.com"
+          }
+        },
+        "type": "n8n-nodes-base.gmailTrigger",
+        "typeVersion": 1.2,
+        "position": [
+          300,
+          560
+        ],
+        "id": "93ecc98b-88de-4e3c-a39d-6a2ee0532544",
+        "name": "Gmail Trigger",
+        "credentials": {
+          "gmailOAuth2": {
+            "id": "cRBJFJPxOYiwcDx0",
+            "name": "Gmail (infoedvistas@gmail.com)"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "OpenAI Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "Information Extractor",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Set Globals": {
+        "main": [
+          [
+            {
+              "node": "Post to Activity Log",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Did we get a review?": {
+        "main": [
+          [
+            {
+              "node": "Information Extractor",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Exit - No Review",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Post to Activity Log": {
+        "main": [
+          [
+            {
+              "node": "Mark as Read",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Information Extractor": {
+        "main": [
+          [
+            {
+              "node": "Set Globals",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Mark as Read": {
+        "main": [
+          [
+            {
+              "node": "Exit - No Review",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Gmail Trigger": {
+        "main": [
+          [
+            {
+              "node": "Did we get a review?",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "system migration",
+    "name": null,
+    "description": null
+  },
+  "activeVersionId": "cba40d4f-2771-4eb0-a8e7-0d6c6c0a7e51",
   "connections": {
     "OpenAI Model": {
       "ai_languageModel": [
