@@ -1,5 +1,99 @@
 {
   "active": true,
+  "activeVersion": {
+    "updatedAt": "2025-11-26T05:18:06.453Z",
+    "createdAt": "2025-11-26T05:18:06.453Z",
+    "versionId": "99fc616f-308f-477c-b16f-98b4eb5985c3",
+    "workflowId": "19",
+    "nodes": [
+      {
+        "parameters": {
+          "resource": "custom",
+          "customResource": "=mail.message",
+          "fieldsToCreateOrUpdate": {
+            "fields": [
+              {
+                "fieldName": "email_from",
+                "fieldValue": "odoobot@edvistas.com"
+              },
+              {
+                "fieldName": "message_type",
+                "fieldValue": "comment"
+              },
+              {
+                "fieldName": "model",
+                "fieldValue": "mail.channel"
+              },
+              {
+                "fieldName": "record_name",
+                "fieldValue": "Uptime Kuma Alert"
+              },
+              {
+                "fieldName": "body",
+                "fieldValue": "={{ $json[\"body\"][\"msg\"] }}"
+              },
+              {
+                "fieldName": "res_id",
+                "fieldValue": "={{ 227 }}"
+              },
+              {
+                "fieldName": "subtype_id",
+                "fieldValue": "=1"
+              }
+            ]
+          }
+        },
+        "id": "58752baf-2b72-4f4d-b3cf-d0d919923612",
+        "name": "Post to Odoo",
+        "type": "n8n-nodes-base.odoo",
+        "typeVersion": 1,
+        "position": [
+          -160,
+          500
+        ],
+        "alwaysOutputData": true,
+        "credentials": {
+          "odooApi": {
+            "id": "22",
+            "name": "Odoo (OdooBot)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "uptimekuma/alert",
+          "options": {}
+        },
+        "name": "Uptime Kuma Input",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 1,
+        "position": [
+          -400,
+          500
+        ],
+        "webhookId": "d201c9fa-57bf-417f-a911-7a168c6cd0ad",
+        "id": "f4f5f4fa-7c0d-40ae-9f0e-126dbd4f59a4"
+      }
+    ],
+    "connections": {
+      "Uptime Kuma Input": {
+        "main": [
+          [
+            {
+              "node": "Post to Odoo",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "system migration",
+    "name": null,
+    "description": null
+  },
+  "activeVersionId": "99fc616f-308f-477c-b16f-98b4eb5985c3",
   "connections": {
     "Uptime Kuma Input": {
       "main": [
