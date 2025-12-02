@@ -1,5 +1,310 @@
 {
   "active": true,
+  "activeVersion": {
+    "updatedAt": "2025-11-26T05:18:06.453Z",
+    "createdAt": "2025-11-26T05:18:06.453Z",
+    "versionId": "223bb6a5-5dfc-44c9-aa30-529342f54fa9",
+    "workflowId": "33",
+    "nodes": [
+      {
+        "parameters": {
+          "content": "## Monitor a folder and get the file name(s) of new file(s).\n**Choose One** to edit to get the file name",
+          "height": 472.39209595352963,
+          "width": 352.9770840827728
+        },
+        "id": "5c5063c6-d3fa-4f90-8699-540b13c613eb",
+        "name": "Sticky Note",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -480,
+          -385
+        ]
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "number": [
+              {
+                "value1": "={{ parseFloat($json.fileSize.match(/[\\d.]+/)[0]) * \n  ($json.fileSize.includes('MB') ? 1024 * 1024 : $json.fileSize.includes('kB') ? 1024 : 1) }}\n\n",
+                "operation": "larger",
+                "value2": 26214400
+              }
+            ]
+          }
+        },
+        "id": "1f7294a5-06aa-4385-944a-66e0e1562ed9",
+        "name": "IF Larger Than 25MB",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 1,
+        "position": [
+          320,
+          -200
+        ]
+      },
+      {
+        "parameters": {
+          "executeOnce": false,
+          "command": "=/home/node/.n8n/scripts/splitaudiofile.sh '{{ $json.directory }}/{{ $json.fileName }}'"
+        },
+        "id": "65f64f1d-928b-4138-8be6-68afda94bf8f",
+        "name": "Split Files",
+        "type": "n8n-nodes-base.executeCommand",
+        "typeVersion": 1,
+        "position": [
+          640,
+          -380
+        ]
+      },
+      {
+        "parameters": {},
+        "id": "61e7aa63-8aee-4450-b877-ea3525a7642e",
+        "name": "Non audio files, do nothing",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          320,
+          -40
+        ]
+      },
+      {
+        "parameters": {
+          "triggerOn": "folder",
+          "path": "/mnt/share/_convert/Speech_2_Text/",
+          "events": [
+            "add"
+          ],
+          "options": {
+            "awaitWriteFinish": true,
+            "usePolling": true
+          }
+        },
+        "id": "5fe90b09-abbe-4e02-9418-deafeefabdca",
+        "name": "Local File Trigger",
+        "type": "n8n-nodes-base.localFileTrigger",
+        "typeVersion": 1,
+        "position": [
+          -360,
+          -180
+        ]
+      },
+      {
+        "parameters": {
+          "fileSelector": "={{ $json.path }}",
+          "options": {}
+        },
+        "id": "0f463abb-dddb-4e8e-b181-f3fa86c35336",
+        "name": "Open File",
+        "type": "n8n-nodes-base.readWriteFile",
+        "typeVersion": 1,
+        "position": [
+          -80,
+          -180
+        ]
+      },
+      {
+        "parameters": {},
+        "id": "49b9b707-b7c9-4b13-9540-c1f7db249823",
+        "name": "Exit",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          840,
+          -380
+        ]
+      },
+      {
+        "parameters": {
+          "content": "### When the file size is larger then 25MB a file split script will execute and cut the file into 25MB chunks.  No need to return loop because when a file chunk is created this workflow will execute again for each.",
+          "height": 274.3313953488371,
+          "width": 478.2906976744182
+        },
+        "id": "009d58f4-7077-41a7-9afb-07cf7c95f776",
+        "name": "Sticky Note1",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          540,
+          -500
+        ]
+      },
+      {
+        "parameters": {
+          "mode": "jsonToBinary",
+          "convertAllData": false,
+          "sourceKey": "text",
+          "destinationKey": "=data",
+          "options": {
+            "fileName": "={{ $('Open File').item.json.directory }}/{{ $('Open File').item.json.fileName }}.txt",
+            "keepSource": true,
+            "mimeType": "=text/plain"
+          }
+        },
+        "id": "024aad0b-04e5-4fe2-8e03-744f5dfab6c4",
+        "name": "Text to Binary",
+        "type": "n8n-nodes-base.moveBinaryData",
+        "typeVersion": 1,
+        "position": [
+          740,
+          -180
+        ]
+      },
+      {
+        "parameters": {
+          "fileName": "={{ $binary.data.directory }}/{{ $binary.data.fileName }}",
+          "options": {
+            "append": false
+          }
+        },
+        "name": "Save to Disk",
+        "type": "n8n-nodes-base.writeBinaryFile",
+        "position": [
+          920,
+          -180
+        ],
+        "typeVersion": 1,
+        "id": "8e03cc03-5de4-4a1e-83fd-eea6f7ebc8c1"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "string": [
+              {
+                "value1": "={{ $json.fileType }}",
+                "value2": "audio"
+              }
+            ]
+          }
+        },
+        "id": "b7914181-4220-442a-b5be-eebae56bb4d7",
+        "name": "Audio files only",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 1,
+        "position": [
+          100,
+          -180
+        ]
+      },
+      {
+        "parameters": {
+          "resource": "audio",
+          "operation": "transcribe",
+          "options": {}
+        },
+        "id": "bc3f31f5-d373-4bc5-b5e6-c4d281dafe9c",
+        "name": "Transcribe",
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "typeVersion": 1.7,
+        "position": [
+          540,
+          -180
+        ],
+        "credentials": {
+          "openAiApi": {
+            "id": "28",
+            "name": "OpenAi (kdessinger)"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "IF Larger Than 25MB": {
+        "main": [
+          [
+            {
+              "node": "Split Files",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Transcribe",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Local File Trigger": {
+        "main": [
+          [
+            {
+              "node": "Open File",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Open File": {
+        "main": [
+          [
+            {
+              "node": "Audio files only",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Split Files": {
+        "main": [
+          [
+            {
+              "node": "Exit",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Text to Binary": {
+        "main": [
+          [
+            {
+              "node": "Save to Disk",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Audio files only": {
+        "main": [
+          [
+            {
+              "node": "IF Larger Than 25MB",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Non audio files, do nothing",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Transcribe": {
+        "main": [
+          [
+            {
+              "node": "Text to Binary",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "system migration",
+    "name": null,
+    "description": null
+  },
+  "activeVersionId": "223bb6a5-5dfc-44c9-aa30-529342f54fa9",
   "connections": {
     "IF Larger Than 25MB": {
       "main": [
