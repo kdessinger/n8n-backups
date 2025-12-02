@@ -1,5 +1,1247 @@
 {
   "active": true,
+  "activeVersion": {
+    "updatedAt": "2025-11-26T05:18:06.453Z",
+    "createdAt": "2025-11-26T05:18:06.453Z",
+    "versionId": "351cf1a2-2b43-4ff8-991f-470ab9688394",
+    "workflowId": "qJCHL92o7fLUFSEM",
+    "nodes": [
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          -656,
+          -416
+        ],
+        "id": "eeaa2ead-60f0-454f-b0c7-f7f7ee537897",
+        "name": "When clicking ‘Test workflow’"
+      },
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "parent-pathways/payment",
+          "responseMode": "lastNode",
+          "responseData": "noData",
+          "options": {
+            "allowedOrigins": "*"
+          }
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2,
+        "position": [
+          -656,
+          -224
+        ],
+        "id": "07b7b289-59d7-4c2f-bcaf-b52c4bee653e",
+        "name": "Webhook",
+        "webhookId": "b4410a1a-7707-43bf-abed-b9a31b3a5a2f"
+      },
+      {
+        "parameters": {
+          "resource": "custom",
+          "customResource": "sale.order",
+          "operation": "get",
+          "customResourceId": "={{ $json.order_id[0] }}",
+          "options": {
+            "fieldsList": [
+              "id",
+              "access_token",
+              "name",
+              "state",
+              "date_order",
+              "partner_id",
+              "order_line",
+              "cart_quantity",
+              "delivery_count",
+              "tag_ids",
+              "user_id",
+              "commitment_date"
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.odoo",
+        "typeVersion": 1,
+        "position": [
+          -96,
+          -224
+        ],
+        "id": "8d168c21-0af1-4221-8e98-052f24d31dbf",
+        "name": "Get Sales Order",
+        "alwaysOutputData": false,
+        "credentials": {
+          "odooApi": {
+            "id": "22",
+            "name": "Odoo (OdooBot)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "resource": "custom",
+          "customResource": "sale.order.line",
+          "operation": "getAll",
+          "returnAll": true,
+          "options": {
+            "fieldsList": [
+              "id",
+              "order_id",
+              "order_partner_id",
+              "sale_order_option_ids",
+              "display_name",
+              "product_uom_qty",
+              "invoice_status",
+              "state",
+              "qty_delivered",
+              "qty_to_deliver",
+              "create_date",
+              "salesman_id"
+            ]
+          },
+          "filterRequest": {
+            "filter": [
+              {
+                "fieldName": "product_id",
+                "operator": "like",
+                "value": "PTA-2774"
+              },
+              {
+                "fieldName": "state",
+                "value": "sale"
+              },
+              {
+                "fieldName": "qty_delivered",
+                "value": "0"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.odoo",
+        "typeVersion": 1,
+        "position": [
+          -336,
+          -224
+        ],
+        "id": "f3bb7273-f69c-4c62-a96f-2ffe35626ce9",
+        "name": "Get Sales Order Line",
+        "alwaysOutputData": false,
+        "credentials": {
+          "odooApi": {
+            "id": "22",
+            "name": "Odoo (OdooBot)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "content": "## Get new PTA sales from Odoo",
+          "height": 1040,
+          "width": 1800,
+          "color": 2
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          -400,
+          -608
+        ],
+        "typeVersion": 1,
+        "id": "15b1fa44-32ea-4d8b-84c8-a1c7b4cd7d4c",
+        "name": "Sticky Note"
+      },
+      {
+        "parameters": {
+          "content": "## Process orders\n\nSet Delivered Date\nSet Delivered Qty\n",
+          "height": 400,
+          "width": 900,
+          "color": 4
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          1952,
+          -608
+        ],
+        "typeVersion": 1,
+        "id": "3384d2c9-5166-4dbd-a519-d6dbd6bf0537",
+        "name": "Sticky Note1"
+      },
+      {
+        "parameters": {
+          "resource": "custom",
+          "customResource": "sale.order",
+          "operation": "update",
+          "customResourceId": "={{ $('Get Sales Order').item.json.id }}",
+          "fieldsToCreateOrUpdate": {
+            "fields": [
+              {
+                "fieldName": "commitment_date",
+                "fieldValue": "={{ $now.toUTC().format('yyyy-MM-dd HH:nn:ss') }}"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.odoo",
+        "typeVersion": 1,
+        "position": [
+          2240,
+          -448
+        ],
+        "id": "3bcb2a92-de5f-4b44-b237-e46697c3c907",
+        "name": "Set Delivery Date",
+        "retryOnFail": false,
+        "executeOnce": false,
+        "credentials": {
+          "odooApi": {
+            "id": "22",
+            "name": "Odoo (OdooBot)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "resource": "custom",
+          "customResource": "sale.order.line",
+          "operation": "update",
+          "customResourceId": "={{ $('Merge').item.json.order_line[0] }}",
+          "fieldsToCreateOrUpdate": {
+            "fields": [
+              {
+                "fieldName": "qty_delivered",
+                "fieldValue": "={{ $('Merge').item.json.qty_to_deliver }}"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.odoo",
+        "typeVersion": 1,
+        "position": [
+          2048,
+          -448
+        ],
+        "id": "092448f1-977d-449f-aa3e-53a7f4cc09df",
+        "name": "Set Delivered Qty",
+        "credentials": {
+          "odooApi": {
+            "id": "22",
+            "name": "Odoo (OdooBot)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "content": "## Trigger the workflow\n\nManually\nWebHook",
+          "height": 760,
+          "width": 340,
+          "color": 6
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          -784,
+          -608
+        ],
+        "typeVersion": 1,
+        "id": "4437faa2-6ca5-4f19-b041-168a27f40557",
+        "name": "Sticky Note2"
+      },
+      {
+        "parameters": {
+          "operation": "get",
+          "contactId": "={{ $json.partner_id[0] }}",
+          "options": {
+            "fieldsList": [
+              "id",
+              "name",
+              "first_name",
+              "middle_name",
+              "last_name",
+              "type",
+              "street",
+              "street2",
+              "city",
+              "state_id",
+              "zip",
+              "contact_address",
+              "email",
+              "phone",
+              "country_id",
+              "country_code",
+              "phone_sanitized",
+              "company_name",
+              "parent_id",
+              "parent_name"
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.odoo",
+        "typeVersion": 1,
+        "position": [
+          560,
+          -224
+        ],
+        "id": "283ee618-5cc2-4bb5-abd5-126b2c17b47f",
+        "name": "Get Contact Info",
+        "credentials": {
+          "odooApi": {
+            "id": "22",
+            "name": "Odoo (OdooBot)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "resource": "custom",
+          "customResource": "res.country.state",
+          "operation": "get",
+          "customResourceId": "={{ $json.state_id[0] }}",
+          "options": {
+            "fieldsList": [
+              "code"
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.odoo",
+        "typeVersion": 1,
+        "position": [
+          768,
+          -224
+        ],
+        "id": "6a8d9306-57b2-4435-9879-43251f5d363c",
+        "name": "Get State",
+        "credentials": {
+          "odooApi": {
+            "id": "22",
+            "name": "Odoo (OdooBot)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "content": "## Send payload to DataMate™",
+          "height": 760,
+          "width": 460
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          1440,
+          -608
+        ],
+        "typeVersion": 1,
+        "id": "69b44ba2-75d4-45fc-a459-7c8879dbcb93",
+        "name": "Sticky Note3"
+      },
+      {
+        "parameters": {
+          "resource": "custom",
+          "customResource": "sale.order.line",
+          "operation": "update",
+          "customResourceId": "3918",
+          "fieldsToCreateOrUpdate": {
+            "fields": [
+              {
+                "fieldName": "qty_delivered",
+                "fieldValue": "0"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.odoo",
+        "typeVersion": 1,
+        "position": [
+          -688,
+          288
+        ],
+        "id": "487ca20e-0b78-458f-ba99-53e66ab571ba",
+        "name": "Set Delivered Qty = 0",
+        "credentials": {
+          "odooApi": {
+            "id": "11",
+            "name": "Odoo (kdessinger)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "content": "## Update Odoo Records\n\n## 1) Populate First & Last name fields in the database\n## 2) Set Payment Terms to 'Immediate'\n## 3) Set TAG to 'PTA'\n## 4) Set Salesman to 'Pete Cooper'\n",
+          "height": 440,
+          "width": 760,
+          "color": 3
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          -368,
+          -48
+        ],
+        "typeVersion": 1,
+        "id": "2997448b-0c61-4d92-a459-6cfe8bfe36d1",
+        "name": "Sticky Note4"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://apps.edvistas.com/datamate/odooapi.aspx?token=24A0A268-5991-45FF-9E78-C20275C43C9A",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {}
+            ]
+          },
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ $json.toJsonString() }}\n\n",
+          "options": {
+            "response": {
+              "response": {}
+            }
+          }
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          1600,
+          -240
+        ],
+        "id": "f859d080-41d1-412a-a0a0-09cdd9579a77",
+        "name": "HTTP Request",
+        "onError": "continueErrorOutput"
+      },
+      {
+        "parameters": {
+          "mode": "raw",
+          "jsonOutput": "={\n  \"id\": {{ $json.order_id[0] }},\n  \"order_id\": \"{{ $json.order_id[1] }}\",\n  \"order_date\": \"{{ $json.date_order }}\",\n  \"end_date\": \"{{ (() => { \n    const orderDate = new Date($json.date_order);\n    orderDate.setFullYear(orderDate.getFullYear() + 1);\n    const year = orderDate.getFullYear();\n    const month = (orderDate.getMonth() + 1).toString().padStart(2, '0'); \n    const day = orderDate.getDate().toString().padStart(2, '0'); \n    const hours = orderDate.getHours().toString().padStart(2, '0'); \n    const minutes = orderDate.getMinutes().toString().padStart(2, '0'); \n    const seconds = orderDate.getSeconds().toString().padStart(2, '0'); \n    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`; \n  })() }}\",\n  \"order_qty\": {{ $json.product_uom_qty }},\n  \"access_token\": \"{{ $json.access_token }}\",\n  \"payment_processed\": \"{{ $('Payment Transaction').item.json.is_post_processed }}\",\n  \"payment_status\": \"{{ $('Payment').item.json.state }}\",\n  \"Company\": \"{{ $json.company_name === 'false' || $json.company_name === null || !$json.company_name ? '' : $json.company_name }}\",\n  \"full_name\": \"{{ $json.name }}\",  \n  \"first_name\": \"{{ $json.name.split(' ')[0] }}\",\n  \"last_name\": \"{{ $json.name.split(' ').slice(1).join(' ') }}\",\n  \"email\": \"{{ $json.email }}\",\n  \"phone\": \"{{ $json.phone }}\",\n  \"phone_sanitized\": \"{{ $json.phone_sanitized === 'false' || $json.phone_sanitized === null || !$json.phone_sanitized ? '' : $json.phone_sanitized }}\",\n  \"street\": \"{{ $json.street }}\",\n  \"street2\": \"{{ $json.street2 === 'false' || $json.street2 === null || !$json.street2 ? '' : $json.street2 }}\",\n  \"city\": \"{{ $json.city }}\",\n  \"state\": \"{{ $json.code }}\",\n  \"zip\": \"{{ $json.zip }}\",\n  \"country\": \"{{ $json.country_id[1] }}\"\n}\n",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1248,
+          -240
+        ],
+        "id": "f4fbaf06-2b18-4ae5-9652-15ae876facdc",
+        "name": "Clean up fields"
+      },
+      {
+        "parameters": {
+          "rule": {
+            "interval": [
+              {
+                "field": "hours"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1.2,
+        "position": [
+          -656,
+          -16
+        ],
+        "id": "2a2fea8d-9616-4de4-9580-7655dc727eb5",
+        "name": "Schedule Trigger"
+      },
+      {
+        "parameters": {
+          "content": "# Reset\n",
+          "height": 620,
+          "width": 340,
+          "color": 3
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          -784,
+          208
+        ],
+        "typeVersion": 1,
+        "id": "10122d04-fe4e-4e34-969b-37962f57ccd8",
+        "name": "Sticky Note7"
+      },
+      {
+        "parameters": {
+          "resource": "custom",
+          "customResource": "account.payment",
+          "operation": "getAll",
+          "returnAll": true,
+          "options": {
+            "fieldsList": [
+              "amount",
+              "state",
+              "payment_state",
+              "partner_id"
+            ]
+          },
+          "filterRequest": {
+            "filter": [
+              {
+                "fieldName": "id",
+                "value": "={{ $json.payment_id[0] }}"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.odoo",
+        "typeVersion": 1,
+        "position": [
+          368,
+          -224
+        ],
+        "id": "4e5c3704-6598-4d11-aa38-151ada1795c3",
+        "name": "Payment",
+        "credentials": {
+          "odooApi": {
+            "id": "22",
+            "name": "Odoo (OdooBot)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "resource": "custom",
+          "customResource": "payment.transaction",
+          "operation": "getAll",
+          "returnAll": true,
+          "options": {
+            "fieldsList": [
+              "provider",
+              "reference",
+              "amount",
+              "payment_id",
+              "is_post_processed",
+              "sale_order_ids",
+              "state"
+            ]
+          },
+          "filterRequest": {
+            "filter": [
+              {
+                "fieldName": "sale_order_ids",
+                "value": "={{ $('Get Sales Order').item.json.id }}"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.odoo",
+        "typeVersion": 1,
+        "position": [
+          144,
+          -224
+        ],
+        "id": "ddd529db-5c01-42e6-b87a-67fea5e4c373",
+        "name": "Payment Transaction",
+        "credentials": {
+          "odooApi": {
+            "id": "22",
+            "name": "Odoo (OdooBot)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "resource": "custom",
+          "customResource": "payment.acquirer",
+          "operation": "update",
+          "customResourceId": "13",
+          "fieldsToCreateOrUpdate": {
+            "fields": [
+              {
+                "fieldName": "state",
+                "fieldValue": "disabled"
+              },
+              {
+                "fieldName": "color",
+                "fieldValue": "3"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.odoo",
+        "typeVersion": 1,
+        "position": [
+          -688,
+          464
+        ],
+        "id": "5352a6d1-db30-4b97-add7-c6626976017d",
+        "name": "Turn off TEST acquirer ",
+        "credentials": {
+          "odooApi": {
+            "id": "11",
+            "name": "Odoo (kdessinger)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "resource": "custom",
+          "customResource": "payment.acquirer",
+          "operation": "update",
+          "customResourceId": "13",
+          "fieldsToCreateOrUpdate": {
+            "fields": [
+              {
+                "fieldName": "state",
+                "fieldValue": "test"
+              },
+              {
+                "fieldName": "color",
+                "fieldValue": "2"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.odoo",
+        "typeVersion": 1,
+        "position": [
+          -688,
+          640
+        ],
+        "id": "2c767fd7-6640-46bb-a051-706997ae71df",
+        "name": "Turn on TEST acquirer",
+        "credentials": {
+          "odooApi": {
+            "id": "11",
+            "name": "Odoo (kdessinger)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "fromEmail": "Parent Pathways <parentpathways@edvistas.com>",
+          "toEmail": "=kdessinger@edvistas.com",
+          "subject": "={{ $('Get Email Template').item.json.subject }}",
+          "html": "={{ $json.html }}",
+          "options": {
+            "appendAttribution": false,
+            "allowUnauthorizedCerts": true
+          }
+        },
+        "type": "n8n-nodes-base.emailSend",
+        "typeVersion": 2.1,
+        "position": [
+          944,
+          208
+        ],
+        "id": "e2319e00-aaae-46e1-b3e9-9ba72fd7993f",
+        "name": "Send Email",
+        "webhookId": "452a6243-e72a-405f-a3a4-bd8667953dbe",
+        "credentials": {
+          "smtp": {
+            "id": "27",
+            "name": "SMTP (mx.gowls.com)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "select * from odooorders"
+        },
+        "type": "n8n-nodes-base.microsoftSql",
+        "typeVersion": 1.1,
+        "position": [
+          2592,
+          -64
+        ],
+        "id": "50334cec-0a12-455c-ab9b-86b69f47c551",
+        "name": "Verify Datamate Received",
+        "credentials": {
+          "microsoftSql": {
+            "id": "8",
+            "name": "DB1.DS1.GOWLS.COM (kdessinger)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "resource": "custom",
+          "customResource": "res.partner",
+          "operation": "update",
+          "customResourceId": "={{ $('Get Contact Info').item.json.id }}",
+          "fieldsToCreateOrUpdate": {
+            "fields": [
+              {
+                "fieldName": "first_name",
+                "fieldValue": "={{ $('Get Contact Info').item.json.name.split(' ')[0] }}"
+              },
+              {
+                "fieldName": "last_name",
+                "fieldValue": "={{ $('Get Contact Info').item.json.name.split(' ').slice(1).join(' ') }}"
+              },
+              {
+                "fieldName": "parent_id",
+                "fieldValue": "={{16972}}"
+              },
+              {
+                "fieldName": "parent_name",
+                "fieldValue": " PTA"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.odoo",
+        "typeVersion": 1,
+        "position": [
+          -320,
+          224
+        ],
+        "id": "b7901ccc-82c4-433a-8f87-3a8de588a6f1",
+        "name": "Update Contacts",
+        "credentials": {
+          "odooApi": {
+            "id": "22",
+            "name": "Odoo (OdooBot)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "resource": "custom",
+          "customResource": "sale.order",
+          "operation": "update",
+          "customResourceId": "={{ $('Get Sales Order').item.json.id }}",
+          "fieldsToCreateOrUpdate": {
+            "fields": [
+              {
+                "fieldName": "tag_ids",
+                "fieldValue": "={{ [60] }}"
+              },
+              {
+                "fieldName": "user_id",
+                "fieldValue": "={{ 26 }}"
+              },
+              {
+                "fieldName": "payment_term_id",
+                "fieldValue": "={{ 1 }}"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.odoo",
+        "typeVersion": 1,
+        "position": [
+          -80,
+          224
+        ],
+        "id": "9eed9037-6892-4a1e-be2e-d34141fb6b6f",
+        "name": "Update Sales Order",
+        "alwaysOutputData": false,
+        "credentials": {
+          "odooApi": {
+            "id": "22",
+            "name": "Odoo (OdooBot)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "resource": "custom",
+          "customResource": "sale.order.line",
+          "operation": "update",
+          "customResourceId": "={{ $('Get Sales Order Line').item.json.id }}",
+          "fieldsToCreateOrUpdate": {
+            "fields": [
+              {
+                "fieldName": "salesman_id",
+                "fieldValue": "26"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.odoo",
+        "typeVersion": 1,
+        "position": [
+          192,
+          224
+        ],
+        "id": "56a7a15f-a12f-44be-8871-ed6f7af6e06e",
+        "name": "Update Sales Order Line",
+        "credentials": {
+          "odooApi": {
+            "id": "22",
+            "name": "Odoo (OdooBot)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "resource": "custom",
+          "customResource": "mail.template",
+          "operation": "get",
+          "customResourceId": "66",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.odoo",
+        "typeVersion": 1,
+        "position": [
+          512,
+          208
+        ],
+        "id": "6c02bb03-e9c0-4e5e-b265-422fb29ec73f",
+        "name": "Get Email Template",
+        "credentials": {
+          "odooApi": {
+            "id": "22",
+            "name": "Odoo (OdooBot)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "content": "## Send out PTA Email\n**Double click** to edit the template in [Odoo](https://odoo.edvistas.com/web?debug=1#id=66&menu_id=4&cids=1&model=mail.template&view_type=form)",
+          "height": 440,
+          "width": 720,
+          "color": 5
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          448,
+          -48
+        ],
+        "typeVersion": 1,
+        "id": "33955238-7512-4452-a066-cf673a41a8c1",
+        "name": "Sticky Note5"
+      },
+      {
+        "parameters": {
+          "content": "## Encountered an error",
+          "height": 340,
+          "width": 520,
+          "color": 3
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          1952,
+          -176
+        ],
+        "typeVersion": 1,
+        "id": "5371744a-4a3e-452f-a6ee-94966279b20f",
+        "name": "Sticky Note6"
+      },
+      {
+        "parameters": {
+          "fields": {
+            "values": [
+              {
+                "name": "Title",
+                "stringValue": "Error - PTA Pathways Sales Order"
+              },
+              {
+                "name": "Message",
+                "stringValue": "=There was an error while sending PTA Parent pathways payload to DataMate. The user {{ $('Clean up fields').item.json.full_name }} was not setup correctly.  Please check the workflow."
+              },
+              {
+                "name": "ClickURL",
+                "stringValue": "=https://n8n.edvistas.com/workflow/qJCHL92o7fLUFSEM/executions"
+              },
+              {
+                "name": "Emojis",
+                "type": "arrayValue",
+                "arrayValue": "['spider_web', 'bangbang']"
+              },
+              {
+                "name": "Priority",
+                "type": "numberValue",
+                "numberValue": "1"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "56d62928-db64-436b-b772-0c1745e40921",
+        "name": "Set Alert Message (Error)",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.2,
+        "position": [
+          2048,
+          -64
+        ]
+      },
+      {
+        "parameters": {
+          "fields": {
+            "values": [
+              {
+                "name": "Title",
+                "stringValue": "PTA Pathways Sales Order"
+              },
+              {
+                "name": "Message",
+                "stringValue": "=A new sale of the PTA Parent Pathways sale has been made. Congradulations to {{ $('Clean up fields').item.json.full_name }} for becomming our newest member. "
+              },
+              {
+                "name": "ClickURL",
+                "stringValue": "=https://n8n.edvistas.com/workflow/qJCHL92o7fLUFSEM/executions"
+              },
+              {
+                "name": "Emojis",
+                "type": "arrayValue",
+                "arrayValue": "['spider_web', 'heavy_check_mark']"
+              },
+              {
+                "name": "Priority",
+                "type": "numberValue",
+                "numberValue": "3"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "77634a45-467b-4f11-ab24-b2be7742aa30",
+        "name": "Set Alert Message (Success)",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.2,
+        "position": [
+          2432,
+          -448
+        ]
+      },
+      {
+        "parameters": {
+          "workflowId": "=RMGsRy908UOekKo3",
+          "options": {}
+        },
+        "id": "60a47d5c-924a-4be2-9205-65836c48b8b1",
+        "name": "Log Activity (Success)",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "typeVersion": 1,
+        "position": [
+          2624,
+          -448
+        ]
+      },
+      {
+        "parameters": {
+          "workflowId": "RMGsRy908UOekKo3",
+          "options": {}
+        },
+        "id": "a079c3e7-0c51-4e08-b798-b8fd95bbb27d",
+        "name": "Log Activity (Error)",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "typeVersion": 1,
+        "position": [
+          2224,
+          -64
+        ]
+      },
+      {
+        "parameters": {
+          "html": "{{ $json.body_html }}"
+        },
+        "type": "n8n-nodes-base.html",
+        "typeVersion": 1.2,
+        "position": [
+          720,
+          208
+        ],
+        "id": "6b1825ce-9a74-4c67-8ca7-1688f350d38f",
+        "name": "HTML"
+      },
+      {
+        "parameters": {
+          "mode": "combine",
+          "combineBy": "combineByPosition",
+          "numberInputs": 6,
+          "options": {
+            "clashHandling": {
+              "values": {
+                "resolveClash": "preferInput1",
+                "mergeMode": "shallowMerge"
+              }
+            },
+            "includeUnpaired": true
+          }
+        },
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3,
+        "position": [
+          1024,
+          -560
+        ],
+        "id": "0abf86f0-8e1f-43da-9918-5c04c717e32f",
+        "name": "Merge",
+        "alwaysOutputData": false
+      }
+    ],
+    "connections": {
+      "When clicking ‘Test workflow’": {
+        "main": [
+          [
+            {
+              "node": "Get Sales Order Line",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "Get Sales Order Line",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get Sales Order": {
+        "main": [
+          [
+            {
+              "node": "Payment Transaction",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Merge",
+              "type": "main",
+              "index": 1
+            }
+          ]
+        ]
+      },
+      "Get Sales Order Line": {
+        "main": [
+          [
+            {
+              "node": "Get Sales Order",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Merge",
+              "type": "main",
+              "index": 2
+            }
+          ]
+        ]
+      },
+      "Get Contact Info": {
+        "main": [
+          [
+            {
+              "node": "Get State",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Merge",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get State": {
+        "main": [
+          [
+            {
+              "node": "Merge",
+              "type": "main",
+              "index": 5
+            },
+            {
+              "node": "Update Contacts",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Clean up fields": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Schedule Trigger": {
+        "main": [
+          [
+            {
+              "node": "Get Sales Order Line",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Set Delivered Qty": {
+        "main": [
+          [
+            {
+              "node": "Set Delivery Date",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "HTTP Request": {
+        "main": [
+          [
+            {
+              "node": "Set Delivered Qty",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Set Alert Message (Error)",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Set Delivery Date": {
+        "main": [
+          [
+            {
+              "node": "Set Alert Message (Success)",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Payment": {
+        "main": [
+          [
+            {
+              "node": "Get Contact Info",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Merge",
+              "type": "main",
+              "index": 4
+            }
+          ]
+        ]
+      },
+      "Payment Transaction": {
+        "main": [
+          [
+            {
+              "node": "Payment",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Merge",
+              "type": "main",
+              "index": 3
+            }
+          ]
+        ]
+      },
+      "Send Email": {
+        "main": [
+          []
+        ]
+      },
+      "Verify Datamate Received": {
+        "main": [
+          []
+        ]
+      },
+      "Update Contacts": {
+        "main": [
+          [
+            {
+              "node": "Update Sales Order",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Update Sales Order": {
+        "main": [
+          [
+            {
+              "node": "Update Sales Order Line",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Update Sales Order Line": {
+        "main": [
+          []
+        ]
+      },
+      "Get Email Template": {
+        "main": [
+          [
+            {
+              "node": "HTML",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Set Alert Message (Error)": {
+        "main": [
+          [
+            {
+              "node": "Log Activity (Error)",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Set Alert Message (Success)": {
+        "main": [
+          [
+            {
+              "node": "Log Activity (Success)",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "HTML": {
+        "main": [
+          [
+            {
+              "node": "Send Email",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Merge": {
+        "main": [
+          [
+            {
+              "node": "Clean up fields",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Log Activity (Success)": {
+        "main": [
+          []
+        ]
+      }
+    },
+    "authors": "system migration",
+    "name": null,
+    "description": null
+  },
+  "activeVersionId": "351cf1a2-2b43-4ff8-991f-470ab9688394",
   "connections": {
     "When clicking ‘Test workflow’": {
       "main": [
