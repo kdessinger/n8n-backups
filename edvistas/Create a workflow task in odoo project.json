@@ -1,5 +1,295 @@
 {
   "active": true,
+  "activeVersion": {
+    "updatedAt": "2025-11-26T05:18:06.453Z",
+    "createdAt": "2025-11-26T05:18:06.453Z",
+    "versionId": "67467ed3-878c-4d5d-9374-6df626ad0691",
+    "workflowId": "ZxOEXvR9jXn5gA5Q",
+    "nodes": [
+      {
+        "parameters": {
+          "model": {
+            "__rl": true,
+            "value": "gpt-5-mini",
+            "mode": "list",
+            "cachedResultName": "gpt-5-mini"
+          },
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "typeVersion": 1.2,
+        "position": [
+          -64,
+          176
+        ],
+        "id": "31e0a1f8-796a-422d-9d32-9acf93a742c3",
+        "name": "OpenAI Chat Model",
+        "credentials": {
+          "openAiApi": {
+            "id": "28",
+            "name": "OpenAi (kdessinger)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "formTitle": "Create a project workflow",
+          "formDescription": "This forms will gather information and then create a workflow task inside of odoo.  ",
+          "formFields": {
+            "values": [
+              {
+                "fieldLabel": "Title",
+                "placeholder": "What is the title of your workflow",
+                "requiredField": true
+              },
+              {
+                "fieldLabel": "Department",
+                "fieldType": "dropdown",
+                "fieldOptions": {
+                  "values": [
+                    {
+                      "option": "Administration"
+                    },
+                    {
+                      "option": "HR"
+                    },
+                    {
+                      "option": "IT"
+                    },
+                    {
+                      "option": "Marketing"
+                    },
+                    {
+                      "option": "Sales"
+                    },
+                    {
+                      "option": "Software Services"
+                    }
+                  ]
+                }
+              },
+              {
+                "fieldLabel": "Description",
+                "placeholder": "Give a detailed explanation of the workflow you want. ",
+                "requiredField": true
+              },
+              {
+                "fieldLabel": "Workflow ID",
+                "placeholder": "i.e  ZxOEXvR9jXn5gA5Q/75ba1d",
+                "requiredField": "=i.e. {{ $workflow.id }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.formTrigger",
+        "typeVersion": 2.3,
+        "position": [
+          -272,
+          -48
+        ],
+        "id": "75ba1d74-bf19-4edc-88e8-3d5cb8983141",
+        "name": "On form submission",
+        "webhookId": "3086702c-834e-4756-ae08-da822cc2e688"
+      },
+      {
+        "parameters": {
+          "jsonSchemaExample": "{\n  \"title\": \"🧠 Extract FAQ's from HelpDesk Tickets\",\n  \"workflow_id\": \"\",\n  \"department\": [\"IT\"],\n  \"project\": \"Corporate Workflows\",\n  \"tags\": [\"helpdesk\",\"IT\"],\n  \"assignees\": [\"Kenn Dessinger\"],\n  \"description_html\": \"<div style=\\\"font-size:14px; line-height:1.6;\\\"><p>Workflow ID: &lt;WORKFLOW_ID&gt;</p><hr><p>🚀 <strong>Extract FAQ's from HelpDesk Tickets</strong></p><p>Reviews closed/resolved helpdesk tickets to produce concise Q&amp;A entries for the knowledge base.</p><p><strong>Trigger</strong>: Ticket marked Resolved/Closed or scheduled batch scan.</p><p><strong>Steps</strong>:</p><ul><li>Shortlist candidate Q&amp;A pairs from tickets. 🧩</li><li>Normalize and dedupe; remove internal notes/PII. 🧼</li><li>Create draft KB articles in <strong>Odoo</strong> with source ticket ID. 📎</li><li>Notify editors for review and publish. ✉️</li></ul><p><strong>Outcome</strong>: Reviewed draft FAQs ready for approval, improving self-service and reducing repeat tickets.</p></div>\"\n}\n"
+        },
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "typeVersion": 1.3,
+        "position": [
+          112,
+          176
+        ],
+        "id": "99240646-d91c-4058-8118-7816063d5360",
+        "name": "Structured Output Parser"
+      },
+      {
+        "parameters": {
+          "resource": "custom",
+          "customResource": "project.task",
+          "operation": "getAll",
+          "returnAll": true,
+          "options": {},
+          "filterRequest": {
+            "filter": [
+              {
+                "fieldName": "name",
+                "operator": "like",
+                "value": "Create a Newsletter"
+              },
+              {
+                "fieldName": "stage_id",
+                "operator": "notEqual",
+                "value": "53"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.odoo",
+        "typeVersion": 1,
+        "position": [
+          -384,
+          208
+        ],
+        "id": "b5ac1869-d983-42d0-b7b7-1a0915439a11",
+        "name": "Get Example Tasks",
+        "credentials": {
+          "odooApi": {
+            "id": "22",
+            "name": "Odoo (OdooBot)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "resource": "custom",
+          "customResource": "project.tags",
+          "operation": "getAll",
+          "returnAll": true,
+          "options": {
+            "fieldsList": [
+              "id",
+              "name",
+              "color"
+            ]
+          },
+          "filterRequest": {
+            "filter": [
+              {
+                "fieldName": "color",
+                "value": "8"
+              }
+            ]
+          }
+        },
+        "id": "c2059d35-b991-4a88-9009-0c90bf3a1f37",
+        "name": "Tags",
+        "type": "n8n-nodes-base.odoo",
+        "typeVersion": 1,
+        "position": [
+          -560,
+          208
+        ],
+        "credentials": {
+          "odooApi": {
+            "id": "12",
+            "name": "Odoo (Administrator)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "=Title: {{ $json.Title }}\nDepartment: {{ $json.Department }}\nDescription: {{ $json.Description }}\nWorkflow Id: {{ $json['Workflow ID'] }}",
+          "hasOutputParser": true,
+          "options": {
+            "systemMessage": "=You are Odoo Tasking Agent. Your job is to generate clean, professional, token-efficient JSON output to create Odoo workflow tasks.\n\n🧭 General Rules\n- Output format: JSON only. No extra text, code fences, or commentary.\n- No hallucinations: If a value is missing in the input, either leave it blank or use the required placeholder.\n- No formatting outside of HTML inside `description_html`.\n\n🧱 Field Requirements\n- title → Must start with one emoji + space, followed by task title text. Max length 80 chars.\n- workflow_id → Use intake field \"Workflow ID\" exactly. If it’s empty, missing, or only whitespace, use the literal string \"<WORKFLOW_ID>\".\n- department → Convert to an array. If input is a single string, wrap it in an array.\n- project → Always \"Corporate Workflows\".\n- tags → Optional, array.\n- assignees → Optional, array.\n- description_html → Must contain structured HTML with specific formatting rules (see below).\n\n🧾 Description HTML Structure\nWrap the entire description in:\n<div style=\"font-size:14px; line-height:1.6;\">\n  <p><strong>Workflow ID:</strong> &lt;WORKFLOW_ID&gt;</p>\n  <hr>\n  <p>🚀 <strong>[Task Title]</strong></p>\n  <p>[1–2 sentence overview of the task]</p>\n  <p>🔔 <strong>Trigger</strong>: [Short trigger explanation]</p>\n  <p>🧩 <strong>Steps</strong>:</p>\n  <ul>\n    <li>First short step with an emoji</li>\n    <li>Second short step</li>\n    <li>Third short step</li>\n  </ul>\n  <p>🎯 <strong>Outcome</strong>: [Outcome statement, 1–2 sentences]</p>\n  <p>📝 <em>Note</em>: [Optional additional notes]</p>\n</div>\n\n✅ Rules for `description_html`:\n- **Workflow ID line must be bold and appear first.**\n- Leave `&lt;WORKFLOW_ID&gt;` if no real ID is provided.\n- Emojis must be used in:\n  • Title (at least one at the start)\n  • Section headers\n- Use only these tags: <div> <p> <strong> <em> <ul> <li> <br> <hr>\n- No Markdown, no code fences, no links unless provided.\n",
+            "enableStreaming": true
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 2.2,
+        "position": [
+          -48,
+          -48
+        ],
+        "id": "b9d2716b-9882-4fb6-9f67-deb193492a95",
+        "name": "Odoo Tasking Agent"
+      },
+      {
+        "parameters": {
+          "resource": "custom",
+          "customResource": "project.task",
+          "fieldsToCreateOrUpdate": {
+            "fields": [
+              {
+                "fieldName": "project_id",
+                "fieldValue": "={{115}}"
+              },
+              {
+                "fieldName": "partner_id",
+                "fieldValue": "={{ 1 }}"
+              },
+              {
+                "fieldName": "name",
+                "fieldValue": "={{ $json.output.title }}"
+              },
+              {
+                "fieldName": "description",
+                "fieldValue": "={{ $json.output.description_html }}"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.odoo",
+        "typeVersion": 1,
+        "position": [
+          288,
+          -48
+        ],
+        "id": "758a1a89-6ef1-4a9b-aa42-21ffb38c9d19",
+        "name": "Create a task in odoo projects",
+        "credentials": {
+          "odooApi": {
+            "id": "22",
+            "name": "Odoo (OdooBot)"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "OpenAI Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "Odoo Tasking Agent",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "On form submission": {
+        "main": [
+          [
+            {
+              "node": "Odoo Tasking Agent",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Structured Output Parser": {
+        "ai_outputParser": [
+          [
+            {
+              "node": "Odoo Tasking Agent",
+              "type": "ai_outputParser",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Odoo Tasking Agent": {
+        "main": [
+          [
+            {
+              "node": "Create a task in odoo projects",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "system migration",
+    "name": null,
+    "description": null
+  },
+  "activeVersionId": "67467ed3-878c-4d5d-9374-6df626ad0691",
   "connections": {
     "OpenAI Chat Model": {
       "ai_languageModel": [
