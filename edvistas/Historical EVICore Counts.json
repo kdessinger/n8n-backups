@@ -1,5 +1,176 @@
 {
   "active": true,
+  "activeVersion": {
+    "updatedAt": "2025-11-26T05:18:06.453Z",
+    "createdAt": "2025-11-26T05:18:06.453Z",
+    "versionId": "0c5da5b6-d368-402a-a6cc-d269dda85ff2",
+    "workflowId": "VE30hvBsBs48MFvt",
+    "nodes": [
+      {
+        "parameters": {},
+        "id": "3c748b0b-08e5-487b-84b8-648253b132ef",
+        "name": "Execute Workflow Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1,
+        "position": [
+          800,
+          608
+        ]
+      },
+      {
+        "parameters": {
+          "rule": {
+            "interval": [
+              {
+                "field": "weeks",
+                "triggerAtDay": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ],
+                "triggerAtHour": 17
+              }
+            ]
+          }
+        },
+        "id": "15b138b7-7a98-40e9-b5d4-d7fe29eeb971",
+        "name": "Schedule Trigger (Workdays@5PM)",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          800,
+          400
+        ]
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "DECLARE @NoDist table (ID SmallInt) Insert into @NoDist values (-1), (21), (804), (805), (806), (815)\nDECLARE @tdate smalldatetime set @tdate = GetDate()\n\nSelect * from (\nSelect 'AIMS' as Name, Count(*) as Count, @tdate TimeStamp FROM aims..districts a Where a.enabled=1 and a.id not in(Select ID from @NoDist)\nunion select 'Courses' Name, Count(*) Count, @tdate TimeStamp FROM rbemcd..courses r Where r.districtid >0 and r.districtid not in(Select ID from @NoDist)\nunion select 'Datamate Elite' Name, Count(*) Count, @tdate TimeStamp from evitesting..districts e WHERE e.enabled=1 and e.id not in(Select ID from @NoDist) and e.datamateElite = 1\nunion select 'Datamate Live' Name, Count(*) Count, @tdate TimeStamp FROM evitesting..districts e WHERE e.enabled=1 and e.id not in(Select ID from @NoDist) and e.dmversion = 'Live'\nunion select 'Datamate Basic' Name, Count(*) Count, @tdate TimeStamp FROM evitesting..districts e WHERE e.enabled=1 and e.id not in(Select ID from @NoDist) and e.dmversion = 'Basic'\nunion select 'Districts' as Name, Count(*) Count, @tdate TimeStamp from eviForms..ecDistricts d Where d.id not in(Select ID from @NoDist)\nunion select 'Forms' as Name, Count(*) Count, @tdate TimeStamp  from eviForms..forms Where complete=0\nunion select 'Guardians' as Name, Count(*) Count, @tdate TimeStamp from eviForms..ecGuardians\nunion select 'SafeSchools' as Name, Count(*) Count, @tdate TimeStamp from safeschools..district ss Where ss.enabled=1 and (ss.trial = 0 or ss.trial is null) and ss.id not in(Select ID from @NoDist)\nunion select 'Schools' as Name, Count(*) Count, @tdate TimeStamp  from eviForms..ecschools \nunion select 'SMS' as Name, Sum(segments) Count, @tdate TimeStamp From eviForms..smsLog \nunion select 'Staff' as Name, Count(*) Count, @tdate TimeStamp  from eviForms..ecStaff sf where disabled=0 and sf.districtId not in (Select ID from @NoDist)\nunion select 'StaffTrac' as Name, Count(*) Count, @tdate TimeStamp FROM stafftrac..districts st Where st.enabled=1 and st.id not in (Select ID from @NoDist)\nunion select 'Students' as Name, Count(*) Count, @tdate TimeStamp  from eviForms..ecStudents s where active=1 and s.districtid not in (Select ID from @NoDist)\nunion select 'Surveys' as Name, Count(*) Count, @tdate TimeStamp FROM eviSurvate..surveys sv Where sv.disable=0 and sv.districtid not in (Select ID from @NoDist)\nunion select 'Users' as Name, Count(*) Count, @tdate TimeStamp  from eviForms..ecUsers u where u.active=1 and u.districtid not in (Select ID from @NoDist)\nunion select 'ItemBank' as Name, Count(*) Count, @tdate TimeStamp FROM evitesting..questionBank q\n ) l\n Pivot (\n\tSum(l.count) For l.name\n\tIn ([AIMS],[Courses],[Datamate Elite],[Datamate Live],[Datamate Basic],[Districts],[Forms],[Guardians],[SafeSchools],[Schools],[SMS],[Staff],[StaffTrac],[Students],[Surveys],[Users],[ItemBank])\n ) as pivotTable"
+        },
+        "id": "394e2168-59e7-4a3f-971b-1cd2ae0dcb36",
+        "name": "Read from EVICore (DB2)",
+        "type": "n8n-nodes-base.microsoftSql",
+        "typeVersion": 1.1,
+        "position": [
+          1328,
+          624
+        ],
+        "notesInFlow": true,
+        "retryOnFail": true,
+        "maxTries": 2,
+        "waitBetweenTries": 3000,
+        "credentials": {
+          "microsoftSql": {
+            "id": "8",
+            "name": "DB1.DS1.GOWLS.COM (kdessinger)"
+          }
+        },
+        "notes": "The DB1 connection failed, trying backup connection DB2."
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "DECLARE @NoDist table (ID SmallInt) Insert into @NoDist values (-1), (21), (804), (805), (806), (815)\nDECLARE @tdate smalldatetime set @tdate = GetDate()\n\nSelect * from (\nSelect 'AIMS' as Name, Count(*) as Count, @tdate TimeStamp FROM aims..districts a Where a.enabled=1 and a.id not in(Select ID from @NoDist)\nunion select 'Courses' Name, Count(*) Count, @tdate TimeStamp FROM rbemcd..courses r Where r.districtid >0 and r.districtid not in(Select ID from @NoDist)\nunion select 'Datamate Elite' Name, Count(*) Count, @tdate TimeStamp from evitesting..districts e WHERE e.enabled=1 and e.id not in(Select ID from @NoDist) and e.datamateElite = 1\nunion select 'Datamate Live' Name, Count(*) Count, @tdate TimeStamp FROM evitesting..districts e WHERE e.enabled=1 and e.id not in(Select ID from @NoDist) and e.dmversion = 'Live'\nunion select 'Datamate Basic' Name, Count(*) Count, @tdate TimeStamp FROM evitesting..districts e WHERE e.enabled=1 and e.id not in(Select ID from @NoDist) and e.dmversion = 'Basic'\nunion select 'Districts' as Name, Count(*) Count, @tdate TimeStamp from eviForms..ecDistricts d Where d.id not in(Select ID from @NoDist)\nunion select 'Forms' as Name, Count(*) Count, @tdate TimeStamp  from eviForms..forms Where complete=0\nunion select 'Guardians' as Name, Count(*) Count, @tdate TimeStamp from eviForms..ecGuardians\nunion select 'SafeSchools' as Name, Count(*) Count, @tdate TimeStamp from safeschools..district ss Where ss.enabled=1 and (ss.trial = 0 or ss.trial is null) and ss.id not in(Select ID from @NoDist)\nunion select 'Schools' as Name, Count(*) Count, @tdate TimeStamp  from eviForms..ecschools \nunion select 'SMS' as Name, Sum(segments) Count, @tdate TimeStamp From eviForms..smsLog \nunion select 'Staff' as Name, Count(*) Count, @tdate TimeStamp  from eviForms..ecStaff sf where disabled=0 and sf.districtId not in (Select ID from @NoDist)\nunion select 'StaffTrac' as Name, Count(*) Count, @tdate TimeStamp FROM stafftrac..districts st Where st.enabled=1 and st.id not in (Select ID from @NoDist)\nunion select 'Students' as Name, Count(*) Count, @tdate TimeStamp  from eviForms..ecStudents s where active=1 and s.districtid not in (Select ID from @NoDist)\nunion select 'Surveys' as Name, Count(*) Count, @tdate TimeStamp FROM eviSurvate..surveys sv Where sv.disable=0 and sv.districtid not in (Select ID from @NoDist)\nunion select 'Users' as Name, Count(*) Count, @tdate TimeStamp  from eviForms..ecUsers u where u.active=1 and u.districtid not in (Select ID from @NoDist)\nunion select 'ItemBank' as Name, Count(*) Count, @tdate TimeStamp FROM evitesting..questionBank q\n ) l\n Pivot (\n\tSum(l.count) For l.name\n\tIn ([AIMS],[Courses],[Datamate Elite],[Datamate Live],[Datamate Basic],[Districts],[Forms],[Guardians],[SafeSchools],[Schools],[SMS],[Staff],[StaffTrac],[Students],[Surveys],[Users],[ItemBank])\n ) as pivotTable"
+        },
+        "id": "2b762f03-96aa-40ca-a3d4-fd73dc12d069",
+        "name": "Read from EVICore",
+        "type": "n8n-nodes-base.microsoftSql",
+        "typeVersion": 1.1,
+        "position": [
+          1088,
+          512
+        ],
+        "notesInFlow": true,
+        "credentials": {
+          "microsoftSql": {
+            "id": "8",
+            "name": "DB1.DS1.GOWLS.COM (kdessinger)"
+          }
+        },
+        "onError": "continueErrorOutput",
+        "notes": "If we fail to login to DB1 then failover to DB2"
+      },
+      {
+        "parameters": {
+          "table": "datacounts",
+          "columns": "=TimeStamp, AIMS, Courses, Datamate Elite, Datamate Live, Datamate Basic, Districts, Forms, Guardians, SafeSchools, Schools, SMS, Staff, StaffTrac, Students, Surveys, Users, ItemBank"
+        },
+        "id": "f6d19dda-5dd5-487e-95c5-a383a2c3fa21",
+        "name": "Write to SQL01 database",
+        "type": "n8n-nodes-base.microsoftSql",
+        "typeVersion": 1,
+        "position": [
+          1552,
+          496
+        ],
+        "credentials": {
+          "microsoftSql": {
+            "id": "c0eH277IuAIBbKLJ",
+            "name": "192.168.148.54 (SQL01)"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "Execute Workflow Trigger": {
+        "main": [
+          [
+            {
+              "node": "Read from EVICore",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Schedule Trigger (Workdays@5PM)": {
+        "main": [
+          [
+            {
+              "node": "Read from EVICore",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Read from EVICore (DB2)": {
+        "main": [
+          [
+            {
+              "node": "Write to SQL01 database",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Read from EVICore": {
+        "main": [
+          [
+            {
+              "node": "Write to SQL01 database",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Read from EVICore (DB2)",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "system migration",
+    "name": null,
+    "description": null
+  },
+  "activeVersionId": "0c5da5b6-d368-402a-a6cc-d269dda85ff2",
   "connections": {
     "Execute Workflow Trigger": {
       "main": [
