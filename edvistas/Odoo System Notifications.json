@@ -1,5 +1,508 @@
 {
   "active": true,
+  "activeVersion": {
+    "updatedAt": "2025-11-26T05:18:06.453Z",
+    "createdAt": "2025-11-26T05:18:06.453Z",
+    "versionId": "8cddad90-6456-4792-bac9-061a5e59f30a",
+    "workflowId": "n9Pv9tSyGQ9fw41t",
+    "nodes": [
+      {
+        "parameters": {
+          "resource": "custom",
+          "customResource": "fetchmail.server",
+          "operation": "get",
+          "customResourceId": "5",
+          "options": {}
+        },
+        "id": "38f050ac-9baf-48aa-9563-a2f60ca40da3",
+        "name": "Incoming Mail Servers",
+        "type": "n8n-nodes-base.odoo",
+        "typeVersion": 1,
+        "position": [
+          -64,
+          368
+        ],
+        "notesInFlow": true,
+        "credentials": {
+          "odooApi": {
+            "id": "12",
+            "name": "Odoo (Administrator)"
+          }
+        },
+        "notes": "query the mails servers"
+      },
+      {
+        "parameters": {
+          "operation": "getTimeBetweenDates",
+          "startDate": "={{ $json.date }}",
+          "endDate": "={{ $now.plus(5, 'hours') }}",
+          "units": [
+            "hour"
+          ],
+          "options": {}
+        },
+        "id": "e57e47e0-e09b-4d0f-8a78-96b24c44df19",
+        "name": "Time Difference",
+        "type": "n8n-nodes-base.dateTime",
+        "typeVersion": 2,
+        "position": [
+          144,
+          368
+        ],
+        "notesInFlow": true,
+        "notes": "calculate time diff"
+      },
+      {
+        "parameters": {
+          "workflowId": {
+            "__rl": true,
+            "value": "RMGsRy908UOekKo3",
+            "mode": "list",
+            "cachedResultName": "Activity Log"
+          },
+          "options": {}
+        },
+        "id": "ed6ffd47-019c-4c88-b4d1-2db38a1f97af",
+        "name": "Post to Activity Log",
+        "type": "n8n-nodes-base.executeWorkflow",
+        "typeVersion": 1.1,
+        "position": [
+          1376,
+          192
+        ]
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "2f483b2f-f663-493d-b0d5-4735f9f9b4e3",
+                "name": "Title",
+                "value": "=Incoming Mail Server Failure",
+                "type": "string"
+              },
+              {
+                "id": "26b298f5-6e2f-4f05-9fd2-3c6a3bb84edc",
+                "name": "Message",
+                "value": "=Odoo failed to retrieve incoming mail messages. I was unable to restart the odoo services. Please check the server. Last Mail Fetch was {{\n  Math.round($('Time Difference').item.json.timeDifference.hours * 10) / 10\n}} hour(s) ago.\n",
+                "type": "string"
+              },
+              {
+                "id": "341f9c63-c78b-474f-89d0-92bcad634817",
+                "name": "Priority",
+                "value": 3,
+                "type": "number"
+              },
+              {
+                "id": "932c17ed-2498-4fdb-8731-4cc2153dd2d5",
+                "name": "Emojis",
+                "value": "[[ \"inbox_tray\",\"rotating_light\" ]]",
+                "type": "array"
+              },
+              {
+                "id": "ea6cb544-19b4-41e8-80c4-7efbbadec1f3",
+                "name": "ClickURL",
+                "value": "https://odoo.edvistas.com/web#menu_id=4&action=141&model=fetchmail.server",
+                "type": "string"
+              }
+            ]
+          },
+          "includeOtherFields": true,
+          "options": {}
+        },
+        "id": "3d0e791c-311d-43ef-aaf9-cf332bf0af33",
+        "name": "Set Alert Message",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1072,
+          336
+        ]
+      },
+      {
+        "parameters": {
+          "content": "## Odoo Email Tester\n\nThis workflow will check odoo's Incomming mail servers to see when the last fetch operation occured.  The cron system is supposed to check email every 15 minutes but sometimes cron gets locked up.   When that happens this workflow will connect to odoo and restart the cron system.\n\nOdoomaster!",
+          "height": 208,
+          "width": 720
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          -272,
+          128
+        ],
+        "typeVersion": 1,
+        "id": "618dcc23-39e3-45d3-b11d-4de06589d914",
+        "name": "Sticky Note"
+      },
+      {
+        "parameters": {
+          "content": "## Send a Failure Alert!",
+          "height": 256,
+          "width": 288,
+          "color": 3
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          976,
+          256
+        ],
+        "typeVersion": 1,
+        "id": "3f100ffb-6d1d-4b31-9414-29cfbf6c9278",
+        "name": "Sticky Note1"
+      },
+      {
+        "parameters": {
+          "command": "sudo supervisorctl restart odoo-server",
+          "cwd": "/home/n8n"
+        },
+        "type": "n8n-nodes-base.ssh",
+        "typeVersion": 1,
+        "position": [
+          544,
+          160
+        ],
+        "id": "85c0cbf5-e3d5-4e67-95ee-d99b4c60653f",
+        "name": "Restart Odoo Services",
+        "credentials": {
+          "sshPassword": {
+            "id": "LDKvgrr1FfyXjneA",
+            "name": "Odoo15-Production"
+          }
+        },
+        "onError": "continueRegularOutput",
+        "notes": "SSH into Odoo15 Production and restart the odoo service"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": false,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "5817b18b-b62c-4386-8b42-71dc5b9bdf4b",
+                "leftValue": "={{ $json.stdout }}",
+                "rightValue": "=odoo-server: stopped\nodoo-server: started",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals",
+                  "name": "filter.operator.equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {
+            "ignoreCase": true
+          }
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          752,
+          160
+        ],
+        "id": "e25a34bd-f2ae-4a14-a647-1e47a98bb769",
+        "name": "Did it restart successfully?"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "2f483b2f-f663-493d-b0d5-4735f9f9b4e3",
+                "name": "Title",
+                "value": "=Incoming Mail Server Failure",
+                "type": "string"
+              },
+              {
+                "id": "26b298f5-6e2f-4f05-9fd2-3c6a3bb84edc",
+                "name": "Message",
+                "value": "=Odoo failed to retrieve incoming mail messages. We restarted the odoo service and it was succesful. Emails should resume momentarily. ",
+                "type": "string"
+              },
+              {
+                "id": "341f9c63-c78b-474f-89d0-92bcad634817",
+                "name": "Priority",
+                "value": 3,
+                "type": "number"
+              },
+              {
+                "id": "932c17ed-2498-4fdb-8731-4cc2153dd2d5",
+                "name": "Emojis",
+                "value": "[[ \"inbox_tray\",\"rotating_light\" ]]",
+                "type": "array"
+              },
+              {
+                "id": "ea6cb544-19b4-41e8-80c4-7efbbadec1f3",
+                "name": "ClickURL",
+                "value": "https://odoo.edvistas.com/web#menu_id=4&action=141&model=fetchmail.server",
+                "type": "string"
+              }
+            ]
+          },
+          "includeOtherFields": true,
+          "options": {}
+        },
+        "id": "94c10365-f549-4f6e-b44c-edac0b5e97d7",
+        "name": "Set Alert Message1",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1072,
+          48
+        ]
+      },
+      {
+        "parameters": {
+          "content": "## Send a Success Alert!",
+          "height": 256,
+          "width": 288,
+          "color": 4
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          976,
+          -16
+        ],
+        "typeVersion": 1,
+        "id": "465b7fd7-dda3-41b8-b22a-99abd5f786bb",
+        "name": "Sticky Note2"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "20774546-d7b7-487b-a25d-45792b8cd039",
+                "leftValue": "={{ $json.timeDifference.hours }}",
+                "rightValue": 1,
+                "operator": {
+                  "type": "number",
+                  "operation": "gt"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "id": "bfa3e071-855b-4f99-81c9-1236e6a1cc7e",
+        "name": "More than 1 hour?",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          352,
+          368
+        ],
+        "notesInFlow": true,
+        "notes": "If"
+      },
+      {
+        "parameters": {
+          "rule": {
+            "interval": [
+              {
+                "field": "cronExpression",
+                "expression": "0 6-17 * * 1-5"
+              },
+              {
+                "field": "cronExpression",
+                "expression": "0 18,21 * * 1-5"
+              },
+              {
+                "field": "cronExpression",
+                "expression": "0 0,3 * * 1-5"
+              },
+              {
+                "field": "cronExpression",
+                "expression": "0 */3 * * Sat,Sun"
+              }
+            ]
+          }
+        },
+        "id": "0eaebc0a-3ebc-48e3-ade6-837d7ce6c67c",
+        "name": "Schedule Task",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1.2,
+        "position": [
+          -272,
+          368
+        ],
+        "notes": "M–F from 6am → 5pm → every 1 hour.\nAny other time (including nights + weekends) → every 3 hours."
+      },
+      {
+        "parameters": {},
+        "id": "f4744c88-a8bc-40d9-ba1a-b29e1e23d65a",
+        "name": "All Good!",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          752,
+          384
+        ],
+        "notesInFlow": true,
+        "notes": "Exit"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "797a577e-60b9-4524-b489-624526e5d7be",
+                "name": "status",
+                "value": "OK",
+                "type": "string"
+              },
+              {
+                "id": "01c65600-d794-47e0-942f-135a49d51bf0",
+                "name": "code",
+                "value": 200,
+                "type": "number"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          544,
+          384
+        ],
+        "id": "d44fe596-98ab-469f-b1df-31210b8074a1",
+        "name": "set reply"
+      }
+    ],
+    "connections": {
+      "Incoming Mail Servers": {
+        "main": [
+          [
+            {
+              "node": "Time Difference",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Time Difference": {
+        "main": [
+          [
+            {
+              "node": "More than 1 hour?",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Set Alert Message": {
+        "main": [
+          [
+            {
+              "node": "Post to Activity Log",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Restart Odoo Services": {
+        "main": [
+          [
+            {
+              "node": "Did it restart successfully?",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Did it restart successfully?": {
+        "main": [
+          [
+            {
+              "node": "Set Alert Message1",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Set Alert Message",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Set Alert Message1": {
+        "main": [
+          [
+            {
+              "node": "Post to Activity Log",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "More than 1 hour?": {
+        "main": [
+          [
+            {
+              "node": "Restart Odoo Services",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "set reply",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Schedule Task": {
+        "main": [
+          [
+            {
+              "node": "Incoming Mail Servers",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "set reply": {
+        "main": [
+          [
+            {
+              "node": "All Good!",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "system migration",
+    "name": null,
+    "description": null
+  },
+  "activeVersionId": "8cddad90-6456-4792-bac9-061a5e59f30a",
   "connections": {
     "Incoming Mail Servers": {
       "main": [
