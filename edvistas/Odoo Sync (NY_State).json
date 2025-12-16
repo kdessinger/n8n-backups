@@ -1,7 +1,340 @@
 {
-  "active": false,
-  "activeVersion": null,
-  "activeVersionId": null,
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2025-12-16T05:13:43.361Z",
+    "createdAt": "2025-12-16T05:13:43.361Z",
+    "versionId": "e2f5aee5-ab78-468f-8d60-ad09755f4094",
+    "workflowId": "PYRy0yPMq9r48yYN",
+    "nodes": [
+      {
+        "parameters": {
+          "content": "# Enrollment Update\n### This node will update Odoo Contacts that have a state ID number present in the 'stateID' field.\nCurrently the data is being download from the state website then saved to a static location as an Excel workbook.  The Data source can be modified to scrape the website directly if you so desire. ",
+          "height": 500.6079061759667,
+          "width": 880.9253209767207
+        },
+        "id": "d1eb193b-0fc6-4486-88e7-10a1c82fb2de",
+        "name": "Sticky Note2",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          356.0742222543224,
+          309
+        ]
+      },
+      {
+        "parameters": {
+          "resource": "custom",
+          "customResource": "res.partner",
+          "operation": "getAll",
+          "returnAll": true,
+          "options": {
+            "fieldsList": [
+              "active",
+              "display_name",
+              "EVI_DistID",
+              "EVI_DistName",
+              "EVI_Last_login",
+              "stateID"
+            ]
+          },
+          "filterRequest": {
+            "filter": [
+              {
+                "fieldName": "stateID",
+                "operator": "notEqual"
+              }
+            ]
+          }
+        },
+        "id": "2d1b7804-e689-4e9a-bec4-79bdc3556e1a",
+        "name": "Get Odoo Contacts",
+        "type": "n8n-nodes-base.odoo",
+        "typeVersion": 1,
+        "position": [
+          400,
+          480
+        ],
+        "credentials": {
+          "odooApi": {
+            "id": "12",
+            "name": "Odoo (Administrator)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "fileSelector": "/mnt/share/_reports/enrollment-public-district-2023-24-all-students.xlsx"
+        },
+        "id": "0604657c-7622-4551-8589-0d78e21fc5bf",
+        "name": "Load Excel File",
+        "type": "n8n-nodes-base.readBinaryFiles",
+        "typeVersion": 1,
+        "position": [
+          400,
+          640
+        ]
+      },
+      {
+        "parameters": {
+          "options": {
+            "headerRow": true,
+            "sheetName": "public-district-2023-24"
+          }
+        },
+        "id": "cc215c43-9866-4980-bac1-8d8a19d715a7",
+        "name": "Read Data",
+        "type": "n8n-nodes-base.spreadsheetFile",
+        "typeVersion": 2,
+        "position": [
+          600,
+          640
+        ]
+      },
+      {
+        "parameters": {
+          "mode": "combine",
+          "mergeByFields": {
+            "values": [
+              {
+                "field1": "stateID",
+                "field2": "STATEID"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "00c7c9b8-6778-4de7-8c71-de9b2bd8e83f",
+        "name": "Merge Datasets",
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 2.1,
+        "position": [
+          800,
+          500
+        ]
+      },
+      {
+        "parameters": {
+          "resource": "custom",
+          "customResource": "res.partner",
+          "operation": "update",
+          "customResourceId": "={{ $json.id }}",
+          "fieldsToCreateOrUpdate": {
+            "fields": [
+              {
+                "fieldName": "enrollment",
+                "fieldValue": "={{ $json['PK12 TOTAL'] }}"
+              },
+              {
+                "fieldName": "gradeLevel",
+                "fieldValue": "={{ $json.Grade_Levels }}"
+              }
+            ]
+          }
+        },
+        "id": "0a06d83b-c8e4-4d01-8fd8-46facc91ace6",
+        "name": "Update Odoo Contacts",
+        "type": "n8n-nodes-base.odoo",
+        "typeVersion": 1,
+        "position": [
+          1040,
+          500
+        ],
+        "credentials": {
+          "odooApi": {
+            "id": "12",
+            "name": "Odoo (Administrator)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "content": "# Triggers\nactivate workflow to enable",
+          "height": 676.1277566306267,
+          "width": 209.7216755652749
+        },
+        "id": "7f0f20b5-2f4d-461d-8b83-0b401fbd5223",
+        "name": "Sticky Note",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          40,
+          233
+        ]
+      },
+      {
+        "parameters": {
+          "path": "odoo/sync /enrollment",
+          "options": {}
+        },
+        "id": "175cbee9-9e6b-40cb-a7bd-fe3a07f33968",
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 1,
+        "position": [
+          100,
+          480
+        ],
+        "webhookId": "2ea717ea-44c6-4a8a-a8be-83a8396f0130"
+      },
+      {
+        "parameters": {},
+        "id": "25795c99-afa4-464e-bbc1-0b7bb40b71bb",
+        "name": "Workflow",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1,
+        "position": [
+          100,
+          760
+        ]
+      },
+      {
+        "parameters": {},
+        "id": "898f0315-3c68-4916-8567-3f4fb90cfb01",
+        "name": "Manual",
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          100,
+          340
+        ],
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "rule": {
+            "interval": [
+              {
+                "triggerAtHour": 20
+              }
+            ]
+          }
+        },
+        "id": "63f1bc41-c109-4df7-8e35-36f433f0f9d4",
+        "name": "Schedule",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          100,
+          620
+        ],
+        "disabled": true
+      }
+    ],
+    "connections": {
+      "Get Odoo Contacts": {
+        "main": [
+          [
+            {
+              "node": "Merge Datasets",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Load Excel File": {
+        "main": [
+          [
+            {
+              "node": "Read Data",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Read Data": {
+        "main": [
+          [
+            {
+              "node": "Merge Datasets",
+              "type": "main",
+              "index": 1
+            }
+          ]
+        ]
+      },
+      "Merge Datasets": {
+        "main": [
+          [
+            {
+              "node": "Update Odoo Contacts",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "Get Odoo Contacts",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Load Excel File",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Workflow": {
+        "main": [
+          [
+            {
+              "node": "Get Odoo Contacts",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Load Excel File",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Manual": {
+        "main": [
+          [
+            {
+              "node": "Get Odoo Contacts",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Load Excel File",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Schedule": {
+        "main": [
+          [
+            {
+              "node": "Get Odoo Contacts",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Load Excel File",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "system migration",
+    "name": null,
+    "description": null
+  },
+  "activeVersionId": "e2f5aee5-ab78-468f-8d60-ad09755f4094",
   "connections": {
     "Get Odoo Contacts": {
       "main": [
@@ -310,7 +643,8 @@
       "position": [
         100,
         340
-      ]
+      ],
+      "disabled": true
     },
     {
       "parameters": {
@@ -329,7 +663,8 @@
       "position": [
         100,
         620
-      ]
+      ],
+      "disabled": true
     }
   ],
   "pinData": {},
@@ -373,7 +708,7 @@
       "name": "MSSQL"
     }
   ],
-  "triggerCount": 2,
+  "triggerCount": 1,
   "updatedAt": "2024-04-08T15:21:35.000Z",
-  "versionId": "f32bb8b7-aee1-4f60-8c49-f3068bfd405a"
+  "versionId": "e2f5aee5-ab78-468f-8d60-ad09755f4094"
 }
