@@ -1,7 +1,358 @@
 {
-  "active": false,
-  "activeVersion": null,
-  "activeVersionId": null,
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2025-12-16T05:13:43.353Z",
+    "createdAt": "2025-12-16T05:13:43.353Z",
+    "versionId": "2ae971d4-4612-4d85-8b64-77714a0b0f0b",
+    "workflowId": "26",
+    "nodes": [
+      {
+        "parameters": {
+          "rule": {
+            "interval": [
+              {
+                "field": "weeks",
+                "triggerAtDay": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ],
+                "triggerAtHour": 9
+              }
+            ]
+          }
+        },
+        "id": "edab0d33-2962-4764-ad46-fdcceb8879fc",
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1,
+        "position": [
+          1060,
+          600
+        ],
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "resource": "custom",
+          "customResource": "=mail.message",
+          "fieldsToCreateOrUpdate": {
+            "fields": [
+              {
+                "fieldName": "email_from",
+                "fieldValue": "odoobot@edvistas.com"
+              },
+              {
+                "fieldName": "message_type",
+                "fieldValue": "comment"
+              },
+              {
+                "fieldName": "model",
+                "fieldValue": "mail.channel"
+              },
+              {
+                "fieldName": "record_name",
+                "fieldValue": "=OpenAI: {{ $('Schedule Trigger').item.json['Readable date'] }}"
+              },
+              {
+                "fieldName": "body",
+                "fieldValue": "={{ $json.message.content }}"
+              },
+              {
+                "fieldName": "res_id",
+                "fieldValue": "={{ 18 }}"
+              },
+              {
+                "fieldName": "subtype_id",
+                "fieldValue": "=1"
+              }
+            ]
+          }
+        },
+        "id": "9120906e-640a-4e49-8026-115bc2038cc4",
+        "name": "Post to Odoo",
+        "type": "n8n-nodes-base.odoo",
+        "typeVersion": 1,
+        "position": [
+          1740,
+          600
+        ],
+        "alwaysOutputData": true,
+        "credentials": {
+          "odooApi": {
+            "id": "22",
+            "name": "Odoo (OdooBot)"
+          }
+        }
+      },
+      {
+        "parameters": {},
+        "type": "@n8n/n8n-nodes-langchain.toolWikipedia",
+        "typeVersion": 1,
+        "position": [
+          1400,
+          780
+        ],
+        "id": "2fa5f262-a49d-47cd-a714-a6918f9a7ff8",
+        "name": "Wikipedia"
+      },
+      {
+        "parameters": {
+          "inputSource": "passthrough"
+        },
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          1040,
+          1000
+        ],
+        "id": "ea149edf-8ce5-4df0-b47e-89203005709c",
+        "name": "Workflow Input Trigger"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://api.tavily.com/search",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpHeaderAuth",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n    \"query\": \"{{ $json.query.replace(/\"/g, '\\\\\"') }}\",\n    \"search_depth\": \"basic\",\n    \"include_answer\": true,\n    \"topic\": \"news\",\n    \"include_raw_content\": true,\n    \"max_results\": 3\n} ",
+          "options": {}
+        },
+        "id": "0653427b-e459-496b-9872-86171b7a33ff",
+        "name": "Tavily",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          1260,
+          1000
+        ],
+        "credentials": {
+          "httpBearerAuth": {
+            "id": "0GDCTMXrmHoNbZm9",
+            "name": "OpenAI-kdessinger"
+          },
+          "httpHeaderAuth": {
+            "id": "H2qdWKiQGMMmzQEB",
+            "name": "Tavily (kdessinger)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "1ae0dd90-d1d0-494b-bd8b-1ef335f0bd8f",
+                "name": "response",
+                "value": "=[Source 1]\nURL: {{ $('Tavily').item.json.results[0].url }}\nContent: {{ $('Tavily').item.json.results[0].content }}\n\n[Source 2]\nURL: {{ $('Tavily').item.json.results[1].url }}\nContent: {{ $('Tavily').item.json.results[1].content }}\n\n[Source 2]\nURL: {{ $('Tavily').item.json.results[2].url }}\nContent: {{ $('Tavily').item.json.results[2].content }}\n",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1680,
+          1000
+        ],
+        "id": "92b2e52c-0b08-4221-9d2e-d729cfb96084",
+        "name": "response"
+      },
+      {
+        "parameters": {
+          "content": "# Tavily Internet Search Tool",
+          "height": 300,
+          "width": 940,
+          "color": 4
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          980,
+          920
+        ],
+        "typeVersion": 1,
+        "id": "6d4ca977-1416-43cf-9be2-6a4acdf2c6ed",
+        "name": "Sticky Note1"
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "INSERT INTO dbo.SearchResultsLog (URL, Title, Content)\nVALUES\n(\n  '{{ $json.results[0].url.replace(/'/g, \"''\") }}',\n  '{{ $json.results[0].title.replace(/'/g, \"''\") }}',\n  '{{ $json.results[0].content.replace(/'/g, \"''\") }}'\n),\n(\n  '{{ $json.results[1].url.replace(/'/g, \"''\") }}',\n  '{{ $json.results[1].title.replace(/'/g, \"''\") }}',\n  '{{ $json.results[1].content.replace(/'/g, \"''\") }}'\n),\n(\n  '{{ $json.results[2].url.replace(/'/g, \"''\") }}',\n  '{{ $json.results[2].title.replace(/'/g, \"''\") }}',\n  '{{ $json.results[2].content.replace(/'/g, \"''\") }}'\n);\n"
+        },
+        "type": "n8n-nodes-base.microsoftSql",
+        "typeVersion": 1.1,
+        "position": [
+          1480,
+          1000
+        ],
+        "id": "89cf8712-8ca9-492c-ba31-3feac8cfa7d5",
+        "name": "Log the search results",
+        "credentials": {
+          "microsoftSql": {
+            "id": "9",
+            "name": "SQL01.edvistas.local (kdessinger)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "name": "tavily",
+          "description": "Call this tool to search the internet\n",
+          "workflowId": {
+            "__rl": true,
+            "value": "26",
+            "mode": "list",
+            "cachedResultName": "Post Daily Fun-Fact to Odoo"
+          },
+          "workflowInputs": {
+            "mappingMode": "defineBelow",
+            "value": {},
+            "matchingColumns": [],
+            "schema": [],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "typeVersion": 2,
+        "position": [
+          1560,
+          780
+        ],
+        "id": "5e7dfec9-9dfc-466b-b057-798712ae2980",
+        "name": "tavily"
+      },
+      {
+        "parameters": {
+          "modelId": {
+            "__rl": true,
+            "value": "gpt-4.1-mini",
+            "mode": "list",
+            "cachedResultName": "GPT-4.1-MINI"
+          },
+          "messages": {
+            "values": [
+              {
+                "content": "Please write a fun-fact about the education industry."
+              },
+              {
+                "content": "AI, wearing your expert hat, fetch us a captivating educational technology fact, deeply connected with today's trending news. Ensure it is broad enough to resonate with all our team members across various departments.  \nYou have 2 tools available to you\nWikipedia for general knowledge\nTavily for current news search",
+                "role": "system"
+              }
+            ]
+          },
+          "options": {
+            "maxTokens": 200,
+            "temperature": 0.7,
+            "topP": 1
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "typeVersion": 1.8,
+        "position": [
+          1320,
+          600
+        ],
+        "id": "9777ad5a-19dd-4999-b8b6-fc12387d3597",
+        "name": "GPT-4.1-MINI",
+        "credentials": {
+          "openAiApi": {
+            "id": "28",
+            "name": "OpenAi (kdessinger)"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "Schedule Trigger": {
+        "main": [
+          [
+            {
+              "node": "GPT-4.1-MINI",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Wikipedia": {
+        "ai_tool": [
+          [
+            {
+              "node": "GPT-4.1-MINI",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Workflow Input Trigger": {
+        "main": [
+          [
+            {
+              "node": "Tavily",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Tavily": {
+        "main": [
+          [
+            {
+              "node": "Log the search results",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Log the search results": {
+        "main": [
+          [
+            {
+              "node": "response",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "tavily": {
+        "ai_tool": [
+          [
+            {
+              "node": "GPT-4.1-MINI",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GPT-4.1-MINI": {
+        "main": [
+          [
+            {
+              "node": "Post to Odoo",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "system migration",
+    "name": null,
+    "description": null
+  },
+  "activeVersionId": "2ae971d4-4612-4d85-8b64-77714a0b0f0b",
   "connections": {
     "Schedule Trigger": {
       "main": [
@@ -114,7 +465,8 @@
       "position": [
         1060,
         600
-      ]
+      ],
+      "disabled": true
     },
     {
       "parameters": {
@@ -419,7 +771,7 @@
       "name": "ChatGPT"
     }
   ],
-  "triggerCount": 1,
+  "triggerCount": 0,
   "updatedAt": "2025-07-08T16:18:13.000Z",
-  "versionId": "4cb119c3-66a6-4b42-9144-715eb0f02ab1"
+  "versionId": "2ae971d4-4612-4d85-8b64-77714a0b0f0b"
 }
