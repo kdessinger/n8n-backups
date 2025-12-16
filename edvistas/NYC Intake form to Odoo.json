@@ -521,6 +521,20 @@
           "name": "Odoo (OdooBot)"
         }
       }
+    },
+    {
+      "parameters": {
+        "content": "## NYC On-Boarding Workflow\n\n",
+        "width": 512
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        384,
+        -336
+      ],
+      "typeVersion": 1,
+      "id": "b10ebe1e-fe30-4b33-816d-478d7f8bc707",
+      "name": "Sticky Note"
     }
   ],
   "pinData": {
@@ -975,6 +989,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-10-01T21:43:31.000Z",
-  "versionId": "ef02cdda-8a3f-46f1-81fd-24a332d9aebe"
+  "updatedAt": "2025-12-16T17:08:00.226Z",
+  "versionId": "4dd3a850-9a2e-413a-b495-3d163909b288"
 }
