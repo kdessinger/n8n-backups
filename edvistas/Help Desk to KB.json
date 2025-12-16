@@ -1,7 +1,606 @@
 {
-  "active": false,
-  "activeVersion": null,
-  "activeVersionId": null,
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2025-11-26T05:18:06.453Z",
+    "createdAt": "2025-11-26T05:18:06.453Z",
+    "versionId": "67e1502a-f2d5-4521-a00d-e65e8c73956a",
+    "workflowId": "C7KxmVSCrYHrNTTc",
+    "nodes": [
+      {
+        "parameters": {},
+        "id": "4376153e-b81e-4a26-9f57-256105ece850",
+        "name": "Execute Workflow Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1,
+        "position": [
+          -896,
+          912
+        ]
+      },
+      {
+        "parameters": {
+          "fields": {
+            "values": [
+              {
+                "name": "Title",
+                "stringValue": "={{$json.body?.Title || $json.Title || 'No Title Detected'}}"
+              },
+              {
+                "name": "Message",
+                "stringValue": "={{$json.body?.Message || $json.Message || 'No Message Detected'}}"
+              },
+              {
+                "name": "MessageClean",
+                "stringValue": "={{$json.body?.Message ? $json.body.Message.replace(/<[^>]+>/g, '') : ($json.Message ? $json.Message.replace(/<[^>]+>/g, '') : 'No Message Detected')}}\n\n"
+              },
+              {
+                "name": "Emojis",
+                "type": "arrayValue",
+                "arrayValue": "={{$json.body?.Emojis || $json.Emojis || ['hugs', '+1']}}"
+              },
+              {
+                "name": "Priority",
+                "type": "numberValue",
+                "numberValue": "={{$json.body?.Priority || $json.Priority || 5}}"
+              },
+              {
+                "name": "ClickURL",
+                "stringValue": "={{$json.body?.ClickURL || $json.ClickURL || '' }}"
+              },
+              {
+                "name": "Channel",
+                "stringValue": "={{$json.body?.Channel || $json.Channel || 'Activity Log'}}"
+              }
+            ]
+          },
+          "options": {
+            "ignoreConversionErrors": true
+          }
+        },
+        "id": "4151a9ed-3b7a-4d48-8ca0-cc38a80463ae",
+        "name": "Set Defaults",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.1,
+        "position": [
+          288,
+          1408
+        ]
+      },
+      {
+        "parameters": {
+          "respondWith": "text",
+          "responseBody": "Help Desk Ticket Created!",
+          "options": {}
+        },
+        "id": "1ec7bcd7-bf10-4fb6-969e-ec55ea7cec6b",
+        "name": "Respond to Webhook",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.1,
+        "position": [
+          288,
+          1632
+        ]
+      },
+      {
+        "parameters": {
+          "content": "## Triggers",
+          "height": 490,
+          "width": 249,
+          "color": 6
+        },
+        "id": "aa26fcc6-d3d4-49b3-80ee-0efb5f607c3e",
+        "name": "Sticky Note1",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -944,
+          800
+        ]
+      },
+      {
+        "parameters": {
+          "content": "# 🧠 Extract FAQ's from HelpDesk Tickets\n\nThis workflow reviews incoming helpdesk tickets to identify common questions and produce concise question-and-answer pairs for the knowledgebase. It automates extraction, validation, and formatting of FAQs for publication.\n\n## 🔔 Trigger\n New or updated helpdesk tickets flagged for knowledgebase review.\n\n## 🧩 Steps\n* Scan selected tickets and extract candidate Q&A pairs\n* Validate and deduplicate entries against existing KB\n* Format and insert approved FAQs into the knowledgebase\n\n## 🎯 Outcome\n A curated set of validated FAQs added to the knowledgebase, improving self-service and reducing repeat tickets.\n\n### 📝 Note: Ensure sensitive or PII-containing content is redacted before publication.",
+          "height": 1008,
+          "width": 832,
+          "color": 6
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          -1808,
+          800
+        ],
+        "typeVersion": 1,
+        "id": "b09d34e0-4c98-4f2c-91e6-fc2eb71ae0ea",
+        "name": "Sticky Note"
+      },
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "helpdesk",
+          "authentication": "headerAuth",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "id": "75dcc732-ff78-4abc-98d0-3c23f318a92d",
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2,
+        "position": [
+          -896,
+          1120
+        ],
+        "webhookId": "1138a896-3e8c-4e5d-844d-e96c1784babb",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "os5m1l0SgTiVl18p",
+            "name": "N8N Bearer Token"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "mode": "combineBySql",
+          "numberInputs": 3,
+          "query": "SELECT\n  i1.id                 AS ticket_id,\n  i1.name               AS ticket_name,\n  i1.state,\n  i1.`stage_id[0]`      AS stage_id,\n  i1.`stage_id[1]`      AS stage_name,\n  i1.`priority[0]`      AS priority_value,\n  i1.`priority[1]`      AS priority_label,\n  i1.`partner_id[0]`    AS partner_id,\n  i1.`partner_id[1]`    AS partner_name,\n  i1.`ticket_type[0]`   AS ticket_type_id,\n  i1.`ticket_type[1]`   AS ticket_type_label,\n  i1.`subject_id[0]`    AS subject_id,\n  i1.`subject_id[1]`    AS subject_name,\n  i1.tag_ids,\n  i1.description        AS ticket_description,\n\n  i2.id                 AS message_id,\n  i2.res_id             AS message_res_id,\n  i2.subject            AS message_subject,\n  i2.email_from         AS message_from,\n  i2.body               AS message_body,\n  i2.message_type,\n  i2.parent_id,\n  i2.record_name,\n  i2.`author_id[0]`     AS message_author_id,\n  i2.`author_id[1]`     AS message_author_name,\n  i2.`subtype_id[0]`    AS message_subtype_id,\n  i2.`subtype_id[1]`    AS message_subtype_name\n\nFROM input1 AS i1\nLEFT JOIN input2 AS i2\n  ON CAST(i2.res_id AS INTEGER) = CAST(i1.id AS INTEGER)\nORDER BY i1.id, i2.id;\n",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3.2,
+        "position": [
+          288,
+          1040
+        ],
+        "id": "06377d4e-371c-424a-8b75-8bd8b1d55f50",
+        "name": "Merge"
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "SELECT\n  t.id,\n  t.name,\n  array_remove(array_agg(DISTINCT tg.name), NULL) AS tags,\n  jsonb_agg(\n    jsonb_build_object(\n      'date', m.date,\n      'author_id', m.author_id,\n      'type', m.message_type,\n      'body', m.body\n    ) ORDER BY m.date\n  ) AS messages\nFROM helpdesk_ticket t\nLEFT JOIN helpdesk_tags_helpdesk_ticket_rel rel\n  ON rel.helpdesk_ticket_id = t.id\nLEFT JOIN helpdesk_tags tg\n  ON tg.id = rel.helpdesk_tags_id\nLEFT JOIN mail_message m\n  ON m.model = 'helpdesk.ticket'\n  AND m.res_id = t.id\n  AND m.message_type IN ('comment', 'email')\nWHERE t.write_date > now() - interval '7 days'\nGROUP BY t.id;\n",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          -176,
+          1504
+        ],
+        "id": "4dbc8119-e5aa-4ed7-80e2-3ee3b6bfcd71",
+        "name": "Execute a SQL query",
+        "credentials": {
+          "postgres": {
+            "id": "QuVSWo9jJJvmCuDA",
+            "name": "Odoo-Production"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "resource": "custom",
+          "customResource": "helpdesk.ticket",
+          "operation": "getAll",
+          "limit": 1,
+          "options": {
+            "fieldsList": [
+              "name",
+              "partner_id",
+              "person_name",
+              "priority",
+              "state",
+              "stage_id",
+              "ticket_type",
+              "tag_ids",
+              "subject_id",
+              "email",
+              "description",
+              "customer_comment",
+              "comment",
+              "color",
+              "message_partner_ids",
+              "message_ids",
+              "invoice_count",
+              "user_id"
+            ]
+          },
+          "filterRequest": {
+            "filter": [
+              {
+                "fieldName": "stage_id",
+                "value": "Closed"
+              },
+              {
+                "fieldName": "id",
+                "operator": "greaterThen",
+                "value": "2817"
+              }
+            ]
+          }
+        },
+        "id": "c1d2579b-3400-44a5-ade1-4cdde8a419af",
+        "name": "Get Helpdesk Tickets",
+        "type": "n8n-nodes-base.odoo",
+        "typeVersion": 1,
+        "position": [
+          -608,
+          960
+        ],
+        "alwaysOutputData": true,
+        "credentials": {
+          "odooApi": {
+            "id": "12",
+            "name": "Odoo (Administrator)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "resource": "custom",
+          "customResource": "mail.message",
+          "operation": "getAll",
+          "returnAll": true,
+          "options": {
+            "fieldsList": [
+              "subject",
+              "body",
+              "email_from",
+              "author_id",
+              "message_type",
+              "record_name",
+              "parent_id",
+              "subtype_id",
+              "res_id"
+            ]
+          },
+          "filterRequest": {
+            "filter": [
+              {
+                "fieldName": "id",
+                "operator": "in",
+                "value": "={{ $json.message_ids }}"
+              }
+            ]
+          }
+        },
+        "id": "4b6191f1-8df9-4c0a-b4f8-40ca6f66c1f2",
+        "name": "Get Ticket Messages",
+        "type": "n8n-nodes-base.odoo",
+        "typeVersion": 1,
+        "position": [
+          -352,
+          832
+        ],
+        "alwaysOutputData": true,
+        "credentials": {
+          "odooApi": {
+            "id": "12",
+            "name": "Odoo (Administrator)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "resource": "custom",
+          "customResource": "helpdesk.tags",
+          "operation": "getAll",
+          "returnAll": true,
+          "options": {
+            "fieldsList": [
+              "name"
+            ]
+          },
+          "filterRequest": {
+            "filter": [
+              {
+                "fieldName": "id",
+                "operator": "in",
+                "value": "={{ $json.tag_ids }}"
+              }
+            ]
+          }
+        },
+        "id": "029f3e0a-8aa2-4856-8efe-c91636edec5f",
+        "name": "Get Ticket Tags",
+        "type": "n8n-nodes-base.odoo",
+        "typeVersion": 1,
+        "position": [
+          -352,
+          1088
+        ],
+        "alwaysOutputData": true,
+        "credentials": {
+          "odooApi": {
+            "id": "12",
+            "name": "Odoo (Administrator)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "=Source: {{ $json.record_name }}\nSubject: {{ $json.subject }}\nBody: {{ $json.body.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '\"').replace(/&#39;/g, \"'\").trim() }}",
+          "hasOutputParser": true,
+          "options": {
+            "systemMessage": "You are an FAQ generation assistant. Your task is to analyze helpdesk tickets from Odoo18-EE. Your job is to analyze the data presented to you from the database and then you will determine if the ticket has a Question/Answer pair that can be added to our knowledgebase.\n\nIf you find a clear question-and-answer pair, extract them as follows:\n\nId: (Ticket's database id)\nSource: (Ticket number)\nQuestion: (summarize the customer’s question)\nAnswer: (summarize the support agent’s answer)\n\nIf no valid Q&A pair is found, output only: false\n\nInstructions:\n\nOnly extract information that is clearly a question from the customer and an answer from the agent.\n\nRedact or omit any sensitive or personally identifiable information.\n\nFormat each result exactly as specified above."
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 3,
+        "position": [
+          -816,
+          1408
+        ],
+        "id": "a6e0abb1-55d3-4fd8-a106-2488a060b623",
+        "name": "FAQ Extractor"
+      },
+      {
+        "parameters": {
+          "jsonSchemaExample": "{\n  \"source\": \"TICKET-12345\",\n  \"question\": \"How do I reset my password?\",\n  \"answer\": \"You can reset your password using the 'Forgot password' link on the login page.\"\n}\n"
+        },
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "typeVersion": 1.3,
+        "position": [
+          -608,
+          1632
+        ],
+        "id": "858479d3-325f-4e28-9d77-533b498d86fb",
+        "name": "Structured Output Parser"
+      },
+      {
+        "parameters": {
+          "model": {
+            "__rl": true,
+            "value": "gpt-5-mini",
+            "mode": "list",
+            "cachedResultName": "gpt-5-mini"
+          },
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "typeVersion": 1.2,
+        "position": [
+          -864,
+          1632
+        ],
+        "id": "06926616-03be-486c-89ab-c6b4aa8a370e",
+        "name": "OpenAI Chat Model",
+        "credentials": {
+          "openAiApi": {
+            "id": "28",
+            "name": "OpenAi (kdessinger)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "6b8579d7-2535-45d0-8e06-0c362bb9f8de",
+                "name": "record_name",
+                "value": "={{ $json.record_name }}",
+                "type": "string"
+              },
+              {
+                "id": "37fc175b-1072-4a9d-9e20-2cc304eb2fd2",
+                "name": "subject",
+                "value": "={{ $json.subject }}",
+                "type": "string"
+              },
+              {
+                "id": "854b8a19-f28a-440b-b6d7-15e0e4a09dbd",
+                "name": "body",
+                "value": "={{ $json.body.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '\"').replace(/&#39;/g, \"'\").trim() }}\n",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          48,
+          1136
+        ],
+        "id": "7eb3f065-410e-46fa-9085-3988b3a89331",
+        "name": "Edit Fields"
+      },
+      {
+        "parameters": {
+          "mode": "combineBySql",
+          "query": "SELECT\n  i1.id,\n  i1.name,\n  i1.person_name,\n  i1.`partner_id[0]`    AS partner_id,\n  i1.`partner_id[1]`    AS partner_name,\n  i1.`priority[0]`      AS priority_value,\n  i1.`priority[1]`      AS priority_label,\n  i1.state,\n  i1.`stage_id[0]`      AS stage_id,\n  i1.`stage_id[1]`      AS stage_name,\n  i1.`ticket_type[0]`   AS ticket_type_id,\n  i1.`ticket_type[1]`   AS ticket_type_label,\n  i1.tag_ids,\n  json_group_array(DISTINCT t.name) AS tag_names,\n  i1.`subject_id[0]`    AS subject_id,\n  i1.`subject_id[1]`    AS subject_name,\n  i1.email,\n  i1.description,\n  i1.customer_comment,\n  i1.comment,\n  i1.color,\n  i1.message_partner_ids,\n  i1.message_ids,\n  i1.invoice_count,\n  i1.`user_id[0]`       AS user_id,\n  i1.`user_id[1]`       AS user_name\nFROM input1 AS i1\n\nLEFT JOIN json_each(i1.tag_ids) AS j\nLEFT JOIN input2 AS t\n  ON CAST(t.id AS INTEGER) = CAST(j.value AS INTEGER)\nGROUP BY\n  i1.id, i1.name, i1.person_name,\n  i1.`partner_id[0]`, i1.`partner_id[1]`,\n  i1.`priority[0]`, i1.`priority[1]`,\n  i1.state, i1.`stage_id[0]`, i1.`stage_id[1]`,\n  i1.`ticket_type[0]`, i1.`ticket_type[1]`,\n  i1.tag_ids,\n  i1.`subject_id[0]`, i1.`subject_id[1]`,\n  i1.email, i1.description, i1.customer_comment, i1.comment, i1.color,\n  i1.message_partner_ids, i1.message_ids, i1.invoice_count,\n  i1.`user_id[0]`, i1.`user_id[1]`\nORDER BY i1.id;\n",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3.2,
+        "position": [
+          48,
+          976
+        ],
+        "id": "1a319bed-8ded-4ad6-921c-2e643f372777",
+        "name": "Merge1"
+      },
+      {
+        "parameters": {
+          "content": "## Get Helpdesk Tickets",
+          "height": 496,
+          "width": 560
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          -672,
+          800
+        ],
+        "typeVersion": 1,
+        "id": "71a55d18-cf26-4146-a1e8-0682384f6bf7",
+        "name": "Get Helpdesk Tickets1"
+      },
+      {
+        "parameters": {
+          "content": "## Analyze Tickets for Questions & Answers",
+          "height": 496,
+          "width": 560
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          -96,
+          800
+        ],
+        "typeVersion": 1,
+        "id": "adcb2d98-784e-417c-b3d3-8e6245d58e83",
+        "name": "Get Helpdesk Tickets2"
+      },
+      {
+        "parameters": {
+          "content": "## Extract FAQ's",
+          "height": 496,
+          "width": 560
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          -944,
+          1312
+        ],
+        "typeVersion": 1,
+        "id": "952ce9bb-bfea-4f61-9d9b-56089c4764a7",
+        "name": "Get Helpdesk Tickets3"
+      },
+      {
+        "parameters": {
+          "content": "## Add FAQ's to Knowledgebase",
+          "height": 496,
+          "width": 560
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          -368,
+          1312
+        ],
+        "typeVersion": 1,
+        "id": "e05101aa-bc59-4ebe-a38e-7eac9a6175e9",
+        "name": "Get Helpdesk Tickets4"
+      },
+      {
+        "parameters": {
+          "content": "## Outputs",
+          "height": 490,
+          "width": 249,
+          "color": 6
+        },
+        "id": "9db3e67f-a80d-4839-b5e0-3a0007333b9f",
+        "name": "Sticky Note2",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          208,
+          1312
+        ]
+      }
+    ],
+    "connections": {
+      "Execute Workflow Trigger": {
+        "main": [
+          [
+            {
+              "node": "Get Helpdesk Tickets",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Set Defaults": {
+        "main": [
+          [
+            {
+              "node": "Respond to Webhook",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "Get Helpdesk Tickets",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get Helpdesk Tickets": {
+        "main": [
+          [
+            {
+              "node": "Get Ticket Messages",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Get Ticket Tags",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Merge1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get Ticket Messages": {
+        "main": [
+          []
+        ]
+      },
+      "Get Ticket Tags": {
+        "main": [
+          [
+            {
+              "node": "Merge1",
+              "type": "main",
+              "index": 1
+            }
+          ]
+        ]
+      },
+      "FAQ Extractor": {
+        "main": [
+          []
+        ]
+      },
+      "Structured Output Parser": {
+        "ai_outputParser": [
+          [
+            {
+              "node": "FAQ Extractor",
+              "type": "ai_outputParser",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "OpenAI Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "FAQ Extractor",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "system migration",
+    "name": null,
+    "description": null
+  },
+  "activeVersionId": "67e1502a-f2d5-4521-a00d-e65e8c73956a",
   "connections": {
     "Execute Workflow Trigger": {
       "main": [
