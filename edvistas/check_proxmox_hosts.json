@@ -1,7 +1,130 @@
 {
-  "active": false,
-  "activeVersion": null,
-  "activeVersionId": null,
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2025-11-26T05:18:06.453Z",
+    "createdAt": "2025-11-26T05:18:06.453Z",
+    "versionId": "f0d83448-a1ee-4922-938e-6ba6fdd033be",
+    "workflowId": "AlzFekxyBMBOSvQy",
+    "nodes": [
+      {
+        "parameters": {
+          "inputSource": "passthrough"
+        },
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          260,
+          60
+        ],
+        "id": "b2d262de-bf10-4421-bb8e-76b7e046df4c",
+        "name": "When Executed by Another Workflow"
+      },
+      {
+        "parameters": {
+          "command": "./checkup_all_vm.sh",
+          "cwd": "/root"
+        },
+        "type": "n8n-nodes-base.ssh",
+        "typeVersion": 1,
+        "position": [
+          500,
+          60
+        ],
+        "id": "79190380-e07f-4fb2-b7e8-c93f66b97b7e",
+        "name": "SSH-Check_Host",
+        "credentials": {
+          "sshPassword": {
+            "id": "Mw87TupVZtGVxX0d",
+            "name": "VM0"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "toText",
+          "sourceProperty": "stdout",
+          "options": {
+            "fileName": "stdout.log"
+          }
+        },
+        "type": "n8n-nodes-base.convertToFile",
+        "typeVersion": 1.1,
+        "position": [
+          720,
+          60
+        ],
+        "id": "7495878c-8739-4c19-834d-acb5ff745136",
+        "name": "Convert to File"
+      },
+      {
+        "parameters": {
+          "fromEmail": "ai.ed@edvistas.com",
+          "toEmail": "kdessinger@edvistas.com",
+          "subject": "Server Check Results",
+          "emailFormat": "text",
+          "text": "=Hello,\n\nHere are the results of running the bash script '{{ $workflow.name }}.sh' on the proxmox server 'VM0.edvistas.local'.\n\n---\n\n{{ $('SSH-Check_Host').item.json.stdout }}",
+          "options": {
+            "attachments": "data",
+            "allowUnauthorizedCerts": true
+          }
+        },
+        "type": "n8n-nodes-base.emailSend",
+        "typeVersion": 2.1,
+        "position": [
+          940,
+          60
+        ],
+        "id": "0ae71305-4590-4409-a305-43cc9e956bdd",
+        "name": "Send Email",
+        "webhookId": "690bdffb-9e91-4d94-b5dc-478772230df3",
+        "credentials": {
+          "smtp": {
+            "id": "27",
+            "name": "SMTP (mx.gowls.com)"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "When Executed by Another Workflow": {
+        "main": [
+          [
+            {
+              "node": "SSH-Check_Host",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "SSH-Check_Host": {
+        "main": [
+          [
+            {
+              "node": "Convert to File",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Convert to File": {
+        "main": [
+          [
+            {
+              "node": "Send Email",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "system migration",
+    "name": null,
+    "description": null
+  },
+  "activeVersionId": "f0d83448-a1ee-4922-938e-6ba6fdd033be",
   "connections": {
     "When Executed by Another Workflow": {
       "main": [
