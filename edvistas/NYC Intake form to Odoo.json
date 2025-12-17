@@ -16,13 +16,7 @@
     },
     "EduForm Pivot": {
       "main": [
-        [
-          {
-            "node": "Create job in Odoo",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Create job in Odoo": {
@@ -53,7 +47,7 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
-        -416,
+        -448,
         -304
       ],
       "id": "36601c45-c22c-4524-80bc-a86b56a21190",
@@ -330,7 +324,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 1,
       "position": [
-        -192,
+        -224,
         -304
       ],
       "alwaysOutputData": false
@@ -378,7 +372,7 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        32,
+        96,
         -304
       ],
       "id": "7b6c1148-0ec4-4c2b-8fea-ee9cea72444a",
@@ -524,12 +518,13 @@
     },
     {
       "parameters": {
-        "content": "## NYC On-Boarding Workflow\n\n",
-        "width": 512
+        "content": "## NYC On-Boarding Workflow\n\n📨 Trigger – Form Submission\nThe workflow is initiated when a customer submits the NYC Intake Form. A webhook automatically fires upon submission, signaling the start of the automation process. --> [Click Here](https://evi.edvistas.com/forms/formEntry.aspx?formid=9184)\n\n✅ Step 1 – Data Validation & CRM Check\nThe workflow first validates the submitted form to ensure all required fields are complete and accurate. It then checks whether the submitting customer already exists in the CRM.\n• If the customer exists, the process continues.\n• If not, a new customer record will be automatically created.\n\n📁 Step 2 – Work Order Creation\nAfter validation, a new Work Order is generated in Odoo. The original intake form is automatically attached to this work order for easy reference by internal teams.\n\n🔁 Workflow Completion\nOnce the work order is created and the form is linked, the workflow ends — providing a fully automated intake-to-work-order pipeline with no manual steps required.",
+        "height": 480,
+        "width": 528
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        384,
+        368,
         -336
       ],
       "typeVersion": 1,
@@ -989,6 +984,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-12-16T17:08:00.226Z",
-  "versionId": "4dd3a850-9a2e-413a-b495-3d163909b288"
+  "updatedAt": "2025-12-16T17:43:39.873Z",
+  "versionId": "6f70e87e-20b5-421a-a9ba-e885c2249ed4"
 }
