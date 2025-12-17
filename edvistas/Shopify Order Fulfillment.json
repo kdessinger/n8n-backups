@@ -1,0 +1,678 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2025-12-17T00:09:43.000Z",
+    "createdAt": "2025-12-17T00:06:02.468Z",
+    "versionId": "92d940c0-181a-4ca5-bb98-1ef0cd5fc9c6",
+    "workflowId": "RBKDl8jq3cYPcRnB",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "4711df85-8be2-429b-8884-adb0f6793f6b",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -608,
+          304
+        ],
+        "id": "d1a0f81a-b576-4392-90b3-eb22215feb50",
+        "name": "Webhook",
+        "webhookId": "4711df85-8be2-429b-8884-adb0f6793f6b"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "a1",
+                "name": "OrderId",
+                "value": "={{ $json.body.id }}",
+                "type": "number"
+              },
+              {
+                "id": "a2",
+                "name": "OrderName",
+                "value": "={{ $json.body.name }}",
+                "type": "string"
+              },
+              {
+                "id": "a3",
+                "name": "CustomerEmail",
+                "value": "={{ $json.body.customer?.email || $json.body.email || $json.body.contact_email }}",
+                "type": "string"
+              },
+              {
+                "id": "a4",
+                "name": "FinancialStatus",
+                "value": "={{ $json.body.financial_status }}",
+                "type": "string"
+              },
+              {
+                "id": "a5",
+                "name": "Currency",
+                "value": "={{ $json.body.currency }}",
+                "type": "string"
+              },
+              {
+                "id": "a6",
+                "name": "TotalPrice",
+                "value": "={{ Number($json.body.total_price) }}",
+                "type": "number"
+              },
+              {
+                "id": "a7",
+                "name": "CreatedAt",
+                "value": "={{ $json.body.created_at }}",
+                "type": "string"
+              },
+              {
+                "id": "a8",
+                "name": "UpdatedAt",
+                "value": "={{ $json.body.updated_at }}",
+                "type": "string"
+              },
+              {
+                "id": "a9",
+                "name": "RawBodyJson",
+                "value": "={{ JSON.stringify($json.body) }}",
+                "type": "string"
+              },
+              {
+                "id": "a10",
+                "name": "line_items",
+                "value": "={{ $json.body.line_items }}",
+                "type": "array"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -384,
+          304
+        ],
+        "id": "b076712e-34d4-41ee-8f02-f35cf22bf8a9",
+        "name": "Order Flatten"
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "MERGE dbo.Shopify AS tgt\nUSING (SELECT\n  {{ $json.OrderId }} AS OrderId\n) AS src\nON tgt.OrderId = src.OrderId\nWHEN MATCHED THEN\n  UPDATE SET\n    OrderName       = '{{ ($json.OrderName || \"\").replace(/'/g,\"''\") }}',\n    CustomerEmail   = '{{ ($json.CustomerEmail || \"\").replace(/'/g,\"''\") }}',\n    FinancialStatus = '{{ ($json.FinancialStatus || \"\").replace(/'/g,\"''\") }}',\n    Currency        = '{{ ($json.Currency || \"\").replace(/'/g,\"''\") }}',\n    TotalPrice      = {{ $json.TotalPrice ?? 'NULL' }},\n    CreatedAt       = TRY_CONVERT(datetime2(0), '{{ ($json.CreatedAt || \"\").replace(/'/g,\"''\") }}'),\n    UpdatedAt       = TRY_CONVERT(datetime2(0), '{{ ($json.UpdatedAt || \"\").replace(/'/g,\"''\") }}'),\n    RawBodyJson     = '{{ ($json.RawBodyJson || \"\").replace(/'/g,\"''\") }}'\nWHEN NOT MATCHED THEN\n  INSERT (OrderId, OrderName, CustomerEmail, FinancialStatus, Currency, TotalPrice, CreatedAt, UpdatedAt, RawBodyJson)\n  VALUES (\n    {{ $json.OrderId }},\n    '{{ ($json.OrderName || \"\").replace(/'/g,\"''\") }}',\n    '{{ ($json.CustomerEmail || \"\").replace(/'/g,\"''\") }}',\n    '{{ ($json.FinancialStatus || \"\").replace(/'/g,\"''\") }}',\n    '{{ ($json.Currency || \"\").replace(/'/g,\"''\") }}',\n    {{ $json.TotalPrice ?? 'NULL' }},\n    TRY_CONVERT(datetime2(0), '{{ ($json.CreatedAt || \"\").replace(/'/g,\"''\") }}'),\n    TRY_CONVERT(datetime2(0), '{{ ($json.UpdatedAt || \"\").replace(/'/g,\"''\") }}'),\n    '{{ ($json.RawBodyJson || \"\").replace(/'/g,\"''\") }}'\n  );\n"
+        },
+        "type": "n8n-nodes-base.microsoftSql",
+        "typeVersion": 1.1,
+        "position": [
+          -144,
+          208
+        ],
+        "id": "89f232a8-f009-432b-a518-918d8a0bcd9d",
+        "name": "Capture Order Info",
+        "credentials": {
+          "microsoftSql": {
+            "id": "c0eH277IuAIBbKLJ",
+            "name": "192.168.148.54 (SQL01)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "fieldToSplitOut": "line_items",
+          "include": "allOtherFields",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          -144,
+          400
+        ],
+        "id": "c0be01ae-5cdc-4764-b022-6f6966f6ccf6",
+        "name": "Split Out"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "d00e53e8-14da-4df2-a095-df225238218e",
+                "name": "OrderId",
+                "value": "={{ $json.OrderId }}",
+                "type": "number"
+              },
+              {
+                "id": "b1",
+                "name": "LineItemId",
+                "value": "={{ $json.line_items.id }}",
+                "type": "number"
+              },
+              {
+                "id": "b2",
+                "name": "ProductId",
+                "value": "={{ $json.line_items.product_id }}",
+                "type": "number"
+              },
+              {
+                "id": "b3",
+                "name": "VariantId",
+                "value": "={{ $json.line_items.variant_id }}",
+                "type": "number"
+              },
+              {
+                "id": "b4",
+                "name": "Title",
+                "value": "={{ $json.line_items.title || $json.line_items.name }}",
+                "type": "string"
+              },
+              {
+                "id": "b5",
+                "name": "Sku",
+                "value": "={{ $json.line_items.sku }}",
+                "type": "string"
+              },
+              {
+                "id": "b6",
+                "name": "Quantity",
+                "value": "={{ $json.line_items.quantity }}",
+                "type": "number"
+              },
+              {
+                "id": "b7",
+                "name": "Price",
+                "value": "={{ Number($json.line_items.price) }}",
+                "type": "number"
+              },
+              {
+                "id": "b8",
+                "name": "Grams",
+                "value": "={{ $json.line_items.grams }}",
+                "type": "number"
+              },
+              {
+                "id": "b9",
+                "name": "RequiresShipping",
+                "value": "={{ $json.line_items.requires_shipping ? 1 : 0 }}",
+                "type": "number"
+              },
+              {
+                "id": "b10",
+                "name": "Taxable",
+                "value": "={{ $json.line_items.taxable ? 1 : 0 }}",
+                "type": "number"
+              },
+              {
+                "id": "b11",
+                "name": "FulfillmentService",
+                "value": "={{ $json.line_items.fulfillment_service }}",
+                "type": "string"
+              },
+              {
+                "id": "b12",
+                "name": "FulfillmentStatus",
+                "value": "={{ $json.line_items.fulfillment_status }}",
+                "type": "string"
+              },
+              {
+                "id": "b13",
+                "name": "RawLineItemJson",
+                "value": "={{ JSON.stringify($json.line_items) }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          112,
+          304
+        ],
+        "id": "2bf34a66-a599-47a4-a9fd-a4ea4eb760e6",
+        "name": "Edit Fields"
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": ";WITH src AS (\n  SELECT\n    TRY_CONVERT(bigint, {{ $json.OrderId }})    AS OrderId,\n    TRY_CONVERT(bigint, {{ $json.LineItemId }}) AS LineItemId,\n\n    TRY_CONVERT(bigint, {{ $json.ProductId }})  AS ProductId,\n    TRY_CONVERT(bigint, {{ $json.VariantId }})  AS VariantId,\n\n    '{{ ($json.Title || '').replace(/'/g, \"''\") }}' AS Title,\n    '{{ ($json.Sku   || '').replace(/'/g, \"''\") }}' AS Sku,\n\n    COALESCE(TRY_CONVERT(int, {{ $json.Quantity }}), 0) AS Quantity,\n    TRY_CONVERT(decimal(18,2), {{ $json.Price }}) AS Price,\n    TRY_CONVERT(int, {{ $json.Grams }})          AS Grams,\n\n    COALESCE(TRY_CONVERT(bit, {{ $json.RequiresShipping }}), 0) AS RequiresShipping,\n    COALESCE(TRY_CONVERT(bit, {{ $json.Taxable }}), 0)          AS Taxable,\n\n    '{{ ($json.FulfillmentService || '').replace(/'/g, \"''\") }}' AS FulfillmentService,\n    CASE\n      WHEN {{ $json.FulfillmentStatus }} IS NULL THEN NULL\n      ELSE '{{ ($json.FulfillmentStatus || '').replace(/'/g, \"''\") }}'\n    END AS FulfillmentStatus,\n\n    '{{ ($json.RawLineItemJson || '').replace(/'/g, \"''\") }}' AS RawLineItemJson\n)\n, src2 AS (\n  SELECT *\n  FROM src\n  WHERE OrderId IS NOT NULL\n    AND LineItemId IS NOT NULL\n)\nMERGE dbo.Shopify_LineItems AS tgt\nUSING src2\nON tgt.OrderId = src2.OrderId\nAND tgt.LineItemId = src2.LineItemId\n\nWHEN MATCHED THEN\n  UPDATE SET\n    ProductId = src2.ProductId,\n    VariantId = src2.VariantId,\n    Title = src2.Title,\n    Sku = src2.Sku,\n    Quantity = src2.Quantity,\n    Price = src2.Price,\n    Grams = src2.Grams,\n    RequiresShipping = src2.RequiresShipping,\n    Taxable = src2.Taxable,\n    FulfillmentService = src2.FulfillmentService,\n    FulfillmentStatus = src2.FulfillmentStatus,\n    RawLineItemJson = src2.RawLineItemJson\n\nWHEN NOT MATCHED THEN\n  INSERT (\n    OrderId, LineItemId, ProductId, VariantId,\n    Title, Sku, Quantity, Price, Grams,\n    RequiresShipping, Taxable,\n    FulfillmentService, FulfillmentStatus, RawLineItemJson\n  )\n  VALUES (\n    src2.OrderId, src2.LineItemId, src2.ProductId, src2.VariantId,\n    src2.Title, src2.Sku, src2.Quantity, src2.Price, src2.Grams,\n    src2.RequiresShipping, src2.Taxable,\n    src2.FulfillmentService, src2.FulfillmentStatus, src2.RawLineItemJson\n  );\n"
+        },
+        "type": "n8n-nodes-base.microsoftSql",
+        "typeVersion": 1.1,
+        "position": [
+          336,
+          304
+        ],
+        "id": "dabccf35-85c9-4c53-839f-aa71c657256a",
+        "name": "Capture Products Ordered",
+        "alwaysOutputData": true,
+        "credentials": {
+          "microsoftSql": {
+            "id": "c0eH277IuAIBbKLJ",
+            "name": "192.168.148.54 (SQL01)"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "Order Flatten",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Order Flatten": {
+        "main": [
+          [
+            {
+              "node": "Capture Order Info",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Split Out",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Capture Order Info": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Split Out": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Edit Fields": {
+        "main": [
+          [
+            {
+              "node": "Capture Products Ordered",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Super Admin",
+    "name": "Version 92d940c0",
+    "description": ""
+  },
+  "activeVersionId": "92d940c0-181a-4ca5-bb98-1ef0cd5fc9c6",
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Order Flatten",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Order Flatten": {
+      "main": [
+        [
+          {
+            "node": "Capture Order Info",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Capture Order Info": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Capture Products Ordered",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-12-16T19:58:22.420Z",
+  "id": "RBKDl8jq3cYPcRnB",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Shopify Order Fulfillment",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "4711df85-8be2-429b-8884-adb0f6793f6b",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -608,
+        304
+      ],
+      "id": "d1a0f81a-b576-4392-90b3-eb22215feb50",
+      "name": "Webhook",
+      "webhookId": "4711df85-8be2-429b-8884-adb0f6793f6b"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a1",
+              "name": "OrderId",
+              "value": "={{ $json.body.id }}",
+              "type": "number"
+            },
+            {
+              "id": "a2",
+              "name": "OrderName",
+              "value": "={{ $json.body.name }}",
+              "type": "string"
+            },
+            {
+              "id": "a3",
+              "name": "CustomerEmail",
+              "value": "={{ $json.body.customer?.email || $json.body.email || $json.body.contact_email }}",
+              "type": "string"
+            },
+            {
+              "id": "a4",
+              "name": "FinancialStatus",
+              "value": "={{ $json.body.financial_status }}",
+              "type": "string"
+            },
+            {
+              "id": "a5",
+              "name": "Currency",
+              "value": "={{ $json.body.currency }}",
+              "type": "string"
+            },
+            {
+              "id": "a6",
+              "name": "TotalPrice",
+              "value": "={{ Number($json.body.total_price) }}",
+              "type": "number"
+            },
+            {
+              "id": "a7",
+              "name": "CreatedAt",
+              "value": "={{ $json.body.created_at }}",
+              "type": "string"
+            },
+            {
+              "id": "a8",
+              "name": "UpdatedAt",
+              "value": "={{ $json.body.updated_at }}",
+              "type": "string"
+            },
+            {
+              "id": "a9",
+              "name": "RawBodyJson",
+              "value": "={{ JSON.stringify($json.body) }}",
+              "type": "string"
+            },
+            {
+              "id": "a10",
+              "name": "line_items",
+              "value": "={{ $json.body.line_items }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -384,
+        304
+      ],
+      "id": "b076712e-34d4-41ee-8f02-f35cf22bf8a9",
+      "name": "Order Flatten"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "MERGE dbo.Shopify AS tgt\nUSING (SELECT\n  {{ $json.OrderId }} AS OrderId\n) AS src\nON tgt.OrderId = src.OrderId\nWHEN MATCHED THEN\n  UPDATE SET\n    OrderName       = '{{ ($json.OrderName || \"\").replace(/'/g,\"''\") }}',\n    CustomerEmail   = '{{ ($json.CustomerEmail || \"\").replace(/'/g,\"''\") }}',\n    FinancialStatus = '{{ ($json.FinancialStatus || \"\").replace(/'/g,\"''\") }}',\n    Currency        = '{{ ($json.Currency || \"\").replace(/'/g,\"''\") }}',\n    TotalPrice      = {{ $json.TotalPrice ?? 'NULL' }},\n    CreatedAt       = TRY_CONVERT(datetime2(0), '{{ ($json.CreatedAt || \"\").replace(/'/g,\"''\") }}'),\n    UpdatedAt       = TRY_CONVERT(datetime2(0), '{{ ($json.UpdatedAt || \"\").replace(/'/g,\"''\") }}'),\n    RawBodyJson     = '{{ ($json.RawBodyJson || \"\").replace(/'/g,\"''\") }}'\nWHEN NOT MATCHED THEN\n  INSERT (OrderId, OrderName, CustomerEmail, FinancialStatus, Currency, TotalPrice, CreatedAt, UpdatedAt, RawBodyJson)\n  VALUES (\n    {{ $json.OrderId }},\n    '{{ ($json.OrderName || \"\").replace(/'/g,\"''\") }}',\n    '{{ ($json.CustomerEmail || \"\").replace(/'/g,\"''\") }}',\n    '{{ ($json.FinancialStatus || \"\").replace(/'/g,\"''\") }}',\n    '{{ ($json.Currency || \"\").replace(/'/g,\"''\") }}',\n    {{ $json.TotalPrice ?? 'NULL' }},\n    TRY_CONVERT(datetime2(0), '{{ ($json.CreatedAt || \"\").replace(/'/g,\"''\") }}'),\n    TRY_CONVERT(datetime2(0), '{{ ($json.UpdatedAt || \"\").replace(/'/g,\"''\") }}'),\n    '{{ ($json.RawBodyJson || \"\").replace(/'/g,\"''\") }}'\n  );\n"
+      },
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1.1,
+      "position": [
+        -144,
+        208
+      ],
+      "id": "89f232a8-f009-432b-a518-918d8a0bcd9d",
+      "name": "Capture Order Info",
+      "credentials": {
+        "microsoftSql": {
+          "id": "c0eH277IuAIBbKLJ",
+          "name": "192.168.148.54 (SQL01)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "line_items",
+        "include": "allOtherFields",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -144,
+        400
+      ],
+      "id": "c0be01ae-5cdc-4764-b022-6f6966f6ccf6",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d00e53e8-14da-4df2-a095-df225238218e",
+              "name": "OrderId",
+              "value": "={{ $json.OrderId }}",
+              "type": "number"
+            },
+            {
+              "id": "b1",
+              "name": "LineItemId",
+              "value": "={{ $json.line_items.id }}",
+              "type": "number"
+            },
+            {
+              "id": "b2",
+              "name": "ProductId",
+              "value": "={{ $json.line_items.product_id }}",
+              "type": "number"
+            },
+            {
+              "id": "b3",
+              "name": "VariantId",
+              "value": "={{ $json.line_items.variant_id }}",
+              "type": "number"
+            },
+            {
+              "id": "b4",
+              "name": "Title",
+              "value": "={{ $json.line_items.title || $json.line_items.name }}",
+              "type": "string"
+            },
+            {
+              "id": "b5",
+              "name": "Sku",
+              "value": "={{ $json.line_items.sku }}",
+              "type": "string"
+            },
+            {
+              "id": "b6",
+              "name": "Quantity",
+              "value": "={{ $json.line_items.quantity }}",
+              "type": "number"
+            },
+            {
+              "id": "b7",
+              "name": "Price",
+              "value": "={{ Number($json.line_items.price) }}",
+              "type": "number"
+            },
+            {
+              "id": "b8",
+              "name": "Grams",
+              "value": "={{ $json.line_items.grams }}",
+              "type": "number"
+            },
+            {
+              "id": "b9",
+              "name": "RequiresShipping",
+              "value": "={{ $json.line_items.requires_shipping ? 1 : 0 }}",
+              "type": "number"
+            },
+            {
+              "id": "b10",
+              "name": "Taxable",
+              "value": "={{ $json.line_items.taxable ? 1 : 0 }}",
+              "type": "number"
+            },
+            {
+              "id": "b11",
+              "name": "FulfillmentService",
+              "value": "={{ $json.line_items.fulfillment_service }}",
+              "type": "string"
+            },
+            {
+              "id": "b12",
+              "name": "FulfillmentStatus",
+              "value": "={{ $json.line_items.fulfillment_status }}",
+              "type": "string"
+            },
+            {
+              "id": "b13",
+              "name": "RawLineItemJson",
+              "value": "={{ JSON.stringify($json.line_items) }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        112,
+        304
+      ],
+      "id": "2bf34a66-a599-47a4-a9fd-a4ea4eb760e6",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": ";WITH src AS (\n  SELECT\n    TRY_CONVERT(bigint, {{ $json.OrderId }})    AS OrderId,\n    TRY_CONVERT(bigint, {{ $json.LineItemId }}) AS LineItemId,\n\n    TRY_CONVERT(bigint, {{ $json.ProductId }})  AS ProductId,\n    TRY_CONVERT(bigint, {{ $json.VariantId }})  AS VariantId,\n\n    '{{ ($json.Title || '').replace(/'/g, \"''\") }}' AS Title,\n    '{{ ($json.Sku   || '').replace(/'/g, \"''\") }}' AS Sku,\n\n    COALESCE(TRY_CONVERT(int, {{ $json.Quantity }}), 0) AS Quantity,\n    TRY_CONVERT(decimal(18,2), {{ $json.Price }}) AS Price,\n    TRY_CONVERT(int, {{ $json.Grams }})          AS Grams,\n\n    COALESCE(TRY_CONVERT(bit, {{ $json.RequiresShipping }}), 0) AS RequiresShipping,\n    COALESCE(TRY_CONVERT(bit, {{ $json.Taxable }}), 0)          AS Taxable,\n\n    '{{ ($json.FulfillmentService || '').replace(/'/g, \"''\") }}' AS FulfillmentService,\n    CASE\n      WHEN {{ $json.FulfillmentStatus }} IS NULL THEN NULL\n      ELSE '{{ ($json.FulfillmentStatus || '').replace(/'/g, \"''\") }}'\n    END AS FulfillmentStatus,\n\n    '{{ ($json.RawLineItemJson || '').replace(/'/g, \"''\") }}' AS RawLineItemJson\n)\n, src2 AS (\n  SELECT *\n  FROM src\n  WHERE OrderId IS NOT NULL\n    AND LineItemId IS NOT NULL\n)\nMERGE dbo.Shopify_LineItems AS tgt\nUSING src2\nON tgt.OrderId = src2.OrderId\nAND tgt.LineItemId = src2.LineItemId\n\nWHEN MATCHED THEN\n  UPDATE SET\n    ProductId = src2.ProductId,\n    VariantId = src2.VariantId,\n    Title = src2.Title,\n    Sku = src2.Sku,\n    Quantity = src2.Quantity,\n    Price = src2.Price,\n    Grams = src2.Grams,\n    RequiresShipping = src2.RequiresShipping,\n    Taxable = src2.Taxable,\n    FulfillmentService = src2.FulfillmentService,\n    FulfillmentStatus = src2.FulfillmentStatus,\n    RawLineItemJson = src2.RawLineItemJson\n\nWHEN NOT MATCHED THEN\n  INSERT (\n    OrderId, LineItemId, ProductId, VariantId,\n    Title, Sku, Quantity, Price, Grams,\n    RequiresShipping, Taxable,\n    FulfillmentService, FulfillmentStatus, RawLineItemJson\n  )\n  VALUES (\n    src2.OrderId, src2.LineItemId, src2.ProductId, src2.VariantId,\n    src2.Title, src2.Sku, src2.Quantity, src2.Price, src2.Grams,\n    src2.RequiresShipping, src2.Taxable,\n    src2.FulfillmentService, src2.FulfillmentStatus, src2.RawLineItemJson\n  );\n"
+      },
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1.1,
+      "position": [
+        336,
+        304
+      ],
+      "id": "dabccf35-85c9-4c53-839f-aa71c657256a",
+      "name": "Capture Products Ordered",
+      "alwaysOutputData": true,
+      "credentials": {
+        "microsoftSql": {
+          "id": "c0eH277IuAIBbKLJ",
+          "name": "192.168.148.54 (SQL01)"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": 300,
+    "availableInMCP": false,
+    "errorWorkflow": "NtBd2hj1eiR2xufe"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-12-16T19:58:22.429Z",
+      "createdAt": "2025-12-16T19:58:22.429Z",
+      "role": "workflow:owner",
+      "workflowId": "RBKDl8jq3cYPcRnB",
+      "projectId": "3dtat9rk4vrp7A9f"
+    }
+  ],
+  "staticData": null,
+  "tags": [
+    {
+      "updatedAt": "2025-12-16T20:44:57.816Z",
+      "createdAt": "2025-12-16T20:44:57.816Z",
+      "id": "Lf7pAG9JMbk8iBUe",
+      "name": "shopify"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2025-12-17T00:10:27.283Z",
+  "versionId": "92d940c0-181a-4ca5-bb98-1ef0cd5fc9c6"
+}
