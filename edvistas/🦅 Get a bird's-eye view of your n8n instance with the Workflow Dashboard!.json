@@ -1767,7 +1767,8 @@
     "callerPolicy": "workflowsFromSameOwner",
     "executionTimeout": 300,
     "executionOrder": "v1",
-    "errorWorkflow": "NtBd2hj1eiR2xufe"
+    "errorWorkflow": "NtBd2hj1eiR2xufe",
+    "availableInMCP": true
   },
   "shared": [
     {
@@ -1781,6 +1782,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-04-07T14:29:56.000Z",
+  "updatedAt": "2026-01-07T06:22:47.056Z",
   "versionId": "86909482-da68-4f31-9de6-16095e0cd802"
 }
