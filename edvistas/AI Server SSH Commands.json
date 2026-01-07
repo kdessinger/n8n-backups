@@ -1,0 +1,202 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "Execute a command": {
+      "main": [
+        []
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Execute a command",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-01-07T00:38:13.520Z",
+  "id": "kDcrenWetdzZYkqM0dGjL",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "AI Server SSH Commands",
+  "nodes": [
+    {
+      "parameters": {
+        "command": "={{ $json.output }}"
+      },
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        304,
+        0
+      ],
+      "id": "0572a9d9-1f32-4c96-b82f-81331d9f3a29",
+      "name": "Execute a command",
+      "credentials": {
+        "sshPassword": {
+          "id": "6eVPkqFNwJjnsj6k",
+          "name": "AI Server (n8n)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are an AI agent that sends commands in n8n to an SSH node.\nThe user will send you a Linux command.\nIf the command looks broken, fix it.\nOnly output the final command with proper formatting and nothing else.\n\nExample Input:\nmount -t nfs 10.42.77.19 /exports/data /mnt/data\n\nExample Output:\nmount -t nfs 10.42.77.19:/exports/data /mnt/data"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -32,
+        0
+      ],
+      "id": "a6f8714e-d09d-41a9-bddf-cc069ab938d5",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "builtInTools": {},
+        "options": {
+          "serviceTier": "auto"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -96,
+        208
+      ],
+      "id": "e93bef4a-5b6e-4023-8edd-9567ec479def",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        64,
+        208
+      ],
+      "id": "cd91511c-d9d1-46c2-ac4e-a4c2464f5c99",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "command": "export DEBIAN_FRONTEND=noninteractive && sudo -n apt update && sudo -n apt full-upgrade -y && sudo -n apt autoremove -y && sudo -n apt autoclean"
+      },
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        48,
+        -192
+      ],
+      "id": "c326c7d2-fc65-4a0c-836d-ee3f11c1cdb7",
+      "name": "Update AI Server",
+      "credentials": {
+        "sshPassword": {
+          "id": "6eVPkqFNwJjnsj6k",
+          "name": "AI Server (n8n)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -272,
+        0
+      ],
+      "id": "ce185f24-9ce8-42d8-8cfb-6376f04104e1",
+      "name": "When chat message received",
+      "webhookId": "61ca8450-4a0f-4335-8fb9-c0acb68b286a"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chat",
+      "typeVersion": 1,
+      "position": [
+        512,
+        0
+      ],
+      "id": "f2abf8f6-3d0c-42e5-86db-2adad397d9b2",
+      "name": "Respond to Chat"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-01-07T00:38:13.524Z",
+      "createdAt": "2026-01-07T00:38:13.524Z",
+      "role": "workflow:owner",
+      "workflowId": "kDcrenWetdzZYkqM0dGjL",
+      "projectId": "3dtat9rk4vrp7A9f"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-01-07T17:18:55.650Z",
+  "versionId": "ce055507-5f50-4353-b93e-1eb749eed319"
+}
