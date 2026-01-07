@@ -205,7 +205,9 @@
   "createdAt": "2026-01-05T22:38:09.419Z",
   "id": "hHxD8vJbCFw0Ha9g",
   "isArchived": false,
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "AI ASSET SPRINT - V1.1 - PRODUCTION",
   "nodes": [
     {
@@ -259,7 +261,13 @@
         640
       ],
       "id": "a748e7a0-1804-49a7-84be-f9207c07afd3",
-      "name": "Brainstorming Pains"
+      "name": "Brainstorming Pains",
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
     },
     {
       "parameters": {
@@ -289,7 +297,13 @@
         768
       ],
       "id": "34150008-c538-4aa7-a547-b0e9ac9d76a8",
-      "name": "Generate Solutions"
+      "name": "Generate Solutions",
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
     },
     {
       "parameters": {
@@ -333,7 +347,13 @@
         912
       ],
       "id": "a19fa22d-a065-4041-8055-d0bbca1439d9",
-      "name": "$100M Offer"
+      "name": "$100M Offer",
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
     },
     {
       "parameters": {
@@ -364,7 +384,13 @@
         480
       ],
       "id": "c5e0bf23-24bc-4ebb-aea5-eb64d8d0788b",
-      "name": "Create Offer Title"
+      "name": "Create Offer Title",
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
     },
     {
       "parameters": {
@@ -394,7 +420,13 @@
         608
       ],
       "id": "ccd0663c-fda5-43c4-8aea-2f04fae1c49c",
-      "name": "Build Outline"
+      "name": "Build Outline",
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
     },
     {
       "parameters": {
@@ -424,7 +456,13 @@
         912
       ],
       "id": "d085f154-08d5-4887-b315-beab45f38c51",
-      "name": "Create $100M Product"
+      "name": "Create $100M Product",
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
     },
     {
       "parameters": {
@@ -443,7 +481,13 @@
       "name": "Generate Image Cover",
       "alwaysOutputData": false,
       "retryOnFail": true,
-      "waitBetweenTries": 2000
+      "waitBetweenTries": 2000,
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
     },
     {
       "parameters": {
@@ -516,7 +560,13 @@
         480
       ],
       "id": "cc0aaec4-5da5-4523-9938-416b34a1583e",
-      "name": "Value Enhancer"
+      "name": "Value Enhancer",
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
     },
     {
       "parameters": {
@@ -569,10 +619,17 @@
     },
     {
       "parameters": {
+        "preBuiltAgentsCalloutHttpRequest": "",
+        "httpVariantWarning": "",
+        "curlImport": "",
         "method": "POST",
+        "": "",
         "url": "https://v2.convertapi.com/convert/html/to/docx",
         "authentication": "predefinedCredentialType",
         "nodeCredentialType": "convertApi",
+        "provideSslCertificates": false,
+        "sendQuery": false,
+        "sendHeaders": false,
         "sendBody": true,
         "contentType": "multipart-form-data",
         "bodyParameters": {
@@ -583,48 +640,59 @@
               "inputDataFieldName": "data"
             },
             {
+              "parameterType": "formData",
               "name": "StoreFile",
               "value": "true"
             },
             {
+              "parameterType": "formData",
               "name": "PageSize",
               "value": "letter"
             },
             {
+              "parameterType": "formData",
               "name": "MarginTop",
               "value": "72"
             },
             {
+              "parameterType": "formData",
               "name": "MarginBottom",
               "value": "72"
             },
             {
+              "parameterType": "formData",
               "name": "MarginLeft",
               "value": "72"
             },
             {
+              "parameterType": "formData",
               "name": "MarginRight",
               "value": "72"
             },
             {
+              "parameterType": "formData",
               "name": "DocumentOpenPassword",
               "value": "``"
             },
             {
+              "parameterType": "formData",
               "name": "DisableContentControl",
               "value": "true"
             },
             {
+              "parameterType": "formData",
               "name": "CompatibilityMode",
               "value": "15"
             },
             {
+              "parameterType": "formData",
               "name": "DocumentProtection",
               "value": "none"
             }
           ]
         },
-        "options": {}
+        "options": {},
+        "infoMessage": ""
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
@@ -634,14 +702,27 @@
       ],
       "id": "2af8382d-d625-4dd9-9696-4a7633a5e4f3",
       "name": "Convert eBook to DOCX",
-      "extendsCredential": "convertApi"
+      "extendsCredential": "convertApi",
+      "credentials": {
+        "convertApi": {
+          "id": "WoXJ7BnWMK79Z5Q1",
+          "name": "ConvertAPI (Sandbox)"
+        }
+      }
     },
     {
       "parameters": {
+        "preBuiltAgentsCalloutHttpRequest": "",
+        "httpVariantWarning": "",
+        "curlImport": "",
         "method": "POST",
+        "": "",
         "url": "https://v2.convertapi.com/convert/html/to/docx",
         "authentication": "predefinedCredentialType",
         "nodeCredentialType": "convertApi",
+        "provideSslCertificates": false,
+        "sendQuery": false,
+        "sendHeaders": false,
         "sendBody": true,
         "contentType": "multipart-form-data",
         "bodyParameters": {
@@ -652,12 +733,14 @@
               "inputDataFieldName": "data"
             },
             {
+              "parameterType": "formData",
               "name": "StoreFile",
               "value": "true"
             }
           ]
         },
-        "options": {}
+        "options": {},
+        "infoMessage": ""
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
@@ -667,12 +750,18 @@
       ],
       "id": "5adfc8a0-c081-4aa6-bfc0-f65feeb6ad1f",
       "name": "Convert Value to DOCX",
-      "extendsCredential": "convertApi"
+      "extendsCredential": "convertApi",
+      "credentials": {
+        "convertApi": {
+          "id": "WoXJ7BnWMK79Z5Q1",
+          "name": "ConvertAPI (Sandbox)"
+        }
+      }
     },
     {
       "parameters": {
         "content": "## | PHASE 1: AI-POWERED IDEATION & STRATEGIC OFFER DESIGN\n\nPurpose: Turn a keyword into a fully-fledged digital asset! In this phase, a series of specialized AI agents collaborate:\n\n1. AI uncovers critical **customer pain points** related to your idea.\n2. Next, another AI crafts targeted **solutions** for each pain.\n3. Finally, a strategic AI applies proven marketing frameworks (like the '$100M Offer') to forge these insights into an **irresistible core offer**, complete with a compelling title, dream outcome, and unique selling propositions. \n\n**This isn't just brainstorming; it's AI-driven strategy in action!**",
-        "height": 1280,
+        "height": 1328,
         "width": 420,
         "color": 5
       },
@@ -688,7 +777,7 @@
     {
       "parameters": {
         "content": "## | PHASE 2: DIGITAL ASSET CREATION\n\nPurpose: Starts AI content creation! This phase takes the strategic offer and automatically produces a **high-value complete ebook with a custom-designed cover**:\n\n1. An AI copywriter generates **captivating ebook titles** and selects the optimal one.\n2. An AI architect builds a **comprehensive ebook outline**.\n3. The all-new GPT-4 Image AI designs a unique, **professional ebook cover image** based on the title and topic.\n4. Then, an AI ghostwriter drafts the **entire ebook content** in engaging, easy-to-read format, meticulously following the outline. \n\n_Making raw ideas become a tangible asset!_",
-        "height": 1280,
+        "height": 1328,
         "width": 440,
         "color": 4
       },
@@ -704,7 +793,7 @@
     {
       "parameters": {
         "content": "## | PHASE 3: VALUE STACKING & FINAL ASSET DELIVERY\n\nPurpose: **Maximizing value is key!** Here, an AI strategist generates a 'Value Enhancer' package – creating compelling bonuses, a one-time-offer, and a workbook outline to complement your main product.\n\nThe grand finale: Both your main Ebook DOCX and the Value Enhancer DOCX are neatly packaged with their download links into a final message, ready to be sent back to you in the chat. \n\nAll this from a single keyword to two complete, ready-to-use digital products.\n\n**All orchestrated by AI and automation!**",
-        "height": 1280,
+        "height": 1328,
         "width": 460,
         "color": 6
       },
@@ -719,14 +808,14 @@
     },
     {
       "parameters": {
-        "content": "# ⭐️ How to Set Up to Run on Your Account\n**Author:** Don Lyons from [Effortless Digital](https://www.instagram.com/effortlessdigitaldon/)  \n\nThis quick-start guide shows you how to set up your account to work with OpenAI for images and content, and ConvertAPI to get the final output in .docx format.\n\n## 🔳 Step 1: Set Up OpenAI for Content & Image Generation\n**Cost Note:** OpenAI's API will cost around 0.25 for each completed PDF product, Bonus Idea doc and Ecover Image. _Definitely beats 2hrs doing it yourself_\n\n1. Go to [OpenAI API Platform](https://platform.openai.com/api-keys)  \n2. Create an account (if you don’t have one).  \n3. Generate an API key.  \n4. Create a credential using that key.  \n**Note:** If you use the 4o image generation model, OpenAI will ask you to verify your identity. They do this to prevent misuse.\n\n## 🔳 Step 2: Set Up ConvertAPI (for DOCX Conversion)\n1.  **Go to:** [ConvertAPI Website](https://www.convertapi.com/)\n2.  **Sign Up:** Create a free account.\n3.  **Find API Secret:** After signing up, navigate to \"Authentication -> Secret Key\". You should find your \"API Secret\" (it starts with secret).\n4.  **Add to n8n:** In n8n, go to \"Credentials\" > \"New\". Search for \"ConvertAPI\" and create a new credential. Paste your API Secret into the appropriate field. Give it a name.\n\n**Note:** ConvertAPI's free tier limit is 250 runs. For extensive use, you might need a paid plan. This workflow uses it to convert HTML to DOCX. You get 250 runs for free.\n\n## 🔳 Step 3: Set Up Cloudinary (Image Uploading Tool)\n**Cost Note:** FREE (free plan lets you upload 1,000s of images each month)\n\n### 1. Create Your Free Account\n- Go to: https://cloudinary.com/users/register_free\n- Sign up for a free account\n\n### 2. Get Your Cloud Name\n- Log into your Cloudinary dashboard\n- Find your **Cloud Name** at the top of the dashboard\n- **Copy this name** - you'll need it in step 5\n\n### 3. Create an Upload Preset\n- Click the **Settings** gear icon (bottom left)\n- Navigate to the **Upload** tab\n- Click **\"+ Add upload preset\"**\n- Configure the preset:\n  - Change **Signing Mode** from \"Signed\" to **\"Unsigned\"**\n  - Set **Preset name** to: `aiasset_preset`\n  - Leave all other settings as default\n  - Click **Save**\n\n### 4. Update the n8n Workflow\nIn your n8n workflow, find the **\"Get Img Link\"** node and:\n- Replace `YOUR_CLOUD_NAME` in the URL with your actual Cloud Name from step 2\n- The URL should look like:\nhttps://api.cloudinary.com/v1_1/doryejrxy/image/upload\nBut with YOUR cloud name instead of \"doodyyrxy\"\n\n### 5. Test Your Setup\n- The workflow is now ready to upload images to your Cloudinary account\n- Each uploaded image will get a unique URL that the workflow uses for the ebook cover\n\n**Note:** Make sure your upload preset name is exactly `aiasset_preset` or the workflow won't work!",
+        "content": "# ⭐️ How to Set Up to Run on Your Account\n\nThis quick-start guide shows you how to set up your account to work with OpenAI for images and content, and ConvertAPI to get the final output in .docx format.\n\n## 🔳 Step 1: Set Up OpenAI for Content & Image Generation\n**Cost Note:** OpenAI's API will cost around 0.25 for each completed PDF product, Bonus Idea doc and Ecover Image. _Definitely beats 2hrs doing it yourself_\n\n1. Go to [OpenAI API Platform](https://platform.openai.com/api-keys)  \n2. Create an account (if you don’t have one).  \n3. Generate an API key.  \n4. Create a credential using that key.  \n**Note:** If you use the 4o image generation model, OpenAI will ask you to verify your identity. They do this to prevent misuse.\n\n## 🔳 Step 2: Set Up ConvertAPI (for DOCX Conversion)\n1.  **Go to:** [ConvertAPI Website](https://www.convertapi.com/)\n2.  **Sign Up:** Create a free account.\n3.  **Find API Secret:** After signing up, navigate to \"Authentication -> Secret Key\". You should find your \"API Secret\" (it starts with secret).\n4.  **Add to n8n:** In n8n, go to \"Credentials\" > \"New\". Search for \"ConvertAPI\" and create a new credential. Paste your API Secret into the appropriate field. Give it a name.\n\n**Note:** ConvertAPI's free tier limit is 250 runs. For extensive use, you might need a paid plan. This workflow uses it to convert HTML to DOCX. You get 250 runs for free.\n\n## 🔳 Step 3: Set Up Cloudinary (Image Uploading Tool)\n**Cost Note:** FREE (free plan lets you upload 1,000s of images each month)\n\n### 1. Create Your Free Account\n- Go to: https://cloudinary.com/users/register_free\n- Sign up for a free account\n\n### 2. Get Your Cloud Name\n- Log into your Cloudinary dashboard\n- Find your **Cloud Name** at the top of the dashboard\n- **Copy this name** - you'll need it in step 5\n\n### 3. Create an Upload Preset\n- Click the **Settings** gear icon (bottom left)\n- Navigate to the **Upload** tab\n- Click **\"+ Add upload preset\"**\n- Configure the preset:\n  - Change **Signing Mode** from \"Signed\" to **\"Unsigned\"**\n  - Set **Preset name** to: `aiasset_preset`\n  - Leave all other settings as default\n  - Click **Save**\n\n### 4. Update the n8n Workflow\nIn your n8n workflow, find the **\"Get Img Link\"** node and:\n- Replace `YOUR_CLOUD_NAME` in the URL with your actual Cloud Name from step 2\n- The URL should look like:\nhttps://api.cloudinary.com/v1_1/doryejrxy/image/upload\nBut with YOUR cloud name instead of \"doodyyrxy\"\n\n### 5. Test Your Setup\n- The workflow is now ready to upload images to your Cloudinary account\n- Each uploaded image will get a unique URL that the workflow uses for the ebook cover\n\n**Note:** Make sure your upload preset name is exactly `aiasset_preset` or the workflow won't work!",
         "height": 1780,
         "width": 540,
         "color": 7
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        368,
+        400,
         48
       ],
       "typeVersion": 1,
@@ -736,7 +825,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.cloudinary.com/v1_1/CLOUD_NAME/image/upload",
+        "url": "https://api.cloudinary.com/v1_1/dsrnvaqws/image/upload",
         "sendBody": true,
         "contentType": "multipart-form-data",
         "bodyParameters": {
@@ -794,6 +883,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-01-05T22:38:09.419Z",
-  "versionId": "a05438a6-41fc-4a98-8432-b8a8c4c7e454"
+  "updatedAt": "2026-01-07T06:21:30.047Z",
+  "versionId": "8d0376de-4fb3-45c5-b4af-42f0bb9ec029"
 }
