@@ -5,7 +5,13 @@
   "connections": {
     "Execute a command": {
       "main": [
-        []
+        [
+          {
+            "node": "Clean up outputs",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "AI Agent": {
@@ -30,6 +36,17 @@
         ]
       ]
     },
+    "Clean up outputs": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "Simple Memory": {
       "ai_memory": [
         [
@@ -41,7 +58,7 @@
         ]
       ]
     },
-    "When chat message received": {
+    "Slack Trigger": {
       "main": [
         [
           {
@@ -82,8 +99,10 @@
     },
     {
       "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.blocks[0].elements[0].elements[1].text }}",
         "options": {
-          "systemMessage": "You are an AI agent that sends commands in n8n to an SSH node.\nThe user will send you a Linux command.\nIf the command looks broken, fix it.\nOnly output the final command with proper formatting and nothing else.\n\nExample Input:\nmount -t nfs 10.42.77.19 /exports/data /mnt/data\n\nExample Output:\nmount -t nfs 10.42.77.19:/exports/data /mnt/data"
+          "systemMessage": "You are an AI agent that prepares Linux commands for execution in n8n via an SSH node.\n\nThe SSH node connects to a Debian Bookworm Linux server running bash.\nUser input may be a Linux command or a natural-language request.\n\nYour job:\n\nIf input is natural language, generate the correct Linux command\n\nIf input is a command, fix syntax or automation issues\n\nPreserve intent; do not add behavior\n\nRules (headless execution):\n\nNo interactive prompts\n\nNo TTY or pager usage\n\nPrefer non-interactive flags\n\nUse sudo -n when sudo is required\n\nOutput must be stdout-safe\n\nOutput:\n\nReturn only the final command\n\nNo explanations or extra text\n\nExamples:\n\nmount -t nfs 10.42.77.19 /exports/data /mnt/data\n→ mount -t nfs 10.42.77.19:/exports/data /mnt/data\n\nsudo fail2ban-client status\n→ sudo -n fail2ban-client status\n\nHow many docker containers are running?\n→ sudo -n docker ps -q | wc -l"
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
@@ -93,7 +112,8 @@
         0
       ],
       "id": "a6f8714e-d09d-41a9-bddf-cc069ab938d5",
-      "name": "AI Agent"
+      "name": "AI Agent",
+      "notes": "Corrects & Optimizes the input command "
     },
     {
       "parameters": {
@@ -110,8 +130,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.3,
       "position": [
-        -96,
-        208
+        -112,
+        224
       ],
       "id": "e93bef4a-5b6e-4023-8edd-9567ec479def",
       "name": "OpenAI Chat Model",
@@ -123,24 +143,13 @@
       }
     },
     {
-      "parameters": {},
-      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
-      "typeVersion": 1.3,
-      "position": [
-        64,
-        208
-      ],
-      "id": "cd91511c-d9d1-46c2-ac4e-a4c2464f5c99",
-      "name": "Simple Memory"
-    },
-    {
       "parameters": {
         "command": "export DEBIAN_FRONTEND=noninteractive && sudo -n apt update && sudo -n apt full-upgrade -y && sudo -n apt autoremove -y && sudo -n apt autoclean"
       },
       "type": "n8n-nodes-base.ssh",
       "typeVersion": 1,
       "position": [
-        48,
+        16,
         -192
       ],
       "id": "c326c7d2-fc65-4a0c-836d-ee3f11c1cdb7",
@@ -154,36 +163,138 @@
     },
     {
       "parameters": {
-        "options": {}
+        "jsCode": "const item = $input.first().json;\n\nconst formatBlock = (label, value) => {\n  if (value === null || value === undefined || value === \"\") {\n    return `${label}: null`;\n  }\n\n  if (Array.isArray(value)) {\n    return `${label}:\\n${value.map(v => `  ${v}`).join(\"\\n\")}`;\n  }\n\n  return `${label}: ${value}`;\n};\n\nconst output =\n[\n  formatBlock(\"code\", item.code),\n  formatBlock(\"signal\", item.signal),\n  formatBlock(\"stderr\", item.stderr),  \n  formatBlock(\"stdout\", item.stdout),\n].join(\"\\n\\n\");\n\nreturn [\n  {\n    json: {\n      message: output\n    }\n  }\n];\n"
       },
-      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
-      "typeVersion": 1.4,
-      "position": [
-        -272,
-        0
-      ],
-      "id": "ce185f24-9ce8-42d8-8cfb-6376f04104e1",
-      "name": "When chat message received",
-      "webhookId": "61ca8450-4a0f-4335-8fb9-c0acb68b286a"
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.chat",
-      "typeVersion": 1,
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
       "position": [
         512,
         0
       ],
-      "id": "f2abf8f6-3d0c-42e5-86db-2adad397d9b2",
-      "name": "Respond to Chat"
+      "id": "4cd3cf60-febd-4ec6-8cab-1f3d345d6f34",
+      "name": "Clean up outputs"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Slack Trigger').item.json.ts }}",
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        64,
+        224
+      ],
+      "id": "54d4f770-cf34-4c99-bc98-52a131357c54",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "content": "## 🧠 AI-Assisted SSH Command Executor (Headless-Safe)\n\nThis workflow allows users to send **Linux commands via chat**, which are then:\n\n### 🔹 Command Intelligence Layer\n- Intercepted by an AI agent before execution\n- Automatically detects and fixes broken or unsafe syntax\n- Corrects common mistakes (e.g. missing NFS colons, interactive commands)\n- Enforces **headless-safe execution**\n  - No interactive prompts\n  - No TTY-dependent behavior\n  - Pager-free output\n  - Adds non-interactive flags where required (e.g. `sudo -n`)\n\n### 🔹 Execution Layer\n- Commands are executed on a **Debian Bookworm AI Server**\n- Uses a **bash shell** via SSH\n- Designed for unattended, automation-safe operation\n\n### 🔹 Output Normalization\n- Captures `stdout`, `stderr`, exit `code`, and `signal`\n- Reformats output for chat consumption\n- Ensures each field is rendered on its own line\n- Preserves multiline output for readability\n\n### 🔒 Design Principles\n- Deterministic execution\n- Least-privilege sudo usage\n- Headless-first command design\n- Safe for AI-driven infrastructure operations\n\n### 🛠 Common Use Cases\n- Server health checks\n- Security monitoring (Fail2Ban, services)\n- Package maintenance\n- Diagnostics and observability\n- AI-assisted command correction\n\n> **Conceptually:**  \n> Humans speak loosely → AI tightens syntax → servers respond cleanly\n",
+        "height": 960,
+        "width": 688,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1024,
+        -416
+      ],
+      "typeVersion": 1,
+      "id": "4662e0ec-0d56-4e82-938d-99368ac9a7d8",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C085Y4ELXDX",
+          "mode": "list",
+          "cachedResultName": "invoicing-agent"
+        },
+        "text": "={{ $json.message }}",
+        "otherOptions": {}
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.4,
+      "position": [
+        720,
+        0
+      ],
+      "id": "c9496624-a2b7-456a-9654-107d82e58758",
+      "name": "Send a message",
+      "webhookId": "35e53c38-d5fe-4bf3-8814-cd6f43757f89",
+      "credentials": {
+        "slackApi": {
+          "id": "ST9taDHbcxQsCtTh",
+          "name": "Slack (ED)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "trigger": [
+          "message",
+          "file_share",
+          "app_mention"
+        ],
+        "channelId": {
+          "__rl": true,
+          "value": "C085Y4ELXDX",
+          "mode": "list",
+          "cachedResultName": "invoicing-agent"
+        },
+        "options": {
+          "userIds": [
+            "USLACKBOT",
+            "U085Y4JSYGH",
+            "U07PHK708MU",
+            "U07NMTZAATH"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.slackTrigger",
+      "typeVersion": 1,
+      "position": [
+        -224,
+        0
+      ],
+      "id": "ccff5d94-e747-4f28-8222-76c8cca57f9a",
+      "name": "Slack Trigger",
+      "webhookId": "298dce72-b0e2-4bb2-8694-f2d3949a322a",
+      "credentials": {
+        "slackApi": {
+          "id": "ST9taDHbcxQsCtTh",
+          "name": "Slack (ED)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Doesn't want to run in published mode",
+        "height": 80,
+        "width": 496
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        288,
+        -192
+      ],
+      "typeVersion": 1,
+      "id": "2e81cd92-3533-477d-87d8-32aa0efec1bc",
+      "name": "Sticky Note1"
     }
   ],
   "pinData": {},
   "settings": {
     "executionOrder": "v1",
-    "availableInMCP": false
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": 600,
+    "errorWorkflow": "NtBd2hj1eiR2xufe"
   },
   "shared": [
     {
@@ -196,7 +307,7 @@
   ],
   "staticData": null,
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2026-01-07T17:18:55.650Z",
-  "versionId": "ce055507-5f50-4353-b93e-1eb749eed319"
+  "triggerCount": 1,
+  "updatedAt": "2026-01-08T00:55:52.868Z",
+  "versionId": "66364dad-a9d9-493a-911c-d45955407662"
 }
