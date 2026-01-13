@@ -36,7 +36,7 @@
         ]
       ]
     },
-    "Start": {
+    "When clicking ‘Execute workflow’": {
       "main": [
         [
           {
@@ -55,17 +55,6 @@
   "name": "Testing Old Odoo API",
   "nodes": [
     {
-      "parameters": {},
-      "name": "Start",
-      "type": "n8n-nodes-base.start",
-      "typeVersion": 1,
-      "position": [
-        660,
-        200
-      ],
-      "id": "ea1b3d30-d4ed-4640-af13-b96279740ed6"
-    },
-    {
       "parameters": {
         "requestMethod": "POST",
         "url": "http://localhost:8069/jsonrpc",
@@ -77,8 +66,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 1,
       "position": [
-        940,
-        200
+        944,
+        208
       ],
       "id": "c64b995a-67ee-4c32-8188-2e4c81414436"
     },
@@ -90,8 +79,8 @@
       "type": "n8n-nodes-base.functionItem",
       "typeVersion": 1,
       "position": [
-        1180,
-        200
+        1184,
+        208
       ],
       "id": "a06c2950-fd9d-423c-ab52-11df8c855b2d"
     },
@@ -102,8 +91,8 @@
       "name": "Function",
       "type": "n8n-nodes-base.function",
       "position": [
-        1450,
-        200
+        1456,
+        208
       ],
       "typeVersion": 1,
       "id": "d5abc532-1cc6-455b-b833-fc4a8cc42cb2"
@@ -124,10 +113,21 @@
       "type": "n8n-nodes-base.itemLists",
       "typeVersion": 1,
       "position": [
-        1650,
-        200
+        1664,
+        208
       ],
       "id": "5e47d507-1a82-4831-b79f-9dc62bfca658"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        704,
+        208
+      ],
+      "id": "eee9aae8-9183-4d16-9243-ffaed613a79a",
+      "name": "When clicking ‘Execute workflow’"
     }
   ],
   "pinData": {},
@@ -157,6 +157,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-07-28T19:16:20.000Z",
-  "versionId": "5b8054bb-3995-4954-81a8-5fe8bf10f6c3"
+  "updatedAt": "2026-01-12T20:22:13.055Z",
+  "versionId": "1012e1c1-75d2-478e-8bac-67c1ba5af1b2"
 }
