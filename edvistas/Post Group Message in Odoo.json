@@ -3,17 +3,6 @@
   "activeVersion": null,
   "activeVersionId": null,
   "connections": {
-    "Start": {
-      "main": [
-        [
-          {
-            "node": "ChatGPT Request",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Get Channel ID": {
       "main": [
         [
@@ -46,6 +35,17 @@
           }
         ]
       ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "ChatGPT Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2022-11-10T21:20:44.103Z",
@@ -54,17 +54,6 @@
   "meta": null,
   "name": "Post Group Message in Odoo",
   "nodes": [
-    {
-      "parameters": {},
-      "name": "Start",
-      "type": "n8n-nodes-base.start",
-      "position": [
-        -1060,
-        500
-      ],
-      "typeVersion": 1,
-      "id": "e19e00b6-2eb3-46ec-98bc-3523c13fd9cb"
-    },
     {
       "parameters": {
         "url": "https://www.affirmations.dev/",
@@ -77,8 +66,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        -920,
-        340
+        -912,
+        256
       ]
     },
     {
@@ -110,8 +99,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -400,
-        500
+        -592,
+        512
       ],
       "credentials": {
         "odooApi": {
@@ -158,8 +147,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -200,
-        500
+        -400,
+        512
       ],
       "alwaysOutputData": true,
       "credentials": {
@@ -181,8 +170,8 @@
       "name": "ChatGPT Request",
       "type": "n8n-nodes-base.httpRequest",
       "position": [
-        -820,
-        500
+        -1008,
+        512
       ],
       "typeVersion": 1,
       "id": "66db6fda-d13b-4f9d-8a3e-24208629a6d7",
@@ -204,8 +193,8 @@
       "name": "ChatGPT Request1",
       "type": "n8n-nodes-base.httpRequest",
       "position": [
-        -720,
-        340
+        -704,
+        256
       ],
       "typeVersion": 1,
       "id": "3c12c263-4fc5-4037-8b5a-748e12c9b422",
@@ -233,8 +222,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 1,
       "position": [
-        -600,
-        500
+        -800,
+        512
       ]
     },
     {
@@ -275,8 +264,8 @@
       "type": "n8n-nodes-base.odoo",
       "typeVersion": 1,
       "position": [
-        -500,
-        340
+        -480,
+        256
       ],
       "credentials": {
         "odooApi": {
@@ -284,6 +273,17 @@
           "name": "Odoo (OdooBot)"
         }
       }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1232,
+        512
+      ],
+      "id": "428ebe3d-13d9-4e9e-a3f4-8a57636f93ed",
+      "name": "When clicking ‘Execute workflow’"
     }
   ],
   "pinData": {},
@@ -326,6 +326,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-03-08T17:14:09.000Z",
-  "versionId": "68f4a6da-609b-49be-84ff-246fff29f9f9"
+  "updatedAt": "2026-01-12T20:18:32.321Z",
+  "versionId": "96c746f9-974c-4c65-ab7a-fc9e40686498"
 }
