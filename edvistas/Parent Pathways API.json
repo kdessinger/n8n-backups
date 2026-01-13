@@ -1,22 +1,11 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2025-11-26T05:18:06.453Z",
-    "createdAt": "2025-11-26T05:18:06.453Z",
-    "versionId": "351cf1a2-2b43-4ff8-991f-470ab9688394",
+    "updatedAt": "2026-01-12T20:32:48.000Z",
+    "createdAt": "2026-01-12T20:32:32.970Z",
+    "versionId": "39989f6d-ac92-4fcb-b663-02de021de441",
     "workflowId": "qJCHL92o7fLUFSEM",
     "nodes": [
-      {
-        "parameters": {},
-        "type": "n8n-nodes-base.manualTrigger",
-        "typeVersion": 1,
-        "position": [
-          -656,
-          -416
-        ],
-        "id": "eeaa2ead-60f0-454f-b0c7-f7f7ee537897",
-        "name": "When clicking ‘Test workflow’"
-      },
       {
         "parameters": {
           "httpMethod": "POST",
@@ -440,7 +429,7 @@
       {
         "parameters": {
           "content": "# Reset\n",
-          "height": 620,
+          "height": 812,
           "width": 340,
           "color": 3
         },
@@ -635,8 +624,8 @@
         "type": "n8n-nodes-base.microsoftSql",
         "typeVersion": 1.1,
         "position": [
-          2592,
-          -64
+          -688,
+          832
         ],
         "id": "50334cec-0a12-455c-ab9b-86b69f47c551",
         "name": "Verify Datamate Received",
@@ -893,34 +882,6 @@
       },
       {
         "parameters": {
-          "workflowId": "=RMGsRy908UOekKo3",
-          "options": {}
-        },
-        "id": "60a47d5c-924a-4be2-9205-65836c48b8b1",
-        "name": "Log Activity (Success)",
-        "type": "n8n-nodes-base.executeWorkflow",
-        "typeVersion": 1,
-        "position": [
-          2624,
-          -448
-        ]
-      },
-      {
-        "parameters": {
-          "workflowId": "RMGsRy908UOekKo3",
-          "options": {}
-        },
-        "id": "a079c3e7-0c51-4e08-b798-b8fd95bbb27d",
-        "name": "Log Activity (Error)",
-        "type": "n8n-nodes-base.executeWorkflow",
-        "typeVersion": 1,
-        "position": [
-          2224,
-          -64
-        ]
-      },
-      {
-        "parameters": {
           "html": "{{ $json.body_html }}"
         },
         "type": "n8n-nodes-base.html",
@@ -956,20 +917,76 @@
         "id": "0abf86f0-8e1f-43da-9918-5c04c717e32f",
         "name": "Merge",
         "alwaysOutputData": false
+      },
+      {
+        "parameters": {
+          "workflowId": {
+            "__rl": true,
+            "value": "RMGsRy908UOekKo3",
+            "mode": "list",
+            "cachedResultUrl": "/workflow/RMGsRy908UOekKo3",
+            "cachedResultName": "Activity Log"
+          },
+          "workflowInputs": {
+            "mappingMode": "defineBelow",
+            "value": {},
+            "matchingColumns": [],
+            "schema": [],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": true
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.executeWorkflow",
+        "typeVersion": 1.3,
+        "position": [
+          2272,
+          -64
+        ],
+        "id": "5ea7d83e-9121-448a-92f6-b915b80fbe78",
+        "name": "Log Activity (Error)"
+      },
+      {
+        "parameters": {
+          "workflowId": {
+            "__rl": true,
+            "value": "RMGsRy908UOekKo3",
+            "mode": "list",
+            "cachedResultUrl": "/workflow/RMGsRy908UOekKo3",
+            "cachedResultName": "Activity Log"
+          },
+          "workflowInputs": {
+            "mappingMode": "defineBelow",
+            "value": {},
+            "matchingColumns": [],
+            "schema": [],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": true
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.executeWorkflow",
+        "typeVersion": 1.3,
+        "position": [
+          2656,
+          -448
+        ],
+        "id": "aafd6935-7a44-4ec5-bb53-189703764dee",
+        "name": "Log Activity (Success)"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          -656,
+          -416
+        ],
+        "id": "eeaa2ead-60f0-454f-b0c7-f7f7ee537897",
+        "name": "When clicking ‘Test workflow’"
       }
     ],
     "connections": {
-      "When clicking ‘Test workflow’": {
-        "main": [
-          [
-            {
-              "node": "Get Sales Order Line",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
       "Webhook": {
         "main": [
           [
@@ -1231,30 +1248,25 @@
           ]
         ]
       },
-      "Log Activity (Success)": {
+      "When clicking ‘Test workflow’": {
         "main": [
-          []
+          [
+            {
+              "node": "Get Sales Order Line",
+              "type": "main",
+              "index": 0
+            }
+          ]
         ]
       }
     },
-    "authors": "system migration",
-    "name": null,
-    "description": null,
+    "authors": "Super Admin",
+    "name": "Version 39989f6d",
+    "description": "",
     "autosaved": false
   },
-  "activeVersionId": "351cf1a2-2b43-4ff8-991f-470ab9688394",
+  "activeVersionId": "39989f6d-ac92-4fcb-b663-02de021de441",
   "connections": {
-    "When clicking ‘Test workflow’": {
-      "main": [
-        [
-          {
-            "node": "Get Sales Order Line",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Webhook": {
       "main": [
         [
@@ -1516,9 +1528,15 @@
         ]
       ]
     },
-    "Log Activity (Success)": {
+    "When clicking ‘Test workflow’": {
       "main": [
-        []
+        [
+          {
+            "node": "Get Sales Order Line",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
@@ -1530,17 +1548,6 @@
   },
   "name": "Parent Pathways API",
   "nodes": [
-    {
-      "parameters": {},
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
-      "position": [
-        -656,
-        -416
-      ],
-      "id": "eeaa2ead-60f0-454f-b0c7-f7f7ee537897",
-      "name": "When clicking ‘Test workflow’"
-    },
     {
       "parameters": {
         "httpMethod": "POST",
@@ -1964,7 +1971,7 @@
     {
       "parameters": {
         "content": "# Reset\n",
-        "height": 620,
+        "height": 812,
         "width": 340,
         "color": 3
       },
@@ -2159,8 +2166,8 @@
       "type": "n8n-nodes-base.microsoftSql",
       "typeVersion": 1.1,
       "position": [
-        2592,
-        -64
+        -688,
+        832
       ],
       "id": "50334cec-0a12-455c-ab9b-86b69f47c551",
       "name": "Verify Datamate Received",
@@ -2417,34 +2424,6 @@
     },
     {
       "parameters": {
-        "workflowId": "=RMGsRy908UOekKo3",
-        "options": {}
-      },
-      "id": "60a47d5c-924a-4be2-9205-65836c48b8b1",
-      "name": "Log Activity (Success)",
-      "type": "n8n-nodes-base.executeWorkflow",
-      "typeVersion": 1,
-      "position": [
-        2624,
-        -448
-      ]
-    },
-    {
-      "parameters": {
-        "workflowId": "RMGsRy908UOekKo3",
-        "options": {}
-      },
-      "id": "a079c3e7-0c51-4e08-b798-b8fd95bbb27d",
-      "name": "Log Activity (Error)",
-      "type": "n8n-nodes-base.executeWorkflow",
-      "typeVersion": 1,
-      "position": [
-        2224,
-        -64
-      ]
-    },
-    {
-      "parameters": {
         "html": "{{ $json.body_html }}"
       },
       "type": "n8n-nodes-base.html",
@@ -2480,6 +2459,73 @@
       "id": "0abf86f0-8e1f-43da-9918-5c04c717e32f",
       "name": "Merge",
       "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "RMGsRy908UOekKo3",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/RMGsRy908UOekKo3",
+          "cachedResultName": "Activity Log"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        2272,
+        -64
+      ],
+      "id": "5ea7d83e-9121-448a-92f6-b915b80fbe78",
+      "name": "Log Activity (Error)"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "RMGsRy908UOekKo3",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/RMGsRy908UOekKo3",
+          "cachedResultName": "Activity Log"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        2656,
+        -448
+      ],
+      "id": "aafd6935-7a44-4ec5-bb53-189703764dee",
+      "name": "Log Activity (Success)"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -656,
+        -416
+      ],
+      "id": "eeaa2ead-60f0-454f-b0c7-f7f7ee537897",
+      "name": "When clicking ‘Test workflow’"
     }
   ],
   "pinData": {},
@@ -2487,7 +2533,9 @@
     "executionOrder": "v1",
     "callerPolicy": "workflowsFromSameOwner",
     "executionTimeout": 300,
-    "errorWorkflow": "NtBd2hj1eiR2xufe"
+    "errorWorkflow": "NtBd2hj1eiR2xufe",
+    "timeSavedMode": "fixed",
+    "availableInMCP": false
   },
   "shared": [
     {
@@ -2518,6 +2566,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2025-10-21T21:38:50.000Z",
-  "versionId": "351cf1a2-2b43-4ff8-991f-470ab9688394"
+  "updatedAt": "2026-01-12T20:33:10.689Z",
+  "versionId": "39989f6d-ac92-4fcb-b663-02de021de441"
 }
