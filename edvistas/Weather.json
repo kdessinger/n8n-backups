@@ -124,17 +124,6 @@
   "name": "Weather",
   "nodes": [
     {
-      "parameters": {},
-      "name": "Start",
-      "type": "n8n-nodes-base.start",
-      "typeVersion": 1,
-      "position": [
-        288,
-        -160
-      ],
-      "id": "263c4c6a-f965-4762-afad-88ea7673470d"
-    },
-    {
       "parameters": {
         "triggerTimes": {
           "item": [
@@ -198,8 +187,8 @@
       "type": "n8n-nodes-base.twilio",
       "typeVersion": 1,
       "position": [
-        512,
-        -160
+        432,
+        -80
       ],
       "credentials": {
         "twilioApi": {
@@ -379,6 +368,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-11-19T15:58:53.000Z",
-  "versionId": "e86e95e3-0ff9-4fb6-9f14-d0beb8307f6f"
+  "updatedAt": "2026-01-12T20:18:57.891Z",
+  "versionId": "13e7ba06-7c54-4cbb-8844-db71d06107ab"
 }
