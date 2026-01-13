@@ -47,7 +47,7 @@
         ]
       ]
     },
-    "Start": {
+    "When clicking ‘Execute workflow’": {
       "main": [
         [
           {
@@ -72,7 +72,7 @@
       "name": "Read Binary File",
       "type": "n8n-nodes-base.readBinaryFile",
       "position": [
-        460,
+        464,
         240
       ],
       "typeVersion": 1,
@@ -88,7 +88,7 @@
       "name": "Write Binary File",
       "type": "n8n-nodes-base.writeBinaryFile",
       "position": [
-        1000,
+        1008,
         240
       ],
       "typeVersion": 1,
@@ -123,7 +123,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 1,
       "position": [
-        280,
+        288,
         240
       ]
     },
@@ -153,7 +153,7 @@
       "name": "Convert Binary Data",
       "type": "n8n-nodes-base.moveBinaryData",
       "position": [
-        820,
+        832,
         240
       ],
       "typeVersion": 1,
@@ -162,14 +162,14 @@
     },
     {
       "parameters": {},
-      "name": "Start",
-      "type": "n8n-nodes-base.start",
+      "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        60,
+        96,
         240
       ],
-      "id": "942e2d6d-d47d-4256-bc6f-c70b5046816c"
+      "id": "afb01a9d-f406-4608-ad10-3a6934a4f0a8",
+      "name": "When clicking ‘Execute workflow’"
     }
   ],
   "pinData": {},
@@ -213,6 +213,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-06-10T20:31:35.000Z",
-  "versionId": "e46cdc63-a5d1-4c0a-9bba-bf00cabc100b"
+  "updatedAt": "2026-01-12T20:19:26.052Z",
+  "versionId": "e98dfcfe-410d-49f9-a883-f92006f28876"
 }
