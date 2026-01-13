@@ -3,17 +3,6 @@
   "activeVersion": null,
   "activeVersionId": null,
   "connections": {
-    "Start": {
-      "main": [
-        [
-          {
-            "node": "Download XML File",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Write header row": {
       "main": [
         [
@@ -128,6 +117,17 @@
           }
         ]
       ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Download XML File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2022-11-02T21:58:30.534Z",
@@ -136,17 +136,6 @@
   "meta": null,
   "name": "Read XML file and store content",
   "nodes": [
-    {
-      "parameters": {},
-      "id": "d0c92688-14fc-4393-a1d6-926eb867b81e",
-      "name": "Start",
-      "type": "n8n-nodes-base.start",
-      "position": [
-        180,
-        449
-      ],
-      "typeVersion": 1
-    },
     {
       "parameters": {
         "content": "## n8n version\n\nThis workflow was created using n8n version 0.197.1 and uses a new [expression syntax](https://docs.n8n.io/code-examples/methods-variables-reference/) as well as a new version of the Merge node. Make sure you're also using n8n version 0.197.1 or newer when running this workflow.",
@@ -157,8 +146,8 @@
       "name": "Note",
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        40,
-        20
+        48,
+        32
       ],
       "typeVersion": 1
     },
@@ -172,7 +161,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "position": [
         400,
-        449
+        464
       ],
       "typeVersion": 3
     },
@@ -184,8 +173,8 @@
       "name": "Parse XML content",
       "type": "n8n-nodes-base.xml",
       "position": [
-        620,
-        449
+        624,
+        464
       ],
       "typeVersion": 1
     },
@@ -199,8 +188,8 @@
       "name": "Create new spreadsheet file",
       "type": "n8n-nodes-base.googleSheets",
       "position": [
-        1060,
-        349
+        1072,
+        352
       ],
       "executeOnce": true,
       "typeVersion": 2,
@@ -229,7 +218,7 @@
       "type": "n8n-nodes-base.set",
       "position": [
         1280,
-        349
+        352
       ],
       "executeOnce": true,
       "typeVersion": 1
@@ -243,8 +232,8 @@
       "name": "Split out food items",
       "type": "n8n-nodes-base.itemLists",
       "position": [
-        840,
-        440
+        848,
+        448
       ],
       "typeVersion": 1
     },
@@ -260,8 +249,8 @@
       "name": "Write header row",
       "type": "n8n-nodes-base.googleSheets",
       "position": [
-        1500,
-        349
+        1504,
+        352
       ],
       "typeVersion": 2,
       "credentials": {
@@ -280,8 +269,8 @@
       "name": "Wait for spreadsheet creation",
       "type": "n8n-nodes-base.merge",
       "position": [
-        1720,
-        449
+        1728,
+        464
       ],
       "typeVersion": 2
     },
@@ -295,8 +284,8 @@
       "name": "Write data to sheet",
       "type": "n8n-nodes-base.googleSheets",
       "position": [
-        1940,
-        449
+        1952,
+        464
       ],
       "typeVersion": 2,
       "credentials": {
@@ -317,12 +306,12 @@
       "typeVersion": 1,
       "position": [
         880,
-        60
+        64
       ],
       "credentials": {
         "nextCloudApi": {
           "id": "18",
-          "name": "NextCloud (kdessinger)"
+          "name": "kdessinger@nextcloud.edvistas.com"
         }
       }
     },
@@ -336,8 +325,8 @@
       "name": "Split out food items1",
       "type": "n8n-nodes-base.itemLists",
       "position": [
-        1400,
-        60
+        1408,
+        64
       ],
       "typeVersion": 1
     },
@@ -355,7 +344,7 @@
       "typeVersion": 1,
       "position": [
         1120,
-        60
+        64
       ]
     },
     {
@@ -369,13 +358,13 @@
       "type": "n8n-nodes-base.nextCloud",
       "typeVersion": 1,
       "position": [
-        580,
-        60
+        592,
+        64
       ],
       "credentials": {
         "nextCloudApi": {
           "id": "18",
-          "name": "NextCloud (kdessinger)"
+          "name": "kdessinger@nextcloud.edvistas.com"
         }
       }
     },
@@ -398,9 +387,20 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 1,
       "position": [
-        740,
-        60
+        752,
+        64
       ]
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        192,
+        464
+      ],
+      "id": "dd121311-2298-4039-b4b4-3908746d7a42",
+      "name": "When clicking ‘Execute workflow’"
     }
   ],
   "pinData": {},
@@ -448,6 +448,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-06-10T21:24:40.000Z",
-  "versionId": "fd8c2c65-6e21-4842-add1-e254bab33c15"
+  "updatedAt": "2026-01-12T20:21:07.230Z",
+  "versionId": "30e38393-bf75-4772-8128-bb12e4a4b88a"
 }
