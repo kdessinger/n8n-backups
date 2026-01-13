@@ -1,7 +1,7 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2025-11-26T05:18:06.453Z",
+    "updatedAt": "2026-01-12T18:50:28.000Z",
     "createdAt": "2025-11-26T05:18:06.453Z",
     "versionId": "86909482-da68-4f31-9de6-16095e0cd802",
     "workflowId": "Qv18DwceJ1N0IAAz",
@@ -877,8 +877,8 @@
       }
     },
     "authors": "system migration",
-    "name": null,
-    "description": null,
+    "name": "Version 86909482",
+    "description": "",
     "autosaved": false
   },
   "activeVersionId": "86909482-da68-4f31-9de6-16095e0cd802",
@@ -1768,7 +1768,8 @@
     "executionTimeout": 300,
     "executionOrder": "v1",
     "errorWorkflow": "NtBd2hj1eiR2xufe",
-    "availableInMCP": true
+    "availableInMCP": false,
+    "timeSavedMode": "fixed"
   },
   "shared": [
     {
@@ -1782,6 +1783,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2026-01-07T06:22:47.056Z",
+  "updatedAt": "2026-01-12T18:50:13.713Z",
   "versionId": "86909482-da68-4f31-9de6-16095e0cd802"
 }
