@@ -32,6 +32,11 @@
             "node": "Sanitize SSH commands",
             "type": "ai_memory",
             "index": 0
+          },
+          {
+            "node": "Format for Slack Messages",
+            "type": "ai_memory",
+            "index": 0
           }
         ]
       ]
@@ -94,6 +99,17 @@
           }
         ]
       ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Insert row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2026-01-07T00:38:13.520Z",
@@ -130,7 +146,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        512,
+        480,
         0
       ],
       "id": "4cd3cf60-febd-4ec6-8cab-1f3d345d6f34",
@@ -145,8 +161,8 @@
       "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
       "typeVersion": 1.3,
       "position": [
-        80,
-        240
+        432,
+        416
       ],
       "id": "54d4f770-cf34-4c99-bc98-52a131357c54",
       "name": "Simple Memory"
@@ -160,8 +176,8 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -1024,
-        -416
+        -976,
+        -352
       ],
       "typeVersion": 1,
       "id": "4662e0ec-0d56-4e82-938d-99368ac9a7d8",
@@ -205,7 +221,7 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1.1,
       "position": [
-        352,
+        288,
         -256
       ],
       "id": "fd76ff71-c0ae-43d0-a26f-55f19f78c4e3",
@@ -234,7 +250,7 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        560,
+        496,
         -256
       ],
       "id": "26a87377-a774-4641-a486-ff6180fdb61f",
@@ -256,7 +272,7 @@
       "type": "n8n-nodes-base.slack",
       "typeVersion": 2.4,
       "position": [
-        1056,
+        992,
         0
       ],
       "id": "716832df-60c3-441b-a164-8308432f6eaf",
@@ -298,7 +314,7 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3.1,
       "position": [
-        720,
+        672,
         0
       ],
       "id": "cc292964-74cb-4c0f-b60c-13000039a412",
@@ -330,6 +346,155 @@
           "name": "OpenAi (kdessinger)"
         }
       }
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "JbKpxW4w7TVaiGzW",
+          "mode": "list",
+          "cachedResultName": "Slack Logs",
+          "cachedResultUrl": "/projects/3dtat9rk4vrp7A9f/datatables/JbKpxW4w7TVaiGzW"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "channel": "={{ $json.channel }}",
+            "initiator": "={{ $json.message.user }}",
+            "source": "slack",
+            "destination": "ai.edvistas.local",
+            "session_key": "={{ $('Slack Trigger').item.json.ts }}",
+            "raw_message": "={{ $('Slack Trigger').item.json.text }}",
+            "sanitized_command": "={{ $('Sanitize SSH commands').item.json.output }}",
+            "reply_message": "={{ $json.message.blocks[0].elements[0].elements[0].text }}",
+            "status": "={{ $('Execute a command').item.json.code }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "timestamp",
+              "displayName": "timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "initiator",
+              "displayName": "initiator",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "channel",
+              "displayName": "channel",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "source",
+              "displayName": "source",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "destination",
+              "displayName": "destination",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "session_key",
+              "displayName": "session_key",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "ai_model",
+              "displayName": "ai_model",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "raw_message",
+              "displayName": "raw_message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "sanitized_command",
+              "displayName": "sanitized_command",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "reply_message",
+              "displayName": "reply_message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        1200,
+        0
+      ],
+      "id": "9c422a76-e2f7-4b52-9a3d-9ac6de680323",
+      "name": "Insert row"
     }
   ],
   "pinData": {},
@@ -363,6 +528,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2026-01-14T01:51:41.259Z",
-  "versionId": "268acc2b-43f1-4c65-bc33-d16983f36ff7"
+  "updatedAt": "2026-01-14T15:45:21.829Z",
+  "versionId": "b0ec2a50-56a8-4373-bf0d-14fd4aa7853b"
 }
