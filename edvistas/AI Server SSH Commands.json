@@ -14,33 +14,11 @@
         ]
       ]
     },
-    "AI Agent": {
-      "main": [
-        [
-          {
-            "node": "Execute a command",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "OpenAI Chat Model": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Clean up outputs": {
       "main": [
         [
           {
-            "node": "Send a message",
+            "node": "Format for Slack Messages",
             "type": "main",
             "index": 0
           }
@@ -51,7 +29,7 @@
       "ai_memory": [
         [
           {
-            "node": "AI Agent",
+            "node": "Sanitize SSH commands",
             "type": "ai_memory",
             "index": 0
           }
@@ -62,8 +40,56 @@
       "main": [
         [
           {
-            "node": "AI Agent",
+            "node": "Sanitize SSH commands",
             "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        []
+      ]
+    },
+    "Call 'AI Server SSH Commands'": {
+      "main": [
+        []
+      ]
+    },
+    "Sanitize SSH commands": {
+      "main": [
+        [
+          {
+            "node": "Execute a command",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format for Slack Messages": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GPT 4.1 Mini": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Sanitize SSH commands",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Format for Slack Messages",
+            "type": "ai_languageModel",
             "index": 0
           }
         ]
@@ -99,70 +125,6 @@
     },
     {
       "parameters": {
-        "promptType": "define",
-        "text": "={{ $json.blocks[0].elements[0].elements[1].text }}",
-        "options": {
-          "systemMessage": "You are an AI agent that prepares Linux commands for execution in n8n via an SSH node.\n\nThe SSH node connects to a Debian Bookworm Linux server running bash.\nUser input may be a Linux command or a natural-language request.\n\nYour job:\n\nIf input is natural language, generate the correct Linux command\n\nIf input is a command, fix syntax or automation issues\n\nPreserve intent; do not add behavior\n\nRules (headless execution):\n\nNo interactive prompts\n\nNo TTY or pager usage\n\nPrefer non-interactive flags\n\nUse sudo -n when sudo is required\n\nOutput must be stdout-safe\n\nOutput:\n\nReturn only the final command\n\nNo explanations or extra text\n\nExamples:\n\nmount -t nfs 10.42.77.19 /exports/data /mnt/data\n→ mount -t nfs 10.42.77.19:/exports/data /mnt/data\n\nsudo fail2ban-client status\n→ sudo -n fail2ban-client status\n\nHow many docker containers are running?\n→ sudo -n docker ps -q | wc -l"
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 3.1,
-      "position": [
-        -32,
-        0
-      ],
-      "id": "a6f8714e-d09d-41a9-bddf-cc069ab938d5",
-      "name": "AI Agent",
-      "notes": "Corrects & Optimizes the input command "
-    },
-    {
-      "parameters": {
-        "model": {
-          "__rl": true,
-          "mode": "list",
-          "value": "gpt-4.1-mini"
-        },
-        "builtInTools": {},
-        "options": {
-          "serviceTier": "auto"
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
-      "typeVersion": 1.3,
-      "position": [
-        -112,
-        224
-      ],
-      "id": "e93bef4a-5b6e-4023-8edd-9567ec479def",
-      "name": "OpenAI Chat Model",
-      "credentials": {
-        "openAiApi": {
-          "id": "28",
-          "name": "OpenAi (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "command": "export DEBIAN_FRONTEND=noninteractive && sudo -n apt update && sudo -n apt full-upgrade -y && sudo -n apt autoremove -y && sudo -n apt autoclean"
-      },
-      "type": "n8n-nodes-base.ssh",
-      "typeVersion": 1,
-      "position": [
-        16,
-        -192
-      ],
-      "id": "c326c7d2-fc65-4a0c-836d-ee3f11c1cdb7",
-      "name": "Update AI Server",
-      "credentials": {
-        "sshPassword": {
-          "id": "6eVPkqFNwJjnsj6k",
-          "name": "AI Server (n8n)"
-        }
-      }
-    },
-    {
-      "parameters": {
         "jsCode": "const item = $input.first().json;\n\nconst formatBlock = (label, value) => {\n  if (value === null || value === undefined || value === \"\") {\n    return `${label}: null`;\n  }\n\n  if (Array.isArray(value)) {\n    return `${label}:\\n${value.map(v => `  ${v}`).join(\"\\n\")}`;\n  }\n\n  return `${label}: ${value}`;\n};\n\nconst output =\n[\n  formatBlock(\"code\", item.code),\n  formatBlock(\"signal\", item.signal),\n  formatBlock(\"stderr\", item.stderr),  \n  formatBlock(\"stdout\", item.stdout),\n].join(\"\\n\\n\");\n\nreturn [\n  {\n    json: {\n      message: output\n    }\n  }\n];\n"
       },
       "type": "n8n-nodes-base.code",
@@ -183,8 +145,8 @@
       "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
       "typeVersion": 1.3,
       "position": [
-        64,
-        224
+        80,
+        240
       ],
       "id": "54d4f770-cf34-4c99-bc98-52a131357c54",
       "name": "Simple Memory"
@@ -207,45 +169,10 @@
     },
     {
       "parameters": {
-        "select": "channel",
-        "channelId": {
-          "__rl": true,
-          "value": "C085Y4ELXDX",
-          "mode": "list",
-          "cachedResultName": "invoicing-agent"
-        },
-        "text": "={{ $json.message }}",
-        "otherOptions": {}
-      },
-      "type": "n8n-nodes-base.slack",
-      "typeVersion": 2.4,
-      "position": [
-        720,
-        0
-      ],
-      "id": "c9496624-a2b7-456a-9654-107d82e58758",
-      "name": "Send a message",
-      "webhookId": "35e53c38-d5fe-4bf3-8814-cd6f43757f89",
-      "credentials": {
-        "slackApi": {
-          "id": "ST9taDHbcxQsCtTh",
-          "name": "Slack (ED)"
-        }
-      }
-    },
-    {
-      "parameters": {
         "trigger": [
-          "message",
-          "file_share",
           "app_mention"
         ],
-        "channelId": {
-          "__rl": true,
-          "value": "C085Y4ELXDX",
-          "mode": "list",
-          "cachedResultName": "invoicing-agent"
-        },
+        "watchWorkspace": true,
         "options": {
           "userIds": [
             "USLACKBOT",
@@ -258,7 +185,7 @@
       "type": "n8n-nodes-base.slackTrigger",
       "typeVersion": 1,
       "position": [
-        -224,
+        -240,
         0
       ],
       "id": "ccff5d94-e747-4f28-8222-76c8cca57f9a",
@@ -273,18 +200,136 @@
     },
     {
       "parameters": {
-        "content": "## Doesn't want to run in published mode",
-        "height": 80,
-        "width": 496
+        "inputSource": "jsonExample"
       },
-      "type": "n8n-nodes-base.stickyNote",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
       "position": [
-        288,
-        -192
+        352,
+        -256
       ],
-      "typeVersion": 1,
-      "id": "2e81cd92-3533-477d-87d8-32aa0efec1bc",
-      "name": "Sticky Note1"
+      "id": "fd76ff71-c0ae-43d0-a26f-55f19f78c4e3",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "kDcrenWetdzZYkqM0dGjL",
+          "mode": "id",
+          "cachedResultUrl": "/workflow/kDcrenWetdzZYkqM0dGjL"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        560,
+        -256
+      ],
+      "id": "26a87377-a774-4641-a486-ff6180fdb61f",
+      "name": "Call 'AI Server SSH Commands'"
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "={{ $('Slack Trigger').item.json.channel }}",
+          "mode": "id"
+        },
+        "text": "={{ $json.output }}",
+        "otherOptions": {
+          "includeLinkToWorkflow": false
+        }
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.4,
+      "position": [
+        1056,
+        0
+      ],
+      "id": "716832df-60c3-441b-a164-8308432f6eaf",
+      "name": "Send a message",
+      "webhookId": "d1a3598b-7e4b-4a80-92d9-fda166d98d7e",
+      "credentials": {
+        "slackApi": {
+          "id": "ST9taDHbcxQsCtTh",
+          "name": "Slack (ED)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.blocks[0].elements[0].elements[1].text }}",
+        "options": {
+          "systemMessage": "=You are an AI agent that prepares Linux commands for execution in n8n via an SSH node.\n\nThe SSH node connects to a Debian Bookworm Linux server running bash.\nUser input may be a Linux command or a natural-language request.\n\nnote* when the user says \"AI Server\" they are talking about the local machine. the hostname of the local machine is: ai.edvistas.local\n\nIf the user is looking for a system status then run this command to get a full diagnostics: sudo -n python3 /root/claude/agents/server_health_monitor/server_health_agent.py --config /root/claude/agents/server_health_monitor/config.yaml\n\nYour job:\n\nIf input is natural language, generate the correct Linux command\n\nIf input is a command, fix syntax or automation issues\n\nPreserve intent; do not add behavior\n\nRules (headless execution):\n\nNo interactive prompts\n\nNo TTY or pager usage\n\nPrefer non-interactive flags\n\nUse sudo -n when sudo is required\n\nOutput must be stdout-safe\n\nOutput:\n\nReturn only the final command\n\nNo explanations or extra text\n\nExamples:\n\nmount -t nfs 10.42.77.19 /exports/data /mnt/data\n→ mount -t nfs 10.42.77.19:/exports/data /mnt/data\n\nsudo fail2ban-client status\n→ sudo -n fail2ban-client status\n\nHow many docker containers are running?\n→ sudo -n docker ps -q | wc -l"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -16,
+        0
+      ],
+      "id": "a6f8714e-d09d-41a9-bddf-cc069ab938d5",
+      "name": "Sanitize SSH commands",
+      "notes": "Corrects & Optimizes the input command "
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.message }}",
+        "options": {
+          "systemMessage": "you will be given stdout from a SSH terminal \nyou will format the output into a human readable message to be delivered in a slack."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        720,
+        0
+      ],
+      "id": "cc292964-74cb-4c0f-b60c-13000039a412",
+      "name": "Format for Slack Messages"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "builtInTools": {},
+        "options": {
+          "serviceTier": "auto"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        432,
+        240
+      ],
+      "id": "e93bef4a-5b6e-4023-8edd-9567ec479def",
+      "name": "GPT 4.1 Mini",
+      "credentials": {
+        "openAiApi": {
+          "id": "28",
+          "name": "OpenAi (kdessinger)"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -294,7 +339,10 @@
     "timeSavedMode": "fixed",
     "callerPolicy": "workflowsFromSameOwner",
     "executionTimeout": 600,
-    "errorWorkflow": "NtBd2hj1eiR2xufe"
+    "errorWorkflow": "NtBd2hj1eiR2xufe",
+    "saveDataErrorExecution": "all",
+    "saveDataSuccessExecution": "all",
+    "saveExecutionProgress": true
   },
   "shared": [
     {
@@ -306,8 +354,15 @@
     }
   ],
   "staticData": null,
-  "tags": [],
+  "tags": [
+    {
+      "updatedAt": "2025-01-02T19:29:58.822Z",
+      "createdAt": "2025-01-02T19:29:58.822Z",
+      "id": "WXisSD9AUSBjzVTs",
+      "name": "agent"
+    }
+  ],
   "triggerCount": 1,
-  "updatedAt": "2026-01-08T00:55:52.868Z",
-  "versionId": "66364dad-a9d9-493a-911c-d45955407662"
+  "updatedAt": "2026-01-14T01:51:41.259Z",
+  "versionId": "268acc2b-43f1-4c65-bc33-d16983f36ff7"
 }
