@@ -84,7 +84,18 @@
         ]
       ]
     },
-    "GPT 4.1 Mini": {
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Log the transaction",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
       "ai_languageModel": [
         [
           {
@@ -95,17 +106,6 @@
           {
             "node": "Format for Slack Messages",
             "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Send a message": {
-      "main": [
-        [
-          {
-            "node": "Insert row",
-            "type": "main",
             "index": 0
           }
         ]
@@ -162,7 +162,7 @@
       "typeVersion": 1.3,
       "position": [
         432,
-        416
+        464
       ],
       "id": "54d4f770-cf34-4c99-bc98-52a131357c54",
       "name": "Simple Memory"
@@ -221,8 +221,8 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1.1,
       "position": [
-        288,
-        -256
+        208,
+        -240
       ],
       "id": "fd76ff71-c0ae-43d0-a26f-55f19f78c4e3",
       "name": "When Executed by Another Workflow"
@@ -250,8 +250,8 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        496,
-        -256
+        400,
+        -240
       ],
       "id": "26a87377-a774-4641-a486-ff6180fdb61f",
       "name": "Call 'AI Server SSH Commands'"
@@ -322,33 +322,6 @@
     },
     {
       "parameters": {
-        "model": {
-          "__rl": true,
-          "mode": "list",
-          "value": "gpt-4.1-mini"
-        },
-        "builtInTools": {},
-        "options": {
-          "serviceTier": "auto"
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
-      "typeVersion": 1.3,
-      "position": [
-        432,
-        240
-      ],
-      "id": "e93bef4a-5b6e-4023-8edd-9567ec479def",
-      "name": "GPT 4.1 Mini",
-      "credentials": {
-        "openAiApi": {
-          "id": "28",
-          "name": "OpenAi (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {
         "dataTableId": {
           "__rl": true,
           "value": "JbKpxW4w7TVaiGzW",
@@ -363,27 +336,30 @@
             "initiator": "={{ $json.message.user }}",
             "source": "slack",
             "destination": "ai.edvistas.local",
-            "session_key": "={{ $('Slack Trigger').item.json.ts }}",
+            "session_key": "={{ $json.message.ts }}",
             "raw_message": "={{ $('Slack Trigger').item.json.text }}",
             "sanitized_command": "={{ $('Sanitize SSH commands').item.json.output }}",
             "reply_message": "={{ $json.message.blocks[0].elements[0].elements[0].text }}",
-            "status": "={{ $('Execute a command').item.json.code }}"
+            "status": "={{ $('Execute a command').item.json.code }}",
+            "ai_model": "gpt-5-nano",
+            "name": "={{ $json.message.bot_profile.name }}",
+            "Type": "={{ $('Slack Trigger').item.json.type }}"
           },
           "matchingColumns": [],
           "schema": [
             {
-              "id": "timestamp",
-              "displayName": "timestamp",
+              "id": "initiator",
+              "displayName": "initiator",
               "required": false,
               "defaultMatch": false,
               "display": true,
-              "type": "dateTime",
+              "type": "string",
               "readOnly": false,
-              "removed": true
+              "removed": false
             },
             {
-              "id": "initiator",
-              "displayName": "initiator",
+              "id": "name",
+              "displayName": "name",
               "required": false,
               "defaultMatch": false,
               "display": true,
@@ -404,6 +380,16 @@
             {
               "id": "source",
               "displayName": "source",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Type",
+              "displayName": "Type",
               "required": false,
               "defaultMatch": false,
               "display": true,
@@ -490,14 +476,128 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        1200,
+        1232,
         0
       ],
       "id": "9c422a76-e2f7-4b52-9a3d-9ac6de680323",
-      "name": "Insert row"
+      "name": "Log the transaction"
+    },
+    {
+      "parameters": {
+        "model": "anthropic/claude-3.5-sonnet",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        432,
+        256
+      ],
+      "id": "778a9d73-6fa6-43cd-b6f7-220d61a9482a",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "HrzA1BkUMujOHcqS",
+          "name": "OpenRouter (kdessinger sub)"
+        }
+      }
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Send a message": [
+      {
+        "json": {
+          "ok": true,
+          "channel": "C085Y4ELXDX",
+          "message": {
+            "user": "U08T0BZ7249",
+            "type": "message",
+            "ts": "1768437528.126359",
+            "bot_id": "B08T0BZ5AGH",
+            "app_id": "A08S6UTJDMM",
+            "text": "The ping test to dc2.edvistas.local was successful with no packet loss.\n\nSummary:\n- Address: 192.168.148.11\n- 4 packets transmitted, 4 received\n- 0% packet loss\n- Round-trip times:\n  - Min: 0.760 ms\n  - Avg: 0.890 ms\n  - Max: 1.062 ms\n  - Mdev: 0.117 ms\n\nThe connection appears to be stable and responsive.",
+            "team": "T07HHEZBT8Q",
+            "bot_profile": {
+              "id": "B08T0BZ5AGH",
+              "app_id": "A08S6UTJDMM",
+              "user_id": "U08T0BZ7249",
+              "name": "Eddie Vistas",
+              "icons": {
+                "image_36": "https://avatars.slack-edge.com/2025-05-15/8907344626834_0a300460e2b4913a78ce_36.jpg",
+                "image_48": "https://avatars.slack-edge.com/2025-05-15/8907344626834_0a300460e2b4913a78ce_48.jpg",
+                "image_72": "https://avatars.slack-edge.com/2025-05-15/8907344626834_0a300460e2b4913a78ce_72.jpg"
+              },
+              "deleted": false,
+              "updated": 1747428469,
+              "team_id": "T07HHEZBT8Q"
+            },
+            "blocks": [
+              {
+                "type": "rich_text",
+                "block_id": "2LS",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "type": "text",
+                        "text": "The ping test to dc2.edvistas.local was successful with no packet loss.\n\nSummary:\n- Address: 192.168.148.11\n- 4 packets transmitted, 4 received\n- 0% packet loss\n- Round-trip times:\n  - Min: 0.760 ms\n  - Avg: 0.890 ms\n  - Max: 1.062 ms\n  - Mdev: 0.117 ms\n\nThe connection appears to be stable and responsive."
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "message_timestamp": "1768437528.126359"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "Slack Trigger": [
+      {
+        "json": {
+          "type": "app_mention",
+          "user": "U07GUJ2MU4T",
+          "ts": "1768437513.683419",
+          "client_msg_id": "f7c5da87-3523-482d-b50b-d583ef98f842",
+          "text": "<@U08T0BZ7249> please ping dc2.edvistas.local",
+          "team": "T07HHEZBT8Q",
+          "blocks": [
+            {
+              "type": "rich_text",
+              "block_id": "lEnbI",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "type": "user",
+                      "user_id": "U08T0BZ7249"
+                    },
+                    {
+                      "type": "text",
+                      "text": " please ping dc2.edvistas.local"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "channel": "C085Y4ELXDX",
+          "assistant_thread": {
+            "action_token": "10297855034630.7595509401296.e0832e73251991465428af118db62518"
+          },
+          "event_ts": "1768437513.683419"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1",
     "availableInMCP": false,
@@ -528,6 +628,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2026-01-14T15:45:21.829Z",
-  "versionId": "b0ec2a50-56a8-4373-bf0d-14fd4aa7853b"
+  "updatedAt": "2026-01-15T00:55:32.342Z",
+  "versionId": "ba5480a1-1d78-4b5a-a458-f67efbb70c43"
 }
