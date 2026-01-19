@@ -1,0 +1,449 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "Airtable Trigger": {
+      "main": [
+        [
+          {
+            "node": "Sales Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Sales Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Revision Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Project Database": {
+      "ai_tool": [
+        [
+          {
+            "node": "Sales Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Sales Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          },
+          {
+            "node": "Revision Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sales Agent": {
+      "main": [
+        [
+          {
+            "node": "Set Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Revision Agent": {
+      "main": [
+        [
+          {
+            "node": "Set Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Email": {
+      "main": [
+        [
+          {
+            "node": "Get Feedback",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Feedback": {
+      "main": [
+        [
+          {
+            "node": "Check Feedback",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Feedback": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Revision Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Check Feedback",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-01-18T22:32:51.378Z",
+  "id": "DdV80OMp24PRUX4C6Y2om",
+  "isArchived": false,
+  "meta": null,
+  "name": "Sales Team - HITL",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "baseId": {
+          "__rl": true,
+          "value": "",
+          "mode": "id"
+        },
+        "tableId": {
+          "__rl": true,
+          "value": "",
+          "mode": "id"
+        },
+        "triggerField": "Created",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.airtableTrigger",
+      "typeVersion": 1,
+      "position": [
+        -208,
+        208
+      ],
+      "id": "b4a0bcee-b5d9-4310-91ba-0cda1ddbe2e7",
+      "name": "Airtable Trigger",
+      "credentials": {
+        "airtableApi": {
+          "id": "35",
+          "name": "Airtable (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.2,
+      "position": [
+        512,
+        528
+      ],
+      "id": "b5309da0-3f3e-46bd-9617-eb8739013cd2",
+      "name": "Anthropic Chat Model",
+      "credentials": {
+        "anthropicApi": {
+          "id": "MNeRQGU2GKUSizau",
+          "name": "Anthropic (kdessinger)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "table": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtableTool",
+      "typeVersion": 2.1,
+      "position": [
+        80,
+        528
+      ],
+      "id": "de588bad-6487-4523-844f-9dc6ef723b0f",
+      "name": "Project Database"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Incoming Lead\n\nName: {{ $json.fields.name }}\n\nEmail: {{ $json.fields.email }}\n\nIntent: {{ $json.fields.intent }}\n\nBudget: {{ $json.fields.budget }}\n\nCompany Name: {{ $json.fields.companyName }}\n\nProject Description: {{ $json.fields.projectDescription }} \n\nTimeline: {{ $json.fields.timeline }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=## Overview\nYou are a senior sales representative for **Educational Vistas, Inc.**, a technology company that designs, builds, and supports **data-driven software platforms** for education, government, elections, and assisted living organizations.\n\nYou monitor the **sales@edvistas.com** inbox and respond to incoming leads in a professional, concise, and confident manner. Your objective is to:\n- Understand the lead’s needs\n- Clearly explain how Educational Vistas can help\n- Move the conversation toward a follow-up call or meeting\n\nWrite as a **human sales professional**, never as an AI or chatbot.\n\n---\n\n## Company & Platform Context\nEducational Vistas specializes in secure, compliance-focused software and long-term partnerships. Core offerings include:\n\n- **SurVate®** – Survey and feedback platform (K–12, assisted living, government, compliance-driven surveys)\n- **DataMate®** – Secure reporting, analytics, and data visualization\n- **StaffTrac® / Workforce Tracking** – Staff activity, compliance, and operational tracking\n- **Election & Assessment Systems** – Secure, high-availability scoring and reporting systems\n- **Custom Software Development** – Tailored web, API, database, automation, and AI-assisted solutions\n- **Hosting, Support, and Managed Services** – Reliable, long-term infrastructure and support\n\nReference platforms **only when relevant** to the lead’s stated needs.\n\n---\n\n## Tools\n**Project / Client Database**\n- Search prior Educational Vistas projects when helpful\n- Reference similar use cases or organizations at a high level\n- Emphasize outcomes: reliability, compliance, scale, and longevity\n\n---\n\n## Rules\n- Treat every message as a real prospective client evaluating vendors\n- Keep responses concise and focused\n- Address the lead’s specific problem, timeline, or constraints\n- Do not over-promise features or timelines\n- Do not invent products or capabilities\n- Ask at most **1–2 targeted follow-up questions**\n- Primary goal: secure a follow-up conversation\n\n---\n\n## Tone & Style\n- Professional, calm, and direct\n- Consultative, not salesy\n- Minimal marketing language\n- Clear structure, short paragraphs\n- Avoid redundancy and unnecessary detail\n\n---\n\n## Closing & Signature\nEnd with a clear next step (call, meeting, or clarification) and sign as:\n\n**Eddie Vistas**  \nSales | Educational Vistas, Inc.\n\n---\n\n## Temporal Context\nCurrent workflow execution time: **{{ $now }}**\n\n---\n\n## Operational Notes\n- Workflow ID: **DdV80OMp24PRUX4C6Y2om**\n- Inbox is monitored continuously\n- Human review and approval may occur before sending\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        -16,
+        208
+      ],
+      "id": "1473b62b-a010-4775-8962-111c66d090ff",
+      "name": "Sales Agent"
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"subject\": {\n      \"type\": \"string\",\n      \"description\": \"The subject line of the email\"\n    },\n    \"email\": {\n      \"type\": \"string\",\n      \"description\": \"The body content of the email\"\n    }\n  },\n  \"required\": [\"subject\", \"email\"]\n}\n"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        848,
+        528
+      ],
+      "id": "230b8ae3-7ee0-49f4-a714-afe1b1d20296",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Airtable Trigger').item.json.fields.email }}",
+        "subject": "={{ $('Sales Agent').item.json.output.subject }}",
+        "emailType": "text",
+        "message": "={{ $('Set Email').item.json.email }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1072,
+        96
+      ],
+      "id": "9ed530ac-9391-45c3-907b-425a20c2e980",
+      "name": "Send Email",
+      "webhookId": "9ae2a2f2-de7c-46a1-93f7-8b2612d40751",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "cRBJFJPxOYiwcDx0",
+          "name": "Gmail (infoedvistas@gmail.com)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Email: {{ $('Set Email').item.json.email }}\n\nFeedback from human: {{ $json.data.text }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=# Educational Vistas – Sales Email Revision Agent\n\n## Overview\nYou are a senior email revision specialist for **Educational Vistas, Inc.**\n\nYou receive:\n1. A draft sales email previously written by the Sales Agent  \n2. Explicit feedback from a human reviewer\n\nYour task is to **revise the email strictly according to the human’s feedback**, while preserving:\n- The original intent\n- The professional tone\n- The Educational Vistas voice\n\nDo **not** re-qualify the lead or change strategy unless the feedback explicitly instructs you to do so.\n\n---\n\n## Primary Responsibilities\n- Apply the human feedback accurately and completely\n- Improve clarity, tone, and professionalism where requested\n- Preserve factual accuracy and approved claims\n- Keep the email concise and readable\n- Ensure the email is ready for final approval or sending\n\n---\n\n## Hard Rules\n- **Do not ignore or reinterpret feedback**\n- **Do not add new products, capabilities, or promises**\n- **Do not invent technical details or timelines**\n- **Do not change intent unless explicitly told**\n- **Do not explain your changes**\n- Output **only the revised email body**\n\nIf feedback is unclear or contradictory, make the **smallest reasonable correction** without adding assumptions.\n\n---\n\n## Tone & Style\n- Professional and human\n- Calm, confident, and direct\n- No marketing fluff\n- No buzzwords unless already present\n- Short paragraphs preferred\n- Optimized for real inbox reading\n\n---\n\n## Closing & Signature\nEnd with a clear next step (call, meeting, or clarification) and sign as:\n\n**Eddie Vistas**  \nSales | Educational Vistas, Inc.\n\n---\n\n## Temporal Context\nCurrent workflow execution time: **{{ $now }}**\n\n---\n\n## Operational Notes\n- Runs only after human review\n- Revises content; does not make approval decisions\n- Output must be immediately suitable for re-review or sending\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        1072,
+        272
+      ],
+      "id": "e9fd0437-0180-4e67-8d9c-95a877895646",
+      "name": "Revision Agent"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3800e373-5f7a-4642-8392-d3a4aed9e067",
+              "name": "email",
+              "value": "={{ $json.output.email }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        336,
+        208
+      ],
+      "id": "b9bfc5d2-187f-41c4-a103-4a6df59ce4a6",
+      "name": "Set Email"
+    },
+    {
+      "parameters": {
+        "operation": "sendAndWait",
+        "sendTo": "kdessinger@edvistas.com",
+        "subject": "=APPROVAL REQUIRED for New Lead: {{ $('Airtable Trigger').item.json.fields.name }}",
+        "message": "={{ $('Airtable Trigger').item.json.fields.name }} from {{ $('Airtable Trigger').item.json.fields.companyName }} is looking for {{ $('Airtable Trigger').item.json.fields.intent }}. Their budget is {{ $('Airtable Trigger').item.json.fields.budget }} with a(n) {{ $('Airtable Trigger').item.json.fields.timeline }} timeline.\n\n\nPlease approve or decline the sending of this message generated by Jim, our AI Sales Agent.\n\nSubject: {{ $('Sales Agent').item.json.output.subject }}\n\nEmail: {{ $json.email }}",
+        "responseType": "freeText",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        528,
+        208
+      ],
+      "id": "529a618a-d719-4404-92bd-f6257ee8dd5d",
+      "name": "Get Feedback",
+      "webhookId": "10605e1c-7bc0-4a9f-b23a-9797cc88449e",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "cRBJFJPxOYiwcDx0",
+          "name": "Gmail (infoedvistas@gmail.com)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "inputText": "={{ $json.data.text }}",
+        "categories": {
+          "categories": [
+            {
+              "category": "Approved",
+              "description": "The email has been reviewed and accepted as-is. The human explicitly or implicitly expresses approval, indicating that no changes are needed. \n\nExample phrases include:\n\n\"Looks good.\"\n\"Go ahead and send it.\"\n\"This works for me.\"\n\"Approved.\"\n\"No changes needed.\""
+            },
+            {
+              "category": "Declined",
+              "description": "The email has been reviewed, but the human requests modifications before it is sent like tweaks, removing parts, rewording, etc. This could include suggested edits, rewording, or major revisions. \n\nExample phrases include:\n\n\"Can we tweak this part?\"\n\"Needs some changes.\"\n\"I’d like to reword this.\"\n\"Not quite right—let’s revise it.\"\n\"Can you adjust this before sending?\"\n\"Don't mention that we can't do that\""
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textClassifier",
+      "typeVersion": 1,
+      "position": [
+        688,
+        208
+      ],
+      "id": "234084af-10f2-48b7-ad22-1e44048fb2a1",
+      "name": "Check Feedback"
+    },
+    {
+      "parameters": {
+        "content": "# Human In The Loop Sales Team That Waits for Feedback and Approval",
+        "height": 80,
+        "width": 1204,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        -176
+      ],
+      "typeVersion": 1,
+      "id": "3ec53eb4-573e-4a83-86c0-4a08ff26af8e",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "# Human In The Loop Sales Team\n## The agents wait for feedback and approval - unlimited email revisions\n\nThe process is simple:\n1️⃣ The Sales Agent generates a personalized email.\n2️⃣ A human reviews and provides feedback.\n3️⃣ The Revision Agent makes adjustments based on the feedback.\n4️⃣ This loop continues until the email is approved and ready to send.\n\nThis system ensures that AI-generated emails meet your standards before being sent—giving you both automation and control.\nWatch Video to see it in action --> (https://youtu.be/FcAAlOw6KZ8)",
+        "height": 788,
+        "width": 1760,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -304,
+        -96
+      ],
+      "typeVersion": 1,
+      "id": "f33c5a4a-b2fb-405c-b4a1-da643d2e13db",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "model": "google/gemini-2.0-flash-exp:free",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        688,
+        528
+      ],
+      "id": "d9326d00-81cb-4e4e-bbb8-b01c6463e343",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "szKaHHo2TRgX3S0G",
+          "name": "OpenRouter (kdessinger@edvistas.com)"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-01-18T22:32:51.389Z",
+      "createdAt": "2026-01-18T22:32:51.389Z",
+      "role": "workflow:owner",
+      "workflowId": "DdV80OMp24PRUX4C6Y2om",
+      "projectId": "3dtat9rk4vrp7A9f"
+    }
+  ],
+  "staticData": null,
+  "tags": [
+    {
+      "updatedAt": "2026-01-18T22:31:07.701Z",
+      "createdAt": "2026-01-18T22:31:07.701Z",
+      "id": "naNfuNkDA1uW7vTj",
+      "name": "sales"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2026-01-18T23:20:32.247Z",
+  "versionId": "e68ba51b-ff2c-4f34-a5ba-78c88574b723"
+}
