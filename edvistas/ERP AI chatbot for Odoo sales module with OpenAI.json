@@ -183,8 +183,8 @@
       "name": "Window Buffer Memory",
       "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
       "position": [
-        1540,
-        1100
+        1552,
+        1104
       ],
       "typeVersion": 1.2
     },
@@ -196,8 +196,8 @@
       "name": "OpenAI Chat Model",
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "position": [
-        1420,
-        1100
+        1424,
+        1104
       ],
       "typeVersion": 1,
       "credentials": {
@@ -213,8 +213,8 @@
       "name": "Calculator",
       "type": "@n8n/n8n-nodes-langchain.toolCalculator",
       "position": [
-        1660,
-        1100
+        1664,
+        1104
       ],
       "typeVersion": 1
     },
@@ -231,7 +231,7 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "position": [
         400,
-        580
+        592
       ],
       "typeVersion": 1.2
     },
@@ -245,8 +245,8 @@
       "name": "Convert to File",
       "type": "n8n-nodes-base.convertToFile",
       "position": [
-        1660,
-        580
+        1664,
+        592
       ],
       "typeVersion": 1.1
     },
@@ -262,8 +262,8 @@
       "name": "Save Summary to File",
       "type": "n8n-nodes-base.readWriteFile",
       "position": [
-        1880,
-        580
+        1888,
+        592
       ],
       "typeVersion": 1
     },
@@ -290,7 +290,7 @@
       "type": "n8n-nodes-base.odoo",
       "position": [
         640,
-        580
+        592
       ],
       "typeVersion": 1,
       "credentials": {
@@ -310,7 +310,7 @@
       "type": "n8n-nodes-base.readWriteFile",
       "position": [
         720,
-        940
+        944
       ],
       "typeVersion": 1,
       "alwaysOutputData": false
@@ -343,8 +343,8 @@
       "name": "If Summary Exists",
       "type": "n8n-nodes-base.if",
       "position": [
-        940,
-        940
+        944,
+        944
       ],
       "typeVersion": 2
     },
@@ -358,7 +358,7 @@
       "type": "n8n-nodes-base.aggregate",
       "position": [
         880,
-        580
+        592
       ],
       "typeVersion": 1
     },
@@ -372,7 +372,7 @@
       "type": "n8n-nodes-base.extractFromFile",
       "position": [
         1200,
-        920
+        928
       ],
       "typeVersion": 1
     },
@@ -389,8 +389,8 @@
       "name": "AI Conversational Agent",
       "type": "@n8n/n8n-nodes-langchain.agent",
       "position": [
-        1420,
-        920
+        1424,
+        928
       ],
       "typeVersion": 1.6
     },
@@ -410,7 +410,7 @@
       "type": "@n8n/n8n-nodes-langchain.chainSummarization",
       "position": [
         1200,
-        460
+        464
       ],
       "typeVersion": 2
     },
@@ -428,8 +428,8 @@
       "name": "OpenAI Summarization Model",
       "type": "@n8n/n8n-nodes-langchain.lmOpenAi",
       "position": [
-        1180,
-        620
+        1184,
+        624
       ],
       "typeVersion": 1,
       "credentials": {
@@ -449,7 +449,7 @@
       "name": "Sticky Note",
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        380,
+        384,
         240
       ],
       "typeVersion": 1
@@ -464,7 +464,7 @@
       "type": "@n8n/n8n-nodes-langchain.chatTrigger",
       "position": [
         400,
-        940
+        944
       ],
       "webhookId": "09eea368-b78f-4209-9750-f28b706363c2",
       "typeVersion": 1
@@ -486,8 +486,15 @@
       "recurrenceRules": []
     }
   },
-  "tags": [],
+  "tags": [
+    {
+      "updatedAt": "2026-01-18T22:31:07.701Z",
+      "createdAt": "2026-01-18T22:31:07.701Z",
+      "id": "naNfuNkDA1uW7vTj",
+      "name": "sales"
+    }
+  ],
   "triggerCount": 3,
-  "updatedAt": "2024-10-10T13:46:53.000Z",
-  "versionId": "2ce2fc59-909f-4683-bdb6-16c3a4d9e84b"
+  "updatedAt": "2026-01-18T22:31:09.809Z",
+  "versionId": "fe04d8c2-1bd4-45ef-ac6f-859e0aab98ec"
 }
