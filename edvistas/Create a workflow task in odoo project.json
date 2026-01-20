@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2025-11-26T05:18:06.453Z",
-    "createdAt": "2025-11-26T05:18:06.453Z",
-    "versionId": "67467ed3-878c-4d5d-9374-6df626ad0691",
+    "updatedAt": "2026-01-19T20:16:02.000Z",
+    "createdAt": "2026-01-19T20:15:16.998Z",
+    "versionId": "51d7e0cd-318c-4420-9a85-9c989187f08d",
     "workflowId": "ZxOEXvR9jXn5gA5Q",
     "nodes": [
       {
@@ -75,8 +75,7 @@
               },
               {
                 "fieldLabel": "Workflow ID",
-                "placeholder": "i.e  ZxOEXvR9jXn5gA5Q/75ba1d",
-                "requiredField": "=i.e. {{ $workflow.id }}"
+                "placeholder": "i.e  ZxOEXvR9jXn5gA5Q/75ba1d"
               }
             ]
           },
@@ -285,12 +284,12 @@
         ]
       }
     },
-    "authors": "system migration",
-    "name": null,
-    "description": null,
+    "authors": "Super Admin",
+    "name": "Version 51d7e0cd",
+    "description": "",
     "autosaved": false
   },
-  "activeVersionId": "67467ed3-878c-4d5d-9374-6df626ad0691",
+  "activeVersionId": "51d7e0cd-318c-4420-9a85-9c989187f08d",
   "connections": {
     "OpenAI Chat Model": {
       "ai_languageModel": [
@@ -414,8 +413,7 @@
             },
             {
               "fieldLabel": "Workflow ID",
-              "placeholder": "i.e  ZxOEXvR9jXn5gA5Q/75ba1d",
-              "requiredField": "=i.e. {{ $workflow.id }}"
+              "placeholder": "i.e  ZxOEXvR9jXn5gA5Q/75ba1d"
             }
           ]
         },
@@ -643,18 +641,6 @@
           "color": 8
         }
       }
-    ],
-    "On form submission": [
-      {
-        "json": {
-          "Title": "Extract FAQ's from HelpDesk Tickets",
-          "Department": "IT",
-          "Description": "This workflow will review helpdesk tickets and then extract Questions and Answers which will then be inserted into our knowledgebase.",
-          "Workflow ID": "ZxOEXvR9jXn5gA5Q",
-          "submittedAt": "2025-10-20T18:20:58.430-04:00",
-          "formMode": "test"
-        }
-      }
     ]
   },
   "settings": {
@@ -682,6 +668,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-11-23T21:19:32.000Z",
-  "versionId": "67467ed3-878c-4d5d-9374-6df626ad0691"
+  "updatedAt": "2026-01-19T20:15:58.023Z",
+  "versionId": "51d7e0cd-318c-4420-9a85-9c989187f08d"
 }
