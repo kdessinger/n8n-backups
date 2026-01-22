@@ -1,0 +1,356 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-01-21T22:55:23.000Z",
+    "createdAt": "2026-01-21T22:53:20.498Z",
+    "versionId": "210ac376-1fc5-49ec-b314-8190295e0a73",
+    "workflowId": "G6YoXLhZCfQ7HPFhRGfS0",
+    "nodes": [
+      {
+        "parameters": {
+          "formTitle": "Create a Support Ticket",
+          "formDescription": "Enter in the information below to create a helpdesk ticket in Odoo.",
+          "formFields": {
+            "values": [
+              {
+                "fieldLabel": "ticket_Type",
+                "fieldType": "dropdown",
+                "fieldOptions": {
+                  "values": [
+                    {
+                      "option": "Bug"
+                    },
+                    {
+                      "option": "Feature Request"
+                    },
+                    {
+                      "option": "Feedback"
+                    },
+                    {
+                      "option": "Incident"
+                    },
+                    {
+                      "option": "Question"
+                    },
+                    {
+                      "option": "Support"
+                    },
+                    {
+                      "option": "Other"
+                    }
+                  ]
+                }
+              },
+              {
+                "fieldLabel": "priority",
+                "fieldType": "dropdown",
+                "fieldOptions": {
+                  "values": [
+                    {
+                      "option": "Low"
+                    },
+                    {
+                      "option": "Normal"
+                    },
+                    {
+                      "option": "High"
+                    },
+                    {
+                      "option": "Urgent"
+                    }
+                  ]
+                }
+              },
+              {
+                "fieldLabel": "Subject"
+              },
+              {
+                "fieldLabel": "name",
+                "placeholder": "Full Name",
+                "requiredField": true
+              },
+              {
+                "fieldLabel": "email",
+                "fieldType": "email",
+                "placeholder": "someone@domain.com",
+                "requiredField": true
+              },
+              {
+                "fieldLabel": "phone",
+                "placeholder": "(518) 344-7022"
+              },
+              {
+                "fieldLabel": "distid",
+                "fieldType": "number",
+                "placeholder": "21"
+              },
+              {
+                "fieldLabel": "district",
+                "placeholder": "Appleville School District"
+              },
+              {
+                "fieldLabel": "product",
+                "fieldType": "dropdown",
+                "fieldOptions": {
+                  "values": [
+                    {
+                      "option": "Aims"
+                    },
+                    {
+                      "option": "CD"
+                    },
+                    {
+                      "option": "DataMate"
+                    },
+                    {
+                      "option": "DataSync"
+                    },
+                    {
+                      "option": "EduForm"
+                    },
+                    {
+                      "option": "EduView"
+                    },
+                    {
+                      "option": "MTSS"
+                    },
+                    {
+                      "option": "Portfolio(+)"
+                    },
+                    {
+                      "option": "Scoring"
+                    },
+                    {
+                      "option": "SafeSchools"
+                    },
+                    {
+                      "option": "SELS"
+                    },
+                    {
+                      "option": "StaffTrac"
+                    },
+                    {
+                      "option": "Report(+)"
+                    }
+                  ]
+                }
+              },
+              {
+                "fieldLabel": "comments",
+                "fieldType": "textarea",
+                "placeholder": "Please explain the need for a support ticket",
+                "requiredField": true
+              }
+            ]
+          },
+          "options": {
+            "appendAttribution": false,
+            "buttonLabel": "Submit",
+            "path": "",
+            "ignoreBots": true,
+            "useWorkflowTimezone": false,
+            "customCss": ":root {\n\t--font-family: 'Open Sans', sans-serif;\n\t--font-weight-normal: 400;\n\t--font-weight-bold: 600;\n\t--font-size-body: 12px;\n\t--font-size-label: 14px;\n\t--font-size-test-notice: 12px;\n\t--font-size-input: 14px;\n\t--font-size-header: 20px;\n\t--font-size-paragraph: 14px;\n\t--font-size-link: 12px;\n\t--font-size-error: 12px;\n\t--font-size-html-h1: 28px;\n\t--font-size-html-h2: 20px;\n\t--font-size-html-h3: 16px;\n\t--font-size-html-h4: 14px;\n\t--font-size-html-h5: 12px;\n\t--font-size-html-h6: 10px;\n\t--font-size-subheader: 14px;\n\n\t/* Colors */\n\t--color-background: #fbfcfe;\n\t--color-test-notice-text: #e6a23d;\n\t--color-test-notice-bg: #fefaf6;\n\t--color-test-notice-border: #f6dcb7;\n\t--color-card-bg: #ffffff;\n\t--color-card-border: #dbdfe7;\n\t--color-card-shadow: rgba(99, 77, 255, 0.06);\n\t--color-link: #7e8186;\n\t--color-header: #525356;\n\t--color-label: #555555;\n\t--color-input-border: #dbdfe7;\n\t--color-input-text: #71747A;\n\t--color-focus-border: rgb(90, 76, 194);\n\t--color-submit-btn-bg: #ff6d5a;\n\t--color-submit-btn-text: #ffffff;\n\t--color-error: #ea1f30;\n\t--color-required: #ff6d5a;\n\t--color-clear-button-bg: #7e8186;\n\t--color-html-text: #555;\n\t--color-html-link: #ff6d5a;\n\t--color-header-subtext: #7e8186;\n\n\t/* Border Radii */\n\t--border-radius-card: 8px;\n\t--border-radius-input: 6px;\n\t--border-radius-clear-btn: 50%;\n\t--card-border-radius: 8px;\n\n\t/* Spacing */\n\t--padding-container-top: 24px;\n\t--padding-card: 24px;\n\t--padding-test-notice-vertical: 12px;\n\t--padding-test-notice-horizontal: 24px;\n\t--margin-bottom-card: 16px;\n\t--padding-form-input: 12px;\n\t--card-padding: 24px;\n\t--card-margin-bottom: 16px;\n\n\t/* Dimensions */\n\t--container-width: 448px;\n\t--submit-btn-height: 48px;\n\t--checkbox-size: 18px;\n\n\t/* Others */\n\t--box-shadow-card: 0px 4px 16px 0px var(--color-card-shadow);\n\t--opacity-placeholder: 0.5;\n}"
+          }
+        },
+        "type": "n8n-nodes-base.formTrigger",
+        "typeVersion": 2.5,
+        "position": [
+          -80,
+          -48
+        ],
+        "id": "6bc716f2-a981-4f18-ba48-1692f38ec94b",
+        "name": "On form submission",
+        "webhookId": "adb5b150-6c77-47c3-870c-f9f491184d17"
+      }
+    ],
+    "connections": {},
+    "authors": "Super Admin",
+    "name": "Version 210ac376",
+    "description": "",
+    "autosaved": true
+  },
+  "activeVersionId": "210ac376-1fc5-49ec-b314-8190295e0a73",
+  "connections": {},
+  "createdAt": "2026-01-21T22:31:00.645Z",
+  "id": "G6YoXLhZCfQ7HPFhRGfS0",
+  "isArchived": false,
+  "meta": null,
+  "name": "Submit Helpdesk Ticket",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Create a Support Ticket",
+        "formDescription": "Enter in the information below to create a helpdesk ticket in Odoo.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "ticket_Type",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Bug"
+                  },
+                  {
+                    "option": "Feature Request"
+                  },
+                  {
+                    "option": "Feedback"
+                  },
+                  {
+                    "option": "Incident"
+                  },
+                  {
+                    "option": "Question"
+                  },
+                  {
+                    "option": "Support"
+                  },
+                  {
+                    "option": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "priority",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Low"
+                  },
+                  {
+                    "option": "Normal"
+                  },
+                  {
+                    "option": "High"
+                  },
+                  {
+                    "option": "Urgent"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Subject"
+            },
+            {
+              "fieldLabel": "name",
+              "placeholder": "Full Name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "email",
+              "fieldType": "email",
+              "placeholder": "someone@domain.com",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "phone",
+              "placeholder": "(518) 344-7022"
+            },
+            {
+              "fieldLabel": "distid",
+              "fieldType": "number",
+              "placeholder": "21"
+            },
+            {
+              "fieldLabel": "district",
+              "placeholder": "Appleville School District"
+            },
+            {
+              "fieldLabel": "product",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Aims"
+                  },
+                  {
+                    "option": "CD"
+                  },
+                  {
+                    "option": "DataMate"
+                  },
+                  {
+                    "option": "DataSync"
+                  },
+                  {
+                    "option": "EduForm"
+                  },
+                  {
+                    "option": "EduView"
+                  },
+                  {
+                    "option": "MTSS"
+                  },
+                  {
+                    "option": "Portfolio(+)"
+                  },
+                  {
+                    "option": "Scoring"
+                  },
+                  {
+                    "option": "SafeSchools"
+                  },
+                  {
+                    "option": "SELS"
+                  },
+                  {
+                    "option": "StaffTrac"
+                  },
+                  {
+                    "option": "Report(+)"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "comments",
+              "fieldType": "textarea",
+              "placeholder": "Please explain the need for a support ticket",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "appendAttribution": false,
+          "buttonLabel": "Submit",
+          "path": "",
+          "ignoreBots": true,
+          "useWorkflowTimezone": false,
+          "customCss": ":root {\n\t--font-family: 'Open Sans', sans-serif;\n\t--font-weight-normal: 400;\n\t--font-weight-bold: 600;\n\t--font-size-body: 12px;\n\t--font-size-label: 14px;\n\t--font-size-test-notice: 12px;\n\t--font-size-input: 14px;\n\t--font-size-header: 20px;\n\t--font-size-paragraph: 14px;\n\t--font-size-link: 12px;\n\t--font-size-error: 12px;\n\t--font-size-html-h1: 28px;\n\t--font-size-html-h2: 20px;\n\t--font-size-html-h3: 16px;\n\t--font-size-html-h4: 14px;\n\t--font-size-html-h5: 12px;\n\t--font-size-html-h6: 10px;\n\t--font-size-subheader: 14px;\n\n\t/* Colors */\n\t--color-background: #fbfcfe;\n\t--color-test-notice-text: #e6a23d;\n\t--color-test-notice-bg: #fefaf6;\n\t--color-test-notice-border: #f6dcb7;\n\t--color-card-bg: #ffffff;\n\t--color-card-border: #dbdfe7;\n\t--color-card-shadow: rgba(99, 77, 255, 0.06);\n\t--color-link: #7e8186;\n\t--color-header: #525356;\n\t--color-label: #555555;\n\t--color-input-border: #dbdfe7;\n\t--color-input-text: #71747A;\n\t--color-focus-border: rgb(90, 76, 194);\n\t--color-submit-btn-bg: #ff6d5a;\n\t--color-submit-btn-text: #ffffff;\n\t--color-error: #ea1f30;\n\t--color-required: #ff6d5a;\n\t--color-clear-button-bg: #7e8186;\n\t--color-html-text: #555;\n\t--color-html-link: #ff6d5a;\n\t--color-header-subtext: #7e8186;\n\n\t/* Border Radii */\n\t--border-radius-card: 8px;\n\t--border-radius-input: 6px;\n\t--border-radius-clear-btn: 50%;\n\t--card-border-radius: 8px;\n\n\t/* Spacing */\n\t--padding-container-top: 24px;\n\t--padding-card: 24px;\n\t--padding-test-notice-vertical: 12px;\n\t--padding-test-notice-horizontal: 24px;\n\t--margin-bottom-card: 16px;\n\t--padding-form-input: 12px;\n\t--card-padding: 24px;\n\t--card-margin-bottom: 16px;\n\n\t/* Dimensions */\n\t--container-width: 448px;\n\t--submit-btn-height: 48px;\n\t--checkbox-size: 18px;\n\n\t/* Others */\n\t--box-shadow-card: 0px 4px 16px 0px var(--color-card-shadow);\n\t--opacity-placeholder: 0.5;\n}"
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        -80,
+        -48
+      ],
+      "id": "6bc716f2-a981-4f18-ba48-1692f38ec94b",
+      "name": "On form submission",
+      "webhookId": "adb5b150-6c77-47c3-870c-f9f491184d17"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-01-21T22:31:00.652Z",
+      "createdAt": "2026-01-21T22:31:00.652Z",
+      "role": "workflow:owner",
+      "workflowId": "G6YoXLhZCfQ7HPFhRGfS0",
+      "projectId": "3dtat9rk4vrp7A9f"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-01-21T22:53:20.497Z",
+  "versionId": "210ac376-1fc5-49ec-b314-8190295e0a73"
+}
