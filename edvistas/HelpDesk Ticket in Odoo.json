@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2025-11-26T05:18:06.453Z",
-    "createdAt": "2025-11-26T05:18:06.453Z",
-    "versionId": "e2cf3872-fcde-4df5-b28d-6d56b9df3a5c",
+    "updatedAt": "2026-01-21T22:19:09.000Z",
+    "createdAt": "2026-01-21T22:18:28.059Z",
+    "versionId": "8677878b-5824-4283-92fc-8f48c7e4f63f",
     "workflowId": "Nfk7xf2YiAPvmFO2",
     "nodes": [
       {
@@ -353,12 +353,12 @@
         "parameters": {
           "content": "## Incomming Request from EduForm.\nSources\n* EduForm #9188\n\n\n\n\n\n\n\n\n\n\n\n\n\nhttps://n8n.edvistas.com/webhook/b93068fb-77db-4332-8b20-94b6dca12940",
           "height": 360,
-          "width": 360,
+          "width": 376,
           "color": 6
         },
         "type": "n8n-nodes-base.stickyNote",
         "position": [
-          -976,
+          -992,
           -464
         ],
         "typeVersion": 1,
@@ -506,12 +506,12 @@
         "parameters": {
           "content": "## Incomming Request from webhook.\nSources\n* EVI Applications\n* Website \n\n\n\n\n\n\n\n\n\n\n\n\n\nhttps://n8n.edvistas.com/webhook/odoo/helpdesk",
           "height": 360,
-          "width": 360,
+          "width": 376,
           "color": 6
         },
         "type": "n8n-nodes-base.stickyNote",
         "position": [
-          -976,
+          -992,
           -80
         ],
         "typeVersion": 1,
@@ -863,189 +863,19 @@
       },
       {
         "parameters": {
-          "formTitle": "Create a Support Ticket",
-          "formDescription": "Enter in the information below to create a helpdesk ticket in Odoo.",
-          "formFields": {
-            "values": [
-              {
-                "fieldLabel": "ticket_Type",
-                "fieldType": "dropdown",
-                "fieldOptions": {
-                  "values": [
-                    {
-                      "option": "Bug"
-                    },
-                    {
-                      "option": "Feature Request"
-                    },
-                    {
-                      "option": "Feedback"
-                    },
-                    {
-                      "option": "Incident"
-                    },
-                    {
-                      "option": "Question"
-                    },
-                    {
-                      "option": "Support"
-                    },
-                    {
-                      "option": "Other"
-                    }
-                  ]
-                },
-                "requiredField": true
-              },
-              {
-                "fieldLabel": "priority",
-                "fieldType": "dropdown",
-                "fieldOptions": {
-                  "values": [
-                    {
-                      "option": "Low"
-                    },
-                    {
-                      "option": "Normal"
-                    },
-                    {
-                      "option": "High"
-                    },
-                    {
-                      "option": "Urgent"
-                    }
-                  ]
-                }
-              },
-              {
-                "fieldLabel": "Subject"
-              },
-              {
-                "fieldLabel": "name",
-                "placeholder": "Full Name",
-                "requiredField": true
-              },
-              {
-                "fieldLabel": "email",
-                "fieldType": "email",
-                "placeholder": "someone@domain.com"
-              },
-              {
-                "fieldLabel": "phone",
-                "placeholder": "(518) 344-7022"
-              },
-              {
-                "fieldLabel": "distid",
-                "fieldType": "number",
-                "placeholder": "21"
-              },
-              {
-                "fieldLabel": "district",
-                "placeholder": "Appleville School District"
-              },
-              {
-                "fieldLabel": "product",
-                "fieldType": "dropdown",
-                "fieldOptions": {
-                  "values": [
-                    {
-                      "option": "Aims"
-                    },
-                    {
-                      "option": "CD"
-                    },
-                    {
-                      "option": "DataMate"
-                    },
-                    {
-                      "option": "DataSync"
-                    },
-                    {
-                      "option": "EduForm"
-                    },
-                    {
-                      "option": "EduView"
-                    },
-                    {
-                      "option": "MTSS"
-                    },
-                    {
-                      "option": "Portfolio(+)"
-                    },
-                    {
-                      "option": "Scoring"
-                    },
-                    {
-                      "option": "SafeSchools"
-                    },
-                    {
-                      "option": "SELS"
-                    },
-                    {
-                      "option": "StaffTrac"
-                    },
-                    {
-                      "option": "SurVate"
-                    },
-                    {
-                      "option": "TransSync"
-                    },
-                    {
-                      "option": "Report(+)"
-                    }
-                  ]
-                }
-              },
-              {
-                "fieldLabel": "comments",
-                "fieldType": "textarea",
-                "placeholder": "Please explain the need for a support ticket",
-                "requiredField": true
-              }
-            ]
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.formTrigger",
-        "typeVersion": 2.2,
-        "position": [
-          -800,
-          448
-        ],
-        "id": "f174c709-65cf-4d62-a192-ff2019afdf71",
-        "name": "On form submission",
-        "webhookId": "46d567ad-fb78-4987-be8a-c595846f4744"
-      },
-      {
-        "parameters": {
-          "content": "## Incomming Request from n8n form.\nSources\n* N8N\n\n\n\n\n\n\n\n\n\n\n\n\n\nhttps://n8n.edvistas.com/form/46d567ad-fb78-4987-be8a-c595846f4744",
+          "content": "## Incomming Request from n8n form.\nSources\n* N8N\n\n\n\n\n\n\n\n\n\n\n\n\n\nhttps://n8n.edvistas.com/form/da8c3653-6e06-4ce1-b1f6-7e7a5c9fa806",
           "height": 360,
-          "width": 360,
+          "width": 376,
           "color": 6
         },
         "type": "n8n-nodes-base.stickyNote",
         "position": [
-          -976,
+          -992,
           304
         ],
         "typeVersion": 1,
         "id": "cf87319e-b8ae-4251-8581-a34fd3ab4d1a",
         "name": "Sticky Note10"
-      },
-      {
-        "parameters": {
-          "respondWith": "text",
-          "responseBody": "={{ $json.portal_ticket_url_wp }}",
-          "options": {}
-        },
-        "type": "n8n-nodes-base.respondToWebhook",
-        "typeVersion": 1.1,
-        "position": [
-          352,
-          384
-        ],
-        "id": "5cf213e7-60d8-4042-920d-6a2e904b54ac",
-        "name": "Respond to Webhook"
       },
       {
         "parameters": {
@@ -1273,6 +1103,177 @@
             "name": "DB1.DS1.GOWLS.COM (kdessinger)"
           }
         }
+      },
+      {
+        "parameters": {
+          "respondWith": "text",
+          "responseBody": "={{ $json.portal_ticket_url_wp }}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.5,
+        "position": [
+          352,
+          384
+        ],
+        "id": "ff07fda8-acd7-454d-90e4-fcc7fa6e04ad",
+        "name": "Respond to Webhook"
+      },
+      {
+        "parameters": {
+          "formTitle": "Create a Support Ticket",
+          "formDescription": "Enter in the information below to create a helpdesk ticket in Odoo.",
+          "formFields": {
+            "values": [
+              {
+                "fieldLabel": "ticket_Type",
+                "fieldType": "dropdown",
+                "fieldOptions": {
+                  "values": [
+                    {
+                      "option": "Bug"
+                    },
+                    {
+                      "option": "Feature Request"
+                    },
+                    {
+                      "option": "Feedback"
+                    },
+                    {
+                      "option": "Incident"
+                    },
+                    {
+                      "option": "Question"
+                    },
+                    {
+                      "option": "Support"
+                    },
+                    {
+                      "option": "Other"
+                    }
+                  ]
+                }
+              },
+              {
+                "fieldLabel": "priority",
+                "fieldType": "dropdown",
+                "fieldOptions": {
+                  "values": [
+                    {
+                      "option": "Low"
+                    },
+                    {
+                      "option": "Normal"
+                    },
+                    {
+                      "option": "High"
+                    },
+                    {
+                      "option": "Urgent"
+                    }
+                  ]
+                }
+              },
+              {
+                "fieldLabel": "Subject"
+              },
+              {
+                "fieldLabel": "name",
+                "placeholder": "Full Name",
+                "requiredField": true
+              },
+              {
+                "fieldLabel": "email",
+                "fieldType": "email",
+                "placeholder": "someone@domain.com",
+                "requiredField": true
+              },
+              {
+                "fieldLabel": "phone",
+                "placeholder": "(518) 344-7022"
+              },
+              {
+                "fieldLabel": "distid",
+                "fieldType": "number",
+                "placeholder": "21"
+              },
+              {
+                "fieldLabel": "district",
+                "placeholder": "Appleville School District"
+              },
+              {
+                "fieldLabel": "product",
+                "fieldType": "dropdown",
+                "fieldOptions": {
+                  "values": [
+                    {
+                      "option": "Aims"
+                    },
+                    {
+                      "option": "CD"
+                    },
+                    {
+                      "option": "DataMate"
+                    },
+                    {
+                      "option": "DataSync"
+                    },
+                    {
+                      "option": "EduForm"
+                    },
+                    {
+                      "option": "EduView"
+                    },
+                    {
+                      "option": "MTSS"
+                    },
+                    {
+                      "option": "Portfolio(+)"
+                    },
+                    {
+                      "option": "Scoring"
+                    },
+                    {
+                      "option": "SafeSchools"
+                    },
+                    {
+                      "option": "SELS"
+                    },
+                    {
+                      "option": "StaffTrac"
+                    },
+                    {
+                      "option": "Report(+)"
+                    }
+                  ]
+                }
+              },
+              {
+                "fieldLabel": "comments",
+                "fieldType": "textarea",
+                "placeholder": "Please explain the need for a support ticket",
+                "requiredField": true
+              }
+            ]
+          },
+          "options": {
+            "appendAttribution": false,
+            "buttonLabel": "Submit",
+            "path": "",
+            "ignoreBots": true,
+            "useWorkflowTimezone": false,
+            "customCss": ":root {\n\t--font-family: 'Open Sans', sans-serif;\n\t--font-weight-normal: 400;\n\t--font-weight-bold: 600;\n\t--font-size-body: 12px;\n\t--font-size-label: 14px;\n\t--font-size-test-notice: 12px;\n\t--font-size-input: 14px;\n\t--font-size-header: 20px;\n\t--font-size-paragraph: 14px;\n\t--font-size-link: 12px;\n\t--font-size-error: 12px;\n\t--font-size-html-h1: 28px;\n\t--font-size-html-h2: 20px;\n\t--font-size-html-h3: 16px;\n\t--font-size-html-h4: 14px;\n\t--font-size-html-h5: 12px;\n\t--font-size-html-h6: 10px;\n\t--font-size-subheader: 14px;\n\n\t/* Colors */\n\t--color-background: #fbfcfe;\n\t--color-test-notice-text: #e6a23d;\n\t--color-test-notice-bg: #fefaf6;\n\t--color-test-notice-border: #f6dcb7;\n\t--color-card-bg: #ffffff;\n\t--color-card-border: #dbdfe7;\n\t--color-card-shadow: rgba(99, 77, 255, 0.06);\n\t--color-link: #7e8186;\n\t--color-header: #525356;\n\t--color-label: #555555;\n\t--color-input-border: #dbdfe7;\n\t--color-input-text: #71747A;\n\t--color-focus-border: rgb(90, 76, 194);\n\t--color-submit-btn-bg: #ff6d5a;\n\t--color-submit-btn-text: #ffffff;\n\t--color-error: #ea1f30;\n\t--color-required: #ff6d5a;\n\t--color-clear-button-bg: #7e8186;\n\t--color-html-text: #555;\n\t--color-html-link: #ff6d5a;\n\t--color-header-subtext: #7e8186;\n\n\t/* Border Radii */\n\t--border-radius-card: 8px;\n\t--border-radius-input: 6px;\n\t--border-radius-clear-btn: 50%;\n\t--card-border-radius: 8px;\n\n\t/* Spacing */\n\t--padding-container-top: 24px;\n\t--padding-card: 24px;\n\t--padding-test-notice-vertical: 12px;\n\t--padding-test-notice-horizontal: 24px;\n\t--margin-bottom-card: 16px;\n\t--padding-form-input: 12px;\n\t--card-padding: 24px;\n\t--card-margin-bottom: 16px;\n\n\t/* Dimensions */\n\t--container-width: 448px;\n\t--submit-btn-height: 48px;\n\t--checkbox-size: 18px;\n\n\t/* Others */\n\t--box-shadow-card: 0px 4px 16px 0px var(--color-card-shadow);\n\t--opacity-placeholder: 0.5;\n}"
+          }
+        },
+        "type": "n8n-nodes-base.formTrigger",
+        "typeVersion": 2.5,
+        "position": [
+          -784,
+          448
+        ],
+        "id": "69fe0f36-baa0-4928-8d9c-ac1539fcbb0c",
+        "name": "On form submission",
+        "webhookId": "da8c3653-6e06-4ce1-b1f6-7e7a5c9fa806"
       }
     ],
     "connections": {
@@ -1437,28 +1438,6 @@
           ]
         ]
       },
-      "On form submission": {
-        "main": [
-          [
-            {
-              "node": "Parse Fields",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Respond to Webhook": {
-        "main": [
-          [
-            {
-              "node": "Set Alert Message",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
       "Sanitized": {
         "main": [
           [
@@ -1520,14 +1499,41 @@
             }
           ]
         ]
+      },
+      "Respond to Webhook": {
+        "main": [
+          [
+            {
+              "node": "Set Alert Message",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Log Activity": {
+        "main": [
+          []
+        ]
+      },
+      "On form submission": {
+        "main": [
+          [
+            {
+              "node": "Parse Fields",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
-    "authors": "system migration",
-    "name": null,
-    "description": null,
-    "autosaved": false
+    "authors": "Super Admin",
+    "name": "Version 8677878b",
+    "description": "",
+    "autosaved": true
   },
-  "activeVersionId": "e2cf3872-fcde-4df5-b28d-6d56b9df3a5c",
+  "activeVersionId": "8677878b-5824-4283-92fc-8f48c7e4f63f",
   "connections": {
     "EduForm Pivot": {
       "main": [
@@ -1690,17 +1696,6 @@
         ]
       ]
     },
-    "On form submission": {
-      "main": [
-        [
-          {
-            "node": "Parse Fields",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Respond to Webhook": {
       "main": [
         [
@@ -1768,6 +1763,17 @@
         [
           {
             "node": "Create User",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On form submission1": {
+      "main": [
+        [
+          {
+            "node": "Parse Fields",
             "type": "main",
             "index": 0
           }
@@ -2277,7 +2283,8 @@
       ],
       "id": "bd93863a-2ee3-4fab-a2bc-d7c2e3f986dd",
       "name": "Application Webhook",
-      "webhookId": "19c2268e-0b25-4239-989e-e4f3cd67a661"
+      "webhookId": "19c2268e-0b25-4239-989e-e4f3cd67a661",
+      "disabled": true
     },
     {
       "parameters": {
@@ -2640,161 +2647,6 @@
     },
     {
       "parameters": {
-        "formTitle": "Create a Support Ticket",
-        "formDescription": "Enter in the information below to create a helpdesk ticket in Odoo.",
-        "formFields": {
-          "values": [
-            {
-              "fieldLabel": "ticket_Type",
-              "fieldType": "dropdown",
-              "fieldOptions": {
-                "values": [
-                  {
-                    "option": "Bug"
-                  },
-                  {
-                    "option": "Feature Request"
-                  },
-                  {
-                    "option": "Feedback"
-                  },
-                  {
-                    "option": "Incident"
-                  },
-                  {
-                    "option": "Question"
-                  },
-                  {
-                    "option": "Support"
-                  },
-                  {
-                    "option": "Other"
-                  }
-                ]
-              },
-              "requiredField": true
-            },
-            {
-              "fieldLabel": "priority",
-              "fieldType": "dropdown",
-              "fieldOptions": {
-                "values": [
-                  {
-                    "option": "Low"
-                  },
-                  {
-                    "option": "Normal"
-                  },
-                  {
-                    "option": "High"
-                  },
-                  {
-                    "option": "Urgent"
-                  }
-                ]
-              }
-            },
-            {
-              "fieldLabel": "Subject"
-            },
-            {
-              "fieldLabel": "name",
-              "placeholder": "Full Name",
-              "requiredField": true
-            },
-            {
-              "fieldLabel": "email",
-              "fieldType": "email",
-              "placeholder": "someone@domain.com"
-            },
-            {
-              "fieldLabel": "phone",
-              "placeholder": "(518) 344-7022"
-            },
-            {
-              "fieldLabel": "distid",
-              "fieldType": "number",
-              "placeholder": "21"
-            },
-            {
-              "fieldLabel": "district",
-              "placeholder": "Appleville School District"
-            },
-            {
-              "fieldLabel": "product",
-              "fieldType": "dropdown",
-              "fieldOptions": {
-                "values": [
-                  {
-                    "option": "Aims"
-                  },
-                  {
-                    "option": "CD"
-                  },
-                  {
-                    "option": "DataMate"
-                  },
-                  {
-                    "option": "DataSync"
-                  },
-                  {
-                    "option": "EduForm"
-                  },
-                  {
-                    "option": "EduView"
-                  },
-                  {
-                    "option": "MTSS"
-                  },
-                  {
-                    "option": "Portfolio(+)"
-                  },
-                  {
-                    "option": "Scoring"
-                  },
-                  {
-                    "option": "SafeSchools"
-                  },
-                  {
-                    "option": "SELS"
-                  },
-                  {
-                    "option": "StaffTrac"
-                  },
-                  {
-                    "option": "SurVate"
-                  },
-                  {
-                    "option": "TransSync"
-                  },
-                  {
-                    "option": "Report(+)"
-                  }
-                ]
-              }
-            },
-            {
-              "fieldLabel": "comments",
-              "fieldType": "textarea",
-              "placeholder": "Please explain the need for a support ticket",
-              "requiredField": true
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.formTrigger",
-      "typeVersion": 2.2,
-      "position": [
-        -800,
-        448
-      ],
-      "id": "f174c709-65cf-4d62-a192-ff2019afdf71",
-      "name": "On form submission",
-      "webhookId": "46d567ad-fb78-4987-be8a-c595846f4744"
-    },
-    {
-      "parameters": {
         "content": "## Incomming Request from n8n form.\nSources\n* N8N\n\n\n\n\n\n\n\n\n\n\n\n\n\nhttps://n8n.edvistas.com/form/46d567ad-fb78-4987-be8a-c595846f4744",
         "height": 360,
         "width": 360,
@@ -2822,7 +2674,8 @@
         384
       ],
       "id": "5cf213e7-60d8-4042-920d-6a2e904b54ac",
-      "name": "Respond to Webhook"
+      "name": "Respond to Webhook",
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -2903,7 +2756,7 @@
             {
               "id": "72e22cf8-b90d-4619-aa57-7444eddde606",
               "name": "name",
-              "value": "={{ $json.body[0].name && $json.body[0].name.toLowerCase().split(', ').map(part => part.charAt(0).toUpperCase() + part.slice(1)).join(', ') }}\n",
+              "value": "={{ $json.body[0].name && $json.body[0].name.toLowerCase().split(', ').map(part => part.charAt(0).toUpperCase() + part.slice(1)).join(', ') }}\n\n{{ $json.name }}",
               "type": "string"
             },
             {
@@ -3050,6 +2903,155 @@
           "name": "DB1.DS1.GOWLS.COM (kdessinger)"
         }
       }
+    },
+    {
+      "parameters": {
+        "formTitle": "Create a Support Ticket",
+        "formDescription": "Enter in the information below to create a helpdesk ticket in Odoo.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "ticket_Type",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Bug"
+                  },
+                  {
+                    "option": "Feature Request"
+                  },
+                  {
+                    "option": "Feedback"
+                  },
+                  {
+                    "option": "Incident"
+                  },
+                  {
+                    "option": "Question"
+                  },
+                  {
+                    "option": "Support"
+                  },
+                  {
+                    "option": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "priority",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Low"
+                  },
+                  {
+                    "option": "Normal"
+                  },
+                  {
+                    "option": "High"
+                  },
+                  {
+                    "option": "Urgent"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Subject"
+            },
+            {
+              "fieldLabel": "name",
+              "placeholder": "Full Name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "email",
+              "fieldType": "email",
+              "placeholder": "someone@domain.com",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "phone",
+              "placeholder": "(518) 344-7022"
+            },
+            {
+              "fieldLabel": "distid",
+              "fieldType": "number",
+              "placeholder": "21"
+            },
+            {
+              "fieldLabel": "district",
+              "placeholder": "Appleville School District"
+            },
+            {
+              "fieldLabel": "product",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Aims"
+                  },
+                  {
+                    "option": "CD"
+                  },
+                  {
+                    "option": "DataMate"
+                  },
+                  {
+                    "option": "DataSync"
+                  },
+                  {
+                    "option": "EduForm"
+                  },
+                  {
+                    "option": "EduView"
+                  },
+                  {
+                    "option": "MTSS"
+                  },
+                  {
+                    "option": "Portfolio(+)"
+                  },
+                  {
+                    "option": "Scoring"
+                  },
+                  {
+                    "option": "SafeSchools"
+                  },
+                  {
+                    "option": "SELS"
+                  },
+                  {
+                    "option": "StaffTrac"
+                  },
+                  {
+                    "option": "Report(+)"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "comments",
+              "fieldType": "textarea",
+              "placeholder": "Please explain the need for a support ticket",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        -784,
+        448
+      ],
+      "id": "69fe0f36-baa0-4928-8d9c-ac1539fcbb0c",
+      "name": "On form submission1",
+      "webhookId": "da8c3653-6e06-4ce1-b1f6-7e7a5c9fa806"
     }
   ],
   "pinData": {
@@ -3082,24 +3084,6 @@
           ],
           "webhookUrl": "https://n8n.edvistas.com/webhook/odoo/helpdesk",
           "executionMode": "production"
-        }
-      }
-    ],
-    "On form submission": [
-      {
-        "json": {
-          "ticket_Type": "Feature Request",
-          "priority": "Normal",
-          "Subject": "test",
-          "name": "Kenn Dessinger",
-          "email": "kdessinger@edvistas.com",
-          "phone": "518-344-7022",
-          "distid": 21,
-          "district": "Appleville",
-          "product": "EduForm",
-          "comments": "This is just a test",
-          "submittedAt": "2025-03-29T23:29:36.834-04:00",
-          "formMode": "test"
         }
       }
     ],
@@ -3330,6 +3314,6 @@
     }
   ],
   "triggerCount": 3,
-  "updatedAt": "2025-10-17T04:55:02.000Z",
-  "versionId": "e2cf3872-fcde-4df5-b28d-6d56b9df3a5c"
+  "updatedAt": "2026-01-21T22:54:36.082Z",
+  "versionId": "2e870e1f-ee12-4aeb-9f63-5ff7cffce014"
 }
