@@ -1,0 +1,211 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Generate an image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate an image": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Form": {
+      "main": [
+        []
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Form",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-01-23T05:41:04.599Z",
+  "id": "Eev8zUlWnfa0h-jgq7O1E",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Lazt-Z Survival",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Last-Z Survival Shooter - Season 4 - Avatar Generator",
+        "formDescription": "Fill out the form and it will generate a kick ass avatar for Season 4 of LastZ",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Alliance Code",
+              "placeholder": "[ABC]"
+            },
+            {
+              "fieldLabel": "Screen Name"
+            },
+            {
+              "fieldLabel": "Gender",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "None"
+                  },
+                  {
+                    "option": "Male"
+                  },
+                  {
+                    "option": "Female"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Color Style",
+              "fieldType": "radio",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "fiery orange"
+                  },
+                  {
+                    "option": "fiery blue"
+                  },
+                  {
+                    "option": "fiery green"
+                  },
+                  {
+                    "option": "fiery pink"
+                  },
+                  {
+                    "option": "fiery yellow"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        -320,
+        -16
+      ],
+      "id": "c708ccdf-bb8c-43c3-a175-4d659eeae635",
+      "name": "On form submission",
+      "webhookId": "c634b4c1-bed5-498d-9f2b-17382b07f01f"
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "model": "gpt-image-1",
+        "prompt": "=Create a cinematic, ultra-detailed digital painting in a gritty, high-contrast post-apocalyptic survival shooter style.\n\nSUBJECT:\nA {{ $json.Gender }} survivor seen from a dramatic over-the-shoulder angle, looking backward toward the viewer. The character has a hardened, battle-experienced expression, realistic facial detail, subtle scars, and rugged tactical survival gear. The pose and framing should closely match a heroic profile portrait used as a high-end game avatar.\n\nSTYLE & MOOD:\nHyper-realistic, cinematic lighting with intense atmosphere. Fire, smoke, drifting embers, and ash fill the air. Strong orange and red highlights contrast against deep shadows. The image should feel epic, dangerous, and premium—like AAA game key art or a season launch poster.\n\nWORLD & THREATS (LOCKED THEME):\nThe environment is a ruined, post-apocalyptic world overrun by:\n• Giant dinosaurs (such as tyrannosaurus or raptors) looming in the background  \n• One or two zombies partially visible in the scene, emerging from smoke or rubble  \nDinosaurs are the dominant threat; zombies are secondary but clearly present.\n\nBACKGROUND ELEMENTS:\n• A large, battle-worn military tank positioned behind the character  \n• A fabric flag physically attached to the tank (antenna or rear mount)  \n• The flag clearly displays the alliance code “{{ $json['Alliance Code'] }}” in bold, readable lettering  \n• The flag is visible but not the centerpiece  \n• Urban ruins, fire, wreckage, and scale-driven chaos behind everything\n\nNAME INTEGRATION:\nThe username “{{ $json['Screen Name'] }}” is integrated naturally into the image—either as:\n• Cinematic metallic title text near the top, OR  \n• Subtle environmental signage, OR  \n• Tactical HUD-style overlay text  \nThe name must feel intentional and immersive, not like a watermark.\n\nCOLOR STYLE:\nApply a consistent {{ $json['Color Style'] }} color grading across the entire image, affecting lighting, fire tones, sky, armor accents, and atmosphere.\n\nCOMPOSITION:\nCentered subject with strong depth of field. The character remains the clear focal point, with background elements slightly softened but readable.\n\nQUALITY:\nUltra-high detail, sharp focus, realistic textures, cinematic realism.\nNo cartoon style.\nNo anime style.\n",
+        "options": {
+          "size": "1024x1024"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        -112,
+        -16
+      ],
+      "id": "3418eb7f-1e6f-4629-8c73-d45703ebfe1d",
+      "name": "Generate an image",
+      "credentials": {
+        "openAiApi": {
+          "id": "H0stDNyGO6DFaJtU",
+          "name": "OpenAi (Last-Z)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "completion",
+        "completionTitle": "Here is your avatar",
+        "completionMessage": "=Now go on and make me proud!\n\n{{ $json.data }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 2.5,
+      "position": [
+        288,
+        -16
+      ],
+      "id": "5765e694-39f8-4b5c-b894-88cae108577d",
+      "name": "Form",
+      "webhookId": "43a20e37-f5df-4094-8dc2-eac175ec791e"
+    },
+    {
+      "parameters": {
+        "operation": "binaryToPropery",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        96,
+        -16
+      ],
+      "id": "eeb18531-6f21-4cd4-ae9e-1f999bd2d6b6",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "operation": "toBinary",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        512,
+        -16
+      ],
+      "id": "7d3aaafa-0dc8-436a-8905-335b5960dafb",
+      "name": "Convert to File"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-01-23T05:41:04.605Z",
+      "createdAt": "2026-01-23T05:41:04.605Z",
+      "role": "workflow:owner",
+      "workflowId": "Eev8zUlWnfa0h-jgq7O1E",
+      "projectId": "St4Flrehoro6GxDS"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-01-23T06:06:41.130Z",
+  "versionId": "e6bdb170-6aa7-4e8b-a088-cbc1c71fb1c2"
+}
