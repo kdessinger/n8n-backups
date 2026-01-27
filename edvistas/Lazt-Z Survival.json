@@ -18,7 +18,7 @@
       "main": [
         [
           {
-            "node": "Extract from File",
+            "node": "Read/Write Files from Disk",
             "type": "main",
             "index": 0
           }
@@ -31,6 +31,17 @@
       ]
     },
     "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read/Write Files from Disk": {
       "main": [
         [
           {
@@ -153,7 +164,7 @@
       "type": "n8n-nodes-base.form",
       "typeVersion": 2.5,
       "position": [
-        288,
+        304,
         -16
       ],
       "id": "5765e694-39f8-4b5c-b894-88cae108577d",
@@ -168,8 +179,8 @@
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1.1,
       "position": [
-        96,
-        -16
+        -96,
+        -224
       ],
       "id": "eeb18531-6f21-4cd4-ae9e-1f999bd2d6b6",
       "name": "Extract from File"
@@ -182,11 +193,28 @@
       "type": "n8n-nodes-base.convertToFile",
       "typeVersion": 1.1,
       "position": [
-        512,
-        -16
+        144,
+        -224
       ],
       "id": "7d3aaafa-0dc8-436a-8905-335b5960dafb",
       "name": "Convert to File"
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "=/mnt/share/_tmp/{{ $('On form submission').item.json['Screen Name'] }}_{{ $workflow.id }}.png",
+        "options": {
+          "append": false
+        }
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1.1,
+      "position": [
+        96,
+        -16
+      ],
+      "id": "c85e0c96-2ca3-40ad-bd93-71c02b9ba5dd",
+      "name": "Read/Write Files from Disk"
     }
   ],
   "pinData": {},
@@ -206,6 +234,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-01-23T06:06:41.130Z",
-  "versionId": "e6bdb170-6aa7-4e8b-a088-cbc1c71fb1c2"
+  "updatedAt": "2026-01-26T18:56:02.151Z",
+  "versionId": "735884c1-cfdf-43c5-9297-84bf29090d07"
 }
