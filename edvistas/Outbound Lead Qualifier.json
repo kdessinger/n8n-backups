@@ -966,7 +966,7 @@
     },
     {
       "parameters": {
-        "content": "# 🛠️ Setup Guide  \n**Author:** [Nate Herk](https://www.youtube.com/@nateherk)\n\nFollow the steps below to get this workflow up and running:\n\n---\n\n### ✅ Step 1: Add Your [VAPI](https://vapi.ai/) API Key  \n- Grab your API key from VAPI  \n- In n8n, create a **Generic Credential** using **Bearer Auth**  \n- Paste your VAPI API key into the **two HTTP Request** nodes that require VAPI\n\n---\n\n### ✅ Step 2: Add the System Prompt to Your VAPI Assistant  \n- Open your VAPI Assistant settings  \n- Copy/paste the system prompt from this doc:  \n  👉 **System Prompt (Copy Link):** [Google Doc](https://docs.google.com/document/u/1/d/1IQV-azxjKCdrxhqOespddFFKEJY8CXjObINN4xFn3es/copy)\n\n---\n\n### ✅ Step 3: Connect a Phone Number in VAPI  \n- Connect (or purchase) a phone number inside VAPI  \n- In the **Call Lead** HTTP Request node, make sure you set:  \n  - **Your Assistant ID**  \n  - **Your Phone Number ID**\n\n---\n\n### ✅ Step 4: Connect the Google Sheet Template  \n- Make a copy of the template here:  \n  👉 **Google Sheet Template (Copy Link):** [Google Sheet](https://docs.google.com/spreadsheets/u/1/d/1NEEmrQhRC0cGLyYKa0qTr5e72Iub38_tZFs4l37PwTk/copy)  \n- Connect your Google credentials in n8n  \n- Point the workflow to **your copied sheet** (not the original template)\n\n---\n\n### 💡 Final Check  \nBefore running, confirm:\n- VAPI key is present in both required HTTP Request nodes  \n- Assistant ID + Phone Number ID are correctly set in **Call Lead**  \n- Google Sheet connection points to your copied template\n",
+        "content": "# Voice Agent That Calls Every New Lead\n\n## 🛠️ Setup Guide  \n**Author:** [Nate Herk](https://www.youtube.com/@nateherk)\n\nFollow the steps below to get this workflow up and running:\n\n---\n\n### ✅ Step 1: Add Your [VAPI](https://vapi.ai/) API Key  \n- Grab your API key from VAPI  \n- In n8n, create a **Generic Credential** using **Bearer Auth**  \n- Paste your VAPI API key into the **two HTTP Request** nodes that require VAPI\n\n---\n\n### ✅ Step 2: Add the System Prompt to Your VAPI Assistant  \n- Open your VAPI Assistant settings  \n- Copy/paste the system prompt from this doc:  \n  👉 **System Prompt (Copy Link):** [Google Doc](https://docs.google.com/document/u/1/d/1IQV-azxjKCdrxhqOespddFFKEJY8CXjObINN4xFn3es/copy)\n\n---\n\n### ✅ Step 3: Connect a Phone Number in VAPI  \n- Connect (or purchase) a phone number inside VAPI  \n- In the **Call Lead** HTTP Request node, make sure you set:  \n  - **Your Assistant ID**  \n  - **Your Phone Number ID**\n\n---\n\n### ✅ Step 4: Connect the Google Sheet Template  \n- Make a copy of the template here:  \n  👉 **Google Sheet Template (Copy Link):** [Google Sheet](https://docs.google.com/spreadsheets/u/1/d/1NEEmrQhRC0cGLyYKa0qTr5e72Iub38_tZFs4l37PwTk/copy)  \n- Connect your Google credentials in n8n  \n- Point the workflow to **your copied sheet** (not the original template)\n\n---\n\n### 💡 Final Check  \nBefore running, confirm:\n- VAPI key is present in both required HTTP Request nodes  \n- Assistant ID + Phone Number ID are correctly set in **Call Lead**  \n- Google Sheet connection points to your copied template\n",
         "height": 1008,
         "width": 704
       },
@@ -1010,6 +1010,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2026-01-20T21:40:05.557Z",
-  "versionId": "929d3d40-2870-4d27-9309-5b6f958ec199"
+  "updatedAt": "2026-01-29T19:25:10.786Z",
+  "versionId": "2b6716a2-11c6-41b4-bb2c-e7b0bb0624e0"
 }
