@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2025-11-26T05:18:06.453Z",
-    "createdAt": "2025-11-26T05:18:06.453Z",
-    "versionId": "0b24783a-0deb-49c6-bf1b-3b7e91c51b8f",
+    "updatedAt": "2026-02-09T17:51:25.000Z",
+    "createdAt": "2026-02-09T17:51:21.682Z",
+    "versionId": "25f30847-1d0a-40b5-8588-846860dceb81",
     "workflowId": "6",
     "nodes": [
       {
@@ -20,11 +20,12 @@
         "name": "GitHub",
         "type": "n8n-nodes-base.github",
         "position": [
-          1475,
-          295
+          1488,
+          304
         ],
         "typeVersion": 1,
         "alwaysOutputData": true,
+        "webhookId": "0052e9eb-0d3b-41d3-87d2-125c014e71f2",
         "credentials": {
           "githubApi": {
             "id": "17",
@@ -57,8 +58,8 @@
         "name": "github_status",
         "type": "n8n-nodes-base.switch",
         "position": [
-          2115,
-          435
+          2128,
+          448
         ],
         "typeVersion": 1
       },
@@ -68,8 +69,8 @@
         "name": "same",
         "type": "n8n-nodes-base.noOp",
         "position": [
-          2355,
-          235
+          2368,
+          240
         ],
         "typeVersion": 1
       },
@@ -79,8 +80,8 @@
         "name": "different",
         "type": "n8n-nodes-base.noOp",
         "position": [
-          2355,
-          435
+          2368,
+          448
         ],
         "typeVersion": 1
       },
@@ -90,8 +91,8 @@
         "name": "new",
         "type": "n8n-nodes-base.noOp",
         "position": [
-          2355,
-          615
+          2368,
+          624
         ],
         "typeVersion": 1
       },
@@ -109,34 +110,11 @@
         "name": "GitHub Edit",
         "type": "n8n-nodes-base.github",
         "position": [
-          2535,
-          435
+          2544,
+          448
         ],
         "typeVersion": 1,
-        "credentials": {
-          "githubApi": {
-            "id": "17",
-            "name": "GitHub (kdessinger)"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "resource": "file",
-          "owner": "={{$node[\"Globals\"].json[\"repo\"][\"owner\"]}}",
-          "repository": "={{$node[\"Globals\"].json[\"repo\"][\"name\"]}}",
-          "filePath": "={{$node[\"Globals\"].json[\"repo\"][\"path\"]}}{{$node[\"OneAtATime\"].json[\"name\"]}}.json",
-          "fileContent": "={{$node[\"isDiffOrNew\"].json[\"n8n_data_stringy\"]}}",
-          "commitMessage": "=[N8N Backup] {{$node[\"OneAtATime\"].json[\"name\"]}}.json ({{$json[\"github_status\"]}})"
-        },
-        "id": "0e919b9b-a810-4fe4-be21-f18d11d15a25",
-        "name": "GitHub Create",
-        "type": "n8n-nodes-base.github",
-        "position": [
-          2540,
-          620
-        ],
-        "typeVersion": 1,
+        "webhookId": "ec961933-8eba-4ef9-9fb8-3230cf7a4d82",
         "credentials": {
           "githubApi": {
             "id": "17",
@@ -153,8 +131,8 @@
         "name": "OneAtATime",
         "type": "n8n-nodes-base.splitInBatches",
         "position": [
-          1255,
-          455
+          1264,
+          464
         ],
         "typeVersion": 1
       },
@@ -182,8 +160,8 @@
         "name": "Globals",
         "type": "n8n-nodes-base.set",
         "position": [
-          820,
-          460
+          832,
+          464
         ],
         "typeVersion": 1
       },
@@ -202,8 +180,8 @@
         "name": "Every 12 hours",
         "type": "n8n-nodes-base.cron",
         "position": [
-          620,
-          460
+          624,
+          464
         ],
         "typeVersion": 1
       },
@@ -217,8 +195,8 @@
         "name": "Note",
         "type": "n8n-nodes-base.stickyNote",
         "position": [
-          180,
-          300
+          192,
+          304
         ],
         "typeVersion": 1
       },
@@ -232,8 +210,8 @@
         "name": "Note2",
         "type": "n8n-nodes-base.stickyNote",
         "position": [
-          1235,
-          175
+          1248,
+          176
         ],
         "typeVersion": 1
       },
@@ -247,27 +225,28 @@
         "name": "Note3",
         "type": "n8n-nodes-base.stickyNote",
         "position": [
-          2075,
-          115
+          2080,
+          128
         ],
         "typeVersion": 1
       },
       {
         "parameters": {
-          "filters": {}
+          "filters": {},
+          "requestOptions": {}
         },
         "id": "926f0d45-31e5-4322-a9d8-36b8f8020076",
         "name": "n8n",
         "type": "n8n-nodes-base.n8n",
         "position": [
-          1020,
-          460
+          1024,
+          464
         ],
         "typeVersion": 1,
         "credentials": {
           "n8nApi": {
             "id": "16",
-            "name": "admin@edvistas.com"
+            "name": "n8n.edvistas.com (Default)"
           }
         }
       },
@@ -279,8 +258,8 @@
         "name": "isDiffOrNew",
         "type": "n8n-nodes-base.code",
         "position": [
-          1875,
-          435
+          1888,
+          448
         ],
         "typeVersion": 1
       },
@@ -290,10 +269,43 @@
         "name": "Merge",
         "type": "n8n-nodes-base.merge",
         "position": [
-          1695,
-          435
+          1696,
+          448
         ],
         "typeVersion": 2
+      },
+      {
+        "parameters": {
+          "resource": "file",
+          "owner": {
+            "__rl": true,
+            "mode": "name",
+            "value": "={{$node[\"Globals\"].json[\"repo\"][\"owner\"]}}"
+          },
+          "repository": {
+            "__rl": true,
+            "mode": "name",
+            "value": "={{$node[\"Globals\"].json[\"repo\"][\"name\"]}}"
+          },
+          "filePath": "={{$node[\"Globals\"].json[\"repo\"][\"path\"]}}{{$node[\"OneAtATime\"].json[\"name\"]}}.json",
+          "fileContent": "={{$node[\"isDiffOrNew\"].json[\"n8n_data_stringy\"]}}",
+          "commitMessage": "=[N8N Backup] {{$node[\"OneAtATime\"].json[\"name\"]}}.json ({{$json[\"github_status\"]}})"
+        },
+        "type": "n8n-nodes-base.github",
+        "typeVersion": 1.1,
+        "position": [
+          2544,
+          656
+        ],
+        "id": "c0d05863-7573-48f0-b951-987a6e728d3e",
+        "name": "GitHub Create",
+        "webhookId": "5e4690f0-6deb-4f84-b33d-abc60fd56bed",
+        "credentials": {
+          "githubApi": {
+            "id": "17",
+            "name": "GitHub (kdessinger)"
+          }
+        }
       }
     ],
     "connections": {
@@ -412,17 +424,6 @@
           ]
         ]
       },
-      "GitHub Create": {
-        "main": [
-          [
-            {
-              "node": "OneAtATime",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
       "github_status": {
         "main": [
           [
@@ -458,14 +459,25 @@
             }
           ]
         ]
+      },
+      "GitHub Create": {
+        "main": [
+          [
+            {
+              "node": "OneAtATime",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
-    "authors": "system migration",
-    "name": null,
-    "description": null,
-    "autosaved": false
+    "authors": "Super Admin",
+    "name": "Version 25f30847",
+    "description": "",
+    "autosaved": true
   },
-  "activeVersionId": "0b24783a-0deb-49c6-bf1b-3b7e91c51b8f",
+  "activeVersionId": "25f30847-1d0a-40b5-8588-846860dceb81",
   "connections": {
     "n8n": {
       "main": [
@@ -582,17 +594,6 @@
         ]
       ]
     },
-    "GitHub Create": {
-      "main": [
-        [
-          {
-            "node": "OneAtATime",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "github_status": {
       "main": [
         [
@@ -628,12 +629,25 @@
           }
         ]
       ]
+    },
+    "GitHub Create": {
+      "main": [
+        [
+          {
+            "node": "OneAtATime",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2022-10-19T03:02:28.609Z",
   "id": "6",
   "isArchived": false,
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "Backup n8n To Github",
   "nodes": [
     {
@@ -650,11 +664,12 @@
       "name": "GitHub",
       "type": "n8n-nodes-base.github",
       "position": [
-        1475,
-        295
+        1488,
+        304
       ],
       "typeVersion": 1,
       "alwaysOutputData": true,
+      "webhookId": "0052e9eb-0d3b-41d3-87d2-125c014e71f2",
       "credentials": {
         "githubApi": {
           "id": "17",
@@ -687,8 +702,8 @@
       "name": "github_status",
       "type": "n8n-nodes-base.switch",
       "position": [
-        2115,
-        435
+        2128,
+        448
       ],
       "typeVersion": 1
     },
@@ -698,8 +713,8 @@
       "name": "same",
       "type": "n8n-nodes-base.noOp",
       "position": [
-        2355,
-        235
+        2368,
+        240
       ],
       "typeVersion": 1
     },
@@ -709,8 +724,8 @@
       "name": "different",
       "type": "n8n-nodes-base.noOp",
       "position": [
-        2355,
-        435
+        2368,
+        448
       ],
       "typeVersion": 1
     },
@@ -720,8 +735,8 @@
       "name": "new",
       "type": "n8n-nodes-base.noOp",
       "position": [
-        2355,
-        615
+        2368,
+        624
       ],
       "typeVersion": 1
     },
@@ -739,34 +754,11 @@
       "name": "GitHub Edit",
       "type": "n8n-nodes-base.github",
       "position": [
-        2535,
-        435
+        2544,
+        448
       ],
       "typeVersion": 1,
-      "credentials": {
-        "githubApi": {
-          "id": "17",
-          "name": "GitHub (kdessinger)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "resource": "file",
-        "owner": "={{$node[\"Globals\"].json[\"repo\"][\"owner\"]}}",
-        "repository": "={{$node[\"Globals\"].json[\"repo\"][\"name\"]}}",
-        "filePath": "={{$node[\"Globals\"].json[\"repo\"][\"path\"]}}{{$node[\"OneAtATime\"].json[\"name\"]}}.json",
-        "fileContent": "={{$node[\"isDiffOrNew\"].json[\"n8n_data_stringy\"]}}",
-        "commitMessage": "=[N8N Backup] {{$node[\"OneAtATime\"].json[\"name\"]}}.json ({{$json[\"github_status\"]}})"
-      },
-      "id": "0e919b9b-a810-4fe4-be21-f18d11d15a25",
-      "name": "GitHub Create",
-      "type": "n8n-nodes-base.github",
-      "position": [
-        2540,
-        620
-      ],
-      "typeVersion": 1,
+      "webhookId": "ec961933-8eba-4ef9-9fb8-3230cf7a4d82",
       "credentials": {
         "githubApi": {
           "id": "17",
@@ -783,8 +775,8 @@
       "name": "OneAtATime",
       "type": "n8n-nodes-base.splitInBatches",
       "position": [
-        1255,
-        455
+        1264,
+        464
       ],
       "typeVersion": 1
     },
@@ -812,8 +804,8 @@
       "name": "Globals",
       "type": "n8n-nodes-base.set",
       "position": [
-        820,
-        460
+        832,
+        464
       ],
       "typeVersion": 1
     },
@@ -832,8 +824,8 @@
       "name": "Every 12 hours",
       "type": "n8n-nodes-base.cron",
       "position": [
-        620,
-        460
+        624,
+        464
       ],
       "typeVersion": 1
     },
@@ -847,8 +839,8 @@
       "name": "Note",
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        180,
-        300
+        192,
+        304
       ],
       "typeVersion": 1
     },
@@ -862,8 +854,8 @@
       "name": "Note2",
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        1235,
-        175
+        1248,
+        176
       ],
       "typeVersion": 1
     },
@@ -877,27 +869,28 @@
       "name": "Note3",
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        2075,
-        115
+        2080,
+        128
       ],
       "typeVersion": 1
     },
     {
       "parameters": {
-        "filters": {}
+        "filters": {},
+        "requestOptions": {}
       },
       "id": "926f0d45-31e5-4322-a9d8-36b8f8020076",
       "name": "n8n",
       "type": "n8n-nodes-base.n8n",
       "position": [
-        1020,
-        460
+        1024,
+        464
       ],
       "typeVersion": 1,
       "credentials": {
         "n8nApi": {
           "id": "16",
-          "name": "admin@edvistas.com"
+          "name": "n8n.edvistas.com (Default)"
         }
       }
     },
@@ -909,8 +902,8 @@
       "name": "isDiffOrNew",
       "type": "n8n-nodes-base.code",
       "position": [
-        1875,
-        435
+        1888,
+        448
       ],
       "typeVersion": 1
     },
@@ -920,10 +913,43 @@
       "name": "Merge",
       "type": "n8n-nodes-base.merge",
       "position": [
-        1695,
-        435
+        1696,
+        448
       ],
       "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "owner": {
+          "__rl": true,
+          "mode": "name",
+          "value": "={{$node[\"Globals\"].json[\"repo\"][\"owner\"]}}"
+        },
+        "repository": {
+          "__rl": true,
+          "mode": "name",
+          "value": "={{$node[\"Globals\"].json[\"repo\"][\"name\"]}}"
+        },
+        "filePath": "={{$node[\"Globals\"].json[\"repo\"][\"path\"]}}{{$node[\"OneAtATime\"].json[\"name\"]}}.json",
+        "fileContent": "={{$node[\"isDiffOrNew\"].json[\"n8n_data_stringy\"]}}",
+        "commitMessage": "=[N8N Backup] {{$node[\"OneAtATime\"].json[\"name\"]}}.json ({{$json[\"github_status\"]}})"
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        2544,
+        656
+      ],
+      "id": "c0d05863-7573-48f0-b951-987a6e728d3e",
+      "name": "GitHub Create",
+      "webhookId": "5e4690f0-6deb-4f84-b33d-abc60fd56bed",
+      "credentials": {
+        "githubApi": {
+          "id": "17",
+          "name": "GitHub (kdessinger)"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -965,6 +991,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-11-17T14:18:47.000Z",
-  "versionId": "0b24783a-0deb-49c6-bf1b-3b7e91c51b8f"
+  "updatedAt": "2026-02-09T17:51:21.681Z",
+  "versionId": "25f30847-1d0a-40b5-8588-846860dceb81"
 }
