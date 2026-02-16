@@ -127,16 +127,7 @@
     },
     {
       "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "e87952cb-878e-4feb-8261-342eaf887838",
-              "name": "json_example_string",
-              "type": "string",
-              "value": "This is a simple string. In JSON, it's always enclosed in double quotes."
-            }
-          ]
-        },
+        "mode": "raw",
         "options": {}
       },
       "id": "6c2fe8ca-9aa9-402a-949d-cc58177eb7e5",
@@ -153,22 +144,6 @@
     },
     {
       "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "e87952cb-878e-4feb-8261-342eaf887838",
-              "name": "key",
-              "type": "string",
-              "value": "value"
-            },
-            {
-              "id": "b5f030f4-6650-4181-881f-de44790bb24b",
-              "name": "another_key",
-              "type": "string",
-              "value": "another_value"
-            }
-          ]
-        },
         "options": {}
       },
       "id": "3cffa562-bedc-42f9-ab4f-8b55cd3b5711",
@@ -702,6 +677,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-11-20T16:12:39.000Z",
-  "versionId": "22073427-441a-43e2-ac21-8ffca909dd64"
+  "updatedAt": "2026-02-16T16:40:50.477Z",
+  "versionId": "5ba20663-5daf-4977-a6d6-99ae520413c0"
 }
