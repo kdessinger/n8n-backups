@@ -66,6 +66,15 @@
     "executionOrder": "v1",
     "errorWorkflow": "hbBAn9DYRcWLren1"
   },
+  "shared": [
+    {
+      "updatedAt": "2023-01-11T01:52:21.534Z",
+      "createdAt": "2023-01-11T01:52:21.534Z",
+      "role": "workflow:owner",
+      "workflowId": "14",
+      "projectId": "hKRlxMvyppBUiF8b"
+    }
+  ],
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
