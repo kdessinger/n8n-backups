@@ -472,11 +472,20 @@
     "executionOrder": "v1",
     "errorWorkflow": "hbBAn9DYRcWLren1"
   },
+  "shared": [
+    {
+      "updatedAt": "2023-10-08T00:36:27.949Z",
+      "createdAt": "2023-10-08T00:36:27.949Z",
+      "role": "workflow:owner",
+      "workflowId": "Mf9buct2tg5IwybR",
+      "projectId": "hKRlxMvyppBUiF8b"
+    }
+  ],
   "staticData": null,
   "tags": [
     {
-      "createdAt": "2023-03-26T04:11:10.869Z",
       "updatedAt": "2023-03-26T04:11:10.869Z",
+      "createdAt": "2023-03-26T04:11:10.869Z",
       "id": "3",
       "name": "Tweet"
     }
