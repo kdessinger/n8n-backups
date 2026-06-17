@@ -124,11 +124,20 @@
     "executionTimeout": 300,
     "errorWorkflow": "hbBAn9DYRcWLren1"
   },
+  "shared": [
+    {
+      "updatedAt": "2024-10-11T04:44:02.174Z",
+      "createdAt": "2024-10-11T04:44:02.174Z",
+      "role": "workflow:owner",
+      "workflowId": "euWMjZT0dZUg36Va",
+      "projectId": "hKRlxMvyppBUiF8b"
+    }
+  ],
   "staticData": null,
   "tags": [
     {
-      "createdAt": "2024-11-22T05:27:55.725Z",
       "updatedAt": "2024-11-22T05:27:55.725Z",
+      "createdAt": "2024-11-22T05:27:55.725Z",
       "id": "oxzM5ZD7cwl7e40S",
       "name": "Images"
     }
