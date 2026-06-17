@@ -247,11 +247,20 @@
   "settings": {
     "executionOrder": "v1"
   },
+  "shared": [
+    {
+      "updatedAt": "2024-12-31T06:56:58.254Z",
+      "createdAt": "2024-12-31T06:56:58.254Z",
+      "role": "workflow:owner",
+      "workflowId": "YVU7IlzaQaZtULg9",
+      "projectId": "hKRlxMvyppBUiF8b"
+    }
+  ],
   "staticData": null,
   "tags": [
     {
-      "createdAt": "2024-12-31T00:21:35.339Z",
       "updatedAt": "2024-12-31T00:21:35.339Z",
+      "createdAt": "2024-12-31T00:21:35.339Z",
       "id": "6GxhHGeDuKWkAijH",
       "name": "agent"
     }
