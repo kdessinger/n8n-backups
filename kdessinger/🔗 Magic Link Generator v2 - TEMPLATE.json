@@ -1,0 +1,1434 @@
+{
+  "active": false,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Screenshot Uploaded?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Screenshot Uploaded?": {
+      "main": [
+        [
+          {
+            "node": "Get Image",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Website URL?1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Image": {
+      "main": [
+        [
+          {
+            "node": "Get Overlay",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Overlay": {
+      "main": [
+        [
+          {
+            "node": "Create Preview",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Preview": {
+      "main": [
+        [
+          {
+            "node": "Upload Website Screenshot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload Website Screenshot": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Pull File Name",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pull File Name": {
+      "main": [
+        [
+          {
+            "node": "Website URL?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Final Magic Link": {
+      "main": [
+        [
+          {
+            "node": "Update Magic Link GHL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Website URL?": {
+      "main": [
+        [
+          {
+            "node": "Pull Website Text",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Final Magic Link",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Error Handler": {
+      "main": [
+        [
+          {
+            "node": "Retry Count",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Retry Count",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Retry Count",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Retry Count",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Status": {
+      "main": [
+        [
+          {
+            "node": "Update Demo Context",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Error Handler",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Retry Count": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Stop and Error",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Demo Context": {
+      "main": [
+        [
+          {
+            "node": "Screenshot Uploaded?1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pull Website Text": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Screenshot Uploaded?1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini 2.5 Flash": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Custom Field ID V2": {
+      "main": [
+        [
+          {
+            "node": "Scrape IDs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Manual": {
+      "main": [
+        [
+          {
+            "node": "Get Custom Field ID V2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Website URL?1": {
+      "main": [
+        [
+          {
+            "node": "Pull Website Text",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update Magic Link1 GHL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Screenshot Uploaded?1": {
+      "main": [
+        [
+          {
+            "node": "Final Magic Link",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Final Magic Link1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Final Magic Link1": {
+      "main": [
+        [
+          {
+            "node": "Update Magic Link GHL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-02-15T03:42:24.522Z",
+  "id": "zxXUtFldX6LTCFDb",
+  "isArchived": false,
+  "meta": null,
+  "name": "🔗 Magic Link Generator v2 - TEMPLATE",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "43eca169-b9f8-4520-b935-887c7fb9e413",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -3600,
+        496
+      ],
+      "id": "d46becca-716d-4c49-b789-5f82867894dc",
+      "name": "Webhook",
+      "webhookId": "43eca169-b9f8-4520-b935-887c7fb9e413"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://services.leadconnectorhq.com/medias/upload-file",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Edit Fields').item.json.private_token }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "multipart/form-data"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "data"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -2272,
+        400
+      ],
+      "id": "f2e85ef9-ec4b-4b90-b1c5-31b1babe4b95",
+      "name": "Upload Website Screenshot",
+      "retryOnFail": true,
+      "maxTries": 5,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6d01346e-fa54-4384-b301-9d1b4df9e386",
+              "name": "private_token",
+              "value": "[PASTE HERE]",
+              "type": "string"
+            },
+            {
+              "id": "da18f880-b5c3-4961-a482-6e40e99b76d9",
+              "name": "field_id_magic_link",
+              "value": "[PASTE HERE]",
+              "type": "string"
+            },
+            {
+              "id": "bcf2cf5c-4e28-4f20-937c-572e46694868",
+              "name": "field_id_demo_context",
+              "value": "[PASTE HERE]",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -3376,
+        496
+      ],
+      "id": "26031efb-a2ce-4373-a8fc-5e50ea9cd330",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "487b0d5e-fb38-4964-b858-26271c0952e6",
+              "leftValue": "={{ $('Webhook').item.json.body['Website Screenshot'][0] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -3152,
+        496
+      ],
+      "id": "497ca627-5e71-44e1-9734-17e203c12ff1",
+      "name": "Screenshot Uploaded?"
+    },
+    {
+      "parameters": {
+        "url": "={{ $('Webhook').item.json.body['Website Screenshot'][0] }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file",
+              "outputPropertyName": "web"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -2928,
+        400
+      ],
+      "id": "aaf55db5-3bf6-4b7e-8a10-400706a83937",
+      "name": "Get Image",
+      "retryOnFail": true,
+      "maxTries": 5,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "url": "https://storage.googleapis.com/msgsndr/qQt47vgUmPtlF177q98t/media/69223e146984f1424e2c07e5.png",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file",
+              "outputPropertyName": "overlay"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -2720,
+        400
+      ],
+      "id": "501ef2d4-2e21-4360-8651-70873a624515",
+      "name": "Get Overlay",
+      "retryOnFail": true,
+      "maxTries": 5,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "operation": "multiStep",
+        "operations": {
+          "operations": [
+            {
+              "operation": "create",
+              "width": 1080,
+              "height": 1350
+            },
+            {
+              "operation": "composite",
+              "dataPropertyNameComposite": "web"
+            },
+            {
+              "operation": "composite",
+              "dataPropertyNameComposite": "overlay"
+            }
+          ]
+        },
+        "options": {
+          "fileName": "={{ $('Webhook').item.json.body.phone }}.png",
+          "format": "png"
+        }
+      },
+      "type": "n8n-nodes-base.editImage",
+      "typeVersion": 1,
+      "position": [
+        -2496,
+        400
+      ],
+      "id": "c68548f2-9be4-4caa-a81f-0206ef96db48",
+      "name": "Create Preview",
+      "retryOnFail": true,
+      "maxTries": 5,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "9777bfbd-892b-4516-b199-22dcaed864d6",
+              "name": "df",
+              "value": "df",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2048,
+        400
+      ],
+      "id": "b511164d-cb68-4481-9f17-cdda00b7dadc",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Pull data specifically from the 'Upload Website Screenshot' node\nconst screenshots = $('Upload Website Screenshot').all();\n\nreturn screenshots.map(item => {\n  // 2. Get the URL safely from the item\n  const url = item.json.url;\n\n  // 3. Safety Check: If url is missing, return item as is (prevents the crash)\n  if (!url) return item;\n\n  // 4. Extract the filename (removes https://.../)\n  const filename = url.split('/').pop();\n\n  // 5. Remove the extension (removes .png, .jpg, etc)\n  // We use lastIndexOf to ensure we don't accidentally cut off parts of the ID if it has dots\n  const pathId = filename.substring(0, filename.lastIndexOf('.'));\n\n  // 6. Save result\n  item.json.path_id = pathId;\n\n  return item;\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1840,
+        400
+      ],
+      "id": "3154736c-5866-4dce-9348-d68a12fa1458",
+      "name": "Pull File Name",
+      "retryOnFail": true,
+      "maxTries": 5,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "9777bfbd-892b-4516-b199-22dcaed864d6",
+              "name": "magic_link",
+              "value": "=?uid=%2B{{ $('Webhook').item.json.body.phone.replace('+', '') }}&bg={{ $('Pull File Name').item.json.path_id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "4080b6d5-ee21-45f3-bf4c-6c2c188a58ff",
+      "name": "Final Magic Link"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "0815b49e-35ef-49fd-8e92-9ba9f69c454c",
+              "leftValue": "={{ $('Webhook').item.json.body.website }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -1568,
+        400
+      ],
+      "id": "71efb873-0d9f-465f-8261-bc0f09e9c669",
+      "name": "Website URL?"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.error }}",
+                    "rightValue": "Bad request - please check your parameters",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "1a1da720-eebd-4d90-86b9-c639d63ac2d9"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Bad request"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "0392bfac-35f0-4390-b7ae-b0f5c4c513c4",
+                    "leftValue": "={{ $json.error }}",
+                    "rightValue": "overloaded_error",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "overloaded"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "54ded808-19bf-4788-af83-ce1a7b0e8622",
+                    "leftValue": "={{ $json.error }}",
+                    "rightValue": "map",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Map Error"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra",
+          "ignoreCase": true
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -352,
+        528
+      ],
+      "id": "3e7783e0-3802-45cd-9c14-f9c0587c7d61",
+      "name": "Error Handler"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "0023d117-f6de-47d9-beee-f6b9c14682e8",
+                    "leftValue": "={{ $json.error }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notExists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Success"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.error }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "exists",
+                      "singleValue": true
+                    },
+                    "id": "72d3027d-73ef-49f5-a05b-6f8a9a6f7ce8"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Error"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -576,
+        432
+      ],
+      "id": "6f2561d3-016f-4704-81b6-6b9fe6d36339",
+      "name": "Status"
+    },
+    {
+      "parameters": {
+        "amount": 30
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        304,
+        736
+      ],
+      "id": "dae4c7e1-0c51-4ded-8953-1b7595425ba3",
+      "name": "Wait",
+      "webhookId": "00700305-b8c7-4093-9550-949ffccca85f"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2cef72a1-4bb9-4422-a101-91373bdc26d7",
+              "name": "retry_count",
+              "value": "={{ ($json.retryCount ?? 0) + 1 }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -144,
+        544
+      ],
+      "id": "63361212-e54c-43ef-83b8-901ac6b784f6",
+      "name": "Retry Count"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "fd81e966-bac5-4275-a23b-d5ec835e4bf5",
+              "leftValue": "={{ $json.retry_count }}",
+              "rightValue": 4,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        80,
+        544
+      ],
+      "id": "5ce106fd-1d15-4e94-a41d-998fc95f76d7",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://services.leadconnectorhq.com/contacts/{{ $('Webhook').item.json.body.contact_id }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Edit Fields').item.json.private_token }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n\"customFields\": [\n    {\n      \"id\": \"{{ $('Edit Fields').item.json.field_id_demo_context }}\",\n      \"field_value\": {{ JSON.stringify($('AI Agent').item.json.output) }}\n    }\n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -352,
+        320
+      ],
+      "id": "359bfeef-5603-4390-a7d8-eac2351009c3",
+      "name": "Update Demo Context",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "maxTries": 5
+    },
+    {
+      "parameters": {
+        "errorMessage": "An error occurred with AI"
+      },
+      "type": "n8n-nodes-base.stopAndError",
+      "typeVersion": 1,
+      "position": [
+        304,
+        496
+      ],
+      "id": "5b94947b-57be-4d43-9de0-8b156ad0b0f6",
+      "name": "Stop and Error"
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://services.leadconnectorhq.com/contacts/{{ $('Webhook').item.json.body.contact_id }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Edit Fields').item.json.private_token }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n\"customFields\": [\n    {\n      \"id\": \"{{ $('Edit Fields').item.json.field_id_magic_link }}\",\n      \"field_value\": \"{{ $json.magic_link }}\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        240,
+        176
+      ],
+      "id": "5059479b-90c4-4866-8619-44a90226e4ca",
+      "name": "Update Magic Link GHL",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "maxTries": 5
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://services.leadconnectorhq.com/contacts/{{ $('Webhook').item.json.body.contact_id }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Edit Fields').item.json.private_token }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n\"customFields\": [\n    {\n      \"id\": \"{{ $('Edit Fields').item.json.field_id_magic_link }}\",\n      \"field_value\": \"?uid=%2B{{ $('Webhook').item.json.body.phone.replace('+', '') }}\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1872,
+        1056
+      ],
+      "id": "25cde0f4-3c3f-402a-bb69-1956a26a082a",
+      "name": "Update Magic Link1 GHL",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "maxTries": 5
+    },
+    {
+      "parameters": {
+        "url": "=https://services.leadconnectorhq.com/objects/contact",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "locationId",
+              "value": "[PASTE HERE]"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer [PASTE HERE]"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -3280,
+        960
+      ],
+      "id": "1b89a5bd-10ac-44e9-bbba-81ca4f382f1a",
+      "name": "Get Custom Field ID V2"
+    },
+    {
+      "parameters": {
+        "url": "=https://{{ $('Webhook').item.json.body.website.replace(/^https?:\\/\\//i, '') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1312,
+        560
+      ],
+      "id": "c1fca007-1a17-4a0c-b825-abd6c13a0639",
+      "name": "Pull Website Text",
+      "retryOnFail": true,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "alwaysOutputData": true,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -1024,
+        768
+      ],
+      "id": "a463b92f-7417-4729-b869-f9369c0c6adc",
+      "name": "Gemini 2.5 Flash"
+    },
+    {
+      "parameters": {
+        "content": "# 👉  SETUP\n\n1. Get your GHL Private Integration Key and Location ID. Add to the \"Get Custom Field ID V2\" node.\n\n2. Click on \"Execute Workflow\", selecting \"from Manual\" to Get your custom field IDs for \"Magic Link\" and \"Demo Context\". \n\n3. Add custom field IDs to first node \"Edit Fields\", along with your Private Integration Key. \n\n5. Add your Gemini API Key to the \"Demo Context AI\" AI node.",
+        "height": 344,
+        "width": 424,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -3424,
+        1136
+      ],
+      "id": "5e2f1360-f4b5-4509-881e-b0a225a69473",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get the input data\nconst items = $input.all();\n\n// Initialize variables\nlet magicLinkId = null;\nlet demoContextId = null;\n\n// Loop through the input\nfor (const item of items) {\n  \n  // Access the 'fields' array\n  const allFields = item.json.fields || [];\n\n  // 1. Find Magic Link ID\n  const magicLinkField = allFields.find(field => field.fieldKey === 'contact.magic_link');\n  if (magicLinkField) {\n    magicLinkId = magicLinkField.id;\n  }\n\n  // 2. Find Demo Context ID\n  const demoContextField = allFields.find(field => field.fieldKey === 'contact.demo_context');\n  if (demoContextField) {\n    demoContextId = demoContextField.id;\n  }\n}\n\n// Return both IDs in a single object\nreturn {\n  json: {\n    magic_link_id: magicLinkId || \"NOT_FOUND\",\n    demo_context_id: demoContextId || \"NOT_FOUND\"\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -3088,
+        960
+      ],
+      "id": "c18f863f-292d-4a7b-a80a-e2eab3334a5c",
+      "name": "Scrape IDs"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -3472,
+        960
+      ],
+      "id": "7e04eca4-1f5d-4bcd-bd61-a3050181f82f",
+      "name": "Manual"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Here is the website info we could scrape: \n\n{{ $('Pull Website Text').item.json.data }}",
+        "options": {
+          "systemMessage": "=Summarize the website, what they do, what what they offer as context for our AI receptionist.\n\nDo not ask any more questions, work with the information provided, nothing more can be provided.\n\nOutput only the information needed without any comments.\n\nIf no web information is available, just output \"no more context\" verbatim, and nothing else."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -1024,
+        560
+      ],
+      "id": "b8c3670a-11ba-41a7-8d1c-1ae8599ef5bd",
+      "name": "AI Agent",
+      "retryOnFail": false,
+      "maxTries": 5,
+      "alwaysOutputData": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "0815b49e-35ef-49fd-8e92-9ba9f69c454c",
+              "leftValue": "={{ $('Webhook').item.json.body.website }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -1712,
+        688
+      ],
+      "id": "76936273-ca84-4202-9833-26ba0b305fe1",
+      "name": "Website URL?1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "9777bfbd-892b-4516-b199-22dcaed864d6",
+              "name": "magic_link",
+              "value": "=?uid={{ $('Webhook').item.json.body.phone.replace('+', '') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        0,
+        256
+      ],
+      "id": "5f77c036-2d90-4e61-8e53-6d48ba589a24",
+      "name": "Final Magic Link1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "487b0d5e-fb38-4964-b858-26271c0952e6",
+              "leftValue": "={{ $('Webhook').item.json.body['Website Screenshot'][0] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -192,
+        112
+      ],
+      "id": "50959b78-2c21-46d7-8fec-6ec6753dc55d",
+      "name": "Screenshot Uploaded?1"
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.srv1175152.hstgr.cloud",
+            "user-agent": "axios/1.13.2",
+            "content-length": "3366",
+            "accept": "application/json, text/plain, */*",
+            "accept-encoding": "gzip, compress, deflate, br",
+            "content-type": "application/json",
+            "traceparent": "00-1aaeaaa5302d8bddd206aff16c3a3f1c-bb530826f6a94e62-00",
+            "x-forwarded-for": "34.69.206.63",
+            "x-forwarded-host": "n8n.srv1175152.hstgr.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "625fd2a77b2e",
+            "x-real-ip": "34.69.206.63"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "How fast do you need results?": "",
+            "Monthly marketing spend?": "",
+            "assistantchat last message 2": "Absolutely works for doctors - we've helped dental practices, medical clinics, and specialists get more patients while cutting their marketing costs. What kind of practice do you run?",
+            "Company Type": "Aesthetic Dental",
+            "User Last Message": "does this work for doctors?",
+            "marketing team size": "",
+            "Your biggest bottleneck?": "",
+            "web_url": "",
+            "what niche": "",
+            "Your #1 lead source today?": "",
+            "How many clients do you have": "",
+            "Website Screenshot": "",
+            "Monthly revenue?": "",
+            "why do you want to be a beta tester": "",
+            "do you own a marketing agency": "",
+            "What would 10x your business?": "",
+            "assistantchat last message": "Hey there! I'm Maya from Black Umbrella App.",
+            "magic link": "",
+            "demo context": "",
+            "contact_id": "rUSpqCzzSjpGsvHIUKG1",
+            "first_name": "Zalo",
+            "full_name": "Zalo",
+            "phone": "+17544575837",
+            "tags": "ai optin",
+            "country": "US",
+            "timezone": "America/Caracas",
+            "date_created": "2025-10-16T16:22:17.296Z",
+            "company_name": "Beautiful Dental",
+            "website": "www.beautifuldental.com",
+            "contact_source": "chat widget",
+            "full_address": "",
+            "contact_type": "lead",
+            "location": {
+              "name": "Black Umbrella App",
+              "address": "390 NE 191st St",
+              "city": "Miami",
+              "state": "FL",
+              "country": "US",
+              "postalCode": "33179",
+              "fullAddress": "390 NE 191st St, Miami FL 33179",
+              "id": "qQt47vgUmPtlF177q98t"
+            },
+            "workflow": {
+              "id": "120c032e-2261-45d5-a49c-8c2e8e636549",
+              "name": "Generate Magic Link"
+            },
+            "triggerData": {},
+            "contact": {
+              "attributionSource": {
+                "sessionSource": "Direct traffic",
+                "url": "https://blackumbrella.app/",
+                "utmSource": null,
+                "utmMedium": null,
+                "utmContent": null,
+                "utmTerm": null,
+                "utmKeyword": null,
+                "utmMatchtype": null,
+                "referrer": null,
+                "gclid": null,
+                "fbp": "fb.1.1743038527810.782235347236965013",
+                "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+                "ip": "187.175.39.220",
+                "gaClientId": "GA1.1.792816547.1743035486",
+                "gaSessionId": null,
+                "medium": "chat_widget",
+                "mediumId": null,
+                "adName": null,
+                "adGroupId": null,
+                "adId": null,
+                "gbraid": null,
+                "wbraid": null
+              },
+              "lastAttributionSource": {
+                "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+                "fbp": "fb.1.1743038527810.782235347236965013",
+                "utmMedium": null,
+                "gaSessionId": null,
+                "adGroupId": null,
+                "medium": "form",
+                "utmKeyword": null,
+                "sessionSource": "Referral",
+                "gbraid": null,
+                "ip": "212.102.61.144",
+                "adId": null,
+                "referrer": "https://crm.blackumbrella.app",
+                "adName": null,
+                "gclid": null,
+                "utmMatchtype": null,
+                "wbraid": null,
+                "gaClientId": "GA1.2.792816547.1743035486",
+                "utmSource": null,
+                "mediumId": "jDnHYK24N52s4ejT3N65",
+                "utmTerm": null,
+                "utmContent": null,
+                "url": "https://demo.blackumbrella.app/ai-demo-magic-link"
+              }
+            },
+            "attributionSource": {
+              "sessionSource": "Referral",
+              "url": "https://demo.blackumbrella.app/ai-demo-magic-link",
+              "utmSource": null,
+              "utmMedium": null,
+              "utmContent": null,
+              "utmTerm": null,
+              "utmKeyword": null,
+              "utmMatchtype": null,
+              "referrer": "https://crm.blackumbrella.app",
+              "gclid": null,
+              "fbp": "fb.1.1743038527810.782235347236965013",
+              "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+              "ip": "212.102.61.144",
+              "gaClientId": "GA1.2.792816547.1743035486",
+              "gaSessionId": null,
+              "medium": "form",
+              "mediumId": "jDnHYK24N52s4ejT3N65",
+              "adName": null,
+              "adGroupId": null,
+              "adId": null,
+              "gbraid": null,
+              "wbraid": null
+            },
+            "customData": {}
+          },
+          "webhookUrl": "https://n8n.srv1175152.hstgr.cloud/webhook/43eca169-b9f8-4520-b935-887c7fb9e413",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-02-15T03:42:24.524Z",
+      "createdAt": "2026-02-15T03:42:24.524Z",
+      "role": "workflow:owner",
+      "workflowId": "zxXUtFldX6LTCFDb",
+      "projectId": "hKRlxMvyppBUiF8b"
+    }
+  ],
+  "staticData": null,
+  "tags": [
+    {
+      "updatedAt": "2026-02-15T03:45:08.982Z",
+      "createdAt": "2026-02-15T03:45:08.982Z",
+      "id": "9dkxqUoXAORAOCce",
+      "name": "template"
+    },
+    {
+      "updatedAt": "2026-02-15T03:44:26.917Z",
+      "createdAt": "2026-02-15T03:44:26.917Z",
+      "id": "qfVsVn9LChNei8zd",
+      "name": "agency"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2026-02-15T03:45:10.000Z",
+  "versionId": "56f789db-ad04-4eef-aaad-145012576e93"
+}
