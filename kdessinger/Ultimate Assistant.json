@@ -554,17 +554,26 @@
   "settings": {
     "executionOrder": "v1"
   },
+  "shared": [
+    {
+      "updatedAt": "2025-02-05T02:49:11.257Z",
+      "createdAt": "2025-02-05T02:49:11.257Z",
+      "role": "workflow:owner",
+      "workflowId": "FPzXK0evaVGefKUe",
+      "projectId": "hKRlxMvyppBUiF8b"
+    }
+  ],
   "staticData": null,
   "tags": [
     {
-      "createdAt": "2024-12-31T00:21:35.339Z",
       "updatedAt": "2024-12-31T00:21:35.339Z",
+      "createdAt": "2024-12-31T00:21:35.339Z",
       "id": "6GxhHGeDuKWkAijH",
       "name": "agent"
     },
     {
-      "createdAt": "2025-02-05T02:49:28.095Z",
       "updatedAt": "2025-02-05T02:49:28.095Z",
+      "createdAt": "2025-02-05T02:49:28.095Z",
       "id": "tytcVoVtg83SuJdq",
       "name": "master"
     }
