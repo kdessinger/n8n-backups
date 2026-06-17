@@ -209,6 +209,15 @@
     "executionTimeout": 300,
     "errorWorkflow": "hbBAn9DYRcWLren1"
   },
+  "shared": [
+    {
+      "updatedAt": "2024-11-23T06:55:07.860Z",
+      "createdAt": "2024-11-23T06:55:07.860Z",
+      "role": "workflow:owner",
+      "workflowId": "JwNmzUn3TBnvUjTW",
+      "projectId": "hKRlxMvyppBUiF8b"
+    }
+  ],
   "staticData": {
     "node:Schedule Trigger": {
       "recurrenceRules": []
@@ -216,8 +225,8 @@
   },
   "tags": [
     {
-      "createdAt": "2024-11-22T05:27:55.725Z",
       "updatedAt": "2024-11-22T05:27:55.725Z",
+      "createdAt": "2024-11-22T05:27:55.725Z",
       "id": "oxzM5ZD7cwl7e40S",
       "name": "Images"
     }
