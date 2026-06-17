@@ -298,17 +298,26 @@
   "settings": {
     "executionOrder": "v1"
   },
+  "shared": [
+    {
+      "updatedAt": "2025-03-29T04:46:09.232Z",
+      "createdAt": "2025-03-29T04:46:09.232Z",
+      "role": "workflow:owner",
+      "workflowId": "0sffv2B77U9VgU5F",
+      "projectId": "hKRlxMvyppBUiF8b"
+    }
+  ],
   "staticData": null,
   "tags": [
     {
-      "createdAt": "2024-12-31T00:21:35.339Z",
       "updatedAt": "2024-12-31T00:21:35.339Z",
+      "createdAt": "2024-12-31T00:21:35.339Z",
       "id": "6GxhHGeDuKWkAijH",
       "name": "agent"
     },
     {
-      "createdAt": "2025-03-29T04:46:03.381Z",
       "updatedAt": "2025-03-29T04:46:03.381Z",
+      "createdAt": "2025-03-29T04:46:03.381Z",
       "id": "nD8rktc4IP9F8G96",
       "name": "MCP"
     }
